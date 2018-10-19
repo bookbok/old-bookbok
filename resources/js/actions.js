@@ -1,6 +1,6 @@
 export const setTimeLine = timeLine => ({ type: "SET_TIMELINE", timeLine });
 
-export const getTimeLine = () => dispatch => {
+export const fetchTimeLine = () => dispatch => {
     const timeLine = [
       { name: "bok1" },
       { name: "bok2" },

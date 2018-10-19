@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { getTimeLine } from "./actions";
+import { fetchTimeLine } from "./actions";
 import { rootReducer } from "./reducers";
 import { App } from "./components/App";
 
@@ -23,5 +23,5 @@ const view = (
 if (document.getElementById('app')) {
     render(view, document.getElementById('app'));
 
-    store.dispatch(getTimeLine());
+    store.dispatch(fetchTimeLine());
 }
