@@ -31,3 +31,5 @@ install:
 build:
 	npm run dev
 
+json:
+	python -m json.tool
