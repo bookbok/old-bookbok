@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// test method
+Route::get('/users', function (Request $request) {
+    $users = App\User::all();
+    return $users;
+});
