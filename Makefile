@@ -7,7 +7,7 @@ help: Makefile
 	cat Makefile
 
 run:
-	php artisan serve
+	php artisan serve --host=0.0.0.0
 
 migrate:
 	php artisan migrate
