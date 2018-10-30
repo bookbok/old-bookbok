@@ -1,5 +1,17 @@
 # BOOKBOK
 
+# Getting started
+It is assumed that you have **copied the .env file**.
+
+```bash
+$ make install
+$ make migrate/fresh
+$ make run
+```
+
+*Let's access server* with browser!!
+<localhost:8000>
+
 # Install
 composer & npm install
 
