@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/{url?}', function () {
     return view('layouts/app');
-});
+})->where('url', '(.*)');
 
 //Auth::routes();
