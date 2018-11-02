@@ -1,9 +1,3 @@
----
-name: Normal issue template
-about: Normal issue template
-
----
-
 connect to #
 
 # 概要
