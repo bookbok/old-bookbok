@@ -3,6 +3,8 @@
 # Getting started
 It is assumed that you have **copied the .env file**.
 
+[if npm permission denied](https://qiita.com/okoysm/items/ced3c3de30af1035242d)
+
 ```bash
 $ make install
 $ make migrate/fresh
