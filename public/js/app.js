@@ -60144,72 +60144,84 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var TimeLine = function (_Component) {
-    _inherits(TimeLine, _Component);
+  _inherits(TimeLine, _Component);
 
-    function TimeLine() {
-        _classCallCheck(this, TimeLine);
+  function TimeLine() {
+    _classCallCheck(this, TimeLine);
 
-        return _possibleConstructorReturn(this, (TimeLine.__proto__ || Object.getPrototypeOf(TimeLine)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (TimeLine.__proto__ || Object.getPrototypeOf(TimeLine)).apply(this, arguments));
+  }
+
+  _createClass(TimeLine, [{
+    key: "render",
+    value: function render() {
+      if (this.props.timeLine == []) {
+        return;
+      }
+      var timeLine = this.props.timeLine.map(function (v, i) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "li",
+          { key: i },
+          v.name
+        );
+      });
+      var imgLink = "../../../public/hoge.png";
+      var bookName = "各本のタイトルを取得して表示";
+      var bookDisp = "各本の概要を取得して表示";
+
+      var BookDetail = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "table",
+        { border: "1" },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "tbody",
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "tr",
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "td",
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "{imgLink}" })
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "td",
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "p",
+                null,
+                bookName
+              )
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "tr",
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "td",
+              { colSpan: "2" },
+              "\u6982\u8981"
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "tr",
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "td",
+              { colSpan: "2" },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "p",
+                null,
+                bookDisp
+              )
+            )
+          )
+        )
+      );
+      return BookDetail;
     }
+  }]);
 
-    _createClass(TimeLine, [{
-        key: "render",
-        value: function render() {
-            if (this.props.timeLine == []) {
-                return;
-            }
-            var timeLine = this.props.timeLine.map(function (v, i) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "li",
-                    { key: i },
-                    v.name
-                );
-            });
-            var imgLink = "../../../public/hoge.png";
-            var bookDetail = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "table",
-                { border: "1" },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "tbody",
-                    null,
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "tr",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "td",
-                            null,
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "{imgLink}" })
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "td",
-                            null,
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "p",
-                                null,
-                                "\u672C\u306E\u30BF\u30A4\u30C8\u30EB"
-                            )
-                        )
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "tr",
-                        null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "td",
-                            { colSpan: "2" },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "p",
-                                null,
-                                "\u672C\u306E\u8AAC\u660E"
-                            )
-                        )
-                    )
-                )
-            );
-            return bookDetail;
-        }
-    }]);
-
-    return TimeLine;
+  return TimeLine;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /***/ }),
