@@ -60166,12 +60166,30 @@ var TimeLine = function (_Component) {
                 );
             });
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
+                "table",
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "ul",
+                    "tr",
                     null,
-                    timeLine
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "td",
+                        null,
+                        "\u753B\u50CF"
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "td",
+                        null,
+                        "\u672C\u306E\u30BF\u30A4\u30C8\u30EB"
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "tr",
+                    null,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "td",
+                        { colspan: "2" },
+                        "\u672C\u306E\u8AAC\u660E"
+                    )
                 )
             );
         }

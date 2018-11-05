@@ -11,15 +11,9 @@ export class TimeLine extends Component {
             </li>
         ));
         return (
-            <table>
-		<tr>
-		  <td>画像</td>
-		  <td>本のタイトル</td>
-		</tr>
-		<tr>
-		  <td colspan="2">本の説明</td>
-		</tr>
-            </table>
+            <div>
+                <ul>{timeLine}</ul>
+            </div>
         );
     }
 }
