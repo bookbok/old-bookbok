@@ -10,10 +10,11 @@ export class TimeLine extends Component {
                 {v.name}
             </li>
         ));
+	const imgLink = "../../../public/hoge.png";
         return (
             <table>
 		<tr>
-		  <td>画像</td>
+		  <td><img src='{imgLink}' /></td>
 		  <td>本のタイトル</td>
 		</tr>
 		<tr>

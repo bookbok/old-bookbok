@@ -60165,6 +60165,7 @@ var TimeLine = function (_Component) {
                     v.name
                 );
             });
+            var imgLink = "../../../public/hoge.png";
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "table",
                 null,
@@ -60174,7 +60175,7 @@ var TimeLine = function (_Component) {
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "td",
                         null,
-                        "\u753B\u50CF"
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "{imgLink}" })
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "td",
