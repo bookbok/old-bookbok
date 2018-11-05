@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 
-export class TimeLine extends Component {
+export class BookDetailView extends Component {
   render() {
-    if(this.props.timeLine == []){
-      return;
-    }
-    const timeLine = this.props.timeLine.map((v, i) => (
-      <li key={i}>
-        {v.name}
-        </li>
-      ));
     const imgLink = "../../../public/hoge.png";
     const bookName = "各本のタイトルを取得して表示";
     const bookDisc = "各本の概要を取得して表示";
