@@ -60183,7 +60183,11 @@ var TimeLine = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "td",
                             null,
-                            "\u672C\u306E\u30BF\u30A4\u30C8\u30EB"
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                "p",
+                                null,
+                                "\u672C\u306E\u30BF\u30A4\u30C8\u30EB"
+                            )
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -60192,7 +60196,11 @@ var TimeLine = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "td",
                             { colSpan: "2" },
-                            "\u672C\u306E\u8AAC\u660E"
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                "p",
+                                null,
+                                "\u672C\u306E\u8AAC\u660E"
+                            )
                         )
                     )
                 )

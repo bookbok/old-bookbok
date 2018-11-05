@@ -13,10 +13,10 @@ export class TimeLine extends Component {
 	const imgLink = "../../../public/hoge.png";
 	const bookDetail = <table border="1"><tbody>
 			       <tr>
-				   <td><img src='{imgLink}' /></td><td>本のタイトル</td>
+				   <td><img src='{imgLink}' /></td><td><p>本のタイトル</p></td>
 			       </tr>
                		       <tr>
-				   <td colSpan="2">本の説明</td>
+				   <td colSpan="2"><p>本の説明</p></td>
 			       </tr>
 			   </tbody></table>
         return (
