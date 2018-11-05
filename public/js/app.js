@@ -60166,33 +60166,38 @@ var TimeLine = function (_Component) {
                 );
             });
             var imgLink = "../../../public/hoge.png";
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            var bookDetail = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "table",
-                null,
+                { border: "1" },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "tr",
+                    "tbody",
                     null,
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "td",
+                        "tr",
                         null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "{imgLink}" })
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "td",
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "{imgLink}" })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "td",
+                            null,
+                            "\u672C\u306E\u30BF\u30A4\u30C8\u30EB"
+                        )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "td",
+                        "tr",
                         null,
-                        "\u672C\u306E\u30BF\u30A4\u30C8\u30EB"
-                    )
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "tr",
-                    null,
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "td",
-                        { colspan: "2" },
-                        "\u672C\u306E\u8AAC\u660E"
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "td",
+                            { colSpan: "2" },
+                            "\u672C\u306E\u8AAC\u660E"
+                        )
                     )
                 )
             );
+            return bookDetail;
         }
     }]);
 
