@@ -17,9 +17,9 @@ class CreateBoksTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('user_book_id');
-            $table->integer('page_num_begin');
-            $table->integer('page_num_end');
-            $table->integer('line_num');
+            $table->unsignedInteger('page_num_begin');
+            $table->unsignedInteger('page_num_end');
+            $table->unsignedInteger('line_num');
             $table->string('body');
             $table->dateTime('published_at');
             $table->timestamps();
