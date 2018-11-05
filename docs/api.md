@@ -509,7 +509,7 @@ Requestの`user_id`はフォローするユーザーのID
 
 # Group LIKES
 
-## LIKES [/api/users/{userId}/likes]
+## USER LIKES [/api/users/{userId}/likes]
 
 ### 自分がいいねしたbokの一覧を取得する [GET /api/users/{userId}/likes]
 // TODO: [1, 2]みたいにbok_idだけをバルク処理で配列取得する？
@@ -539,29 +539,45 @@ Requestの`user_id`はフォローするユーザーのID
             }
         ]
 
-### 新しくいいねする [POST /api/users/{userId}/likes]
-// TODO: リクエストでbok_idを渡すのはナンセンス。`/boks/{bokId}/like`のようにするのが理想
+## BOK LIKES [/api/boks/{bokId}/likes]
+
+### bokをいいねした人の一覧を取得する [GET /api/boks/{bokId}/likes]
+// TODO: [1, 2]みたいにuser_idだけをバルク処理で配列取得する？
 
 + Parameter
 
-    + userId(number) - ユーザーのID
+    + bokId(number) - bokのID
 
-+ Request (application/json)
++ Response 200 (application/json)
 
-        {
-            "bok_id": 1
-        }
+        [
+            {
+                "user_id": 1,
+                "name": "user name",
+                "avator": "http://~"
+            },
+            {
+                "user_id": 2,
+                "name": "user name",
+                "avator": "http://~"
+            }
+        ]
+
+### 新しくいいねする [POST /api/boks/{bokId}/likes]
+
++ Parameter
+
+    + bokId(number) - bokのID
 
 + Response 201 (application/json)
 
         None
 
-### いいねを解除する [DELETE /api/users/{userId}/likes/{likeId}]
-// TODO: likeIdで消すのはナンセンス。`/boks/{bokId}/unlike` のようにするのが理想
+### いいねを解除する [DELETE /api/boks/{bokId}/likes/{likeId}]
 
 + Parameter
 
-    + userId(number) - ユーザーのID
+    + bokId(number) - bokのID
     + likeId(number) - likeテーブルカラムのID
 
 + Response 200 (application/json)
@@ -571,7 +587,7 @@ Requestの`user_id`はフォローするユーザーのID
 
 # Group LOVES
 
-## LOVES [/api/users/{userId}/loves]
+## USER LOVES [/api/users/{userId}/loves]
 
 ### 自分がloveしたbokの一覧を取得する [GET /api/users/{userId}/loves]
 
@@ -600,29 +616,45 @@ Requestの`user_id`はフォローするユーザーのID
             }
         ]
 
-### bokをloveする [POST /api/users/{userId}/loves]
-// TODO: リクエストでbok_idを渡すのはナンセンス。`/boks/{bokId}/love`のようにするのが理想
+## BOK LOVES [/api/boks/{bokId}/loves]
+
+### bokをloveした人の一覧を取得する [GET /api/boks/{bokId}/loves]
+// TODO: [1, 2]みたいにuser_idだけをバルク処理で配列取得する？
 
 + Parameter
 
-    + userId(number) - ユーザーのID
+    + bokId(number) - bokのID
 
-+ Request (application/json)
++ Response 200 (application/json)
 
-        {
-            "bok_id": 1
-        }
+        [
+            {
+                "user_id": 1,
+                "name": "user name",
+                "avator": "http://~"
+            },
+            {
+                "user_id": 2,
+                "name": "user name",
+                "avator": "http://~"
+            }
+        ]
+
+### bokをloveする [POST /api/boks/{bokId}/loves]
+
++ Parameter
+
+    + bokId(number) - bokのID
 
 + Response 201 (application/json)
 
         None
 
-### loveを解除する [DELETE /api/users/{userId}/loves/{loveId}]
-// TODO: loveIdで消すのはナンセンス。`/boks/{bokId}/unlove` のようにするのが理想
+### loveを解除する [DELETE /api/boks/{bokId}/loves/{loveId}]
 
 + Parameter
 
-    + userId(number) - ユーザーのID
+    + bokId(number) - bokのID
     + loveId(number) - loveテーブルカラムのID
 
 + Response 200 (application/json)
