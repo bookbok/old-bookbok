@@ -21,10 +21,6 @@ class CreateBooksTable extends Migration
             $table->string('author');
             $table->unsignedInteger('genre_id');
             $table->timestamps();
-
-            $table->foreign('genre_id')
-                ->references('id')->on('genres')
-                ->onDelete('cascade');
         });
     }
 
