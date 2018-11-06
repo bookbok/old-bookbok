@@ -61529,11 +61529,6 @@ var App = function (_Component) {
                 'div',
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Header_jsx__["a" /* MenuRouter */], null),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'h1',
-                    null,
-                    'Hello, world!'
-                ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__containers__["a" /* ConnectedTimeLine */], null)
             );
         }
@@ -61629,74 +61624,74 @@ var TimeLine = function (_Component) {
 
 //ヘッダー(globalnavigation）
 var Header = function Header() {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		null,
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'nav',
-			{ 'class': 'navbar navbar-expand-md navbar-light bg-light' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'a',
-				{ 'class': 'navbar-brand', href: '#' },
-				'BookBok'
-			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'button',
-				{ 'class': 'navbar-toggler', type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbarNavAltMarkup', 'aria-controls': 'navbarNavAltMarkup', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' },
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { 'class': 'navbar-toggler-icon' })
-			),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'div',
-				{ 'class': 'collapse navbar-collapse', id: 'navbarNavAltMarkup' },
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'div',
-					{ 'class': 'navbar-nav' },
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'a',
-						{ 'class': 'nav-item nav-link', href: '/home' },
-						'\u30DB\u30FC\u30E0 ',
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'span',
-							{ 'class': 'sr-only' },
-							'(current)'
-						)
-					),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'a',
-						{ 'class': 'nav-item nav-link', href: '/signup' },
-						'\u65B0\u898F\u767B\u9332'
-					),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'a',
-						{ 'class': 'nav-item nav-link', href: '/login' },
-						'\u30ED\u30B0\u30A4\u30F3'
-					),
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'a',
-						{ 'class': 'nav-item nav-link', href: '/mypage' },
-						'\u30DE\u30A4\u30DA\u30FC\u30B8'
-					)
-				)
-			)
-		)
-	);
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'nav',
+            { 'class': 'navbar navbar-expand-md navbar-light bg-light' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'a',
+                { 'class': 'navbar-brand', href: '#' },
+                'BookBok'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'button',
+                { 'class': 'navbar-toggler', type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbarNavAltMarkup', 'aria-controls': 'navbarNavAltMarkup', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { 'class': 'navbar-toggler-icon' })
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { 'class': 'collapse navbar-collapse', id: 'navbarNavAltMarkup' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { 'class': 'navbar-nav' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'a',
+                        { 'class': 'nav-item nav-link', href: '/home' },
+                        '\u30DB\u30FC\u30E0 ',
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'span',
+                            { 'class': 'sr-only' },
+                            '(current)'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'a',
+                        { 'class': 'nav-item nav-link', href: '/signup' },
+                        '\u65B0\u898F\u767B\u9332'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'a',
+                        { 'class': 'nav-item nav-link', href: '/login' },
+                        '\u30ED\u30B0\u30A4\u30F3'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'a',
+                        { 'class': 'nav-item nav-link', href: '/mypage' },
+                        '\u30DE\u30A4\u30DA\u30FC\u30B8'
+                    )
+                )
+            )
+        )
+    );
 };
 //react-router-dom
 var MenuRouter = function MenuRouter() {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* BrowserRouter */],
-		null,
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'div',
-			null,
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Header, null),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { exact: true, path: '/' }),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/home', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["a" /* Home */] }),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/signup', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["d" /* SignUp */] }),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/login', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["b" /* Login */] }),
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/mypage', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["c" /* Mypage */] })
-		)
-	);
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* BrowserRouter */],
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Header, null),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { exact: true, path: '/' }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/home', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["a" /* Home */] }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/signup', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["d" /* SignUp */] }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/login', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["b" /* Login */] }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/mypage', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["c" /* Mypage */] })
+        )
+    );
 };
 
 /***/ }),
@@ -63596,54 +63591,54 @@ var withRouter = function withRouter(Component) {
 
 //ホーム画面を表すコンポーネントを定義
 var Home = function Home() {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		null,
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'h1',
-			null,
-			'\u30DB\u30FC\u30E0'
-		)
-	);
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h1',
+            null,
+            '\u30DB\u30FC\u30E0'
+        )
+    );
 };
 
 //新規登録画面を表すコンポーネントを定義
 var SignUp = function SignUp() {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		null,
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'h1',
-			null,
-			'\u65B0\u898F\u767B\u9332'
-		)
-	);
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h1',
+            null,
+            '\u65B0\u898F\u767B\u9332'
+        )
+    );
 };
 
 //ログイン画面を表すコンポーネントを定義
 var Login = function Login() {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		null,
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'h1',
-			null,
-			'\u30ED\u30B0\u30A4\u30F3'
-		)
-	);
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h1',
+            null,
+            '\u30ED\u30B0\u30A4\u30F3'
+        )
+    );
 };
 
 //マイページ画面を表すコンポーネントを定義
 var Mypage = function Mypage() {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		null,
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'h1',
-			null,
-			'\u30DE\u30A4\u30DA\u30FC\u30B8'
-		)
-	);
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h1',
+            null,
+            '\u30DE\u30A4\u30DA\u30FC\u30B8'
+        )
+    );
 };
 
 /***/ }),
