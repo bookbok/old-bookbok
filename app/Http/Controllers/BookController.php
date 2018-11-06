@@ -14,7 +14,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        return Book::all()->select('id','name','cover')
+                          ->toJson(JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
     }
 
     /**
