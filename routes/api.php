@@ -28,3 +28,4 @@ Route::get('/users', function (Request $request) {
  * 
  */
 Route::get('books', 'BookController@index');
+Route::get('books/{book}', 'BookController@show');
