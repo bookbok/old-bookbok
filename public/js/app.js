@@ -15084,7 +15084,7 @@ var Symbol = __WEBPACK_IMPORTED_MODULE_0__root_js__["a" /* default */].Symbol;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(24);
-module.exports = __webpack_require__(88);
+module.exports = __webpack_require__(89);
 
 
 /***/ }),
@@ -60070,6 +60070,7 @@ function rootReducer() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__containers__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__BookDetailView_jsx__ = __webpack_require__(88);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60077,6 +60078,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -60091,17 +60093,12 @@ var App = function (_Component) {
     }
 
     _createClass(App, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
+                'div',
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "h1",
-                    null,
-                    "Hello, world!"
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__containers__["a" /* ConnectedTimeLine */], null)
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__BookDetailView_jsx__["a" /* BookDetailView */], null)
             );
         }
     }]);
@@ -60114,7 +60111,7 @@ var App = function (_Component) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ConnectedTimeLine; });
+/* unused harmony export ConnectedTimeLine */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_redux__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_TimeLine__ = __webpack_require__(87);
 
@@ -60144,88 +60141,133 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var TimeLine = function (_Component) {
-  _inherits(TimeLine, _Component);
+    _inherits(TimeLine, _Component);
 
-  function TimeLine() {
-    _classCallCheck(this, TimeLine);
+    function TimeLine() {
+        _classCallCheck(this, TimeLine);
 
-    return _possibleConstructorReturn(this, (TimeLine.__proto__ || Object.getPrototypeOf(TimeLine)).apply(this, arguments));
-  }
-
-  _createClass(TimeLine, [{
-    key: "render",
-    value: function render() {
-      if (this.props.timeLine == []) {
-        return;
-      }
-      var timeLine = this.props.timeLine.map(function (v, i) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "li",
-          { key: i },
-          v.name
-        );
-      });
-      var imgLink = "../../../public/hoge.png";
-      var bookName = "各本のタイトルを取得して表示";
-      var bookDisp = "各本の概要を取得して表示";
-
-      var BookDetail = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "table",
-        { border: "1" },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "tbody",
-          null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "tr",
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "td",
-              null,
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "{imgLink}" })
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "td",
-              null,
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "p",
-                null,
-                bookName
-              )
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "tr",
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "td",
-              { colSpan: "2" },
-              "\u6982\u8981"
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            "tr",
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              "td",
-              { colSpan: "2" },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "p",
-                null,
-                bookDisp
-              )
-            )
-          )
-        )
-      );
-      return BookDetail;
+        return _possibleConstructorReturn(this, (TimeLine.__proto__ || Object.getPrototypeOf(TimeLine)).apply(this, arguments));
     }
-  }]);
 
-  return TimeLine;
+    _createClass(TimeLine, [{
+        key: "render",
+        value: function render() {
+            if (this.props.timeLine == []) {
+                return;
+            }
+            var timeLine = this.props.timeLine.map(function (v, i) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "li",
+                    { key: i },
+                    v.name
+                );
+            });
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "div",
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "ul",
+                    null,
+                    timeLine
+                )
+            );
+        }
+    }]);
+
+    return TimeLine;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /***/ }),
 /* 88 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookDetailView; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var BookDetailView = function (_Component) {
+		_inherits(BookDetailView, _Component);
+
+		function BookDetailView() {
+				_classCallCheck(this, BookDetailView);
+
+				return _possibleConstructorReturn(this, (BookDetailView.__proto__ || Object.getPrototypeOf(BookDetailView)).apply(this, arguments));
+		}
+
+		_createClass(BookDetailView, [{
+				key: "render",
+				value: function render() {
+						var imgLink = "../../../public/hoge.png";
+						var bookName = "各本のタイトルを取得して表示";
+						var bookDisc = "各本の概要を取得して表示";
+
+						var BookDetail = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+								"table",
+								{ border: "1" },
+								__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+										"tbody",
+										null,
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												"tr",
+												null,
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+														"td",
+														null,
+														__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "{imgLink}" })
+												),
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+														"td",
+														null,
+														__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																"p",
+																null,
+																bookName
+														)
+												)
+										),
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												"tr",
+												null,
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+														"td",
+														{ colSpan: "2" },
+														"\u6982\u8981"
+												)
+										),
+										__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+												"tr",
+												null,
+												__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+														"td",
+														{ colSpan: "2" },
+														__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+																"p",
+																null,
+																bookDisc
+														)
+												)
+										)
+								)
+						);
+						return BookDetail;
+				}
+		}]);
+
+		return BookDetailView;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/***/ }),
+/* 89 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
