@@ -16,7 +16,7 @@ class BookController extends Controller
     {
         return Book::orderBy('id')
                       ->get(['id','name','cover'])
-                      ->toJson(JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+                      ->toJson(JSON_UNESCAPED_UNICODE);
     }
 
     /**
