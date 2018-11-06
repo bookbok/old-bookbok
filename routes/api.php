@@ -22,3 +22,9 @@ Route::get('/users', function (Request $request) {
     $users = App\User::all();
     return $users;
 });
+
+/**
+ *  Resource: BOOK
+ * 
+ */
+Route::get('books', BookController@index);
