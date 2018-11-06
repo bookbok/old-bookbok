@@ -27,4 +27,4 @@ Route::get('/users', function (Request $request) {
  *  Resource: BOOK
  * 
  */
-Route::get('books', BookController@index);
+Route::get('books', 'BookController@index');
