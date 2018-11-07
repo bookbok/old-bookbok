@@ -14,9 +14,10 @@ class BookController extends Controller
      */
     public function index()
     {
-        return Book::orderBy('id')
-                      ->get(['id','name','cover'])
-                      ->toJson(JSON_UNESCAPED_UNICODE);
+        $result = Book::orderBy('id')
+                      ->get(['id','name','cover']);
+                    //   ->toJson(JSON_UNESCAPED_UNICODE);
+        return response()->json( $result );
     }
 
     /**
