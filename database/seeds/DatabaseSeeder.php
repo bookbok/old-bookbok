@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,9 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Model::unguard(); //Eloquent の Mass Assignment制約を解除
+
         $this->call(UsersTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(BooksTableSeeder::class);
         $this->call(GenresTableSeeder::class);
+
+        Model::reguard(); //再設定
     }
 }
