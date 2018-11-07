@@ -54,7 +54,21 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        $book->setVisible([
+            'id',
+            'name',
+            'description',
+            'cover',
+            'author',
+            'genre_id',
+        ]);
+
+        return response()->json( 
+            $book,
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
     }
 
     /**
