@@ -23,10 +23,10 @@ const Header = () => (
                     <a class="nav-item nav-link" href="/signup">新規登録</a>
                     <a class="nav-item nav-link" href="/login">ログイン</a>
                     <a class="nav-item nav-link" href="/mypage">マイページ</a>
-					<a class="nav-item nav-link" href="/booklist">本一覧</a>
-					<a class="nav-item nav-link" href="/bookdetailview">本詳細</a>
+                    <a class="nav-item nav-link" href="/booklist">本一覧</a>
+                    <a class="nav-item nav-link" href="/bookdetailview">本詳細</a>
                 </div>
-			</div>
+            </div>
         </nav>
     </div>
 )
@@ -40,8 +40,8 @@ export const MenuRouter = () => (
             <Route path="/signup" component={ SignUp } />
             <Route path="/login" component={ Login } />
             <Route path="/mypage" component={ Mypage } />
-			<Route path="/booklist" component={ BookList } />
-			<Route path="/bookdetailview" component={ BookDetailView } />
+            <Route path="/booklist" component={ BookList } />
+            <Route path="/bookdetailview" component={ BookDetailView } />
         </div>
     </BrowserRouter>
 )
