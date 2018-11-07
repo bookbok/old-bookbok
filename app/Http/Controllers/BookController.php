@@ -16,12 +16,11 @@ class BookController extends Controller
     {
 
         $collection = Book::orderBy('id')->get();
-        
+
         return response()->json( 
-            [
-                'data' => $collection
-            ],
-            200,[],
+            $collection,
+            200,
+            [],
             JSON_UNESCAPED_UNICODE
         );
     }
