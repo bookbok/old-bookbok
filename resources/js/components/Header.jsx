@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import { Home, SignUp, Login, Mypage } from './Screen.jsx';
+import { Home } from './Home.jsx';
+import { SignUp } from './SignUp.jsx';
+import { Login } from './Login.jsx';
+import { Mypage } from './Mypage.jsx';
+import { BookList } from './BookList.jsx';
+import { BookDetailView } from './BookDetailView.jsx';
+
 
 //ヘッダー(globalnavigation）
 const Header = () => (
@@ -17,8 +23,10 @@ const Header = () => (
                     <a class="nav-item nav-link" href="/signup">新規登録</a>
                     <a class="nav-item nav-link" href="/login">ログイン</a>
                     <a class="nav-item nav-link" href="/mypage">マイページ</a>
+					<a class="nav-item nav-link" href="/booklist">本一覧</a>
+					<a class="nav-item nav-link" href="/bookdetailview">本詳細</a>
                 </div>
-               </div>
+			</div>
         </nav>
     </div>
 )
@@ -32,6 +40,8 @@ export const MenuRouter = () => (
             <Route path="/signup" component={ SignUp } />
             <Route path="/login" component={ Login } />
             <Route path="/mypage" component={ Mypage } />
+			<Route path="/booklist" component={ BookList } />
+			<Route path="/bookdetailview" component={ BookDetailView } />
         </div>
     </BrowserRouter>
 )

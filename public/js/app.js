@@ -16645,7 +16645,7 @@ var generatePath = function generatePath() {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(41);
-module.exports = __webpack_require__(129);
+module.exports = __webpack_require__(134);
 
 
 /***/ }),
@@ -61617,7 +61617,17 @@ var TimeLine = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Home_jsx__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SignUp_jsx__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Login_jsx__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Mypage_jsx__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__BookList_jsx__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__BookDetailView_jsx__ = __webpack_require__(133);
+
+
+
+
+
 
 
 
@@ -61670,6 +61680,16 @@ var Header = function Header() {
                         'a',
                         { 'class': 'nav-item nav-link', href: '/mypage' },
                         '\u30DE\u30A4\u30DA\u30FC\u30B8'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'a',
+                        { 'class': 'nav-item nav-link', href: '/booklist' },
+                        '\u672C\u4E00\u89A7'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'a',
+                        { 'class': 'nav-item nav-link', href: '/bookdetailview' },
+                        '\u672C\u8A73\u7D30'
                     )
                 )
             )
@@ -61686,10 +61706,12 @@ var MenuRouter = function MenuRouter() {
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Header, null),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { exact: true, path: '/' }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/home', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["a" /* Home */] }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/signup', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["d" /* SignUp */] }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/login', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["b" /* Login */] }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/mypage', component: __WEBPACK_IMPORTED_MODULE_2__Screen_jsx__["c" /* Mypage */] })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/home', component: __WEBPACK_IMPORTED_MODULE_2__Home_jsx__["a" /* Home */] }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/signup', component: __WEBPACK_IMPORTED_MODULE_3__SignUp_jsx__["a" /* SignUp */] }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/login', component: __WEBPACK_IMPORTED_MODULE_4__Login_jsx__["a" /* Login */] }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/mypage', component: __WEBPACK_IMPORTED_MODULE_5__Mypage_jsx__["a" /* Mypage */] }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/booklist', component: __WEBPACK_IMPORTED_MODULE_6__BookList_jsx__["a" /* BookList */] }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { path: '/bookdetailview', component: __WEBPACK_IMPORTED_MODULE_7__BookDetailView_jsx__["a" /* BookDetailView */] })
         )
     );
 };
@@ -63582,9 +63604,6 @@ var withRouter = function withRouter(Component) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Home; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SignUp; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return Login; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return Mypage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
@@ -63602,6 +63621,16 @@ var Home = function Home() {
     );
 };
 
+/***/ }),
+/* 129 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignUp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
 //新規登録画面を表すコンポーネントを定義
 var SignUp = function SignUp() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -63615,6 +63644,16 @@ var SignUp = function SignUp() {
     );
 };
 
+/***/ }),
+/* 130 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Login; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
 //ログイン画面を表すコンポーネントを定義
 var Login = function Login() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -63627,6 +63666,16 @@ var Login = function Login() {
         )
     );
 };
+
+/***/ }),
+/* 131 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Mypage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
 
 //マイページ画面を表すコンポーネントを定義
 var Mypage = function Mypage() {
@@ -63642,7 +63691,118 @@ var Mypage = function Mypage() {
 };
 
 /***/ }),
-/* 129 */
+/* 132 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookList; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+//本の一覧画面を表すコンポーネントを定義
+var BookList = function BookList() {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "div",
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "h1",
+            null,
+            "\u672C\u4E00\u89A7"
+        )
+    );
+};
+
+/***/ }),
+/* 133 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookDetailView; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var BookDetailView = function (_Component) {
+    _inherits(BookDetailView, _Component);
+
+    function BookDetailView() {
+        _classCallCheck(this, BookDetailView);
+
+        return _possibleConstructorReturn(this, (BookDetailView.__proto__ || Object.getPrototypeOf(BookDetailView)).apply(this, arguments));
+    }
+
+    _createClass(BookDetailView, [{
+        key: "render",
+        value: function render() {
+            var imgLink = "../../../public/hoge.png";
+            var bookName = "各本のタイトルを取得して表示";
+            var bookDisc = "各本の概要を取得して表示";
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "table",
+                { border: "1" },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "tbody",
+                    null,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "tr",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "td",
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: "{imgLink}" })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "td",
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                "p",
+                                null,
+                                bookName
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "tr",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "td",
+                            { colSpan: "2" },
+                            "\u6982\u8981"
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "tr",
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "td",
+                            { colSpan: "2" },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                "p",
+                                null,
+                                bookDisc
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return BookDetailView;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/***/ }),
+/* 134 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
