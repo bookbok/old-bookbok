@@ -6,6 +6,7 @@ import { Login } from './Login.jsx';
 import { Mypage } from './Mypage.jsx';
 import { BookList } from './BookList.jsx';
 import { BookDetailView } from './BookDetailView.jsx';
+import { BookListView } from './BookListView.jsx';
 
 
 //ヘッダー(globalnavigation）
@@ -40,7 +41,7 @@ export const MenuRouter = () => (
             <Route path="/signup" component={ SignUp } />
             <Route path="/login" component={ Login } />
             <Route path="/mypage" component={ Mypage } />
-            <Route path="/booklist" component={ BookList } />
+            <Route path="/booklist" component={ BookListView } />
             <Route path="/bookdetailview" component={ BookDetailView } />
         </div>
     </BrowserRouter>
