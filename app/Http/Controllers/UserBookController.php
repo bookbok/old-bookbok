@@ -18,16 +18,12 @@ class UserBookController extends Controller
      */
     public function index($userId)
     {
-        // $userbooks = UserBook::where('user_id', '=', $userId)
-        //             ->join('books', 'user_book.book_id', '=', 'books.id')
-        //             ->select()
-        //             ->get();
 
         $userbooks = User::with(array('books'=>function($q){
                         $q->select('books.id','books.name', 'books.cover', 'books.author', 'books.genre_id');
-                    }))
-                    ->select(['users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id'])
-                    ->find($userId);
+                     }))
+                     ->select(['users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id'])
+                     ->find($userId);
                     
         
         return response()->json(
