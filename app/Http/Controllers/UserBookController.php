@@ -10,11 +10,24 @@ class UserBookController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
+     * @param string $userId
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $userId)
     {
-        //
+        $userbooks = UserBook::find($userId)
+                    ->with('users')
+                    ->with('books')
+                    ->with('reviews')
+                    ->get();
+
+        return response()->json(
+            $userbooks,
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
     }
 
     /**
