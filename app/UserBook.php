@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserBook extends Model
 {
-    protected $table = 'user_book';
+    protected $table = 'book_user';
 
     /**
      * リレーション定義

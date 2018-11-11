@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\UserBook;
+use App\User;
+use App\Book;
 use Illuminate\Http\Request;
 
 class UserBookController extends Controller
@@ -14,14 +16,20 @@ class UserBookController extends Controller
      * @param string $userId
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $userId)
+    public function index($userId)
     {
-        $userbooks = UserBook::find($userId)
-                    ->with('users')
-                    ->with('books')
-                    ->with('reviews')
-                    ->get();
+        // $userbooks = UserBook::where('user_id', '=', $userId)
+        //             ->join('books', 'user_book.book_id', '=', 'books.id')
+        //             ->select()
+        //             ->get();
 
+        $userbooks = User::with(array('books'=>function($q){
+                        $q->select('books.id','books.name', 'books.cover', 'books.author', 'books.genre_id');
+                    }))
+                    ->select(['users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id'])
+                    ->find($userId);
+                    
+        
         return response()->json(
             $userbooks,
             200,

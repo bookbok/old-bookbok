@@ -32,7 +32,8 @@ class User extends Authenticatable
      * リレーション定義
      */
     public function books(){
-        return $this->belongsToMany(Book::class);
+        return $this->belongsToMany(Book::class)
+                    ->withPivot('id');
     }
 
     public function reviews(){
