@@ -33,7 +33,8 @@ class User extends Authenticatable
      */
     public function books(){
         return $this->belongsToMany(Book::class)
-                    ->withPivot('id', 'created_at', 'updated_at');
+                    ->withPivot('id')
+                    ->withTimestamps();
     }
 
     public function reviews(){
