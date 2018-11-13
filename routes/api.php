@@ -49,3 +49,4 @@ Route::get('users/{userId}/user_books','UserBookController@index');
  * 
  */
 Route::get('genres','GenreController@index');
+Route::get('genres/{genre}', 'GenreController@show');
