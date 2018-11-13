@@ -24,4 +24,25 @@ class GenreController extends Controller
             JSON_UNESCAPED_UNICODE
         );
     }
+
+
+    /**
+     * Display the specified resources.
+     * 
+     * 
+     */
+    public function show(Genre $genre){
+
+        $genre->setVisible([
+            'id',
+            'name',
+        ]);
+
+        return response()->json(
+            $genre,
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
+    }
 }
