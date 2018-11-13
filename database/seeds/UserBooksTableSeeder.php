@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class UserBooksTableSeeder extends Seeder
 {
@@ -16,18 +17,26 @@ class UserBooksTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'book_id' => 1,
+                'created_at' => Carbon::now()->subDays(15),
+                'updated_at' => Carbon::now()->subDays(15),
             ],
             [
                 'user_id' => 1,
                 'book_id' => 2,
+                'created_at' => Carbon::now()->subDays(10),
+                'updated_at' => Carbon::now()->subDays(10),
             ],
             [
                 'user_id' => 1,
                 'book_id' => 9,
+                'created_at' => Carbon::now()->subDays(4),
+                'updated_at' => Carbon::now()->subDays(4),
             ],
             [
                 'user_id' => 1,
                 'book_id' => 6,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ],
         ]);
     }
