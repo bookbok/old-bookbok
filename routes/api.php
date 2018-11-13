@@ -29,3 +29,9 @@ Route::get('/users', function (Request $request) {
  */
 Route::get('books', 'BookController@index');
 Route::get('books/{book}', 'BookController@show');
+
+/**
+ *  Resource: UserBook
+ * 
+ */
+Route::get('users/{userId}/user_books','UserBookController@index');

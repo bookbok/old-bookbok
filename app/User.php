@@ -27,4 +27,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * リレーション定義
+     */
+    public function books(){
+        return $this->belongsToMany(Book::class)
+                    ->withPivot('id')
+                    ->withTimestamps();
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
 }

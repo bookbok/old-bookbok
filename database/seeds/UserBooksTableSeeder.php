@@ -13,7 +13,7 @@ class UserBooksTableSeeder extends Seeder
     public function run()
     {
         // HACK: BooksTableSeederで10個のBookが生成されていることを前提としている
-        DB::table('user_book')->insert([
+        DB::table('book_user')->insert([
             [
                 'user_id' => 1,
                 'book_id' => 1,
