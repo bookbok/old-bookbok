@@ -9,11 +9,11 @@ export const fetchTimeLine = () => dispatch => {
     dispatch(setTimeLine(timeLine));
 }
 
-export const fetchBookDetail = () => despatch => {
+export const fetchBookDetail = () => dispatch => {
   // 本の詳細情報をどうにかして取得
   const bookDetail = [
     {book_name: "book1", book_detail: "hogehoge"},
-    {book_name: "book2", book_detail: "fugafuga",}
+    {book_name: "book2", book_detail: "fugafuga"},
   ];
   // 取得した情報を渡して詳細情報を表示
   dispatch(setBookDetail(bookDetail));
