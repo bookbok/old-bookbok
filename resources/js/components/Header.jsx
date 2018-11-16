@@ -4,7 +4,6 @@ import { Home } from './Home.jsx';
 import { SignUp } from './SignUp.jsx';
 import { Login } from './Login.jsx';
 import { Mypage } from './Mypage.jsx';
-import { BookList } from './BookList.jsx';
 import { BookDetailView } from './BookDetailView.jsx';
 import { BookListView } from './BookListView.jsx';
 
