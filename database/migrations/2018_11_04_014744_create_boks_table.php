@@ -16,7 +16,7 @@ class CreateBoksTable extends Migration
         Schema::create('boks', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('user_book_id');
+            $table->unsignedInteger('book_user_id');
             $table->unsignedInteger('page_num_begin');
             $table->unsignedInteger('page_num_end');
             $table->unsignedInteger('line_num');
@@ -27,8 +27,8 @@ class CreateBoksTable extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->foreign('user_book_id')
-                ->references('id')->on('user_book')
+            $table->foreign('book_user_id')
+                ->references('id')->on('book_user')
                 ->onDelete('cascade');
         });
     }
