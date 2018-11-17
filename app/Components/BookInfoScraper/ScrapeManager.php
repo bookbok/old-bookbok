@@ -37,7 +37,9 @@ class ScrapeManager
     public function searchByIsbn(string $isbn)
     {
         foreach ($this->scrapers as $scraper) {
-            if (false !== ($book = $scraper->searchByIsbn($isbn))) {
+            $book = $scraper->searchByIsbn($isbn);
+
+            if (false !== $book) {
                 return $book;
             }
         }
