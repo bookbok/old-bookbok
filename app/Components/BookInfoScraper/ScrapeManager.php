@@ -10,7 +10,7 @@ use Illuminate\Support\ServiceProvider;
 class ScrapeManager
 {
     /**
-     * @var ScraperInterface
+     * @var ScraperInterface[]
      */
     private $scrapers;
 
