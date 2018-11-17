@@ -25,9 +25,9 @@ class BookInfoScraperServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'app.bookinfo.scrapeManager',
+            'app.bookInfo.scrapeManager',
             function ($app) {
-                return new ScrapeManager($app->tagged('app.bookinfo.scraper'));
+                return new ScrapeManager($app->tagged('app.bookInfo.scraper'));
             }
         );
     }
