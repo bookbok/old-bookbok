@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GenresTableSeeder::class);
         $this->call(UserBooksTableSeeder::class);
         $this->call(ReviewsTableSeeder::class);
+        $this->call(BoksTableSeeder::class);
 
         Model::reguard(); //再設定
     }
