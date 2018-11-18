@@ -28,7 +28,8 @@ class ScrapeManager
      * 外部APIを通じてISBNから書籍情報を取得する
      * 
      * @param   string  $isbn
-     *  ISBN文字列。10桁の場合は先頭に978をつけて検索する。
+     *  検索対象ISBN。
+     *  ISBN10の場合、プレフィックス978のISBN13に変換して検索する。
      * 
      * @return  \App\Book|false
      *  見つかった場合はApp\Bookモデルを返す。
