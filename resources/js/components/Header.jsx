@@ -37,12 +37,12 @@ export const MenuRouter = () => (
             <Header />
             <Switch>
                 <Route exact path="/" component={ Home } />
-                <Route path="/home" component={ Home } />
-                <Route path="/signup" component={ SignUp } />
-                <Route path="/login" component={ Login } />
-                <Route path="/mypage" component={ Mypage } />
-                <Route path="/books" component={ BookListView } />
-                <Route path="/books/:id" component={ BookDetailView } />
+                <Route exact path="/home" component={ Home } />
+                <Route exact path="/signup" component={ SignUp } />
+                <Route exact path="/login" component={ Login } />
+                <Route exact path="/mypage" component={ Mypage } />
+                <Route exact path="/books" component={ BookListView } />
+                <Route exact path="/books/:id" component={ BookDetailView } />
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
             </Switch>
         </div>
