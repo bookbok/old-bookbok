@@ -18,12 +18,12 @@ const Header = () => (
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="/">ホーム <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="/signup">新規登録</a>
-                    <a class="nav-item nav-link" href="/login">ログイン</a>
-                    <a class="nav-item nav-link" href="/mypage">マイページ</a>
-                    <a class="nav-item nav-link" href="/books">本一覧</a>
-                    <a class="nav-item nav-link" href="/books/0">本詳細</a>
+                    <Link className="nav-item nav-link" to="/">ホーム <span class="sr-only">(current)</span></Link>
+                    <Link className="nav-item nav-link" to="/signup">新規登録</Link>
+                    <Link className="nav-item nav-link" to="/login">ログイン</Link>
+                    <Link className="nav-item nav-link" to="/mypage">マイページ</Link>
+                    <Link className="nav-item nav-link" to="/books">本一覧</Link>
+                    <Link className="nav-item nav-link" to="/books/0">本詳細</Link>
                 </div>
             </div>
         </nav>
