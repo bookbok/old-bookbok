@@ -6,6 +6,7 @@ import { Login } from './Login.jsx';
 import { Mypage } from './Mypage.jsx';
 import { BookDetailView } from './BookDetailView.jsx';
 import { BookListView } from './BookListView.jsx';
+import { Footer } from './Footer';
 
 
 // bootstrap global navigation bar
@@ -45,6 +46,7 @@ export const MenuRouter = () => (
                 <Route exact path="/books/:id" component={ BookDetailView } />
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
             </Switch>
+            <Footer />
         </div>
     </BrowserRouter>
 )
