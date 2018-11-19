@@ -9,8 +9,8 @@ class GenreController extends Controller
 {
     /**
      * Display listing of resources.
-     * 
-     * 
+     *
+     *
      */
     public function index(){
 
@@ -28,8 +28,8 @@ class GenreController extends Controller
 
     /**
      * Display the specified resources.
-     * 
-     * 
+     *
+     *
      */
     public function show(Genre $genre){
 
