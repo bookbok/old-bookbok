@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ConnectedTimeLine, ConnectedGenres } from "../containers";
+import { ConnectedTimeLine } from "../containers";
 import { MenuRouter } from './Header.jsx';
 
 export class App extends Component {
@@ -8,7 +8,6 @@ export class App extends Component {
             <div>
                 <MenuRouter />
                 <ConnectedTimeLine />
-                <ConnectedGenres />
             </div>
         );
     }

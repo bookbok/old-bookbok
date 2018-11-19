@@ -18,7 +18,6 @@ export const fetchGenres = () => dispatch => {
     })
         .then(res => res.json())
         .then(json => {
-                console.log(json);
                 dispatch(setGenres(json));
         })
         .catch(err => {

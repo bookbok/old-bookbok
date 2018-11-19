@@ -5,18 +5,23 @@ export class Genres extends Component {
         if(this.props.genres == []){
             return;
         }
+        
+        const genres = this.props.genres.map( x => x.name );
 
-        console.log(this.props.genres);
-
-        const genres = this.props.genres.map((v, i) => (
-            <li key={i}>
-                {v.name}
-            </li>
-        ));
         return (
             <div>
-                <h1>ジャンル一覧</h1>
-                <ul>{genres}</ul>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        ジャンル一覧
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">{genres[0]}</a></li>
+                        <li><a href="#">{genres[1]}</a></li>
+                        <li><a href="#">{genres[2]}</a></li>
+                        <li><a href="#">{genres[3]}</a></li>
+                    </ul>
+                </div>
             </div>
         );
     }

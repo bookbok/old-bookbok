@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ConnectedGenres } from "../containers";
 
 export class BookListView extends Component {
     render() {
@@ -15,15 +16,18 @@ export class BookListView extends Component {
            bookName.push(<th>{book.name}</th>);
         });
 
-        return (
-            <table border="1">
-               <tr>
-                 {bookBody}
-               </tr>
-               <tr>
-                 {bookName}
-               </tr>
-            </table>
+        return(
+            <div>
+                <ConnectedGenres />
+                <table border="1">
+                    <tr>
+                        {bookBody}
+                    </tr>
+                    <tr>
+                        {bookName}
+                    </tr>
+                </table>
+            </div>
         );
     }  
 }
