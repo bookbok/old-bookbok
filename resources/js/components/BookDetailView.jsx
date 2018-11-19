@@ -8,7 +8,7 @@ export class BookDetailView extends Component {
     };
 
     componentDidMount(){
-        const bookId = this.props.match.params.id;
+        const bookId = parseInt(this.props.match.params.id);
         store.dispatch(fetchBookDetail(bookId));
     };
 

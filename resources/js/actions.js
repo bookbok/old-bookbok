@@ -10,8 +10,6 @@ export const fetchTimeLine = () => dispatch => {
 }
 
 export const fetchBookDetail = (id) => dispatch => {
-    console.log(id);
-    id = parseInt(id);
     fetch(`http://localhost:8000/api/books/${id}`)
         .then(res => res.json())
         .then(json => {
