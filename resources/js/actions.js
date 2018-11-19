@@ -11,8 +11,11 @@ export const fetchTimeLine = () => dispatch => {
 
 export const fetchBookDetail = () => dispatch => {
   // 本の詳細情報をどうにかして取得
-  const bookDetail = { book_name: "book1", book_detail: "hogehoge" };
-  // 取得した情報を渡して詳細情報を表示
-  dispatch(setBookDetail(bookDetail));
+  // const bookDetail = { book_name: "book1", book_detail: "hogehoge" };
+  fetch("http://localhost:8000/api/books/1")
+    .then(res => res.json())
+    .then(json => {
+      dispatch(setBookDetail(json));
+  })
 }
 
