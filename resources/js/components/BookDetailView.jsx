@@ -5,6 +5,9 @@ import { store } from "../index";
 export class BookDetailView extends Component {
     constructor(props){
         super(props);
+    };
+
+    componentDidMount(){
         store.dispatch(fetchBookDetail());
     };
 
