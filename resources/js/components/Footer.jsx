@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 export const Footer = () => (
-    <div class="container">
+    <div class="container mt-5">
         <div class="justify-content-center">
             <footer class="d-none d-md-block">
                 <nav>
