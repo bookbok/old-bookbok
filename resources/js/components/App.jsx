@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ConnectedTimeLine } from "../containers";
 import { MenuRouter } from './Header.jsx';
 
 export class App extends Component {
@@ -7,7 +6,6 @@ export class App extends Component {
         return (
             <div>
                 <MenuRouter />
-                <ConnectedTimeLine />
             </div>
         );
     }
