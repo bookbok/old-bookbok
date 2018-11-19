@@ -13,9 +13,9 @@ export const fetchBookDetail = () => dispatch => {
     // 本の詳細情報をどうにかして取得
     // const bookDetail = { book_name: "book1", book_detail: "hogehoge" };
     fetch("http://localhost:8000/api/books/1")
-     .then(res => res.json())
-     .then(json => {
-      dispatch(setBookDetail(json));
+        .then(res => res.json())
+        .then(json => {
+    dispatch(setBookDetail(json));
     })
 }
 
