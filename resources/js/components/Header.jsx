@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { Footer } from './Footer';
 import { Home } from './Home.jsx';
 import { SignUp } from './SignUp.jsx';
 import { Login } from './Login.jsx';
 import { Mypage } from './Mypage.jsx';
-import { BookDetailView } from './BookDetailView.jsx';
 import { BookListView } from './BookListView.jsx';
-import { Footer } from './Footer';
+import { ConnectedBookDetail} from '../containers.js';
 
 
 // bootstrap global navigation bar
@@ -43,7 +43,7 @@ export const MenuRouter = () => (
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/mypage" component={ Mypage } />
                 <Route exact path="/books" component={ BookListView } />
-                <Route exact path="/books/:id" component={ BookDetailView } />
+                <Route exact path="/books/:id" component={ ConnectedBookDetail } />
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
             </Switch>
             <Footer />
