@@ -9,13 +9,12 @@ export class BookDetailView extends Component {
     };
 
     render() {
-        const imgLink = 'http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api';
         const book = this.props.bookDetail;
 
         return (
             <table border="1"><tbody>
                 <tr>
-                    <td><img src='{imgLink}' /></td>
+                    <td><img src={book.cover} /></td>
                     <td><p>{book.name}</p></td>
                 </tr>
                 <tr>
