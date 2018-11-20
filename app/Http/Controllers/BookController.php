@@ -17,7 +17,7 @@ class BookController extends Controller
 
         $collection = Book::orderBy('id')->get();
 
-        return response()->json( 
+        return response()->json(
             $collection,
             200,
             [],
@@ -63,7 +63,7 @@ class BookController extends Controller
             'genre_id',
         ]);
 
-        return response()->json( 
+        return response()->json(
             $book,
             200,
             [],

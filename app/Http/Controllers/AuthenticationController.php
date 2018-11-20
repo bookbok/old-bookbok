@@ -13,15 +13,15 @@ class AuthenticationController extends Controller
 
     /**
      * ログイン処理
-     * 
+     *
      * @param   Request $request
      *  リクエスト
-     * 
+     *
      * @return  \Illuminate\Http\Response
      */
     public function login(Request $request) {
         $user = User::where('email', $request->email)->first();
-        
+
         if (null === $user) {
             $response = 'User doesn\'t exist';
             return response($response, 422);
@@ -41,10 +41,10 @@ class AuthenticationController extends Controller
 
     /**
      * ログアウト処理
-     * 
+     *
      * @param   Request $request
      *  リクエスト
-     * 
+     *
      * @return  \Illuminate\Http\Response
      */
     public function logout(Request $request) {
