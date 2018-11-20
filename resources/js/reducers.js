@@ -7,6 +7,8 @@ export function rootReducer(
             return { ...state, timeLine: action.timeLine };
         case "SET_BOOK_DETAIL":
             return { ...state, bookDetail: action.bookDetail };
+        case "SET_AUTH_TOKEN":
+            return { ...state, token: action.token };
     }
     return state;
 }
