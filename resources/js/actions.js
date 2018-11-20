@@ -13,7 +13,7 @@ export const fetchBookDetail = (id) => dispatch => {
     fetch(`http://localhost:8000/api/books/${id}`)
         .then(res => res.json())
         .then(json => {
-    dispatch(setBookDetail(json));
+          dispatch(setBookDetail(json));
     })
 }
 
