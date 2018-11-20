@@ -12,7 +12,7 @@ export const fetchTimeLine = () => dispatch => {
 }
 
 export const fetchGenres = () => dispatch => {
-    fetch( "http://localhost:8000/api/genres/", {
+    fetch( DOMAIN + "/api/genres/", {
         timeout: 3000,
         method: "GET"
     })

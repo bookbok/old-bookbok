@@ -6,7 +6,9 @@ export class Genres extends Component {
             return;
         }
         
-        const genres = this.props.genres.map( x => x.name );
+        const genres = this.props.genres.map(( genre ) => (
+            <li><a href="#">{genre.name}</a></li> 
+        ));
 
         return (
             <div>
@@ -16,10 +18,7 @@ export class Genres extends Component {
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">{genres[0]}</a></li>
-                        <li><a href="#">{genres[1]}</a></li>
-                        <li><a href="#">{genres[2]}</a></li>
-                        <li><a href="#">{genres[3]}</a></li>
+                        {genres}
                     </ul>
                 </div>
             </div>
