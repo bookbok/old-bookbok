@@ -1,4 +1,7 @@
+import { DOMAIN } from "./domain";
+
 export const setTimeLine = timeLine => ({ type: "SET_TIMELINE", timeLine });
+export const setGenres = genres => ({ type: "SET_GENRES", genres });
 export const setBookDetail = bookDetail => ({type: "SET_BOOK_DETAIL", bookDetail});
 
 export const fetchTimeLine = () => dispatch => {
@@ -23,6 +26,20 @@ export const requestLogin = (loginUser) => dispatch => {
         .then(res => res.json())
         .then(json => {
             dispatch(setAuthToken(json.token));
+        });
+}
+
+export const fetchGenres = () => dispatch => {
+    fetch( DOMAIN + "/api/genres/", {
+        timeout: 3000,
+        method: "GET"
+    })
+        .then(res => res.json())
+        .then(json => {
+                dispatch(setGenres(json));
+        })
+        .catch(err => {
+            console.error("fetch error!", err);
         });
 }
 
