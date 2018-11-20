@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { requestLogin } from "../actions.js";
 import { store } from "../index";
 
@@ -12,6 +13,7 @@ export class Login extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    // 変更されたinput要素のnameを取得し、自動的にstateの値を変更するハンドラ
     handleChange(e) {
         const name = e.target.name;
         const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
@@ -22,8 +24,8 @@ export class Login extends Component {
 
     submitLogin(e) {
         e.preventDefault();
-        console.log(this.state); // TODO: 消す
-        //store.dispatch(requestLogin(this.state));
+        store.dispatch(requestLogin(this.state));
+        this.props.history.push('/'); // ログイン後のデフォルト遷移先
     }
 
     render() {
@@ -98,5 +100,4 @@ export class Login extends Component {
             </div>
         );
     }
-
 }
