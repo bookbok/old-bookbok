@@ -1,6 +1,16 @@
 import React, { Component } from "react";
+import { fetchGenres } from "../actions.js";
+import { store } from "../index";
 
 export class Genres extends Component {
+    constructor(props){
+        super(props);
+    };
+
+    componentDidMount(){
+        store.dispatch(fetchGenres());
+    };
+
     render() {
         if(this.props.genres == []){
             return;
