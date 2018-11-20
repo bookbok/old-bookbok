@@ -19,13 +19,12 @@ class UserBookController extends Controller
     public function index($userId)
     {
 
-        $userbooks = User::with(['books'=>function($q){
+        $userbooks = User::with(['books' => function($q) {
                         $q->select('books.id','books.name', 'books.cover', 'books.author', 'books.genre_id');
                      }])
                      ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
                      ->find($userId);
-                    
-        
+
         return response()->json(
             $userbooks,
             200,

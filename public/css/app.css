@@ -10466,3 +10466,28 @@ a.text-dark:focus {
   }
 }
 
+footer {
+  border-top: 1px solid #eaeaea;
+  color: lightgray;
+}
+
+footer a {
+  color: gray;
+}
+
+footer a:hover {
+  color: darkgray;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer ul li {
+  margin-left: 1em;
+}
+
+footer ul li:first-child {
+  margin-left: 0;
+}
+

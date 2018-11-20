@@ -9,7 +9,7 @@ import { fetchTimeLine, fetchGenres } from "./actions";
 import { rootReducer } from "./reducers";
 import { App } from "./components/App";
 
-const store = createStore(
+export const store = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(thunkMiddleware))
 );

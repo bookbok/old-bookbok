@@ -37,6 +37,6 @@ class CreateUserBooksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_book');
+        Schema::dropIfExists('book_user');
     }
 }

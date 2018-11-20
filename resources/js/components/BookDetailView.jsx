@@ -1,22 +1,31 @@
 import React, { Component } from "react";
+import { fetchBookDetail } from "../actions.js";
+import { store } from "../index";
 
 export class BookDetailView extends Component {
+    constructor(props){
+        super(props);
+    };
+
+    componentDidMount(){
+        const bookId = parseInt(this.props.match.params.id);
+        store.dispatch(fetchBookDetail(bookId));
+    };
+
     render() {
-        const imgLink = "../../../public/hoge.png";
-        const bookName = "各本のタイトルを取得して表示";
-        const bookDisc = "各本の概要を取得して表示";
+        const book = this.props.bookDetail;
 
         return (
             <table border="1"><tbody>
                 <tr>
-                    <td><img src='{imgLink}' /></td>
-                    <td><p>{bookName}</p></td>
+                    <td><img src={book.cover} /></td>
+                    <td><p>{book.name}</p></td>
                 </tr>
                 <tr>
                     <td colSpan="2">概要</td>
                 </tr>
                 <tr>
-                    <td colSpan="2"><p>{bookDisc}</p></td>
+                    <td colSpan="2"><p>{book.description}</p></td>
                 </tr>
             </tbody></table>
         );

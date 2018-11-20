@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -11,16 +12,27 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        // created_at, updated_at is random
         App\User::create([
             'name' => 'admin',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
+            'role_id' => 1,
+            'avatar' => 'https://avatars0.githubusercontent.com/u/22770924',
+            'created_at' => Carbon::now()->subDays(32),
+            'updated_at' => Carbon::now()->subDays(32),
         ]);
 
         App\User::create([
-            'name' => 'test-user',
-            'email' => 'user@example.com',
+            'name' => 'test-staff',
+            'email' => 'staff@example.com',
             'password' => bcrypt('password'),
+            'role_id' => 5,
+            'avatar' => 'https://avatars0.githubusercontent.com/u/22770924',
+            'created_at' => Carbon::now()->subDays(32),
+            'updated_at' => Carbon::now()->subDays(32),
         ]);
+
+        factory(App\User::class, 10)->create();
     }
 }
