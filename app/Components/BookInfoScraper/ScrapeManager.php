@@ -2,6 +2,7 @@
 
 namespace App\Components\BookInfoScraper;
 
+use App\Components\ISBN;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -34,12 +35,16 @@ class ScrapeManager
      * @return  \App\Book|false
      *  見つかった場合はApp\Bookモデルを返す。
      *  見つからなかった場合はfalseを返す
+     * 
+     * @throws  \InvalidArgumentException
+     *  ISBN文字列として不正な場合にスローされる例外
      */
     public function searchByIsbn(string $isbn)
     {
+        $isbn = ISBN::normalize($isbn);
+
         foreach ($this->scrapers as $scraper) {
             $book = $scraper->searchByIsbn($isbn);
-
             if (false !== $book) {
                 return $book;
             }
