@@ -10,11 +10,10 @@ use Illuminate\Http\Request;
 class UserBookController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 特定ユーザの本棚のなかに登録されている本の一覧情報を返す
      *
-     * @param Request $request
-     * @param string $userId
-     * @return \Illuminate\Http\Response
+     * @param userId : ユーザID
+     * @return JSON形式のユーザの本棚内一覧
      */
     public function index($userId)
     {
