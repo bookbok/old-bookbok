@@ -54,12 +54,12 @@ class BookUserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 本棚に収められた本の詳細情報表示用API.
      *
-     * @param  \App\UserBook  $userBook
-     * @return \Illuminate\Http\Response
+     * @param  userBookId: ユーザブックの主キー
+     * @return JSON形式のまるっと情報
      */
-    public function show($userId, $userBookId)
+    public function show($userBookId)
     {
         $userBook = BookUser::with([
                         'user:id,name,avatar,description',
