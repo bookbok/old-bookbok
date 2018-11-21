@@ -12,7 +12,7 @@ class Bok extends Model
     }
 
     public function userBook(){
-        return $this->belongsTo(UserBook::class);
+        return $this->belongsTo(BookUser::class);
     }
 
 }

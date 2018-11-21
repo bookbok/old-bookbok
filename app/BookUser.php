@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserBook extends Model
+class BookUser extends Model
 {
     protected $table = 'book_user';
 
@@ -17,5 +17,9 @@ class UserBook extends Model
 
     public function boks(){
         return $this->hasMany(Bok::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\UserBook;
+use App\BookUser;
 use App\User;
 use App\Book;
 use Illuminate\Http\Request;
 
-class UserBookController extends Controller
+class BookUserController extends Controller
 {
     /**
      * 特定ユーザの本棚のなかに登録されている本の一覧情報を返す
@@ -18,14 +18,14 @@ class UserBookController extends Controller
     public function index($userId)
     {
 
-        $userbooks = User::with(['books' => function($q) {
+        $userBooks = User::with(['books' => function($q) {
                         $q->select('books.id','books.name', 'books.cover', 'books.author', 'books.genre_id');
                      }])
                      ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
                      ->find($userId);
 
         return response()->json(
-            $userbooks,
+            $userBooks,
             200,
             [],
             JSON_UNESCAPED_UNICODE
@@ -59,9 +59,21 @@ class UserBookController extends Controller
      * @param  \App\UserBook  $userBook
      * @return \Illuminate\Http\Response
      */
-    public function show(UserBook $userBook)
+    public function show($userId, $userBookId)
     {
-        //
+        $userBook = BookUser::with([
+                        'user:id,name,avatar,description',
+                        'review:id,user_id,book_user_id,body,published_at',
+                        'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
+                        ])
+                    ->find($userBookId);
+
+        return response()->json(
+            $userBook,
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
     }
 
     /**
