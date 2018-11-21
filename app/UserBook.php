@@ -14,4 +14,8 @@ class UserBook extends Model
     public function review(){
         return $this->hasOne(Review::class);
     }
+
+    public function boks(){
+        return $this->hasMany(Bok::class);
+    }
 }
