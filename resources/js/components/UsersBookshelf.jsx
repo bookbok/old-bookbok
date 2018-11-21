@@ -12,15 +12,28 @@ export class UsersBookshelf extends Component {
         //store.dispatch(fetchBookDetail(bookId));
     };
 
-    render() {
+    render(){
+        const bookCover = [];
+        const bookName = [];
+        const userBooks = [
+            {cover: "userBook1.png", name: "userBook1"},
+            {cover: "userBook2.png", name: "userBook2"},
+            {cover: "userBook3.png", name: "userBook3"},
+            {cover: "userBook4.png", name: "userBook4"},
+            {cover: "userBook5.png", name: "userBook5"},
+        ];
+
+        userBooks.forEach((userBook) => {
+            bookCover.push(<td><img src={userBook.cover} /></td>);
+            bookName.push(<td>{userBook.name}</td>);
+        })
+
         //const book = this.props.bookDetail;
 
         return (
             <table border="1"><tbody>
-                <tr>
-                    <td><img src="hoge.png" /></td>
-                    <td><p>ユーザーの本棚画面</p></td>
-                </tr>
+                <tr>{bookCover}</tr>
+                <tr>{bookName}</tr>
             </tbody></table>
         );
     }
