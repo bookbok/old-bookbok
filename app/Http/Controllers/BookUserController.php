@@ -66,7 +66,7 @@ class BookUserController extends Controller
                         'review:id,user_id,book_user_id,body,published_at',
                         'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
                         ])
-                    ->select('id')
+                    ->select(['id', 'user_id', 'book_id'])
                     ->find($userBookId);
 
         return response()->json(
