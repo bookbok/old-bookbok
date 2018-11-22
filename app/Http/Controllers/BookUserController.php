@@ -56,10 +56,10 @@ class BookUserController extends Controller
     /**
      * 本棚に収められた本の詳細情報表示用API.
      *
-     * @param  userBookId: ユーザブックの主キー
+     * @param  bookUserId: ユーザブックの主キー
      * @return JSON形式のまるっと情報
      */
-    public function show($userBookId)
+    public function show($bookUserId)
     {
         $userBook = BookUser::with([
                         'user:id,name,avatar,description',
@@ -67,7 +67,7 @@ class BookUserController extends Controller
                         'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
                         ])
                     ->select(['id', 'user_id', 'book_id'])
-                    ->find($userBookId);
+                    ->find($bookUserId);
 
         return response()->json(
             $userBook,
