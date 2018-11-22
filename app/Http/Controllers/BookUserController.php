@@ -2,31 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\UserBook;
+use App\BookUser;
 use App\User;
 use App\Book;
 use Illuminate\Http\Request;
 
-class UserBookController extends Controller
+class BookUserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 特定ユーザの本棚のなかに登録されている本の一覧情報を返す
      *
-     * @param Request $request
-     * @param string $userId
-     * @return \Illuminate\Http\Response
+     * @param userId : ユーザID
+     * @return JSON形式のユーザの本棚内一覧
      */
     public function index($userId)
     {
 
-        $userbooks = User::with(['books' => function($q) {
+        $userBooks = User::with(['books' => function($q) {
                         $q->select('books.id','books.name', 'books.cover', 'books.author', 'books.genre_id');
                      }])
                      ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
                      ->find($userId);
 
         return response()->json(
-            $userbooks,
+            $userBooks,
             200,
             [],
             JSON_UNESCAPED_UNICODE
@@ -55,14 +54,27 @@ class UserBookController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 本棚に収められた本の詳細情報表示用API.
      *
-     * @param  \App\UserBook  $userBook
-     * @return \Illuminate\Http\Response
+     * @param  bookUserId: ユーザブックの主キー
+     * @return JSON形式のまるっと情報
      */
-    public function show(UserBook $userBook)
+    public function show($bookUserId)
     {
-        //
+        $userBook = BookUser::with([
+                        'user:id,name,avatar,description',
+                        'review:id,user_id,book_user_id,body,published_at',
+                        'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
+                        ])
+                    ->select(['id', 'user_id', 'book_id'])
+                    ->find($bookUserId);
+
+        return response()->json(
+            $userBook,
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
     }
 
     /**
