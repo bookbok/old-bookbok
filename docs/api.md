@@ -105,33 +105,40 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "user": {
-                "id": 1,
-                "name": "user name",
-                "avator": "http://~",
-                "description": "user info"
-            },
-            "user_books": [
+            "id": 1,
+            "name": "user name",
+            "avator": "http://~",
+            "description": "user info",
+            "role_id": "10",
+            "books": [
                 {
                     "id": 1,
-                    "book": {
+                    "name": "book name",
+                    "description": "book info",
+                    "cover": "http://example.com",
+                    "author": "武田 信玄",
+                    "genre_id": "1",
+                    "pivot": {
+                        "user_id": "1",
+                        "book_id": "1",
                         "id": 1,
-                        "name": "book name",
-                        "description": "book info",
-                        "cover": "http://~",
-                        "author": "武田 信玄",
-                        "genre_id": 1
+                        "created_at": "2018-09-11 10:11:00",
+                        "updated_at": "2018-09-11 10:11:00"
                     }
                 },
                 {
                     "id": 2,
-                    "book": {
+                    "name": "book name",
+                    "description": "book info",
+                    "cover": "http://example.com",
+                    "author": "武田 信玄",
+                    "genre_id": "1",
+                    "pivot": {
+                        "user_id": "1",
+                        "book_id": "2",
                         "id": 2,
-                        "name": "book name",
-                        "description": "book info",
-                        "cover": "http://~",
-                        "author": "武田 信玄",
-                        "genre_id": 1
+                        "created_at": "2018-09-11 10:11:00",
+                        "updated_at": "2018-09-11 10:11:00"
                     }
                 }
             ]
