@@ -34,3 +34,8 @@ export const fetchBookDetail = (id) => dispatch => {
     })
 }
 
+export const requestLogout = () => dispatch => {
+    fetch(DOMAIN + "/api/logout")
+        .then(res => {
+        });
+}
