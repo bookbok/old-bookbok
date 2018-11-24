@@ -34,8 +34,10 @@ export const fetchBookDetail = (id) => dispatch => {
     })
 }
 
+export const removeAuthToken = () => ({ type: "REMOVE_AUTH_TOKEN" });
 export const requestLogout = () => dispatch => {
     fetch(DOMAIN + "/api/logout")
         .then(res => {
+            dispatch(removeAuthToken());
         });
 }
