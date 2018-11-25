@@ -52,17 +52,17 @@ BOOKBOK　API仕様書
 
 + Response 200 (text/html)
 
-    {
-        "id": 1,
-        "name": "example",
-        "email": "example@example.com",
-        "email_verified_at": null,
-        "avatar": "https://avatars0.githubusercontent.com/u/22770924",
-        "description": "",
-        "created_at": "2018-10-24 15:53:09",
-        "updated_at": "2018-10-24 15:53:09",
-        "role_id": "1"
-    }
+        {
+            "id": 1,
+            "name": "example",
+            "email": "example@example.com",
+            "email_verified_at": null,
+            "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+            "description": "",
+            "created_at": "2018-10-24 15:53:09",
+            "updated_at": "2018-10-24 15:53:09",
+            "role_id": "1"
+        }
 
 # Group USERS
 
