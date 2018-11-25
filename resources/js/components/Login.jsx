@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { requestLogin } from "../actions.js";
-import { store } from "../index";
+import { store } from "../store";
 
 //ログイン画面を表すコンポーネントを定義
 export class Login extends Component {

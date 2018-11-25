@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { requestLogout } from "../actions";
-import { store } from "../index";
+import { store } from "../store";
 
 export class Logout extends Component {
     componentDidMount() {
