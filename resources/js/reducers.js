@@ -12,7 +12,7 @@ export function rootReducer(
         case "SET_BOOK_DETAIL":
             return { ...state, bookDetail: action.bookDetail };
 
-        case "SET_AUTH_TOKEN":
+        case "SET_AUTH_TOKEN": // ログインを必要とするAPI用の認証トークンを保存
             return { ...state, token: action.token };
 
         case "REMOVE_AUTH_TOKEN": // ログアウトに伴い、ログイントークンを削除

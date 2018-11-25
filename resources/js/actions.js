@@ -14,7 +14,7 @@ export const fetchTimeLine = () => dispatch => {
 // Get authentication token
 export const setAuthToken = (token) => ({ type: "SET_AUTH_TOKEN", token });
 export const requestLogin = (loginUser) => dispatch => {
-    fetch('http://localhost:8000/api/login', {
+    fetch(DOMAIN + "/api/login", {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -54,7 +54,7 @@ export const fetchGenres = () => dispatch => {
 
 export const setBookDetail = bookDetail => ({type: "SET_BOOK_DETAIL", bookDetail});
 export const fetchBookDetail = (id) => dispatch => {
-    fetch(`http://localhost:8000/api/books/${id}`)
+    fetch(DOMAIN + `/api/books/${id}`)
         .then(res => res.json())
         .then(json => {
           dispatch(setBookDetail(json));
