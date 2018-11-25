@@ -1,9 +1,6 @@
 import { DOMAIN } from "./domain";
 
 export const setTimeLine = timeLine => ({ type: "SET_TIMELINE", timeLine });
-export const setGenres = genres => ({ type: "SET_GENRES", genres });
-export const setBookDetail = bookDetail => ({type: "SET_BOOK_DETAIL", bookDetail});
-
 export const fetchTimeLine = () => dispatch => {
     const timeLine = [
       { name: "bok1" },
@@ -12,6 +9,8 @@ export const fetchTimeLine = () => dispatch => {
     dispatch(setTimeLine(timeLine));
 }
 
+
+/* ==== Auth actions ==== */
 // Get authentication token
 export const setAuthToken = (token) => ({ type: "SET_AUTH_TOKEN", token });
 export const requestLogin = (loginUser) => dispatch => {
@@ -29,6 +28,16 @@ export const requestLogin = (loginUser) => dispatch => {
         });
 }
 
+export const removeAuthToken = () => ({ type: "REMOVE_AUTH_TOKEN" });
+export const requestLogout = () => dispatch => {
+    fetch(DOMAIN + "/api/logout")
+        .then(res => {
+            dispatch(removeAuthToken());
+        });
+}
+
+
+export const setGenres = genres => ({ type: "SET_GENRES", genres });
 export const fetchGenres = () => dispatch => {
     fetch( DOMAIN + "/api/genres/", {
         timeout: 3000,
@@ -43,18 +52,11 @@ export const fetchGenres = () => dispatch => {
         });
 }
 
+export const setBookDetail = bookDetail => ({type: "SET_BOOK_DETAIL", bookDetail});
 export const fetchBookDetail = (id) => dispatch => {
     fetch(`http://localhost:8000/api/books/${id}`)
         .then(res => res.json())
         .then(json => {
           dispatch(setBookDetail(json));
     })
-}
-
-export const removeAuthToken = () => ({ type: "REMOVE_AUTH_TOKEN" });
-export const requestLogout = () => dispatch => {
-    fetch(DOMAIN + "/api/logout")
-        .then(res => {
-            dispatch(removeAuthToken());
-        });
 }
