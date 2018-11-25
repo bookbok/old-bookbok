@@ -12,7 +12,7 @@ class BoksTableSeeder extends Seeder
     public function run()
     {
         // userBookそれぞれに0~10個のbokを作成する
-        $userBooks = App\UserBook::all();
+        $userBooks = App\BookUser::all();
         foreach($userBooks as $book) {
             for($i = 0; $i < rand(0, 10); $i++) {
                 factory(App\Bok::class, 10)->create([
