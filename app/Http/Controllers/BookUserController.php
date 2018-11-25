@@ -80,10 +80,10 @@ class BookUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UserBook  $userBook
+     * @param  \App\BookUser  $userBook
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserBook $userBook)
+    public function edit(BookUser $userBook)
     {
         //
     }
@@ -92,10 +92,10 @@ class BookUserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserBook  $userBook
+     * @param  \App\BookUser  $userBook
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserBook $userBook)
+    public function update(Request $request, BookUser $userBook)
     {
         //
     }
@@ -103,10 +103,10 @@ class BookUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UserBook  $userBook
+     * @param  \App\BookUser  $userBook
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserBook $userBook)
+    public function destroy(BookUser $userBook)
     {
         //
     }

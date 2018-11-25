@@ -11,7 +11,7 @@ class ReviewsTableSeeder extends Seeder
      */
     public function run()
     {
-        $userBooks = App\UserBook::all();
+        $userBooks = App\BookUser::all();
         foreach($userBooks as $book) {
             factory(App\Review::class)->create(['book_user_id' => $book->id, 'user_id' => $book->user_id]);
         }

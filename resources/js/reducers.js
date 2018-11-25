@@ -12,6 +12,9 @@ export function rootReducer(
         case "SET_BOOK_DETAIL":
             return { ...state, bookDetail: action.bookDetail };
 
+        case "SET_AUTH_TOKEN":
+            return { ...state, token: action.token };
+
         case "REMOVE_AUTH_TOKEN": // ログアウトに伴い、ログイントークンを削除
             return { ...state, token: null };
     }
