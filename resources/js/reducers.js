@@ -13,8 +13,6 @@ export function rootReducer(
             return { ...state, bookDetail: action.bookDetail };
 
         case "SET_USERS_BOOKSHELF":
-            console.log("reducer: SET_USERS_BOOKSHELF");
-            console.table(action.usersBookshelf);
             return { ...state, usersBookshelf: action.usersBookshelf };
 
         case "SET_AUTH_TOKEN": // ログインを必要とするAPI用の認証トークンを保存
