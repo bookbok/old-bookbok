@@ -7,7 +7,7 @@ import { Login } from './Login.jsx';
 import { Mypage } from './Mypage.jsx';
 import { BookListView } from './BookListView.jsx';
 import { ConnectedBookDetail} from '../containers.js';
-import { UsersBookshelf } from './UsersBookshelf';
+import { ConnectedUsersBookshelf } from '../containers.js';
 
 
 // bootstrap global navigation bar
@@ -46,7 +46,7 @@ export const MenuRouter = () => (
                 <Route exact path="/mypage" component={ Mypage } />
                 <Route exact path="/books" component={ BookListView } />
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />
-                <Route exact path="/users/:id/user_books" component={ UsersBookshelf } />
+                <Route exact path="/users/:id/user_books" component={ ConnectedUsersBookshelf } />
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
             </Switch>
             <Footer />
