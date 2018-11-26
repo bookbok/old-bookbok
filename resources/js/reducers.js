@@ -16,6 +16,9 @@ export function rootReducer(
             console.log("reducer: SET_USERS_BOOKSHELF");
             console.table(action.usersBookshelf);
             return { ...state, usersBookshelf: action.usersBookshelf };
+
+        case "SET_AUTH_TOKEN":
+            return { ...state, token: action.token };
     }
     return state;
 }

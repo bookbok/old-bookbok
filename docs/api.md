@@ -5,6 +5,65 @@ HOST: http://bookbok.com
 
 BOOKBOK　API仕様書
 
+# Group AUTHENTICATION
+
+`/api/login`を叩いて正常に認証されるとアクセストークンが発行される。
+
+認証が必要なリソースにアクセスする際に`Authorization: Bearer アクセストークン`を指定すると、
+それだけでユーザ認証が行われる。
+
+> TODO:
+ - 認証失敗時に`/api/login`へリダイレクトさせようとするのをどうにかする
+
+## AUTHENTICATION [/api]
+
+> REVIEW:
+ - ベースパスを`/api`にしておいてよいか。(`/api/auth`等にしなくてよいか)
+
+### ログインする [POST /api/login]
+
+> TODO:
+ - エラーの場合のレスポンスをどうにかする
+
++ Request (application/json)
+
+        {
+            "email": "example@example.com",
+            "password": "password"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "token": "eyJ0e...ZN2z0"
+        }
+
++ Response 422 (text/html)
+
+### ログアウトする [GET /api/logout]
+
+> TODO:
+ - HTTPメソッドこれでいいのか
+ - レスポンスをjsonに
+
++ Response 200 (text/html)
+
+### 認証したユーザーの情報を取得する [GET /api/user]
+
++ Response 200 (text/html)
+
+        {
+            "id": 1,
+            "name": "example",
+            "email": "example@example.com",
+            "email_verified_at": null,
+            "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+            "description": "",
+            "created_at": "2018-10-24 15:53:09",
+            "updated_at": "2018-10-24 15:53:09",
+            "role_id": "1"
+        }
+
 # Group USERS
 
 ## USERS [/api/users]
@@ -105,33 +164,40 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "user": {
-                "id": 1,
-                "name": "user name",
-                "avator": "http://~",
-                "description": "user info"
-            },
-            "user_books": [
+            "id": 1,
+            "name": "user name",
+            "avator": "http://~",
+            "description": "user info",
+            "role_id": "10",
+            "books": [
                 {
                     "id": 1,
-                    "book": {
+                    "name": "book name",
+                    "description": "book info",
+                    "cover": "http://example.com",
+                    "author": "武田 信玄",
+                    "genre_id": "1",
+                    "pivot": {
+                        "user_id": "1",
+                        "book_id": "1",
                         "id": 1,
-                        "name": "book name",
-                        "description": "book info",
-                        "cover": "http://~",
-                        "author": "武田 信玄",
-                        "genre_id": 1
+                        "created_at": "2018-09-11 10:11:00",
+                        "updated_at": "2018-09-11 10:11:00"
                     }
                 },
                 {
                     "id": 2,
-                    "book": {
+                    "name": "book name",
+                    "description": "book info",
+                    "cover": "http://example.com",
+                    "author": "武田 信玄",
+                    "genre_id": "1",
+                    "pivot": {
+                        "user_id": "1",
+                        "book_id": "2",
                         "id": 2,
-                        "name": "book name",
-                        "description": "book info",
-                        "cover": "http://~",
-                        "author": "武田 信玄",
-                        "genre_id": 1
+                        "created_at": "2018-09-11 10:11:00",
+                        "updated_at": "2018-09-11 10:11:00"
                     }
                 }
             ]
