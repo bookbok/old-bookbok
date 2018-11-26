@@ -1,0 +1,15 @@
+<?php
+
+return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
+    ->setRules(
+        Suin\PhpCsFixer\Rules::create([
+        // If you want to overwrite default rules
+        // add rules here.
+        'declare_strict_types' => false,
+    ]))
+    ->setFinder(PhpCsFixer\Finder::create()
+        ->exclude('vendor')
+        ->in(__DIR__)
+    )
+;
