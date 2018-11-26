@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { fetchBookDetail } from "../actions.js";
-import { store } from "../index";
+import { store } from "../store";
 
 export class BookDetailView extends Component {
     constructor(props){
