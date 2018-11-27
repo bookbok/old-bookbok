@@ -34,9 +34,10 @@ export class UsersBookshelf extends Component {
 
         {/* 本棚の形に加工 */}
         const bookshelf = [];
-        for(let i=0, key=booksInfo.length ; i<booksInfo.length; i++){
-            bookshelf.push(booksInfo[i]);
-            if(i % 3 == 2 || booksInfo.length == (i+1)){
+        for(let index=0, key=booksInfo.length ; index<booksInfo.length; index++){
+            bookshelf.push(booksInfo[index]);
+            {/* 改行する */}
+            if(index % 3 == 2 || booksInfo.length == (index+1)){
                 bookshelf.push(<div key={key++}></div>);
             }
         }
