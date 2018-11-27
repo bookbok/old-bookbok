@@ -1,5 +1,5 @@
 export function rootReducer(
-    state = { timeLine: [], genres: [], bookDetail: {} },
+    state = { timeLine: [], genres: [], bookDetail: {}, usersBookshelf: {} },
     action
 ) {
     switch(action.type) {
@@ -11,6 +11,9 @@ export function rootReducer(
 
         case "SET_BOOK_DETAIL":
             return { ...state, bookDetail: action.bookDetail };
+
+        case "SET_USERS_BOOKSHELF":
+            return { ...state, usersBookshelf: action.usersBookshelf };
 
         case "SET_AUTH_TOKEN": // ログインを必要とするAPI用の認証トークンを保存
             return { ...state, token: action.token };
