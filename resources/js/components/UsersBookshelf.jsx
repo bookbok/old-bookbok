@@ -21,20 +21,46 @@ export class UsersBookshelf extends Component {
         if(this.isObjectEmpty(usersShelf)){
             return <div></div>;
         }
-        const bookCover = [];
-        const bookName = [];
 
-        usersShelf.books.forEach((userBook, index) => {
-            bookCover.push(<td key={index}><img src={userBook.cover} /></td>);
-            bookName.push(<td key={index}>{userBook.name}</td>);
+        {/* ユーザーが所持する本の情報を本ビューに加工 */}
+        const booksInfo = usersShelf.books.map((userBook, index) => {
+            return (
+                <div class="d-flex flex-column" key={index}>
+                    <img src={userBook.cover}/>
+                    <p>{userBook.name}</p>
+                </div>
+            );
+        });
+
+        {/* 本棚の形に加工 */}
+        const bookshelf = booksInfo.map((book, index) => {
+            if(index % 3 == 0 && booksInfo.length == (index+1)){
+                console.log("1冊目かつ最後");
+                return (
+                    <div className="d-flex" key={index}>{book}</div>
+                );
+            } else if(index % 3 == 0){
+                console.log("一番左の本");
+                return (
+                    <div className="d-flex" key={index}>{book}</div>
+                );
+            } else if(index % 3 == 2 || booksInfo.length == (index+1)){
+                console.log("一番右の本");
+                return (
+                    <div key={index}>{book}</div>
+                );
+            } else {
+                console.log("真ん中の本");
+                return (
+                    <div key={index}>{book}</div>
+                );
+            }
         });
 
         return (
-            <table border="1"><tbody>
-                {/* いい感じのキーが思いつかなかったからそれっぽい文字列にしておいた */}
-                <tr key="bookCover">{bookCover}</tr>
-                <tr key="bookName">{bookName}</tr>
-            </tbody></table>
+            <div class="d-flex flex-column">
+                {bookshelf}
+            </div>
         );
     }
 }
