@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { fetchUsersBookshelf } from "../actions.js";
 import { store } from "../store";
+import { isObjectEmpty } from "../utils.js";
 
 export class UsersBookshelf extends Component {
     constructor(props){
@@ -12,13 +13,10 @@ export class UsersBookshelf extends Component {
         store.dispatch(fetchUsersBookshelf(userId));
     };
 
-    isObjectEmpty(obj){
-        return !Object.keys(obj).length;
-    }
-
     render(){
         const usersShelf = this.props.usersBookshelf;
-        if(this.isObjectEmpty(usersShelf)){
+        if(isObjectEmpty(usersShelf)){
+            {/* 後々ローディング画面に置き換え */}
             return <div></div>;
         }
 
@@ -34,7 +32,7 @@ export class UsersBookshelf extends Component {
 
         {/* 本棚の形に加工 */}
         const bookshelf = [];
-        for(let index=0, key=booksInfo.length ; index<booksInfo.length; index++){
+        for(let index = 0, key = booksInfo.length ; index < booksInfo.length; index++){
             bookshelf.push(booksInfo[index]);
             {/* 改行する */}
             if(index % 3 == 2 || booksInfo.length == (index+1)){
