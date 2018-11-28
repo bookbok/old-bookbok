@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { fetchGenres } from "../actions.js";
 import { store } from "../store";
-import { isListEmpty } from "../utils";
+import { isEmpty } from "../utils";
 
 export class Genres extends Component {
     constructor(props){
@@ -13,7 +13,7 @@ export class Genres extends Component {
     };
 
     render() {
-        if(isListEmpty(this.props.genres)){
+        if(isEmpty(this.props.genres)){
             return <div></div>;
         }
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { fetchUsersBookshelf } from "../actions.js";
 import { store } from "../store";
-import { isObjectEmpty } from "../utils.js";
+import { isEmpty } from "../utils.js";
 import { Loading } from "./shared/Loading";
 
 export class UsersBookshelf extends Component {
@@ -16,7 +16,7 @@ export class UsersBookshelf extends Component {
 
     render(){
         const usersShelf = this.props.usersBookshelf;
-        if(isObjectEmpty(usersShelf)){
+        if(isEmpty(usersShelf)){
             return <Loading />;
         }
 
