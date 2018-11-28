@@ -23,7 +23,7 @@ export class UsersBookshelf extends Component {
         {/* ユーザーが所持する本の情報を本ビューに加工 */}
         const booksInfo = usersShelf.books.map((userBook, index) => {
             return (
-                <div class="d-inline-block" key={index}>
+                <div className="d-inline-block" key={index}>
                     <img src={userBook.cover}/>
                     <pre>{userBook.name}</pre>
                 </div>
@@ -41,9 +41,9 @@ export class UsersBookshelf extends Component {
         }
 
         return (
-            <div class="container mt-4">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
+            <div className="container mt-4">
+                <div className="row justify-content-center">
+                    <div className="col-md-8">
                         {bookshelf}
                     </div>
                 </div>
