@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
+    // 自動増分の抑制
+    public $incrementing = false;
+    // 'id'ではない主キーの設定
+    protected $primaryKey = 'isbn';
 
     /**
      * リレーション定義
