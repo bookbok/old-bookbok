@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { fetchGenres } from "../actions.js";
 import { store } from "../store";
+import { isListEmpty } from "../utils";
 
 export class Genres extends Component {
     constructor(props){
@@ -12,8 +13,8 @@ export class Genres extends Component {
     };
 
     render() {
-        if(this.props.genres == []){
-            return;
+        if(isListEmpty(this.props.genres)){
+            return <div></div>;
         }
 
         const genres = this.props.genres.map(( genre ) => (
