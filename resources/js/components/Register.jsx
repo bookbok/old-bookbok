@@ -3,28 +3,27 @@ import { withRouter } from "react-router-dom";
 import { requestLogin } from "../actions.js";
 import { store } from "../store";
 
-export class Login extends Component {
+export class Register extends Component {
     constructor(props) {
         super(props);
-        this.state = { email: "", password: "", remember: false };
+        this.state = { name: "", email: "", password: "", passwordConfirm: "" };
 
-        this.submitLogin = this.submitLogin.bind(this);
+        this.submitRegister = this.submitRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
     // 変更されたinput要素のnameを取得し、自動的にstateの値を変更するハンドラ
     handleChange(e) {
         const name = e.target.name;
-        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
         this.setState({
-            [name]: value,
+            [name]: e.target.value,
         });
     }
 
-    submitLogin(e) {
+    submitRegister(e) {
         e.preventDefault();
-        store.dispatch(requestLogin(this.state));
-        this.props.history.push('/'); // ログイン後のデフォルト遷移先
+        //store.dispatch(requestLogin(this.state));
+        this.props.history.push('/login'); // アカウント登録後のデフォルト遷移先
     }
 
     render() {
@@ -32,14 +31,29 @@ export class Login extends Component {
             <div className="container mt-4">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
-
                         <div className="card">
-                            <div className="card-header">ログイン</div>
+                            <div className="card-header">アカウント登録</div>
 
                             <div className="card-body">
-                                <form onSubmit={this.submitLogin}>
+                                <form onSubmit={this.submitRegister}>
                                     <div className="form-group row">
-                                        <label htmlFor="email" className="col-sm-4 col-form-label text-md-right">Eメール</label>
+                                        <label htmlFor="name" className="col-md-4 col-form-label text-md-right">名前</label>
+
+                                        <div className="col-md-6">
+                                            <input id="name"
+                                                name="name"
+                                                type="text"
+                                                className="form-control"
+                                                value={this.state.name}
+                                                onChange={this.handleChange}
+                                                required
+                                                autoFocus />
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group row">
+                                        <label htmlFor="email" className="col-md-4 col-form-label text-md-right">Eメール</label>
+
                                         <div className="col-md-6">
                                             <input id="email"
                                                 name="email"
@@ -54,6 +68,7 @@ export class Login extends Component {
 
                                     <div className="form-group row">
                                         <label htmlFor="password" className="col-md-4 col-form-label text-md-right">パスワード</label>
+
                                         <div className="col-md-6">
                                             <input id="password"
                                                 name="password"
@@ -62,33 +77,26 @@ export class Login extends Component {
                                                 value={this.state.password}
                                                 onChange={this.handleChange}
                                                 required />
+
                                         </div>
                                     </div>
 
                                     <div className="form-group row">
-                                        <div className="col-md-6 offset-md-4">
-                                            <div className="form-check">
-                                                <input id="remember"
-                                                    name="remember"
-                                                    type="checkbox"
-                                                    className="form-check-input"
-                                                    checked={this.state.remmber}
-                                                    onChange={this.handleChange} />
-                                                <label className="form-check-label" htmlFor="remember">
-                                                    ログイン状態を保持する
-                                                </label>
-                                            </div>
+                                        <label for="password-confirm" className="col-md-4 col-form-label text-md-right">確認用パスワード</label>
+
+                                        <div className="col-md-6">
+                                            <input id="password-confirm"
+                                                name="passwordConfirm"
+                                                type="password"
+                                                className="form-control"
+                                                value={this.state.passwordConfirm}
+                                                onChange={this.handleChange}
+                                                required />
                                         </div>
                                     </div>
 
                                     <div className="form-group row d-flex flex-column align-items-center">
-                                        <button type="submit" className="btn btn-primary">
-                                            ログイン
-                                        </button>
-
-                                        <a className="btn btn-link" href="#">
-                                            パスワードを忘れましたか?
-                                        </a>
+                                        <button type="submit" className="btn btn-primary">登録</button>
                                     </div>
                                 </form>
                             </div>
@@ -100,3 +108,4 @@ export class Login extends Component {
         );
     }
 }
+
