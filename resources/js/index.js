@@ -14,6 +14,4 @@ const view = (
 
 if (document.getElementById('app')) {
     render(view, document.getElementById('app'));
-
-    store.dispatch(fetchTimeLine());
 }

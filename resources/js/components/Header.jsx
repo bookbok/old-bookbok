@@ -26,7 +26,7 @@ const Header = () => (
                     <Link className="nav-item nav-link" to="/login">ログイン</Link>
                     <Link className="nav-item nav-link" to="/mypage">マイページ</Link>
                     <Link className="nav-item nav-link" to="/books">本一覧</Link>
-                    <Link className="nav-item nav-link" to="/books/0">本詳細</Link>
+                    <Link className="nav-item nav-link" to="/books/1">本詳細</Link>
                     <Link className="nav-item nav-link" to ="/users/1/user_books">ユーザー本棚</Link>
                 </div>
             </div>
