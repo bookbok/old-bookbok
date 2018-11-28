@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ConnectedGenres } from "../containers";
+import { Search } from "./Search.jsx";
 
 export class BookListView extends Component {
     render() {
@@ -18,6 +19,7 @@ export class BookListView extends Component {
 
         return(
             <div>
+                <Search />
                 <ConnectedGenres />
                 <table border="1">
                     <tr>
