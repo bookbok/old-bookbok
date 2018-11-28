@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { fetchUsersBookshelf } from "../actions.js";
 import { store } from "../store";
 import { isObjectEmpty } from "../utils.js";
+import { Loading } from "./shared/Loading";
 
 export class UsersBookshelf extends Component {
     constructor(props){
@@ -16,8 +17,7 @@ export class UsersBookshelf extends Component {
     render(){
         const usersShelf = this.props.usersBookshelf;
         if(isObjectEmpty(usersShelf)){
-            {/* 後々ローディング画面に置き換え */}
-            return <div></div>;
+            return <Loading />;
         }
 
         {/* ユーザーが所持する本の情報を本ビューに加工 */}
