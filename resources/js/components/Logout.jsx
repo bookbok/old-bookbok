@@ -12,7 +12,7 @@ export class Logout extends Component {
     render() {
         return (
             <div>
-                <p class="text-center">ログアウトしています......</p>
+                <p className="text-center">ログアウトしています......</p>
             </div>
         );
     }
