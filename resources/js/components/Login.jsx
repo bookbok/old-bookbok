@@ -30,22 +30,22 @@ export class Login extends Component {
 
     render() {
         return (
-            <div class="container mt-4">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
+            <div className="container mt-4">
+                <div className="row justify-content-center">
+                    <div className="col-md-8">
 
-                        <div class="card">
-                            <div class="card-header">ログイン</div>
+                        <div className="card">
+                            <div className="card-header">ログイン</div>
 
-                            <div class="card-body">
+                            <div className="card-body">
                                 <form onSubmit={this.submitLogin}>
-                                    <div class="form-group row">
-                                        <label htmlFor="email" class="col-sm-4 col-form-label text-md-right">Eメール</label>
-                                        <div class="col-md-6">
+                                    <div className="form-group row">
+                                        <label htmlFor="email" className="col-sm-4 col-form-label text-md-right">Eメール</label>
+                                        <div className="col-md-6">
                                             <input id="email"
                                                 name="email"
                                                 type="email"
-                                                class="form-control"
+                                                className="form-control"
                                                 value={this.state.email}
                                                 onChange={this.handleChange}
                                                 required
@@ -53,41 +53,41 @@ export class Login extends Component {
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label htmlFor="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
-                                        <div class="col-md-6">
+                                    <div className="form-group row">
+                                        <label htmlFor="password" className="col-md-4 col-form-label text-md-right">パスワード</label>
+                                        <div className="col-md-6">
                                             <input id="password"
                                                 name="password"
                                                 type="password"
-                                                class="form-control"
+                                                className="form-control"
                                                 value={this.state.password}
                                                 onChange={this.handleChange}
                                                 required />
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <div class="col-md-6 offset-md-4">
-                                            <div class="form-check">
+                                    <div className="form-group row">
+                                        <div className="col-md-6 offset-md-4">
+                                            <div className="form-check">
                                                 <input id="remember"
                                                     name="remember"
                                                     type="checkbox"
-                                                    class="form-check-input"
+                                                    className="form-check-input"
                                                     checked={this.state.remmber}
                                                     onChange={this.handleChange} />
-                                                <label class="form-check-label" htmlFor="remember">
+                                                <label className="form-check-label" htmlFor="remember">
                                                     ログイン状態を保持する
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="form-group row d-flex flex-column align-items-center">
-                                        <button type="submit" class="btn btn-primary">
+                                    <div className="form-group row d-flex flex-column align-items-center">
+                                        <button type="submit" className="btn btn-primary">
                                             ログイン
                                         </button>
 
-                                        <a class="btn btn-link" href="#">
+                                        <a className="btn btn-link" href="#">
                                             パスワードを忘れましたか?
                                         </a>
                                     </div>

@@ -14,19 +14,19 @@ import { ConnectedUsersBookshelf } from '../containers.js';
 // bootstrap global navigation bar
 const Header = () => (
     <div>
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <a class="navbar-brand" href="#">BookBok</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        <nav className="navbar navbar-expand-md navbar-light bg-light">
+            <a className="navbar-brand" href="#">BookBok</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <Link className="nav-item nav-link" to="/">ホーム <span class="sr-only">(current)</span></Link>
+            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div className="navbar-nav">
+                    <Link className="nav-item nav-link" to="/">ホーム <span className="sr-only">(current)</span></Link>
                     <Link className="nav-item nav-link" to="/signup">新規登録</Link>
                     <Link className="nav-item nav-link" to="/login">ログイン</Link>
                     <Link className="nav-item nav-link" to="/mypage">マイページ</Link>
                     <Link className="nav-item nav-link" to="/books">本一覧</Link>
-                    <Link className="nav-item nav-link" to="/books/0">本詳細</Link>
+                    <Link className="nav-item nav-link" to="/books/1">本詳細</Link>
                     <Link className="nav-item nav-link" to ="/users/1/user_books">ユーザー本棚</Link>
                 </div>
             </div>

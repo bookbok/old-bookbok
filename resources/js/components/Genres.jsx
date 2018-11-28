@@ -22,12 +22,12 @@ export class Genres extends Component {
 
         return (
             <div>
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <div className="dropdown">
+                    <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         ジャンル一覧
-                        <span class="caret"></span>
+                        <span className="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                         {genres}
                     </ul>
                 </div>
