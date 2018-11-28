@@ -48,7 +48,7 @@ class GoogleBooksScraper implements ScraperInterface
             $book = new Book;
 
             // レスポンスで得た情報を該当カラムに格納する。
-            $book->id = $bookInfo->items[0]->volumeInfo->industryIdentifiers[1]->identifier;
+            $book->isbn = $bookInfo->items[0]->volumeInfo->industryIdentifiers[1]->identifier;
             $book->name = $bookInfo->items[0]->volumeInfo->title;
             $book->description = $bookInfo->items[0]->volumeInfo->description;
             $book->conver = $bookInfo->items[0]->volumeInfo->imageLinks->smallThumbnail;
