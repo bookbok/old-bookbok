@@ -6,8 +6,8 @@ import { SignUp } from './SignUp.jsx';
 import { Login } from './Login.jsx';
 import { Logout } from './Logout.jsx';
 import { Mypage } from './Mypage.jsx';
-import { BookListView } from './BookListView.jsx';
 import { ConnectedBookDetail} from '../containers.js';
+import { ConnectedBookList} from '../containers.js';
 import { ConnectedUsersBookshelf } from '../containers.js';
 
 
@@ -46,7 +46,7 @@ export const MenuRouter = () => (
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/logout" component={ Logout } />
                 <Route exact path="/mypage" component={ Mypage } />
-                <Route exact path="/books" component={ BookListView } />
+                <Route exact path="/books" component={ ConnectedBookList } />
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />
                 <Route exact path="/users/:id/user_books" component={ ConnectedUsersBookshelf } />
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}

@@ -1,34 +1,56 @@
 import React, { Component } from 'react';
+
 import { ConnectedGenres } from "../containers";
 import { Search } from "./Search.jsx";
+import { fetchBookList } from "../actions.js";
+import { store } from "../store";
 
 export class BookListView extends Component {
+    constructor(props) {
+        super(props);
+    };
+    
+    componentDidMount() {
+        store.dispatch(fetchBookList());
+    };
+
     render() {
-        const bookBody = [];
-        const bookName = [];
-        const books = [
-            {name:'c++01', body:'http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api'},
-            {name:'c++02', body:'http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api'},
-            {name:'c++03', body:'http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api'},
-        ];
-
-        books.forEach((book) => {
-           bookBody.push(<td><img src={book.body} /></td>);
-           bookName.push(<th>{book.name}</th>);
+        let bookNameLength = 0;  
+        let bookNameSpace = [];
+        const booksInfo = this.props.bookList.map((book, index) => {
+            if(bookNameLength < book.name.length) bookNameLength = book.name.length;
+            console.log(bookNameLength);
+            //for (let bookNameLength; bookNameLength < 1; bookNameLength--) bookNameSpace.push(' ');
+            bookNameSpace.push(' ');
+            console.log(bookNameSpace);
+            return (
+                <div class="d-inline-block" key={index}>
+                    <img src={book.cover}/>
+                    <p>{book.name}</p>
+                </div>
+            );
         });
-
+        
+        const bookList = [];
+        for(let index = 0, key = booksInfo.length ; index < booksInfo.length; index++){
+            bookList.push(booksInfo[index]);
+            //console.log(booksInfo[index]);
+            if(index % 3 == 2 || booksInfo.length == (index+1)){
+                bookList.push(<div key={key++}></div>);
+            }
+        }
+ 
         return(
             <div>
                 <Search />
                 <ConnectedGenres />
-                <table border="1">
-                    <tr>
-                        {bookBody}
-                    </tr>
-                    <tr>
-                        {bookName}
-                    </tr>
-                </table>
+                <div class="container mt-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            {bookList}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }  
