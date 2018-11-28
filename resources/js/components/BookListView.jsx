@@ -15,18 +15,11 @@ export class BookListView extends Component {
     };
 
     render() {
-        let bookNameLength = 0;  
-        let bookNameSpace = [];
         const booksInfo = this.props.bookList.map((book, index) => {
-            if(bookNameLength < book.name.length) bookNameLength = book.name.length;
-            console.log(bookNameLength);
-            //for (let bookNameLength; bookNameLength < 1; bookNameLength--) bookNameSpace.push(' ');
-            bookNameSpace.push(' ');
-            console.log(bookNameSpace);
             return (
                 <div class="d-inline-block" key={index}>
                     <img src={book.cover}/>
-                    <p>{book.name}</p>
+                    <pre>{book.name}</pre>
                 </div>
             );
         });
@@ -34,7 +27,6 @@ export class BookListView extends Component {
         const bookList = [];
         for(let index = 0, key = booksInfo.length ; index < booksInfo.length; index++){
             bookList.push(booksInfo[index]);
-            //console.log(booksInfo[index]);
             if(index % 3 == 2 || booksInfo.length == (index+1)){
                 bookList.push(<div key={key++}></div>);
             }
