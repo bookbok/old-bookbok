@@ -552,17 +552,17 @@ module.exports = warning;
 
 "use strict";
 /* unused harmony export setTimeLine */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return fetchTimeLine; });
+/* unused harmony export fetchTimeLine */
 /* unused harmony export setAuthToken */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return requestLogin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return requestLogin; });
 /* unused harmony export removeAuthToken */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return requestLogout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return requestLogout; });
 /* unused harmony export setGenres */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return fetchGenres; });
 /* unused harmony export setBookDetail */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return fetchBookDetail; });
 /* unused harmony export setUsersBookshelf */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return fetchUsersBookshelf; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return fetchUsersBookshelf; });
 /* unused harmony export setBookList */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return fetchBookList; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__domain__ = __webpack_require__(97);
@@ -39170,8 +39170,6 @@ var view = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 
 if (document.getElementById('app')) {
     Object(__WEBPACK_IMPORTED_MODULE_1_react_dom__["render"])(view, document.getElementById('app'));
-
-    __WEBPACK_IMPORTED_MODULE_5__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions__["d" /* fetchTimeLine */])());
 }
 
 /***/ }),
@@ -63440,7 +63438,7 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DOMAIN; });
-var DOMAIN = "http://0.0.0.0:8000";
+var DOMAIN = "http://localhost:8000";
 
 /***/ }),
 /* 98 */
@@ -63520,30 +63518,30 @@ var Header = function Header() {
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'nav',
-            { 'class': 'navbar navbar-expand-md navbar-light bg-light' },
+            { className: 'navbar navbar-expand-md navbar-light bg-light' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'a',
-                { 'class': 'navbar-brand', href: '#' },
+                { className: 'navbar-brand', href: '#' },
                 'BookBok'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'button',
-                { 'class': 'navbar-toggler', type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbarNavAltMarkup', 'aria-controls': 'navbarNavAltMarkup', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { 'class': 'navbar-toggler-icon' })
+                { className: 'navbar-toggler', type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbarNavAltMarkup', 'aria-controls': 'navbarNavAltMarkup', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'navbar-toggler-icon' })
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                { 'class': 'collapse navbar-collapse', id: 'navbarNavAltMarkup' },
+                { className: 'collapse navbar-collapse', id: 'navbarNavAltMarkup' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { 'class': 'navbar-nav' },
+                    { className: 'navbar-nav' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
                         { className: 'nav-item nav-link', to: '/' },
                         '\u30DB\u30FC\u30E0 ',
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'span',
-                            { 'class': 'sr-only' },
+                            { className: 'sr-only' },
                             '(current)'
                         )
                     ),
@@ -63569,7 +63567,7 @@ var Header = function Header() {
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
-                        { className: 'nav-item nav-link', to: '/books/0' },
+                        { className: 'nav-item nav-link', to: '/books/1' },
                         '\u672C\u8A73\u7D30'
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -65522,19 +65520,19 @@ module.exports = hoistNonReactStatics;
 var Footer = function Footer() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "div",
-        { "class": "container mt-5" },
+        { className: "container mt-5" },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             "div",
-            { "class": "justify-content-center" },
+            { className: "justify-content-center" },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "footer",
-                { "class": "d-none d-md-block" },
+                { className: "d-none d-md-block" },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "nav",
                     null,
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "ul",
-                        { "class": "d-flex" },
+                        { className: "d-flex" },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "li",
                             null,
@@ -65564,7 +65562,7 @@ var Footer = function Footer() {
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "li",
-                            { "class": "mr-auto" },
+                            { className: "mr-auto" },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
                                 { to: "#" },
@@ -65716,7 +65714,7 @@ var Login = function (_Component) {
         key: "submitLogin",
         value: function submitLogin(e) {
             e.preventDefault();
-            __WEBPACK_IMPORTED_MODULE_3__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actions_js__["f" /* requestLogin */])(this.state));
+            __WEBPACK_IMPORTED_MODULE_3__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actions_js__["e" /* requestLogin */])(this.state));
             this.props.history.push('/'); // ログイン後のデフォルト遷移先
         }
     }, {
@@ -65724,42 +65722,42 @@ var Login = function (_Component) {
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
-                { "class": "container mt-4" },
+                { className: "container mt-4" },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
-                    { "class": "row justify-content-center" },
+                    { className: "row justify-content-center" },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "div",
-                        { "class": "col-md-8" },
+                        { className: "col-md-8" },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "div",
-                            { "class": "card" },
+                            { className: "card" },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 "div",
-                                { "class": "card-header" },
+                                { className: "card-header" },
                                 "\u30ED\u30B0\u30A4\u30F3"
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 "div",
-                                { "class": "card-body" },
+                                { className: "card-body" },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     "form",
                                     { onSubmit: this.submitLogin },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         "div",
-                                        { "class": "form-group row" },
+                                        { className: "form-group row" },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             "label",
-                                            { htmlFor: "email", "class": "col-sm-4 col-form-label text-md-right" },
+                                            { htmlFor: "email", className: "col-sm-4 col-form-label text-md-right" },
                                             "E\u30E1\u30FC\u30EB"
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             "div",
-                                            { "class": "col-md-6" },
+                                            { className: "col-md-6" },
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { id: "email",
                                                 name: "email",
                                                 type: "email",
-                                                "class": "form-control",
+                                                className: "form-control",
                                                 value: this.state.email,
                                                 onChange: this.handleChange,
                                                 required: true,
@@ -65768,19 +65766,19 @@ var Login = function (_Component) {
                                     ),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         "div",
-                                        { "class": "form-group row" },
+                                        { className: "form-group row" },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             "label",
-                                            { htmlFor: "password", "class": "col-md-4 col-form-label text-md-right" },
+                                            { htmlFor: "password", className: "col-md-4 col-form-label text-md-right" },
                                             "\u30D1\u30B9\u30EF\u30FC\u30C9"
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             "div",
-                                            { "class": "col-md-6" },
+                                            { className: "col-md-6" },
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { id: "password",
                                                 name: "password",
                                                 type: "password",
-                                                "class": "form-control",
+                                                className: "form-control",
                                                 value: this.state.password,
                                                 onChange: this.handleChange,
                                                 required: true })
@@ -65788,22 +65786,22 @@ var Login = function (_Component) {
                                     ),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         "div",
-                                        { "class": "form-group row" },
+                                        { className: "form-group row" },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             "div",
-                                            { "class": "col-md-6 offset-md-4" },
+                                            { className: "col-md-6 offset-md-4" },
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 "div",
-                                                { "class": "form-check" },
+                                                { className: "form-check" },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { id: "remember",
                                                     name: "remember",
                                                     type: "checkbox",
-                                                    "class": "form-check-input",
+                                                    className: "form-check-input",
                                                     checked: this.state.remmber,
                                                     onChange: this.handleChange }),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     "label",
-                                                    { "class": "form-check-label", htmlFor: "remember" },
+                                                    { className: "form-check-label", htmlFor: "remember" },
                                                     "\u30ED\u30B0\u30A4\u30F3\u72B6\u614B\u3092\u4FDD\u6301\u3059\u308B"
                                                 )
                                             )
@@ -65811,15 +65809,15 @@ var Login = function (_Component) {
                                     ),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         "div",
-                                        { "class": "form-group row d-flex flex-column align-items-center" },
+                                        { className: "form-group row d-flex flex-column align-items-center" },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             "button",
-                                            { type: "submit", "class": "btn btn-primary" },
+                                            { type: "submit", className: "btn btn-primary" },
                                             "\u30ED\u30B0\u30A4\u30F3"
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             "a",
-                                            { "class": "btn btn-link", href: "#" },
+                                            { className: "btn btn-link", href: "#" },
                                             "\u30D1\u30B9\u30EF\u30FC\u30C9\u3092\u5FD8\u308C\u307E\u3057\u305F\u304B?"
                                         )
                                     )
@@ -65961,7 +65959,7 @@ var Logout = function (_Component) {
     _createClass(Logout, [{
         key: "componentDidMount",
         value: function componentDidMount() {
-            __WEBPACK_IMPORTED_MODULE_2__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_1__actions__["g" /* requestLogout */])());
+            __WEBPACK_IMPORTED_MODULE_2__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_1__actions__["f" /* requestLogout */])());
             this.props.history.push('/');
         }
 
@@ -65975,7 +65973,7 @@ var Logout = function (_Component) {
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "p",
-                    { "class": "text-center" },
+                    { className: "text-center" },
                     "\u30ED\u30B0\u30A2\u30A6\u30C8\u3057\u3066\u3044\u307E\u3059......"
                 )
             );
@@ -66123,16 +66121,16 @@ var Genres = function (_Component) {
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
-                    { "class": "dropdown" },
+                    { className: "dropdown" },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "button",
-                        { "class": "btn btn-default dropdown-toggle", type: "button", id: "dropdownMenu1", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "true" },
+                        { className: "btn btn-default dropdown-toggle", type: "button", id: "dropdownMenu1", "data-toggle": "dropdown", "aria-haspopup": "true", "aria-expanded": "true" },
                         "\u30B8\u30E3\u30F3\u30EB\u4E00\u89A7",
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { "class": "caret" })
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "caret" })
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "ul",
-                        { "class": "dropdown-menu", "aria-labelledby": "dropdownMenu1" },
+                        { className: "dropdown-menu", "aria-labelledby": "dropdownMenu1" },
                         genres
                     )
                 )
@@ -66283,20 +66281,13 @@ var BookListView = function (_Component) {
     }, {
         key: "render",
         value: function render() {
-            var bookNameLength = 0;
-            var bookNameSpace = [];
             var booksInfo = this.props.bookList.map(function (book, index) {
-                if (bookNameLength < book.name.length) bookNameLength = book.name.length;
-                console.log(bookNameLength);
-                //for (let bookNameLength; bookNameLength < 1; bookNameLength--) bookNameSpace.push(' ');
-                bookNameSpace.push(' ');
-                console.log(bookNameSpace);
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { "class": "d-inline-block", key: index },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: book.cover }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "p",
+                        "pre",
                         null,
                         book.name
                     )
@@ -66306,7 +66297,6 @@ var BookListView = function (_Component) {
             var bookList = [];
             for (var index = 0, key = booksInfo.length; index < booksInfo.length; index++) {
                 bookList.push(booksInfo[index]);
-                //console.log(booksInfo[index]);
                 if (index % 3 == 2 || booksInfo.length == index + 1) {
                     bookList.push(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", { key: key++ }));
                 }
@@ -66352,21 +66342,21 @@ var Search = function Search() {
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             "div",
-            { "class": "form-group" },
+            { className: "form-group" },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
-                { "class": "row" },
+                { className: "row" },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
-                    { "class": "col-xs-4" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", "class": "form-control", placeholder: "\u30C6\u30AD\u30B9\u30C8\u5165\u529B\u6B04" })
+                    { className: "col-xs-4" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", className: "form-control", placeholder: "\u30C6\u30AD\u30B9\u30C8\u5165\u529B\u6B04" })
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "span",
-                    { "class": "input-group-btn" },
+                    { className: "input-group-btn" },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "button",
-                        { type: "button", "class": "btn btn-default" },
+                        { type: "button", className: "btn btn-default" },
                         "\u691C\u7D22"
                     )
                 )
@@ -66412,7 +66402,7 @@ var UsersBookshelf = function (_Component) {
         key: "componentDidMount",
         value: function componentDidMount() {
             var userId = parseInt(this.props.match.params.id);
-            __WEBPACK_IMPORTED_MODULE_2__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_1__actions_js__["e" /* fetchUsersBookshelf */])(userId));
+            __WEBPACK_IMPORTED_MODULE_2__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_1__actions_js__["d" /* fetchUsersBookshelf */])(userId));
         }
     }, {
         key: "render",
@@ -66427,7 +66417,7 @@ var UsersBookshelf = function (_Component) {
             var booksInfo = usersShelf.books.map(function (userBook, index) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
-                    { "class": "d-inline-block", key: index },
+                    { className: "d-inline-block", key: index },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: userBook.cover }),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "pre",
@@ -66449,13 +66439,13 @@ var UsersBookshelf = function (_Component) {
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
-                { "class": "container mt-4" },
+                { className: "container mt-4" },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
-                    { "class": "row justify-content-center" },
+                    { className: "row justify-content-center" },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "div",
-                        { "class": "col-md-8" },
+                        { className: "col-md-8" },
                         bookshelf
                     )
                 )
@@ -66473,7 +66463,7 @@ var UsersBookshelf = function (_Component) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = isObjectEmpty;
 function isObjectEmpty(obj) {
-  return !Object.keys(obj).length;
+  return !obj || !Object.keys(obj).length;
 }
 
 /***/ }),
