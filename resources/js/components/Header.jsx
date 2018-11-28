@@ -5,6 +5,7 @@ import { Home } from './Home.jsx';
 import { SignUp } from './SignUp.jsx';
 import { Login } from './Login.jsx';
 import { Logout } from './Logout.jsx';
+import { Register } from './Register.jsx';
 import { Mypage } from './Mypage.jsx';
 import { BookListView } from './BookListView.jsx';
 import { ConnectedBookDetail} from '../containers.js';
@@ -45,6 +46,7 @@ export const MenuRouter = () => (
                 <Route exact path="/signup" component={ SignUp } />
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/logout" component={ Logout } />
+                <Route exact path="/register" component={ Register } />
                 <Route exact path="/mypage" component={ Mypage } />
                 <Route exact path="/books" component={ BookListView } />
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />
