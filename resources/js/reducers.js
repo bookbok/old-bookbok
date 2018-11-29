@@ -1,5 +1,5 @@
 export function rootReducer(
-    state = { timeLine: [], genres: [], bookDetail: {}, usersBookshelf: {} },
+    state = { timeLine: [], genres: [], usersBookshelf: {} },
     action
 ) {
     switch(action.type) {
