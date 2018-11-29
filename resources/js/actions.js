@@ -9,7 +9,6 @@ export const fetchTimeLine = () => dispatch => {
     dispatch(setTimeLine(timeLine));
 }
 
-
 /* ==== Auth actions ==== */
 // Get authentication token
 export const setAuthToken = (token) => ({ type: "SET_AUTH_TOKEN", token });
@@ -68,4 +67,16 @@ export const fetchUsersBookshelf = (userId) => dispatch => {
         .then(json => {
             dispatch(setUsersBookshelf(json));
         })
+}
+
+export const setBookList = books => ({type: "SET_BOOKLIST", books});
+export const fetchBookList = () => dispatch => {
+    fetch(DOMAIN + "/api/books/")
+        .then(res => res.json())
+        .then(json => {
+            dispatch(setBookList(json));
+        })
+        .catch(err => {
+            console.error("fetch error", err);
+        });
 }

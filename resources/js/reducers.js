@@ -12,6 +12,9 @@ export function rootReducer(
         case "SET_BOOK_DETAIL":
             return { ...state, bookDetail: action.bookDetail };
 
+        case "SET_BOOKLIST":
+            return { ...state, books: action.books };
+
         case "SET_USERS_BOOKSHELF":
             return { ...state, usersBookshelf: action.usersBookshelf };
 
