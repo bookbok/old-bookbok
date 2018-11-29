@@ -36,6 +36,21 @@ export const requestLogout = () => dispatch => {
         });
 }
 
+export const requestUserRegister = (userInfo) => dispatch => {
+    /* TODO: サーバー側が実装されれば書く
+    fetch(DOMAIN + "/api/register", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userInfo)
+    })
+        .then(res => {
+        });
+    */
+};
+
 
 export const setGenres = genres => ({ type: "SET_GENRES", genres });
 export const fetchGenres = () => dispatch => {
