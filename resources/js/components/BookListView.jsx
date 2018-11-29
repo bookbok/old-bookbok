@@ -4,18 +4,19 @@ import { ConnectedGenres } from "../containers";
 import { Search } from "./Search.jsx";
 import { fetchBookList } from "../actions.js";
 import { store } from "../store";
+import { isObjectEmpty } from "../utils.js";
 
 export class BookListView extends Component {
-    constructor(props) {
-        super(props);
-    };
-    
     componentDidMount() {
         store.dispatch(fetchBookList());
     };
 
     render() {
-        const booksInfo = this.props.bookList.map((book, index) => {
+        if(isObjectEmpty(this.props.books)){
+            return <div></div>;
+        }
+
+        const booksInfo = this.props.books.map((book, index) => {
             return (
                 <div class="d-inline-block" key={index}>
                     <img src={book.cover}/>
@@ -34,11 +35,12 @@ export class BookListView extends Component {
  
         return(
             <div>
-                <Search />
-                <ConnectedGenres />
                 <div class="container mt-4">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
+                    <div class="row justify-content-center"> 
+                        <div class="col-md-8"> 
+                            <Search />
+                            <ConnectedGenres />
+                            <br/>
                             {bookList}
                         </div>
                     </div>

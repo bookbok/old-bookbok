@@ -655,14 +655,12 @@ var fetchUsersBookshelf = function fetchUsersBookshelf(userId) {
     };
 };
 
-var setBookList = function setBookList(bookList) {
-    return { type: "SET_BOOKLIST", bookList: bookList };
+var setBookList = function setBookList(books) {
+    return { type: "SET_BOOKLIST", books: books };
 };
 var fetchBookList = function fetchBookList() {
     return function (dispatch) {
-        fetch(__WEBPACK_IMPORTED_MODULE_0__domain__["a" /* DOMAIN */] + "/api/books/", {
-            method: "GET"
-        }).then(function (res) {
+        fetch(__WEBPACK_IMPORTED_MODULE_0__domain__["a" /* DOMAIN */] + "/api/books/").then(function (res) {
             return res.json();
         }).then(function (json) {
             dispatch(setBookList(json));
@@ -65895,7 +65893,7 @@ exports.devToolsEnhancer = (
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function rootReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { timeLine: [], genres: [], bookDetail: {}, usersBookshelf: {}, bookList: [] };
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { timeLine: [], genres: [], bookDetail: {}, usersBookshelf: {} };
     var action = arguments[1];
 
     switch (action.type) {
@@ -65909,7 +65907,7 @@ function rootReducer() {
             return _extends({}, state, { bookDetail: action.bookDetail });
 
         case "SET_BOOKLIST":
-            return _extends({}, state, { bookList: action.bookList });
+            return _extends({}, state, { books: action.books });
 
         case "SET_USERS_BOOKSHELF":
             return _extends({}, state, { usersBookshelf: action.usersBookshelf });
@@ -66249,6 +66247,7 @@ var BookDetailView = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Search_jsx__ = __webpack_require__(137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_js__ = __webpack_require__(139);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -66264,13 +66263,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
 var BookListView = function (_Component) {
     _inherits(BookListView, _Component);
 
-    function BookListView(props) {
+    function BookListView() {
         _classCallCheck(this, BookListView);
 
-        return _possibleConstructorReturn(this, (BookListView.__proto__ || Object.getPrototypeOf(BookListView)).call(this, props));
+        return _possibleConstructorReturn(this, (BookListView.__proto__ || Object.getPrototypeOf(BookListView)).apply(this, arguments));
     }
 
     _createClass(BookListView, [{
@@ -66281,7 +66281,11 @@ var BookListView = function (_Component) {
     }, {
         key: "render",
         value: function render() {
-            var booksInfo = this.props.bookList.map(function (book, index) {
+            if (Object(__WEBPACK_IMPORTED_MODULE_5__utils_js__["a" /* isObjectEmpty */])(this.props.books)) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", null);
+            }
+
+            var booksInfo = this.props.books.map(function (book, index) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { "class": "d-inline-block", key: index },
@@ -66305,8 +66309,6 @@ var BookListView = function (_Component) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Search_jsx__["a" /* Search */], null),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__containers__["c" /* ConnectedGenres */], null),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { "class": "container mt-4" },
@@ -66316,6 +66318,9 @@ var BookListView = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             "div",
                             { "class": "col-md-8" },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Search_jsx__["a" /* Search */], null),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__containers__["c" /* ConnectedGenres */], null),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
                             bookList
                         )
                     )

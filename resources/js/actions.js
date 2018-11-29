@@ -69,11 +69,9 @@ export const fetchUsersBookshelf = (userId) => dispatch => {
         })
 }
 
-export const setBookList = bookList => ({type: "SET_BOOKLIST", bookList});
+export const setBookList = books => ({type: "SET_BOOKLIST", books});
 export const fetchBookList = () => dispatch => {
-    fetch(DOMAIN + "/api/books/", {
-        method: "GET"  
-    })
+    fetch(DOMAIN + "/api/books/")
         .then(res => res.json())
         .then(json => {
             dispatch(setBookList(json));
