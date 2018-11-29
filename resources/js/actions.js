@@ -3,6 +3,8 @@ import { DOMAIN } from "./domain";
 export const setTimeLine = timeLine => ({ type: "SET_TIMELINE", timeLine });
 export const setGenres = genres => ({ type: "SET_GENRES", genres });
 export const setBookDetail = bookDetail => ({type: "SET_BOOK_DETAIL", bookDetail});
+export const setUserInfo = userInfo => ({type: "SET_USER_INFO", userInfo });
+
 
 export const fetchTimeLine = () => dispatch => {
     const timeLine = [
@@ -49,5 +51,24 @@ export const fetchBookDetail = (id) => dispatch => {
         .then(json => {
           dispatch(setBookDetail(json));
     })
+}
+
+export const fetchUserInfo = () => dispatch => {
+    fetch( DOMAIN + "/api/users/", {
+        timeout: 3000,
+        method: "GET"
+    })
+        .then(res => res.json())
+        .then(json => {
+                dispatch(setUserInfo(json));
+
+
+//        console.log(json);
+
+
+        })
+        .catch(err => {
+            console.error("fetch error!", err);
+        });
 }
 

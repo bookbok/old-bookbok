@@ -1,5 +1,5 @@
 export function rootReducer(
-    state = { timeLine: [], genres: [], bookDetail: {} },
+    state = { timeLine: [], genres: [], bookDetail: {}, userInfo: {} },
     action
 ) {
     switch(action.type) {
@@ -13,6 +13,12 @@ export function rootReducer(
             return { ...state, bookDetail: action.bookDetail };
         case "SET_AUTH_TOKEN":
             return { ...state, token: action.token };
+
+        case "SET_USER_INFO":
+            return { ...state, userInfo: action.userInfo };
+
     }
+
     return state;
 }
+
