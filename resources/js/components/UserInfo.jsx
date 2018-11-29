@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { fetchUserInfo } from "../actions.js";
-import { store } from "../index";
-
+import { store } from "../store";
+import { isObjectEmpty } from "../utils.js";
 
 export class UserInfo extends Component {
-
     constructor(props){
         super(props);
     };
@@ -28,7 +27,6 @@ export class UserInfo extends Component {
 
         console.log(userInfo);
 
-        console.log(userInfo[0]);
 
         return (
             <div>

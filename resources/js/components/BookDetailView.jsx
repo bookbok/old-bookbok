@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { fetchBookDetail } from "../actions.js";
-import { store } from "../index";
+import { store } from "../store";
+import { isEmpty } from "../utils.js";
+import { Loading } from "./shared/Loading";
 
 export class BookDetailView extends Component {
     constructor(props){
@@ -14,6 +16,9 @@ export class BookDetailView extends Component {
 
     render() {
         const book = this.props.bookDetail;
+        if(isEmpty(book)){
+            return <Loading />;
+        }
 
         return (
             <table border="1"><tbody>
