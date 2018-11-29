@@ -4,7 +4,7 @@ import { ConnectedGenres } from "../containers";
 import { Search } from "./Search.jsx";
 import { fetchBookList } from "../actions.js";
 import { store } from "../store";
-import { isObjectEmpty } from "../utils.js";
+import { isEmpty } from "../utils.js";
 
 export class BookListView extends Component {
     componentDidMount() {
@@ -12,7 +12,7 @@ export class BookListView extends Component {
     };
 
     render() {
-        if(isObjectEmpty(this.props.books)){
+        if(isEmpty(this.props.books)){
             return <div></div>;
         }
 
