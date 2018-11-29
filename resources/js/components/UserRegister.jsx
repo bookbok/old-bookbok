@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { requestUserRegister } from "../actions.js";
 import { store } from "../store";
 
-export class Register extends Component {
+export class UserRegister extends Component {
     constructor(props) {
         super(props);
         this.state = { name: "", email: "", password: "", passwordConfirm: "" };
