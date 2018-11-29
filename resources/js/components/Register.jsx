@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { requestLogin } from "../actions.js";
+import { requestUserRegister } from "../actions.js";
 import { store } from "../store";
 
 export class Register extends Component {
@@ -22,7 +22,7 @@ export class Register extends Component {
 
     submitRegister(e) {
         e.preventDefault();
-        //store.dispatch(requestLogin(this.state));
+        store.dispatch(requestUserRegister(this.state));
         this.props.history.push('/login'); // アカウント登録後のデフォルト遷移先
     }
 
@@ -61,8 +61,7 @@ export class Register extends Component {
                                                 className="form-control"
                                                 value={this.state.email}
                                                 onChange={this.handleChange}
-                                                required
-                                                autoFocus />
+                                                required />
                                         </div>
                                     </div>
 
