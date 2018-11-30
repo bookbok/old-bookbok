@@ -11,6 +11,29 @@ export function convertQuery(obj) {
         return key + "=" + body[key];
     }).join('&')
 }
+export async function wrapFetch({ url, method = "GET", body, isParse = true }) {
+    if(method === "GET") {
+        url += "?" + convertQuery(body);
+    }
+
+    const res = await fetch(url, {
+        method,
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: method === "GET" ? null : body
+    });
+
+    if(successfulStatus(res.status)) {
+        throw new Error("fetch error" + res.statusText);
+    }
+
+    if(isParse) {
+        return await res.json();
+    }
+    return null;
+}
 
 
 export const setTimeLine = timeLine => ({ type: "SET_TIMELINE", timeLine });
