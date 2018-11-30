@@ -22,8 +22,14 @@ export class UserInfo extends Component {
 
         const userInfo = this.props.userInfo.map(( info, i ) => (
             <div key={i}>
-                <div>{info.name}</div>
-                <div>{info.email}</div>
+                <table className="table table-condensed">
+                    <tbody>
+                        <tr>
+                      {/*      <th>{info.avatar}</th>   */}
+                            <th>{info.name}</th>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         ));
 
@@ -31,7 +37,7 @@ export class UserInfo extends Component {
 
         return (
             <div>
-                ユーザー情報↓
+                ユーザー名
                 { userInfo }
             </div>
         );
