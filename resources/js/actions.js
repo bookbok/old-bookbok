@@ -34,6 +34,12 @@ export async function wrapFetch({ url, method = "GET", body, isParse = true }) {
     }
     return null;
 }
+export function _mix(actionCreator, callback) {
+    return (...args) => {
+        return actionCreator(...args)
+            .then(json => callback(json));
+    }
+}
 
 
 export const setTimeLine = timeLine => ({ type: "SET_TIMELINE", timeLine });
