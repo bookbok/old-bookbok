@@ -46,14 +46,12 @@ class NationalDietLibraryScraper implements ScraperInterface
         $nameSpaces = $xml->getNamespaces(true);
 
         // channel配下にある名前空間'openSearch'を取得する
-        $channel = $xml->channel;
-        $channelBookInfoXML = $channel->children($nameSpaces['openSearch']);
+        $channelBookInfoXML = $xml->channel->children($nameSpaces['openSearch']);
         // 検索結果が0件ならばnullを返す
         if( $channelBookInfoXML->totalResults[0] == 0) return null;
 
         // item配下にある名前空間'dc'の要素を取得する
-        $item = $xml->channel->item;
-        $dcBookInfoXML = $item->children($nameSpaces['dc']);
+        $dcBookInfoXML = $xml->channel->item->children($nameSpaces['dc']);
         // JSONオブジェクトに変換
         $dcBookInfoJSON = json_decode(json_encode($dcBookInfoXML, true));
         
