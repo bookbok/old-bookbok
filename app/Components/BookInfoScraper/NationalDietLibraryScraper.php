@@ -22,10 +22,10 @@ class NationalDietLibraryScraper implements ScraperInterface
      *  ScrapeInterface::searchByIsbn()の実装
      *  国会図書館のAPIを叩き、本の情報を取得する。
      *  その情報をもとにApp\Bookに情報を格納してマネージャに返す。
-     * 
+     *
      *  @param string $isbn
      *   正規化されたISBN
-     * 
+     *
      *  @return App\Book | null
      *   戻り値があればApp/Bookにして返す。
      *   なかった場合はnullを返す。
@@ -54,7 +54,7 @@ class NationalDietLibraryScraper implements ScraperInterface
         $dcBookInfoXML = $xml->channel->item->children($nameSpaces['dc']);
         // JSONオブジェクトに変換
         $dcBookInfoJSON = json_decode(json_encode($dcBookInfoXML, true));
-        
+
         $book = new Book;
 
         $book->isbn = (int)($isbn);
