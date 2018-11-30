@@ -6,6 +6,11 @@ export function successfulStatus(code) {
     }
     return false;
 }
+export function convertQuery(obj) {
+    return Object.keys(body).map((key) => {
+        return key + "=" + body[key];
+    }).join('&')
+}
 
 
 export const setTimeLine = timeLine => ({ type: "SET_TIMELINE", timeLine });
