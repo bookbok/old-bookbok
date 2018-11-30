@@ -1,5 +1,13 @@
 import { DOMAIN } from "./domain";
 
+export function successfulStatus(code) {
+    if(code / 100 == 2) {
+        return true;
+    }
+    return false;
+}
+
+
 export const setTimeLine = timeLine => ({ type: "SET_TIMELINE", timeLine });
 export const fetchTimeLine = () => dispatch => {
     const timeLine = [
