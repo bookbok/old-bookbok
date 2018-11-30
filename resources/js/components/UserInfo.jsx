@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { fetchUserInfo } from "../actions.js";
 import { store } from "../store";
-import { isObjectEmpty } from "../utils.js";
+import { isEmpty } from "../utils.js";
 
 export class UserInfo extends Component {
+
     constructor(props){
         super(props);
     };
@@ -14,24 +15,24 @@ export class UserInfo extends Component {
 
     render() {
 
-//        if(isEmpty(this.props.userInfo)){
-//            console.log("empty");
-//        }
-
-        if(this.props.userInfo == []){
-            console.log("error");
-            return;
+        if(isEmpty(this.props.userInfo)){
+            console.log("empty");
+            return<div></div>;
         }
 
-        const userInfo = this.props.userInfo;
+        const userInfo = this.props.userInfo.map(( info, i ) => (
+            <div key={i}>
+                <div>{info.name}</div>
+                <div>{info.email}</div>
+            </div>
+        ));
 
         console.log(userInfo);
-
 
         return (
             <div>
                 ユーザー情報↓
-            
+                { userInfo }
             </div>
         );
     }

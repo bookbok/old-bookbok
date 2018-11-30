@@ -85,10 +85,6 @@ export const fetchUserInfo = () => dispatch => {
         .then(json => {
                 dispatch(setUserInfo(json));
 
-
-//        console.log(json);
-
-
         })
         .catch(err => {
             console.error("fetch error!", err);
