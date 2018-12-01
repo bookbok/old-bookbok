@@ -8,6 +8,8 @@ export async function wrapFetch(url, { body, method = "GET", isParse = true } = 
     // GETリクエスト時にクエリパラメーターを自動作成する
     if(method === "GET" && !utils.isEmpty(body)) {
         url += "?" + utils.convertQuery(body);
+    } else if(!utils.isEmpty(body)) { // not get request && body not empty
+        body = JSON.stringify(body);
     }
 
     const res = await fetch(url, {
@@ -53,7 +55,7 @@ export const setAuthToken = (token) => ({ type: "SET_AUTH_TOKEN", token });
 export const requestLogin = (loginUser) => dispatch => {
     wrapFetch(DOMAIN + "/api/login", {
         method: "POST",
-        body: JSON.stringify(loginUser)
+        body: loginUser
     }).then(json => {
         dispatch(setAuthToken(json.token));
     });
