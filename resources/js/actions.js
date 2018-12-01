@@ -91,11 +91,10 @@ export const requestUserRegister = (userInfo) => dispatch => {
 
 export const setGenres = genres => ({ type: "SET_GENRES", genres });
 export const fetchGenres = () => dispatch => {
-    wrapFetch({
-        url: DOMAIN + "/api/genres",
-    }).then(json => {
-        dispatch(setGenres(json));
-    });
+    wrapFetch(DOMAIN + "/api/genres")
+        .then(json => {
+            dispatch(setGenres(json));
+        });
 }
 
 export const setBookDetail = bookDetail => ({type: "SET_BOOK_DETAIL", bookDetail});
