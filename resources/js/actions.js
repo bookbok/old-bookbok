@@ -1,5 +1,6 @@
 import { DOMAIN } from "./domain";
 import * as utils from "./utils";
+import { store } from "./store";
 
 
 // fetch関数を綺麗に扱えるようにするラッパー関数
@@ -90,17 +91,11 @@ export const requestUserRegister = (userInfo) => dispatch => {
 
 export const setGenres = genres => ({ type: "SET_GENRES", genres });
 export const fetchGenres = () => dispatch => {
-    fetch( DOMAIN + "/api/genres/", {
-        timeout: 3000,
-        method: "GET"
-    })
-        .then(res => res.json())
-        .then(json => {
-                dispatch(setGenres(json));
-        })
-        .catch(err => {
-            console.error("fetch error!", err);
-        });
+    wrapFetch({
+        url: DOMAIN + "/api/genres",
+    }).then(json => {
+        dispatch(setGenres(json));
+    });
 }
 
 export const setBookDetail = bookDetail => ({type: "SET_BOOK_DETAIL", bookDetail});
