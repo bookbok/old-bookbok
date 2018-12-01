@@ -1,9 +1,12 @@
 import { DOMAIN } from "./domain";
 import * as utils from "./utils";
 
+
+// fetch関数を綺麗に扱えるようにするラッパー関数
 export async function wrapFetch({ url, method = "GET", body, isParse = true }) {
-    if(method === "GET") {
-        url += "?" + convertQuery(body);
+    // GETリクエスト時にクエリパラメーターを自動作成する
+    if(method === "GET" && !utils.isEmpty(body)) {
+        url += "?" + utils.convertQuery(body);
     }
 
     const res = await fetch(url, {
