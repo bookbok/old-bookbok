@@ -15,11 +15,11 @@ export async function wrapFetch({ url, method = "GET", body, isParse = true }) {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
-        body: method === "GET" ? null : body
+        body: method === "GET" ? null : body // GET時はクエリで代用するため
     });
 
-    if(successfulStatus(res.status)) {
-        throw new Error("fetch error" + res.statusText);
+    if(!utils.successfulStatus(res.status)) {
+        throw new Error("fetch error: " + res.statusText);
     }
 
     if(isParse) {
