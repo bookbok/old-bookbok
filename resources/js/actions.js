@@ -51,18 +51,12 @@ export const fetchTimeLine = () => dispatch => {
 // Get authentication token
 export const setAuthToken = (token) => ({ type: "SET_AUTH_TOKEN", token });
 export const requestLogin = (loginUser) => dispatch => {
-    fetch(DOMAIN + "/api/login", {
+    wrapFetch(DOMAIN + "/api/login", {
         method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
         body: JSON.stringify(loginUser)
-    })
-        .then(res => res.json())
-        .then(json => {
-            dispatch(setAuthToken(json.token));
-        });
+    }).then(json => {
+        dispatch(setAuthToken(json.token));
+    });
 }
 
 export const removeAuthToken = () => ({ type: "REMOVE_AUTH_TOKEN" });
