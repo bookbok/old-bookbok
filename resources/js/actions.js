@@ -4,7 +4,7 @@ import { store } from "./store";
 
 
 // fetch関数を綺麗に扱えるようにするラッパー関数
-export async function wrapFetch({ url, method = "GET", body, isParse = true }) {
+export async function wrapFetch(url, { body, method = "GET", isParse = true } = {}) {
     // GETリクエスト時にクエリパラメーターを自動作成する
     if(method === "GET" && !utils.isEmpty(body)) {
         url += "?" + utils.convertQuery(body);
