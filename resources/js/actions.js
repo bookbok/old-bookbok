@@ -1,16 +1,6 @@
 import { DOMAIN } from "./domain";
+import * as utils from "./utils";
 
-export function successfulStatus(code) {
-    if(code / 100 == 2) {
-        return true;
-    }
-    return false;
-}
-export function convertQuery(obj) {
-    return Object.keys(body).map((key) => {
-        return key + "=" + body[key];
-    }).join('&')
-}
 export async function wrapFetch({ url, method = "GET", body, isParse = true }) {
     if(method === "GET") {
         url += "?" + convertQuery(body);
