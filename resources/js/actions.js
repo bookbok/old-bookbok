@@ -27,7 +27,9 @@ export async function wrapFetch({ url, method = "GET", body, isParse = true }) {
     }
     return null;
 }
-export function _mix(actionCreator, callback) {
+
+// 封印されしラッパー関数
+export function wrapAction(actionCreator, callback) {
     return (...args) => {
         return actionCreator(...args)
             .then(json => callback(json));
