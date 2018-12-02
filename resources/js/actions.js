@@ -97,30 +97,26 @@ export const fetchGenres = () => dispatch => {
 
 export const setBookDetail = bookDetail => ({type: "SET_BOOK_DETAIL", bookDetail});
 export const fetchBookDetail = (id) => dispatch => {
-    fetch(DOMAIN + `/api/books/${id}`)
-        .then(res => res.json())
+    wrapFetch(DOMAIN + `/api/books/${id}`)
         .then(json => {
             dispatch(setBookDetail(json));
-    })
+        });
 }
 
 export const setUsersBookshelf = usersBookshelf => ({type: "SET_USERS_BOOKSHELF", usersBookshelf});
 export const fetchUsersBookshelf = (userId) => dispatch => {
-    fetch(DOMAIN + `/api/users/${userId}/user_books`)
-        .then(res => res.json())
+    wrapFetch(DOMAIN + `/api/users/${userId}/user_books`)
         .then(json => {
             dispatch(setUsersBookshelf(json));
-        })
+        });
 }
 
 export const setBookList = books => ({type: "SET_BOOKLIST", books});
 export const fetchBookList = () => dispatch => {
-    fetch(DOMAIN + "/api/books/")
-        .then(res => res.json())
+    wrapFetch(DOMAIN + "/api/books/")
         .then(json => {
             dispatch(setBookList(json));
-        })
-        .catch(err => {
-            console.error("fetch error", err);
+        }).catch(err => {
+            console.error("fetchBookList: ", err);
         });
 }
