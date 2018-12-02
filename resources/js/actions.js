@@ -2,6 +2,11 @@ import { DOMAIN } from "./domain";
 import * as utils from "./utils";
 import { store } from "./store";
 
+// stateの値を取得し、自動更新する
+let state = store.getState();
+store.subscribe(() => {
+    state = store.getState();
+});
 
 // fetch関数を綺麗に扱えるようにするラッパー関数
 export async function wrapFetch(url, { body, method = "GET", isParse = true } = {}) {
@@ -17,12 +22,15 @@ export async function wrapFetch(url, { body, method = "GET", isParse = true } = 
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${state.token}`,
         },
         body: method === "GET" ? null : body // GET時はクエリで代用するため
     });
 
-    if(!utils.successfulStatus(res.status)) {
-        throw new Error("fetch error: " + res.statusText);
+    if(res.status === 401) {
+        throw new Error("Authorization error: " + res.statusText);
+    } else if(!utils.successfulStatus(res.status)) {
+        throw new Error("Fetch error: " + res.statusText);
     }
 
     if(isParse) {
