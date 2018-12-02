@@ -64,10 +64,11 @@ export const requestLogin = (loginUser) => dispatch => {
 
 export const removeAuthToken = () => ({ type: "REMOVE_AUTH_TOKEN" });
 export const requestLogout = () => dispatch => {
-    fetch(DOMAIN + "/api/logout")
-        .then(res => {
-            dispatch(removeAuthToken());
-        });
+    wrapFetch(DOMAIN + "/api/logout", {
+        isParse: false,
+    }).then(res => {
+        dispatch(removeAuthToken());
+    });
 }
 
 export const requestUserRegister = (userInfo) => dispatch => {
