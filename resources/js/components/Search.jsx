@@ -1,7 +1,6 @@
 import React from 'react';
 
 export const Search = () => (
-
     <div>
         <div className="form-group">
             <div className="row">

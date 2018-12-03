@@ -5,7 +5,6 @@ import { ConnectedUserInfo } from "../containers.js";
 export const Mypage = () => (
     <div>
         <h1>マイページ</h1>
-        <ConnectedUserInfo />
     </div>
 )
 

@@ -21,20 +21,15 @@ export class UserInfo extends Component {
 
         const userInfo = this.props.userInfo.map(( info, i ) => (
             <div key={i}>
-                <table className="table table-condensed">
-                    <tbody>
-                        <tr>
-                      {/*      <th>{info.avatar}</th>   */}
-                            <th>{info.name}</th>
-                        </tr>
-                    </tbody>
-                </table>
+                <div>{info.avatar}</div>
+                <div>{info.name}</div>
             </div>
         ));
 
+
         return (
             <div>
-                ユーザー名
+                <div>ユーザー情報</div>
                 { userInfo }
             </div>
         );
