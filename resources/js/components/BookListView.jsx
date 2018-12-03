@@ -26,23 +26,40 @@ export class BookListView extends Component {
                 bookName[i][j] = new Array(17);
             }
         }
+        console.log(this.props.books[0].name.charAt(50));
         
         for(let allBooks = books.length, bookIndex = 0 ; 0 < allBooks ; allBooks--, bookIndex++) {
             for(let newLine = 0 ; newLine < 2; newLine++) {
                 for(let charNum = 0 ; charNum < 17; charNum++) {
-                    bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum);
+                    if(newLine==1 && books[bookIndex].name.charAt(charNum+17)!="") {
+                        if(newLine==1 && charNum!=14) {
+                            bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum+17);
+                        } 
+                        else if(newLine==1 && charNum==14) {
+                            bookName[bookIndex][newLine][charNum] = "...";
+                            break;
+                        } else {
+                            bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum+17);
+                        }
+                    } else if (newLine==0 && books[bookIndex].name.charAt(charNum)!="") {
+                                
+                        bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum);
+                    }
                 }
             }
         }
 
         const booksInfo = books.map((book, index) => {
+            var i = 0;
             return (
                 <div className="d-inline-block" key={index}>
                     <img src={book.cover}/>
                     <pre>{bookName[0][0]}</pre>
                     <pre>{bookName[0][1]}</pre>
+                    <br/>
                 </div>
             );
+            i++;
         });
 
         const bookList = [];
