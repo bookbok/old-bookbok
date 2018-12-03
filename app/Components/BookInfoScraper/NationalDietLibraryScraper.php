@@ -9,6 +9,7 @@ class NationalDietLibraryScraper implements ScraperInterface
 {
     // APIのエントリポイント
     private const URI = "http://iss.ndl.go.jp/api/opensearch?isbn=";
+    private const COVER_URI = "http://iss.ndl.go.jp/thumbnail/";
 
     /**
      *  コンストラクタ
@@ -16,6 +17,43 @@ class NationalDietLibraryScraper implements ScraperInterface
      */
     public function __construct(){
 
+    }
+
+    /**
+     * 著者情報の整形処理
+     * 
+     * @param $bookInfoAuthor
+     * 
+     * @return $consAuthors | $bookInfo
+     *   引数に渡されたものが配列であれば文字列に連結して返す。
+     * 　配列でない場合はそのまま返す。
+     */
+    private function consAuthors($bookInfoAuthor){
+        if(is_array($bookInfoAuthor)){
+            $authors = str_replace(", ", "", $bookInfoAuthor);
+            $consAuthors = implode('/', $authors);
+
+            return $consAuthors;
+        }
+
+        return $bookInfoAuthor;
+    }
+
+    /**
+     * @param $bookInfoDescription
+     * 
+     * @return $consDescription | $bookInfoDescription
+     *   引数に渡されたものが配列であれば文字列に連結して返す。
+     * 　配列でない場合はそのまま返す。
+     */
+    private function consDescription($bookInfoDescription){
+        if(is_array($bookInfoDescription)){
+            $consDescription = implode('/', $bookInfoDescription);
+
+            return $consDescription;
+        }
+
+        return $bookInfoDescription;
     }
 
     /**
@@ -39,6 +77,10 @@ class NationalDietLibraryScraper implements ScraperInterface
                            ->getBody()
                            ->getContents();
 
+        // 書籍のカバー情報が存在するかを確認するためのリクエストを送る。
+        // 404Errorでの例外発生を抑制するためにfalseを設定する
+        $response_cover = $client->request('GET', (self::COVER_URI . $isbn), ['http_errors' => false]);
+
         // 文字列$responseをSimpleXMLElementにパースする
         $xml = simplexml_load_string($response);
 
@@ -55,14 +97,27 @@ class NationalDietLibraryScraper implements ScraperInterface
         // JSONオブジェクトに変換
         $dcBookInfoJSON = json_decode(json_encode($dcBookInfoXML, true));
 
+        // ScrapeManagerにreturnするBookインスタンスの生成と情報の格納
         $book = new Book;
 
         $book->isbn = (int)($isbn);
         $book->name = $dcBookInfoJSON->title;
-        $book->description = $dcBookInfoJSON->description;
-        $book->cover = "";
-        $book->author = str_replace(", ", "", $dcBookInfoJSON->creator);
-
+        if(property_exists($dcBookInfoJSON, 'description')){
+            $book->description = $this->consDescription($dcBookInfoJSON->description);
+        }else{
+            $book->description = "";
+        }
+        if($response_cover->getStatusCode() === 404){
+            $book->cover = "";
+        }else{
+            $book->cover = self::COVER_URI . $isbn;
+        }
+        if(property_exists($dcBookInfoJSON, 'creator')){
+            $book->author = $this->consAuthors($dcBookInfoJSON->creator);
+        }else{
+            $book->author = "";
+        }
+        
         return $book;
     }
 }
