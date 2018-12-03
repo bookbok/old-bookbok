@@ -8,10 +8,7 @@ export function isEmpty(obj) {
 
 // ステータスコードが200番代か判定する
 export function successfulStatus(code) {
-    if(code / 100 == 2) {
-        return true;
-    }
-    return false;
+    return (code / 100 == 2);
 }
 
 // オブジェクトを受け取って、GETリクエストのクエリパラメーターに変換する
