@@ -14,17 +14,17 @@ export class Bok extends Component {
 
     render(){
         const bokData = {
-            'cover':    'get_cover.png',
-            'bookName': 'get_ゼロからわかるRuby超入門(かんたんIT基礎講座)',
-            'userName': 'get_wakamaka1122',
-            'review':   'get_めっちゃすごい',
-            'likeMark': 'get_like.png',
-            'loveMark': 'get_love.png'
-        }
+            'cover':    'cover.png',
+            'bookName': 'ゼロからわかるRuby超入門(かんたんIT基礎講座)',
+            'userName': 'wakamaka1122',
+            'review':   'めっちゃすごい',
+            'likeMark': 'like.png',
+            'loveMark': 'love.png'
+        };
 
         return (
             <table border="1"><tbody>
-                <tr><th colSpan="3">Bok</th></tr>
+                <tr><th>Bok</th></tr>
                 <tr>
                     <td><img src={bokData.cover} /></td>
                     <td><p>{bokData.bookName}</p></td>
