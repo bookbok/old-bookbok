@@ -19,7 +19,7 @@ class OpenBDScraper implements ScraperInterface
 
     /**
      * Constructor
-     * 
+     *
      * @param   Client  $client HTTPクライアント
      */
     public function __construct(Client $client)
@@ -35,7 +35,7 @@ class OpenBDScraper implements ScraperInterface
         $response = $this->client->request(
             'GET',
             self::URI . $isbn
-        ); 
+        );
 
         if (200 !== $response->getStatusCode()) {
             return null;
@@ -64,12 +64,12 @@ class OpenBDScraper implements ScraperInterface
 
         return $book;
     }
-    
+
     /**
      * 説明を生成する
-     * 
+     *
      * @param   mixed[] $data   レスポンスデータ
-     * 
+     *
      * @return  string
      */
     protected function generateDescription(array $data)
@@ -95,6 +95,7 @@ class OpenBDScraper implements ScraperInterface
                 continue;
             }
 
+            $type   = (int) $content['TextType'];
             $result = $content['Text'];
         }
 

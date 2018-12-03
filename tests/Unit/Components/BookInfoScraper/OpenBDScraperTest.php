@@ -56,6 +56,9 @@ class OpenBDScraperTest extends TestCase
         $this->scraper = new OpenBDScraper($client);
     }
 
+    /**
+     * 情報を取ってこれた場合のテスト
+     */
     public function testScrapeExistsData()
     {
         $result = $this->scraper->searchByIsbn(self::EXISTS_ISBN);
@@ -84,5 +87,25 @@ EXPECT
         );
         $this->assertSame('https://cover.openbd.jp/9784594612634.jpg', $result->conver);
         $this->assertSame('クックパッド株式会社／監修', $result->author);
+    }
+
+    /**
+     * 指定したISBNの本が存在していなかった場合のテスト
+     */
+    public function testScrapeNotExistsData()
+    {
+        $result = $this->scraper->searchByIsbn(self::NOT_EXISTS_ISBN);
+
+        $this->assertSame(null, $result);
+    }
+
+    /**
+     * APIサーバーの方で何らかのエラーがあった場合のテスト
+     */
+    public function testScrapeErrorData()
+    {
+        $result = $this->scraper->searchByIsbn(self::ERROR_ISBN);
+
+        $this->assertSame(null, $result);
     }
 }
