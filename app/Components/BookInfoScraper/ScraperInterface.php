@@ -13,9 +13,9 @@ interface ScraperInterface
      *  検索対象ISBN。
      *  ISBN10の場合、プレフィックス978のISBN13に変換して検索する。
      * 
-     * @return  \App\Book|false
+     * @return  \App\Book|null
      *  見つかった場合はApp\Bookモデルを返す。
-     *  見つからなかった場合はfalseを返す
+     *  見つからなかった場合はnullを返す。
      */
     public function searchByIsbn(string $isbn);
 }

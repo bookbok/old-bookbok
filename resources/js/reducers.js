@@ -21,8 +21,13 @@ export function rootReducer(
         case "SET_AUTH_TOKEN": // ログインを必要とするAPI用の認証トークンを保存
             return { ...state, token: action.token };
 
+        case "SET_USER_INFO":
+            return { ...state, userInfo: action.userInfo };
+
         case "REMOVE_AUTH_TOKEN": // ログアウトに伴い、ログイントークンを削除
             return { ...state, token: null };
     }
+
     return state;
 }
+
