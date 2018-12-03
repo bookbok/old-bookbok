@@ -5,6 +5,7 @@ import { Search } from "./Search.jsx";
 import { fetchBookList } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils.js";
+import { Loading } from "./shared/Loading";
 
 export class BookListView extends Component {
     componentDidMount() {
@@ -12,15 +13,34 @@ export class BookListView extends Component {
     };
 
     render() {
-        if(isEmpty(this.props.books)){
-            return <div></div>;
+        const books = this.props.books;
+        if(isEmpty(books)){
+            return <Loading />;
         }
 
-        const booksInfo = this.props.books.map((book, index) => {
+        const bookName = [];
+        // initialized
+        for(let i = 0 ; i < books.length ; i++) {
+            bookName[i] = new Array(2);
+            for(let j = 0 ; j < 2 ; j++) {
+                bookName[i][j] = new Array(17);
+            }
+        }
+        
+        for(let allBooks = books.length, bookIndex = 0 ; 0 < allBooks ; allBooks--, bookIndex++) {
+            for(let newLine = 0 ; newLine < 2; newLine++) {
+                for(let charNum = 0 ; charNum < 17; charNum++) {
+                    bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum);
+                }
+            }
+        }
+
+        const booksInfo = books.map((book, index) => {
             return (
                 <div className="d-inline-block" key={index}>
                     <img src={book.cover}/>
-                    <pre>{book.name}</pre>
+                    <pre>{bookName[0][0]}</pre>
+                    <pre>{bookName[0][1]}</pre>
                 </div>
             );
         });
