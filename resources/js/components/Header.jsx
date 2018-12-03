@@ -7,11 +7,11 @@ import { Login } from './Login.jsx';
 import { Logout } from './Logout.jsx';
 import { UserRegister } from './UserRegister.jsx';
 import { Mypage } from './Mypage.jsx';
+import { LikeBokList } from './LikeBokList.jsx';
 import { ConnectedBookDetail} from '../containers.js';
 import { ConnectedBookList} from '../containers.js';
 import { ConnectedUsersBookshelf } from '../containers.js';
-import { LikeBokList } from './LikeBokList.jsx';
-import { Bok } from './Bok.jsx';
+import { ConnectedLikeBokList } from '../containers.js';
 import { ConnectedUserInfo } from '../containers.js';
 
 // bootstrap global navigation bar

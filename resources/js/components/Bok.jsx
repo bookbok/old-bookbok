@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-//import { fetchUsersBookshelf } from "../actions.js";
 import { store } from "../store";
 import { Loading } from "./shared/Loading";
+import { LikeBokList } from "./LikeBokList.jsx";
 
 export class Bok extends Component {
     constructor(props){
@@ -9,34 +9,28 @@ export class Bok extends Component {
     }
 
     componentDidMount(){
-        //store.dispatch(fetchLikeBokList(userId));
+        console.log("(Bok)componentDidMount : ");
     };
 
     render(){
-        const bokData = {
-            'cover':    'cover.png',
-            'bookName': 'ゼロからわかるRuby超入門(かんたんIT基礎講座)',
-            'userName': 'wakamaka1122',
-            'review':   'めっちゃすごい',
-            'likeMark': 'like.png',
-            'loveMark': 'love.png'
-        };
+        console.table(this.props.likeBok);
+        const likeBok = this.props.likeBok;
 
         return (
             <table border="1"><tbody>
                 <tr><th>Bok</th></tr>
                 <tr>
-                    <td><img src={bokData.cover} /></td>
-                    <td><p>{bokData.bookName}</p></td>
-                    <td><p>{bokData.userName}</p></td>
+                    <td><img src={likeBok.cover} /></td>
+                    <td><p>{likeBok.bookName}</p></td>
+                    <td><p>{likeBok.userName}</p></td>
                 </tr>
                 <tr>
-                    <td colSpan="3">{bokData.review}</td>
+                    <td colSpan="3">{likeBok.review}</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><img src={bokData.likeMark} /></td>
-                    <td><img src={bokData.loveMark} /></td>
+                    <td><img src={likeBok.likeMark} /></td>
+                    <td><img src={likeBok.loveMark} /></td>
                 </tr>
             </tbody></table>
         );
