@@ -24,7 +24,7 @@ class NationalDietLibraryScraper implements ScraperInterface
      * 
      * @param $bookInfoAuthor
      * 
-     * @return $consAuthors | $bookInfo
+     * @return $consAuthors | $bookInfoAuthor
      *   引数に渡されたものが配列であれば文字列に連結して返す。
      * 　配列でない場合はそのまま返す。
      */
@@ -40,6 +40,8 @@ class NationalDietLibraryScraper implements ScraperInterface
     }
 
     /**
+     * 本の概要情報の整形処理
+     * 
      * @param $bookInfoDescription
      * 
      * @return $consDescription | $bookInfoDescription
@@ -90,7 +92,7 @@ class NationalDietLibraryScraper implements ScraperInterface
         // channel配下にある名前空間'openSearch'を取得する
         $channelBookInfoXML = $xml->channel->children($nameSpaces['openSearch']);
         // 検索結果が0件ならばnullを返す
-        if( $channelBookInfoXML->totalResults[0] == 0) return null;
+        if($channelBookInfoXML->totalResults[0] == 0) return null;
 
         // item配下にある名前空間'dc'の要素を取得する
         $dcBookInfoXML = $xml->channel->item->children($nameSpaces['dc']);
