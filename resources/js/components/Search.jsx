@@ -1,4 +1,5 @@
 import React from 'react';
+
 export const Search = () => (
     <div>
         <div className="form-group">
@@ -12,5 +13,5 @@ export const Search = () => (
             </div>
         </div>
     </div>
-)
 
+)

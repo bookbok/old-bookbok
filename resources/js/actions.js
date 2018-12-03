@@ -75,6 +75,22 @@ export const fetchBookDetail = (id) => dispatch => {
     })
 }
 
+export const setUserInfo = userInfo => ({type: "SET_USER_INFO", userInfo });
+export const fetchUserInfo = () => dispatch => {
+    fetch( DOMAIN + "/api/users/", {
+        timeout: 3000,
+        method: "GET"
+    })
+        .then(res => res.json())
+        .then(json => {
+                dispatch(setUserInfo(json));
+
+        })
+        .catch(err => {
+            console.error("fetch error!", err);
+        });
+}
+
 export const setUsersBookshelf = usersBookshelf => ({type: "SET_USERS_BOOKSHELF", usersBookshelf});
 export const fetchUsersBookshelf = (userId) => dispatch => {
     fetch(DOMAIN + `/api/users/${userId}/user_books`)
