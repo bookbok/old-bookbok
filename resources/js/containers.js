@@ -5,6 +5,7 @@ import { BookDetailView } from "./components/BookDetailView";
 import { UserInfo } from "./components/UserInfo";
 import { BookListView } from "./components/BookListView";
 import { UsersBookshelf } from "./components/UsersBookshelf";
+import { LikeBokList } from "./components/LikeBokList";
 
 export const ConnectedTimeLine = connect(
     state => state
@@ -29,3 +30,7 @@ export const ConnectedUsersBookshelf = connect(
 export const ConnectedBookList = connect(
     state => state,
 )(BookListView);
+
+export const ConnectedLikeBokList = connect(
+    state => state,
+)(LikeBokList);
