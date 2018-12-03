@@ -28,38 +28,40 @@ export class BookListView extends Component {
         }
         console.log(this.props.books[0].name.charAt(50));
         
+        //どうにか直したい・・・汚すぎる。まず３次元配列を使ってる時点で汚い
         for(let allBooks = books.length, bookIndex = 0 ; 0 < allBooks ; allBooks--, bookIndex++) {
             for(let newLine = 0 ; newLine < 2; newLine++) {
                 for(let charNum = 0 ; charNum < 17; charNum++) {
-                    if(newLine==1 && books[bookIndex].name.charAt(charNum+17)!="") {
-                        if(newLine==1 && charNum!=14) {
+                    if(newLine == 1 && books[bookIndex].name.charAt(charNum+17)!="") {
+                        if(newLine == 1 && charNum != 14) {
                             bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum+17);
                         } 
-                        else if(newLine==1 && charNum==14) {
+                        else if(newLine == 1 && charNum == 14) {
                             bookName[bookIndex][newLine][charNum] = "...";
                             break;
                         } else {
                             bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum+17);
                         }
-                    } else if (newLine==0 && books[bookIndex].name.charAt(charNum)!="") {
+                    } else if (newLine == 0 && books[bookIndex].name.charAt(charNum)!="") {
                                 
                         bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum);
+                    } else if(newLine == 0 && books[bookIndex].name.charAt(charNum) == "") {
+                        bookName[bookIndex][newLine+1][charNum] = " ";
+                        break;
                     }
                 }
             }
         }
 
         const booksInfo = books.map((book, index) => {
-            var i = 0;
             return (
                 <div className="d-inline-block" key={index}>
                     <img src={book.cover}/>
-                    <pre>{bookName[0][0]}</pre>
-                    <pre>{bookName[0][1]}</pre>
+                    <pre>{bookName[index][0]}</pre>
+                    <pre>{bookName[index][1]}</pre>
                     <br/>
                 </div>
             );
-            i++;
         });
 
         const bookList = [];
