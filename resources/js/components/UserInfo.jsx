@@ -16,7 +16,6 @@ export class UserInfo extends Component {
     render() {
 
         if(isEmpty(this.props.userInfo)){
-            console.log("empty");
             return<div></div>;
         }
 
@@ -32,8 +31,6 @@ export class UserInfo extends Component {
                 </table>
             </div>
         ));
-
-        console.log(userInfo);
 
         return (
             <div>
