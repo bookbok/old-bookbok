@@ -1,6 +1,7 @@
 import { DOMAIN } from "./domain";
 import * as utils from "./utils";
 import { store } from "./store";
+import * as types from "./types";
 
 // stateの値を取得し、自動更新する
 let state = store.getState();
@@ -48,11 +49,11 @@ export function wrapAction(actionCreator, callback) {
 }
 
 
-export const setTimeLine = timeLine => ({ type: "SET_TIMELINE", timeLine });
+export const setTimeLine = timeLine => ({ type: types.SET_TIMELINE, timeLine });
 
 /* ==== Auth actions ==== */
 // Get authentication token
-export const setAuthToken = (token) => ({ type: "SET_AUTH_TOKEN", token });
+export const setAuthToken = (token) => ({ type: types.SET_AUTH_TOKEN, token });
 export const requestLogin = (loginUser) => dispatch => {
     wrapFetch(DOMAIN + "/api/login", {
         method: "POST",
@@ -62,7 +63,7 @@ export const requestLogin = (loginUser) => dispatch => {
     });
 }
 
-export const removeAuthToken = () => ({ type: "REMOVE_AUTH_TOKEN" });
+export const removeAuthToken = () => ({ type: types.REMOVE_AUTH_TOKEN });
 export const requestLogout = () => dispatch => {
     wrapFetch(DOMAIN + "/api/logout", {
         isParse: false,
@@ -87,7 +88,7 @@ export const requestUserRegister = (userInfo) => dispatch => {
 };
 
 
-export const setGenres = genres => ({ type: "SET_GENRES", genres });
+export const setGenres = genres => ({ type: types.SET_GENRES, genres });
 export const fetchGenres = () => dispatch => {
     wrapFetch(DOMAIN + "/api/genres")
         .then(json => {
@@ -95,7 +96,7 @@ export const fetchGenres = () => dispatch => {
         });
 }
 
-export const setBookDetail = bookDetail => ({type: "SET_BOOK_DETAIL", bookDetail});
+export const setBookDetail = bookDetail => ({type: types.SET_BOOK_DETAIL, bookDetail});
 export const fetchBookDetail = (id) => dispatch => {
     wrapFetch(DOMAIN + `/api/books/${id}`)
         .then(json => {
@@ -103,7 +104,7 @@ export const fetchBookDetail = (id) => dispatch => {
         });
 }
 
-export const setUserInfo = userInfo => ({type: "SET_USER_INFO", userInfo });
+export const setUserInfo = userInfo => ({type: types.SET_USER_INFO, userInfo });
 export const fetchUserInfo = () => dispatch => {
     fetch( DOMAIN + "/api/users/", {
         timeout: 3000,
@@ -119,7 +120,7 @@ export const fetchUserInfo = () => dispatch => {
         });
 }
 
-export const setUsersBookshelf = usersBookshelf => ({type: "SET_USERS_BOOKSHELF", usersBookshelf});
+export const setUsersBookshelf = usersBookshelf => ({type: types.SET_USERS_BOOKSHELF, usersBookshelf});
 export const fetchUsersBookshelf = (userId) => dispatch => {
     wrapFetch(DOMAIN + `/api/users/${userId}/user_books`)
         .then(json => {
@@ -127,7 +128,7 @@ export const fetchUsersBookshelf = (userId) => dispatch => {
         });
 }
 
-export const setBookList = books => ({type: "SET_BOOKLIST", books});
+export const setBookList = books => ({type: types.SET_BOOKLIST, books});
 export const fetchBookList = () => dispatch => {
     wrapFetch(DOMAIN + "/api/books/")
         .then(json => {
