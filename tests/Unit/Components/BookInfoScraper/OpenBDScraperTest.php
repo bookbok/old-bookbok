@@ -85,7 +85,7 @@ EXPECT
             ,
             $result->description
         );
-        $this->assertSame('https://cover.openbd.jp/9784594612634.jpg', $result->conver);
+        $this->assertSame('https://cover.openbd.jp/9784594612634.jpg', $result->cover);
         $this->assertSame('クックパッド株式会社／監修', $result->author);
     }
 

@@ -59,7 +59,7 @@ class OpenBDScraper implements ScraperInterface
         $book->isbn         = $data['summary']['isbn'];
         $book->name         = $data['summary']['title'];
         $book->description  = $this->generateDescription($data);
-        $book->conver       = $data['summary']['cover'];
+        $book->cover        = $data['summary']['cover'];
         $book->author       = $data['summary']['author'];
 
         return $book;
