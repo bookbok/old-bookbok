@@ -15,7 +15,7 @@ class BookController extends Controller
     public function index()
     {
 
-        $collection = Book::orderBy('id')->get();
+        $collection = Book::orderBy('isbn')->get();
 
         return response()->json(
             $collection,
@@ -55,7 +55,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $book->setVisible([
-            'id',
+            'isbn',
             'name',
             'description',
             'cover',
