@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Book;
+use App\Like;
 use Illuminate\Http\Request;
 
-class BookController extends Controller
+class LikeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($userId)
     {
-
-        $collection = Book::orderBy('isbn')->get();
-
+        $likes = Like::where('user_id', $userId)->get();
         return response()->json(
-            $collection,
+            $likes,
             200,
             [],
             JSON_UNESCAPED_UNICODE
@@ -49,35 +47,21 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Book  $book
+     * @param  \App\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show(Like $like)
     {
-        $book->setVisible([
-            'isbn',
-            'name',
-            'description',
-            'cover',
-            'author',
-            'genre_id',
-        ]);
-
-        return response()->json(
-            $book,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Book  $book
+     * @param  \App\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit(Like $like)
     {
         //
     }
@@ -86,10 +70,10 @@ class BookController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Book  $book
+     * @param  \App\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, Like $like)
     {
         //
     }
@@ -97,10 +81,10 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Book  $book
+     * @param  \App\Like  $like
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy(Like $like)
     {
         //
     }

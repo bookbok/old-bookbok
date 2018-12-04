@@ -50,7 +50,7 @@ class GoogleBooksScraper implements ScraperInterface
         $book->isbn = $bookInfo->items[0]->volumeInfo->industryIdentifiers[1]->identifier;
         $book->name = $bookInfo->items[0]->volumeInfo->title;
         $book->description = $bookInfo->items[0]->volumeInfo->description;
-        $book->conver = $bookInfo->items[0]->volumeInfo->imageLinks->smallThumbnail;
+        $book->cover = $bookInfo->items[0]->volumeInfo->imageLinks->smallThumbnail;
         $book->author = $bookInfo->items[0]->volumeInfo->authors;
         // $book->genre_id = $bookInfo->items[0]->volumeInfo->categories;
 
