@@ -41,7 +41,7 @@ class BookInfoScraperServiceProvider extends ServiceProvider
 
         // NationalDietLibraryScraperをコンテナに登録
         $this->app->bind(
-            'app.bookInfo.scraper.ndl'
+            'app.bookInfo.scraper.ndl',
             NationalDietLibraryScraper::class
         );
 
