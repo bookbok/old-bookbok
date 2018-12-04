@@ -26,28 +26,32 @@ export class BookListView extends Component {
                 bookName[i][j] = new Array(17);
             }
         }
-        console.log(this.props.books[0].name.charAt(50));
         
         //どうにか直したい・・・汚すぎる。まず３次元配列を使ってる時点で汚い
+        //脳筋プログラムができてしまったので助けてええええ
         for(let allBooks = books.length, bookIndex = 0 ; 0 < allBooks ; allBooks--, bookIndex++) {
             for(let newLine = 0 ; newLine < 2; newLine++) {
                 for(let charNum = 0 ; charNum < 17; charNum++) {
-                    if(newLine == 1 && books[bookIndex].name.charAt(charNum+17)!="") {
-                        if(newLine == 1 && charNum != 14) {
-                            bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum+17);
-                        } 
-                        else if(newLine == 1 && charNum == 14) {
-                            bookName[bookIndex][newLine][charNum] = "...";
-                            break;
-                        } else {
-                            bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum+17);
-                        }
-                    } else if (newLine == 0 && books[bookIndex].name.charAt(charNum)!="") {
-                                
+                    //１行目かつ該当の文字が存在すればbooks.nameのbookIndex番目のcharNum番目の1文字を3次元配列のbookNameに挿入する
+                    if(newLine == 0 && books[bookIndex].name.charAt(charNum) != "") {
                         bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum);
+                    //1行目かつ該当の文字が存在しなかったら表示がおかしくなるので2行目に空白を入れてfor文を抜ける
                     } else if(newLine == 0 && books[bookIndex].name.charAt(charNum) == "") {
                         bookName[bookIndex][newLine+1][charNum] = " ";
                         break;
+                    //２行目かつ該当の文字が存在すれば
+                    } else if(newLine == 1 && books[bookIndex].name.charAt(charNum+17) != "") {
+                        //2行目の処理
+                        if(newLine == 1 && charNum != 14) {
+                            bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum+17);
+                        //2行目かつ14行目なら「...」を入れてfor文から抜ける
+                        } else if(newLine == 1 && charNum == 14) {
+                            bookName[bookIndex][newLine][charNum] = "...";
+                            break;
+                        //それ以外なら１文字をbookNameに挿入
+                        } else {
+                            bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum+17);
+                        }
                     }
                 }
             }
@@ -56,7 +60,7 @@ export class BookListView extends Component {
         const booksInfo = books.map((book, index) => {
             return (
                 <div className="d-inline-block" key={index}>
-                    <img src={book.cover}/>
+                    <img hspace="50" src={book.cover}/>
                     <pre>{bookName[index][0]}</pre>
                     <pre>{bookName[index][1]}</pre>
                     <br/>
