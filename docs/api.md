@@ -15,17 +15,24 @@ BOOKBOK　API仕様書
 > TODO:
  - 認証失敗時に`/api/login`へリダイレクトさせようとするのをどうにかする
 
-## AUTHENTICATION [/api]
-
 > REVIEW:
  - ベースパスを`/api`にしておいてよいか。(`/api/auth`等にしなくてよいか)
 
-### ログインする [POST /api/login]
+## Authentication [/api/login]
+
+### ログインする [POST]
 
 > TODO:
  - エラーの場合のレスポンスをどうにかする
 
 + Request (application/json)
+
+    + Attributes
+
+        + email (required)
+        + password (required)
+
+    + Body
 
         {
             "email": "example@example.com",
@@ -40,7 +47,9 @@ BOOKBOK　API仕様書
 
 + Response 422 (text/html)
 
-### ログアウトする [GET /api/logout]
+## Authentication [/api/logout]
+
+### ログアウトする [GET]
 
 > TODO:
  - HTTPメソッドこれでいいのか
@@ -48,7 +57,9 @@ BOOKBOK　API仕様書
 
 + Response 200 (text/html)
 
-### 認証したユーザーの情報を取得する [GET /api/user]
+## Authentication [/api/user]
+
+### 認証したユーザーの情報を取得する [GET]
 
 + Response 200 (text/html)
 
@@ -66,9 +77,9 @@ BOOKBOK　API仕様書
 
 # Group USERS
 
-## USERS [/api/users]
+## Users [/api/users]
 
-### 全ユーザ情報を取得する [GET /api/users]
+### 全ユーザ情報を取得する [GET]
 
 + Response 200 (application/json)
 
@@ -87,11 +98,13 @@ BOOKBOK　API仕様書
             }
         ]
 
-### 特定のユーザ情報を取得する [GET /api/users/{userId}]
+## User [/api/users/{userId}]
 
 + Parameters
 
-    + userId(number) - ユーザID
+    + userId: 1 (number) - ユーザID
+
+### 特定のユーザ情報を取得する [GET]
 
 + Response 200 (application/json)
 
@@ -105,10 +118,12 @@ BOOKBOK　API仕様書
 
 # Group BOOKS
 
-## BOOKS [/api/books]
+## Books [/api/books]
 
-### すべての本の情報を取得する [GET /api/books]
-// HACK: こんなに情報いる？ id, name, coverだけでもあり
+### すべての本の情報を取得する [GET]
+
+> HACK:
+ - こんなに情報いる？ id, name, coverだけでもあり
 
 + Response 200 (application/json)
 
@@ -131,11 +146,13 @@ BOOKBOK　API仕様書
             }
         ]
 
-### 特定の本の情報を取得する [GET /api/books/{bookId}]
+## Book [/api/books/{bookId}]
 
 + Parameters
 
     + bookId(number) - 本のISBN
+
+### 特定の本の情報を取得する [GET]
 
 + Response 200 (application/json)
 
@@ -151,15 +168,16 @@ BOOKBOK　API仕様書
 
 # Group USERBOOKS
 
-## USERBOOKS [/api/users/{userId}/user_books]
-
-### あるユーザの本情報一覧を取得する（本棚相当） [GET /api/users/{userId}/user_books]
-// HACK: userの本棚を見たときに、本の詳細な情報は必要なのか？タイトル、画像などでいいのでは？
-// HACK: user_booksの配列にするのは処理が面倒になったり、直感的ではないか
+## UserBooks [/api/users/{userId}/user_books]
 
 + Parameters
 
     + userId(number) - ユーザID
+
+### あるユーザの本棚を取得する [GET]
+
+> HACK:
+ - userの本棚を見たときに、本の詳細な情報は必要なのか？タイトル、画像などでいいのでは？
 
 + Response 200 (application/json)
 
@@ -203,12 +221,80 @@ BOOKBOK　API仕様書
             ]
         }
 
-### あるユーザの特定の本情報を取得する　[GET /api/users/{userId}/user_books/{userBookId}]
+### あるユーザの本棚に本を新規登録する　[POST]
+
+> MEMO:
+ - 裏で存在しない本は登録後、本棚に追加される。
+ - 本棚に追加しただけの場合、Responseのreviewやboksはempty。
+
+> TODO:
+ - Requestにtitleや画像での追加も入れたりする？
+
++ Request (application/json)
+
+    + Attributes
+
+        + book_id (required)
+
+    + Body
+
+        {
+            "book_id": "本のISBN"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "id": 1,
+            "user": {
+                "id": 1,
+                "name": "user name",
+                "avator": "http://~",
+                "description": "user info"
+            },
+            "book": {
+                "id": 1,
+                "name": "book name",
+                "description": "book info",
+                "cover": "http://~",
+                "author": "武田 信玄",
+                "genre_id": 1
+            },
+            "review": {
+                "id": 1,
+                "body": "review body",
+                "published_at": "2018-11-11 10:30",
+                "user_book_id": 1,
+                "user_id": 1
+            },
+            "boks": [
+                {
+                    "id": 1,
+                    "body": "bok body",
+                    "page_num_begin": 1,
+                    "page_num_end": 1,
+                    "line_num": 1,
+                    "published_at": "2018-11-11 10:30"
+                },
+                {
+                    "id": 1,
+                    "body": "bok body",
+                    "page_num_begin": 1,
+                    "page_num_end": 1,
+                    "line_num": 1,
+                    "published_at": "2018-11-11 10:30"
+                }
+            ]
+        }
+
+## UserBooks [/api/users/{userId}/user_books/{userBookId}]
 
 + Parameters
 
     + userId(number) - ユーザID
     + userBookId(number) - UserとBookの中間テーブルカラムのID
+
+### あるユーザの特定のユーザーブック(本棚の本)を取得する [GET]
 
 + Response 200 (application/json)
 
@@ -255,84 +341,15 @@ BOOKBOK　API仕様書
             ]
         }
 
-### あるユーザの本棚に本を新規登録する　[POST /api/users/{userId}/user_books]
-裏で存在しない本は登録後、本棚に追加される。
-本棚に追加しただけの場合、Responseのreviewやboksはempty。
-// TODO: Requestにtitleや画像での追加も入れたりする？
-
-+ Parameters
-
-    + userId(number) - ユーザID
-
-+ Request (application/json)
-
-        {
-            "book_id": "本のISBN"
-        }
-
-+ Response 201 (application/json)
-
-
-        {
-            "id": 1,
-            "user": {
-                "id": 1,
-                "name": "user name",
-                "avator": "http://~",
-                "description": "user info"
-            },
-            "book": {
-                "id": 1,
-                "name": "book name",
-                "description": "book info",
-                "cover": "http://~",
-                "author": "武田 信玄",
-                "genre_id": 1
-            },
-            "review": {
-                "id": 1,
-                "body": "review body",
-                "published_at": "2018-11-11 10:30",
-                "user_book_id": 1,
-                "user_id": 1
-            },
-            "boks": [
-                {
-                    "id": 1,
-                    "body": "bok body",
-                    "page_num_begin": 1,
-                    "page_num_end": 1,
-                    "line_num": 1,
-                    "published_at": "2018-11-11 10:30"
-                },
-                {
-                    "id": 1,
-                    "body": "bok body",
-                    "page_num_begin": 1,
-                    "page_num_end": 1,
-                    "line_num": 1,
-                    "published_at": "2018-11-11 10:30"
-                }
-            ]
-        }
-
-### あるユーザの特定の本情報を本棚から削除する [DELETE /api/users/{userId}/user_books/{userBookId}]
-
-+ Parameters
-
-    + userId(number) - ユーザID
-    + userBookId(number) - UserとBookの中間テーブルカラムのID
+### あるユーザの特定のユーザーブックを本棚から削除する [DELETE]
 
 + Response 200 (application/json)
 
-        None
-
-
 # Group GENRES
 
-## GENRES [/api/genres]
+## Genres [/api/genres]
 
-### ジャンル一覧 [GET /api/genres]
+### ジャンル一覧を取得する [GET]
 
 + Response 200 (application/json)
 
@@ -347,11 +364,13 @@ BOOKBOK　API仕様書
             }
         ]
 
-### 特定ジャンル情報 [GET /api/genres/{genreId}]
+## Genre [/api/genres/{genreId}]
 
 + Parameters
 
     + genreId(number) - ジャンルID
+
+### 特定ジャンル情報を取得する [GET]
 
 + Response 200 (application/json)
 
@@ -365,12 +384,14 @@ BOOKBOK　API仕様書
 
 ## REVIEW [/api/user_books/{userBookId}/review]
 
-### レビュー情報の取得 [GET /api/user_books/{userBookId}/review]
-// TODO: user_booksの詳細でreview、boksを返すのでもはや必要ないのでは？
-
 + Parameters
 
     + userBookId(number) - UserとBookの中間テーブルカラムのID
+
+### レビュー情報の取得 [GET]
+
+> REVIEW:
+ - user_booksの詳細でreview、boksを返すのでもはや必要ないのでは？
 
 + Response 200 (application/json)
 
@@ -382,13 +403,15 @@ BOOKBOK　API仕様書
             "user_id": 1
         }
 
-### レビュー情報の投稿 [POST /api/user_books/{userBookId}/review]
-
-+ Parameters
-
-    + userBookId(number) - UserとBookの中間テーブルカラムのID
+### レビュー情報の投稿 [POST]
 
 + Request (application/json)
+
+    + Attributes
+
+        + boby (required)
+
+    + Body
 
         {
             "body": "review body"
@@ -404,44 +427,38 @@ BOOKBOK　API仕様書
             "user_id": 1
         }
 
-### レビュー情報の更新 [PUT /api/user_books/{userBookId}/review]
-
-+ Parameters
-
-    + userBookId(number) - UserとBookの中間テーブルカラムのID
+### レビュー情報の更新 [PUT]
 
 + Request (application/json)
+
+    + Attributes
+
+        + boby (required)
+
+    + Body
 
         {
             "body": "review body"
         }
 
-
 + Response 201 (application/json)
 
-        None
-
-###　レビュー情報の削除 [DELETE /api/user_books/{userBookId}/review]
-
-+ Parameters
-
-    + userBookId(number) - UserとBookの中間テーブルカラムのID
+###　レビュー情報の削除 [DELETE]
 
 + Response 200 (application/json)
-
-        None
-
 
 # Group BOK
 
-## BOK [/api/user_books/{userBookId}/boks]
-
-### BOKの一覧情報を取得する(BOKS相当) [GET /api/user_books/{userBookId}/boks]
-// TODO: user_booksの詳細でreview、boksを返すのでもはや必要ないのでは？
+## Boks [/api/user_books/{userBookId}/boks]
 
 + Parameters
 
     + userBookId(number) - UserとBookの中間テーブルカラムのID
+
+### BOKの一覧情報を取得する(BOKS相当) [GET]
+
+> TODO:
+ - user_booksの詳細でreview、boksを返すのでもはや必要ないのでは？
 
 + Response 200 (application/json)
 
@@ -468,14 +485,51 @@ BOOKBOK　API仕様書
             }
         ]
 
-### BOK単体の情報を取得する [GET /api/user_books/{userBookId}/boks/{bokId}]
-// TODO: bokを単体だけで見る機能は必要？(/boks/{bokId})
-// TODO: user_booksの詳細でreview、boksを返すのでもはや必要ないのでは？
+### BOK単体の情報を登録する [POST]
 
-+ Parameter
++ Request (application/json)
+
+    + Attributes
+
+        + boby (required)
+        + page_num_begin (number,required)
+        + page_num_end (number,required)
+        + line_num (number,required)
+
+    + Body
+
+        {
+            "body": "bok body",
+            "page_num_begin": 1,
+            "page_num_end": 1,
+            "line_num": 1,
+        }
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "body": "bok body",
+            "page_num_begin": 1,
+            "page_num_end": 1,
+            "line_num": 1,
+            "published_at": "2018-11-11 10:30",
+            "user_book_id": 1,
+            "user_id": 1
+        }
+
+## Bok [/api/user_books/{userBookId}/boks/{bokId}]
+
++ Parameters
 
     + userBookId(number) - UserとBookの中間テーブルカラムのID
     + bokId(number) - BOKのID
+
+### BOK単体の情報を取得する [GET]
+
+> TODO:
+ - bokを単体だけで見る機能は必要？(/boks/{bokId})
+ - user_booksの詳細でreview、boksを返すのでもはや必要ないのでは？
 
 + Response 200 (application/json)
 
@@ -493,13 +547,13 @@ BOOKBOK　API仕様書
 
 # Group FOLLOWERS
 
-## FOLLOWERS [/api/users/{userId}/followers]
-
-### 自分をフォローしている人の一覧を取得する [GET /api/users/{userId}/followers]
+## Followers [/api/users/{userId}/followers]
 
 + Parameter
 
     + userId(number) - ユーザーのID
+
+### 自分をフォローしている人の一覧を取得する [GET]
 
 + Response 200 (application/json)
 
@@ -519,14 +573,16 @@ BOOKBOK　API仕様書
 
 # Group FOLLOWINGS
 
-##  FOLLOWINGS [/api/users/{userId}/following]
-
-### 自分がフォローしている人の一覧を取得する [GET /api/users/{userId}/following]
-// TODO: followingの詳細が見たい場合は、userの詳細を叩く
+## Followings [/api/users/{userId}/followings]
 
 + Parameter
 
     + userId(number) - ユーザーのID
+
+### 自分がフォローしている人の一覧を取得する [GET]
+
+> TODO:
+ - followingの詳細が見たい場合は、userの詳細を叩く
 
 + Response 200 (application/json)
 
@@ -543,46 +599,46 @@ BOOKBOK　API仕様書
             }
         ]
 
-### 新しくフォローする [POST /api/users/{userId}/following]
-Requestの`user_id`はフォローするユーザーのID
+### 新しくフォローする [POST]
 
-+ Parameter
-
-    + userId(number) - ユーザーのID
+> MEMO:
+ - Requestの`user_id`はフォローするユーザーのID
 
 + Request (application/json)
+
+    + Attributes
+
+        + user_id (number,required)
+
+    + Body
+        None
 
         {
             "user_id": 1
         }
 
-
 + Response 201 (application/json)
 
-        None
-
-### フォローを解除する [DELETE /api/users/{userId}/following/{targetUserId}]
+## Following [/api/users/{userId}/followings/{targetUserId}]
 
 + Parameter
 
     + userId(number) - ユーザーのID
     + targetUserId(number) - フォロー対象のユーザID
 
+### フォローを解除する [DELETE]
+
 + Response 200 (application/json)
-
-        None
-
 
 # Group LIKES
 
-## USER LIKES [/api/users/{userId}/likes]
-
-### 自分がいいねしたbokの一覧を取得する [GET /api/users/{userId}/likes]
-// TODO: [1, 2]みたいにbok_idだけをバルク処理で配列取得する？
+## User Likes [/api/users/{userId}/likes]
 
 + Parameter
 
     + userId(number) - ユーザーのID
+
+### 自分がいいねしたbokの一覧を取得する [GET]
 
 + Response 200 (application/json)
 
@@ -605,14 +661,13 @@ Requestの`user_id`はフォローするユーザーのID
             }
         ]
 
-## BOK LIKES [/api/boks/{bokId}/likes]
-
-### bokをいいねした人の一覧を取得する [GET /api/boks/{bokId}/likes]
-// TODO: [1, 2]みたいにuser_idだけをバルク処理で配列取得する？
+## Bok Likes [/api/boks/{bokId}/likes]
 
 + Parameter
 
     + bokId(number) - bokのID
+
+### bokをいいねした人の一覧を取得する [GET]
 
 + Response 200 (application/json)
 
@@ -629,37 +684,19 @@ Requestの`user_id`はフォローするユーザーのID
             }
         ]
 
-### 新しくいいねする [POST /api/boks/{bokId}/likes]
-
-+ Parameter
-
-    + bokId(number) - bokのID
+### 新しくいいねする [POST]
 
 + Response 201 (application/json)
 
-        None
-
-### いいねを解除する [DELETE /api/boks/{bokId}/likes/{likeId}]
-
-+ Parameter
-
-    + bokId(number) - bokのID
-    + likeId(number) - likeテーブルカラムのID
+### いいねを解除する [DELETE]
 
 + Response 200 (application/json)
-
-        None
-
 
 # Group LOVES
 
-## USER LOVES [/api/users/{userId}/loves]
+## User Loves [/api/users/{userId}/loves]
 
-### 自分がloveしたbokの一覧を取得する [GET /api/users/{userId}/loves]
-
-+ Parameter
-
-    + userId(number) - ユーザーのID
+### 自分がloveしたbokの一覧を取得する [GET]
 
 + Response 200 (application/json)
 
@@ -682,14 +719,9 @@ Requestの`user_id`はフォローするユーザーのID
             }
         ]
 
-## BOK LOVES [/api/boks/{bokId}/loves]
+## Bok Loves [/api/boks/{bokId}/loves]
 
-### bokをloveした人の一覧を取得する [GET /api/boks/{bokId}/loves]
-// TODO: [1, 2]みたいにuser_idだけをバルク処理で配列取得する？
-
-+ Parameter
-
-    + bokId(number) - bokのID
+### bokをloveした人の一覧を取得する [GET]
 
 + Response 200 (application/json)
 
@@ -706,23 +738,11 @@ Requestの`user_id`はフォローするユーザーのID
             }
         ]
 
-### bokをloveする [POST /api/boks/{bokId}/loves]
-
-+ Parameter
-
-    + bokId(number) - bokのID
+### bokをloveする [POST]
 
 + Response 201 (application/json)
 
-        None
-
-### loveを解除する [DELETE /api/boks/{bokId}/loves/{loveId}]
-
-+ Parameter
-
-    + bokId(number) - bokのID
-    + loveId(number) - loveテーブルカラムのID
+### loveを解除する [DELETE]
 
 + Response 200 (application/json)
 
-        None
