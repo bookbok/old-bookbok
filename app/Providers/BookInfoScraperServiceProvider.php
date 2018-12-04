@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Components\BookInfoScraper\ScrapeManager;
 use App\Components\BookInfoScraper\GoogleBooksScraper;
+use App\Components\BookInfoScraper\OpenBDScraper;
+use App\Components\BookInfoScraper\NationalDietLibraryScraper;
 use Illuminate\Support\ServiceProvider;
 
 class BookInfoScraperServiceProvider extends ServiceProvider
@@ -27,14 +29,31 @@ class BookInfoScraperServiceProvider extends ServiceProvider
     {
         // GoogleBooksScraperをコンテナに登録
         $this->app->bind(
-            'GoogleBooksScraper',
-            function(){
-                return new GoogleBooksScraper();
-            }
+            'app.bookInfo.scraper.google',
+            GoogleBooksScraper::class
+        );
+
+        // OpenBDScraperをコンテナに登録
+        $this->app->bind(
+            'app.bookInfo.scraper.openbd',
+            OpenBDScraper::class
+        );
+
+        // NationalDietLibraryScraperをコンテナに登録
+        $this->app->bind(
+            'app.bookInfo.scraper.ndl'
+            NationalDietLibraryScraper::class
         );
 
         // tag付け
-        $this->app->tag(['GoogleBooksScraper'], 'app.bookInfo.scraper');
+        $this->app->tag(
+            [
+                'app.bookInfo.scraper.google',
+                'app.bookInfo.scraper.openbd',
+                'app.bookInfo.scraper.ndl',
+            ],
+            'app.bookInfo.scraper'
+        );
 
         // ScrapeManagerをコンテナに登録
         // コンストラクタに引数として'app.bookInfo.scraper'のタグを持つ各スクレイパーを渡す

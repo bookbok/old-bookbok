@@ -107,12 +107,12 @@ export const fetchBookDetail = (id) => dispatch => {
 export const setUserInfo = userInfo => ({type: types.SET_USER_INFO, userInfo });
 export const fetchUserInfo = () => dispatch => {
     wrapFetch( DOMAIN + "/api/users/")
-      .then(json => {
-              dispatch(setUserInfo(json));
-      })
-      .catch(err => {
-          console.error("fetch error!", err);
-      });
+        .then(json => {
+                dispatch(setUserInfo(json));
+        })
+        .catch(err => {
+            console.error("fetch error!", err);
+        });
 }
 
 export const setUsersBookshelf = usersBookshelf => ({type: types.SET_USERS_BOOKSHELF, usersBookshelf});
