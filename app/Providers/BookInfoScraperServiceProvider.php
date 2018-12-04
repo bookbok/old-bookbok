@@ -29,10 +29,8 @@ class BookInfoScraperServiceProvider extends ServiceProvider
     {
         // GoogleBooksScraperをコンテナに登録
         $this->app->bind(
-            'GoogleBooksScraper',
-            function(){
-                return new GoogleBooksScraper();
-            }
+            'app.bookInfo.scraper.google',
+            GoogleBooksScraper::class
         );
 
         // OpenBDScraperをコンテナに登録
@@ -43,18 +41,16 @@ class BookInfoScraperServiceProvider extends ServiceProvider
 
         // NationalDietLibraryScraperをコンテナに登録
         $this->app->bind(
-            'NationalDietLibraryScraper',
-            function(){
-                return new NationalDietLibraryScraper();
-            }
+            'app.bookInfo.scraper.ndl'
+            NationalDietLibraryScraper::class
         );
 
         // tag付け
         $this->app->tag(
             [
-                'GoogleBooksScraper',
+                'app.bookInfo.scraper.google',
                 'app.bookInfo.scraper.openbd',
-                'NationalDietLibraryScraper',
+                'app.bookInfo.scraper.ndl',
             ],
             'app.bookInfo.scraper'
         );
