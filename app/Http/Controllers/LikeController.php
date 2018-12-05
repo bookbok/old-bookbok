@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Like;
+use App\User;
 use Illuminate\Http\Request;
 
 class LikeController extends Controller
@@ -14,7 +15,7 @@ class LikeController extends Controller
      */
     public function index($userId)
     {
-        $likes = Like::where('user_id', $userId)->get();
+        $likes = User::find($userId)->likes;
         return response()->json(
             $likes,
             200,
