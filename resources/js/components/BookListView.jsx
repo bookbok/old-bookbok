@@ -19,40 +19,22 @@ export class BookListView extends Component {
         }
 
         const bookName = [];
-        // initialized
         for(let i = 0 ; i < books.length ; i++) {
             bookName[i] = new Array(2);
-            for(let j = 0 ; j < 2 ; j++) {
-                bookName[i][j] = new Array(17);
-            }
         }
         
-        //どうにか直したい・・・汚すぎる。まず３次元配列を使ってる時点で汚い
-        //脳筋プログラムができてしまったので助けてええええ
         for(let allBooks = books.length, bookIndex = 0 ; 0 < allBooks ; allBooks--, bookIndex++) {
             for(let newLine = 0 ; newLine < 2; newLine++) {
-                for(let charNum = 0 ; charNum < 17; charNum++) {
-                    //１行目かつ該当の文字が存在すればbooks.nameのbookIndex番目のcharNum番目の1文字を3次元配列のbookNameに挿入する
-                    if(newLine == 0 && books[bookIndex].name.charAt(charNum) != "") {
-                        bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum);
-                    //1行目かつ該当の文字が存在しなかったら表示がおかしくなるので2行目に空白を入れてfor文を抜ける
-                    } else if(newLine == 0 && books[bookIndex].name.charAt(charNum) == "") {
-                        bookName[bookIndex][newLine+1][charNum] = " ";
-                        break;
-                    //２行目かつ該当の文字が存在すれば
-                    } else if(newLine == 1 && books[bookIndex].name.charAt(charNum+17) != "") {
-                        //2行目の処理
-                        if(newLine == 1 && charNum != 14) {
-                            bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum+17);
-                        //2行目かつ14行目なら「...」を入れてfor文から抜ける
-                        } else if(newLine == 1 && charNum == 14) {
-                            bookName[bookIndex][newLine][charNum] = "...";
-                            break;
-                        //それ以外なら１文字をbookNameに挿入
-                        } else {
-                            bookName[bookIndex][newLine][charNum] = books[bookIndex].name.charAt(charNum+17);
-                        }
+                if( books[bookIndex].name != "") {
+                    if(newLine == 0) {
+                        bookName[bookIndex][newLine] = books[bookIndex].name.substr(0,17);
+                    } else if(newLine == 1 && books[bookIndex].name.charAt(18) != "") {
+                        bookName[bookIndex][newLine] = books[bookIndex].name.substr(18);
+                    } else {
+                        bookName[bookIndex][newLine] = " ";
                     }
+                } else {
+                        bookName[bookIndex][newLine] = " ";
                 }
             }
         }
