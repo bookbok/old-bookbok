@@ -1,33 +1,35 @@
+import * as types from "./types";
+
 export function rootReducer(
-    state = { timeLine: [] },
+    state = {},
     action
 ) {
     switch(action.type) {
-        case "SET_TIMELINE":
+        case types.SET_TIMELINE:
             return { ...state, timeLine: action.timeLine };
 
-        case "SET_GENRES":
+        case types.SET_GENRES:
             return { ...state, genres: action.genres };
 
-        case "SET_BOOK_DETAIL":
+        case types.SET_BOOK_DETAIL:
             return { ...state, bookDetail: action.bookDetail };
 
-        case "SET_BOOKLIST":
+        case types.SET_BOOKLIST:
             return { ...state, books: action.books };
 
-        case "SET_USERS_BOOKSHELF":
+        case types.SET_USERS_BOOKSHELF:
             return { ...state, usersBookshelf: action.usersBookshelf };
 
-        case "SET_AUTH_TOKEN": // ログインを必要とするAPI用の認証トークンを保存
+        case types.SET_AUTH_TOKEN: // ログインを必要とするAPI用の認証トークンを保存
             return { ...state, token: action.token };
 
-        case "SET_USER_INFO":
+        case types.SET_USER_INFO:
             return { ...state, userInfo: action.userInfo };
 
         case "SET_LIKEBOKLIST":
             return { ...state, likeBokList: action.likeBokList };
 
-        case "REMOVE_AUTH_TOKEN": // ログアウトに伴い、ログイントークンを削除
+        case types.REMOVE_AUTH_TOKEN: // ログアウトに伴い、ログイントークンを削除
             return { ...state, token: null };
     }
 
