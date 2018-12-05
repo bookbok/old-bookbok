@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function boks(){
         return $this->hasMany(Bok::class);
     }
+
+    public function likes(){
+        return $this->belongsToMany(Bok::class, 'likes', 'user_id', 'bok_id');
+    }
 }
