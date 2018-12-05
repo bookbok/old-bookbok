@@ -39,14 +39,18 @@ export class LikeBokList extends Component {
             return <Loading />;
         }
 
-        const Boks = likeBoks.map((likeBok) => {
-            return <Bok likeBok={likeBok} />
+        const Boks = likeBoks.map((likeBok, index) => {
+            return <Bok likeBok={likeBok} key={index} />
         })
         console.log("(like)Boks↓");
         console.table(Boks);
 
         return (
-            <p>LikeBok一覧</p>
+            <div>
+                <p>LikeBok一覧</p>
+                {Boks}
+                <br/>
+            </div>
         );
     }
 }

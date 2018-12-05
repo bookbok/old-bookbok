@@ -18,7 +18,6 @@ export class Bok extends Component {
 
         return (
             <table border="1"><tbody>
-                <tr><th>Bok</th></tr>
                 <tr>
                     <td><img src={likeBok.cover} /></td>
                     <td><p>{likeBok.bookName}</p></td>
