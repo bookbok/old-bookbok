@@ -9,7 +9,7 @@ export class Bok extends Component {
     }
 
     componentDidMount(){
-        console.log("(Bok)componentDidMount : ");
+        console.log("(Bok)componentDidMount");
     };
 
     render(){

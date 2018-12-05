@@ -42,7 +42,7 @@ export class LikeBokList extends Component {
         const Boks = likeBoks.map((likeBok) => {
             return <Bok likeBok={likeBok} />
         })
-        console.log("(like)Boks : ");
+        console.log("(like)Boks↓");
         console.table(Boks);
 
         return (
