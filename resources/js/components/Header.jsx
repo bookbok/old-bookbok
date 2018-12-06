@@ -56,7 +56,7 @@ export const MenuRouter = () => (
                 <Route exact path="/books" component={ ConnectedBookList } />
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />
                 <Route exact path="/users/:id/user_books" component={ ConnectedUsersBookshelf } />
-                <Route exact path="/users/:id/likes" component={ LikeBokList } />
+                <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
                 <Route exact path="/users" component={ ConnectedUserInfo } />
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
             </Switch>

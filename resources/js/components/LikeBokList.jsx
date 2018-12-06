@@ -12,28 +12,12 @@ export class LikeBokList extends Component {
 
     componentDidMount(){
         const userId = parseInt(this.props.match.params.id);
-        console.log("(Like)componentDidMount : " + userId);
-        //store.dispatch(fetchLikeBokList(userId));
+        store.dispatch(fetchLikeBokList(userId));
     };
 
     render(){
-        //const likeBoks = this.props.likeBokList;
-        const likeBoks = [{
-            'cover'    : 'cover1.png',
-            'bookName' : 'ゼロからわかるRuby超入門(かんたんIT基礎講座)',
-            'userName' : 'wakamaka1122',
-            'review'   :   'めっちゃすごい',
-            'likeMark' : 'like.png',
-            'loveMark' : 'love.png'
-        }, {
-            'cover'    : 'cover2.png',
-            'bookName' : '簡単&節約！ボリュームおかず',
-            'userName' : 'program_kakenai',
-            'review'   : '飯テロ許さない',
-            'likeMark' : 'like.png',
-            'loveMark' : 'love.png'
-        }];
-        console.table(likeBoks);
+        const likeBoks = this.props.likeBokList;
+        console.table({likeBoks});
 
         if(isEmpty(likeBoks)){
             return <Loading />;
@@ -42,8 +26,6 @@ export class LikeBokList extends Component {
         const Boks = likeBoks.map((likeBok, index) => {
             return <Bok likeBok={likeBok} key={index} />
         })
-        console.log("(like)Boks↓");
-        console.table(Boks);
 
         return (
             <div>
