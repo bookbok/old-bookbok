@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BoksTableSeeder::class);
         $this->call(LikesTableSeeder::class);
         $this->call(LovesTableSeeder::class);
+        $this->call(ReactionsTableSeeder::class);
 
         Model::reguard(); //再設定
     }
