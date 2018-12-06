@@ -18,15 +18,19 @@ export class LikeBokList extends Component {
             return <Loading />;
         }
 
-        const Boks = likeBoks.map((likeBok, index) => {
+        const boks = likeBoks.map((likeBok, index) => {
             return <Bok likeBok={likeBok} key={index} />
         })
 
         return (
-            <div>
-                <p>LikeBok一覧</p>
-                {Boks}
-                <br/>
+            <div className="container mt-4">
+                <div className="row justify-content-center">
+                    <div className="col-md-8">
+                        <p>LikeBok一覧</p>
+                        {boks}
+                        <br/>
+                    </div>
+                </div>
             </div>
         );
     }
