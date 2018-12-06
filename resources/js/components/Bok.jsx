@@ -3,23 +3,8 @@ import { store } from "../store";
 import { Loading } from "./shared/Loading";
 
 export class Bok extends Component {
-    componentDidMount(){};
-
     render(){
         const likeBok = this.props.likeBok;
-        const dummy = [
-            "cover"         :"cover.png",
-            "bookName"      :"Ruby超入門",
-            "page_num_begin":"120",
-            "page_num_end"  :"121",
-            "line_num"      :"32",
-            "userName"      :"wakamaka1122",
-            "body"          :"RubyがRubyですごくRubyだからまじRubyで超Ruby",
-            "date"          :"2018/12/12",
-            "time"          :"20:32",
-            "likeMark"      :"like.png",
-            "loveMark"      :"lovaMark.png"
-        ]
 
         return (
             <table border="1"><tbody>
