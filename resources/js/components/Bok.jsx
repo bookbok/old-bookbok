@@ -9,15 +9,15 @@ export class Bok extends Component {
         return (
             <table border="1"><tbody>
                 <tr>
-                    <td>
+                    <td valign="top">
                         <table border="1"><tbody>
-                            <tr><td><img src={likeBok.id} /></td></tr>
-                            <tr><td>{likeBok.book_user_id}</td></tr>
-                            <tr><td>{likeBok.page_num_begin}~{likeBok.page_num_end} {likeBok.line_num}行目</td></tr>
+                            <tr><td><img src="likeBok.bok.cover" /></td></tr>
+                            <tr><td>likeBok.book.name</td></tr>
+                            <tr><td>p{likeBok.page_num_begin}~p{likeBok.page_num_end} {likeBok.line_num}行目</td></tr>
                         </tbody></table>
-                    </td><td>
+                    </td><td valign="top">
                         <table border="1"><tbody>
-                            <tr><td colSpan="3">{likeBok.user_id}</td></tr>
+                            <tr><td colSpan="3">likeBok.user.name</td></tr>
                             <tr><td colSpan="3">{likeBok.body}</td></tr>
                             <tr>
                                 <td>{likeBok.created_at}</td>
