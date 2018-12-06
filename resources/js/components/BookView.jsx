@@ -5,25 +5,20 @@ export class BookView extends Component {
         const book = this.props.book;
         const bookName = [];
         
-        for(let newLine = 0 ; newLine < 2; newLine++) {
-            if(book.name != "") {
-                if(newLine == 0) {
-                    bookName[newLine] = book.name.substr(0,17);
-                } else if(newLine == 1 && book.name.charAt(18) != "") {
-                    bookName[newLine] = book.name.substr(18);
-                } else {
-                    bookName[newLine] = " ";
-                }
+        if(book.name != "") {
+            if(book.name.charAt(18) != "") {
+                bookName.push(<pre>{book.name.slice(0, 17)}<br/>{book.name.slice(18)}</pre>);
             } else {
-                bookName[newLine] = " ";
+                bookName.push(<pre>{book.name.slice(0, 17)}<br/><br/></pre>);
             }
+        } else {
+                bookName.push(<pre><br/><br/></pre>);
         }
 
         return (
             <div className="d-inline-block">
                 <img hspace="50" src={book.cover}/>
-                <pre>{bookName[0]}</pre>
-                <pre>{bookName[1]}</pre>
+                {bookName}
                 <br/>
             </div>
          );
