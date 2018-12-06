@@ -33,7 +33,7 @@ class User extends Authenticatable
      * リレーション定義
      */
     public function books(){
-        return $this->belongsToMany(Book::class)
+        return $this->belongsToMany(Book::class, 'book_user', 'user_id', 'book_id')
                     ->withPivot('id')
                     ->withTimestamps();
     }
@@ -44,5 +44,9 @@ class User extends Authenticatable
 
     public function boks(){
         return $this->hasMany(Bok::class);
+    }
+
+    public function likes(){
+        return $this->belongsToMany(Bok::class, 'likes', 'user_id', 'bok_id');
     }
 }
