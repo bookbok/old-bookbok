@@ -25,7 +25,7 @@ export class BookListView extends Component {
         
         for(let allBooks = books.length, bookIndex = 0 ; 0 < allBooks ; allBooks--, bookIndex++) {
             for(let newLine = 0 ; newLine < 2; newLine++) {
-                if( books[bookIndex].name != "") {
+                if(books[bookIndex].name != "") {
                     if(newLine == 0) {
                         bookName[bookIndex][newLine] = books[bookIndex].name.substr(0,17);
                     } else if(newLine == 1 && books[bookIndex].name.charAt(18) != "") {
