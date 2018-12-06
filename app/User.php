@@ -47,6 +47,7 @@ class User extends Authenticatable
     }
 
     public function likes(){
-        return $this->belongsToMany(Bok::class, 'likes', 'user_id', 'bok_id');
+        return $this->belongsToMany(Bok::class, 'reactions', 'user_id', 'bok_id')
+            ->wherePivot('liked', 1);
     }
 }
