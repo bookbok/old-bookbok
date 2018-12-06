@@ -18,6 +18,19 @@ export class BookListView extends Component {
         if(isEmpty(books)) {
             return <Loading />;
         }
+        
+        const booksInfo = books.map((book, i) => {
+                return <BookView book={book} key={i} />
+        });
+        
+        const bookList = [];
+        for(let index = 0, key = booksInfo.length ; index < booksInfo.length; index++) {
+            bookList.push(booksInfo[index]);
+            if(index % 3 == 2 || booksInfo.length == (index+1)) {
+                bookList.push(<div key={key++}></div>);
+            }
+        }
+
 
         return(
             <div>
@@ -27,7 +40,7 @@ export class BookListView extends Component {
                             <Search />
                             <ConnectedGenres />
                             <br/>
-                            <BookView books={books} />
+                            {bookList}
                         </div>
                     </div>
                 </div>
