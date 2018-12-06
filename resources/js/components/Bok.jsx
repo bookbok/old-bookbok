@@ -21,8 +21,8 @@ export class Bok extends Component {
                             <tr><td colSpan="3">{likeBok.body}</td></tr>
                             <tr>
                                 <td>{likeBok.created_at}</td>
-                                <td><img src="like.png" /></td>
-                                <td><img src="love.png" /></td>
+                                <td><div className="heart"/></td>
+                                <td><div className="heart"/></td>
                             </tr>
                         </tbody></table>
                     </td>
