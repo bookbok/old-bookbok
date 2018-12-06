@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchLikeBokList } from "../actions.js";
+import { fetchLikeBoks } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils.js";
 import { Loading } from "./shared/Loading";
@@ -12,11 +12,11 @@ export class LikeBokList extends Component {
 
     componentDidMount(){
         const userId = parseInt(this.props.match.params.id);
-        store.dispatch(fetchLikeBokList(userId));
+        store.dispatch(fetchLikeBoks(userId));
     };
 
     render(){
-        const likeBoks = this.props.likeBokList;
+        const likeBoks = this.props.likeBoks;
         console.table({likeBoks});
 
         if(isEmpty(likeBoks)){

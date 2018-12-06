@@ -133,11 +133,10 @@ export const fetchBookList = () => dispatch => {
         });
 }
 
-export const setLikeBokList = likeBokList => ({type: "SET_LIKEBOKLIST", likeBokList});
-export const fetchLikeBokList = (userId) => dispatch => {
-    console.log("(action)fetchLikeBokList : " + userId);
+export const setLikeBoks = likeBoks => ({type: "SET_LIKEBOKS", likeBoks});
+export const fetchLikeBoks = (userId) => dispatch => {
     wrapFetch(DOMAIN + `/api/users/${userId}/likes`)
        .then(json => {
-          dispatch(setLikeBokList(json));
+          dispatch(setLikeBoks(json));
        });
 }
