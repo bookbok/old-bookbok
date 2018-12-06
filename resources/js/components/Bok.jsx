@@ -3,10 +3,6 @@ import { store } from "../store";
 import { Loading } from "./shared/Loading";
 
 export class Bok extends Component {
-    constructor(props){
-        super(props);
-    }
-
     componentDidMount(){};
 
     render(){
