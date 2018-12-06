@@ -17,7 +17,6 @@ export class LikeBokList extends Component {
 
     render(){
         const likeBoks = this.props.likeBoks;
-        console.table({likeBoks});
 
         if(isEmpty(likeBoks)){
             return <Loading />;

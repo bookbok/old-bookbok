@@ -10,7 +10,6 @@ export class Bok extends Component {
     componentDidMount(){};
 
     render(){
-        console.table(this.props.likeBok);
         const likeBok = this.props.likeBok;
         const dummy = [
             "cover"         :"cover.png",
