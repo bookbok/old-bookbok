@@ -35,15 +35,14 @@ class AuthenticationController extends Controller
             null === $user ||
             false === password_verify($request->password, $user->password)
         ) {
-            return response()->json(
-                'Falid to authentication...',
-                422
-            );
+            return response()->json([
+                'message' => 'Falid to authentication...',
+            ], 422);
         }
 
         return response()->json([
-            'token' => $user->createToken(self::TOKEN_NAME)->accessToken
-        ]);
+            'token' => $user->createToken(self::TOKEN_NAME)->accessToken,
+        ], 200);
     }
 
     /**
@@ -61,8 +60,8 @@ class AuthenticationController extends Controller
 
         $token->revoke();
 
-        return response()->json(
-            'You have been successfully logged out!'
-        );
+        return response()->json([
+            'message' => 'You have been successfully logged out!',
+        ], 200);
     }
 }
