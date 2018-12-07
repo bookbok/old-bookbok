@@ -26,7 +26,6 @@ class OpenBDScraper implements ScraperInterface
     {
         $this->client = $client;
     }
-
     /**
      * {@inheritdoc}
      */

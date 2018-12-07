@@ -57,7 +57,7 @@ class BookUserController extends Controller
      * @return \Illuminate\Http\Response
      * 　JSON形式で本情報をまとめて返す
      */
-    public function store(Request $request, ScrapeManager $scrapers, $userId)
+    public function store(Request $request, $userId)
     {
         /**
          * 1.リクエストから入力取得
@@ -68,27 +68,33 @@ class BookUserController extends Controller
          * 4.レスポンスを返す* 
          */
 
+        // ScrapeManagerの生成
+        $scrapers = resolve('app.bookInfo.scrapeManager');
+
         // 入力取得
         $isbn = $request->input('book_id');
+        var_dump($isbn);
 
         // booksテーブルに該当レコードが存在しているか確認する
         $book = Book::find($isbn);
         if($book == null){
-        // 存在していなければ、ScrapeManagerに処理委譲。
-        // 外部APIを使用しISBNに該当する本情報をBOOK型で受け取る
-        $book = $scrapers->searchByIsbn($isbn);
-        // すべてのScraperが情報取得に失敗した場合
-        if($book == null){
-            // なんかのエラー処理
-            return null;
-        }
-        // booksテーブルに挿入する
-        $book->save();
+            // 存在していなければ、ScrapeManagerに処理委譲。
+            // 外部APIを使用しISBNに該当する本情報をBOOK型で受け取る
+            $new_book = $scrapers->searchByIsbn((string)$isbn);
+            // すべてのScraperが情報取得に失敗した場合
+            if($new_book == null){
+                // なんかのエラー処理
+                return null;
+            }
+            // booksテーブルに挿入する
+            var_dump($new_book);
+            $new_book->save();
         }
         // book_userテーブルに挿入する
         $user_book = new BookUser;
-        $user_id = (int)$userId;
-        $book_id = (int)$isbn;
+        var_dump($user_book->id);
+        $user_book->user_id = (int)$userId;
+        $user_book->book_id = (int)$isbn;
         $user_book->save();
         // レスポンスデータの生成
         $userBook = BookUser::with([

@@ -48,8 +48,8 @@ class BookInfoScraperServiceProvider extends ServiceProvider
         // tag付け
         $this->app->tag(
             [
-                'app.bookInfo.scraper.google',
                 'app.bookInfo.scraper.openbd',
+                'app.bookInfo.scraper.google',
                 'app.bookInfo.scraper.ndl',
             ],
             'app.bookInfo.scraper'
