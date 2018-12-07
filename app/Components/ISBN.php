@@ -9,12 +9,12 @@ class ISBN
 {
     /**
      * ISBN文字列をハイフン無しISBN13に正規化する
-     * 
+     *
      * @param   string  $isbn
      *  正規化対象ISBN文字列
-     * 
+     *
      * @return  string
-     * 
+     *
      * @throws  \InvalidArgumentException
      *  ISBN文字列として不正な場合にスローされる例外
      */
@@ -44,10 +44,10 @@ class ISBN
 
     /**
      * ISBN13のチェックディジットを計算する
-     * 
+     *
      * @param   string  $isbn
      *  ISBN13のチェックディジットを除いた12桁の文字列
-     * 
+     *
      * @return  int
      */
     public static function calculateIsbn13CheckDigit(string $isbn)
@@ -57,7 +57,7 @@ class ISBN
         }
 
         $sum = 0;
-        
+
         for ($i = 0; $i < 12; ++$i) {
             $sum += (1 === ($i + 1) % 2)
                 ? (int)$isbn[$i] * 1 // 奇数番
@@ -70,7 +70,7 @@ class ISBN
         if (0 === $remainder) {
             return 0;
         }
-        
+
         return 10 - $remainder;
     }
 }

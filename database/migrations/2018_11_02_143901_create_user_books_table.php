@@ -23,7 +23,7 @@ class CreateUserBooksTable extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
             $table->foreign('book_id')
-                ->references('isbn')->on('books')
+                ->references('id')->on('books')
                 ->onDelete('cascade');
 
             $table->unique(['user_id', 'book_id']);

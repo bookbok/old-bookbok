@@ -19,7 +19,7 @@ class BookUserController extends Controller
     {
 
         $userBooks = User::with(['books' => function($q) {
-                        $q->select('books.isbn','books.name', 'books.cover', 'books.author', 'books.genre_id');
+                        $q->select('books.id', 'books.isbn','books.name', 'books.cover', 'books.author', 'books.genre_id');
                      }])
                      ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
                      ->find($userId);
