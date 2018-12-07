@@ -20,23 +20,30 @@ class AuthenticationController extends Controller
      * @return  \Illuminate\Http\Response
      */
     public function login(Request $request) {
+        $validator = \Validator::make($request->all(), [
+            'email'    => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         $user = User::where('email', $request->email)->first();
 
-        if (null === $user) {
-            $response = 'User doesn\'t exist';
-            return response($response, 422);
+        if (
+            null === $user ||
+            false === password_verify($request->password, $user->password)
+        ) {
+            return response()->json(
+                'Falid to authentication...',
+                422
+            );
         }
 
-        if (false === password_verify($request->password, $user->password)) {
-            $response = 'Password mismatch';
-            return response($response, 422);
-        }
-
-        $response = [
+        return response()->json([
             'token' => $user->createToken(self::TOKEN_NAME)->accessToken
-        ];
-
-        return response($response, 200);
+        ]);
     }
 
     /**
@@ -54,8 +61,8 @@ class AuthenticationController extends Controller
 
         $token->revoke();
 
-        $response = 'You have been successfully logged out!';
-
-        return response($response, 200);
+        return response()->json(
+            'You have been successfully logged out!'
+        );
     }
 }
