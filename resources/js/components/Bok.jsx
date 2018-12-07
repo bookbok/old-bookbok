@@ -10,6 +10,17 @@ export class Bok extends Component {
             page += (" ~ p" + likeBok.page_num_end);
         }
 
+        const clickLike = (e) => {
+            // 親要素のclickイベントを防止
+            //e.stopPropagation();
+            console.log("like!");
+        }
+
+        const clickLove = (e) => {
+            //e.stopPropagation();
+            console.log("love!");
+        }
+
         return (
             <table border="1"><tbody>
                 <tr>
@@ -19,14 +30,15 @@ export class Bok extends Component {
                             <tr><td>likeBok.book.name</td></tr>
                             <tr><td>{page} {likeBok.line_num}行目</td></tr>
                         </tbody></table>
-                    </td><td valign="top">
+                    </td>
+                    <td valign="top">
                         <table border="1"><tbody>
                             <tr><td colSpan="3">likeBok.user.name</td></tr>
                             <tr><td colSpan="3">{likeBok.body}</td></tr>
                             <tr>
                                 <td>{likeBok.created_at}</td>
-                                <td><div className="heart"/></td>
-                                <td><div className="heart"/></td>
+                                <td><div className="heart" onClick={clickLike}/></td>
+                                <td><div className="heart" onClick={clickLove}/></td>
                             </tr>
                         </tbody></table>
                     </td>
