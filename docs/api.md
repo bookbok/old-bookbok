@@ -644,20 +644,70 @@ BOOKBOK　API仕様書
 
         [
             {
-                "id": 1,
-                "body": "bok body",
-                "page_num_begin": 1,
-                "page_num_end": 1,
-                "line_num": 1,
-                "published_at": "2018-11-11 10:30"
+            "id": 1,
+            "user_id": "1",
+            "bok_id": "1",
+            "liked": "1",
+            "loved": "1",
+            "created_at": "2018-12-06 13:56:24",
+            "updated_at": "2018-12-06 13:56:24",
+                "user":{
+                    "id": 1,
+                    "name": "admin",
+                    "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                    "description": ""
+                },
+                "bok":{
+                    "id": 1,
+                    "user_id": "1",
+                    "body": "カムパネルラが手をあげられないるくなってお父さんのw",
+                    "page_num_begin": "5",
+                    "page_num_end": "5",
+                    "published_at": "2004-07-19 17:14:27",
+                    "book_user_id": "1",
+                    "book_user":{
+                        "id": 1,
+                        "book_id": "9784723597931",
+                        "book":{
+                            "isbn": "9784723597931",
+                            "name": "Labore tempora aspernatur maxime.",
+                            "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
+                        }
+                    }
+                }
             },
             {
-                "id": 2,
-                "body": "bok body",
-                "page_num_begin": 1,
-                "page_num_end": 1,
-                "line_num": 1,
-                "published_at": "2018-11-11 10:30"
+            "id": 2,
+            "user_id": "1",
+            "bok_id": "2",
+            "liked": "1",
+            "loved": "",
+            "created_at": "2018-12-06 13:56:24",
+            "updated_at": "2018-12-06 13:56:24",
+                "user":{
+                    "id": 1,
+                    "name": "admin",
+                    "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                    "description": ""
+                },
+                "bok":{
+                    "id": 2,
+                    "user_id": "1",
+                    "body": "カムパネルラが手をあげられないるくなってお父さんのw",
+                    "page_num_begin": "20",
+                    "page_num_end": "25",
+                    "published_at": "2004-07-19 17:14:27",
+                    "book_user_id": "2",
+                    "book_user":{
+                        "id": 2,
+                        "book_id": "9784723597931",
+                        "book":{
+                            "isbn": "9784723597931",
+                            "name": "Labore tempora aspernatur maxime.",
+                            "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
+                        }
+                    }
+                }
             }
         ]
 
