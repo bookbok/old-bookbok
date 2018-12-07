@@ -13,7 +13,7 @@ class NationalDietLibraryScraper implements ScraperInterface
 
     /**
      *  コンストラクタ
-     * 
+     *
      */
     public function __construct(){
 
@@ -21,9 +21,9 @@ class NationalDietLibraryScraper implements ScraperInterface
 
     /**
      * 著者情報の整形処理
-     * 
+     *
      * @param $bookInfoAuthor
-     * 
+     *
      * @return $consAuthors | $bookInfoAuthor
      *   引数に渡されたものが配列であれば文字列に連結して返す。
      * 　配列でない場合はそのまま返す。
@@ -41,9 +41,9 @@ class NationalDietLibraryScraper implements ScraperInterface
 
     /**
      * 本の概要情報の整形処理
-     * 
+     *
      * @param $bookInfoDescription
-     * 
+     *
      * @return $consDescription | $bookInfoDescription
      *   引数に渡されたものが配列であれば文字列に連結して返す。
      * 　配列でない場合はそのまま返す。
@@ -102,7 +102,7 @@ class NationalDietLibraryScraper implements ScraperInterface
         // ScrapeManagerにreturnするBookインスタンスの生成と情報の格納
         $book = new Book;
 
-        $book->isbn = (int)($isbn);
+        $book->isbn = $isbn;
         $book->name = $dcBookInfoJSON->title;
         if(property_exists($dcBookInfoJSON, 'description')){
             $book->description = $this->consDescription($dcBookInfoJSON->description);
@@ -119,7 +119,7 @@ class NationalDietLibraryScraper implements ScraperInterface
         }else{
             $book->author = "";
         }
-        
+
         return $book;
     }
 }
