@@ -19,7 +19,7 @@ class ReactionController extends Controller
 
     public function likes($userId)
     {
-        $likes = User::find($userId)->likes;
+        $likes = User::find($userId)->likes();
         return response()->json(
             $likes,
             200,
