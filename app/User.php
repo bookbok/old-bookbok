@@ -47,7 +47,12 @@ class User extends Authenticatable
     }
 
     public function likes(){
-        return $this->belongsToMany(Bok::class, 'reactions', 'user_id', 'bok_id')
-            ->wherePivot('liked', 1);
+        return \App\Reaction::where('user_id', $this->id)->where('liked', 1)
+            ->with([
+                'user:id,name,avatar,description',
+                'bok:id,user_id,body,page_num_begin,page_num_end,published_at,book_user_id',
+                'bok.bookUser:id,book_id',
+                'bok.bookUser.book:isbn,name,cover',
+            ])->get();
     }
 }
