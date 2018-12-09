@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\BookUser;
+use App\UserBook;
 use App\User;
 use App\Book;
 use Illuminate\Http\Request;
 
-class BookUserController extends Controller
+class UserBookController extends Controller
 {
     /**
      * 特定ユーザの本棚のなかに登録されている本の一覧情報を返す
@@ -61,7 +61,7 @@ class BookUserController extends Controller
      */
     public function show($bookUserId)
     {
-        $userBook = BookUser::with([
+        $userBook = UserBook::with([
                         'user:id,name,avatar,description',
                         'review:id,user_id,user_book_id,body,published_at',
                         'boks:id,user_id,user_book_id,body,page_num_begin,page_num_end,published_at'
@@ -80,10 +80,10 @@ class BookUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\BookUser  $userBook
+     * @param  \App\UserBook  $userBook
      * @return \Illuminate\Http\Response
      */
-    public function edit(BookUser $userBook)
+    public function edit(UserBook $userBook)
     {
         //
     }
@@ -92,10 +92,10 @@ class BookUserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\BookUser  $userBook
+     * @param  \App\UserBook  $userBook
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BookUser $userBook)
+    public function update(Request $request, UserBook $userBook)
     {
         //
     }
@@ -103,10 +103,10 @@ class BookUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\BookUser  $userBook
+     * @param  \App\UserBook  $userBook
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BookUser $userBook)
+    public function destroy(UserBook $userBook)
     {
         //
     }
