@@ -14,6 +14,6 @@ class Review extends Model
     }
 
     public function bookUser(){
-        return $this->belongsTo(BookUser::class);
+        return $this->hasOne(BookUser::class, 'book_user_id', 'id');
     }
 }

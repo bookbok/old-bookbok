@@ -20,10 +20,10 @@ class BookUserController extends Controller
     {
 
         $userBooks = User::with(['books' => function($q) {
-                        $q->select('books.isbn','books.name', 'books.cover', 'books.author', 'books.genre_id');
-                     }])
-                     ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
-                     ->find($userId);
+                $q->select('books.isbn','books.name', 'books.cover', 'books.author', 'books.genre_id');
+            }])
+            ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
+            ->find($userId);
 
         return response()->json(
             $userBooks,
@@ -51,8 +51,6 @@ class BookUserController extends Controller
      * 　ボディにはbook_id（本のISBN）が含まれている。
      * @param $userId
      * 　usersリソースを一意に特定するためのユーザID。
-     * @param ScrapeManager $scrapers
-     * 　外部APIを使用して本条を取得するScraperを管理するマネージャクラス。
      * 
      * @return \Illuminate\Http\Response
      * 　JSON形式で本情報をまとめて返す
@@ -73,10 +71,9 @@ class BookUserController extends Controller
 
         // 入力取得
         $isbn = $request->input('book_id');
-        var_dump($isbn);
 
         // booksテーブルに該当レコードが存在しているか確認する
-        $book = Book::find($isbn);
+        $book = Book::where('isbn', $isbn)->first();
         if($book == null){
             // 存在していなければ、ScrapeManagerに処理委譲。
             // 外部APIを使用しISBNに該当する本情報をBOOK型で受け取る
@@ -87,24 +84,22 @@ class BookUserController extends Controller
                 return null;
             }
             // booksテーブルに挿入する
-            var_dump($new_book);
             $new_book->save();
         }
         // book_userテーブルに挿入する
-        $user_book = new BookUser;
-        var_dump($user_book->id);
-        $user_book->user_id = (int)$userId;
-        $user_book->book_id = (int)$isbn;
-        $user_book->save();
+        $book_user = new BookUser;
+        $book_user->user_id = (int)$userId;
+        $book_user->book_id = (int)$isbn;
+        $book_user->save();
         // レスポンスデータの生成
         $userBook = BookUser::with([
-                    'user:id,name,avatar,description',
-                    'book:id,name,description,cover,author,genre_id',
-                    'review:id,user_id,book_user_id,body,published_at',
-                    'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
-                    ])
-                ->select(['id', 'user_id', 'book_id'])
-                ->find($user_book->id);
+            'user:id,name,avatar,description',
+            'book:isbn,name,description,cover,author,genre_id',
+            'review:id,user_id,book_user_id,body,published_at',
+            'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
+            ])
+            ->select(['id', 'user_id', 'book_id'])
+            ->find($book_user->id);
 
         return response()->json(
             $userBook,
@@ -124,12 +119,12 @@ class BookUserController extends Controller
     public function show($bookUserId)
     {
         $userBook = BookUser::with([
-                        'user:id,name,avatar,description',
-                        'review:id,user_id,book_user_id,body,published_at',
-                        'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
-                        ])
-                    ->select(['id', 'user_id', 'book_id'])
-                    ->find($bookUserId);
+            'user:id,name,avatar,description',
+            'review:id,user_id,book_user_id,body,published_at',
+            'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
+            ])
+            ->select(['id', 'user_id', 'book_id'])
+            ->find($bookUserId);
 
         return response()->json(
             $userBook,

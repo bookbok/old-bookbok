@@ -11,57 +11,73 @@ use GuzzleHttp\Client;
 
 class BookUserControllerTest extends TestCase
 {
-    
 
-    /**
-     * 
-     * 
-     */
-    public function setup(){
-        // 必須の呼び出し
+    /** @var CuzzleHttp\Client */
+    private $client;
+
+    /** @var int */
+    private $count_book;
+    private $count_bookuser;
+
+    public function setUp(){
+
         parent::setUp();
 
-        // モデルのリフレッシュ
+        //　php artisan migrate:refresh --seed の実行
+        \Artisan::call('migrate:refresh');
+        \Artisan::call('db:seed');
+
+        // 現状のレコード数を計算する   
+        $this->count_bookuser = count(BookUser::all());
+        $this->count_book = count(Book::all());
+    }
+
+    public function tearDown(){
+        //　php artisan migrate:refresh --seed の実行
         \Artisan::call('migrate:refresh');
         \Artisan::call('db:seed');
     }
 
     /**
-     * 
-     * 
-     */
-    public function tearDown(){
-
-    }
-
-    /**
      * @test
-     * 
      */
-    public function BOOKに登録されているISBNを入力されたときのテスト(){
-        // 現状のレコード数を計算する   
-        $count_bookuser = count(BookUser::all());
-        $count_book = count(Book::all());
+    public function BOOKに登録されていないISBNを入力されたとき、および登録されているISBNを入力されたときのテスト(){
 
-        
+        $client = new Client();
+
+        //　登録前
+        $client->request(
+            'POST',
+            'http://localhost:8000/api/users/1/user_books',
+            ['form_params' => 
+                [
+                    'book_id' => '9784063842760'
+                ]
+            ]
+        );
 
         // チェック
-        // $this->assertTag(array('tag' => 'strong', 'content' =>'Success'),$response->body->__toString());
-        // $this->assertEquals($count_bookuser + 1, count(BookUser::all()));
-        // $this->assertEquals($count_book + 1, count(Book::all()));
+        $this->count_bookuser++;
+        $this->count_book++;
+        $this->assertEquals($this->count_bookuser, count(BookUser::all()));
+        $this->assertEquals($this->count_book, count(Book::all()));
+
+
+        //　登録後
+        $client->request(
+            'POST',
+            'http://localhost:8000/api/users/2/user_books',
+            ['form_params' => 
+                [
+                    'book_id' => '9784063842760'
+                ]
+            ]
+        );
+
+        // チェック
+        $this->count_bookuser++;
+        $this->assertEquals($this->count_bookuser, count(BookUser::all()));
+        $this->assertEquals($this->count_book, count(Book::all()));
 
     }
-
-    // /**
-    //  * @test
-    //  * 
-    //  */
-    // public function BOOKに登録されていないISBNを入力されたときのテスト(){
-    //     // 現状のレコード数を計算する   
-    //     $count_bookuser = count(BookUser::all());
-    //     $count_book = count(Book::all());
-
-    //     // 入力値を直接指定(存在していない)
-    //     $_POST["book_id"] = "9784844339458";
-    // }
 }

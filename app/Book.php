@@ -21,4 +21,8 @@ class Book extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+
+    public function userBooks(){
+        return $this->hasMany(BookUser::class, 'book_id', 'isbn');
+    }
 }
