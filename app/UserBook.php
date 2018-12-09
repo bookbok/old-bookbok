@@ -12,11 +12,11 @@ class UserBook extends Model
      * リレーション定義
      */
     public function review(){
-        return $this->hasOne(Review::class);
+        return $this->hasOne(Review::class, 'user_book_id');
     }
 
     public function boks(){
-        return $this->hasMany(Bok::class);
+        return $this->hasMany(Bok::class, 'user_book_id');
     }
 
     public function user(){

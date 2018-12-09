@@ -33,7 +33,7 @@ class User extends Authenticatable
      * リレーション定義
      */
     public function books(){
-        return $this->belongsToMany(Book::class, 'user_book', 'user_id', 'book_id')
+        return $this->belongsToMany(Book::class, 'user_book')
                     ->withPivot('id')
                     ->withTimestamps();
     }
@@ -52,7 +52,7 @@ class User extends Authenticatable
                 'user:id,name,avatar,description',
                 'bok:id,user_id,body,page_num_begin,page_num_end,published_at,user_book_id',
                 'bok.userBook:id,book_id',
-                'bok.userBook.book:isbn,name,cover',
+                'bok.userBook.book:id,isbn,name,cover',
             ])->get();
     }
 }
