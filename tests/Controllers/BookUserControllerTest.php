@@ -16,8 +16,8 @@ class BookUserControllerTest extends TestCase
     private $client;
 
     /** @var int */
-    private $count_book;
-    private $count_bookuser;
+    private $countBook;
+    private $countBookuser;
 
     public function setUp(){
 
@@ -28,8 +28,8 @@ class BookUserControllerTest extends TestCase
         \Artisan::call('db:seed');
 
         // 現状のレコード数を計算する   
-        $this->count_bookuser = count(BookUser::all());
-        $this->count_book = count(Book::all());
+        $this->countBookuser = count(BookUser::all());
+        $this->countBook = count(Book::all());
     }
 
     public function tearDown(){
@@ -57,10 +57,10 @@ class BookUserControllerTest extends TestCase
         );
 
         // チェック
-        $this->count_bookuser++;
-        $this->count_book++;
-        $this->assertEquals($this->count_bookuser, count(BookUser::all()));
-        $this->assertEquals($this->count_book, count(Book::all()));
+        $this->countBookuser++;
+        $this->countBook++;
+        $this->assertEquals($this->countBookuser, count(BookUser::all()));
+        $this->assertEquals($this->countBook, count(Book::all()));
 
 
         //　登録後
@@ -75,9 +75,9 @@ class BookUserControllerTest extends TestCase
         );
 
         // チェック
-        $this->count_bookuser++;
-        $this->assertEquals($this->count_bookuser, count(BookUser::all()));
-        $this->assertEquals($this->count_book, count(Book::all()));
+        $this->countBookuser++;
+        $this->assertEquals($this->countBookuser, count(BookUser::all()));
+        $this->assertEquals($this->countBook, count(Book::all()));
 
     }
 }

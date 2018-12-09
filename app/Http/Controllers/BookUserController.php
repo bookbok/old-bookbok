@@ -20,7 +20,7 @@ class BookUserController extends Controller
     {
 
         $userBooks = User::with(['books' => function($q) {
-                $q->select('books.isbn','books.name', 'books.cover', 'books.author', 'books.genre_id');
+                $q->select('books.id','books.isbn','books.name', 'books.cover', 'books.author', 'books.genre_id');
             }])
             ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
             ->find($userId);
@@ -61,7 +61,7 @@ class BookUserController extends Controller
         $scrapers = resolve('app.bookInfo.scrapeManager');
 
         // 入力取得
-        $isbn = $request->input('book_id');
+        $isbn = $request->input('isbn');
 
         // booksテーブルに該当レコードが存在しているか確認する
         $book = Book::where('isbn', $isbn)->first();
@@ -71,7 +71,12 @@ class BookUserController extends Controller
             $new_book = $scrapers->searchByIsbn((string)$isbn);
             // すべてのScraperが情報取得に失敗した場合
             if($new_book == null){
-                return null;
+                return response()->json(
+                    [],
+                    404,
+                    [],
+                    JSON_UNESCAPED_UNICODE
+                );
             }
             // booksテーブルに挿入する
             $new_book->save();
@@ -79,12 +84,12 @@ class BookUserController extends Controller
         // book_userテーブルに挿入する
         $book_user = new BookUser;
         $book_user->user_id = (int)$userId;
-        $book_user->book_id = (int)$isbn;
+        $book_user->book_id = $book ? $book->id : $new_book->id;
         $book_user->save();
         // レスポンスデータの生成
         $userBook = BookUser::with([
             'user:id,name,avatar,description',
-            'book:isbn,name,description,cover,author,genre_id',
+            'book:id,isbn,name,description,cover,author,genre_id',
             'review:id,user_id,book_user_id,body,published_at',
             'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
             ])
