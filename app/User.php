@@ -51,8 +51,8 @@ class User extends Authenticatable
             ->with([
                 'user:id,name,avatar,description',
                 'bok:id,user_id,body,page_num_begin,page_num_end,published_at,user_book_id',
-                'bok.bookUser:id,book_id',
-                'bok.bookUser.book:isbn,name,cover',
+                'bok.userBook:id,book_id',
+                'bok.userBook.book:isbn,name,cover',
             ])->get();
     }
 }

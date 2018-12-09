@@ -11,7 +11,7 @@ class Bok extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function bookUser(){
+    public function userBook(){
         return $this->belongsTo(UserBook::class, 'user_book');
     }
 

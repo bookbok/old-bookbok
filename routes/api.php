@@ -43,7 +43,7 @@ Route::get('books/{book}', 'BookController@show');
  *
  */
 Route::get('users/{userId}/user_books','UserBookController@index');
-Route::get('users/{userId}/user_books/{bookUserId}', 'UserBookController@show');
+Route::get('users/{userId}/user_books/{userBookId}', 'UserBookController@show');
 
 /**
  * Resource: Genre
