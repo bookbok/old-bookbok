@@ -57,15 +57,6 @@ class BookUserController extends Controller
      */
     public function store(Request $request, $userId)
     {
-        /**
-         * 1.リクエストから入力取得
-         * 2.パラメータをもとにDBにISBNに該当する本情報が格納されているか確認する
-         * 3.格納されていれば、book_userテーブルにレコードを挿入する
-         *   されていなければ、スクレイプマネージャに処理委譲し、戻りデータをbooksテーブルに格納後
-         * 　先と同様に、book_userテーブルにレコードを挿入する
-         * 4.レスポンスを返す* 
-         */
-
         // ScrapeManagerの生成
         $scrapers = resolve('app.bookInfo.scrapeManager');
 
@@ -80,7 +71,6 @@ class BookUserController extends Controller
             $new_book = $scrapers->searchByIsbn((string)$isbn);
             // すべてのScraperが情報取得に失敗した場合
             if($new_book == null){
-                // なんかのエラー処理
                 return null;
             }
             // booksテーブルに挿入する
