@@ -51,7 +51,7 @@ class BookUserControllerTest extends TestCase
             'http://localhost:8000/api/users/1/user_books',
             ['form_params' => 
                 [
-                    'book_id' => '9784063842760'
+                    'isbn' => '9784063842760'
                 ]
             ]
         );
@@ -69,7 +69,7 @@ class BookUserControllerTest extends TestCase
             'http://localhost:8000/api/users/2/user_books',
             ['form_params' => 
                 [
-                    'book_id' => '9784063842760'
+                    'isbn' => '9784063842760'
                 ]
             ]
         );
