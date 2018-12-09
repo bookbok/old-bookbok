@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BookUser extends Model
+class UserBook extends Model
 {
-    protected $table = 'book_user';
+    protected $table = 'user_book';
 
     /**
      * リレーション定義
