@@ -12,7 +12,7 @@ class GoogleBooksScraper implements ScraperInterface
 
     /**
      *  コンストラクタ
-     * 
+     *
      */
     public function __construct(){
     }
@@ -41,10 +41,10 @@ class GoogleBooksScraper implements ScraperInterface
      * ScrapeInterface::searchByIsbn()の実装
      * GoogleBooksAPIを叩き、本の情報を取得する。
      * その情報をもとにApp\Bookに情報を格納してマネージャに返す。
-     * 
+     *
      * @param string $isbn
      *  正規化されたISBN
-     * 
+     *
      * @return App\Book | null
      *  戻り値があればApp\Bookにして返す。
      *  なかった場合はnullを返す。
@@ -76,6 +76,6 @@ class GoogleBooksScraper implements ScraperInterface
 
         // App\Bookをスクレイプマネージャに返す
         return $book;
-    
+
     }
 }

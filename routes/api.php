@@ -57,5 +57,5 @@ Route::get('genres/{genre}', 'GenreController@show');
  * Resource: Like
  *
  */
-Route::get('users/{userId}/likes','LikeController@index');
+Route::get('users/{userId}/likes','ReactionController@likes');
 

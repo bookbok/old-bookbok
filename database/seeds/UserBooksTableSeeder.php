@@ -17,7 +17,7 @@ class UserBooksTableSeeder extends Seeder
         foreach($books as $book) {
             App\BookUser::create([
                 'user_id' => 1,
-                'book_id' => $book->isbn,
+                'book_id' => $book->id,
                 'created_at' => Carbon::now()->subDays(15),
                 'updated_at' => Carbon::now()->subDays(15),
             ]);
