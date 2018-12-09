@@ -13,7 +13,7 @@ class ReviewsTableSeeder extends Seeder
     {
         $userBooks = App\BookUser::all();
         foreach($userBooks as $book) {
-            factory(App\Review::class)->create(['book_user_id' => $book->id, 'user_id' => $book->user_id]);
+            factory(App\Review::class)->create(['user_book_id' => $book->id, 'user_id' => $book->user_id]);
         }
     }
 }

@@ -63,8 +63,8 @@ class BookUserController extends Controller
     {
         $userBook = BookUser::with([
                         'user:id,name,avatar,description',
-                        'review:id,user_id,book_user_id,body,published_at',
-                        'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
+                        'review:id,user_id,user_book_id,body,published_at',
+                        'boks:id,user_id,user_book_id,body,page_num_begin,page_num_end,published_at'
                         ])
                     ->select(['id', 'user_id', 'book_id'])
                     ->find($bookUserId);
