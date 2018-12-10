@@ -55,7 +55,7 @@ export const setTimeLine = timeLine => ({ type: types.SET_TIMELINE, timeLine });
 // Get authentication token
 export const setAuthToken = (token) => ({ type: types.SET_AUTH_TOKEN, token });
 export const requestLogin = (loginUser) => dispatch => {
-    wrapFetch(DOMAIN + "/api/login", {
+    wrapFetch(DOMAIN + "/api/auth/login", {
         method: "POST",
         body: loginUser
     }).then(json => {
@@ -65,7 +65,7 @@ export const requestLogin = (loginUser) => dispatch => {
 
 export const removeAuthToken = () => ({ type: types.REMOVE_AUTH_TOKEN });
 export const requestLogout = () => dispatch => {
-    wrapFetch(DOMAIN + "/api/logout", {
+    wrapFetch(DOMAIN + "/api/auth/logout", {
         isParse: false,
     }).then(res => {
         dispatch(removeAuthToken());
@@ -74,7 +74,7 @@ export const requestLogout = () => dispatch => {
 
 export const requestUserRegister = (userInfo) => dispatch => {
     /* TODO: サーバー側が実装されれば書く
-    fetch(DOMAIN + "/api/register", {
+    fetch(DOMAIN + "/api/auth/register", {
         method: "POST",
         headers: {
             Accept: "application/json",
