@@ -10,7 +10,7 @@
     }
 }
 
-pre{
+pre.book-view-pre{
     @include mq-sm {
         text-overflow: ellipsis;
         width: 92px;
@@ -24,7 +24,7 @@ pre{
     };
 } 
 
-img{
+img.book-view-img{
     @include mq-sm {
         max-width: 115px;
         max-height: 115px;
