@@ -44,6 +44,7 @@ Route::get('books/{book}', 'BookController@show');
  */
 Route::get('users/{userId}/user_books','BookUserController@index');
 Route::get('users/{userId}/user_books/{bookUserId}', 'BookUserController@show');
+Route::post('users/{userId}/user_books', 'BookUserController@store');
 
 /**
  * Resource: Genre

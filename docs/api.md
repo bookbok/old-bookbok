@@ -234,12 +234,12 @@ BOOKBOK　API仕様書
 
     + Attributes
 
-        + book_id (required)
+        + isbn (required)
 
     + Body
 
         {
-            "book_id": "本のISBN"
+            "isbn": "本のISBN"
         }
 
 + Response 201 (application/json)
@@ -254,6 +254,7 @@ BOOKBOK　API仕様書
             },
             "book": {
                 "id": 1,
+                "isbn": "9784111121221",
                 "name": "book name",
                 "description": "book info",
                 "cover": "http://~",

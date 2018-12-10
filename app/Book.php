@@ -17,7 +17,7 @@ class Book extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function bookUser() {
+    public function userBooks(){
         return $this->hasMany(BookUser::class);
     }
 }
