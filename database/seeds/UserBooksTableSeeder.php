@@ -15,9 +15,9 @@ class UserBooksTableSeeder extends Seeder
         // HACK: BooksTableSeederで10個のBookが生成されていることを前提としている
         $books = App\Book::orderBy('created_at')->take(5)->get();
         foreach($books as $book) {
-            App\BookUser::create([
+            App\UserBook::create([
                 'user_id' => 1,
-                'book_id' => $book->isbn,
+                'book_id' => $book->id,
                 'created_at' => Carbon::now()->subDays(15),
                 'updated_at' => Carbon::now()->subDays(15),
             ]);

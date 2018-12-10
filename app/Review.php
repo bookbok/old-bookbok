@@ -13,7 +13,7 @@ class Review extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function bookUser(){
-        return $this->belongsTo(BookUser::class);
+    public function userBook(){
+        return $this->belongsTo(UserBook::class, 'user_book_id');
     }
 }

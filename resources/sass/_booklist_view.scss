@@ -1,0 +1,38 @@
+@mixin mq-sm {
+    @media screen and (max-width: ($sm)) {
+        @content;
+    }
+}
+
+@mixin mq-pc {
+    @media screen and (min-width: ($pc)) {
+        @content;
+    }
+}
+
+pre.book-view-pre{
+    @include mq-sm {
+        text-overflow: ellipsis;
+        width: 92px;
+        font-size: 12px;
+    };
+    @include mq-pc {
+        margin-left: 30px;
+        text-overflow: ellipsis;
+        width: 130px;
+        font-size: 15px;
+    };
+} 
+
+img.book-view-img{
+    @include mq-sm {
+        max-width: 115px;
+        max-height: 115px;
+    };
+
+    @include mq-pc {
+        margin-left: 30px;
+        max-width: 300px;
+        max-height: 300px;
+    };
+}

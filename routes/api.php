@@ -16,11 +16,21 @@ use Illuminate\Http\Request;
 /*
  * Authentication Routes
  */
-Route::post('/login','AuthenticationController@login')->name('login');
-Route::middleware('auth:api')->group(function () {
-    Route::get('/logout','AuthenticationController@logout')->name('logout');
+Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
+    Route::post('login','LoginController@login')->name('login');
+
+    Route::middleware('auth:api')->group(function () {
+        Route::get('logout','LoginController@logout')->name('logout');
+        Route::get('user', function (Request $request) {
+            return $request->user();
+        })->name('user');
+    });
 });
 
+Route::post('/login','Auth\\LoginController@login');
+Route::middleware('auth:api')->group(function () {
+    Route::get('/logout','Auth\\LoginController@logout');
+});
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -42,8 +52,9 @@ Route::get('books/{book}', 'BookController@show');
  *  Resource: UserBook
  *
  */
-Route::get('users/{userId}/user_books','BookUserController@index');
-Route::get('users/{userId}/user_books/{bookUserId}', 'BookUserController@show');
+Route::get('users/{userId}/user_books','UserBookController@index');
+Route::get('users/{userId}/user_books/{userBookId}', 'UserBookController@show');
+Route::post('users/{userId}/user_books', 'UserBookController@store');
 
 /**
  * Resource: Genre
@@ -56,5 +67,5 @@ Route::get('genres/{genre}', 'GenreController@show');
  * Resource: Like
  *
  */
-Route::get('users/{userId}/likes','LikeController@index');
+Route::get('users/{userId}/likes','ReactionController@likes');
 

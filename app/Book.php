@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    // 自動増分の抑制
-    public $incrementing = false;
-    // 'id'ではない主キーの設定
-    protected $primaryKey = 'isbn';
-
     /**
      * リレーション定義
      */
@@ -19,6 +14,10 @@ class Book extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'user_book');
+    }
+
+    public function userBooks(){
+        return $this->hasMany(UserBook::class);
     }
 }

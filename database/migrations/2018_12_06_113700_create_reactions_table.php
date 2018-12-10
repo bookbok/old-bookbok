@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReviewsTable extends Migration
+class CreateReactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,19 @@ class CreateReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('reactions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('user_book_id');
-            $table->string('body');
-            $table->dateTime('published_at')->nullable();
+            $table->unsignedInteger('bok_id');
+            $table->boolean('liked')->default(false);
+            $table->boolean('loved')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->foreign('user_book_id')
-                ->references('id')->on('user_book')
+            $table->foreign('bok_id')
+                ->references('id')->on('boks')
                 ->onDelete('cascade');
         });
     }
@@ -37,6 +37,6 @@ class CreateReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('reactions');
     }
 }
