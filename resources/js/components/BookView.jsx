@@ -6,18 +6,19 @@ export class BookView extends Component {
         const bookName = [];
         
         if(book.name != "") {
-            if(book.name.charAt(18) != "") {
-                bookName.push(<pre>{book.name.slice(0, 17)}<br/>{book.name.slice(18)}</pre>);
+            const width = screen.width <= 750 ? 12 : 14;
+            if(book.name.charAt(width+1) != "") {
+                bookName.push(<pre>{book.name.slice(0, width)}<br/>{book.name.slice(width)}</pre>);
             } else {
-                bookName.push(<pre>{book.name.slice(0, 17)}<br/><br/></pre>);
+                bookName.push(<pre>{book.name.slice(0, width)}<br/><br/></pre>);
             }
         } else {
                 bookName.push(<pre><br/><br/></pre>);
         }
 
         return (
-            <div className="d-inline-block">
-                <img hspace="50" src={book.cover}/>
+            <div className="d-inline-block col-md-4 col-4"> 
+                <img src={book.cover}/>
                 {bookName}
                 <br/>
             </div>
