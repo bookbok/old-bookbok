@@ -29,8 +29,8 @@ export function rootReducer(
         case types.SET_USER_INFO:
             return { ...state, userInfo: action.userInfo };
 
-        case types.REMOVE_AUTH_TOKEN: // ログアウトに伴い、ログイントークンを削除
-            return { ...state, token: null };
+        case types.REMOVE_LOGGEDIN_INFO: // ログアウトに伴い、ログイントークン、ログイン中ユーザー情報を削除
+            return { ...state, token: null, loggedinUser: null };
     }
 
     return state;

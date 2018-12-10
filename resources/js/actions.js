@@ -71,12 +71,12 @@ export const getLoggedinUser = () => dispatch => {
     });
 }
 
-export const removeAuthToken = () => ({ type: types.REMOVE_AUTH_TOKEN });
+export const removeLoggedinInfo = () => ({ type: types.REMOVE_LOGGEDIN_INFO });
 export const requestLogout = () => dispatch => {
     wrapFetch(DOMAIN + "/api/logout", {
         isParse: false,
     }).then(res => {
-        dispatch(removeAuthToken());
+        dispatch(removeLoggedinInfo());
     });
 }
 
