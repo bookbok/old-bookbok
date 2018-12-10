@@ -12,7 +12,10 @@ class UserBook extends Model
      * リレーション定義
      */
     public function review(){
-        return $this->hasOne(Review::class, 'user_book_id');
+        return $this->hasOne(Review::class, 'user_book_id')
+                    ->withDefault([
+                        "body" => "未記入"
+                    ]);
     }
 
     public function boks(){
@@ -23,7 +26,7 @@ class UserBook extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function book() {
-        return $this->belongsTo(Book::class, 'book_id');
+    public function book(){
+        return $this->belongsTo(Book::class);
     }
 }

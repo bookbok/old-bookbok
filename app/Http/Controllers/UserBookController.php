@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\UserBook;
 use App\User;
 use App\Book;
+use App\Components\BookInfoScraper\ScrapeManager;
 use Illuminate\Http\Request;
 
 class UserBookController extends Controller
@@ -19,10 +20,10 @@ class UserBookController extends Controller
     {
 
         $userBooks = User::with(['books' => function($q) {
-                        $q->select('books.id', 'books.isbn','books.name', 'books.cover', 'books.author', 'books.genre_id');
-                     }])
-                     ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
-                     ->find($userId);
+                $q->select('books.id','books.isbn','books.name', 'books.cover', 'books.author', 'books.genre_id');
+            }])
+            ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
+            ->find($userId);
 
         return response()->json(
             $userBooks,
@@ -43,14 +44,65 @@ class UserBookController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * ユーザの本棚に本を追加する。
      *
      * @param  \Illuminate\Http\Request  $request
+     * 　POSTメソッドで送られてくる。
+     * 　ボディにはbook_id（本のISBN）が含まれている。
+     * @param $userId
+     * 　usersリソースを一意に特定するためのユーザID。
+     *
      * @return \Illuminate\Http\Response
+     * 　JSON形式で本情報をまとめて返す
      */
-    public function store(Request $request)
+    public function store(Request $request, $userId)
     {
-        //
+        // ScrapeManagerの生成
+        $scrapers = resolve('app.bookInfo.scrapeManager');
+
+        // 入力取得
+        $isbn = $request->input('isbn');
+
+        // booksテーブルに該当レコードが存在しているか確認する
+        $book = Book::where('isbn', $isbn)->first();
+        if($book == null){
+            // 存在していなければ、ScrapeManagerに処理委譲。
+            // 外部APIを使用しISBNに該当する本情報をBOOK型で受け取る
+            $new_book = $scrapers->searchByIsbn((string)$isbn);
+            // すべてのScraperが情報取得に失敗した場合
+            if($new_book == null){
+                return response()->json(
+                    [],
+                    404,
+                    [],
+                    JSON_UNESCAPED_UNICODE
+                );
+            }
+            // booksテーブルに挿入する
+            $new_book->save();
+        }
+        // user_bookテーブルに挿入する
+        $user_book = new UserBook;
+        $user_book->user_id = (int)$userId;
+        $user_book->book_id = $book ? $book->id : $new_book->id;
+        $user_book->save();
+        // レスポンスデータの生成
+        $userBook = UserBook::with([
+            'user:id,name,avatar,description',
+            'book:id,isbn,name,description,cover,author,genre_id',
+            'review:id,user_id,user_book_id,body,published_at',
+            'boks:id,user_id,user_book_id,body,page_num_begin,page_num_end,published_at'
+            ])
+            ->select(['id', 'user_id', 'book_id'])
+            ->find($user_book->id);
+
+        return response()->json(
+            $userBook,
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
+
     }
 
     /**
@@ -62,12 +114,12 @@ class UserBookController extends Controller
     public function show($userBookId)
     {
         $userBook = UserBook::with([
-                        'user:id,name,avatar,description',
-                        'review:id,user_id,user_book_id,body,published_at',
-                        'boks:id,user_id,user_book_id,body,page_num_begin,page_num_end,published_at'
-                        ])
-                    ->select(['id', 'user_id', 'book_id'])
-                    ->find($userBookId);
+                'user:id,name,avatar,description',
+                'review:id,user_id,user_book_id,body,published_at',
+                'boks:id,user_id,user_book_id,body,page_num_begin,page_num_end,published_at'
+            ])
+            ->select(['id', 'user_id', 'book_id'])
+            ->find($userBookId);
 
         return response()->json(
             $userBook,
