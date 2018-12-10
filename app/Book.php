@@ -18,6 +18,6 @@ class Book extends Model
     }
 
     public function userBooks(){
-        return $this->hasMany(BookUser::class, 'book_id', 'id');
+        return $this->hasMany(BookUser::class, 'book_id');
     }
 }
