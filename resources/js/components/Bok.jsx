@@ -3,6 +3,13 @@ import { store } from "../store";
 import { Loading } from "./shared/Loading";
 
 export class Bok extends Component {
+    constructor(props){
+        super(props);
+
+        this.likeClass = "like";
+        this.loveClass = "love";
+    }
+
     render(){
         const likeBok = this.props.likeBok;
         let page = "p" + likeBok.page_num_begin;
@@ -11,13 +18,10 @@ export class Bok extends Component {
         }
 
         const clickLike = (e) => {
-            // 親要素のclickイベントを防止
-            //e.stopPropagation();
             console.log("like!");
         }
 
         const clickLove = (e) => {
-            //e.stopPropagation();
             console.log("love!");
         }
 
@@ -37,8 +41,8 @@ export class Bok extends Component {
                             <tr><td colSpan="3">{likeBok.body}</td></tr>
                             <tr>
                                 <td>{likeBok.created_at}</td>
-                                <td><div className="heart" onClick={clickLike}/></td>
-                                <td><div className="heart" onClick={clickLove}/></td>
+                                <td><div className={this.likeClass} onClick={clickLike}/></td>
+                                <td><div className={this.loveClass} onClick={clickLove}/></td>
                             </tr>
                         </tbody></table>
                     </td>
