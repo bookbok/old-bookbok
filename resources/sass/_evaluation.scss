@@ -6,7 +6,7 @@
   cursor: pointer;
 }
 
-.like:hover{
+.liked{
   background-position: -2800px 0;
   -webkit-transition: background 1s steps(28);
   transition: background 1s steps(28);
@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 
-.love:hover{
+.loved{
   background-position: -2800px 0;
   -webkit-transition: background 1s steps(28);
   transition: background 1s steps(28);
