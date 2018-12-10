@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\BookUser;
+use App\UserBook;
 use App\User;
 use App\Book;
 use App\Components\BookInfoScraper\ScrapeManager;
 use Illuminate\Http\Request;
 
-class BookUserController extends Controller
+class UserBookController extends Controller
 {
     /**
      * 特定ユーザの本棚のなかに登録されている本の一覧情報を返す
@@ -51,7 +51,7 @@ class BookUserController extends Controller
      * 　ボディにはbook_id（本のISBN）が含まれている。
      * @param $userId
      * 　usersリソースを一意に特定するためのユーザID。
-     * 
+     *
      * @return \Illuminate\Http\Response
      * 　JSON形式で本情報をまとめて返す
      */
@@ -81,20 +81,20 @@ class BookUserController extends Controller
             // booksテーブルに挿入する
             $new_book->save();
         }
-        // book_userテーブルに挿入する
-        $book_user = new BookUser;
-        $book_user->user_id = (int)$userId;
-        $book_user->book_id = $book ? $book->id : $new_book->id;
-        $book_user->save();
+        // user_bookテーブルに挿入する
+        $user_book = new UserBook;
+        $user_book->user_id = (int)$userId;
+        $user_book->book_id = $book ? $book->id : $new_book->id;
+        $user_book->save();
         // レスポンスデータの生成
-        $userBook = BookUser::with([
+        $userBook = UserBook::with([
             'user:id,name,avatar,description',
             'book:id,isbn,name,description,cover,author,genre_id',
-            'review:id,user_id,book_user_id,body,published_at',
-            'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
+            'review:id,user_id,user_book_id,body,published_at',
+            'boks:id,user_id,user_book_id,body,page_num_begin,page_num_end,published_at'
             ])
             ->select(['id', 'user_id', 'book_id'])
-            ->find($book_user->id);
+            ->find($user_book->id);
 
         return response()->json(
             $userBook,
@@ -108,18 +108,18 @@ class BookUserController extends Controller
     /**
      * 本棚に収められた本の詳細情報表示用API.
      *
-     * @param  bookUserId: ユーザブックの主キー
+     * @param  userBookId: ユーザブックの主キー
      * @return JSON形式のまるっと情報
      */
-    public function show($bookUserId)
+    public function show($userBookId)
     {
-        $userBook = BookUser::with([
-            'user:id,name,avatar,description',
-            'review:id,user_id,book_user_id,body,published_at',
-            'boks:id,user_id,book_user_id,body,page_num_begin,page_num_end,published_at'
+        $userBook = UserBook::with([
+                'user:id,name,avatar,description',
+                'review:id,user_id,user_book_id,body,published_at',
+                'boks:id,user_id,user_book_id,body,page_num_begin,page_num_end,published_at'
             ])
             ->select(['id', 'user_id', 'book_id'])
-            ->find($bookUserId);
+            ->find($userBookId);
 
         return response()->json(
             $userBook,
@@ -132,10 +132,10 @@ class BookUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\BookUser  $userBook
+     * @param  \App\UserBook  $userBook
      * @return \Illuminate\Http\Response
      */
-    public function edit(BookUser $userBook)
+    public function edit(UserBook $userBook)
     {
         //
     }
@@ -144,10 +144,10 @@ class BookUserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\BookUser  $userBook
+     * @param  \App\UserBook  $userBook
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BookUser $userBook)
+    public function update(Request $request, UserBook $userBook)
     {
         //
     }
@@ -155,10 +155,10 @@ class BookUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\BookUser  $userBook
+     * @param  \App\UserBook  $userBook
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BookUser $userBook)
+    public function destroy(UserBook $userBook)
     {
         //
     }

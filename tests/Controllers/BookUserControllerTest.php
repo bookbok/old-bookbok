@@ -5,11 +5,11 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\BookUser;
+use App\UserBook;
 use App\Book;
 use GuzzleHttp\Client;
 
-class BookUserControllerTest extends TestCase
+class UserBookControllerTest extends TestCase
 {
 
     /** @var CuzzleHttp\Client */
@@ -17,7 +17,7 @@ class BookUserControllerTest extends TestCase
 
     /** @var int */
     private $countBook;
-    private $countBookuser;
+    private $countUserBook;
 
     public function setUp(){
 
@@ -27,8 +27,8 @@ class BookUserControllerTest extends TestCase
         \Artisan::call('migrate:refresh');
         \Artisan::call('db:seed');
 
-        // 現状のレコード数を計算する   
-        $this->countBookuser = count(BookUser::all());
+        // 現状のレコード数を計算する
+        $this->countUserBook = count(UserBook::all());
         $this->countBook = count(Book::all());
     }
 
@@ -49,7 +49,7 @@ class BookUserControllerTest extends TestCase
         $client->request(
             'POST',
             'http://localhost:8000/api/users/1/user_books',
-            ['form_params' => 
+            ['form_params' =>
                 [
                     'isbn' => '9784063842760'
                 ]
@@ -57,9 +57,9 @@ class BookUserControllerTest extends TestCase
         );
 
         // チェック
-        $this->countBookuser++;
+        $this->countUserBook++;
         $this->countBook++;
-        $this->assertEquals($this->countBookuser, count(BookUser::all()));
+        $this->assertEquals($this->countUserBook, count(UserBook::all()));
         $this->assertEquals($this->countBook, count(Book::all()));
 
 
@@ -67,7 +67,7 @@ class BookUserControllerTest extends TestCase
         $client->request(
             'POST',
             'http://localhost:8000/api/users/2/user_books',
-            ['form_params' => 
+            ['form_params' =>
                 [
                     'isbn' => '9784063842760'
                 ]
@@ -75,8 +75,8 @@ class BookUserControllerTest extends TestCase
         );
 
         // チェック
-        $this->countBookuser++;
-        $this->assertEquals($this->countBookuser, count(BookUser::all()));
+        $this->countUserBook++;
+        $this->assertEquals($this->countUserBook, count(UserBook::all()));
         $this->assertEquals($this->countBook, count(Book::all()));
 
     }

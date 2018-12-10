@@ -13,7 +13,7 @@ class CreateUserBooksTable extends Migration
      */
     public function up()
     {
-        Schema::create('book_user', function (Blueprint $table) {
+        Schema::create('user_book', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('book_id');
@@ -37,6 +37,6 @@ class CreateUserBooksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_user');
+        Schema::dropIfExists('user_book');
     }
 }

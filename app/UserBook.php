@@ -4,22 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BookUser extends Model
+class UserBook extends Model
 {
-    protected $table = 'book_user';
+    protected $table = 'user_book';
 
     /**
      * リレーション定義
      */
     public function review(){
-        return $this->belongsTo(Review::class, 'book_user_id', 'id')
+        return $this->hasOne(Review::class, 'user_book_id')
                     ->withDefault([
                         "body" => "未記入"
                     ]);
     }
 
     public function boks(){
-        return $this->hasMany(Bok::class);
+        return $this->hasMany(Bok::class, 'user_book_id');
     }
 
     public function user(){

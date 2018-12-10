@@ -16,7 +16,7 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('book_user_id');
+            $table->unsignedInteger('user_book_id');
             $table->string('body');
             $table->dateTime('published_at')->nullable();
             $table->timestamps();
@@ -24,8 +24,8 @@ class CreateReviewsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->foreign('book_user_id')
-                ->references('id')->on('book_user')
+            $table->foreign('user_book_id')
+                ->references('id')->on('user_book')
                 ->onDelete('cascade');
         });
     }

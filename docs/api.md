@@ -665,8 +665,8 @@ BOOKBOK　API仕様書
                     "page_num_begin": "5",
                     "page_num_end": "5",
                     "published_at": "2004-07-19 17:14:27",
-                    "book_user_id": "1",
-                    "book_user":{
+                    "user_book_id": "1",
+                    "user_book":{
                         "id": 1,
                         "book_id": "9784723597931",
                         "book":{
@@ -698,8 +698,8 @@ BOOKBOK　API仕様書
                     "page_num_begin": "20",
                     "page_num_end": "25",
                     "published_at": "2004-07-19 17:14:27",
-                    "book_user_id": "2",
-                    "book_user":{
+                    "user_book_id": "2",
+                    "user_book":{
                         "id": 2,
                         "book_id": "9784723597931",
                         "book":{
