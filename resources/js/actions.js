@@ -60,6 +60,14 @@ export const requestLogin = (loginUser) => dispatch => {
         body: loginUser
     }).then(json => {
         dispatch(setAuthToken(json.token));
+        dispatch(getLoggedinUser());
+    });
+}
+
+export const setLoggedinUser = (loggedinUser) => ({ type: types.SET_LOGGEDIN_USER, loggedinUser });
+export const getLoggedinUser = () => dispatch => {
+    wrapFetch(DOMAIN + "/api/auth/user").then(json => {
+        dispatch(setLoggedinUser(json));
     });
 }
 
