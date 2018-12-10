@@ -1,5 +1,6 @@
 export const SET_TIMELINE = "SET_TIMELINE";
 export const SET_AUTH_TOKEN = "SET_AUTH_TOKEN";
+export const SET_LOGGEDIN_USER = "SET_LOGGEDIN_USER";
 export const REMOVE_AUTH_TOKEN = "REMOVE_AUTH_TOKEN";
 export const SET_GENRES = "SET_GENRES";
 export const SET_BOOK_DETAIL = "SET_BOOK_DETAIL";
