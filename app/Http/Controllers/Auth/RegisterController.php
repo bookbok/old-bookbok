@@ -20,7 +20,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'name'     => 'required|string|max:255|regex:/\A[0-9A-Za-z-]+\z/',
+            'name'     => 'required|string|regex:/\A[^[:cntrl:]\s]+\z/u|min:1|max:255|unique:users',
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
