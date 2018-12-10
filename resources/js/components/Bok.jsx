@@ -6,36 +6,30 @@ export class Bok extends Component {
     constructor(props){
         super(props);
 
-        this.likeClass = "like";
-        this.loveClass = "love";
-        this.likeFlg = false;
-        this.loveFlg = false;
+        this.state = {
+            likeClass: "like",
+            loveClass: "love",
+            likeFlg: false,
+            loveFlg: false,
+        };
         this.clickLike = this.clickLike.bind(this);
         this.clickLove = this.clickLove.bind(this);
     }
 
     clickLike(e){
-        if(!this.likeFlg){
-            this.likeClass += " liked";
-            this.likeFlg = true;
+        if(this.state.likeFlg){
+            this.setState({likeClass: "like", likeFlg: false});
         } else {
-            this.likeClass = "like";
-            this.likeFlg = false;
+            this.setState({likeClass: this.state.likeClass + " liked", likeFlg: true});
         }
-        console.log("likeClass : " + this.likeClass);
-        console.log("likeFlg : " + this.likeFlg);
     }
 
     clickLove(e){
-        if(!this.loveFlg){
-            this.loveClass += " loved";
-            this.loveFlg = true;
+        if(this.state.loveFlg){
+            this.setState({loveClass: "love", loveFlg: false});
         } else {
-            this.loveClass = "love";
-            this.loveFlg = false;
+            this.setState({loveClass: this.state.loveClass + " loved", loveFlg: true});
         }
-        console.log("loveClass : " + this.loveClass);
-        console.log("loveFlg : " + this.loveFlg);
     }
 
     render(){
@@ -61,8 +55,8 @@ export class Bok extends Component {
                             <tr><td colSpan="3">{likeBok.body}</td></tr>
                             <tr>
                                 <td>{likeBok.created_at}</td>
-                                <td><div className={this.likeClass} onClick={this.clickLike}/></td>
-                                <td><div className={this.loveClass} onClick={this.clickLove}/></td>
+                                <td><div className={this.state.likeClass} onClick={this.clickLike}/></td>
+                                <td><div className={this.state.loveClass} onClick={this.clickLove}/></td>
                             </tr>
                         </tbody></table>
                     </td>
