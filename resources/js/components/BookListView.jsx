@@ -22,7 +22,7 @@ export class BookListView extends Component {
         const booksInfo = books.map((book, i) => {
                 return <BookView book={book} key={i} />
         });
-        
+
         const bookList = [];
         for(let index = 0, key = booksInfo.length ; index < booksInfo.length; index++) {
             bookList.push(booksInfo[index]);
@@ -31,17 +31,14 @@ export class BookListView extends Component {
             }
         }
 
-
         return(
-            <div>
-                <div className="container mt-4">
-                    <div className="row justify-content-center">
-                        <div className="col-md-8">
-                            <Search />
-                            <ConnectedGenres />
-                            <br/>
-                            {bookList}
-                        </div>
+            <div className="container mt-4">
+                <div className="row justify-content-center">
+                    <div>
+                        <Search />
+                        <ConnectedGenres />
+                        <br/>
+                        {bookList}
                     </div>
                 </div>
             </div>
