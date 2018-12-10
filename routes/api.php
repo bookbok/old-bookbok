@@ -16,11 +16,21 @@ use Illuminate\Http\Request;
 /*
  * Authentication Routes
  */
-Route::post('/login','AuthenticationController@login')->name('login');
-Route::middleware('auth:api')->group(function () {
-    Route::get('/logout','AuthenticationController@logout')->name('logout');
+Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
+    Route::post('login','LoginController@login')->name('login');
+
+    Route::middleware('auth:api')->group(function () {
+        Route::get('logout','LoginController@logout')->name('logout');
+        Route::get('user', function (Request $request) {
+            return $request->user();
+        })->name('user');
+    });
 });
 
+Route::post('/login','Auth\\LoginController@login');
+Route::middleware('auth:api')->group(function () {
+    Route::get('/logout','Auth\\LoginController@logout');
+});
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

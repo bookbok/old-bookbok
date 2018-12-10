@@ -2,38 +2,66 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Lcobucci\JWT\Parser;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
+    private const TOKEN_NAME = 'Laravel Password Grant Client';
 
     /**
-     * Where to redirect users after login.
+     * ログイン処理
      *
-     * @var string
+     * @param   Request $request
+     *  リクエスト
+     *
+     * @return  \Illuminate\Http\Response
      */
-    protected $redirectTo = '/home';
+    public function login(Request $request) {
+        $validator = \Validator::make($request->all(), [
+            'email'    => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if (
+            null === $user ||
+            false === password_verify($request->password, $user->password)
+        ) {
+            return response()->json([
+                'message' => 'Falid to authentication...',
+            ], 422);
+        }
+
+        return response()->json([
+            'token' => $user->createToken(self::TOKEN_NAME)->accessToken,
+        ], 200);
+    }
 
     /**
-     * Create a new controller instance.
+     * ログアウト処理
      *
-     * @return void
+     * @param   Request $request
+     *  リクエスト
+     *
+     * @return  \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
+    public function logout(Request $request) {
+        $value = $request->bearerToken();
+        $id    = (new Parser())->parse($value)->getHeader('jti');
+        $token = $request->user()->tokens->find($id);
+
+        $token->revoke();
+
+        return response()->json([
+            'message' => 'You have been successfully logged out!',
+        ], 200);
     }
 }
