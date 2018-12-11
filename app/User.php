@@ -50,7 +50,7 @@ class User extends Authenticatable
         return \App\Reaction::where('user_id', $this->id)->where('liked', 1)
             ->with([
                 'user:id,name,avatar,description',
-                'bok:id,user_id,body,page_num_begin,page_num_end,published_at,user_book_id',
+                'bok:id,user_id,body,page_num_begin,page_num_end,line_num,published_at,user_book_id',
                 'bok.userBook:id,book_id',
                 'bok.userBook.book:id,isbn,name,cover',
             ])->get();
