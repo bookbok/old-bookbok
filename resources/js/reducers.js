@@ -28,6 +28,9 @@ export function rootReducer(
 
         case types.REMOVE_AUTH_TOKEN: // ログアウトに伴い、ログイントークンを削除
             return { ...state, token: null };
+
+        case types.SET_USER_BOOK_DETAIL:
+            return { ...state, userBookDetail: action.userBookDetail };
     }
 
     return state;
