@@ -17,7 +17,7 @@ export class Bok extends Component {
     }
 
     clickLike(e){
-        if(this.state.likeFlg){
+        if(this.state.isLiked){
             this.setState({likeClass: "like", isLiked: false});
         } else {
             this.setState({likeClass: this.state.likeClass + " liked", isLiked: true});
@@ -25,7 +25,7 @@ export class Bok extends Component {
     }
 
     clickLove(e){
-        if(this.state.loveFlg){
+        if(this.state.isLoved){
             this.setState({loveClass: "love", isLoved: false});
         } else {
             this.setState({loveClass: this.state.loveClass + " loved", isLoved: true});
