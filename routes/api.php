@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
  */
 Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
     Route::post('login','LoginController@login')->name('login');
+    Route::post('register','RegisterController@register')->name('register');
 
     Route::middleware('auth:api')->group(function () {
         Route::get('logout','LoginController@logout')->name('logout');
