@@ -34,9 +34,12 @@ export class Bok extends Component {
 
     render(){
         const likeBok = this.props.likeBok;
-        let page = "p" + likeBok.page_num_begin;
-        if(likeBok.page_num_begin !== likeBok.page_num_end){
-            page += (" ~ p" + likeBok.page_num_end);
+        const bok = this.props.likeBok.bok;
+        const user = this.props.likeBok.user;
+
+        let page = "p" + bok.page_num_begin;
+        if(bok.page_num_begin !== bok.page_num_end){
+            page += (" ~ p" + bok.page_num_end);
         }
 
         return (
@@ -44,17 +47,17 @@ export class Bok extends Component {
                 <tr>
                     <td valign="top">
                         <table border="1"><tbody>
-                            <tr><td><img src="likeBok.bok.cover" /></td></tr>
-                            <tr><td>likeBok.book.name</td></tr>
-                            <tr><td>{page} {likeBok.line_num}行目</td></tr>
+                            <tr><td><img src={bok.user_book.book.cover} /></td></tr>
+                            <tr><td>{bok.user_book.book.name}</td></tr>
+                            <tr><td>{page} {bok.line_num}行目</td></tr>
                         </tbody></table>
                     </td>
                     <td valign="top">
                         <table border="1"><tbody>
-                            <tr><td colSpan="3">likeBok.user.name</td></tr>
-                            <tr><td colSpan="3">{likeBok.body}</td></tr>
+                            <tr><td colSpan="3">{user.name}</td></tr>
+                            <tr><td colSpan="3">{bok.body}</td></tr>
                             <tr>
-                                <td>{likeBok.created_at}</td>
+                                <td>{likeBok.updated_at}</td>
                                 <td><div className={this.state.likeClass} onClick={this.clickLike}/></td>
                                 <td><div className={this.state.loveClass} onClick={this.clickLove}/></td>
                             </tr>
