@@ -7,23 +7,14 @@ BOOKBOK　API仕様書
 
 # Group AUTHENTICATION
 
-`/api/login`を叩いて正常に認証されるとアクセストークンが発行される。
+`/api/auth/login`を叩いて正常に認証されるとアクセストークンが発行される。
 
 認証が必要なリソースにアクセスする際に`Authorization: Bearer アクセストークン`を指定すると、
 それだけでユーザ認証が行われる。
 
-> TODO:
- - 認証失敗時に`/api/login`へリダイレクトさせようとするのをどうにかする
-
-> REVIEW:
- - ベースパスを`/api`にしておいてよいか。(`/api/auth`等にしなくてよいか)
-
-## Authentication [/api/login]
+## Login [/api/auth/login]
 
 ### ログインする [POST]
-
-> TODO:
- - エラーの場合のレスポンスをどうにかする
 
 + Request (application/json)
 
@@ -45,19 +36,34 @@ BOOKBOK　API仕様書
             "token": "eyJ0e...ZN2z0"
         }
 
++ Response 400 (application/json)
+
+        {
+            "email": [
+                "validation.required"
+            ],
+            "password": [
+                "validation.required"
+            ]
+        }
+
 + Response 422 (text/html)
 
-## Authentication [/api/logout]
+        {
+            "message": "Falid to authentication..."
+        }
+
+## Logout [/api/auth/logout]
 
 ### ログアウトする [GET]
 
-> TODO:
- - HTTPメソッドこれでいいのか
- - レスポンスをjsonに
-
 + Response 200 (text/html)
 
-## Authentication [/api/user]
+        {
+            "message": "You have been successfully logged out!"
+        }
+    
+## Yourself [/api/auth/user]
 
 ### 認証したユーザーの情報を取得する [GET]
 
@@ -65,14 +71,54 @@ BOOKBOK　API仕様書
 
         {
             "id": 1,
-            "name": "example",
             "email": "example@example.com",
             "email_verified_at": null,
             "avatar": "https://avatars0.githubusercontent.com/u/22770924",
             "description": "",
             "created_at": "2018-10-24 15:53:09",
             "updated_at": "2018-10-24 15:53:09",
-            "role_id": "1"
+            "role_id": "1",
+            "name": "あいえええ"
+        }
+
+## Register [/api/auth/register]
+
+### ユーザを新規登録する [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + email (required)
+        + password (required)
+        + name (required)
+
+    + Body
+
+        {
+            "email": "example@example.com",
+            "password": "password",
+            "name": "あいえええ"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "message": "You have been successfully registerd user! Let's login."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "name":[
+                "validation.required"
+            ],
+            "email":[
+                "validation.required"
+            ],
+            "password":[
+                "validation.required"
+            ]
         }
 
 # Group USERS
