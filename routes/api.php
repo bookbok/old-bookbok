@@ -18,7 +18,6 @@ use Illuminate\Http\Request;
  */
 Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
     Route::post('login','LoginController@login')->name('login');
-    Route::post('register','RegisterController@register')->name('register');
 
     Route::middleware('auth:api')->group(function () {
         Route::get('logout','LoginController@logout')->name('logout');
@@ -48,6 +47,12 @@ Route::get('/users', function (Request $request) {
  */
 Route::get('books', 'BookController@index');
 Route::get('books/{book}', 'BookController@show');
+
+/**
+ * Resource: Bok
+ * 
+ */
+Route::get('/api/user_books/{userBookId}/boks', 'BokController@index');
 
 /**
  *  Resource: UserBook
