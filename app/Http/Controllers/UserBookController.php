@@ -98,7 +98,7 @@ class UserBookController extends Controller
 
         return response()->json(
             $userBook,
-            200,
+            201,
             [],
             JSON_UNESCAPED_UNICODE
         );
