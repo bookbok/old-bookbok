@@ -5,6 +5,8 @@ import { Search } from "./Search.jsx";
 import { fetchBookList } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils.js";
+import { Loading } from "./shared/Loading";
+import { BookView } from "./BookView.jsx";
 
 export class BookListView extends Component {
     componentDidMount() {
@@ -12,37 +14,31 @@ export class BookListView extends Component {
     };
 
     render() {
-        if(isEmpty(this.props.books)){
-            return <div></div>;
+        const books = this.props.books;
+        if(isEmpty(books)) {
+            return <Loading />;
         }
-
-        const booksInfo = this.props.books.map((book, index) => {
-            return (
-                <div className="d-inline-block" key={index}>
-                    <img src={book.cover}/>
-                    <pre>{book.name}</pre>
-                </div>
-            );
+        
+        const booksInfo = books.map((book, i) => {
+                return <BookView book={book} key={i} />
         });
 
         const bookList = [];
-        for(let index = 0, key = booksInfo.length ; index < booksInfo.length; index++){
+        for(let index = 0, key = booksInfo.length ; index < booksInfo.length; index++) {
             bookList.push(booksInfo[index]);
-            if(index % 3 == 2 || booksInfo.length == (index+1)){
+            if(index % 3 == 2 || booksInfo.length == (index+1)) {
                 bookList.push(<div key={key++}></div>);
             }
         }
 
         return(
-            <div>
-                <div className="container mt-4">
-                    <div className="row justify-content-center">
-                        <div className="col-md-8">
-                            <Search />
-                            <ConnectedGenres />
-                            <br/>
-                            {bookList}
-                        </div>
+            <div className="container mt-4">
+                <div className="row justify-content-center">
+                    <div>
+                        <Search />
+                        <ConnectedGenres />
+                        <br/>
+                        {bookList}
                     </div>
                 </div>
             </div>

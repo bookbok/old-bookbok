@@ -55,6 +55,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $book->setVisible([
+            'id',
             'isbn',
             'name',
             'description',

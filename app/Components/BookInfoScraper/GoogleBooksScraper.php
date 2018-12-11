@@ -12,19 +12,39 @@ class GoogleBooksScraper implements ScraperInterface
 
     /**
      *  コンストラクタ
-     * 
+     *
      */
     public function __construct(){
+    }
+
+    /**
+     * 著者情報の整形処理
+     * 
+     * @param $bookInfoAuthor
+     * 
+     * @return $consAuthors | $bookInfoAuthor
+     *   引数に渡されたものが配列であれば文字列に連結して返す。
+     * 　配列でない場合はそのまま返す。
+     */
+    private function consAuthors($bookInfoAuthor){
+        if(is_array($bookInfoAuthor)){
+            $authors = str_replace(", ", "", $bookInfoAuthor);
+            $consAuthors = implode('/', $authors);
+
+            return $consAuthors;
+        }
+
+        return $bookInfoAuthor;
     }
 
     /**
      * ScrapeInterface::searchByIsbn()の実装
      * GoogleBooksAPIを叩き、本の情報を取得する。
      * その情報をもとにApp\Bookに情報を格納してマネージャに返す。
-     * 
+     *
      * @param string $isbn
      *  正規化されたISBN
-     * 
+     *
      * @return App\Book | null
      *  戻り値があればApp\Bookにして返す。
      *  なかった場合はnullを返す。
@@ -51,11 +71,11 @@ class GoogleBooksScraper implements ScraperInterface
         $book->name = $bookInfo->items[0]->volumeInfo->title;
         $book->description = $bookInfo->items[0]->volumeInfo->description;
         $book->cover = $bookInfo->items[0]->volumeInfo->imageLinks->smallThumbnail;
-        $book->author = $bookInfo->items[0]->volumeInfo->authors;
+        $book->author = $this->consAuthors($bookInfo->items[0]->volumeInfo->authors);
         // $book->genre_id = $bookInfo->items[0]->volumeInfo->categories;
 
         // App\Bookをスクレイプマネージャに返す
         return $book;
-    
+
     }
 }

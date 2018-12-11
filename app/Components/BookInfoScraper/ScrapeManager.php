@@ -4,6 +4,7 @@ namespace App\Components\BookInfoScraper;
 
 use App\Components\ISBN;
 use Illuminate\Support\ServiceProvider;
+use GuzzleHttp\Client;
 
 /**
  * 外部のAPIを通じて書籍情報を取得するコンポーネント
@@ -17,7 +18,7 @@ class ScrapeManager
 
     /**
      * Constructor
-     * 
+     *
      * @param   ScraperInterface[]  $scrapers
      *  スクレイパーの配列
      */
@@ -26,16 +27,30 @@ class ScrapeManager
     }
 
     /**
-     * 外部APIを通じてISBNから書籍情報を取得する
+     * 楽天ブックスAPIを利用してジャンル情報を取得する
      * 
+     * @param string $isbn
+     * 　検索対象ISBN。
+     * 　正規化されたものを受け取ることを前提とする。
+     * 
+     * @return 
+     * 　ジャンル
+     */
+    public function getGenre(string $isbn){
+        //@Todo
+    }
+
+    /**
+     * 外部APIを通じてISBNから書籍情報を取得する
+     *
      * @param   string  $isbn
      *  検索対象ISBN。
      *  ISBN10の場合、プレフィックス978のISBN13に変換して検索する。
-     * 
+     *
      * @return  \App\Book|false
      *  見つかった場合はApp\Bookモデルを返す。
      *  見つからなかった場合はfalseを返す
-     * 
+     *
      * @throws  \InvalidArgumentException
      *  ISBN文字列として不正な場合にスローされる例外
      */
@@ -45,11 +60,14 @@ class ScrapeManager
 
         foreach ($this->scrapers as $scraper) {
             $book = $scraper->searchByIsbn($isbn);
-            if (false !== $book) {
+            if (null !== $book) {
+                //@Todo: 別のissueで修正
+                //$book->genre_id = getGenre($isbn);
+                $book->genre_id = 1;
                 return $book;
             }
         }
 
-        return false;
+        return null;
     }
 }
