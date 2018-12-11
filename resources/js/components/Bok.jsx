@@ -43,28 +43,23 @@ export class Bok extends Component {
         }
 
         return (
-            <table border="1"><tbody>
-                <tr>
-                    <td valign="top">
-                        <table border="1"><tbody>
-                            <tr><td><img src={bok.user_book.book.cover} /></td></tr>
-                            <tr><td>{bok.user_book.book.name}</td></tr>
-                            <tr><td>{page} {bok.line_num}行目</td></tr>
-                        </tbody></table>
-                    </td>
-                    <td valign="top">
-                        <table border="1"><tbody>
-                            <tr><td colSpan="3">{user.name}</td></tr>
-                            <tr><td colSpan="3">{bok.body}</td></tr>
-                            <tr>
-                                <td>{likeBok.updated_at}</td>
-                                <td><div className={this.state.likeClass} onClick={this.clickLike}/></td>
-                                <td><div className={this.state.loveClass} onClick={this.clickLove}/></td>
-                            </tr>
-                        </tbody></table>
-                    </td>
-                </tr>
-            </tbody></table>
+            <div className="card">
+                <div className="d-flex">
+                    <div className="d-flex flex-column" margin-left="50%">
+                        <img src="hoge.png"/>
+                        <p>本のタイトル</p>
+                        <p>{page} 何行目</p>
+                    </div>
+                    <div className="d-flex flex-column">
+                        <p>ユーザ名</p>
+                        <p>なんかすごくすごかった</p>
+                        <div className="d-flex">
+                            <p>更新日時</p>
+                            <p>☆ ♡</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
