@@ -45,19 +45,30 @@ export class Bok extends Component {
         return (
             <div className="card">
                 <div className="d-flex">
-                    <div className="d-flex flex-column" margin-left="50%">
-                        <img src="hoge.png"/>
-                        <p>本のタイトル</p>
-                        <p>{page} 何行目</p>
-                    </div>
                     <div className="d-flex flex-column">
-                        <p>ユーザ名</p>
-                        <p>なんかすごくすごかった</p>
-                        <div className="d-flex">
-                            <p>更新日時</p>
-                            <p>☆ ♡</p>
+                        <img src="hoge.png"/>
+                        <p className="font-weight-bold">本のタイトル</p>
+                        <p className="text-muted">{page} 何行目</p>
+                    </div>
+
+                    <div className="w-100">
+                        <div className="d-flex flex-column">
+                            <p>ユーザ名</p>
+                            <p>なんかすごくすごかった</p>
+                            <div className="d-flex">
+                                <p>更新日時</p>
+                                <div className="w-100">
+                                    <div className="float-right">
+                                        <div className="d-flex">
+                                            <div className={this.state.likeClass} onClick={this.clickLike} />
+                                            <div className={this.state.loveClass} onClick={this.clickLove} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         );
