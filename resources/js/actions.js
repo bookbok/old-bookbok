@@ -60,15 +60,23 @@ export const requestLogin = (loginUser) => dispatch => {
         body: loginUser
     }).then(json => {
         dispatch(setAuthToken(json.token));
+        dispatch(getLoggedinUser());
     });
 }
 
-export const removeAuthToken = () => ({ type: types.REMOVE_AUTH_TOKEN });
+export const setLoggedinUser = (loggedinUser) => ({ type: types.SET_LOGGEDIN_USER, loggedinUser });
+export const getLoggedinUser = () => dispatch => {
+    wrapFetch(DOMAIN + "/api/auth/user").then(json => {
+        dispatch(setLoggedinUser(json));
+    });
+}
+
+export const removeLoggedinInfo = () => ({ type: types.REMOVE_LOGGEDIN_INFO });
 export const requestLogout = () => dispatch => {
     wrapFetch(DOMAIN + "/api/auth/logout", {
         isParse: false,
     }).then(res => {
-        dispatch(removeAuthToken());
+        dispatch(removeLoggedinInfo());
     });
 }
 
