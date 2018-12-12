@@ -32,9 +32,6 @@ export function rootReducer(
         case "SET_LIKEBOKS":
             return { ...state, likeBoks: action.likeBoks };
 
-        case types.REMOVE_AUTH_TOKEN: // ログアウトに伴い、ログイントークンを削除
-            return { ...state, token: null };
-
         case types.REMOVE_LOGGEDIN_INFO: // ログアウトに伴い、ログイントークン、ログイン中ユーザー情報を削除
             return { ...state, token: null, loggedinUser: null };
     }
