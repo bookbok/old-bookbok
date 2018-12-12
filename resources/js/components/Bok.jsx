@@ -20,7 +20,7 @@ export class Bok extends Component {
         if(this.state.isLiked){
             this.setState({likeClass: "far fa-thumbs-up icon", isLiked: false});
         } else {
-            this.setState({likeClass: " fas fa-thumbs-up icon", isLiked: true});
+            this.setState({likeClass: " fas fa-thumbs-up icon like-animation", isLiked: true});
         }
     }
 
@@ -28,7 +28,7 @@ export class Bok extends Component {
         if(this.state.isLoved){
             this.setState({loveClass: "far fa-heart icon", isLoved: false});
         } else {
-            this.setState({loveClass: " fas fa-heart icon", isLoved: true});
+            this.setState({loveClass: " fas fa-heart icon love-animation", isLoved: true});
         }
     }
 
