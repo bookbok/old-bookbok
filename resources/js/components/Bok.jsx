@@ -7,8 +7,8 @@ export class Bok extends Component {
         super(props);
 
         this.state = {
-            likeClass: "far fa-thumbs-up icon-size",
-            loveClass: "far fa-heart icon-size",
+            likeClass: "far fa-thumbs-up icon",
+            loveClass: "far fa-heart icon",
             isLiked: false,
             isLoved: false,
         };
@@ -18,17 +18,17 @@ export class Bok extends Component {
 
     clickLike(e){
         if(this.state.isLiked){
-            this.setState({likeClass: "far fa-thumbs-up icon-size", isLiked: false});
+            this.setState({likeClass: "far fa-thumbs-up icon", isLiked: false});
         } else {
-            this.setState({likeClass: this.state.likeClass + " fas fa-thumbs-up icon-size", isLiked: true});
+            this.setState({likeClass: this.state.likeClass + " fas fa-thumbs-up icon", isLiked: true});
         }
     }
 
     clickLove(e){
         if(this.state.isLoved){
-            this.setState({loveClass: "far fa-heart icon-size", isLoved: false});
+            this.setState({loveClass: "far fa-heart icon", isLoved: false});
         } else {
-            this.setState({loveClass: this.state.loveClass + " fas fa-heart icon-size", isLoved: true});
+            this.setState({loveClass: this.state.loveClass + " fas fa-heart icon", isLoved: true});
         }
     }
 
@@ -61,18 +61,18 @@ export class Bok extends Component {
 
                     <div className="w-100">
                         <div className="d-flex flex-column m-2">
-                            <p className="bok-user border-bottom">userBook.user.name</p>
+                            <p className="bok-user">userBook.user.name</p>
                             <p className="bok-body">{longBody}</p>
 
                             <div className="d-flex bok-footer">
-                                <p className="text-muted w-100">likeBok.updated_at</p>
+                                <p className="text-muted w-100 align-bottom">likeBok.updated_at</p>
                                 <div className="w-100">
                                     <div className="float-right">
                                         <div className="d-flex">
-                                            <div onClick={this.clickLike}>
+                                            <div className="mr-3" onClick={this.clickLike}>
                                                 <i className={this.state.likeClass}></i>
                                             </div>
-                                            <div onClick={this.clickLove}>
+                                            <div className="mr-2" onClick={this.clickLove}>
                                                 <i className={this.state.loveClass}></i>
                                             </div>
                                         </div>
