@@ -7,7 +7,6 @@ use App\User;
 use App\Book;
 use App\Components\BookInfoScraper\ScrapeManager;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class UserBookController extends Controller
