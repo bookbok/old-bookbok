@@ -34,12 +34,16 @@ export class Bok extends Component {
 
     render(){
         const likeBok = this.props.likeBok;
-        const bok = this.props.likeBok.bok;
-        const user = this.props.likeBok.user;
+        const userBook = this.props.likeBok.user_book;
 
-        let page = "p" + bok.page_num_begin;
-        if(bok.page_num_begin !== bok.page_num_end){
-            page += (" ~ p" + bok.page_num_end);
+        let page = "p" + likeBok.page_num_begin;
+        if(likeBok.page_num_begin !== likeBok.page_num_end){
+            page += (" ~ p" + likeBok.page_num_end);
+        }
+
+        let line = likeBok.line_num;
+        if(line !== null){
+            line += "行目";
         }
 
         return (
@@ -47,19 +51,19 @@ export class Bok extends Component {
                 <div className="d-flex">
                     <div className="d-flex flex-column">
                         <img src="hoge.png"/>
-                        <p className="font-weight-bold">本のタイトル</p>
+                        <p className="font-weight-bold">userBook.book.name</p>
                         <div className="text-muted book-footer">
-                            <p>{page}<br/>何行目</p>
+                            <p>{page}<br/>{line}</p>
                         </div>
                     </div>
 
                     <div className="w-100">
                         <div className="d-flex flex-column">
-                            <p>ユーザ名</p>
-                            <p>なんかすごくすごかった</p>
+                            <p>userBook.user.name</p>
+                            <p>likeBok.body</p>
 
                             <div className="d-flex bok-footer">
-                                <p className="text-muted w-100">2018/12/12 14:46</p>
+                                <p className="text-muted w-100">likeBok.updated_at</p>
                                 <div className="w-100">
                                     <div className="float-right">
                                         <div className="d-flex">
