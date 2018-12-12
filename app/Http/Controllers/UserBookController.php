@@ -128,19 +128,22 @@ class UserBookController extends Controller
                 'boks' => function($q1) use($userId) {
                     $q1->withCount([
                         'reactions as liked_count' => function($q2) {
-                            $q2->where('liked', true);
+                            $q2->isLiked();
                         },
                         'reactions as loved_count' => function($q2) {
-                            $q2->where('loved', true);
+                            $q2->isLoved();
                         },
                         'reactions as liked' => function($q2) use($userId) {
-                            $q2->where('liked', true)->where('user_id', $userId);
+                            $q2->isLiked()->where('user_id', $userId);
                         },
                         'reactions as loved' => function($q2) use($userId) {
-                            $q2->where('loved', true)->where('user_id', $userId);
+                            $q2->isLoved()->where('user_id', $userId);
                         },
                     ]);
                 },
+                'boks.userBook:id,user_id,book_id',
+                'boks.userBook.book:id,name,cover',
+                'boks.userBook.user:id,name,avatar',
             ])
             ->select(['id', 'user_id', 'book_id'])
             ->find($userBookId);
