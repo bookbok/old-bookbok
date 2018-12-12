@@ -44,10 +44,6 @@ export const Mypage = () => (
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
 )
 
