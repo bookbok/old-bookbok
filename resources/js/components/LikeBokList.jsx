@@ -19,7 +19,7 @@ export class LikeBokList extends Component {
         }
 
         const boks = likeBoks.map((likeBok, index) => {
-            return <Bok likeBok={likeBok} key={index} />
+            return <Bok bok={likeBok} key={index} />
         })
 
         return (

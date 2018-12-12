@@ -33,17 +33,17 @@ export class Bok extends Component {
     }
 
     render(){
-        const likeBok = this.props.likeBok;
-        const userBook = this.props.likeBok.user_book;
+        const bok = this.props.bok;
+        const userBook = this.props.bok.user_book;
         const debugLongBody = "あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ";
         const debugShortBody = "Nighthawks";
 
-        let page = "p" + likeBok.page_num_begin;
-        if(likeBok.page_num_begin !== likeBok.page_num_end){
-            page += (" ~ p" + likeBok.page_num_end);
+        let page = "p" + bok.page_num_begin;
+        if(bok.page_num_begin !== bok.page_num_end){
+            page += (" ~ p" + bok.page_num_end);
         }
 
-        let line = likeBok.line_num;
+        let line = bok.line_num;
         if(line !== null){
             line += "行目";
         }
@@ -65,7 +65,7 @@ export class Bok extends Component {
                             <p className="bok-body">{debugShortBody}</p>
 
                             <div className="d-flex bok-footer">
-                                <p className="text-muted w-50">likeBok.updated_at</p>
+                                <p className="text-muted w-50">bok.updated_at</p>
                                 <div className="w-50">
                                     <div className="float-right">
                                         <div className="d-flex">
