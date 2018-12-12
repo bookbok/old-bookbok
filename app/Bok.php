@@ -15,4 +15,7 @@ class Bok extends Model
         return $this->belongsTo(UserBook::class, 'user_book_id');
     }
 
+    public function reactions(){
+        return $this->hasMany(Reaction::class);
+    }
 }
