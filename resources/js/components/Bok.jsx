@@ -7,8 +7,8 @@ export class Bok extends Component {
         super(props);
 
         this.state = {
-            likeClass: "far fa-thumbs-up",
-            loveClass: "far fa-heart",
+            likeClass: "far fa-thumbs-up icon-size",
+            loveClass: "far fa-heart icon-size",
             isLiked: false,
             isLoved: false,
         };
@@ -18,17 +18,17 @@ export class Bok extends Component {
 
     clickLike(e){
         if(this.state.isLiked){
-            this.setState({likeClass: "far fa-thumbs-up", isLiked: false});
+            this.setState({likeClass: "far fa-thumbs-up icon-size", isLiked: false});
         } else {
-            this.setState({likeClass: this.state.likeClass + " fas fa-thumbs-up", isLiked: true});
+            this.setState({likeClass: this.state.likeClass + " fas fa-thumbs-up icon-size", isLiked: true});
         }
     }
 
     clickLove(e){
         if(this.state.isLoved){
-            this.setState({loveClass: "far fa-heart", isLoved: false});
+            this.setState({loveClass: "far fa-heart icon-size", isLoved: false});
         } else {
-            this.setState({loveClass: this.state.loveClass + " fas fa-heart", isLoved: true});
+            this.setState({loveClass: this.state.loveClass + " fas fa-heart icon-size", isLoved: true});
         }
     }
 
@@ -56,8 +56,8 @@ export class Bok extends Component {
                             <p>ユーザ名</p>
                             <p>なんかすごくすごかった</p>
 
-                            <div className="d-flex">
-                                <p>更新日時</p>
+                            <div className="d-flex bok-footer">
+                                <p className="text-muted w-100">2018/12/12 14:46</p>
                                 <div className="w-100">
                                     <div className="float-right">
                                         <div className="d-flex">
