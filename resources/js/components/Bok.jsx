@@ -7,7 +7,7 @@ export class Bok extends Component {
         super(props);
 
         this.state = {
-            likeClass: "far fa-heart",
+            likeClass: "far fa-thumbs-up",
             loveClass: "far fa-heart",
             isLiked: false,
             isLoved: false,
@@ -17,16 +17,14 @@ export class Bok extends Component {
     }
 
     clickLike(e){
-        console.log("like!");
         if(this.state.isLiked){
-            this.setState({likeClass: "far fa-heart", isLiked: false});
+            this.setState({likeClass: "far fa-thumbs-up", isLiked: false});
         } else {
-            this.setState({likeClass: this.state.likeClass + " fas fa-heart", isLiked: true});
+            this.setState({likeClass: this.state.likeClass + " fas fa-thumbs-up", isLiked: true});
         }
     }
 
     clickLove(e){
-        console.log("love!");
         if(this.state.isLoved){
             this.setState({loveClass: "far fa-heart", isLoved: false});
         } else {
