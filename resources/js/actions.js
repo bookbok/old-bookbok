@@ -140,3 +140,11 @@ export const fetchBookList = () => dispatch => {
             console.error("fetchBookList: ", err);
         });
 }
+
+export const setLikeBoks = likeBoks => ({type: types.SET_LIKEBOKLIST, likeBoks});
+export const fetchLikeBoks = (userId) => dispatch => {
+    wrapFetch(DOMAIN + `/api/users/${userId}/likes`)
+       .then(json => {
+          dispatch(setLikeBoks(json));
+       });
+}
