@@ -23,8 +23,8 @@ export function rootReducer(
         case types.SET_AUTH_TOKEN: // ログインを必要とするAPI用の認証トークンを保存
             return { ...state, token: action.token };
 
-      case types.SET_LOGGEDIN_USER:
-          return { ...state, loggedinUser: action.loggedinUser };
+        case types.SET_LOGGEDIN_USER:
+            return { ...state, loggedinUser: action.loggedinUser };
 
         case types.SET_USER_INFO:
             return { ...state, userInfo: action.userInfo };
