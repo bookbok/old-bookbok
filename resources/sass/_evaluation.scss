@@ -1,15 +1,13 @@
 .like {
-  width: 70px;
-  height: 50px;
-  background: url(http://nelog.jp/wp-content/uploads/2016/03/star_animation.png) no-repeat;
-  background-position: 0 0;
-  cursor: pointer;
+  content: '\f004';
+  padding: 0 .4em 0 0;
+  font-family: FontAwesome;
 }
 
 .liked {
-  background-position: -3519px 0;
-  -webkit-transition: background 1s steps(55);
-  transition: background 1s steps(55);
+  content: '\f7a9';
+  padding: 0 .4em 0 0;
+  font-family: FontAwesome;
 }
 
 .love {

@@ -17,6 +17,7 @@ export class Bok extends Component {
     }
 
     clickLike(e){
+        console.log("like!");
         if(this.state.isLiked){
             this.setState({likeClass: "like", isLiked: false});
         } else {
@@ -25,6 +26,7 @@ export class Bok extends Component {
     }
 
     clickLove(e){
+        console.log("love!");
         if(this.state.isLoved){
             this.setState({loveClass: "love", isLoved: false});
         } else {
@@ -60,8 +62,12 @@ export class Bok extends Component {
                                 <div className="w-100">
                                     <div className="float-right">
                                         <div className="d-flex">
-                                            <div className={this.state.likeClass} onClick={this.clickLike} />
-                                            <div className={this.state.loveClass} onClick={this.clickLove} />
+                                            <div onClick={this.clickLike}>
+                                                <i className="far fa-heart"></i>
+                                            </div>
+                                            <div onClick={this.clickLove}>
+                                                <i className="fas fa-heart"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
