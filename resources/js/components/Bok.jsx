@@ -49,7 +49,7 @@ export class Bok extends Component {
         return (
             <div className="card">
                 <div className="d-flex">
-                    <div className="d-flex flex-column">
+                    <div className="d-flex flex-column book-info">
                         <img src="hoge.png"/>
                         <p className="font-weight-bold">userBook.book.name</p>
                         <div className="text-muted book-footer">
