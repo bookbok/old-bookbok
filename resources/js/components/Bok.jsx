@@ -61,8 +61,7 @@ export class Bok extends Component {
 
                     <div className="w-100">
                         <div className="d-flex flex-column m-2">
-                            <p className="bok-user">userBook.user.name</p>
-                            <hr/>
+                            <p className="bok-user border-bottom">userBook.user.name</p>
                             <p className="bok-body">{longBody}</p>
 
                             <div className="d-flex bok-footer">
