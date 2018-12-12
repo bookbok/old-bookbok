@@ -7,6 +7,8 @@ use App\User;
 use App\Book;
 use App\Components\BookInfoScraper\ScrapeManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserBookController extends Controller
 {
@@ -113,10 +115,32 @@ class UserBookController extends Controller
      */
     public function show($userBookId)
     {
+        $userId = Auth::id();
+        if($userId === null) {
+            $userId = 0;
+        }
+
         $userBook = UserBook::with([
                 'user:id,name,avatar,description',
+                'book:id,isbn,name,cover',
                 'review:id,user_id,user_book_id,body,published_at',
-                'boks:id,user_id,user_book_id,body,page_num_begin,page_num_end,published_at'
+                'boks',
+                'boks' => function($q1) use($userId) {
+                    $q1->withCount([
+                        'reactions as liked_count' => function($q2) {
+                            $q2->where('liked', true);
+                        },
+                        'reactions as loved_count' => function($q2) {
+                            $q2->where('loved', true);
+                        },
+                        'reactions as liked' => function($q2) use($userId) {
+                            $q2->where('liked', true)->where('user_id', $userId);
+                        },
+                        'reactions as loved' => function($q2) use($userId) {
+                            $q2->where('loved', true)->where('user_id', $userId);
+                        },
+                    ]);
+                },
             ])
             ->select(['id', 'user_id', 'book_id'])
             ->find($userBookId);
