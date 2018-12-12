@@ -6,15 +6,28 @@
 
 .book-footer{
   height: 40px;
-  font-size: 12px;
+  font-size: 0.8rem;
 }
 
 // bok部分
+.bok-info{
+}
+
+.bok-user{
+  height: 20px;
+  font-size: 0.8rem;
+}
+
+.bok-body{
+  min-height: 50px;
+  vertical-align: top;
+}
+
 .bok-footer{
   height: 20px;
-  font-size: 12px;
+  font-size: 0.7rem;
 }
 
 .icon-size{
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
