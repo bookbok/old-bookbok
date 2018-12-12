@@ -35,7 +35,7 @@ export class Bok extends Component {
     render(){
         const likeBok = this.props.likeBok;
         const userBook = this.props.likeBok.user_book;
-        const longBody = "バカみたいな夢を笑わないで聞いてほしい。日が暮れる前に話しておきたい。君みたいに優しくなりたいだけ。祈る声は激しくあと少しだけ心の底から触れ合うまで君と繋がっていたいだけ。泣きじゃくるだけじゃ何もないとわかったから傷つけた事を謝りに行こう。いつまでも近くにいてほしいだけ。さよならが言えなくて恐ろしいだけ。あふれる光に手が震えたって君となら強くなれるだけ。君みたいに優しくなりたいだけ。祈る声は激しくあと少しだけ心の底から触れ合うまで君と繋がっていたいだけ。怯えてばかりで恥ずかしくなるよ。そこから見ていてね大丈夫ありがとう。";
+        const longBody = "あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ";
         const shortBody = "Nighthawks";
 
         let page = "p" + likeBok.page_num_begin;
@@ -49,9 +49,9 @@ export class Bok extends Component {
         }
 
         return (
-            <div className="card">
+            <div className="card p-2">
                 <div className="d-flex">
-                    <div className="d-flex flex-column book-info m-2">
+                    <div className="d-flex flex-column book-info mr-2">
                         <img src="http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"/>
                         <p className="font-weight-bold">userBook.book.name</p>
                         <div className="text-muted book-footer">
@@ -60,13 +60,13 @@ export class Bok extends Component {
                     </div>
 
                     <div className="w-100">
-                        <div className="d-flex flex-column m-2">
+                        <div className="d-flex flex-column h-100">
                             <p className="bok-user">userBook.user.name</p>
-                            <p className="bok-body">{longBody}</p>
+                            <p className="bok-body">{shortBody}</p>
 
                             <div className="d-flex bok-footer">
-                                <p className="text-muted w-100 align-bottom">likeBok.updated_at</p>
-                                <div className="w-100">
+                                <p className="text-muted w-50">likeBok.updated_at</p>
+                                <div className="w-50">
                                     <div className="float-right">
                                         <div className="d-flex">
                                             <div className="mr-3" onClick={this.clickLike}>
