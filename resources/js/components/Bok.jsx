@@ -35,8 +35,8 @@ export class Bok extends Component {
     render(){
         const likeBok = this.props.likeBok;
         const userBook = this.props.likeBok.user_book;
-        const longBody = "あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ";
-        const shortBody = "Nighthawks";
+        const debugLongBody = "あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ";
+        const debugShortBody = "Nighthawks";
 
         let page = "p" + likeBok.page_num_begin;
         if(likeBok.page_num_begin !== likeBok.page_num_end){
@@ -62,7 +62,7 @@ export class Bok extends Component {
                     <div className="w-100">
                         <div className="d-flex flex-column h-100">
                             <p className="bok-user">userBook.user.name</p>
-                            <p className="bok-body">{shortBody}</p>
+                            <p className="bok-body">{debugShortBody}</p>
 
                             <div className="d-flex bok-footer">
                                 <p className="text-muted w-50">likeBok.updated_at</p>
