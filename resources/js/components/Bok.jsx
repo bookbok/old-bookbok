@@ -48,7 +48,9 @@ export class Bok extends Component {
                     <div className="d-flex flex-column">
                         <img src="hoge.png"/>
                         <p className="font-weight-bold">本のタイトル</p>
-                        <p className="text-muted">{page} 何行目</p>
+                        <div className="text-muted book-footer">
+                            <p>{page}<br/>何行目</p>
+                        </div>
                     </div>
 
                     <div className="w-100">
