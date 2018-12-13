@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
 
@@ -54,5 +54,13 @@ class User extends Authenticatable
                 'bok.userBook:id,book_id',
                 'bok.userBook.book:id,isbn,name,cover',
             ])->get();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new Notifications\VerifyEmail);
     }
 }
