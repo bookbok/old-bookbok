@@ -37,11 +37,11 @@ class BokController extends Controller
             ])
             ->select(['id', 'user_id', 'user_book_id', 'page_num_begin', 'page_num_end', 'line_num', 'body', 'updated_at'])
             ->withCount([
-                'reactions as liked_count' => function($q2) {
-                    $q2->where('liked', true);
+                'reactions as liked_count' => function($q) {
+                    $q->isLiked();
                 },
-                'reactions as loved_count' => function($q2) {
-                    $q2->where('loved', true);
+                'reactions as loved_count' => function($q) {
+                    $q->isLoved();
                 }
             ])
             ->where('user_book_id', $userBookId)
