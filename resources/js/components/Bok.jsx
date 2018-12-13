@@ -37,6 +37,8 @@ export class Bok extends Component {
         const userBook = this.props.bok.user_book;
         const debugLongBody = "あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ";
         const debugShortBody = "Nighthawks";
+        const bookLink = "/books/" + this.props.bok.user_book.book.id;
+        console.log({bookLink});
 
         let page = "p" + bok.page_num_begin;
         if(bok.page_num_begin !== bok.page_num_end){
@@ -52,7 +54,9 @@ export class Bok extends Component {
             <div className="card p-2">
                 <div className="d-flex">
                     <div className="d-flex flex-column book-info mr-2">
-                        <img className="book-cover mx-auto d-block" src="http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"/>
+                        <a href={bookLink}>
+                            <img className="book-cover mx-auto d-block" src="http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"/>
+                        </a>
                         <pre className="font-weight-bold book-title">userBook.book.name</pre>
                         <div className="text-muted book-footer">
                             <pre>{page}<br/>{line}</pre>
