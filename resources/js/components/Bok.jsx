@@ -7,8 +7,8 @@ export class Bok extends Component {
         super(props);
 
         this.state = {
-            likeClass: "far fa-thumbs-up icon",
-            loveClass: "far fa-bookmark icon",
+            likeClass: "far fa-thumbs-up fa-fw icon",
+            loveClass: "far fa-bookmark fa-fw icon",
             isLiked: false,
             isLoved: false,
         };
@@ -18,17 +18,17 @@ export class Bok extends Component {
 
     clickLike(e){
         if(this.state.isLiked){
-            this.setState({likeClass: "far fa-thumbs-up icon", isLiked: false});
+            this.setState({likeClass: "far fa-thumbs-up fa-fw icon", isLiked: false});
         } else {
-            this.setState({likeClass: " fas fa-thumbs-up icon like-animation", isLiked: true});
+            this.setState({likeClass: " fas fa-thumbs-up fa-fw icon like-animation", isLiked: true});
         }
     }
 
     clickLove(e){
         if(this.state.isLoved){
-            this.setState({loveClass: "far fa-bookmark icon", isLoved: false});
+            this.setState({loveClass: "far fa-bookmark fa-fw icon", isLoved: false});
         } else {
-            this.setState({loveClass: " fas fa-bookmark icon love-animation", isLoved: true});
+            this.setState({loveClass: " fas fa-bookmark fa-fw icon love-animation", isLoved: true});
         }
     }
 
@@ -74,11 +74,17 @@ export class Bok extends Component {
                                 <div className="w-50">
                                     <div className="float-right">
                                         <div className="d-flex">
-                                            <div className="mr-3" onClick={this.clickLike}>
-                                                <i className={this.state.likeClass}></i>
+                                            <div className="mr-3 mb-0" onClick={this.clickLike}>
+                                                <p className="liked mr-1">
+                                                    <i className={this.state.likeClass}></i>
+                                                    {bok.liked}
+                                                </p>
                                             </div>
-                                            <div className="mr-2" onClick={this.clickLove}>
-                                                <i className={this.state.loveClass}></i>
+                                            <div className="mr-2 mb-0" onClick={this.clickLove}>
+                                                <p className="loved mr-1">
+                                                    <i className={this.state.loveClass}></i>
+                                                    {bok.loved}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>

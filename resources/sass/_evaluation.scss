@@ -93,7 +93,19 @@ pre.updated {
   font-size: 0.8rem;
 }
 
-.icon{
+.liked {
+  @include mq-pc {
+    font-size: 1.1rem;
+  }
+}
+
+.loved {
+  @include mq-pc {
+    font-size: 1.1rem;
+  }
+}
+
+.icon {
   @include mq-pc {
     font-size: 1.5rem;
   };
