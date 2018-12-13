@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
 
@@ -76,5 +76,13 @@ class User extends Authenticatable
                     $q2->isLoved()->where('user_id', $userId);
                 },
             ])->get();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new Notifications\VerifyEmail);
     }
 }
