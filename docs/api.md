@@ -35,6 +35,7 @@ BOOKBOK　API仕様書
         {
             "token": "eyJ0e...ZN2z0"
         }
+
 + Response 400 (application/json)
 
         {
@@ -70,22 +71,23 @@ BOOKBOK　API仕様書
 
         {
             "id": 1,
-            "name": "example",
             "email": "example@example.com",
             "email_verified_at": null,
             "avatar": "https://avatars0.githubusercontent.com/u/22770924",
             "description": "",
             "created_at": "2018-10-24 15:53:09",
             "updated_at": "2018-10-24 15:53:09",
-            "role_id": "1"
+            "role_id": "1",
+            "name": "あいえええ"
         }
 
 ## Register [/api/auth/register]
 
 ### ユーザを新規登録する [POST]
 
-新規ユーザ登録を完了すると
+新規ユーザ登録を完了すると、
 `/auth/email/verify?expires={expires}&signature={signature}`へのリンクを記載したメールが送信される。
+
 + Request (application/json)
 
     + Attributes
