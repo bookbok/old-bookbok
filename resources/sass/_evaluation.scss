@@ -1,36 +1,96 @@
 // 本の情報
 .book-info{
-  width: 150px;
   text-align: center;
+
+  @include mq-pc {
+    width: 160px;
+  };
+
+  @include mq-sm {
+    width: 80px;
+  };
+}
+
+img.book-cover {
+  @include mq-sm {
+    width: 64px;
+    max-height: 80px;
+  };
+
+  @include mq-pc {
+    width: 128px;
+    max-height: 160px;
+  };
+}
+
+pre.book-title{
+  @include mq-sm {
+    display: none;
+  };
 }
 
 .book-footer{
-  height: 40px;
   font-size: 0.8rem;
+
+  @include mq-pc {
+    height: 40px;
+  };
+
+  @include mq-sm {
+    height: 20px;
+  };
 }
 
 // bok部分
-.bok-info{
+.bok-user {
+  overflow: visible;
+  margin: 0;
+
+  @include mq-pc {
+    font-size: 0.8rem;
+  };
+
+  @include mq-sm {
+    font-size: 0.8rem;
+  };
 }
 
-.bok-user{
-  height: 20px;
-  font-size: 0.8rem;
-}
-
-.bok-body{
-  min-height: 60%;
+.bok-body {
   vertical-align: top;
+  margin: 0;
+  min-height: 70%;
+  white-space: pre-wrap;
 }
 
 .bok-footer{
-  height: 20px;
   font-size: 0.7rem;
-  margin: 10px;
+  vertical-align: bottom;
+
+  @include mq-pc {
+    padding: 10px;
+  };
+
+  @include mq-sm {
+    padding: 2px;
+  };
+}
+
+pre.updated {
+  overflow: visible;
+  margin: 0;
+  width: 50%;
+  vertical-align: bottom;
+  font-size: 0.8rem;
 }
 
 .icon{
-  font-size: 1.5rem;
+  @include mq-pc {
+    font-size: 1.5rem;
+  };
+
+  @include mq-sm {
+    font-size: 1rem;
+  };
 }
 
 .like-animation{

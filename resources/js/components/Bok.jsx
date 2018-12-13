@@ -52,20 +52,20 @@ export class Bok extends Component {
             <div className="card p-2">
                 <div className="d-flex">
                     <div className="d-flex flex-column book-info mr-2">
-                        <img src="http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"/>
-                        <p className="font-weight-bold">userBook.book.name</p>
+                        <img className="book-cover" src="http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"/>
+                        <pre className="font-weight-bold book-title">userBook.book.name</pre>
                         <div className="text-muted book-footer">
-                            <p>{page}<br/>{line}</p>
+                            <pre>{page}<br/>{line}</pre>
                         </div>
                     </div>
 
                     <div className="w-100">
                         <div className="d-flex flex-column h-100">
-                            <p className="bok-user">userBook.user.name</p>
-                            <p className="bok-body">{debugShortBody}</p>
+                            <pre className="bok-user border-bottom">userBook.user.name</pre>
+                            <pre className="bok-body mt-2">{debugLongBody}</pre>
 
-                            <div className="d-flex bok-footer">
-                                <p className="text-muted w-50">bok.updated_at</p>
+                            <div className="d-flex bok-footer mt-auto">
+                                <pre className="text-muted updated">bok.updated_at</pre>
                                 <div className="w-50">
                                     <div className="float-right">
                                         <div className="d-flex">
