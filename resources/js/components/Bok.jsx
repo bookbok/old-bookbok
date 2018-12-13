@@ -52,7 +52,7 @@ export class Bok extends Component {
             <div className="card p-2">
                 <div className="d-flex">
                     <div className="d-flex flex-column book-info mr-2">
-                        <img className="book-cover" src="http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"/>
+                        <img className="book-cover mx-auto d-block" src="http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"/>
                         <pre className="font-weight-bold book-title">userBook.book.name</pre>
                         <div className="text-muted book-footer">
                             <pre>{page}<br/>{line}</pre>
