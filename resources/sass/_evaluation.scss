@@ -30,6 +30,10 @@ img.book-cover:hover {
 }
 
 pre.book-title{
+  @include mq-pc {
+    white-space: pre-wrap;
+    margin-top: 5px;
+  };
   @include mq-sm {
     display: none;
   };

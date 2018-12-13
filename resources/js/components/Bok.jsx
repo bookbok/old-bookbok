@@ -35,41 +35,42 @@ export class Bok extends Component {
     render(){
         const bok = this.props.bok;
         const userBook = this.props.bok.user_book;
-        const debugLongBody = "あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ";
-        const debugShortBody = "Nighthawks";
         const bookLink = "/books/" + this.props.bok.user_book.book.id;
         console.log({bookLink});
 
-        let page = "p" + bok.page_num_begin;
-        if(bok.page_num_begin !== bok.page_num_end){
-            page += (" ~ p" + bok.page_num_end);
+        let page = null;
+        if(bok.page_num_begin !== null){
+            page = ("p" + bok.page_num_begin);
+            if(bok.page_num_begin !== bok.page_num_end){
+                page += (" ~ p" + bok.page_num_end);
+            }
         }
 
-        let line = bok.line_num;
-        if(line !== null){
-            line += "行目";
+        let line = null;
+        if(bok.line_num !== null){
+            line = (bok.line_num + "行目");
         }
 
         return (
             <div className="card p-2">
                 <div className="d-flex">
-                    <div className="d-flex flex-column book-info mr-2">
+                    <div className="d-flex flex-column book-info mr-3">
                         <a href={bookLink}>
-                            <img className="book-cover mx-auto d-block" src="http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"/>
+                            <img className="book-cover mx-auto d-block" src={userBook.book.cover}/>
                         </a>
-                        <pre className="font-weight-bold book-title">userBook.book.name</pre>
-                        <div className="text-muted book-footer">
+                        <pre className="font-weight-bold book-title">{userBook.book.name}</pre>
+                        <div className="text-muted book-footer mt-2">
                             <pre>{page}<br/>{line}</pre>
                         </div>
                     </div>
 
                     <div className="w-100">
                         <div className="d-flex flex-column h-100">
-                            <pre className="bok-user border-bottom">userBook.user.name</pre>
-                            <pre className="bok-body mt-2">{debugLongBody}</pre>
+                            <pre className="bok-user border-bottom">{userBook.user.name}</pre>
+                            <pre className="bok-body mt-2">{bok.body}</pre>
 
                             <div className="d-flex bok-footer mt-auto">
-                                <pre className="text-muted updated">bok.updated_at</pre>
+                                <pre className="text-muted updated">{bok.updated_at}</pre>
                                 <div className="w-50">
                                     <div className="float-right">
                                         <div className="d-flex">
