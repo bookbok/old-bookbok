@@ -8,7 +8,7 @@ export class Bok extends Component {
 
         this.state = {
             likeClass: "far fa-thumbs-up icon",
-            loveClass: "far fa-heart icon",
+            loveClass: "far fa-bookmark icon",
             isLiked: false,
             isLoved: false,
         };
@@ -26,9 +26,9 @@ export class Bok extends Component {
 
     clickLove(e){
         if(this.state.isLoved){
-            this.setState({loveClass: "far fa-heart icon", isLoved: false});
+            this.setState({loveClass: "far fa-bookmark icon", isLoved: false});
         } else {
-            this.setState({loveClass: " fas fa-heart icon love-animation", isLoved: true});
+            this.setState({loveClass: " fas fa-bookmark icon love-animation", isLoved: true});
         }
     }
 
