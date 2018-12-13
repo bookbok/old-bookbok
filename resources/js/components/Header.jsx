@@ -10,6 +10,7 @@ import { Mypage } from './Mypage.jsx';
 import { ConnectedBookDetail} from '../containers.js';
 import { ConnectedBookList} from '../containers.js';
 import { ConnectedUsersBookshelf } from '../containers.js';
+import { ConnectedLikeBokList } from '../containers.js';
 import { ConnectedUserInfo } from '../containers.js';
 
 // bootstrap global navigation bar
@@ -30,6 +31,7 @@ const Header = () => (
                     <Link className="nav-item nav-link" to="/books">本一覧</Link>
                     <Link className="nav-item nav-link" to="/books/1">本詳細</Link>
                     <Link className="nav-item nav-link" to ="/users/1/user_books">ユーザー本棚</Link>
+                    <Link className="nav-item nav-link" to="/users/1/likes">LIKEしたbok一覧</Link>
                     <Link className="nav-item nav-link" to="/users">ユーザー一覧</Link>
                 </div>
             </div>
@@ -53,6 +55,7 @@ export const MenuRouter = () => (
                 <Route exact path="/books" component={ ConnectedBookList } />
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />
                 <Route exact path="/users/:id/user_books" component={ ConnectedUsersBookshelf } />
+                <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
                 <Route exact path="/users" component={ ConnectedUserInfo } />
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
             </Switch>
