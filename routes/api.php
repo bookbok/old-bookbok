@@ -52,7 +52,7 @@ Route::get('books/{book}', 'BookController@show');
  * Resource: Bok
  * 
  */
-Route::get('/api/user_books/{userBookId}/boks', 'BokController@index');
+Route::get('user_books/{userBookId}/boks', 'BokController@index');
 
 /**
  *  Resource: UserBook
