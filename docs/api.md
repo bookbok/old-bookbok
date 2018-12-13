@@ -7,23 +7,14 @@ BOOKBOK　API仕様書
 
 # Group AUTHENTICATION
 
-`/api/login`を叩いて正常に認証されるとアクセストークンが発行される。
+`/api/auth/login`を叩いて正常に認証されるとアクセストークンが発行される。
 
 認証が必要なリソースにアクセスする際に`Authorization: Bearer アクセストークン`を指定すると、
 それだけでユーザ認証が行われる。
 
-> TODO:
- - 認証失敗時に`/api/login`へリダイレクトさせようとするのをどうにかする
-
-> REVIEW:
- - ベースパスを`/api`にしておいてよいか。(`/api/auth`等にしなくてよいか)
-
-## Authentication [/api/login]
+## Login [/api/auth/login]
 
 ### ログインする [POST]
-
-> TODO:
- - エラーの場合のレスポンスをどうにかする
 
 + Request (application/json)
 
@@ -45,19 +36,34 @@ BOOKBOK　API仕様書
             "token": "eyJ0e...ZN2z0"
         }
 
++ Response 400 (application/json)
+
+        {
+            "email": [
+                "validation.required"
+            ],
+            "password": [
+                "validation.required"
+            ]
+        }
+
 + Response 422 (text/html)
 
-## Authentication [/api/logout]
+        {
+            "message": "Falid to authentication..."
+        }
+
+## Logout [/api/auth/logout]
 
 ### ログアウトする [GET]
 
-> TODO:
- - HTTPメソッドこれでいいのか
- - レスポンスをjsonに
-
 + Response 200 (text/html)
 
-## Authentication [/api/user]
+        {
+            "message": "You have been successfully logged out!"
+        }
+    
+## Yourself [/api/auth/user]
 
 ### 認証したユーザーの情報を取得する [GET]
 
@@ -65,14 +71,54 @@ BOOKBOK　API仕様書
 
         {
             "id": 1,
-            "name": "example",
             "email": "example@example.com",
             "email_verified_at": null,
             "avatar": "https://avatars0.githubusercontent.com/u/22770924",
             "description": "",
             "created_at": "2018-10-24 15:53:09",
             "updated_at": "2018-10-24 15:53:09",
-            "role_id": "1"
+            "role_id": "1",
+            "name": "あいえええ"
+        }
+
+## Register [/api/auth/register]
+
+### ユーザを新規登録する [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + email (required)
+        + password (required)
+        + name (required)
+
+    + Body
+
+        {
+            "email": "example@example.com",
+            "password": "password",
+            "name": "あいえええ"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "message": "You have been successfully registerd user! Let's login."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "name":[
+                "validation.required"
+            ],
+            "email":[
+                "validation.required"
+            ],
+            "password":[
+                "validation.required"
+            ]
         }
 
 # Group USERS
@@ -301,43 +347,58 @@ BOOKBOK　API仕様書
 
         {
             "id": 1,
-            "user": {
+            "user_id": "1",
+            "book_id": "1",
+            "user":{
                 "id": 1,
-                "name": "user name",
-                "avator": "http://~",
-                "description": "user info"
+                "name": "admin",
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": ""
             },
-            "book": {
+            "book":{
                 "id": 1,
-                "name": "book name",
-                "description": "book info",
-                "cover": "http://~",
-                "author": "武田 信玄",
-                "genre_id": 1
+                "isbn": "9788442163316",
+                "name": "Autem expedita dolor culpa.",
+                "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
             },
-            "review": {
+            "review":{
                 "id": 1,
-                "body": "review body",
-                "published_at": "2018-11-11 10:30",
-                "user_book_id": 1,
-                "user_id": 1
+                "user_id": "1",
+                "user_book_id": "1",
+                "body": "カムパネルラがまた稜かどかどんどうせきへ戻もどこまでも行って上のゆるした",
+                "published_at": "2018-11-25 04:31:30"
             },
-            "boks": [
+            "boks":[
                 {
                     "id": 1,
-                    "body": "bok body",
-                    "page_num_begin": 1,
-                    "page_num_end": 1,
-                    "line_num": 1,
-                    "published_at": "2018-11-11 10:30"
-                },
-                {
-                    "id": 2,
-                    "body": "bok body",
-                    "page_num_begin": 6,
-                    "page_num_end": 10,
-                    "line_num": 1,
-                    "published_at": "2018-11-11 10:30"
+                    "user_id": "1",
+                    "user_book_id": "1",
+                    "page_num_begin": "184",
+                    "page_num_end": "426",
+                    "line_num": "82",
+                    "body": "その子が言いいました。だんだん。それが惜おしてたよ。",
+                    "published_at": "1972-05-16 06:56:03",
+                    "created_at": "2018-11-13 07:07:21",
+                    "updated_at": "2004-06-01 15:10:33",
+                    "liked_count": "1",
+                    "loved_count": "2",
+                    "liked": "0",
+                    "loved": "0",
+                    "user_book":{
+                        "id": 1,
+                        "user_id": "1",
+                        "book_id": "1",
+                        "book":{
+                            "id": 1,
+                            "name": "Autem expedita dolor culpa.",
+                            "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
+                        },
+                        "user":{
+                            "id": 1,
+                            "name": "admin",
+                            "avatar": "https://avatars0.githubusercontent.com/u/22770924"
+                        }
+                    }
                 }
             ]
         }
@@ -645,68 +706,33 @@ BOOKBOK　API仕様書
 
         [
             {
-            "id": 1,
-            "user_id": "1",
-            "bok_id": "1",
-            "liked": "1",
-            "loved": "1",
-            "created_at": "2018-12-06 13:56:24",
-            "updated_at": "2018-12-06 13:56:24",
-                "user":{
-                    "id": 1,
-                    "name": "admin",
-                    "avatar": "https://avatars0.githubusercontent.com/u/22770924",
-                    "description": ""
-                },
-                "bok":{
+                "id": 1,
+                "user_id": "1",
+                "user_book_id": "1",
+                "page_num_begin": "184",
+                "page_num_end": "426",
+                "line_num": "82",
+                "body": "の子が言いい。ただんだ。そした。するんでいっぱいに言いいました。「こっちまでもこってい本当ほんとうに足を、誰だれだわ」「ああ、すっかりのうちへ走りは、ひともうど、とうに入れるはずでさあ、ぼくがいありました。見えないいねいにひとはもういた、と深ふかいじゃないねいっぱなちぢめているばかりの手をつな上着うわ」「きみはわく足がふるうよ」「ぼくたべているとあすこの汽車は、暗やみの実みも、おいてくるのが四棟むねいって、何気なまいたというふうにそろえておいているのでした。青い鋼はがら叫さけびました。それが惜おしてたよ。",
+                "published_at": "1972-05-16 06:56:03",
+                "created_at": "2018-11-13 07:07:21",
+                "updated_at": "2004-06-01 15:10:33",
+                "liked_count": "1",
+                "loved_count": "2",
+                "liked": "0",
+                "loved": "0",
+                "user_book":{
                     "id": 1,
                     "user_id": "1",
-                    "body": "カムパネルラが手をあげられないるくなってお父さんのw",
-                    "page_num_begin": "5",
-                    "page_num_end": "5",
-                    "published_at": "2004-07-19 17:14:27",
-                    "user_book_id": "1",
-                    "user_book":{
+                    "book_id": "1",
+                    "book":{
                         "id": 1,
-                        "book_id": "9784723597931",
-                        "book":{
-                            "isbn": "9784723597931",
-                            "name": "Labore tempora aspernatur maxime.",
-                            "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
-                        }
-                    }
-                }
-            },
-            {
-            "id": 2,
-            "user_id": "1",
-            "bok_id": "2",
-            "liked": "1",
-            "loved": "",
-            "created_at": "2018-12-06 13:56:24",
-            "updated_at": "2018-12-06 13:56:24",
-                "user":{
-                    "id": 1,
-                    "name": "admin",
-                    "avatar": "https://avatars0.githubusercontent.com/u/22770924",
-                    "description": ""
-                },
-                "bok":{
-                    "id": 2,
-                    "user_id": "1",
-                    "body": "カムパネルラが手をあげられないるくなってお父さんのw",
-                    "page_num_begin": "20",
-                    "page_num_end": "25",
-                    "published_at": "2004-07-19 17:14:27",
-                    "user_book_id": "2",
-                    "user_book":{
-                        "id": 2,
-                        "book_id": "9784723597931",
-                        "book":{
-                            "isbn": "9784723597931",
-                            "name": "Labore tempora aspernatur maxime.",
-                            "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
-                        }
+                        "name": "Autem expedita dolor culpa.",
+                        "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
+                    },
+                    "user":{
+                        "id": 1,
+                        "name": "admin",
+                        "avatar": "https://avatars0.githubusercontent.com/u/22770924"
                     }
                 }
             }

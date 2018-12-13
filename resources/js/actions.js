@@ -55,26 +55,34 @@ export const setTimeLine = timeLine => ({ type: types.SET_TIMELINE, timeLine });
 // Get authentication token
 export const setAuthToken = (token) => ({ type: types.SET_AUTH_TOKEN, token });
 export const requestLogin = (loginUser) => dispatch => {
-    wrapFetch(DOMAIN + "/api/login", {
+    wrapFetch(DOMAIN + "/api/auth/login", {
         method: "POST",
         body: loginUser
     }).then(json => {
         dispatch(setAuthToken(json.token));
+        dispatch(getLoggedinUser());
     });
 }
 
-export const removeAuthToken = () => ({ type: types.REMOVE_AUTH_TOKEN });
+export const setLoggedinUser = (loggedinUser) => ({ type: types.SET_LOGGEDIN_USER, loggedinUser });
+export const getLoggedinUser = () => dispatch => {
+    wrapFetch(DOMAIN + "/api/auth/user").then(json => {
+        dispatch(setLoggedinUser(json));
+    });
+}
+
+export const removeLoggedinInfo = () => ({ type: types.REMOVE_LOGGEDIN_INFO });
 export const requestLogout = () => dispatch => {
-    wrapFetch(DOMAIN + "/api/logout", {
+    wrapFetch(DOMAIN + "/api/auth/logout", {
         isParse: false,
     }).then(res => {
-        dispatch(removeAuthToken());
+        dispatch(removeLoggedinInfo());
     });
 }
 
 export const requestUserRegister = (userInfo) => dispatch => {
     /* TODO: サーバー側が実装されれば書く
-    fetch(DOMAIN + "/api/register", {
+    fetch(DOMAIN + "/api/auth/register", {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -139,4 +147,12 @@ export const fetchBookList = () => dispatch => {
         }).catch(err => {
             console.error("fetchBookList: ", err);
         });
+}
+
+export const setLikeBoks = likeBoks => ({type: types.SET_LIKEBOKLIST, likeBoks});
+export const fetchLikeBoks = (userId) => dispatch => {
+    wrapFetch(DOMAIN + `/api/users/${userId}/likes`)
+       .then(json => {
+          dispatch(setLikeBoks(json));
+       });
 }
