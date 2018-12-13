@@ -25,17 +25,16 @@ BOOKBOK　API仕様書
 
     + Body
 
-        {
-            "email": "example@example.com",
-            "password": "password"
-        }
+            {
+                "email": "example@example.com",
+                "password": "password"
+            }
 
 + Response 200 (application/json)
 
         {
             "token": "eyJ0e...ZN2z0"
         }
-
 + Response 400 (application/json)
 
         {
@@ -71,20 +70,22 @@ BOOKBOK　API仕様書
 
         {
             "id": 1,
+            "name": "example",
             "email": "example@example.com",
             "email_verified_at": null,
             "avatar": "https://avatars0.githubusercontent.com/u/22770924",
             "description": "",
             "created_at": "2018-10-24 15:53:09",
             "updated_at": "2018-10-24 15:53:09",
-            "role_id": "1",
-            "name": "あいえええ"
+            "role_id": "1"
         }
 
 ## Register [/api/auth/register]
 
 ### ユーザを新規登録する [POST]
 
+新規ユーザ登録を完了すると
+`/auth/email/verify?expires={expires}&signature={signature}`へのリンクを記載したメールが送信される。
 + Request (application/json)
 
     + Attributes
@@ -95,11 +96,11 @@ BOOKBOK　API仕様書
 
     + Body
 
-        {
-            "email": "example@example.com",
-            "password": "password",
-            "name": "あいえええ"
-        }
+            {
+                "email": "example@example.com",
+                "password": "password",
+                "name": "あいえええ"
+            }
 
 + Response 200 (application/json)
 
@@ -119,6 +120,62 @@ BOOKBOK　API仕様書
             "password":[
                 "validation.required"
             ]
+        }
+
+## Email Verify [/api/auth/email/verify/{userId}{?expires,signature}]
+
++ Parameters
+
+    + userId: 1 (number) - ユーザID
+    + expires: 1544667062 (number) - 失効日時
+    + signature: 40ae63c8777d0be61147751644ec3180ff2dc87f0111657ff7e6eece2c8c6cae (hex) - 署名
+
+### メールアドレス検証を完了する [GET]
+
++ Response 200 (application/json)
+
+        {
+            "message": "Your email has been successfully verified!"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "Verification failed..."
+        }
+
++ Response 403 (application/json)
+
+        {
+            "message": "Invalid signature."
+        }
+
++ Response 429 (application/json)
+
+        {
+            "message": "Too Many Attempts."
+        }
+
+## Email Verify Resend [/api/auth/email/resend]
+
+### メールアドレス検証メールを再送する [GET]
+
++ Response 200 (application/json)
+
+        {
+            "message": "We successfully retransmitted the verification email."
+        }
+
++ Response 200 (application/json)
+
+        {
+            "message": "Your email has been successfully verified!"
+        }
+
++ Response 429 (application/json)
+
+        {
+            "message": "Too Many Attempts."
         }
 
 # Group USERS
