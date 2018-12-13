@@ -56,6 +56,11 @@ Route::get('books/{book}', 'BookController@show');
 Route::get('user_books/{userBookId}/boks', 'BokController@index');
 
 /**
+ * Resource: BokFlow
+ */
+Route::get('users/{userId}/bok_flow', 'BokFlow@index');
+
+/**
  *  Resource: UserBook
  *
  */
