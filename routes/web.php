@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/auth/email/verify', function () {
+    return view('layouts/app');
+})->name('dummy.auth.email.verify');
+
 Route::get('/{url?}', function () {
     return view('layouts/app');
 })->where('url', '(.*)');
