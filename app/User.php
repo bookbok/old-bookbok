@@ -6,8 +6,9 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
 
@@ -46,13 +47,42 @@ class User extends Authenticatable
         return $this->hasMany(Bok::class);
     }
 
+    public function reactions(){
+        return $this->hasMany(Reaction::class);
+    }
+
     public function likes(){
-        return \App\Reaction::where('user_id', $this->id)->where('liked', 1)
+        $userId = Auth::id();
+        if($userId === null) {
+            $userId = 0;
+        }
+
+        return $this->boks()
             ->with([
-                'user:id,name,avatar,description',
-                'bok:id,user_id,body,page_num_begin,page_num_end,line_num,published_at,user_book_id',
-                'bok.userBook:id,book_id',
-                'bok.userBook.book:id,isbn,name,cover',
+                'userBook:id,user_id,book_id',
+                'userBook.book:id,name,cover',
+                'userBook.user:id,name,avatar',
+            ])->withCount([
+                'reactions as liked_count' => function($q2) {
+                    $q2->isLiked();
+                },
+                'reactions as loved_count' => function($q2) {
+                    $q2->isLoved();
+                },
+                'reactions as liked' => function($q2) use($userId) {
+                    $q2->isLiked()->where('user_id', $userId);
+                },
+                'reactions as loved' => function($q2) use($userId) {
+                    $q2->isLoved()->where('user_id', $userId);
+                },
             ])->get();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new Notifications\VerifyEmail);
     }
 }

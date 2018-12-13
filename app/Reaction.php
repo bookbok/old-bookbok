@@ -18,4 +18,20 @@ class Reaction extends Model
         return $this->belongsTo(Bok::class);
     }
 
+
+    /**
+     * Query scope
+     */
+
+    public function scopeIsLiked($query) {
+        return $query->where('liked', true);
+    }
+
+    public function scopeIsLoved($query) {
+        return $query->where('loved', true);
+    }
+
+    public function scopeIsReactioned($query) {
+        return $query->where('liked', true)->orWhere('loved', true);
+    }
 }

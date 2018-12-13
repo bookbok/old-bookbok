@@ -21,6 +21,12 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
     Route::post('register','RegisterController@register')->name('register');
 
     Route::middleware('auth:api')->group(function () {
+        Route::get('email/verify/{id}', 'VerificationController@verify')
+            ->name('email.verify')
+            ->where('id', '[1-9][0-9]*')
+        ;
+        Route::get('email/resend', 'VerificationController@resend')->name('email.verify.resend');
+
         Route::get('logout','LoginController@logout')->name('logout');
         Route::get('user', function (Request $request) {
             return $request->user();
@@ -48,6 +54,12 @@ Route::get('/users', function (Request $request) {
  */
 Route::get('books', 'BookController@index');
 Route::get('books/{book}', 'BookController@show');
+
+/**
+ * Resource: Bok
+ * 
+ */
+Route::get('user_books/{userBookId}/boks', 'BokController@index');
 
 /**
  *  Resource: UserBook
