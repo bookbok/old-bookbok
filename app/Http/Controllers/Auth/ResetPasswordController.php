@@ -16,6 +16,7 @@ class ResetPasswordController extends Controller
         PasswordBroker::INVALID_PASSWORD => '',
         PasswordBroker::
     ];
+
     /**
      * パスワードリセットメール送信処理
      *
