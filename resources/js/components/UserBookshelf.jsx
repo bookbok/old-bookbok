@@ -3,15 +3,12 @@ import { fetchUserBookshelf } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils.js";
 import { Loading } from "./shared/Loading";
+import { BookView } from "./BookView.jsx";
 
 export class UserBookshelf extends Component {
-    constructor(props){
-        super(props);
-    };
-
     componentDidMount(){
-        const userId = parseInt(this.props.match.params.id);
-        store.dispatch(fetchUserBookshelf(userId));
+        this.userId = parseInt(this.props.match.params.id);
+        store.dispatch(fetchUserBookshelf(this.userId));
     };
 
     render(){
@@ -21,21 +18,16 @@ export class UserBookshelf extends Component {
         }
 
         {/* ユーザーが所持する本の情報を本ビューに加工 */}
-        const booksInfo = userShelf.books.map((userBook, index) => {
-            return (
-                <div className="d-inline-block" key={index}>
-                    <img src={userBook.cover}/>
-                    <pre>{userBook.name}</pre>
-                </div>
-            );
+        const booksInfo = userShelf.books.map((book, i) => {
+            return <BookView book={book} link={`/users/${this.userId}/user_books/${book.pivot.id}`} key={i} />;
         });
 
         {/* 本棚の形に加工 */}
         const bookshelf = [];
-        for(let index = 0, key = booksInfo.length ; index < booksInfo.length; index++){
-            bookshelf.push(booksInfo[index]);
+        for(let i = 0, key = booksInfo.length ; i < booksInfo.length; i++){
+            bookshelf.push(booksInfo[i]);
             {/* 改行する */}
-            if(index % 3 == 2 || booksInfo.length == (index+1)){
+            if(i % 3 == 2 || booksInfo.length == i + 1){
                 bookshelf.push(<div key={key++}></div>);
             }
         }
