@@ -46,12 +46,12 @@ class PrototypesTableSeeder extends Seeder
         ]);
 
         $book = Book::create([
-            'isbn' => '',
-            'name' => '',
-            'description' => '',
-            'cover' => 'http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api',
-            'author' => '織田信長',
-            'genre_id' => 1,
+            'isbn' => '9784041026168',
+            'name' => '小説秒速5センチメートル',
+            'description' => '「桜の花びらの落ちるスピードだよ。秒速5センチメートル」いつも大切なことを教えてくれた明里、そんな彼女を守ろうとした貴樹。小学校で出会った2人は中学で離ればなれになり、それぞれの恋心と魂は彷徨を続けていく―。劇場アニメーション『秒速5センチメートル』では語られなかった彼らの心象風景を、新海誠監督みずからが繊細な筆致で小説化。1人の少年を軸に描かれる、3つの連作短編を収録する。',
+            'cover' => 'https://cover.openbd.jp/9784041026168.jpg',
+            'author' => '新海誠',
+            'genre_id' => 8,
         ]);
 
         // don't touch
@@ -63,7 +63,7 @@ class PrototypesTableSeeder extends Seeder
         Review::create([
             'user_book_id' => $userBook->id,
             'user_id' => $user->id,
-            'body' => '',
+            'body' => 'この作品は私が一番大嫌いで、一番面白いと思った作品の1つだ。',
         ]);
 
         $boks = [
