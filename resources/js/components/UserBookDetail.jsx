@@ -48,6 +48,7 @@ export class UserBookDetail extends Component {
                         </div>
 
                         <div className="user-follow-info mt-2">
+                            <a href={`/users/${user.id}/followers`} className="m-2">14 フォロー</a>
                             <a href={`/users/${user.id}/followings`} className="m-2">127 フォロワー</a>
                         </div>
                     </div>
