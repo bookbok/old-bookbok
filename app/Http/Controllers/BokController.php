@@ -35,7 +35,7 @@ class BokController extends Controller
         // 指定されたuserBookIdに紐づくBokを取得する
         $boks = Bok::with([
                 'userBook.user:id,name',
-                'userBook.book:id,isbn',
+                'userBook.book:id,isbn,cover',
             ])
             ->select(['id', 'user_id', 'user_book_id', 'page_num_begin', 'page_num_end', 'line_num', 'body', 'updated_at'])
             ->withCount([
