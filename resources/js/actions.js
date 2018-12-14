@@ -123,11 +123,11 @@ export const fetchUserInfo = () => dispatch => {
         });
 }
 
-export const setUsersBookshelf = usersBookshelf => ({type: types.SET_USERS_BOOKSHELF, usersBookshelf});
-export const fetchUsersBookshelf = (userId) => dispatch => {
+export const setUserBookshelf = userBookshelf => ({type: types.SET_USER_BOOKSHELF, userBookshelf});
+export const fetchUserBookshelf = (userId) => dispatch => {
     wrapFetch(DOMAIN + `/api/users/${userId}/user_books`)
         .then(json => {
-            dispatch(setUsersBookshelf(json));
+            dispatch(setUserBookshelf(json));
         });
 }
 

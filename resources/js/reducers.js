@@ -17,8 +17,8 @@ export function rootReducer(
         case types.SET_BOOKLIST:
             return { ...state, books: action.books };
 
-        case types.SET_USERS_BOOKSHELF:
-            return { ...state, usersBookshelf: action.usersBookshelf };
+        case types.SET_USER_BOOKSHELF:
+            return { ...state, userBookshelf: action.userBookshelf };
 
         case types.SET_AUTH_TOKEN: // ログインを必要とするAPI用の認証トークンを保存
             return { ...state, token: action.token };

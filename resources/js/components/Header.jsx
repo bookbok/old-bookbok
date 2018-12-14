@@ -9,7 +9,7 @@ import { UserRegister } from './UserRegister.jsx';
 import { Mypage } from './Mypage.jsx';
 import { ConnectedBookDetail} from '../containers.js';
 import { ConnectedBookList} from '../containers.js';
-import { ConnectedUsersBookshelf } from '../containers.js';
+import { ConnectedUserBookshelf } from '../containers.js';
 import { ConnectedLikeBokList } from '../containers.js';
 import { ConnectedUserInfo } from '../containers.js';
 
@@ -54,7 +54,7 @@ export const MenuRouter = () => (
                 <Route exact path="/mypage" component={ Mypage } />
                 <Route exact path="/books" component={ ConnectedBookList } />
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />
-                <Route exact path="/users/:id/user_books" component={ ConnectedUsersBookshelf } />
+                <Route exact path="/users/:id/user_books" component={ ConnectedUserBookshelf } />
                 <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
                 <Route exact path="/users" component={ ConnectedUserInfo } />
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}

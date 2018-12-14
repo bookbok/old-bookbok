@@ -1,27 +1,27 @@
 import React, { Component } from "react";
-import { fetchUsersBookshelf } from "../actions.js";
+import { fetchUserBookshelf } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils.js";
 import { Loading } from "./shared/Loading";
 
-export class UsersBookshelf extends Component {
+export class UserBookshelf extends Component {
     constructor(props){
         super(props);
     };
 
     componentDidMount(){
         const userId = parseInt(this.props.match.params.id);
-        store.dispatch(fetchUsersBookshelf(userId));
+        store.dispatch(fetchUserBookshelf(userId));
     };
 
     render(){
-        const usersShelf = this.props.usersBookshelf;
-        if(isEmpty(usersShelf)){
+        const userShelf = this.props.userBookshelf;
+        if(isEmpty(userShelf)){
             return <Loading />;
         }
 
         {/* ユーザーが所持する本の情報を本ビューに加工 */}
-        const booksInfo = usersShelf.books.map((userBook, index) => {
+        const booksInfo = userShelf.books.map((userBook, index) => {
             return (
                 <div className="d-inline-block" key={index}>
                     <img src={userBook.cover}/>
