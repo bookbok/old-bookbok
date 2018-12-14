@@ -64,7 +64,7 @@ Route::get('user_books/{userBookId}/boks', 'BokController@index');
 /**
  * Resource: BokFlow
  */
-Route::get('users/{userId}/bok_flow', 'BokFlowController@index');
+Route::get('users/{userId}/bok_flow', 'BokFlowController@index')->middleware('auth:api');
 
 /**
  *  Resource: UserBook
