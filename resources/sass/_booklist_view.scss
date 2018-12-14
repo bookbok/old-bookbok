@@ -24,17 +24,15 @@ pre.book-view-pre{
         font-size: 15px;
         overflow: hidden;
     };
-} 
+}
 
 img.book-view-img{
-    @include mq-sm {
-        max-width: 115px;
-        max-height: 115px;
-    };
+    max-width: 92px;
+    max-height: 115px;
 
     @include mq-pc {
         margin-left: 30px;
-        max-width: 300px;
-        max-height: 300px;
+        max-width: 128px;
+        max-height: 168px;
     };
 }
