@@ -204,6 +204,96 @@ BOOKBOK　API仕様書
             "message": "Too Many Attempts."
         }
 
+## Password Reset Mail Send [/api/auth/password/reset/send]
+
+### パスワードリセットメールを送信する [POST]
+
+`/auth/password/reset?token={token}`へのリンクを記載したメールが送信される。
+
++ Request (application/json)
+
+    + Attributes
+
+        + email (required)
+
+    + Body
+
+            {
+                "email": "example@example.com"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "message": "We successfully sent a mail with a link to the password reset page!"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "email":[
+                "validation.required"
+            ]
+        }
+
++ Response 429 (application/json)
+
+        {
+            "message": "Too Many Attempts."
+        }
+
+## Password Reset [/api/auth/password/reset]
+
+### パスワードをリセットする [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + email: user@example.com (required) - パスワードリセット対象ユーザのメールアドレス
+        + password: newpassword (required) - アンパンマン！新しいパスワードよ
+        + token (required) - メールで送られたリンクのクエリについているリセット用トークン
+
+    + Body
+
+            {
+                "email": "example@example.com",
+                "password": "new-password",
+                "token": "5c4bc3f4b0258db9eedce3693dd75f066d76d80e0058db65b027e3143f03e3"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "message": "You have successfully changed password!"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "email":[
+                "validation.required"
+            ],
+            "password":[
+                "validation.required"
+            ],
+            "token":[
+                "validation.required"
+            ]
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "Password reset failure..."
+        }
+
++ Response 429 (application/json)
+
+        {
+            "message": "Too Many Attempts."
+        }
+
 # Group USERS
 
 ## Users [/api/users]
