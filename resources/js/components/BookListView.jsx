@@ -18,7 +18,7 @@ export class BookListView extends Component {
         if(isEmpty(books)) {
             return <Loading />;
         }
-        
+
         const booksInfo = books.map((book, i) => {
                 return <BookView book={book} key={i} />
         });
