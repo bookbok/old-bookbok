@@ -20,7 +20,7 @@ export class BookListView extends Component {
         }
 
         const booksInfo = books.map((book, i) => {
-                return <BookView book={book} key={i} />
+            return <BookView book={book} link={`/books/${book.id}`} key={i} />
         });
 
         const bookList = [];
