@@ -20,6 +20,9 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
     Route::post('login','LoginController@login')->name('login');
     Route::post('register','RegisterController@register')->name('register');
 
+    Route::post('password/reset/send', 'ResetPasswordController@send')->name('password.reset.send');
+    Route::post('password/reset', 'ResetPasswordController@reset')->name('password.reset');
+
     Route::middleware('auth:api')->group(function () {
         Route::get('email/verify/{id}', 'VerificationController@verify')
             ->name('email.verify')
