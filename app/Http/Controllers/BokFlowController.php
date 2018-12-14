@@ -68,7 +68,7 @@ class BokFlowController extends Controller
             }
         ])
         ->whereIn('user_id', $ids)
-        ->orderBy('updated_at')
+        ->orderBy('updated_at', 'desc')
         ->get();
 
         return response()->json(
