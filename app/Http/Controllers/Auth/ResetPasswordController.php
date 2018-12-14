@@ -13,6 +13,14 @@ use Illuminate\Auth\Events\PasswordReset;
 class ResetPasswordController extends Controller
 {
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('throttle:6,1')->only('send', 'reset');
+    }
+
+    /**
      * パスワードリセットメール送信処理
      *
      * @param   Request    $request
