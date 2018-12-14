@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
 
 class ResetPasswordController extends Controller
 {
@@ -64,7 +65,8 @@ class ResetPasswordController extends Controller
             $request->only('token', 'email', 'password') + [
                 'password_confirmation' => $request->all()['password'],
             ],
-            [$this, 'resetPassword']
+             // PasswordBroker::resetがClosureを求めているのでこうしている。
+            \Closure::fromCallable([$this, 'resetPassword'])
         );
 
         if (Password::PASSWORD_RESET !== $response) {
