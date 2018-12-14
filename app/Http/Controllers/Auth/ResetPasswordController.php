@@ -11,12 +11,6 @@ use Illuminate\Support\Facades\Password;
 
 class ResetPasswordController extends Controller
 {
-    const ERROR_MSG = [
-        PasswordBroker::INVALID_USER     => '',
-        PasswordBroker::INVALID_PASSWORD => '',
-        PasswordBroker::
-    ];
-
     /**
      * パスワードリセットメール送信処理
      *
@@ -65,6 +59,8 @@ class ResetPasswordController extends Controller
         }
    
         $response = Password::broker()->reset(
+            // ここでpassword_confirmationを追加するのはPasswordBrokerでその値を使うから。
+            // リクエストに含めないのはパスワードの入力チェックはクライアント側でやってもらいたいから。
             $request->only('token', 'email', 'password') + [
                 'password_confirmation' => $request->all()['password'],
             ],
@@ -73,7 +69,7 @@ class ResetPasswordController extends Controller
 
         if (Password::PASSWORD_RESET !== $response) {
             return response()->json([
-                'message' => self::ERROR_MSG[$response] ?? 'Error...',
+                'message' => 'Password reset failure...',
             ], 400);
         }
         
