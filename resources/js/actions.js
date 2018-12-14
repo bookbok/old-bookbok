@@ -80,8 +80,8 @@ export const requestLogout = () => dispatch => {
     });
 }
 
+export const setUserRegister = register => ({ type: types.SET_USER_REGISTER, register });
 export const requestUserRegister = (userInfo) => dispatch => {
-    /* TODO: サーバー側が実装されれば書く
     fetch(DOMAIN + "/api/auth/register", {
         method: "POST",
         headers: {
@@ -91,8 +91,8 @@ export const requestUserRegister = (userInfo) => dispatch => {
         body: JSON.stringify(userInfo)
     })
         .then(res => {
+            dispatch(setUserRegister(res.status));
         });
-    */
 };
 
 
