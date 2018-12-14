@@ -25,20 +25,22 @@ export const Contribution = () => (
                                 <div class="col">
                                     <input type="number" class="form-control" placeholder="終了ページ" />
                                 </div>
+                                <div class="col">
+                                    <input type="number" class="form-control" placeholder="該当行番号" />
+                                </div>
                             </div>
                             <br />
                             <div class="form-group">
-                                <input type="number" class="form-control" placeholder="該当行番号" />
-                            </div>
-                            <div class="form-group">
-                                <label for="impressions-text">感想:</label>
-                                <textarea class="form-control" id="impressions-text"></textarea>
+                                <label for="impressions-text" class="control-label">感想&nbsp;
+                                        <span class="badge badge-danger">必須</span>
+                                </label>
+                                <textarea class="form-control" id="impressions-text" required></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                        <button type="button" class="btn btn-primary">BOKを投稿</button>
+                        <button type="submit" class="btn btn-primary">BOKを投稿</button>
                     </div>
                 </div>
             </div>
