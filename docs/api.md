@@ -47,7 +47,7 @@ BOOKBOK　API仕様書
             ]
         }
 
-+ Response 422 (text/html)
++ Response 422 (application/json)
 
         {
             "message": "Falid to authentication..."
@@ -57,17 +57,23 @@ BOOKBOK　API仕様書
 
 ### ログアウトする [GET]
 
-+ Response 200 (text/html)
++ Response 200 (application/json)
 
         {
             "message": "You have been successfully logged out!"
+        }
+
++ Response 401 (application/json)
+
+        {
+            "message": "Unauthenticated."
         }
     
 ## Yourself [/api/auth/user]
 
 ### 認証したユーザーの情報を取得する [GET]
 
-+ Response 200 (text/html)
++ Response 200 (application/json)
 
         {
             "id": 1,
@@ -79,6 +85,12 @@ BOOKBOK　API仕様書
             "updated_at": "2018-10-24 15:53:09",
             "role_id": "1",
             "name": "あいえええ"
+        }
+
++ Response 401 (application/json)
+
+        {
+            "message": "Unauthenticated."
         }
 
 ## Register [/api/auth/register]
@@ -146,6 +158,12 @@ BOOKBOK　API仕様書
             "message": "Verification failed..."
         }
 
++ Response 401 (application/json)
+
+        {
+            "message": "Unauthenticated."
+        }
+
 + Response 403 (application/json)
 
         {
@@ -172,6 +190,12 @@ BOOKBOK　API仕様書
 
         {
             "message": "Your email has been successfully verified!"
+        }
+
++ Response 401 (application/json)
+
+        {
+            "message": "Unauthenticated."
         }
 
 + Response 429 (application/json)
