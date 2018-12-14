@@ -47,7 +47,7 @@ BOOKBOK　API仕様書
             ]
         }
 
-+ Response 422 (text/html)
++ Response 422 (application/json)
 
         {
             "message": "Falid to authentication..."
@@ -57,7 +57,7 @@ BOOKBOK　API仕様書
 
 ### ログアウトする [GET]
 
-+ Response 200 (text/html)
++ Response 200 (application/json)
 
         {
             "message": "You have been successfully logged out!"
@@ -73,7 +73,7 @@ BOOKBOK　API仕様書
 
 ### 認証したユーザーの情報を取得する [GET]
 
-+ Response 200 (text/html)
++ Response 200 (application/json)
 
         {
             "id": 1,
