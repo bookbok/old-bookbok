@@ -82,7 +82,7 @@ export const requestLogout = () => dispatch => {
 
 export const setUserRegister = register => ({ type: types.SET_USER_REGISTER, register });
 export const requestUserRegister = (userInfo) => dispatch => {
-    fetch(DOMAIN + "/api/auth/register", {
+    wrapFetch(DOMAIN + "/api/auth/register", {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -92,6 +92,9 @@ export const requestUserRegister = (userInfo) => dispatch => {
     })
         .then(res => {
             dispatch(setUserRegister(res.status));
+        })
+        .catch(err => {
+            dispatch(setUserRegister(err));
         });
 };
 
