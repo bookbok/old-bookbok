@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { requestUserRegister } from "../actions.js";
 import { store } from "../store";
+import { successfulStatus } from "../utils";
+import { Loading } from "./shared/Loading";
 
 export class UserRegister extends Component {
     constructor(props) {
@@ -12,6 +14,10 @@ export class UserRegister extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    componentDidMount() {
+        store.dispatch(requestUserRegister(this.state));
+    }
+    
     // 変更されたinput要素のnameを取得し、自動的にstateの値を変更するハンドラ
     handleChange(e) {
         const name = e.target.name;
@@ -23,7 +29,12 @@ export class UserRegister extends Component {
     submitRegister(e) {
         e.preventDefault();
         store.dispatch(requestUserRegister(this.state));
-        this.props.history.push('/login'); // アカウント登録後のデフォルト遷移先
+
+        if(successfulStatus(this.props.register)) {
+            this.props.history.push('/login'); // アカウント登録後のデフォルト遷移先
+        } else {
+            console.log(this.props.register);
+        }
     }
 
     render() {
@@ -81,7 +92,7 @@ export class UserRegister extends Component {
                                     </div>
 
                                     <div className="form-group row">
-                                        <label for="password-confirm" className="col-md-4 col-form-label text-md-right">確認用パスワード</label>
+                                        <label htmlFor="password-confirm" className="col-md-4 col-form-label text-md-right">確認用パスワード</label>
 
                                         <div className="col-md-6">
                                             <input id="password-confirm"
