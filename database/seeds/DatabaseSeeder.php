@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
         $this->call(LovesTableSeeder::class);
         $this->call(ReactionsTableSeeder::class);
 
+        // プロトタイプ用に作ったSeeder
+        $this->call(PrototypesTableSeeder::class);
+
         Model::reguard(); //再設定
     }
 }
