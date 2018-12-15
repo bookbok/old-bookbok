@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { fetchUserBookDetail } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils.js";
+
 import { Loading } from "./shared/Loading";
-import { Bok } from "./Bok.jsx";
+import { Bok } from "./Bok";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
+import { BookInfo } from "./shared/book/BookInfo";
 
 export class UserBookDetail extends Component {
     constructor(props){
@@ -42,17 +44,7 @@ export class UserBookDetail extends Component {
                 <div className="container mt-4">
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
-                            <div className="d-flex">
-                                <img src={book.cover} className="title-book-cover"/>
-                                <h1>
-                                    <a href={`/books/${book.id}`}
-                                       className="ml-2 d-block text-success title-book-name">
-                                        {book.name}
-                                    </a>
-                                </h1>
-                            </div>
-                            <h3 className="mt-5">概要</h3>
-                            <p>{book.description}</p>
+                            <BookInfo book={book} />
 
                             <h3 className="mt-5">レビュー</h3>
                             <p>{review.body}</p>
