@@ -10,13 +10,13 @@ use App\Reaction;
 class BokController extends Controller
 {
     /**
-     *  BOKフローを返すAPI
+     *  BOKSを返すAPI
      * 
      * @param string $userBookId
      *   ユーザブックを一意に特定するID
      * 
      * @return \Illuminate\Http\Response
-     *   JSON形式でBOKフローを返す
+     *   JSON形式でBOKSを返す
      */
     public function index($userBookId){
 
