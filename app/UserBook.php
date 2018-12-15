@@ -43,23 +43,23 @@ class UserBook extends Model
      * Query scope
      */
 
-    public function scopeIsNoneStatus($query){
+    public function scopeNoneStatus($query){
         return $query->where('reading_status', self::READING_STATUS['none']);
     }
 
-    public function scopeIsWantedStatus($query){
+    public function scopeWantedStatus($query){
         return $query->where('reading_status', self::READING_STATUS['wanted']);
     }
 
-    public function scopeIsUnreadStatus($query){
+    public function scopeUnreadStatus($query){
         return $query->where('reading_status', self::READING_STATUS['unread']);
     }
 
-    public function scopeIsReadingStatus($query){
+    public function scopeReadingStatus($query){
         return $query->where('reading_status', self::READING_STATUS['reading']);
     }
 
-    public function scopeIsReadedStatus($query){
+    public function scopeReadedStatus($query){
         return $query->where('reading_status', self::READING_STATUS['readed']);
     }
 }
