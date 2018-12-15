@@ -36,7 +36,7 @@ class BokFlowController extends Controller
         if($followers->isEmpty()){
             return response()->json(
                 [],
-                404,
+                200,
                 [],
                 JSON_UNESCAPED_UNICODE
             );
