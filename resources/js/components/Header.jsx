@@ -7,6 +7,7 @@ import { Login } from './Login.jsx';
 import { Logout } from './Logout.jsx';
 import { UserRegister } from './UserRegister.jsx';
 import { Mypage } from './Mypage.jsx';
+import { ConnectedBokFlow } from '../containers.js';
 import { ConnectedBookDetail} from '../containers.js';
 import { ConnectedBookList} from '../containers.js';
 import { ConnectedUsersBookshelf } from '../containers.js';
@@ -25,6 +26,7 @@ const Header = () => (
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
                     <Link className="nav-item nav-link" to="/">ホーム <span className="sr-only">(current)</span></Link>
+                    <Link className="nav-item nav-link" to="/bok_flow">ボックフロー</Link>
                     <Link className="nav-item nav-link" to="/signup">新規登録</Link>
                     <Link className="nav-item nav-link" to="/login">ログイン</Link>
                     <Link className="nav-item nav-link" to="/logout">ログアウト</Link>
@@ -49,6 +51,7 @@ export const MenuRouter = () => (
             <Switch>
                 <Route exact path="/" component={ Home } />
                 <Route exact path="/home" component={ Home } />
+                <Route exact path="/bok_flow" component={ ConnectedBokFlow } />
                 <Route exact path="/signup" component={ SignUp } />
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/logout" component={ Logout } />
