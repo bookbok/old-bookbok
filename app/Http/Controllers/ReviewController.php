@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ReviewController extends Controller
 {
@@ -18,24 +20,42 @@ class ReviewController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Reviewの作成、または更新をするAPI
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $userBookId
      * @return \Illuminate\Http\Response
+     *   ReviewのインスタンスJSON
      */
-    public function store(Request $request)
+    public function store(Request $request, $userBookId)
     {
-        //
+        $validator = \Validator::make($request->all(), [
+            'body' => 'required|string|max:4048',
+            'publish' => 'boolean',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        // 公開処理
+        $publishedAt = null;
+        if($request->publish) {
+            $publishedAt = Carbon::now()->toDateTimeString();
+        }
+
+        $review = Review::updateOrCreate(
+            [
+                'user_id' => auth()->id(),
+                'user_book_id' => $userBookId,
+            ],
+            [
+                'body' => $request->body,
+                'published_at' => $publishedAt,
+            ]
+        );
+
+        return response()->json($review, 200);
     }
 
     /**
@@ -45,29 +65,6 @@ class ReviewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Review $review)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Review $review)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Review $review)
     {
         //
     }
