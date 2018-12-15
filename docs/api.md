@@ -628,9 +628,6 @@ BOOKBOK　API仕様書
 
 ### レビュー情報の取得 [GET]
 
-> REVIEW:
- - user_booksの詳細でreview、boksを返すのでもはや必要ないのでは？
-
 + Response 200 (application/json)
 
         {
@@ -641,18 +638,20 @@ BOOKBOK　API仕様書
             "user_id": 1
         }
 
-### レビュー情報の投稿 [POST]
+### レビュー情報の投稿、または更新(PUT) [POST]
 
 + Request (application/json)
 
     + Attributes
 
         + boby (required)
+        + publish
 
     + Body
 
         {
-            "body": "review body"
+            "body": "review body",
+            "publish": true
         }
 
 + Response 201 (application/json)
@@ -665,23 +664,7 @@ BOOKBOK　API仕様書
             "user_id": 1
         }
 
-### レビュー情報の更新 [PUT]
-
-+ Request (application/json)
-
-    + Attributes
-
-        + boby (required)
-
-    + Body
-
-        {
-            "body": "review body"
-        }
-
-+ Response 201 (application/json)
-
-###　レビュー情報の削除 [DELETE]
+### レビュー情報の削除 [DELETE]
 
 + Response 200 (application/json)
 
