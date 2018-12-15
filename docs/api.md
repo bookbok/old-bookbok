@@ -648,11 +648,13 @@ BOOKBOK　API仕様書
     + Attributes
 
         + boby (required)
+        + publish
 
     + Body
 
         {
-            "body": "review body"
+            "body": "review body",
+            "publish": true
         }
 
 + Response 201 (application/json)
@@ -672,16 +674,26 @@ BOOKBOK　API仕様書
     + Attributes
 
         + boby (required)
+        + publish
 
     + Body
 
         {
-            "body": "review body"
+            "body": "review body",
+            "publish": ture
         }
 
 + Response 201 (application/json)
 
-###　レビュー情報の削除 [DELETE]
+        {
+            "id": 1,
+            "body": "review body",
+            "published_at": "2018-11-11 10:30",
+            "user_book_id": 1,
+            "user_id": 1
+        }
+
+### レビュー情報の削除 [DELETE]
 
 + Response 200 (application/json)
 
