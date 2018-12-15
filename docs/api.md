@@ -68,7 +68,7 @@ BOOKBOK　API仕様書
         {
             "message": "Unauthenticated."
         }
-    
+
 ## Yourself [/api/auth/user]
 
 ### 認証したユーザーの情報を取得する [GET]
@@ -418,6 +418,7 @@ BOOKBOK　API仕様書
                         "user_id": "1",
                         "book_id": "1",
                         "id": 1,
+                        "reading_status": "0",
                         "created_at": "2018-09-11 10:11:00",
                         "updated_at": "2018-09-11 10:11:00"
                     }
@@ -433,6 +434,7 @@ BOOKBOK　API仕様書
                         "user_id": "1",
                         "book_id": "2",
                         "id": 2,
+                        "reading_status": "0",
                         "created_at": "2018-09-11 10:11:00",
                         "updated_at": "2018-09-11 10:11:00"
                     }
@@ -522,6 +524,7 @@ BOOKBOK　API仕様書
             "id": 1,
             "user_id": "1",
             "book_id": "1",
+            "reading_status": "0",
             "user":{
                 "id": 1,
                 "name": "admin",
@@ -847,15 +850,15 @@ BOOKBOK　API仕様書
                 }
             }
         ]
-        
+
 + Response 401(application/json)
 
         []
-        
+
 + Response 404(application/json)
 
         []
- 
+
 # Group FOLLOWERS
 
 ## Followers [/api/users/{userId}/followers]
