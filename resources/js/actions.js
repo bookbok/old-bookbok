@@ -49,7 +49,16 @@ export function wrapAction(actionCreator, callback) {
 }
 
 
-export const setTimeLine = timeLine => ({ type: types.SET_TIMELINE, timeLine });
+export const setBokFlow = bokFlow => ({ type: types.SET_BOK_FLOW, bokFlow });
+export const fetchBokFlow = () => dispatch => {
+    wrapFetch(DOMAIN + "/api/bok_flow").then(json => {
+        if(utils.isEmpty(json)){
+            dispatch(setBokFlow('最近のBokがありません'));
+        } else {
+            dispatch(setBokFlow(json));
+        }
+    });
+}
 
 /* ==== Auth actions ==== */
 // Get authentication token
