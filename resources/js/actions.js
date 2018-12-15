@@ -131,6 +131,14 @@ export const fetchUsersBookshelf = (userId) => dispatch => {
         });
 }
 
+export const setUserBookDetail = userBookDetail => ({ type: types.SET_USER_BOOK_DETAIL, userBookDetail });
+export const fetchUserBookDetail = (userId, userBookId) => dispatch => {
+    wrapFetch(DOMAIN + `/api/users/${userId}/user_books/${userBookId}`)
+        .then(json => {
+            dispatch(setUserBookDetail(json));
+        });
+}
+
 export const setBookList = books => ({type: types.SET_BOOKLIST, books});
 export const fetchBookList = () => dispatch => {
     wrapFetch(DOMAIN + "/api/books/")
