@@ -8,6 +8,14 @@ class UserBook extends Model
 {
     protected $table = 'user_book';
 
+    public const READING_STATUS = [
+        'none' => 0,     // 未設定
+        'wanted' => 5,   // 欲しい
+        'unread' => 10,  // 積読
+        'reading' => 15, // 読書中
+        'readed' => 20,  // 読書了
+    ];
+
     /**
      * リレーション定義
      */
@@ -28,5 +36,30 @@ class UserBook extends Model
 
     public function book(){
         return $this->belongsTo(Book::class);
+    }
+
+
+    /**
+     * Query scope
+     */
+
+    public function scopeIsNoneStatus($query){
+        return $query->where('reading_status', self::READING_STATUS['none']);
+    }
+
+    public function scopeIsWantedStatus($query){
+        return $query->where('reading_status', self::READING_STATUS['wanted']);
+    }
+
+    public function scopeIsUnreadStatus($query){
+        return $query->where('reading_status', self::READING_STATUS['unread']);
+    }
+
+    public function scopeIsReadingStatus($query){
+        return $query->where('reading_status', self::READING_STATUS['reading']);
+    }
+
+    public function scopeIsReadedStatus($query){
+        return $query->where('reading_status', self::READING_STATUS['readed']);
     }
 }
