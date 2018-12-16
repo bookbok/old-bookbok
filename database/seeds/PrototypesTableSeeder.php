@@ -37,7 +37,7 @@ class PrototypesTableSeeder extends Seeder
             'email' => 'sugino@example.com',
             'password' => bcrypt('password'),
             'role_id' => 10,
-            'avatar' => 'https://avatars0.githubusercontent.com/u/22770924',
+            'avatar' => 'https://avatars0.githubusercontent.com/u/29668738',
         ]);
          $book = Book::create([
             'isbn' => '9784534031730',
