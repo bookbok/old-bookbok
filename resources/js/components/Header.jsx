@@ -7,11 +7,13 @@ import { Login } from './Login.jsx';
 import { Logout } from './Logout.jsx';
 import { UserRegister } from './UserRegister.jsx';
 import { Mypage } from './Mypage.jsx';
+import { ConnectedBokFlow } from '../containers.js';
 import { ConnectedBookDetail} from '../containers.js';
 import { ConnectedBookList} from '../containers.js';
 import { ConnectedUserBookshelf } from '../containers.js';
 import { ConnectedLikeBokList } from '../containers.js';
 import { ConnectedUserInfo } from '../containers.js';
+import { ConnectedUserBookDetail } from '../containers.js';
 
 // bootstrap global navigation bar
 const Header = () => (
@@ -24,6 +26,7 @@ const Header = () => (
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
                     <Link className="nav-item nav-link" to="/">ホーム <span className="sr-only">(current)</span></Link>
+                    <Link className="nav-item nav-link" to="/bok_flow">ボックフロー</Link>
                     <Link className="nav-item nav-link" to="/signup">新規登録</Link>
                     <Link className="nav-item nav-link" to="/login">ログイン</Link>
                     <Link className="nav-item nav-link" to="/logout">ログアウト</Link>
@@ -31,6 +34,7 @@ const Header = () => (
                     <Link className="nav-item nav-link" to="/books">本一覧</Link>
                     <Link className="nav-item nav-link" to="/books/1">本詳細</Link>
                     <Link className="nav-item nav-link" to ="/users/1/user_books">ユーザー本棚</Link>
+                    <Link className="nav-item nav-link" to ="/users/1/user_books/1">UserBookDetail</Link>
                     <Link className="nav-item nav-link" to="/users/1/likes">LIKEしたbok一覧</Link>
                     <Link className="nav-item nav-link" to="/users">ユーザー一覧</Link>
                 </div>
@@ -47,6 +51,7 @@ export const MenuRouter = () => (
             <Switch>
                 <Route exact path="/" component={ Home } />
                 <Route exact path="/home" component={ Home } />
+                <Route exact path="/bok_flow" component={ ConnectedBokFlow } />
                 <Route exact path="/signup" component={ SignUp } />
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/logout" component={ Logout } />
@@ -55,6 +60,7 @@ export const MenuRouter = () => (
                 <Route exact path="/books" component={ ConnectedBookList } />
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />
                 <Route exact path="/users/:id/user_books" component={ ConnectedUserBookshelf } />
+                <Route exact path="/users/:userId/user_books/:userBookId" component={ ConnectedUserBookDetail } />
                 <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
                 <Route exact path="/users" component={ ConnectedUserInfo } />
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}

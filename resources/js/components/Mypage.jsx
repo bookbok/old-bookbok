@@ -8,7 +8,7 @@ export const Mypage = () => (
             <div className="row justify-content-center">
                 <div className="col-md-8">
                     <div class="p-3">
-                        
+
                         {/*タブのボタン部分*/}
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
