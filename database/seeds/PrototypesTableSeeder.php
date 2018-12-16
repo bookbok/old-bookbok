@@ -346,9 +346,8 @@ class PrototypesTableSeeder extends Seeder
         $boks = [
             [
                 'body' => '最初の1ページ目に書かれた文章から、一気に物語に引き込まれるような情景の伝え方が素晴らしい！！！\nこれぞ新海誠の世界観、ここにありという文章。\nこうして読みながらBokを書きながらその情景を思い浮かべるだけで頭の中で世界観がどんどん広がっていく。',
-                'page_num_begin' => 7,
+                'page_num_begin' => 1,
                 'page_num_end' => 1,
-                'line_num' => 1,
                 'published_at' => Carbon::now(),
             ],
             [
@@ -383,7 +382,6 @@ class PrototypesTableSeeder extends Seeder
                 'body' => '「永遠とか心とか魂とか言うものがどこにあるのか、分かった気がした。」\n!!!!!!!!!!!!!',
                 'page_num_begin' => 50,
                 'page_num_end' => 50,
-                'line_num' => 0,
                 'published_at' => Carbon::now(),
             ],
             [
@@ -397,7 +395,6 @@ class PrototypesTableSeeder extends Seeder
                 'body' => '貴樹が高校になっても朝から部活練習を一人だろうとしているのは、やはり何もしていない時間を無くしたいからなのだろう。',
                 'page_num_begin' => 61,
                 'page_num_end' => 61,
-                'line_num' => 0,
                 'published_at' => Carbon::now(),
             ],
             [
@@ -425,7 +422,6 @@ class PrototypesTableSeeder extends Seeder
                 'body' => 'この時代(平成十数年代)にはWebなんてそんなになくて、WindowsAPIのようなOSへのAPIを叩いてネイティブのデスクトップアプリを作るといったことがスタンダードだったんだな。と至極当たり前のことを考えながら、平成30年との間に横たわる茫漠とした大きな時間を感じた。',
                 'page_num_begin' => 132,
                 'page_num_end' => 132,
-                'line_num' => 0,
                 'published_at' => Carbon::now(),
             ],
             [
@@ -439,7 +435,6 @@ class PrototypesTableSeeder extends Seeder
                 'body' => '人生とは多くの奇蹟でできている。悪いことも良いことも全て含めて奇蹟なのだ。結局どれだけ大人になろうとも、「一つずつできることからやる」のだ......',
                 'page_num_begin' => 184,
                 'page_num_end' => 184,
-                'line_num' => 0,
                 'published_at' => Carbon::now(),
             ],
         ];
