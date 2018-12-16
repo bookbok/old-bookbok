@@ -5,8 +5,8 @@ export function rootReducer(
     action
 ) {
     switch(action.type) {
-        case types.SET_TIMELINE:
-            return { ...state, timeLine: action.timeLine };
+        case types.SET_BOK_FLOW:
+            return { ...state, bokFlow: action.bokFlow };
 
         case types.SET_GENRES:
             return { ...state, genres: action.genres };
