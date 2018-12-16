@@ -339,7 +339,68 @@ class PrototypesTableSeeder extends Seeder
         $this->insertBoks($boks, $user->id, $userBook->id);
     }
 
-    private function akari() { }
+    private function akari() {
+        $user = User::create([
+            'name' => 'AKARI-I',
+            'email' => 'akari@example.com',
+            'password' => bcrypt('password'),
+            'role_id' => 10,
+            'avatar' => 'https://avatars0.githubusercontent.com/u/30049713?s=400&u=00ee60703f10456080bc172aad4a966c3c954d5e&v=4',
+        ]);
+
+        $book = Book::create([
+            'isbn' => '9784344812758',
+            'name' => 'ヘタリア ~axis powers~',
+            'description' => '昔はすごく強かった。周りからはドイツ、イギリスより強いと思われていた。──でも　なんか違った。～そんなヘタリアとゆかいな世界の仲間たちの物語～',
+            'cover' => 'https://cover.openbd.jp/9784344812758.jpg',
+            'author' => '日丸屋秀和',
+            'genre_id' => 1,
+        ]);
+
+        // don't touch
+        $userBook = UserBook::create([
+            'user_id' => $user->id,
+            'book_id' => $book->id,
+        ]);
+
+        Review::create([
+            'user_book_id' => $userBook->id,
+            'user_id' => $user->id,
+            'body' => 'ヘタリアといえばこれ！みたいな話が詰まってる。枢軸はもちろんなんだけど連合国のわちゃわちゃがひたすら可愛かった。',
+        ]);
+
+        $boks = [
+            [
+                'body' => 'マキャベリさんパートほんと好き',
+                'page_num_begin' => 27,
+                'page_num_end' => null,
+                'line_num' => null,
+                'published_at' => Carbon::now(),
+            ],
+            [
+                'body' => 'おじいちゃんがまだはっちゃけきれてなくて可愛い',
+                'page_num_begin' => 30,
+                'page_num_end' => 34,
+                'line_num' => null,
+                'published_at' => Carbon::now(),
+            ],
+            [
+                'body' => '連合国きたぁぁぁぁ',
+                'page_num_begin' => 47,
+                'page_num_end' => null,
+                'line_num' => null,
+                'published_at' => Carbon::now(),
+            ],
+            [
+                'body' => 'フィンランドもいもい可愛い',
+                'page_num_begin' => 125,
+                'page_num_end' => null,
+                'line_num' => null,
+                'published_at' => Carbon::now(),
+            ]
+        ];
+        $this->insertBoks($boks, $user->id, $userBook->id);
+    }
 
     private function nakka() {
         $user = User::create([
