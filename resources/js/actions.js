@@ -80,21 +80,16 @@ export const requestLogout = () => dispatch => {
     });
 }
 
-export const setUserRegister = register => ({ type: types.SET_USER_REGISTER, register });
-export const requestUserRegister = (userInfo) => dispatch => {
+export const directUserRegister = (userInfo) => dispatch => {
     wrapFetch(DOMAIN + "/api/auth/register", {
         method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfo)
+        body: userInfo
     })
         .then(res => {
-            dispatch(setUserRegister(res.status));
+           return res.status;
         })
         .catch(err => {
-            dispatch(setUserRegister(err));
+            return err;
         });
 };
 
