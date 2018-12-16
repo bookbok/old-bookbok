@@ -183,7 +183,96 @@ class PrototypesTableSeeder extends Seeder
         $this->insertBoks($boks, $user->id, $userBook->id);
     }
 
-    private function kento() { }
+    private function kento() {
+        $user = User::create([
+            'name'      => 'kento-oka',
+            'email'     => 'kento-oka@example.com',
+            'password'  => bcrypt('password'),
+            'role_id'   => 10,
+            'avatar'    => 'https://avatars0.githubusercontent.com/u/30544668',
+        ]);
+
+        $book = Book::create([
+            'isbn'        => '9784150311193',
+            'name'        => 'リライト',
+            'description' => '過去は変わらないはずだった―1992年夏、未来から来たという保彦と出会った中学2年の美雪は、旧校舎崩壊事故から彼を救うため10年後へ跳んだ。2002年夏、作家となった美雪はその経験を元に小説を上梓する。彼と過ごした夏、時を超える薬、突然の別れ...しかしタイムリープ当日になっても10年前の自分は現れない。不審に思い調べるなかで、美雪は記憶と現実の違いに気づき...SF史上最悪のパラドックスを描く第1作。',
+            'cover'       => 'https://cover.openbd.jp/9784150311193.jpg',
+            'author'      => '法条遥／著',
+            'genre_id'    => 16,
+        ]);
+
+        // don't touch
+        $userBook = UserBook::create([
+            'user_id' => $user->id,
+            'book_id' => $book->id,
+        ]);
+
+        Review::create([
+            'user_book_id' => $userBook->id,
+            'user_id'      => $user->id,
+            'body'         => 'リビジョン・リアクト・リライブへと続くリ-シリーズの第1作。\nとにかく読み進めながら感じる微妙な違和感や不穏な空気など、一気に読み進めてしまわないと気がすまなくなってしまうような物語だった。\n\n次から次へと視点や時間が切り替わり、何度も前のページん戻るなどのタイムリープを経験した。時間がかかわる物語が好きな人にはおすすめのシリーズ。',
+        ]);
+
+        $boks = [
+            [
+                'body'           => '時間が絡む物語だ！これは徹夜コースだな。',
+                'page_num_begin' => 1,
+                'page_num_end'   => null,
+                'line_num'       => null,
+                'published_at'   => Carbon::now(),
+            ],
+            [
+                'body'           => 'さあ過去が変わったぞ。どう進んでいくんだ',
+                'page_num_begin' => 10,
+                'page_num_end'   => 10,
+                'line_num'       => 8,
+                'published_at'   => Carbon::now(),
+            ],
+            [
+                'body'           => '「保彦が証明のために未来からとってきた新聞。これはそうなる運命だった」つまりこの物語の時間というものは過去から未来へ流れる確定した一本の軸ということか。',
+                'page_num_begin' => null,
+                'page_num_end'   => 38,
+                'line_num'       => null,
+                'published_at'   => Carbon::now(),
+            ],
+            [
+                'body'           => 'ドラえもん300年も続くのか...。超ご長寿番組だなw',
+                'page_num_begin' => null,
+                'page_num_end'   => null,
+                'line_num'       => null,
+                'published_at'   => Carbon::now(),
+            ],
+            [
+                'body'           => 'きたー！タイムリープもの定番のラベンダーの香り',
+                'page_num_begin' => 48,
+                'page_num_end'   => null,
+                'line_num'       => null,
+                'published_at'   => Carbon::now(),
+            ],
+            [
+                'body'           => 'ここで本が作られるのか',
+                'page_num_begin' => 98,
+                'page_num_end'   => 100,
+                'line_num'       => null,
+                'published_at'   => Carbon::now(),
+            ],
+            [
+                'body'           => 'さあ変わるはずのない過去が変わりだして、過去が未来へ影響しはじめたぞ',
+                'page_num_begin' => 115,
+                'page_num_end'   => null,
+                'line_num'       => null,
+                'published_at'   => Carbon::now(),
+            ],
+            [
+                'body'           => '最後まで読んでしまった。なんやこれ最高かよ',
+                'page_num_begin' => 282,
+                'page_num_end'   => null,
+                'line_num'       => null,
+                'published_at'   => Carbon::now(),
+            ],
+        ];
+        $this->insertBoks($boks, $user->id, $userBook->id);
+    }
 
     private function yrtmeci() {
         $user = User::create([
