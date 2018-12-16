@@ -184,7 +184,57 @@ class PrototypesTableSeeder extends Seeder
     }
 
     private function kento() { }
-    private function yrtmeci() { }
+
+    private function yrtmeci() {
+        $user = User::create([
+            'name' => 'kazuki',
+            'email' => 'yrtmeci@example.com',
+            'password' => bcrypt('password'),
+            'role_id' => 10,
+            'avatar' => 'https://avatars0.githubusercontent.com/u/41029768',
+        ]);
+
+        $book = Book::create([
+            'isbn' => '4062209896',
+            'name' => '図解仕事の基本社会人1年生大全',
+            'description' => 'いまさら聞けない、社会人のビジネス常識がすぐわかる! 楽しく充実した仕事人生のために
+            、段取りよくスマートに働くには?',
+            'cover' => 'https://cover.openbd.jp/9784062209892.jpg',
+            'author' => '北篠久美子',
+            'genre_id' => 6,
+        ]);
+
+        // don't touch
+        $userBook = UserBook::create([
+            'user_id' => $user->id,
+            'book_id' => $book->id,
+        ]);
+
+        Review::create([
+            'user_book_id' => $userBook->id,
+            'user_id' => $user->id,
+            'body' => '文字ばかりでなく図があることで読み進めやすい。',
+        ]);
+
+        $boks = [
+            [
+                'body' => '仕事を始める前に「やりがい」を見つけておこうと思った。',
+                'page_num_begin' => 20,
+                'page_num_end' => 21,
+                'line_num' => 1,
+                'published_at' => Carbon::now(),
+            ],
+            [
+                'body' => '人と話すときのさしすせそ。しっかりと覚えようと思った。',
+                'page_num_begin' => 60,
+                'page_num_end' => 60,
+                'line_num' => 2,
+                'published_at' => Carbon::now(),
+            ],
+        ];
+        $this->insertBoks($boks, $user->id, $userBook->id);
+    }
+
     private function oya() { }
     private function akari() { }
 
