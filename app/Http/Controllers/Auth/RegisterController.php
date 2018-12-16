@@ -14,7 +14,7 @@ class RegisterController extends Controller
      *
      * @param   Request    $request
      *  リクエスト
-     * 
+     *
      * @return  \Illuminate\Http\Response
      */
     public function register(Request $request)

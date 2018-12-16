@@ -10,13 +10,13 @@ use App\Reaction;
 class BokController extends Controller
 {
     /**
-     *  BOKフローを返すAPI
+     *  BOKSを返すAPI
      * 
      * @param string $userBookId
      *   ユーザブックを一意に特定するID
      * 
      * @return \Illuminate\Http\Response
-     *   JSON形式でBOKフローを返す
+     *   JSON形式でBOKSを返す
      */
     public function index($userBookId){
 
@@ -35,7 +35,7 @@ class BokController extends Controller
         // 指定されたuserBookIdに紐づくBokを取得する
         $boks = Bok::with([
                 'userBook.user:id,name',
-                'userBook.book:id,isbn',
+                'userBook.book:id,isbn,cover',
             ])
             ->select(['id', 'user_id', 'user_book_id', 'page_num_begin', 'page_num_end', 'line_num', 'body', 'updated_at'])
             ->withCount([

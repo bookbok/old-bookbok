@@ -59,10 +59,22 @@ Route::get('books', 'BookController@index');
 Route::get('books/{book}', 'BookController@show');
 
 /**
+ * Resource: Review
+ *
+ */
+Route::post('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
+Route::put('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
+
+/**
  * Resource: Bok
- * 
+ *
  */
 Route::get('user_books/{userBookId}/boks', 'BokController@index');
+
+/**
+ * Resource: BokFlow
+ */
+Route::get('bok_flow', 'BokFlowController@index')->middleware('auth:api');
 
 /**
  *  Resource: UserBook

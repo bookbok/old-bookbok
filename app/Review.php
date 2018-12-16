@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
+    protected $fillable = [
+        'user_id', 'user_book_id', 'body', 'published_at',
+    ];
+
     /**
      *リレーション定義
      */
@@ -15,5 +19,14 @@ class Review extends Model
 
     public function userBook(){
         return $this->belongsTo(UserBook::class, 'user_book_id');
+    }
+
+
+    /**
+     * Query scope
+     */
+
+    public function scopePublished($query){
+        return $query->whereNotNull('published_at');
     }
 }

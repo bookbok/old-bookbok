@@ -17,11 +17,11 @@ class CreateBoksTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('user_book_id');
-            $table->unsignedInteger('page_num_begin');
-            $table->unsignedInteger('page_num_end');
-            $table->unsignedInteger('line_num');
+            $table->unsignedInteger('page_num_begin')->nullable();
+            $table->unsignedInteger('page_num_end')->nullable();
+            $table->unsignedInteger('line_num')->nullable();
             $table->string('body');
-            $table->dateTime('published_at');
+            $table->dateTime('published_at')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
