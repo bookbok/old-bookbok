@@ -235,7 +235,82 @@ class PrototypesTableSeeder extends Seeder
         $this->insertBoks($boks, $user->id, $userBook->id);
     }
 
-    private function oya() { }
+    private function oya() {
+        $user = User::create([
+            'name' => 'OYASAI',
+            'email' => 'oyasai@example.com',
+            'password' => bcrypt('password'),
+            'role_id' => 10,
+            'avatar' => 'https://avatars3.githubusercontent.com/u/25961633',
+        ]);
+
+        $book = Book::create([
+            'isbn' => '9784023332096',
+            'name' => 'ハムスターがおしえるハムの本音',
+            'description' => '鳴き声、しぐさ、体のヒミツなどについて、ハムスター自身が「ハム目線」で解説する実用書。',
+            'cover' => 'https://books.google.co.jp/books/content?id=7Nx8tgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',
+            'author' => '今泉忠明',
+            'genre_id' => 9,
+        ]);
+
+        $userBook = UserBook::create([
+            'user_id' => $user->id,
+            'book_id' => $book->id,
+        ]);
+
+        Review::create([
+            'user_book_id' => $userBook->id,
+            'user_id' => $user->id,
+            'body' => 'ハムスターに対してと飼い主に対して、それぞれ面白おかしく「あの行動」についてのアドバイスが記述されていてる。ハムスターという生き物は小さいが故にまだまだ謎の多い生き物とされているが、この本一冊でちょっとしたしぐさ全てに意味があるということがわかり、面白いと思った。',
+        ]);
+
+        $boks = [
+            [
+                'body' => 'ハムスターは体調を隠す生き物とのこと。常日頃愛ハムの体調チェックはしとかないと。',
+                'page_num_begin' => 26,
+                'page_num_end' => 26,
+                'line_num' => 3,
+                'published_at' => Carbon::now(),
+            ],
+            [
+                'body' => '頬袋から餌をたくさん出し始めるハムスター。よくSNSなどで挙がっていたりしており、可愛いなあと思って見てたが実は敵から逃げる時の準備だとか。こういう行動もハムスターにとっては意味があるんだなあ。',
+                'page_num_begin' => 44,
+                'page_num_end' => 44,
+                'line_num' => 10,
+                'published_at' => Carbon::now(),
+            ],
+            [
+                'body' => 'ハムスターの1日が絵図で描かれている。直感的でとてもわかりやすい図でハム飼い初心者さんにとっては嬉しい図だろうと思う。\nところでハムスターって半日も寝てるんだなあ・・・。',
+                'page_num_begin' => 75,
+                'page_num_end' => 75,
+                'line_num' => 10,
+                'published_at' => Carbon::now(),
+            ],
+            [
+                'body' => 'ハムスターが定位置で小便をすることは知っていたが、巣箱やごはん皿から離れたところでするというのは初めて知った。',
+                'page_num_begin' => 88,
+                'page_num_end' => 88,
+                'line_num' => 6,
+                'published_at' => Carbon::now(),
+            ],
+            [
+                'body' => 'ハムスターは人間の心拍数の約6倍とのこと。\n私たち人間が少しだけと思って触れ合った時間はハムにとってはとても長いということが分かったので気をつけようと思った。',
+                'page_num_begin' => 129,
+                'page_num_end' => 129,
+                'line_num' => 6,
+                'published_at' => Carbon::now(),
+            ],
+            [
+                'body' => 'もともとハムスターの頬袋はただのシワだった。先祖のハムがこのシワに食べ物を詰めていった結果、巣穴と外との往復量が減り、これを繰り返すうちに今のほお袋ができたらしい。ハムスターは賢い！',
+                'page_num_begin' => 180,
+                'page_num_end' => 180,
+                'line_num' => 1,
+                'published_at' => Carbon::now(),
+            ],
+        ];
+        $this->insertBoks($boks, $user->id, $userBook->id);
+    }
+
     private function akari() { }
 
     private function nakka() {
