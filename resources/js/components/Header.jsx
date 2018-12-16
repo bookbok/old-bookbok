@@ -10,7 +10,7 @@ import { Mypage } from './Mypage.jsx';
 import { ConnectedBokFlow } from '../containers.js';
 import { ConnectedBookDetail} from '../containers.js';
 import { ConnectedBookList} from '../containers.js';
-import { ConnectedUsersBookshelf } from '../containers.js';
+import { ConnectedUserBookshelf } from '../containers.js';
 import { ConnectedLikeBokList } from '../containers.js';
 import { ConnectedUserInfo } from '../containers.js';
 import { ConnectedUserBookDetail } from '../containers.js';
@@ -59,7 +59,7 @@ export const MenuRouter = () => (
                 <Route exact path="/mypage" component={ Mypage } />
                 <Route exact path="/books" component={ ConnectedBookList } />
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />
-                <Route exact path="/users/:id/user_books" component={ ConnectedUsersBookshelf } />
+                <Route exact path="/users/:id/user_books" component={ ConnectedUserBookshelf } />
                 <Route exact path="/users/:userId/user_books/:userBookId" component={ ConnectedUserBookDetail } />
                 <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
                 <Route exact path="/users" component={ ConnectedUserInfo } />

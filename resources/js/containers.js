@@ -4,7 +4,7 @@ import { Genres } from "./components/Genres";
 import { BookDetailView } from "./components/BookDetailView";
 import { UserInfo } from "./components/UserInfo";
 import { BookListView } from "./components/BookListView";
-import { UsersBookshelf } from "./components/UsersBookshelf";
+import { UserBookshelf } from "./components/UserBookshelf";
 import { UserBookDetail } from "./components/UserBookDetail";
 import { LikeBokList } from "./components/LikeBokList";
 
@@ -24,9 +24,9 @@ export const ConnectedUserInfo = connect(
     state => state
 )(UserInfo);
 
-export const ConnectedUsersBookshelf = connect(
+export const ConnectedUserBookshelf = connect(
     state => state
-)(UsersBookshelf);
+)(UserBookshelf);
 
 export const ConnectedBookList = connect(
     state => state,
