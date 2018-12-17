@@ -29,6 +29,9 @@ export function rootReducer(
         case types.SET_USER_INFO:
             return { ...state, userInfo: action.userInfo };
 
+        case types.SET_USER:
+            return { ...state, user: action.user };
+
         case types.SET_USER_BOOK_DETAIL:
             return { ...state, userBookDetail: action.userBookDetail };
 
