@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { directUserRegister } from "../actions.js";
 import { store } from "../store";
-import { successfulStatus } from "../utils";
-import { Loading } from "./shared/Loading";
 
 export class UserRegister extends Component {
     constructor(props) {
@@ -45,7 +43,7 @@ export class UserRegister extends Component {
 
                             <div className="card-body">
                                 <div className={`text-size invalid-feedback text-center ${this.state.invalid && "d-block"}`}>
-                                    入力内容をご確認ください。 
+                                    入力内容をもう一度ご確認ください。 
                                 </div>
                                 {this.state.invalid && <br/>}
                                 <form onSubmit={this.submitRegister}>
