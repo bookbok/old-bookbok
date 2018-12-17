@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { fetchBookDetail } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils.js";
+
 import { Loading } from "./shared/Loading";
-import { Contribution } from "./Contribution.jsx";
+import { Contribution } from "./Contribution";
+import { BookInfo } from "./shared/book/BookInfo";
 
 export class BookDetailView extends Component {
     constructor(props){
@@ -22,28 +24,13 @@ export class BookDetailView extends Component {
         }
 
         return (
-            <div>
-                <div className="container mt-4">
-                    <div className="row justify-content-center">
-                        <div className="col-md-8">
-
-                            <Contribution />
-
-                            <table border="1"><tbody>
-                                <tr>
-                                    <td><img src={book.cover} /></td>
-                                    <td><p>{book.name}</p></td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="2">概要</td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="2"><p>{book.description}</p></td>
-                                </tr>
-                            </tbody></table>
-                        </div>
+            <div className="container mt-4">
+                <div className="row justify-content-center">
+                    <div className="col-md-8 main-content p-5">
+                        <Contribution />
+                        <BookInfo book={book} />
                     </div>
-                </div>    
+                </div>
             </div>
         );
     }

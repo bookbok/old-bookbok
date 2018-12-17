@@ -20,7 +20,16 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
     Route::post('login','LoginController@login')->name('login');
     Route::post('register','RegisterController@register')->name('register');
 
+    Route::post('password/reset/send', 'ResetPasswordController@send')->name('password.reset.send');
+    Route::post('password/reset', 'ResetPasswordController@reset')->name('password.reset');
+
     Route::middleware('auth:api')->group(function () {
+        Route::get('email/verify/{id}', 'VerificationController@verify')
+            ->name('email.verify')
+            ->where('id', '[1-9][0-9]*')
+        ;
+        Route::get('email/resend', 'VerificationController@resend')->name('email.verify.resend');
+
         Route::get('logout','LoginController@logout')->name('logout');
         Route::get('user', function (Request $request) {
             return $request->user();
@@ -50,10 +59,22 @@ Route::get('books', 'BookController@index');
 Route::get('books/{book}', 'BookController@show');
 
 /**
+ * Resource: Review
+ *
+ */
+Route::post('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
+Route::put('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
+
+/**
  * Resource: Bok
- * 
+ *
  */
 Route::get('user_books/{userBookId}/boks', 'BokController@index');
+
+/**
+ * Resource: BokFlow
+ */
+Route::get('bok_flow', 'BokFlowController@index')->middleware('auth:api');
 
 /**
  *  Resource: UserBook

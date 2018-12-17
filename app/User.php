@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
 
@@ -35,7 +35,7 @@ class User extends Authenticatable
      */
     public function books(){
         return $this->belongsToMany(Book::class, 'user_book')
-                    ->withPivot('id')
+                    ->withPivot('id', 'reading_status')
                     ->withTimestamps();
     }
 
@@ -76,5 +76,21 @@ class User extends Authenticatable
                     $q2->isLoved()->where('user_id', $userId);
                 },
             ])->get();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new Notifications\VerifyEmail);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new Notifications\ResetPassword($token));
     }
 }

@@ -25,10 +25,10 @@ BOOKBOK　API仕様書
 
     + Body
 
-        {
-            "email": "example@example.com",
-            "password": "password"
-        }
+            {
+                "email": "example@example.com",
+                "password": "password"
+            }
 
 + Response 200 (application/json)
 
@@ -47,7 +47,7 @@ BOOKBOK　API仕様書
             ]
         }
 
-+ Response 422 (text/html)
++ Response 422 (application/json)
 
         {
             "message": "Falid to authentication..."
@@ -57,17 +57,23 @@ BOOKBOK　API仕様書
 
 ### ログアウトする [GET]
 
-+ Response 200 (text/html)
++ Response 200 (application/json)
 
         {
             "message": "You have been successfully logged out!"
         }
-    
+
++ Response 401 (application/json)
+
+        {
+            "message": "Unauthenticated."
+        }
+
 ## Yourself [/api/auth/user]
 
 ### 認証したユーザーの情報を取得する [GET]
 
-+ Response 200 (text/html)
++ Response 200 (application/json)
 
         {
             "id": 1,
@@ -81,9 +87,18 @@ BOOKBOK　API仕様書
             "name": "あいえええ"
         }
 
++ Response 401 (application/json)
+
+        {
+            "message": "Unauthenticated."
+        }
+
 ## Register [/api/auth/register]
 
 ### ユーザを新規登録する [POST]
+
+新規ユーザ登録を完了すると、
+`/auth/email/verify?expires={expires}&signature={signature}`へのリンクを記載したメールが送信される。
 
 + Request (application/json)
 
@@ -95,11 +110,11 @@ BOOKBOK　API仕様書
 
     + Body
 
-        {
-            "email": "example@example.com",
-            "password": "password",
-            "name": "あいえええ"
-        }
+            {
+                "email": "example@example.com",
+                "password": "password",
+                "name": "あいえええ"
+            }
 
 + Response 200 (application/json)
 
@@ -119,6 +134,164 @@ BOOKBOK　API仕様書
             "password":[
                 "validation.required"
             ]
+        }
+
+## Email Verify [/api/auth/email/verify/{userId}{?expires,signature}]
+
++ Parameters
+
+    + userId: 1 (number) - ユーザID
+    + expires: 1544667062 (number) - 失効日時
+    + signature: 40ae63c8777d0be61147751644ec3180ff2dc87f0111657ff7e6eece2c8c6cae (hex) - 署名
+
+### メールアドレス検証を完了する [GET]
+
++ Response 200 (application/json)
+
+        {
+            "message": "Your email has been successfully verified!"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "Verification failed..."
+        }
+
++ Response 401 (application/json)
+
+        {
+            "message": "Unauthenticated."
+        }
+
++ Response 403 (application/json)
+
+        {
+            "message": "Invalid signature."
+        }
+
++ Response 429 (application/json)
+
+        {
+            "message": "Too Many Attempts."
+        }
+
+## Email Verify Resend [/api/auth/email/resend]
+
+### メールアドレス検証メールを再送する [GET]
+
++ Response 200 (application/json)
+
+        {
+            "message": "We successfully retransmitted the verification email."
+        }
+
++ Response 200 (application/json)
+
+        {
+            "message": "Your email has been successfully verified!"
+        }
+
++ Response 401 (application/json)
+
+        {
+            "message": "Unauthenticated."
+        }
+
++ Response 429 (application/json)
+
+        {
+            "message": "Too Many Attempts."
+        }
+
+## Password Reset Mail Send [/api/auth/password/reset/send]
+
+### パスワードリセットメールを送信する [POST]
+
+`/auth/password/reset?token={token}`へのリンクを記載したメールが送信される。
+
++ Request (application/json)
+
+    + Attributes
+
+        + email (required)
+
+    + Body
+
+            {
+                "email": "example@example.com"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "message": "We successfully sent a mail with a link to the password reset page!"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "email":[
+                "validation.required"
+            ]
+        }
+
++ Response 429 (application/json)
+
+        {
+            "message": "Too Many Attempts."
+        }
+
+## Password Reset [/api/auth/password/reset]
+
+### パスワードをリセットする [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + email: user@example.com (required) - パスワードリセット対象ユーザのメールアドレス
+        + password: newpassword (required) - アンパンマン！新しいパスワードよ
+        + token (required) - メールで送られたリンクのクエリについているリセット用トークン
+
+    + Body
+
+            {
+                "email": "example@example.com",
+                "password": "new-password",
+                "token": "5c4bc3f4b0258db9eedce3693dd75f066d76d80e0058db65b027e3143f03e3"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "message": "You have successfully changed password!"
+        }
+
++ Response 400 (application/json)
+
+        {
+            "email":[
+                "validation.required"
+            ],
+            "password":[
+                "validation.required"
+            ],
+            "token":[
+                "validation.required"
+            ]
+        }
+
++ Response 400 (application/json)
+
+        {
+            "message": "Password reset failure..."
+        }
+
++ Response 429 (application/json)
+
+        {
+            "message": "Too Many Attempts."
         }
 
 # Group USERS
@@ -245,6 +418,7 @@ BOOKBOK　API仕様書
                         "user_id": "1",
                         "book_id": "1",
                         "id": 1,
+                        "reading_status": "0",
                         "created_at": "2018-09-11 10:11:00",
                         "updated_at": "2018-09-11 10:11:00"
                     }
@@ -260,6 +434,7 @@ BOOKBOK　API仕様書
                         "user_id": "1",
                         "book_id": "2",
                         "id": 2,
+                        "reading_status": "0",
                         "created_at": "2018-09-11 10:11:00",
                         "updated_at": "2018-09-11 10:11:00"
                     }
@@ -349,6 +524,7 @@ BOOKBOK　API仕様書
             "id": 1,
             "user_id": "1",
             "book_id": "1",
+            "reading_status": "0",
             "user":{
                 "id": 1,
                 "name": "admin",
@@ -452,9 +628,6 @@ BOOKBOK　API仕様書
 
 ### レビュー情報の取得 [GET]
 
-> REVIEW:
- - user_booksの詳細でreview、boksを返すのでもはや必要ないのでは？
-
 + Response 200 (application/json)
 
         {
@@ -465,18 +638,20 @@ BOOKBOK　API仕様書
             "user_id": 1
         }
 
-### レビュー情報の投稿 [POST]
+### レビュー情報の投稿、または更新(PUT) [POST]
 
 + Request (application/json)
 
     + Attributes
 
         + boby (required)
+        + publish
 
     + Body
 
         {
-            "body": "review body"
+            "body": "review body",
+            "publish": true
         }
 
 + Response 201 (application/json)
@@ -489,23 +664,7 @@ BOOKBOK　API仕様書
             "user_id": 1
         }
 
-### レビュー情報の更新 [PUT]
-
-+ Request (application/json)
-
-    + Attributes
-
-        + boby (required)
-
-    + Body
-
-        {
-            "body": "review body"
-        }
-
-+ Response 201 (application/json)
-
-###　レビュー情報の削除 [DELETE]
+### レビュー情報の削除 [DELETE]
 
 + Response 200 (application/json)
 
@@ -606,6 +765,82 @@ BOOKBOK　API仕様書
             "user_id": 1
         }
 
+# Group BOKFLOW
+
+## BOKFLOW [api/bok_flow]
+
+### Bokフローを取得する [GET]
+
++ Response 200(application/json)
+
+        [
+            {
+                "id": 3,
+                "user_id": "1",
+                "user_book_id": "1",
+                "page_num_begin": "8",
+                "page_num_end": "9",
+                "line_num": "41",
+                "body": "いっしゃのような青じろいあかいがすぐうしろからずにはたしました。にわから。ぼくわかれて流ながめていると、その遠くの遠くの方へ飛とび出しました。「あらゆるした。「ハレルヤ、ハレルヤ、ハレルヤ」前からこれをたてたくさんかしです。そのひびきや草花のに、にわらいでので、野原を見ている姉弟きょう」と言いいえず悲かなともあとかすか。いつとったのでした。すると、向こうごうせきにも言いいましくなったない、いきなまっくらいことができるようにわかにその中からだんだ。あした。ジョバンニの横よこたえません。双子ふたりとりです。。",
+                "updated_at": "1970-07-02 13:13:19",
+                "liked_count": "1",
+                "loved_count": "2",
+                "liked": "1",
+                "loved": "1",
+                "user_book": {
+                    "id": 1,
+                    "user_id": "1",
+                    "book_id": "5",
+                    "created_at": "2018-11-28 22:57:49",
+                    "updated_at": "2018-11-28 22:57:49",
+                    "user": {
+                        "id": 1,
+                        "name": "admin"
+                    },
+                    "book": {
+                        "id": 5,
+                        "isbn": "9794417137824"
+                    }
+                }
+            },
+            {
+                "id": 105,
+                "user_id": "1",
+                "user_book_id": "4",
+                "page_num_begin": "368",
+                "page_num_end": "628",
+                "line_num": "6",
+                "body": "遊あそばず、ひるならんなというんだ。中でとったりもいろな形を逆ぎゃありが言いえ、第一だいさつの地図に見えました。けれどもお父さん光る鷺さぎですか」そう思うとうの柵さく、水晶すいぎんと硫黄いおうとした。「いるのでした。「なんに、風のようなそうにそこかです。息いきも見わけです。ジョバンニは、どうしをたれだって、だんだり、袋ふくを求もとめたのです」「ええ、毎日注文ちゅうじかのいっぱいでしたら、牛乳ぎゅうや赤帽あかり覚悟かくひょうやの中にざあっているらしいことを分けていたのさいので、「あの女の子の、うや地球ちき。",
+                "updated_at": "1971-05-04 10:09:09",
+                "liked_count": "0",
+                "loved_count": "0",
+                "liked": "0",
+                "loved": "0",
+                "user_book": {
+                    "id": 4,
+                    "user_id": "1",
+                    "book_id": "4",
+                    "created_at": "2018-11-28 22:57:49",
+                    "updated_at": "2018-11-28 22:57:49",
+                    "user": {
+                        "id": 1,
+                        "name": "admin"
+                    },
+                    "book": {
+                        "id": 4,
+                        "isbn": "9789662688320"
+                    }
+                }
+            }
+        ]
+
++ Response 401(application/json)
+
+        []
+
++ Response 404(application/json)
+
+        []
 
 # Group FOLLOWERS
 

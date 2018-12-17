@@ -121,7 +121,7 @@ class UserBookController extends Controller
 
         $userBook = UserBook::with([
                 'user:id,name,avatar,description',
-                'book:id,isbn,name,cover',
+                'book:id,isbn,name,cover,description',
                 'review:id,user_id,user_book_id,body,published_at',
                 'boks',
                 'boks' => function($q1) use($userId) {
@@ -144,7 +144,7 @@ class UserBookController extends Controller
                 'boks.userBook.book:id,name,cover',
                 'boks.userBook.user:id,name,avatar',
             ])
-            ->select(['id', 'user_id', 'book_id'])
+            ->select(['id', 'user_id', 'book_id', 'reading_status'])
             ->find($userBookId);
 
         return response()->json(
