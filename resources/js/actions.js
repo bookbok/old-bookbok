@@ -113,14 +113,11 @@ export const fetchBookDetail = (id) => dispatch => {
         });
 }
 
-export const setUserInfo = userInfo => ({type: types.SET_USER_INFO, userInfo });
-export const fetchUserInfo = () => dispatch => {
-    wrapFetch( DOMAIN + "/api/users/")
+export const setUsers = users => ({type: types.SET_USERS, users });
+export const fetchUsers = () => dispatch => {
+    wrapFetch(DOMAIN + "/api/users/")
         .then(json => {
-                dispatch(setUserInfo(json));
-        })
-        .catch(err => {
-            console.error("fetch error!", err);
+                dispatch(setUsers(json));
         });
 }
 
