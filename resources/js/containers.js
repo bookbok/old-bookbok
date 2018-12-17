@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { BokFlow } from "./components/BokFlow";
 import { Genres } from "./components/Genres";
 import { BookDetailView } from "./components/BookDetailView";
-import { UserInfo } from "./components/UserInfo";
+import { UsersView } from "./components/UsersView";
 import { BookListView } from "./components/BookListView";
 import { UserBookshelf } from "./components/UserBookshelf";
 import { UserBookDetail } from "./components/UserBookDetail";
@@ -20,9 +20,9 @@ export const ConnectedBookDetail = connect(
     state => state
 )(BookDetailView);
 
-export const ConnectedUserInfo = connect(
+export const ConnectedUsersView = connect(
     state => state
-)(UserInfo);
+)(UsersView);
 
 export const ConnectedUserBookshelf = connect(
     state => state
