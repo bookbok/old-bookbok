@@ -26,7 +26,7 @@ class GoogleBooksScraper implements ScraperInterface
      *   引数に渡されたものが配列であれば文字列に連結して返す。
      * 　配列でない場合はそのまま返す。
      */
-    private function consAuthors($bookInfoAuthor){
+    private function getAuthors($bookInfoAuthor){
         if(is_array($bookInfoAuthor)){
             $authors = str_replace(", ", "", $bookInfoAuthor);
             $consAuthors = implode('/', $authors);
@@ -44,7 +44,7 @@ class GoogleBooksScraper implements ScraperInterface
      *   サブタイトルがあれば「:」で連結して返す。
      * 　なければ、タイトルをそのまま返す。
      */
-    private function consTitles($bookInfo){
+    private function getTitles($bookInfo){
         if(array_key_exists("subtitle", $bookInfo)){
             return $bookInfo->title . ': ' . $bookInfo->subtitle;
         }
@@ -83,10 +83,10 @@ class GoogleBooksScraper implements ScraperInterface
 
         // レスポンスで得た情報を該当カラムに格納する。
         $book->isbn = $isbn;
-        $book->name = $this->consTitles($bookInfo);
+        $book->name = $this->getTitles($bookInfo);
         $book->description = array_key_exists("description", $bookInfo) ? $bookInfo->description : "";
         $book->cover = array_key_exists("imageLinks", $bookInfo) ? $bookInfo->imageLinks->smallThumbnail : "";
-        $book->author = $this->consAuthors($bookInfo->authors);
+        $book->author = $this->getAuthors($bookInfo->authors);
 
         // App\Bookをスクレイプマネージャに返す
         return $book;
