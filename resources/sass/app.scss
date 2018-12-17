@@ -8,6 +8,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// responsive media separator
+@import 'responsive';
+
 // User define class
 @import 'footer';
 @import 'loading_animation';
@@ -17,3 +20,5 @@
 
 @import 'booklist_view';
 
+@import 'book_detail';
+@import 'user_info';

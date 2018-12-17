@@ -5,8 +5,8 @@ export function rootReducer(
     action
 ) {
     switch(action.type) {
-        case types.SET_TIMELINE:
-            return { ...state, timeLine: action.timeLine };
+        case types.SET_BOK_FLOW:
+            return { ...state, bokFlow: action.bokFlow };
 
         case types.SET_GENRES:
             return { ...state, genres: action.genres };
@@ -17,8 +17,8 @@ export function rootReducer(
         case types.SET_BOOKLIST:
             return { ...state, books: action.books };
 
-        case types.SET_USERS_BOOKSHELF:
-            return { ...state, usersBookshelf: action.usersBookshelf };
+        case types.SET_USER_BOOKSHELF:
+            return { ...state, userBookshelf: action.userBookshelf };
 
         case types.SET_AUTH_TOKEN: // ログインを必要とするAPI用の認証トークンを保存
             return { ...state, token: action.token };
@@ -28,6 +28,9 @@ export function rootReducer(
 
         case types.SET_USER_INFO:
             return { ...state, userInfo: action.userInfo };
+
+        case types.SET_USER_BOOK_DETAIL:
+            return { ...state, userBookDetail: action.userBookDetail };
 
         case types.SET_LIKEBOKLIST:
             return { ...state, likeBoks: action.likeBoks };
