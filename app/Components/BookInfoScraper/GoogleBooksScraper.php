@@ -38,6 +38,20 @@ class GoogleBooksScraper implements ScraperInterface
     }
 
     /**
+     * タイトル情報整形処理
+     * 
+     * @return string
+     *   サブタイトルがあれば「:」で連結して返す。
+     * 　なければ、タイトルをそのまま返す。
+     */
+    private function consTitles($bookInfo){
+        if(array_key_exists("subtitle", $bookInfo)){
+            return $bookInfo->title . ': ' . $bookInfo->subtitle;
+        }
+        return $bookInfo->title;
+    }
+
+    /**
      * ScrapeInterface::searchByIsbn()の実装
      * GoogleBooksAPIを叩き、本の情報を取得する。
      * その情報をもとにApp\Bookに情報を格納してマネージャに返す。
@@ -59,19 +73,21 @@ class GoogleBooksScraper implements ScraperInterface
 
         // JSON形式にデコード
         $bookInfo = json_decode($response);
+        // var_dump($bookInfo);
 
-        // レスポンスなければnullを返す
+        //レスポンスなければnullを返す
         if( $bookInfo->totalItems === 0) return null;
+        $bookInfo = $bookInfo->items[0]->volumeInfo;
 
         // App\Bookのインスタンスを生成。
         $book = new Book;
 
         // レスポンスで得た情報を該当カラムに格納する。
-        $book->isbn = $bookInfo->items[0]->volumeInfo->industryIdentifiers[1]->identifier;
-        $book->name = $bookInfo->items[0]->volumeInfo->title;
-        $book->description = $bookInfo->items[0]->volumeInfo->description;
-        $book->cover = $bookInfo->items[0]->volumeInfo->imageLinks->smallThumbnail;
-        $book->author = $this->consAuthors($bookInfo->items[0]->volumeInfo->authors);
+        $book->isbn = $isbn;
+        $book->name = $this->consTitles($bookInfo);
+        $book->description = array_key_exists("description", $bookInfo) ? $bookInfo->description : "";
+        $book->cover = array_key_exists("imageLinks", $bookInfo) ? $bookInfo->imageLinks->smallThumbnail : "";
+        $book->author = $this->consAuthors($bookInfo->authors);
         // $book->genre_id = $bookInfo->items[0]->volumeInfo->categories;
 
         // App\Bookをスクレイプマネージャに返す
