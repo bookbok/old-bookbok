@@ -4,6 +4,7 @@ import { store } from "../store";
 import { isEmpty } from "../utils.js";
 import { Loading } from "./shared/Loading";
 import { BookView } from "./BookView.jsx";
+import { MyPageTabs } from "./shared/user/MyPageTabs";
 
 export class UserBookshelf extends Component {
     componentDidMount(){
@@ -36,7 +37,10 @@ export class UserBookshelf extends Component {
             <div className="container mt-4">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
-                        {bookshelf}
+                        <MyPageTabs isUserBooks userId={this.props.match.params.id} />
+                        <div className="mt-4">
+                            {bookshelf}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { store } from "../store";
 import { isEmpty } from "../utils.js";
 import { Loading } from "./shared/Loading";
 import { Bok } from "./Bok.jsx";
+import { MyPageTabs } from "./shared/user/MyPageTabs";
 
 export class LikeBokList extends Component {
     componentDidMount(){
@@ -26,9 +27,12 @@ export class LikeBokList extends Component {
             <div className="container mt-4">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
-                        <p>LikeBok一覧</p>
-                        {boks}
-                        <br/>
+                        <MyPageTabs isLikes userId={this.props.match.params.id} />
+                        <div className="mt-4">
+                            <p>LikeBok一覧</p>
+                            {boks}
+                            <br/>
+                        </div>
                     </div>
                 </div>
             </div>
