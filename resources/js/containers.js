@@ -39,3 +39,4 @@ export const ConnectedUserBookDetail = connect(
 export const ConnectedLikeBokList = connect(
     state => state,
 )(LikeBokList);
+

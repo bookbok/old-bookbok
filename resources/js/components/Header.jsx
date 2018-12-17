@@ -6,7 +6,7 @@ import { SignUp } from './SignUp.jsx';
 import { Login } from './Login.jsx';
 import { Logout } from './Logout.jsx';
 import { UserRegister } from './UserRegister.jsx';
-import { Mypage } from './Mypage.jsx';
+import { ConnectedUserDetail } from './UserDetail.jsx';
 import { ConnectedBokFlow } from '../containers.js';
 import { ConnectedBookDetail} from '../containers.js';
 import { ConnectedBookList} from '../containers.js';
@@ -30,12 +30,7 @@ const Header = () => (
                     <Link className="nav-item nav-link" to="/signup">新規登録</Link>
                     <Link className="nav-item nav-link" to="/login">ログイン</Link>
                     <Link className="nav-item nav-link" to="/logout">ログアウト</Link>
-                    <Link className="nav-item nav-link" to="/mypage">マイページ</Link>
                     <Link className="nav-item nav-link" to="/books">本一覧</Link>
-                    <Link className="nav-item nav-link" to="/books/1">本詳細</Link>
-                    <Link className="nav-item nav-link" to ="/users/1/user_books">ユーザー本棚</Link>
-                    <Link className="nav-item nav-link" to ="/users/1/user_books/1">UserBookDetail</Link>
-                    <Link className="nav-item nav-link" to="/users/1/likes">LIKEしたbok一覧</Link>
                     <Link className="nav-item nav-link" to="/users">ユーザー一覧</Link>
                 </div>
             </div>
@@ -56,7 +51,7 @@ export const MenuRouter = () => (
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/logout" component={ Logout } />
                 <Route exact path="/user_register" component={ UserRegister } />
-                <Route exact path="/mypage" component={ Mypage } />
+                <Route exact path="/users/:id" component={ ConnectedUserDetail } />
                 <Route exact path="/books" component={ ConnectedBookList } />
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />
                 <Route exact path="/users/:id/user_books" component={ ConnectedUserBookshelf } />
