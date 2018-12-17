@@ -23,7 +23,7 @@ export class UserRegister extends Component {
     submitRegister(e) {
         e.preventDefault();
         const promise = store.dispatch(directUserRegister(this.state));
-        let that = this;
+        const that = this;
         promise.then(function(message) {
             if(message == undefined) {
                 that.props.history.push('/login');
