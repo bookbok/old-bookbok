@@ -73,7 +73,6 @@ class GoogleBooksScraper implements ScraperInterface
 
         // JSON形式にデコード
         $bookInfo = json_decode($response);
-        // var_dump($bookInfo);
 
         //レスポンスなければnullを返す
         if( $bookInfo->totalItems === 0) return null;
@@ -88,7 +87,6 @@ class GoogleBooksScraper implements ScraperInterface
         $book->description = array_key_exists("description", $bookInfo) ? $bookInfo->description : "";
         $book->cover = array_key_exists("imageLinks", $bookInfo) ? $bookInfo->imageLinks->smallThumbnail : "";
         $book->author = $this->consAuthors($bookInfo->authors);
-        // $book->genre_id = $bookInfo->items[0]->volumeInfo->categories;
 
         // App\Bookをスクレイプマネージャに返す
         return $book;
