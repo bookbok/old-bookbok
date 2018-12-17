@@ -11,8 +11,8 @@ class BokFlowController extends Controller
 {
     /**
      * ユーザがフォローしているユーザのBokを時系列順に並べて返すAPI
-     * 
-     * 
+     *
+     *
      * @return @return  \Illuminate\Http\Response
      *   JSON形式のBokフローデータ
      */
@@ -31,7 +31,7 @@ class BokFlowController extends Controller
 
         //フォローしているユーザを取得
         $followers = Follower::where('user_id', $userId)->get();
-        
+
         //フォローが0人の場合は空配列を返す
         if($followers->isEmpty()){
             return response()->json(

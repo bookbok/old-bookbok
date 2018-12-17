@@ -68,7 +68,7 @@ BOOKBOK　API仕様書
         {
             "message": "Unauthenticated."
         }
-    
+
 ## Yourself [/api/auth/user]
 
 ### 認証したユーザーの情報を取得する [GET]
@@ -418,6 +418,7 @@ BOOKBOK　API仕様書
                         "user_id": "1",
                         "book_id": "1",
                         "id": 1,
+                        "reading_status": "0",
                         "created_at": "2018-09-11 10:11:00",
                         "updated_at": "2018-09-11 10:11:00"
                     }
@@ -433,6 +434,7 @@ BOOKBOK　API仕様書
                         "user_id": "1",
                         "book_id": "2",
                         "id": 2,
+                        "reading_status": "0",
                         "created_at": "2018-09-11 10:11:00",
                         "updated_at": "2018-09-11 10:11:00"
                     }
@@ -522,6 +524,7 @@ BOOKBOK　API仕様書
             "id": 1,
             "user_id": "1",
             "book_id": "1",
+            "reading_status": "0",
             "user":{
                 "id": 1,
                 "name": "admin",
@@ -625,9 +628,6 @@ BOOKBOK　API仕様書
 
 ### レビュー情報の取得 [GET]
 
-> REVIEW:
- - user_booksの詳細でreview、boksを返すのでもはや必要ないのでは？
-
 + Response 200 (application/json)
 
         {
@@ -638,18 +638,20 @@ BOOKBOK　API仕様書
             "user_id": 1
         }
 
-### レビュー情報の投稿 [POST]
+### レビュー情報の投稿、または更新(PUT) [POST]
 
 + Request (application/json)
 
     + Attributes
 
         + boby (required)
+        + publish
 
     + Body
 
         {
-            "body": "review body"
+            "body": "review body",
+            "publish": true
         }
 
 + Response 201 (application/json)
@@ -662,23 +664,7 @@ BOOKBOK　API仕様書
             "user_id": 1
         }
 
-### レビュー情報の更新 [PUT]
-
-+ Request (application/json)
-
-    + Attributes
-
-        + boby (required)
-
-    + Body
-
-        {
-            "body": "review body"
-        }
-
-+ Response 201 (application/json)
-
-###　レビュー情報の削除 [DELETE]
+### レビュー情報の削除 [DELETE]
 
 + Response 200 (application/json)
 
@@ -847,15 +833,15 @@ BOOKBOK　API仕様書
                 }
             }
         ]
-        
+
 + Response 401(application/json)
 
         []
-        
+
 + Response 404(application/json)
 
         []
- 
+
 # Group FOLLOWERS
 
 ## Followers [/api/users/{userId}/followers]
