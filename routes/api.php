@@ -46,9 +46,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // test method
-Route::get('/users', function (Request $request) {
+Route::get('/users', function () {
     $users = App\User::all();
     return $users;
+});
+Route::get('/users/{user}', function (\App\User $user) {
+    return $user;
 });
 
 /**

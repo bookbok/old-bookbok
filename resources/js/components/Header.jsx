@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { connect } from "react-redux";
 import { Footer } from './Footer';
 import { Home } from './Home.jsx';
 import { Login } from './Login.jsx';
 import { Logout } from './Logout.jsx';
 import { UserRegister } from './UserRegister.jsx';
-import { Mypage } from './Mypage.jsx';
+import { ConnectedUserDetail } from './UserDetail.jsx';
 import { ConnectedBokFlow } from '../containers.js';
 import { ConnectedBookDetail} from '../containers.js';
 import { ConnectedBookList} from '../containers.js';
@@ -15,38 +16,89 @@ import { ConnectedUsersView } from '../containers.js';
 import { ConnectedUserBookDetail } from '../containers.js';
 
 // bootstrap global navigation bar
-const Header = () => (
-    <div>
-        <nav className="navbar navbar-expand-md navbar-light bg-light">
-            <a className="navbar-brand" href="#">BookBok</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div className="navbar-nav">
-                    <Link className="nav-item nav-link" to="/">ホーム <span className="sr-only">(current)</span></Link>
-                    <Link className="nav-item nav-link" to="/bok_flow">ボックフロー</Link>
-                    <Link className="nav-item nav-link" to="/register">新規登録</Link>
-                    <Link className="nav-item nav-link" to="/login">ログイン</Link>
-                    <Link className="nav-item nav-link" to="/logout">ログアウト</Link>
-                    <Link className="nav-item nav-link" to="/mypage">マイページ</Link>
-                    <Link className="nav-item nav-link" to="/books">本一覧</Link>
-                    <Link className="nav-item nav-link" to="/books/1">本詳細</Link>
-                    <Link className="nav-item nav-link" to ="/users/1/user_books">ユーザー本棚</Link>
-                    <Link className="nav-item nav-link" to ="/users/1/user_books/1">UserBookDetail</Link>
-                    <Link className="nav-item nav-link" to="/users/1/likes">LIKEしたbok一覧</Link>
-                    <Link className="nav-item nav-link" to="/users">ユーザー一覧</Link>
-                </div>
+class Header extends Component {
+    render() {
+        const loggedinUser = this.props.loggedinUser;
+
+        function AuthNavItemsInNavRight() {
+            if(loggedinUser) {
+                return (
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item dropdown">
+                            <a id="navbarDropdown"
+                               className="nav-link dropdown-toggle"
+                               href="#"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                <span>{loggedinUser.name}</span> <span class="caret"></span>
+                            </a>
+                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <Link className="dropdown-item" to={`/users/${loggedinUser.id}`}>
+                                    プロフィール
+                                </Link>
+                                <Link className="dropdown-item" to="/logout">
+                                    ログアウト
+                                </Link>
+                            </div>
+                        </li>
+                    </ul>
+                );
+            } else {
+                return (
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/login">ログイン</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/signup">新規登録</Link>
+                        </li>
+                    </ul>
+                );
+            }
+        }
+
+        return (
+            <div>
+                <nav className="navbar navbar-expand-md navbar-light bg-light">
+                    <a className="navbar-brand" href="#">BookBok</a>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        {/* Left side of Navbar */}
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/">ホーム <span className="sr-only">(current)</span></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/bok_flow">BokFlow</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/books">本一覧</Link>
+                            </li>
+                        </ul>
+
+                        {/* Right side of Navbar */}
+                        <AuthNavItemsInNavRight />
+                    </div>
+                </nav>
             </div>
-        </nav>
-    </div>
-)
+        );
+    }
+}
+
+const ConnectedHeader = connect(
+    state => ({ loggedinUser: state.loggedinUser })
+)(Header);
+
 
 //react-router-dom
 export const MenuRouter = () => (
     <BrowserRouter>
         <div>
-            <Header />
+            <ConnectedHeader />
             <Switch>
                 <Route exact path="/" component={ Home } />
                 <Route exact path="/home" component={ Home } />
@@ -54,7 +106,8 @@ export const MenuRouter = () => (
                 <Route exact path="/register" component={ UserRegister } />
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/logout" component={ Logout } />
-                <Route exact path="/mypage" component={ Mypage } />
+                <Route exact path="/user_register" component={ UserRegister } />
+                <Route exact path="/users/:id" component={ ConnectedUserDetail } />
                 <Route exact path="/books" component={ ConnectedBookList } />
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />
                 <Route exact path="/users/:id/user_books" component={ ConnectedUserBookshelf } />
