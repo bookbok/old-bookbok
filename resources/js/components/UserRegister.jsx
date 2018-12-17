@@ -6,7 +6,7 @@ import { store } from "../store";
 export class UserRegister extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: "", email: "", password: "", passwordConfirm: "", invalidCheck: false };
+        this.state = { name: "", email: "", password: "", passwordConfirm: "", isInvalid: false };
 
         this.submitRegister = this.submitRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -22,13 +22,13 @@ export class UserRegister extends Component {
 
     submitRegister(e) {
         e.preventDefault();
-        const register=store.dispatch(directUserRegister(this.state));
+        const promise=store.dispatch(directUserRegister(this.state));
         let that = this;
-        register.then(function(message) {
+        promise.then(function(message) {
             if(message==undefined) {
                 that.props.history.push('/login');
             } else {
-                that.setState({ invalidCheck: true });
+                that.setState({ isInvalid: true });
             }
         });
     }
@@ -42,7 +42,7 @@ export class UserRegister extends Component {
                             <div className="card-header">アカウント登録</div>
 
                             <div className="card-body">
-                                <div className={`mb-4 text-size invalid-feedback text-center ${this.state.invalidCheck && "d-block"}`}>
+                                <div className={`mb-4 text-size invalid-feedback text-center ${this.state.isInvalid && "d-block"}`}>
                                     入力内容をもう一度ご確認ください。 
                                 </div>
                                 <form onSubmit={this.submitRegister}>
