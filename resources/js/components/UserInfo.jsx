@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import { fetchUserInfo } from "../actions.js";
+import { fetchUsers } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils.js";
 import { Loading } from "./shared/Loading";
 
-export class UserInfo extends Component {
+export class UsersView extends Component {
     componentDidMount(){
-        store.dispatch(fetchUserInfo());
+        store.dispatch(fetchUsers());
     };
 
     render() {
-        if(isEmpty(this.props.userInfo)){
+        if(isEmpty(this.props.users)){
             return <Loading />;
         }
 
-        const userInfo = this.props.userInfo.map((user, i) => (
+        const bindedUsers = this.props.users.map((user, i) => (
             <div className="card border-secondary mb-2" key={i}>
                 <div className="card-body d-flex">
                     <img src={user.avatar} height="40" />
@@ -35,7 +35,7 @@ export class UserInfo extends Component {
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <h1 className="mt-4 mb-4 mr-2">ユーザー一覧</h1>
-                        { userInfo }
+                        { bindedUsers }
                     </div>
                 </div>
             </div>
