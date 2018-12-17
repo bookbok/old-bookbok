@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { directUserRegister } from "../actions.js";
-import { store } from "../store";
 
 export class UserRegister extends Component {
     constructor(props) {
@@ -22,11 +21,10 @@ export class UserRegister extends Component {
 
     submitRegister(e) {
         e.preventDefault();
-        const promise = directUserRegister(this.state);
         const that = this;
-        promise.then(function(res) {
+        directUserRegister(this.state).then(res => {
             that.props.history.push('/login');
-        }).catch(function(err) {
+        }).catch(err => {
             that.setState({ isInvalid: true });
         });
     }
