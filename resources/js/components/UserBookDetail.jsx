@@ -7,6 +7,7 @@ import { Loading } from "./shared/Loading";
 import { Bok } from "./Bok";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 import { BookInfo } from "./shared/book/BookInfo";
+import { Contribution } from "./Contribution";
 
 export class UserBookDetail extends Component {
     constructor(props){
@@ -49,6 +50,7 @@ export class UserBookDetail extends Component {
                             <h3 className="mt-5">レビュー</h3>
                             <p>{review.body}</p>
                             <hr />
+                            <div className="float-right"> <Contribution /> </div>
                             <h3 className="mt-5">Boks</h3>
                             {boks}
                         </div>
