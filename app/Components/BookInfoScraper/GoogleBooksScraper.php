@@ -26,7 +26,7 @@ class GoogleBooksScraper implements ScraperInterface
      *   引数に渡されたものが配列であれば文字列に連結して返す。
      * 　配列でない場合はそのまま返す。
      */
-    private function consAuthors($bookInfoAuthor){
+    private function concatAuthors($bookInfoAuthor){
         if(is_array($bookInfoAuthor)){
             $authors = str_replace(", ", "", $bookInfoAuthor);
             $consAuthors = implode('/', $authors);
@@ -35,6 +35,20 @@ class GoogleBooksScraper implements ScraperInterface
         }
 
         return $bookInfoAuthor;
+    }
+
+    /**
+     * タイトル情報整形処理
+     * 
+     * @return string
+     *   サブタイトルがあれば「:」で連結して返す。
+     * 　なければ、タイトルをそのまま返す。
+     */
+    private function concatTitles($bookInfo){
+        if(array_key_exists("subtitle", $bookInfo)){
+            return $bookInfo->title . ': ' . $bookInfo->subtitle;
+        }
+        return $bookInfo->title;
     }
 
     /**
@@ -60,19 +74,19 @@ class GoogleBooksScraper implements ScraperInterface
         // JSON形式にデコード
         $bookInfo = json_decode($response);
 
-        // レスポンスなければnullを返す
+        //レスポンスなければnullを返す
         if( $bookInfo->totalItems === 0) return null;
+        $bookInfo = $bookInfo->items[0]->volumeInfo;
 
         // App\Bookのインスタンスを生成。
         $book = new Book;
 
         // レスポンスで得た情報を該当カラムに格納する。
-        $book->isbn = $bookInfo->items[0]->volumeInfo->industryIdentifiers[1]->identifier;
-        $book->name = $bookInfo->items[0]->volumeInfo->title;
-        $book->description = $bookInfo->items[0]->volumeInfo->description;
-        $book->cover = $bookInfo->items[0]->volumeInfo->imageLinks->smallThumbnail;
-        $book->author = $this->consAuthors($bookInfo->items[0]->volumeInfo->authors);
-        // $book->genre_id = $bookInfo->items[0]->volumeInfo->categories;
+        $book->isbn = $isbn;
+        $book->name = $this->concatTitles($bookInfo);
+        $book->description = array_key_exists("description", $bookInfo) ? $bookInfo->description : "";
+        $book->cover = array_key_exists("imageLinks", $bookInfo) ? $bookInfo->imageLinks->smallThumbnail : "";
+        $book->author = $this->concatAuthors($bookInfo->authors);
 
         // App\Bookをスクレイプマネージャに返す
         return $book;
