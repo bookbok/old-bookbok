@@ -23,6 +23,10 @@ export class BookDetailView extends Component {
 
         return (
             <div>
+                <div className="container mt-4">
+                    <div className="row justify-content-center">
+                        <div className="col-md-8">
+
                 <Contribution />
 
                 <table border="1"><tbody>
@@ -37,6 +41,10 @@ export class BookDetailView extends Component {
                         <td colSpan="2"><p>{book.description}</p></td>
                     </tr>
                 </tbody></table>
+            
+                        </div>
+                    </div>
+                </div>    
             </div>
         );
     }
