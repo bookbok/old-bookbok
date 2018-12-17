@@ -4,7 +4,6 @@ import { store } from "../store";
 import { isEmpty } from "../utils.js";
 
 import { Loading } from "./shared/Loading";
-import { Contribution } from "./Contribution";
 import { BookInfo } from "./shared/book/BookInfo";
 
 export class BookDetailView extends Component {
@@ -27,7 +26,6 @@ export class BookDetailView extends Component {
             <div className="container mt-4">
                 <div className="row justify-content-center">
                     <div className="col-md-8 main-content p-5">
-                        <Contribution />
                         <BookInfo book={book} />
                     </div>
                 </div>
