@@ -93,13 +93,11 @@ export const directUserRegister = (userInfo) => dispatch => {
     return wrapFetch(DOMAIN + "/api/auth/register", {
         method: "POST",
         body: userInfo
-    })
-        .then(res => {
-            return res.status;
-        })
-        .catch(err => {
-            return err;
-        });
+    }).then(res => {
+        return res;
+    }).catch(err => {
+        return err;
+    });
 };
 
 

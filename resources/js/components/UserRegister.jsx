@@ -24,8 +24,8 @@ export class UserRegister extends Component {
         e.preventDefault();
         const promise = store.dispatch(directUserRegister(this.state));
         const that = this;
-        promise.then(function(message) {
-            if(message == undefined) {
+        promise.then(function(res) {
+            if(res.message == "You have been successfully registerd user! Let's login.") {
                 that.props.history.push('/login');
             } else {
                 that.setState({ isInvalid: true });
