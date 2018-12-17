@@ -89,19 +89,11 @@ export const requestLogout = () => dispatch => {
     });
 }
 
-export const requestUserRegister = (userInfo) => dispatch => {
-    /* TODO: サーバー側が実装されれば書く
-    fetch(DOMAIN + "/api/auth/register", {
+export const directUserRegister = (userInfo) => {
+    return wrapFetch(DOMAIN + "/api/auth/register", {
         method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfo)
-    })
-        .then(res => {
-        });
-    */
+        body: userInfo
+    });
 };
 
 

@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { connect } from "react-redux";
 import { Footer } from './Footer';
 import { Home } from './Home.jsx';
-import { SignUp } from './SignUp.jsx';
 import { Login } from './Login.jsx';
 import { Logout } from './Logout.jsx';
 import { UserRegister } from './UserRegister.jsx';
@@ -104,7 +103,7 @@ export const MenuRouter = () => (
                 <Route exact path="/" component={ Home } />
                 <Route exact path="/home" component={ Home } />
                 <Route exact path="/bok_flow" component={ ConnectedBokFlow } />
-                <Route exact path="/signup" component={ SignUp } />
+                <Route exact path="/register" component={ UserRegister } />
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/logout" component={ Logout } />
                 <Route exact path="/user_register" component={ UserRegister } />
