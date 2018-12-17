@@ -27,21 +27,20 @@ export class BookDetailView extends Component {
                     <div className="row justify-content-center">
                         <div className="col-md-8">
 
-                <Contribution />
+                            <Contribution />
 
-                <table border="1"><tbody>
-                    <tr>
-                        <td><img src={book.cover} /></td>
-                        <td><p>{book.name}</p></td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2">概要</td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2"><p>{book.description}</p></td>
-                    </tr>
-                </tbody></table>
-            
+                            <table border="1"><tbody>
+                                <tr>
+                                    <td><img src={book.cover} /></td>
+                                    <td><p>{book.name}</p></td>
+                                </tr>
+                                <tr>
+                                    <td colSpan="2">概要</td>
+                                </tr>
+                                <tr>
+                                    <td colSpan="2"><p>{book.description}</p></td>
+                                </tr>
+                            </tbody></table>
                         </div>
                     </div>
                 </div>    
