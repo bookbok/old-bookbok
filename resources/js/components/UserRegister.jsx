@@ -22,10 +22,10 @@ export class UserRegister extends Component {
 
     submitRegister(e) {
         e.preventDefault();
-        const promise=store.dispatch(directUserRegister(this.state));
+        const promise = store.dispatch(directUserRegister(this.state));
         let that = this;
         promise.then(function(message) {
-            if(message==undefined) {
+            if(message == undefined) {
                 that.props.history.push('/login');
             } else {
                 that.setState({ isInvalid: true });
