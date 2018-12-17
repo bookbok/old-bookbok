@@ -13,6 +13,7 @@ migrate:
 	php artisan migrate
 
 migrate/fresh:
+	composer dump-autoload
 	php artisan migrate:fresh --seed
 
 c:
