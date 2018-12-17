@@ -26,7 +26,7 @@ const Header = () => (
                 <div className="navbar-nav">
                     <Link className="nav-item nav-link" to="/">ホーム <span className="sr-only">(current)</span></Link>
                     <Link className="nav-item nav-link" to="/bok_flow">ボックフロー</Link>
-                    <Link className="nav-item nav-link" to="/signup">新規登録</Link>
+                    <Link className="nav-item nav-link" to="/user_register">新規登録</Link>
                     <Link className="nav-item nav-link" to="/login">ログイン</Link>
                     <Link className="nav-item nav-link" to="/logout">ログアウト</Link>
                     <Link className="nav-item nav-link" to="/mypage">マイページ</Link>
@@ -51,10 +51,9 @@ export const MenuRouter = () => (
                 <Route exact path="/" component={ Home } />
                 <Route exact path="/home" component={ Home } />
                 <Route exact path="/bok_flow" component={ ConnectedBokFlow } />
-                <Route exact path="/signup" component={ SignUp } />
+                <Route exact path="/user_register" component={ UserRegister } />
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/logout" component={ Logout } />
-                <Route exact path="/user_register" component={ ConnectedUserRegister } />
                 <Route exact path="/mypage" component={ Mypage } />
                 <Route exact path="/books" component={ ConnectedBookList } />
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />

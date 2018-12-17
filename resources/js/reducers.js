@@ -37,9 +37,6 @@ export function rootReducer(
 
         case types.REMOVE_LOGGEDIN_INFO: // ログアウトに伴い、ログイントークン、ログイン中ユーザー情報を削除
             return { ...state, token: null, loggedinUser: null };
-
-        case types.SET_USER_REGISTER:
-            return { ...state, register: action.register};
     }
 
     return state;

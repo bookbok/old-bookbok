@@ -90,12 +90,12 @@ export const requestLogout = () => dispatch => {
 }
 
 export const directUserRegister = (userInfo) => dispatch => {
-    wrapFetch(DOMAIN + "/api/auth/register", {
+    return wrapFetch(DOMAIN + "/api/auth/register", {
         method: "POST",
         body: userInfo
     })
         .then(res => {
-           return res.status;
+            return res.status;
         })
         .catch(err => {
             return err;

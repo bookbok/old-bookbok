@@ -8,7 +8,7 @@ import { Loading } from "./shared/Loading";
 export class UserRegister extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: "", email: "", password: "", passwordConfirm: "" };
+        this.state = { name: "", email: "", password: "", passwordConfirm: "", invalid: false };
 
         this.submitRegister = this.submitRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -25,13 +25,14 @@ export class UserRegister extends Component {
     submitRegister(e) {
         e.preventDefault();
         const req=store.dispatch(directUserRegister(this.state));
-
-        /*if(successfulStatus(this.props.register)) {
-            this.props.history.push('/login'); // アカウント登録後のデフォルト遷移先
-        } else {
-            console.log(req);
-        }*/
-            console.log(req);
+        let that = this;
+        req.then(function(value) {
+            if(value==undefined) {
+                that.props.history.push('/login');
+            } else {
+                that.setState({ invalid: true });
+            }
+        });
     }
 
     render() {
@@ -43,6 +44,10 @@ export class UserRegister extends Component {
                             <div className="card-header">アカウント登録</div>
 
                             <div className="card-body">
+                                <div className={`text-size invalid-feedback text-center ${this.state.invalid && "d-block"}`}>
+                                    入力内容をご確認ください。 
+                                </div>
+                                {this.state.invalid && <br/>}
                                 <form onSubmit={this.submitRegister}>
                                     <div className="form-group row">
                                         <label htmlFor="name" className="col-md-4 col-form-label text-md-right">名前</label>
