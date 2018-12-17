@@ -89,14 +89,10 @@ export const requestLogout = () => dispatch => {
     });
 }
 
-export const directUserRegister = (userInfo) => dispatch => {
+export const directUserRegister = (userInfo) => {
     return wrapFetch(DOMAIN + "/api/auth/register", {
         method: "POST",
         body: userInfo
-    }).then(res => {
-        return res;
-    }).catch(err => {
-        return err;
     });
 };
 

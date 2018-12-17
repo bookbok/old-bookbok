@@ -22,14 +22,12 @@ export class UserRegister extends Component {
 
     submitRegister(e) {
         e.preventDefault();
-        const promise = store.dispatch(directUserRegister(this.state));
+        const promise = directUserRegister(this.state);
         const that = this;
         promise.then(function(res) {
-            if(res.message == "You have been successfully registerd user! Let's login.") {
-                that.props.history.push('/login');
-            } else {
-                that.setState({ isInvalid: true });
-            }
+            that.props.history.push('/login');
+        }).catch(function(err) {
+            that.setState({ isInvalid: true });
         });
     }
 
