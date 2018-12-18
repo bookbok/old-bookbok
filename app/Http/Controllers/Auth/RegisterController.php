@@ -26,7 +26,10 @@ class RegisterController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return response()->json([
+                'status' => 400,
+                'userMessage' => $validator->errors()
+            ], 400);
         }
 
         $data = $request->all();
@@ -40,6 +43,7 @@ class RegisterController extends Controller
         event(new Registered($user));
 
         return response()->json([
+            'status' => 200,
             'userMessage' => 'You have been successfully registerd user! Let\'s login.',
         ], 200);
     }
