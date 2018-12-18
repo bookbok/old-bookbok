@@ -11,10 +11,10 @@ class BokController extends Controller
 {
     /**
      *  BOKSを返すAPI
-     * 
+     *
      * @param string $userBookId
      *   ユーザブックを一意に特定するID
-     * 
+     *
      * @return \Illuminate\Http\Response
      *   JSON形式でBOKSを返す
      */
