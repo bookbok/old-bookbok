@@ -30,14 +30,19 @@ export async function wrapFetch(url, { body, method = "GET", isParse = true } = 
 
     if(res.status === 401) {
         throw new Error("Authorization error: " + res.statusText);
-    } else if(!utils.successfulStatus(res.status)) {
-        throw new Error("Fetch error: " + res.statusText);
     }
 
+    let json = null;
     if(isParse) {
-        return await res.json();
+        json = await res.json();
     }
-    return null;
+
+    if(!res.ok) {
+        console.error(json.userMessage);
+        throw new Error(`[${res.status}]Fetch error: ` + res.statusText);
+    }
+
+    return json;
 }
 
 // 封印されしラッパー関数
