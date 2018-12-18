@@ -12,7 +12,7 @@ import { ConnectedBookDetail} from '../containers.js';
 import { ConnectedBookList} from '../containers.js';
 import { ConnectedUserBookshelf } from '../containers.js';
 import { ConnectedLikeBokList } from '../containers.js';
-import { ConnectedUserInfo } from '../containers.js';
+import { ConnectedUsersView } from '../containers.js';
 import { ConnectedUserBookDetail } from '../containers.js';
 
 // bootstrap global navigation bar
@@ -113,7 +113,7 @@ export const MenuRouter = () => (
                 <Route exact path="/users/:id/user_books" component={ ConnectedUserBookshelf } />
                 <Route exact path="/users/:userId/user_books/:userBookId" component={ ConnectedUserBookDetail } />
                 <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
-                <Route exact path="/users" component={ ConnectedUserInfo } />
+                <Route exact path="/users" component={ ConnectedUsersView } />
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
             </Switch>
             <Footer />
