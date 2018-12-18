@@ -29,6 +29,14 @@ export class Bok extends Component {
         return page;
     }
 
+    makeLineViewStr(bok) {
+        let line = null;
+        if(bok.line_num !== null){
+            line = (bok.line_num + "行目");
+        }
+        return line;
+    }
+
     clickLike(e){
         if(this.state.isLiked){     // いいねを取り消す
             this.setState({
@@ -66,11 +74,7 @@ export class Bok extends Component {
         const userBook = this.props.bok.user_book;
         const bookLink = "/books/" + this.props.bok.user_book.book.id;
         const page = this.makePageViewStr(bok);
-
-        let line = null;
-        if(bok.line_num !== null){
-            line = (bok.line_num + "行目");
-        }
+        const line = this.makeLineViewStr(bok);
 
         return (
             <div className="card p-2">
