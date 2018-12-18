@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
+import { withRouter } from "react-router-dom";
 import { storeISBNToUserBookDirect } from "../../../actions";
 
-export class ISBNModal extends Component {
+// ファイル下部でwithRouterに食わせているため、名前を特殊にしている
+class ISBNModal_ extends Component {
+    // HACK: サーバー側から帰ってきたちゃんとしたメッセージに置き換える。
+    static get INVALID_ISBN_LENGTH(){ return '入力されたISBNの形式が間違っています'; }
+    static get NOT_FOUND_ISBN() { return 'お探しのISBNが存在しません'; }
+
     constructor(props) {
         super(props);
 
-        this.state = { isbn: "", isInvalid: false };
-        this.handleChangeISBN = this.handleChangeISBN.bind(this);
+        this.state = { isbn: "", isInvalid: false, invalidMessage: "" };
         this.handleRegisterISBN = this.handleRegisterISBN.bind(this);
     }
 
@@ -18,16 +23,19 @@ export class ISBNModal extends Component {
         });
     }
 
-    handleChangeISBN(e) {
-        this.setState({ isbn: e.target.value });
-    }
-
     handleRegisterISBN(e) {
         e.preventDefault();
+        if(this.state.isbn.length !== 13 && this.state.isbn.length !== 10) {
+            this.setState({ isInvalid: true, invalidMessage: ISBNModal.INVALID_ISBN_LENGTH });
+            return;
+        }
+
         storeISBNToUserBookDirect(1, this.state.isbn).then(res => {
+            $('#ISBNModal').modal('hide'); // hideしないと画面がバグる
             this.props.history.push(`/users/${res.user.id}/user_books/${res.id}`);
         }).catch(err => {
-            this.setState({ isInvalid: true });
+            console.log(err);
+            this.setState({ isInvalid: true, invalidMessage: ISBNModal.NOT_FOUND_ISBN });
         });
     }
 
@@ -57,11 +65,11 @@ export class ISBNModal extends Component {
                                         className={`form-control form-control-lg ${this.state.isInvalid && 'is-invalid'}`}
                                         placeholder="9784041026168"
                                         value={this.state.isbn}
-                                        onChange={this.handleChangeISBN}
+                                        onChange={(e) => this.setState({ isbn: e.target.value })}
                                         ref="isbn"
                                         required />
                                     <div className="invalid-feedback">
-                                        入力されたISBNが存在しません
+                                        {this.state.invalidMessage}
                                     </div>
                                 </div>
 
@@ -78,3 +86,5 @@ export class ISBNModal extends Component {
         );
     }
 }
+
+export const ISBNModal = withRouter(ISBNModal_);
