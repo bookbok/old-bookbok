@@ -43,7 +43,7 @@ class ResetPasswordController extends Controller
         );
 
         return response()->json([
-            'message' => 'We successfully sent a mail with a link to the password reset page!',
+            'userMessage' => 'We successfully sent a mail with a link to the password reset page!',
         ], 200);
     }
 
@@ -79,12 +79,12 @@ class ResetPasswordController extends Controller
 
         if (Password::PASSWORD_RESET !== $response) {
             return response()->json([
-                'message' => 'Password reset failure...',
+                'userMessage' => 'Password reset failure...',
             ], 400);
         }
         
         return response()->json([
-            'message' => 'You have successfully changed password!',
+            'userMessage' => 'You have successfully changed password!',
         ], 200);
     }
 

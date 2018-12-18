@@ -36,7 +36,7 @@ class LoginController extends Controller
             false === password_verify($request->password, $user->password)
         ) {
             return response()->json([
-                'message' => 'Falid to authentication...',
+                'userMessage' => 'Falid to authentication...',
             ], 422);
         }
 
@@ -61,7 +61,7 @@ class LoginController extends Controller
         $token->revoke();
 
         return response()->json([
-            'message' => 'You have been successfully logged out!',
+            'userMessage' => 'You have been successfully logged out!',
         ], 200);
     }
 }
