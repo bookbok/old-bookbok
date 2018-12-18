@@ -19,21 +19,20 @@ export const Review = () => (
                         <form>
                             <div className="row">
                                 <div className="col">レビューのタイトルを記入してください
-                                    <input type="text" class="form-control" placeholder="この本をズバリ一言で！" />
+                                    <input type="text" className="form-control" placeholder="この本をズバリ一言で！" />
                                 </div>
                             </div>
-                            <br />
-                            <div class="form-group">
-                                <label for="impressions-text" class="control-label">ここにレビューを記入してください&nbsp;
-                                        <span class="badge badge-danger">必須</span>
+                            <div className="form-group" className="mt-5">
+                                <label htmlFor="impressions-text" className="control-label">ここにレビューを記入してください&nbsp;
+                                        <span className="badge badge-danger">必須</span>
                                 </label>
-                                <textarea class="form-control" id="impressions-text" required placeholder="1冊を読み終えてどうだったか。これから読む人に伝えたいこと。"></textarea>
+                                <textarea className="form-control" id="impressions-text" required placeholder="1冊を読み終えてどうだったか。これから読む人に伝えたいこと。"></textarea>
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                        <button type="submit" class="btn btn-primary">レビューを投稿</button>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                        <button type="submit" className="btn btn-primary">レビューを投稿</button>
                     </div>
                 </div>
             </div>
