@@ -7,7 +7,7 @@ export const Review = () => (
             レビューを投稿する
         </button>
 
-        <div className="modal fade" id="ReviewModalCenter" tabindex="-1" role="dialog" aria-labelledby="ReviewModalCenterTitle" aria-hidden="true">
+        <div className="modal fade" id="ReviewModalCenter" tabIndex="-1" role="dialog" aria-labelledby="ReviewModalCenterTitle" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div className="modal-content">
                     <div className="modal-header">
