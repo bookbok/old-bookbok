@@ -1,30 +1,23 @@
-import React, { Component } from "react";
-import { fetchLikeBoks, fetchUser } from "../actions";
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 import { store } from "../store";
+import { fetchUser } from "../actions";
 import { isEmpty } from "../utils";
 
 import { Loading } from "./shared/Loading";
-import { Bok } from "./Bok";
 import { MyPageTabs } from "./shared/user/MyPageTabs";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 
-export class LikeBokList extends Component {
-    componentDidMount(){
-        const userId = parseInt(this.props.match.params.id);
-        store.dispatch(fetchLikeBoks(userId));
-        store.dispatch(fetchUser(userId));
-    };
-
-    render(){
-        const likeBoks = this.props.likeBoks;
+//マイページ画面を表すコンポーネントを定義
+export class UserDetail extends Component {
+    componentDidMount() {
+        store.dispatch(fetchUser(this.props.match.params.id));
+    }
+    render() {
         const user = this.props.user;
-        if(isEmpty(likeBoks) || isEmpty(user)){
+        if(isEmpty(user)){
             return <Loading />;
         }
-
-        const boks = likeBoks.map((likeBok, index) => {
-            return <Bok bok={likeBok} key={index} />
-        })
 
         return (
             <div className="page-content-wrap row">
@@ -33,11 +26,9 @@ export class LikeBokList extends Component {
                 <div className="container mt-4">
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
-                            <MyPageTabs isLikes userId={this.props.match.params.id} />
+                            <MyPageTabs isTop userId={this.props.match.params.id} />
                             <div className="mt-4">
-                                <p>LikeBok一覧</p>
-                                {boks}
-                                <br/>
+                                <h1>トップ</h1>
                             </div>
                         </div>
                     </div>
@@ -46,3 +37,7 @@ export class LikeBokList extends Component {
         );
     }
 }
+
+export const ConnectedUserDetail = connect(
+    state => state,
+)(UserDetail);

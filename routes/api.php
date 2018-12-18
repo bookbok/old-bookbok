@@ -46,9 +46,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // test method
-Route::get('/users', function (Request $request) {
+Route::get('/users', function () {
     $users = App\User::all();
     return $users;
+});
+Route::get('/users/{user}', function (\App\User $user) {
+    return $user;
 });
 
 /**
@@ -70,6 +73,7 @@ Route::put('user_books/{userBookId}/review', 'ReviewController@store')->middlewa
  *
  */
 Route::get('user_books/{userBookId}/boks', 'BokController@index');
+Route::post('user_books/{userBookId}/boks', 'BokController@store')->middleware('auth:api');
 
 /**
  * Resource: BokFlow
