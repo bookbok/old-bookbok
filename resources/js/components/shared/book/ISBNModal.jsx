@@ -31,12 +31,19 @@ class ISBNModal_ extends Component {
         }
 
         storeISBNToUserBookDirect(1, this.state.isbn).then(res => {
+            if(res.status === 401) {
+                this.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
+                throw new Error();
+            } else if(!res.ok) {
+                // TODO: ISBN登録でサーバー側から正しいレスポンスが返るようになった時は、レスポンスのメッセージを表示する
+                this.setState({ isInvalid: true, invalidMessage: ISBNModal.NOT_FOUND_ISBN });
+                throw new Error();
+            }
+            return res.json();
+        }).then(res => {
             $('#ISBNModal').modal('hide'); // hideしないと画面がバグる
             this.props.history.push(`/users/${res.user.id}/user_books/${res.id}`);
-        }).catch(err => {
-            console.log(err);
-            this.setState({ isInvalid: true, invalidMessage: ISBNModal.NOT_FOUND_ISBN });
-        });
+        }).catch(err => {});
     }
 
     render() {
