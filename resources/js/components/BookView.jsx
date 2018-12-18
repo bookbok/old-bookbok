@@ -6,14 +6,16 @@ export class BookView extends Component {
         const book = this.props.book;
         let bookName;
 
-        for (var i = 0, jaCnt = 0 ; i < book.name.length; i++) {
+        for (var i = 0, jaCnt = 0, enCnt = 0 ; i < book.name.length ; i++) {
             if (ja2Bit(book.name.charAt(i))) {
                 jaCnt++;
+            } else {
+                enCnt++;
             }
         }
 
         if(book.name != "") {
-            const charNum = jaCnt < 9 ? 13 : 9;
+            const charNum = jaCnt < enCnt ? 13 : 9;
             const endLine = screen.width <= 750 ? charNum - 1 : charNum + 0;
             if(book.name.charAt(endLine) != "") {
                 bookName = <pre className="book-view-pre">{mb_substr(book.name, 0, endLine)}<br/>{mb_substr(book.name, endLine, book.name.length)}</pre>;
