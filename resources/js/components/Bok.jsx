@@ -11,24 +11,26 @@ export class Bok extends Component {
             loveClass: "far fa-bookmark fa-fw icon",
             isLiked: false,
             isLoved: false,
+            likeCount: parseInt(this.props.bok.liked_count),
+            loveCount: parseInt(this.props.bok.loved_count)
         };
         this.clickLike = this.clickLike.bind(this);
         this.clickLove = this.clickLove.bind(this);
     }
 
     clickLike(e){
-        if(this.state.isLiked){
-            this.setState({likeClass: "far fa-thumbs-up fa-fw icon", isLiked: false});
-        } else {
-            this.setState({likeClass: " fas fa-thumbs-up fa-fw icon like-animation", isLiked: true});
+        if(this.state.isLiked){     // いいねを取り消す
+            this.setState({likeClass: "far fa-thumbs-up fa-fw icon", isLiked: false, likeCount: this.state.likeCount-1});
+        } else {                     // いいねする
+            this.setState({likeClass: " fas fa-thumbs-up fa-fw icon like-animation", isLiked: true, likeCount: this.state.likeCount+1});
         }
     }
 
     clickLove(e){
         if(this.state.isLoved){
-            this.setState({loveClass: "far fa-bookmark fa-fw icon", isLoved: false});
+            this.setState({loveClass: "far fa-bookmark fa-fw icon", isLoved: false, loveCount: this.state.loveCount-1});
         } else {
-            this.setState({loveClass: " fas fa-bookmark fa-fw icon love-animation", isLoved: true});
+            this.setState({loveClass: " fas fa-bookmark fa-fw icon love-animation", isLoved: true, loveCount: this.state.loveCount+1});
         }
     }
 
@@ -76,13 +78,13 @@ export class Bok extends Component {
                                             <div className="align-top" onClick={this.clickLike}>
                                                 <p className="liked mr-2">
                                                     <i className={this.state.likeClass}></i>
-                                                    {bok.liked}
+                                                    {this.state.likeCount}
                                                 </p>
                                             </div>
                                             <div onClick={this.clickLove}>
                                                 <p className="loved">
                                                     <i className={this.state.loveClass}></i>
-                                                    {bok.loved}
+                                                    {this.state.loveCount}
                                                 </p>
                                             </div>
                                         </div>
