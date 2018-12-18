@@ -365,7 +365,7 @@ BOOKBOK　API仕様書
 
 + Parameters
 
-    + q: keyword1 keyword2 genre:1 (string,optional) - フリーキーワード(AND)
+    + q: keyword1 keyword2 genre:1 (string,optional) - フリーキーワード(タイトルと著者名の部分一致のAND)
     + genres (array,optional) - ジャンル(OR)
     + offset: 0 (number,optional) - 取得開始位置
     + maxResult: 20 (number, optional) - 最大取得数
