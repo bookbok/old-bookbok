@@ -50,10 +50,10 @@ export class UserBookDetail extends Component {
                             <BookInfo book={book} />
                             <hr />
                             <h3 className="mt-5">レビュー<div className="float-right"><Review /></div></h3>
-                            <p className="mt-4">{review.body}</p>
+                            <div className="mt-4">{review.body}</div>
                             <hr />
                             <h3 className="mt-5">Boks <div className="float-right"><Contribution /></div></h3>
-                            <p className="mt-4">{boks}</p>
+                            <div className="mt-4">{boks}</div>
                         </div>
                     </div>
                 </div>
