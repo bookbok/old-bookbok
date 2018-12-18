@@ -35,16 +35,18 @@ export class BookListView extends Component {
         return(
             <div className="container mt-4">
                 <div className="row justify-content-center">
-                    <div>
-                        <div className="d-flex mb-4">
-                            <div className="mr-5">
-                                <ConnectedGenres />
-                            </div>
-                            <Search />
-                            <div className="ml-5">
-                                <ISBNModal />
-                            </div>
+                    <div className="d-flex">
+                        <div className="m-3">
+                            <ConnectedGenres />
                         </div>
+                        <div className="m-3">
+                            <Search />
+                        </div>
+                    </div>
+                    <div className="m-3">
+                        <ISBNModal />
+                    </div>
+                    <div className="mt-4">
                         {bookList}
                     </div>
                 </div>
