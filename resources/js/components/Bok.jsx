@@ -36,12 +36,11 @@ export class Bok extends Component {
         const bok = this.props.bok;
         const userBook = this.props.bok.user_book;
         const bookLink = "/books/" + this.props.bok.user_book.book.id;
-        console.log({bookLink});
 
         let page = null;
         if(bok.page_num_begin !== null){
             page = ("p" + bok.page_num_begin);
-            if(bok.page_num_begin !== bok.page_num_end){
+            if((bok.page_num_begin !== bok.page_num_end) && bok.page_num_end !== null){
                 page += (" ~ p" + bok.page_num_end);
             }
         }
