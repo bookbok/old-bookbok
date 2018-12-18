@@ -20,17 +20,33 @@ export class Bok extends Component {
 
     clickLike(e){
         if(this.state.isLiked){     // いいねを取り消す
-            this.setState({likeClass: "far fa-thumbs-up fa-fw icon", isLiked: false, likeCount: this.state.likeCount-1});
+            this.setState({
+                likeClass: "far fa-thumbs-up fa-fw icon",
+                isLiked: false,
+                likeCount: this.state.likeCount-1
+            });
         } else {                     // いいねする
-            this.setState({likeClass: " fas fa-thumbs-up fa-fw icon like-animation", isLiked: true, likeCount: this.state.likeCount+1});
+            this.setState({
+                likeClass: " fas fa-thumbs-up fa-fw icon like-animation",
+                isLiked: true,
+                likeCount: this.state.likeCount+1
+            });
         }
     }
 
     clickLove(e){
         if(this.state.isLoved){
-            this.setState({loveClass: "far fa-bookmark fa-fw icon", isLoved: false, loveCount: this.state.loveCount-1});
+            this.setState({
+                loveClass: "far fa-bookmark fa-fw icon",
+                isLoved: false,
+                loveCount: this.state.loveCount-1
+            });
         } else {
-            this.setState({loveClass: " fas fa-bookmark fa-fw icon love-animation", isLoved: true, loveCount: this.state.loveCount+1});
+            this.setState({
+                loveClass: " fas fa-bookmark fa-fw icon love-animation",
+                isLoved: true,
+                loveCount: this.state.loveCount+1
+            });
         }
     }
 
