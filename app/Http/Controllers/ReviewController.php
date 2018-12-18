@@ -9,15 +9,6 @@ use Carbon\Carbon;
 
 class ReviewController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Reviewの作成、または更新をするAPI
@@ -35,7 +26,10 @@ class ReviewController extends Controller
         ]);
 
         if($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return response()->json([
+                'status' => 400,
+                'userMessage' => $validator->errors()
+            ], 400);
         }
 
         // 公開処理
@@ -57,26 +51,3 @@ class ReviewController extends Controller
 
         return response()->json($review, 200);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Review $review)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Review $review)
-    {
-        //
-    }
-}

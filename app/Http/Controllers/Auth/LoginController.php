@@ -26,7 +26,10 @@ class LoginController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json([
+                'status' => 400,
+                'userMessage' => $validator->errors()
+            ], 400);
         }
 
         $user = User::where('email', $request->email)->first();
@@ -36,7 +39,8 @@ class LoginController extends Controller
             false === password_verify($request->password, $user->password)
         ) {
             return response()->json([
-                'message' => 'Falid to authentication...',
+                'status' => 422,
+                'userMessage' => '認証に失敗しました。',
             ], 422);
         }
 
@@ -61,7 +65,7 @@ class LoginController extends Controller
         $token->revoke();
 
         return response()->json([
-            'message' => 'You have been successfully logged out!',
+            'userMessage' => 'ログアウトしました。',
         ], 200);
     }
 }

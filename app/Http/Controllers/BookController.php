@@ -60,27 +60,6 @@ class BookController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Book  $book
@@ -105,6 +84,7 @@ class BookController extends Controller
             JSON_UNESCAPED_UNICODE
         );
     }
+<<<<<<< HEAD
 
     /**
      * Show the form for editing the specified resource.
@@ -183,3 +163,6 @@ class BookController extends Controller
         return [$queries, $genres, $offset, $maxResult];
     }
 }
+=======
+}
+>>>>>>> master
