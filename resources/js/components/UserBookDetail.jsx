@@ -8,6 +8,8 @@ import { Bok } from "./Bok";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 import { BookInfo } from "./shared/book/BookInfo";
 import { Contribution } from "./Contribution";
+import { Review } from "./Review";
+
 
 export class UserBookDetail extends Component {
     constructor(props){
@@ -46,10 +48,12 @@ export class UserBookDetail extends Component {
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
                             <BookInfo book={book} />
-
+                            <br />
+                            <div className="float-right"> <Review /> </div>
                             <h3 className="mt-5">レビュー</h3>
                             <p>{review.body}</p>
                             <hr />
+                            <br />
                             <div className="float-right"> <Contribution /> </div>
                             <h3 className="mt-5">Boks</h3>
                             {boks}
