@@ -3,22 +3,22 @@ import React from 'react';
 export const Review = () => (
 
     <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ReviewModalCenter">
+        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#ReviewModalCenter">
             レビューを投稿する
         </button>
 
-        <div class="modal fade" id="ReviewModalCenter" tabindex="-1" role="dialog" aria-labelledby="ReviewModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+        <div className="modal fade" id="ReviewModalCenter" tabindex="-1" role="dialog" aria-labelledby="ReviewModalCenterTitle" aria-hidden="true">
+            <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <button type="button" className="close" data-dismiss="modal" aria-label="閉じる">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                         <form>
-                            <div class="row">
-                                <div class="col">レビューのタイトルを記入してください
+                            <div className="row">
+                                <div className="col">レビューのタイトルを記入してください
                                     <input type="text" class="form-control" placeholder="この本をズバリ一言で！" />
                                 </div>
                             </div>
