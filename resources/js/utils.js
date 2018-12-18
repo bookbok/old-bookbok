@@ -39,7 +39,7 @@ export function mb_substr(str, begin, end) {
     return ret;
 }
 
-//漢字・ひらがな・カタカナ以外の文字を含んでいたら「false」が返る
+//漢字・ひらがな・カタカナの文字を含んでいたら「true」が返る
 export function ja2Bit(chr) {
     return ( chr.match(/^[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]+$/) )? true : false
 }
