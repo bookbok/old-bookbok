@@ -3,16 +3,16 @@ import React from 'react';
 export const Contribution = () => (
 
     <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BokModalCenter">
+        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#BokModalCenter">
             BOKボタン
         </button>
 
-        <div class="modal fade" id="BokModalCenter" tabindex="-1" role="dialog" aria-labelledby="BokModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">タイトル</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+        <div className="modal fade" id="BokModalCenter" tabIndex="-1" role="dialog" aria-labelledby="BokModalCenterTitle" aria-hidden="true">
+            <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalCenterTitle">タイトル</h5>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="閉じる">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
