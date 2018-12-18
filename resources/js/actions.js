@@ -29,7 +29,7 @@ export async function wrapFetch(url, { body, method = "GET", isParse = true } = 
     });
 
     if(res.status === 401) {
-        throw new Error("Authorization error: " + res.statusText);
+        throw new Error("[401]Authorization error: " + res.statusText);
     }
 
     let json = null;
@@ -169,8 +169,14 @@ export const fetchLikeBoks = (userId) => dispatch => {
 }
 
 export const storeISBNToUserBookDirect = (userId, isbn) => {
-    return wrapFetch(DOMAIN + `/api/users/${userId}/user_books`, {
+    // HACK: wrapFetchでは対応できなかった
+    return fetch(DOMAIN + `/api/users/${userId}/user_books`, {
         method: "POST",
-        body: { "isbn": isbn },
+        body: JSON.stringify({ "isbn": isbn }),
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${state.token}`,
+        },
     });
 }
