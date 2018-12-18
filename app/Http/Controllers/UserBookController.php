@@ -63,8 +63,11 @@ class UserBookController extends Controller
             // すべてのScraperが情報取得に失敗した場合
             if($new_book == null){
                 return response()->json(
-                    [],
-                    404,
+                    [
+                        'status' => 500,
+                        'userMessage' => 'お探しの本の情報を取得することができませんでした。'
+                    ],
+                    500,
                     [],
                     JSON_UNESCAPED_UNICODE
                 );
@@ -146,28 +149,5 @@ class UserBookController extends Controller
             [],
             JSON_UNESCAPED_UNICODE
         );
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserBook  $userBook
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, UserBook $userBook)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\UserBook  $userBook
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(UserBook $userBook)
-    {
-        //
     }
 }
