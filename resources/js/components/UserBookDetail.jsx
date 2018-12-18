@@ -7,8 +7,8 @@ import { Loading } from "./shared/Loading";
 import { Bok } from "./Bok";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 import { BookInfo } from "./shared/book/BookInfo";
-import { Contribution } from "./Contribution";
-import { Review } from "./Review";
+import { BokModal } from "./BokModal";
+import { ReviewModal } from "./ReviewModal";
 
 
 export class UserBookDetail extends Component {
@@ -49,10 +49,10 @@ export class UserBookDetail extends Component {
                         <div className="col-md-8 main-content p-5">
                             <BookInfo book={book} />
                             <hr />
-                            <h3 className="mt-5">レビュー<div className="float-right"><Review /></div></h3>
-                            <div className="mt-4">{review.body}</div>
+                            <h3 className="mt-5">レビュー<div className="float-right"><ReviewModal /></div></h3>
+                            <p className="mt-4">{review.body}</p>
                             <hr />
-                            <h3 className="mt-5">Boks <div className="float-right"><Contribution /></div></h3>
+                            <h3 className="mt-5">Boks <div className="float-right"><BokModal /></div></h3>
                             <div className="mt-4">{boks}</div>
                         </div>
                     </div>
