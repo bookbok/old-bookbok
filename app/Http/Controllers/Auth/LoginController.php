@@ -27,9 +27,9 @@ class LoginController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status' => 422,
+                'status' => 400,
                 'userMessage' => $validator->errors()
-            ], 422);
+            ], 400);
         }
 
         $user = User::where('email', $request->email)->first();
@@ -45,7 +45,6 @@ class LoginController extends Controller
         }
 
         return response()->json([
-            'status' => 200,
             'token' => $user->createToken(self::TOKEN_NAME)->accessToken,
         ], 200);
     }
@@ -66,7 +65,6 @@ class LoginController extends Controller
         $token->revoke();
 
         return response()->json([
-            'status' => 200,
             'userMessage' => 'You have been successfully logged out!',
         ], 200);
     }

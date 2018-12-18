@@ -23,7 +23,10 @@ class BokController extends Controller
         // 指定されたuserBookIdが実在するかのチェック
         if(!UserBook::find($userBookId)){
             return response()->json(
-                [],
+                [
+                    'status' => 404,
+                    'userMessage' => 'UserBook does not exist...'
+                ],
                 404,
                 [],
                 JSON_UNESCAPED_UNICODE
@@ -80,7 +83,10 @@ class BokController extends Controller
         ]);
 
         if($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return response()->json([
+                'status' => 400,
+                'userMessage' => $validator->errors()
+            ], 400);
         }
 
         // 公開処理

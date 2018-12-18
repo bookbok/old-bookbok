@@ -46,7 +46,6 @@ class ResetPasswordController extends Controller
         );
 
         return response()->json([
-            'status' => 200,
             'userMessage' => 'We successfully sent a mail with a link to the password reset page!',
         ], 200);
     }
@@ -92,7 +91,6 @@ class ResetPasswordController extends Controller
         }
         
         return response()->json([
-            'status' => 200,
             'userMessage' => 'You have successfully changed password!',
         ], 200);
     }

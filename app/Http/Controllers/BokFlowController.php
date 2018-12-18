@@ -22,7 +22,10 @@ class BokFlowController extends Controller
         $userId = Auth::id();
         if(!$userId){
             return response()->json(
-                [],
+                [
+                    'status' => 401,
+                    'userMessage' => 'You have to login to view bok flow...'
+                ],
                 401,
                 [],
                 JSON_UNESCAPED_UNICODE
