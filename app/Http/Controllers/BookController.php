@@ -10,6 +10,9 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param   Request $request
+     *  リクエスト
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
