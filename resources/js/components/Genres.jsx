@@ -17,8 +17,8 @@ export class Genres extends Component {
             return <div></div>;
         }
 
-        const genres = this.props.genres.map(( genre ) => (
-            <li><a href="#">{genre.name}</a></li>
+        const genres = this.props.genres.map((genre) => (
+            <li key={genre.id}><a href="#" className="text-body">{genre.name}</a></li>
         ));
 
         return (
