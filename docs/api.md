@@ -337,11 +337,12 @@ BOOKBOK　API仕様書
 
 # Group BOOKS
 
-## Books [/api/books{?q,offset,maxResult}]
+## Books [/api/books{?q,genres,offset,maxResult}]
 
 + Parameters
 
-    + q: keyword1 keyword2 genre:1 (string,optional) - フリーキーワード
+    + q: keyword1 keyword2 genre:1 (string,optional) - フリーキーワード(AND)
+    + genres (array,optional) - ジャンル(OR)
     + offset: 0 (number,optional) - 取得開始位置
     + maxResult: 20 (number, optional) - 最大取得数
 
