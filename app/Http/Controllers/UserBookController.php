@@ -65,7 +65,7 @@ class UserBookController extends Controller
                 return response()->json(
                     [
                         'status' => 500,
-                        'userMessage' => 'Sorry...we can\'t get book information.'
+                        'userMessage' => 'お探しの本の情報を取得することができませんでした。'
                     ],
                     500,
                     [],
@@ -150,3 +150,4 @@ class UserBookController extends Controller
             JSON_UNESCAPED_UNICODE
         );
     }
+}

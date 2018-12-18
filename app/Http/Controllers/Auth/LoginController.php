@@ -40,7 +40,7 @@ class LoginController extends Controller
         ) {
             return response()->json([
                 'status' => 422,
-                'userMessage' => 'Falid to authentication...',
+                'userMessage' => '認証に失敗しました。',
             ], 422);
         }
 
@@ -65,7 +65,7 @@ class LoginController extends Controller
         $token->revoke();
 
         return response()->json([
-            'userMessage' => 'You have been successfully logged out!',
+            'userMessage' => 'ログアウトしました。',
         ], 200);
     }
 }

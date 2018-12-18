@@ -24,7 +24,7 @@ class BokFlowController extends Controller
             return response()->json(
                 [
                     'status' => 401,
-                    'userMessage' => 'You have to login to view bok flow...'
+                    'userMessage' => 'Bokフローの閲覧にはログインが必要です。'
                 ],
                 401,
                 [],

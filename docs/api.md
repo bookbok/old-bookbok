@@ -54,7 +54,7 @@ BOOKBOK　API仕様書
 
         {
             "status":422,
-            "userMessage": "Falid to authentication..."
+            "userMessage": "認証に失敗しました。"
         }
 
 ## Logout [/api/auth/logout]
@@ -64,14 +64,14 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "userMessage": "You have been successfully logged out!"
+            "userMessage": "ログアウトしました。"
         }
 
 + Response 401 (application/json)
 
         {
             "status":401,
-            "userMessage": "Unauthenticated."
+            "userMessage": "権限がありません。"
         }
 
 ## Yourself [/api/auth/user]
@@ -96,7 +96,7 @@ BOOKBOK　API仕様書
 
         {
             "status":401,
-            "userMessage": "Unauthenticated."
+            "userMessage": "権限がありません。"
         }
 
 ## Register [/api/auth/register]
@@ -125,7 +125,7 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "userMessage": "You have been successfully registerd user! Let's login."
+            "userMessage": "ユーザ登録に成功しました。ログインしましょう！"
         }
 
 + Response 400 (application/json)
@@ -158,35 +158,35 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "userMessage": "Your email has been successfully verified!"
+            "userMessage": "有効化に成功しました。"
         }
 
 + Response 400 (application/json)
 
         {
             "status":400,
-            "userMessage": "Verification failed..."
+            "userMessage": "有効化に失敗しました。"
         }
 
 + Response 401 (application/json)
 
         {
             "status":401,
-            "userMessage": "Unauthenticated."
+            "userMessage": "権限がありません。"
         }
 
 + Response 403 (application/json)
 
         {
             "status":403,
-            "userMessage": "Invalid signature."
+            "userMessage": "シグネチャが不正です。"
         }
 
 + Response 429 (application/json)
 
         {
             "status":429,
-            "userMessage": "Too Many Attempts."
+            "userMessage": "試行回数が多すぎます。"
         }
 
 ## Email Verify Resend [/api/auth/email/resend]
@@ -196,27 +196,27 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "userMessage": "We successfully retransmitted the verification email."
+            "userMessage": "検証メールを再送信しました。確認をお願いします。"
         }
 
 + Response 200 (application/json)
 
         {
-            "userMessage": "Your email has been successfully verified!"
+            "userMessage": "有効化に成功しました。"
         }
 
 + Response 401 (application/json)
 
         {
             "status":401,
-            "userMessage": "Unauthenticated."
+            "userMessage": "権限がありません。"
         }
 
 + Response 429 (application/json)
 
         {
             "status":429,
-            "userMessage": "Too Many Attempts."
+            "userMessage": "試行回数が多すぎます。"
         }
 
 ## Password Reset Mail Send [/api/auth/password/reset/send]
@@ -240,7 +240,7 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "userMessage": "We successfully sent a mail with a link to the password reset page!"
+            "userMessage": "リセット用のリンクを送信しました。登録されているメールの確認をお願いします。"
         }
 
 + Response 400 (application/json)
@@ -258,7 +258,7 @@ BOOKBOK　API仕様書
 
         {
             "status":429,
-            "userMessage": "Too Many Attempts."
+            "userMessage": "試行回数が多すぎます。"
         }
 
 ## Password Reset [/api/auth/password/reset]
@@ -284,7 +284,7 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "userMessage": "You have successfully changed password!"
+            "userMessage": "パスワードの変更に成功しました。"
         }
 
 + Response 400 (application/json)
@@ -308,14 +308,14 @@ BOOKBOK　API仕様書
 
         {
             "status":400,
-            "userMessage": "Password reset failure..."
+            "userMessage": "パスワードの変更に失敗しました。"
         }
 
 + Response 429 (application/json)
 
         {
             "status":429,
-            "userMessage": "Too Many Attempts."
+            "userMessage": "試行回数が多すぎます。"
         }
 
 # Group USERS
@@ -498,6 +498,7 @@ BOOKBOK　API仕様書
                 "description": "user info"
             },
             "book": {
+
                 "id": 1,
                 "isbn": "9784111121221",
                 "name": "book name",
@@ -862,9 +863,8 @@ BOOKBOK　API仕様書
 
         [
             'status' => 401,
-            'userMessage' => 'You have to login to view bok flow...'
+            'userMessage' => 'Bokフローの閲覧にはログインが必要です。'
         ]
-
 
 # Group FOLLOWERS
 

@@ -25,7 +25,7 @@ class BokController extends Controller
             return response()->json(
                 [
                     'status' => 404,
-                    'userMessage' => 'UserBook does not exist...'
+                    'userMessage' => 'お探しのユーザブックは見つかりませんでした。'
                 ],
                 404,
                 [],

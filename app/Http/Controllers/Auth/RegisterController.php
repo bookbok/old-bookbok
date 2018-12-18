@@ -43,7 +43,7 @@ class RegisterController extends Controller
         event(new Registered($user));
 
         return response()->json([
-            'userMessage' => 'You have been successfully registerd user! Let\'s login.',
+            'userMessage' => 'ユーザ登録に成功しました。ログインしましょう！',
         ], 200);
     }
 }

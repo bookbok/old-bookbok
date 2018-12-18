@@ -46,7 +46,7 @@ class ResetPasswordController extends Controller
         );
 
         return response()->json([
-            'userMessage' => 'We successfully sent a mail with a link to the password reset page!',
+            'userMessage' => 'リセット用のリンクを送信しました。登録されているメールの確認をお願いします。',
         ], 200);
     }
 
@@ -86,12 +86,12 @@ class ResetPasswordController extends Controller
         if (Password::PASSWORD_RESET !== $response) {
             return response()->json([
                 'status' => 400,
-                'userMessage' => 'Password reset failure...',
+                'userMessage' => 'パスワードのリセットに失敗しました。',
             ], 400);
         }
         
         return response()->json([
-            'userMessage' => 'You have successfully changed password!',
+            'userMessage' => 'パスワードの変更に成功しました。',
         ], 200);
     }
 
