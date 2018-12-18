@@ -11,14 +11,14 @@ export class BookView extends Component {
                 jaCnt++;
             }
         }
-             
+
         if(book.name != "") {
-            const width = jaCnt < 9 ? 13 : 9;
-            const device = screen.width <= 750 ? -2 : 0;
-            if(book.name.charAt((width+device)+1) != "") {
-                bookName = <pre className="book-view-pre">{mb_substr(book.name, 0, width+device)}<br/>{mb_substr(book.name, width+device, book.name.length)}</pre>;
+            const charNum = jaCnt < 9 ? 13 : 9;
+            const endLine = screen.width <= 750 ? charNum - 1 : charNum + 0;
+            if(book.name.charAt(endLine) != "") {
+                bookName = <pre className="book-view-pre">{mb_substr(book.name, 0, endLine)}<br/>{mb_substr(book.name, endLine, book.name.length)}</pre>;
             } else {
-                bookName = <pre className="book-view-pre">{mb_substr(book.name, 0, book.name.length)}<br/><br/></pre>;
+                bookName = <pre className="book-view-pre">{mb_substr(book.name, 0, endLine)}<br/><br/></pre>;
             }
         } else {
                 bookName = <pre className="book-view-pre"><br/><br/></pre>;

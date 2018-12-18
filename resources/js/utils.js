@@ -21,6 +21,7 @@ export function convertQuery(obj) {
 $.isSurrogatePear = function(upper, lower) {
       return 0xD800 <= upper && upper <= 0xDBFF && 0xDC00 <= lower && lower <= 0xDFFF;
 };
+
 //マルチバイト文字対応型の文字列の切り出しをする
 export function mb_substr(str, begin, end) {
     let ret = '';
