@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { requestUserRegister } from "../actions.js";
-import { store } from "../store";
+import { directUserRegister } from "../actions.js";
 
 export class UserRegister extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: "", email: "", password: "", passwordConfirm: "" };
+        this.state = { name: "", email: "", password: "", passwordConfirm: "", isInvalid: false };
 
         this.submitRegister = this.submitRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -22,8 +21,12 @@ export class UserRegister extends Component {
 
     submitRegister(e) {
         e.preventDefault();
-        store.dispatch(requestUserRegister(this.state));
-        this.props.history.push('/login'); // アカウント登録後のデフォルト遷移先
+        const that = this;
+        directUserRegister(this.state).then(res => {
+            that.props.history.push('/login');
+        }).catch(err => {
+            that.setState({ isInvalid: true });
+        });
     }
 
     render() {
@@ -35,6 +38,9 @@ export class UserRegister extends Component {
                             <div className="card-header">アカウント登録</div>
 
                             <div className="card-body">
+                                <div className={`mb-4 text-size invalid-feedback text-center ${this.state.isInvalid && "d-block"}`}>
+                                    入力内容をもう一度ご確認ください。 
+                                </div>
                                 <form onSubmit={this.submitRegister}>
                                     <div className="form-group row">
                                         <label htmlFor="name" className="col-md-4 col-form-label text-md-right">名前</label>
@@ -81,7 +87,7 @@ export class UserRegister extends Component {
                                     </div>
 
                                     <div className="form-group row">
-                                        <label for="password-confirm" className="col-md-4 col-form-label text-md-right">確認用パスワード</label>
+                                        <label htmlFor="password-confirm" className="col-md-4 col-form-label text-md-right">確認用パスワード</label>
 
                                         <div className="col-md-6">
                                             <input id="password-confirm"

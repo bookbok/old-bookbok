@@ -49,7 +49,16 @@ export function wrapAction(actionCreator, callback) {
 }
 
 
-export const setTimeLine = timeLine => ({ type: types.SET_TIMELINE, timeLine });
+export const setBokFlow = bokFlow => ({ type: types.SET_BOK_FLOW, bokFlow });
+export const fetchBokFlow = () => dispatch => {
+    wrapFetch(DOMAIN + "/api/bok_flow").then(json => {
+        if(utils.isEmpty(json)){
+            dispatch(setBokFlow('最近のBokがありません'));
+        } else {
+            dispatch(setBokFlow(json));
+        }
+    });
+}
 
 /* ==== Auth actions ==== */
 // Get authentication token
@@ -80,19 +89,11 @@ export const requestLogout = () => dispatch => {
     });
 }
 
-export const requestUserRegister = (userInfo) => dispatch => {
-    /* TODO: サーバー側が実装されれば書く
-    fetch(DOMAIN + "/api/auth/register", {
+export const directUserRegister = (userInfo) => {
+    return wrapFetch(DOMAIN + "/api/auth/register", {
         method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfo)
-    })
-        .then(res => {
-        });
-    */
+        body: userInfo
+    });
 };
 
 
@@ -112,22 +113,35 @@ export const fetchBookDetail = (id) => dispatch => {
         });
 }
 
-export const setUserInfo = userInfo => ({type: types.SET_USER_INFO, userInfo });
-export const fetchUserInfo = () => dispatch => {
-    wrapFetch( DOMAIN + "/api/users/")
+export const setUsers = users => ({type: types.SET_USERS, users });
+export const fetchUsers = () => dispatch => {
+    wrapFetch(DOMAIN + "/api/users/")
         .then(json => {
-                dispatch(setUserInfo(json));
-        })
-        .catch(err => {
-            console.error("fetch error!", err);
+                dispatch(setUsers(json));
         });
 }
 
-export const setUsersBookshelf = usersBookshelf => ({type: types.SET_USERS_BOOKSHELF, usersBookshelf});
-export const fetchUsersBookshelf = (userId) => dispatch => {
+export const setUser = user => ({type: types.SET_USER, user});
+export const fetchUser = (userId) => dispatch => {
+    wrapFetch(DOMAIN + `/api/users/${userId}`)
+        .then(json => {
+            dispatch(setUser(json));
+        });
+}
+
+export const setUserBookshelf = userBookshelf => ({type: types.SET_USER_BOOKSHELF, userBookshelf});
+export const fetchUserBookshelf = (userId) => dispatch => {
     wrapFetch(DOMAIN + `/api/users/${userId}/user_books`)
         .then(json => {
-            dispatch(setUsersBookshelf(json));
+            dispatch(setUserBookshelf(json));
+        });
+}
+
+export const setUserBookDetail = userBookDetail => ({ type: types.SET_USER_BOOK_DETAIL, userBookDetail });
+export const fetchUserBookDetail = (userId, userBookId) => dispatch => {
+    wrapFetch(DOMAIN + `/api/users/${userId}/user_books/${userBookId}`)
+        .then(json => {
+            dispatch(setUserBookDetail(json));
         });
 }
 

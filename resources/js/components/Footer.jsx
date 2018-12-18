@@ -12,7 +12,7 @@ export const Footer = () => (
                         <li><Link to="#">ヘルプ</Link></li>
                         <li className="mr-auto"><Link to="#">お問い合わせ</Link></li>
                         <li><Link to="#">BookBokとは</Link></li>
-                        <li><Link to="#">ユーザー</Link></li>
+                        <li><Link to="/users">ユーザー</Link></li>
                         <li><Link to="#">開発ブログ</Link></li>
                         <li><Link to="#">ご意見</Link></li>
                     </ul>

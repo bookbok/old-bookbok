@@ -1,15 +1,16 @@
 import { connect } from "react-redux";
-import { TimeLine } from "./components/TimeLine";
+import { BokFlow } from "./components/BokFlow";
 import { Genres } from "./components/Genres";
 import { BookDetailView } from "./components/BookDetailView";
-import { UserInfo } from "./components/UserInfo";
+import { UsersView } from "./components/UsersView";
 import { BookListView } from "./components/BookListView";
-import { UsersBookshelf } from "./components/UsersBookshelf";
+import { UserBookshelf } from "./components/UserBookshelf";
+import { UserBookDetail } from "./components/UserBookDetail";
 import { LikeBokList } from "./components/LikeBokList";
 
-export const ConnectedTimeLine = connect(
+export const ConnectedBokFlow = connect(
     state => state
-)(TimeLine);
+)(BokFlow);
 
 export const ConnectedGenres = connect(
     state => state
@@ -19,18 +20,23 @@ export const ConnectedBookDetail = connect(
     state => state
 )(BookDetailView);
 
-export const ConnectedUserInfo = connect(
+export const ConnectedUsersView = connect(
     state => state
-)(UserInfo);
+)(UsersView);
 
-export const ConnectedUsersBookshelf = connect(
+export const ConnectedUserBookshelf = connect(
     state => state
-)(UsersBookshelf);
+)(UserBookshelf);
 
 export const ConnectedBookList = connect(
     state => state,
 )(BookListView);
 
+export const ConnectedUserBookDetail = connect(
+    state => state
+)(UserBookDetail);
+
 export const ConnectedLikeBokList = connect(
     state => state,
 )(LikeBokList);
+

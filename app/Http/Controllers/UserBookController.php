@@ -35,16 +35,6 @@ class UserBookController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * ユーザの本棚に本を追加する。
      *
      * @param  \Illuminate\Http\Request  $request
@@ -109,22 +99,23 @@ class UserBookController extends Controller
     /**
      * 本棚に収められた本の詳細情報表示用API.
      *
+     * @param  userId: ユーザの主キー
      * @param  userBookId: ユーザブックの主キー
      * @return JSON形式のまるっと情報
      */
-    public function show($userBookId)
+    public function show($userId, $userBookId)
     {
-        $userId = Auth::id();
-        if($userId === null) {
-            $userId = 0;
+        $authId = Auth::id();
+        if($authId === null) {
+            $authId = 0;
         }
 
         $userBook = UserBook::with([
                 'user:id,name,avatar,description',
-                'book:id,isbn,name,cover',
+                'book:id,isbn,name,cover,description',
                 'review:id,user_id,user_book_id,body,published_at',
                 'boks',
-                'boks' => function($q1) use($userId) {
+                'boks' => function($q1) use($authId) {
                     $q1->withCount([
                         'reactions as liked_count' => function($q2) {
                             $q2->isLiked();
@@ -132,11 +123,11 @@ class UserBookController extends Controller
                         'reactions as loved_count' => function($q2) {
                             $q2->isLoved();
                         },
-                        'reactions as liked' => function($q2) use($userId) {
-                            $q2->isLiked()->where('user_id', $userId);
+                        'reactions as liked' => function($q2) use($authId) {
+                            $q2->isLiked()->where('user_id', $authId);
                         },
-                        'reactions as loved' => function($q2) use($userId) {
-                            $q2->isLoved()->where('user_id', $userId);
+                        'reactions as loved' => function($q2) use($authId) {
+                            $q2->isLoved()->where('user_id', $authId);
                         },
                     ]);
                 },
@@ -144,8 +135,10 @@ class UserBookController extends Controller
                 'boks.userBook.book:id,name,cover',
                 'boks.userBook.user:id,name,avatar',
             ])
-            ->select(['id', 'user_id', 'book_id'])
-            ->find($userBookId);
+            ->select(['id', 'user_id', 'book_id', 'reading_status'])
+            ->where('id', $userBookId)
+            ->where('user_id', $userId)
+            ->take(1)->first();
 
         return response()->json(
             $userBook,
@@ -153,17 +146,6 @@ class UserBookController extends Controller
             [],
             JSON_UNESCAPED_UNICODE
         );
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\UserBook  $userBook
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UserBook $userBook)
-    {
-        //
     }
 
     /**

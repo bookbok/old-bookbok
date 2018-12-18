@@ -4,7 +4,7 @@ export class BookView extends Component {
     render() {
         const book = this.props.book;
         let bookName;
-        
+
         if(book.name != "") {
             const width = screen.width <= 750 ? 12 : 14;
             if(book.name.charAt(width+1) != "") {
@@ -17,10 +17,12 @@ export class BookView extends Component {
         }
 
         return (
-            <div className="d-inline-block col-md-4 col-4"> 
-                <img className="book-view-img" src={book.cover}/>
-                {bookName}
-                <br/>
+            <div className="d-inline-block col-md-4 col-4">
+                <a href={this.props.link ? this.props.link : "#"}>
+                    <img className="book-view-img" src={book.cover}/>
+                    {bookName}
+                    <br/>
+                </a>
             </div>
          );
 

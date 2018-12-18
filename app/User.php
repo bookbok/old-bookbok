@@ -27,7 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'email_verified_at',
     ];
 
     /**
@@ -35,7 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function books(){
         return $this->belongsToMany(Book::class, 'user_book')
-                    ->withPivot('id')
+                    ->withPivot('id', 'reading_status')
                     ->withTimestamps();
     }
 
@@ -84,5 +84,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendEmailVerificationNotification()
     {
         $this->notify(new Notifications\VerifyEmail);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new Notifications\ResetPassword($token));
     }
 }

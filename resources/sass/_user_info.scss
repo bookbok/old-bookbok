@@ -1,0 +1,63 @@
+img.user-info-avatar {
+  max-width: 50px;
+  max-height: 50px;
+
+  @include normal-pc {
+    max-width: 100px;
+    max-height: 100px;
+  };
+}
+
+/* === user info accordion box == */
+.user-info-accordion {
+  label {
+    display: block;
+    cursor: pointer;
+    background-color: #CCFFCC;
+    transition: background-color 0.3s;
+    max-width: 100%;
+
+    @include middle-screen {
+      max-width: 30%;
+    }
+
+    &:hover {
+      background-color: #99FFCC;
+    }
+  }
+
+  input {
+    display: none;
+  }
+
+  /* default display none */
+  .user-info-description {
+    white-space: pre-wrap;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.4s;
+  }
+
+  /* display description when clicked */
+  .user-info-accordion-check:checked + .user-info-description{
+    height: auto;
+    opacity: 1;
+  }
+}
+/* == !accordion == */
+
+
+.user-follow-btn {
+  max-width: 100%;
+
+  @include middle-screen {
+    max-width: 30%;
+  }
+}
+
+.user-follow-info {
+  //line-height: 50px;
+}
+
