@@ -89,19 +89,11 @@ export const requestLogout = () => dispatch => {
     });
 }
 
-export const requestUserRegister = (userInfo) => dispatch => {
-    /* TODO: サーバー側が実装されれば書く
-    fetch(DOMAIN + "/api/auth/register", {
+export const directUserRegister = (userInfo) => {
+    return wrapFetch(DOMAIN + "/api/auth/register", {
         method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfo)
-    })
-        .then(res => {
-        });
-    */
+        body: userInfo
+    });
 };
 
 
@@ -121,14 +113,19 @@ export const fetchBookDetail = (id) => dispatch => {
         });
 }
 
-export const setUserInfo = userInfo => ({type: types.SET_USER_INFO, userInfo });
-export const fetchUserInfo = () => dispatch => {
-    wrapFetch( DOMAIN + "/api/users/")
+export const setUsers = users => ({type: types.SET_USERS, users });
+export const fetchUsers = () => dispatch => {
+    wrapFetch(DOMAIN + "/api/users/")
         .then(json => {
-                dispatch(setUserInfo(json));
-        })
-        .catch(err => {
-            console.error("fetch error!", err);
+                dispatch(setUsers(json));
+        });
+}
+
+export const setUser = user => ({type: types.SET_USER, user});
+export const fetchUser = (userId) => dispatch => {
+    wrapFetch(DOMAIN + `/api/users/${userId}`)
+        .then(json => {
+            dispatch(setUser(json));
         });
 }
 
