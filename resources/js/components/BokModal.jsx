@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Contribution = () => (
+export const BokModal = () => (
 
     <div>
         <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#BokModalCenter">

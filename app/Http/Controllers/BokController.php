@@ -11,10 +11,10 @@ class BokController extends Controller
 {
     /**
      *  BOKSを返すAPI
-     * 
+     *
      * @param string $userBookId
      *   ユーザブックを一意に特定するID
-     * 
+     *
      * @return \Illuminate\Http\Response
      *   JSON形式でBOKSを返す
      */
@@ -23,7 +23,10 @@ class BokController extends Controller
         // 指定されたuserBookIdが実在するかのチェック
         if(!UserBook::find($userBookId)){
             return response()->json(
-                [],
+                [
+                    'status' => 404,
+                    'userMessage' => 'お探しのユーザブックは見つかりませんでした。'
+                ],
                 404,
                 [],
                 JSON_UNESCAPED_UNICODE
@@ -62,5 +65,47 @@ class BokController extends Controller
             [],
             JSON_UNESCAPED_UNICODE
         );
+    }
+
+    /**
+     * Bokの作成、または更新をするAPI
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $userBookId
+     * @return \Illuminate\Http\Response
+     *   BokのインスタンスJSON
+     */
+    public function store(Request $request, $userBookId)
+    {
+        $validator = \Validator::make($request->all(), [
+            'body' => 'required|string|max:2048',
+            'publish' => 'boolean',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'userMessage' => $validator->errors()
+            ], 400);
+        }
+
+        // 公開処理
+        $publishedAt = null;
+        if($request->publish) {
+            $publishedAt = Carbon::now()->toDateTimeString();
+        }
+
+        $bok = Bok::updateOrCreate(
+            [
+                'user_id' => auth()->id(),
+                'user_book_id' => $userBookId,
+            ],
+            [
+                'body' => $request->body,
+                'published_at' => $publishedAt,
+            ]
+        );
+
+        return response()->json($bok, 200);
     }
 }
