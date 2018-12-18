@@ -167,3 +167,10 @@ export const fetchLikeBoks = (userId) => dispatch => {
           dispatch(setLikeBoks(json));
        });
 }
+
+export const storeISBNToUserBookDirect = (userId, isbn) => {
+    return wrapFetch(DOMAIN + `/api/users/${userId}/user_books`, {
+        method: "POST",
+        body: { "isbn": isbn },
+    });
+}
