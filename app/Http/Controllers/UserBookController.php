@@ -79,7 +79,16 @@ class UserBookController extends Controller
         $user_book = new UserBook;
         $user_book->user_id = (int)$userId;
         $user_book->book_id = $book ? $book->id : $new_book->id;
+
+        $book = $book ?? $new_book;
+
+        if (in_array($book->genre_id, [1, 18])) {
+            // もしジャンルが文庫もしくは漫画ならネタバレフラグをtrueにする
+            $user_book->is_spoiler = true;
+        }
+
         $user_book->save();
+
         // レスポンスデータの生成
         $userBook = UserBook::with([
             'user:id,name,avatar,description',
