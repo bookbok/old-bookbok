@@ -50,7 +50,7 @@ BOOKBOK　API仕様書
 + Response 422 (application/json)
 
         {
-            "message": "Falid to authentication..."
+            "userMessage": "Falid to authentication..."
         }
 
 ## Logout [/api/auth/logout]
@@ -60,13 +60,13 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "message": "You have been successfully logged out!"
+            "userMessage": "You have been successfully logged out!"
         }
 
 + Response 401 (application/json)
 
         {
-            "message": "Unauthenticated."
+            "userMessage": "Unauthenticated."
         }
 
 ## Yourself [/api/auth/user]
@@ -90,7 +90,7 @@ BOOKBOK　API仕様書
 + Response 401 (application/json)
 
         {
-            "message": "Unauthenticated."
+            "userMessage": "Unauthenticated."
         }
 
 ## Register [/api/auth/register]
@@ -119,7 +119,7 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "message": "You have been successfully registerd user! Let's login."
+            "userMessage": "You have been successfully registerd user! Let's login."
         }
 
 + Response 400 (application/json)
@@ -149,31 +149,31 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "message": "Your email has been successfully verified!"
+            "userMessage": "Your email has been successfully verified!"
         }
 
 + Response 400 (application/json)
 
         {
-            "message": "Verification failed..."
+            "userMessage": "Verification failed..."
         }
 
 + Response 401 (application/json)
 
         {
-            "message": "Unauthenticated."
+            "userMessage": "Unauthenticated."
         }
 
 + Response 403 (application/json)
 
         {
-            "message": "Invalid signature."
+            "userMessage": "Invalid signature."
         }
 
 + Response 429 (application/json)
 
         {
-            "message": "Too Many Attempts."
+            "userMessage": "Too Many Attempts."
         }
 
 ## Email Verify Resend [/api/auth/email/resend]
@@ -183,25 +183,25 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "message": "We successfully retransmitted the verification email."
+            "userMessage": "We successfully retransmitted the verification email."
         }
 
 + Response 200 (application/json)
 
         {
-            "message": "Your email has been successfully verified!"
+            "userMessage": "Your email has been successfully verified!"
         }
 
 + Response 401 (application/json)
 
         {
-            "message": "Unauthenticated."
+            "userMessage": "Unauthenticated."
         }
 
 + Response 429 (application/json)
 
         {
-            "message": "Too Many Attempts."
+            "userMessage": "Too Many Attempts."
         }
 
 ## Password Reset Mail Send [/api/auth/password/reset/send]
@@ -225,7 +225,7 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "message": "We successfully sent a mail with a link to the password reset page!"
+            "userMessage": "We successfully sent a mail with a link to the password reset page!"
         }
 
 + Response 400 (application/json)
@@ -239,7 +239,7 @@ BOOKBOK　API仕様書
 + Response 429 (application/json)
 
         {
-            "message": "Too Many Attempts."
+            "userMessage": "Too Many Attempts."
         }
 
 ## Password Reset [/api/auth/password/reset]
@@ -265,7 +265,7 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "message": "You have successfully changed password!"
+            "userMessage": "You have successfully changed password!"
         }
 
 + Response 400 (application/json)
@@ -285,13 +285,13 @@ BOOKBOK　API仕様書
 + Response 400 (application/json)
 
         {
-            "message": "Password reset failure..."
+            "userMessage": "Password reset failure..."
         }
 
 + Response 429 (application/json)
 
         {
-            "message": "Too Many Attempts."
+            "userMessage": "Too Many Attempts."
         }
 
 # Group USERS
