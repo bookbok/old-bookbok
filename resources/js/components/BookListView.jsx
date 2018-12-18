@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { fetchBookList } from "../actions";
+import { store } from "../store";
+import { isEmpty } from "../utils";
 
 import { ConnectedGenres } from "../containers";
-import { Search } from "./Search.jsx";
-import { fetchBookList } from "../actions.js";
-import { store } from "../store";
-import { isEmpty } from "../utils.js";
+import { Search } from "./Search";
 import { Loading } from "./shared/Loading";
-import { BookView } from "./BookView.jsx";
+import { BookView } from "./BookView";
+import { ISBNModal } from "./shared/book/ISBNModal";
 
 export class BookListView extends Component {
     componentDidMount() {
@@ -35,9 +36,15 @@ export class BookListView extends Component {
             <div className="container mt-4">
                 <div className="row justify-content-center">
                     <div>
-                        <Search />
-                        <ConnectedGenres />
-                        <br/>
+                        <div className="d-flex mb-4">
+                            <div className="mr-5">
+                                <ConnectedGenres />
+                            </div>
+                            <Search />
+                            <div className="ml-5">
+                                <ISBNModal />
+                            </div>
+                        </div>
                         {bookList}
                     </div>
                 </div>
