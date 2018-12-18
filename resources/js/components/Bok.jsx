@@ -66,21 +66,21 @@ export class Bok extends Component {
                     <div className="w-100">
                         <div className="d-flex flex-column h-100">
                             <pre className="bok-user border-bottom">{userBook.user.name}</pre>
-                            <pre className="bok-body mt-2">{bok.body}</pre>
+                            <pre className="bok-body mt-2 mr-2">{bok.body}</pre>
 
-                            <div className="d-flex align-items-end bok-footer mt-2">
+                            <div className="d-flex bok-footer mt-2">
                                 <pre className="text-muted updated">{bok.updated_at}</pre>
                                 <div className="w-50">
                                     <div className="float-right">
                                         <div className="d-flex">
-                                            <div className="mr-3 mb-0" onClick={this.clickLike}>
-                                                <p className="liked mr-1">
+                                            <div className="align-top" onClick={this.clickLike}>
+                                                <p className="liked mr-2">
                                                     <i className={this.state.likeClass}></i>
                                                     {bok.liked}
                                                 </p>
                                             </div>
-                                            <div className="mr-2 mb-0" onClick={this.clickLove}>
-                                                <p className="loved mr-1">
+                                            <div onClick={this.clickLove}>
+                                                <p className="loved">
                                                     <i className={this.state.loveClass}></i>
                                                     {bok.loved}
                                                 </p>

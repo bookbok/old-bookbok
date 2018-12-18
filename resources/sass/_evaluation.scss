@@ -37,7 +37,7 @@ pre.book-title{
   font-size: 0.8rem;
   height: 20px;
 
-  @include mq-pc {
+  @include normal-pc {
     height: 40px;
   };
 }
@@ -46,7 +46,7 @@ pre.book-title{
 .bok-user {
   overflow: visible;
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
 
   @include normal-pc {
     font-size: 0.8rem;
@@ -58,46 +58,57 @@ pre.book-title{
   margin: 0;
   min-height: 50%;
   white-space: pre-wrap;
+  font-size: 0.7rem;
+  line-height: 1.5em;
+  margin-right: 2px;
+
+  @include normal-pc {
+    font-size: 0.8rem;
+  }
 }
 
 .bok-footer{
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   vertical-align: bottom;
 
-  @include mq-pc {
+  @include normal-pc {
     font-size: 0.8rem;
   };
 }
 
 pre.updated {
   overflow: visible;
-  margin: 0;
+  margin-bottom: 0;
   width: 50%;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   vertical-align: top;
+
+  @include normal-pc {
+    margin-top: 0;
+  }
 }
 
 .liked {
-  margin: 0;
+  margin-top: 24px;
+  margin-bottom: 0;
+  vertical-align: top;
+
   @include normal-pc {
-    font-size: 1.1rem;
+    margin-right: 5px;
   }
 }
 
 .loved {
-  margin: 0;
-  @include mq-pc {
-    font-size: 1.1rem;
-  }
+  margin-top: 24px;
+  margin-bottom: 0;
+  margin-right: 2px;
+  vertical-align: top;
 }
 
 .icon {
-  @include mq-pc {
-    font-size: 1.5rem;
-  };
-
-  @include mq-sm {
-    font-size: 1rem;
+  font-size: 1rem;
+  @include normal-pc {
+    font-size: 1.2rem;
   };
 }
 
