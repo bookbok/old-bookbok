@@ -13,14 +13,14 @@
 pre.book-view-pre{
     @include mq-sm {
         text-overflow: ellipsis;
-        width: 92px;
+        width: 100px;
         font-size: 12px;
         overflow: hidden;
     };
     @include mq-pc {
         margin-left: 30px;
         text-overflow: ellipsis;
-        width: 130px;
+        width: 140px;
         font-size: 15px;
         overflow: hidden;
     };
