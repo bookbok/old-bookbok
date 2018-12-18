@@ -8,7 +8,7 @@ use App\Book;
 class GoogleBooksScraper implements ScraperInterface
 {
     // APIのエントリポイント
-    private const URI = "https://www.googleapis.com/books/v1/volumes?q=";
+    private const URI = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
 
     /**
      *  コンストラクタ
