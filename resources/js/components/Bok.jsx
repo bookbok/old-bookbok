@@ -68,7 +68,7 @@ export class Bok extends Component {
                             <pre className="bok-user border-bottom">{userBook.user.name}</pre>
                             <pre className="bok-body mt-2">{bok.body}</pre>
 
-                            <div className="d-flex bok-footer mt-auto">
+                            <div className="d-flex align-items-end bok-footer mt-2">
                                 <pre className="text-muted updated">{bok.updated_at}</pre>
                                 <div className="w-50">
                                     <div className="float-right">
