@@ -7,7 +7,9 @@ import { Loading } from "./shared/Loading";
 import { Bok } from "./Bok";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 import { BookInfo } from "./shared/book/BookInfo";
-import { Contribution } from "./Contribution";
+import { BokModal } from "./BokModal";
+import { ReviewModal } from "./ReviewModal";
+
 
 export class UserBookDetail extends Component {
     constructor(props){
@@ -46,13 +48,12 @@ export class UserBookDetail extends Component {
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
                             <BookInfo book={book} />
-
-                            <h3 className="mt-5">レビュー</h3>
-                            <p>{review.body}</p>
                             <hr />
-                            <div className="float-right"> <Contribution /> </div>
-                            <h3 className="mt-5">Boks</h3>
-                            {boks}
+                            <h3 className="mt-5">レビュー<div className="float-right"><ReviewModal /></div></h3>
+                            <p className="mt-4">{review.body}</p>
+                            <hr />
+                            <h3 className="mt-5">Boks <div className="float-right"><BokModal /></div></h3>
+                            <div className="mt-4">{boks}</div>
                         </div>
                     </div>
                 </div>

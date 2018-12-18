@@ -35,7 +35,10 @@ class ResetPasswordController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return response()->json([
+                'status' => 400,
+                'userMessage' => $validator->errors()
+            ], 400);
         }
 
         $response = Password::broker()->sendResetLink(
@@ -43,7 +46,7 @@ class ResetPasswordController extends Controller
         );
 
         return response()->json([
-            'message' => 'We successfully sent a mail with a link to the password reset page!',
+            'userMessage' => 'リセット用のリンクを送信しました。登録されているメールの確認をお願いします。',
         ], 200);
     }
 
@@ -64,7 +67,10 @@ class ResetPasswordController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return response()->json([
+                'status' => 400,
+                'userMessage' => $validator->errors()
+            ], 400);
         }
    
         $response = Password::broker()->reset(
@@ -79,12 +85,13 @@ class ResetPasswordController extends Controller
 
         if (Password::PASSWORD_RESET !== $response) {
             return response()->json([
-                'message' => 'Password reset failure...',
+                'status' => 400,
+                'userMessage' => 'パスワードのリセットに失敗しました。',
             ], 400);
         }
         
         return response()->json([
-            'message' => 'You have successfully changed password!',
+            'userMessage' => 'パスワードの変更に成功しました。',
         ], 200);
     }
 
