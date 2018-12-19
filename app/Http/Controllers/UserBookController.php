@@ -130,7 +130,7 @@ class UserBookController extends Controller
      */
     public function show($userId, $userBookId)
     {
-        $authId = Auth::id();
+        $authId = auth()->guard('api')->id();
         if($authId === null) {
             $authId = 0;
         }
