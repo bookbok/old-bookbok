@@ -5,6 +5,7 @@ import { Footer } from './Footer';
 import { Home } from './Home.jsx';
 import { Login } from './Login.jsx';
 import { Logout } from './Logout.jsx';
+import { PrivacyPolicyView } from './PrivacyPolicyView';
 import { UserRegister } from './UserRegister.jsx';
 import { ConnectedUserDetail } from './UserDetail.jsx';
 import { ConnectedBokFlow } from '../containers.js';
@@ -102,6 +103,7 @@ export const MenuRouter = () => (
             <Switch>
                 <Route exact path="/" component={ Home } />
                 <Route exact path="/home" component={ Home } />
+                <Route exact path="/privacy" component={ PrivacyPolicyView } />
                 <Route exact path="/bok_flow" component={ ConnectedBokFlow } />
                 <Route exact path="/register" component={ UserRegister } />
                 <Route exact path="/login" component={ Login } />
