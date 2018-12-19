@@ -48,12 +48,30 @@ class UserBookController extends Controller
      */
     public function store(Request $request, $userId)
     {
-        // ScrapeManagerの生成
-        $scrapers = resolve('app.bookInfo.scrapeManager');
+        // 認可チェック
+        $authId = Auth::id();
+        if(!$authId == $userId){
+            return response()->json([
+                'status' => 401,
+                'userMessage' => '自分以外の本棚に追加することはできません。'
+            ], 403);
+        }
 
         // 入力取得
         $isbn = $request->input('isbn');
 
+        // 当該ユーザのuser_bookテーブルに同じ本がすでに登録されているかのチェック
+        $is_userBook_exists = UserBook::where('book_id', $isbn)->where('user_id', $userId)->first();
+        if($is_userBook_exists == null){
+            return response()->json([
+                'status' => 400,
+                'userMessage' => '追加しようとした本はすでに本棚に登録されています。'
+            ], 400);
+        }
+        
+        // ScrapeManagerの生成
+        $scrapers = resolve('app.bookInfo.scrapeManager');
+        
         // booksテーブルに該当レコードが存在しているか確認する
         $book = Book::where('isbn', $isbn)->first();
         if($book == null){
@@ -62,19 +80,15 @@ class UserBookController extends Controller
             $new_book = $scrapers->searchByIsbn((string)$isbn);
             // すべてのScraperが情報取得に失敗した場合
             if($new_book == null){
-                return response()->json(
-                    [
+                return response()->json([
                         'status' => 500,
                         'userMessage' => 'お探しの本の情報を取得することができませんでした。'
-                    ],
-                    500,
-                    [],
-                    JSON_UNESCAPED_UNICODE
-                );
+                    ], 500);
             }
             // booksテーブルに挿入する
             $new_book->save();
         }
+
         // user_bookテーブルに挿入する
         $user_book = new UserBook;
         $user_book->user_id = (int)$userId;
