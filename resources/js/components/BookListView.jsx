@@ -10,9 +10,21 @@ import { BookView } from "./BookView";
 import { ISBNModal } from "./shared/book/ISBNModal";
 
 export class BookListView extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { q: "" };
+        this.handleSubmitSearchText = this.handleSubmitSearchText.bind(this);
+    }
+
     componentDidMount() {
         store.dispatch(fetchBookList());
     };
+
+    handleSubmitSearchText(q) {
+        this.setState({ q: q }); // 現状stateに入れる必要はないが、ジャンルでの絞り込みも始めた時に必要になりそうなので
+        store.dispatch(fetchBookList({ q: q }));
+    }
 
     render() {
         const books = this.props.books;
@@ -40,7 +52,7 @@ export class BookListView extends Component {
                             <ConnectedGenres />
                         </div>
                         <div className="m-3">
-                            <Search />
+                            <Search handleSubmit={this.handleSubmitSearchText} />
                         </div>
                     </div>
                     <div className="m-3">
