@@ -16,6 +16,10 @@ class UserBook extends Model
         'readed' => 20,  // 読書了
     ];
 
+    protected $casts = [
+        'is_spoiler' => 'boolean',
+    ];
+
     /**
      * リレーション定義
      */
