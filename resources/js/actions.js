@@ -162,3 +162,10 @@ export const fetchLikeBoks = (userId) => dispatch => {
           dispatch(setLikeBoks(json));
        });
 }
+
+export const reviewRegister = (userBookId,reviewInfo) => {
+    return wrapFetch(DOMAIN + `/api/user_books/${userBookId}/review`, {
+        method: "POST",
+        body: reviewInfo
+    });
+}

@@ -1,24 +1,32 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
+import { reviewRegister } from "../actions";
 
 export class ReviewModal extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { title: "", body: "" };
+        this.state = { title: "", body: "",isInvalid: false };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.submitRegister = this.submitRegister.bind(this);
+        this.handleChangeReview = this.handleChangeReview.bind(this);
+        this.handleRegisterReview = this.handleRegisterReview.bind(this);
     }
 
-    //変更されたinput要素のnameを取得し、自動的にstateの値を変更するハンドラ
-    handleChange(e) {
-        this.setState({ value: event.target.value });
+    handleChangeReview(e) {
+        this.setState({ value: e.target.value });
     }
 
-    submitRegister(e) {
+    handleRegisterReview(e) {
         e.preventDefault();
 
+        reviewRegister(1,this.state.body).then(res => {
+            return res.json();
+        }).then(res =>{
+            this.props.history.push(`/users/${res.user.id}/user_books/${res.id}`);
+        }).catch(err => {
+            this.setState({ isInvalid: true });
+            console.log("error!");
+        });
     }
 
     render() {
@@ -36,8 +44,9 @@ export class ReviewModal extends Component {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div className="modal-body">
-                                <form>
+
+                            <form onSubmit={this.handleRegisterReview}>
+                                <div className="modal-body">
                                     <div className="row">
                                         <div className="col">レビューのタイトルを記入してください
                                             <input id="title"
@@ -45,7 +54,7 @@ export class ReviewModal extends Component {
                                                 type="text"
                                                 className="form-control"
                                                 value={this.state.name}
-                                                onChange={this.handleChange}
+                                                onChange={this.handleChangeReview}
                                                 placeholder="この本をズバリ一言で！" />
                                         </div>
                                     </div>
@@ -57,16 +66,16 @@ export class ReviewModal extends Component {
                                             name="body"
                                             className="form-control"
                                             value={this.state.name}
-                                            onChange={this.handleChange}
+                                            onChange={this.handleChangeReview}
                                             placeholder="1冊を読み終えてどうだったか。これから読む人に伝えたいこと。"
                                             required />
                                     </div>
-                                </form>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                                <button type="submit" className="btn btn-primary">レビューを投稿</button>
-                            </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                                    <button type="submit" className="btn btn-primary">レビューを投稿</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
