@@ -151,8 +151,11 @@ export const fetchUserBookDetail = (userId, userBookId) => dispatch => {
 }
 
 export const setBookList = books => ({type: types.SET_BOOKLIST, books});
-export const fetchBookList = () => dispatch => {
-    wrapFetch(DOMAIN + "/api/books/")
+// TODO: Rename to fetchBooksWithQuery
+export const fetchBookList = (query = {}) => dispatch => {
+    wrapFetch(DOMAIN + "/api/books/", {
+        body: query,
+    })
         .then(json => {
             dispatch(setBookList(json));
         }).catch(err => {
