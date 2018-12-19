@@ -79,12 +79,12 @@ export class Bok extends Component {
         return (
             <div className="card p-2">
                 <div className="d-flex">
-                    <div className="d-flex flex-column book-info mr-3">
+                    <div className="d-flex flex-column bok-book-info mr-3">
                         <Link to={`/books/${bok.user_book.book.id}`}>
-                            <img className="book-cover mx-auto d-block" src={userBook.book.cover}/>
+                            <img className="bok-book-cover mx-auto d-block" src={userBook.book.cover}/>
                         </Link>
-                        <pre className="font-weight-bold book-title">{userBook.book.name}</pre>
-                        <div className="text-muted book-footer mt-2">
+                        <pre className="font-weight-bold bok-book-title">{userBook.book.name}</pre>
+                        <div className="text-muted bok-book-footer mt-2">
                             <pre>{page}<br/>{line}</pre>
                         </div>
                     </div>
