@@ -9,8 +9,37 @@ store.subscribe(() => {
     state = store.getState();
 });
 
-// fetch関数を綺麗に扱えるようにするラッパー関数
+/**
+ * fetch関数を綺麗に扱えるようにするラッパー関数
+ * 200系のレスポンスのみthen句に流れるので、この関数を使った場合then句ではエラーレスポンスはありえない
+ * ステータスコードで細かくエラーハンドリングしたい場合、smartFetchを使う必要がある
+ */
 export async function wrapFetch(url, { body, method = "GET", isParse = true } = {}) {
+    const res = await smartFetch(url, { body, method, isParse });
+
+    if(res.status === 401) {
+        throw new Error("[401]Authorization error: " + res.statusText);
+    }
+
+    let json = null;
+    if(isParse) {
+        json = await res.json();
+    }
+
+    if(!res.ok) {
+        console.error(json.userMessage);
+        throw new Error(`[${res.status}]Fetch error: ` + res.statusText);
+    }
+
+    return json;
+}
+
+/**
+ * fetch関数を楽に扱えるようにしただけの関数で、戻り値は通常のfetchと同じ
+ * ネットワークエラーなどの重大エラー以外はcatchされないので注意
+ * 400, 500などのサーバーレスポンスが返ってきても全てthenとして扱われる
+ */
+export async function smartFetch(url, { body, method = "GET", isParse = true } = {}) {
     // GETリクエスト時にクエリパラメーターを自動作成する
     if(method === "GET" && !utils.isEmpty(body)) {
         url += "?" + utils.convertQuery(body);
@@ -28,21 +57,7 @@ export async function wrapFetch(url, { body, method = "GET", isParse = true } = 
         body: method === "GET" ? null : body // GET時はクエリで代用するため
     });
 
-    if(res.status === 401) {
-        throw new Error("[401]Authorization error: " + res.statusText);
-    }
-
-    let json = null;
-    if(isParse) {
-        json = await res.json();
-    }
-
-    if(!res.ok) {
-        console.error(json.userMessage);
-        throw new Error(`[${res.status}]Fetch error: ` + res.statusText);
-    }
-
-    return json;
+    return res;
 }
 
 // 封印されしラッパー関数
