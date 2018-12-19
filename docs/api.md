@@ -828,6 +828,7 @@ BOOKBOK　API仕様書
                     "book_id": "5",
                     "created_at": "2018-11-28 22:57:49",
                     "updated_at": "2018-11-28 22:57:49",
+                    "is_spoiler": false,
                     "user": {
                         "id": 1,
                         "name": "admin"
@@ -857,6 +858,7 @@ BOOKBOK　API仕様書
                     "book_id": "4",
                     "created_at": "2018-11-28 22:57:49",
                     "updated_at": "2018-11-28 22:57:49",
+                    "is_spoiler": false,
                     "user": {
                         "id": 1,
                         "name": "admin"
