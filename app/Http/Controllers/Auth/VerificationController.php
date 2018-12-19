@@ -33,14 +33,15 @@ class VerificationController extends Controller
             || !$request->user()->markEmailAsVerified()
         ) {
             return response()->json([
-                'message' => 'Verification failed...'
+                'status' => 400,
+                'userMessage' => '有効化に失敗しました。'
             ], 400);
         }
 
         event(new Verified($request->user()));
 
         return response()->json([
-            'message' => 'Your email has been successfully verified!',
+            'userMessage' => '有効化に成功しました。',
         ], 200);
     }
 
@@ -56,14 +57,14 @@ class VerificationController extends Controller
     {
         if ($request->user()->hasVerifiedEmail()) {
             return response()->json([
-                'message' => 'Your email has been successfully verified!',
+                'userMessage' => '有効化に成功しました。',
             ], 200);
         }
 
         $request->user()->sendEmailVerificationNotification();
 
         return response()->json([
-            'message' => 'We successfully retransmitted the verification email.',
+            'userMessage' => '検証メールを再送信しました。確認をお願いします。',
         ], 200);
     }
 }

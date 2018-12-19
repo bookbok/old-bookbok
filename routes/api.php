@@ -73,6 +73,7 @@ Route::put('user_books/{userBookId}/review', 'ReviewController@store')->middlewa
  *
  */
 Route::get('user_books/{userBookId}/boks', 'BokController@index');
+Route::post('user_books/{userBookId}/boks', 'BokController@store')->middleware('auth:api');
 
 /**
  * Resource: BokFlow
@@ -85,7 +86,7 @@ Route::get('bok_flow', 'BokFlowController@index')->middleware('auth:api');
  */
 Route::get('users/{userId}/user_books','UserBookController@index');
 Route::get('users/{userId}/user_books/{userBookId}', 'UserBookController@show');
-Route::post('users/{userId}/user_books', 'UserBookController@store');
+Route::post('users/{userId}/user_books', 'UserBookController@store')->middleware('auth:api');
 
 /**
  * Resource: Genre

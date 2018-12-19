@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\UserBook;
 use App\User;
 use App\Book;
+use App\Genre;
 use App\Components\BookInfoScraper\ScrapeManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,8 +64,11 @@ class UserBookController extends Controller
             // すべてのScraperが情報取得に失敗した場合
             if($new_book == null){
                 return response()->json(
-                    [],
-                    404,
+                    [
+                        'status' => 500,
+                        'userMessage' => 'お探しの本の情報を取得することができませんでした。'
+                    ],
+                    500,
                     [],
                     JSON_UNESCAPED_UNICODE
                 );
@@ -74,9 +78,17 @@ class UserBookController extends Controller
         }
         // user_bookテーブルに挿入する
         $user_book = new UserBook;
-        $user_book->user_id = (int)$userId;
+        $user_book->user_id = auth()->id();
         $user_book->book_id = $book ? $book->id : $new_book->id;
+
+        $book = $book ?? $new_book;
+
+        if (in_array($book->genre_id, Genre::SPOILER_ID_LIST)) {
+            $user_book->is_spoiler = true;
+        }
+
         $user_book->save();
+
         // レスポンスデータの生成
         $userBook = UserBook::with([
             'user:id,name,avatar,description',
@@ -135,7 +147,7 @@ class UserBookController extends Controller
                 'boks.userBook.book:id,name,cover',
                 'boks.userBook.user:id,name,avatar',
             ])
-            ->select(['id', 'user_id', 'book_id', 'reading_status'])
+            ->select(['id', 'user_id', 'book_id', 'reading_status', 'is_spoiler'])
             ->where('id', $userBookId)
             ->where('user_id', $userId)
             ->take(1)->first();
@@ -146,28 +158,5 @@ class UserBookController extends Controller
             [],
             JSON_UNESCAPED_UNICODE
         );
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserBook  $userBook
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, UserBook $userBook)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\UserBook  $userBook
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(UserBook $userBook)
-    {
-        //
     }
 }

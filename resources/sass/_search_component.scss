@@ -1,0 +1,7 @@
+.search-button-text {
+    display: none;
+
+    @include normal-pc {
+        display: inline;
+    }
+}
