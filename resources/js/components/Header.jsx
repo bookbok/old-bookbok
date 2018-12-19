@@ -52,7 +52,7 @@ class Header extends Component {
                             <Link className="nav-link" to="/login">ログイン</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/signup">新規登録</Link>
+                            <Link className="nav-link" to="/register">新規登録</Link>
                         </li>
                     </ul>
                 );

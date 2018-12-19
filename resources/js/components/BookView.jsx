@@ -6,7 +6,7 @@ export class BookView extends Component {
         const book = this.props.book;
         let bookName;
 
-        for (var i = 0, jaCnt = 0, enCnt = 0 ; i < book.name.length ; i++) {
+        /*for (var i = 0, jaCnt = 0, enCnt = 0 ; i < book.name.length ; i++) {
             if (ja2Bit(book.name.charAt(i))) {
                 jaCnt++;
             } else {
@@ -24,15 +24,15 @@ export class BookView extends Component {
             }
         } else {
                 bookName = <pre className="book-view-pre"><br/><br/></pre>;
-        }
+        }*/
 
         return (
-            <div className="d-inline-block col-md-4 col-4">
+            <div className="d-inline-block col-4">
                 <a href={this.props.link ? this.props.link : "#"}>
                     <img className="book-view-img" src={book.cover}/>
-                    {bookName}
-                    <br/>
+                    <p className="book-view-pre">{book.name}</p>
                 </a>
+                <br/>
             </div>
          );
 
