@@ -147,7 +147,7 @@ class UserBookController extends Controller
                 'boks.userBook.book:id,name,cover',
                 'boks.userBook.user:id,name,avatar',
             ])
-            ->select(['id', 'user_id', 'book_id', 'reading_status'])
+            ->select(['id', 'user_id', 'book_id', 'reading_status', 'is_spoiler'])
             ->where('id', $userBookId)
             ->where('user_id', $userId)
             ->take(1)->first();
