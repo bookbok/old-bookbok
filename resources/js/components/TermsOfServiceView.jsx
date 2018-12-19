@@ -48,7 +48,7 @@ export class TermsOfServiceView extends Component {
                 </ol>
 
                 <h2 className="mt-5">第7条（禁止事項）</h2>
-                <p>
+                <div>
                     ユーザーは，本サービスの利用にあたり，以下の行為をしてはなりません。
                     <ol>
                         <li>法令または公序良俗に違反する行為</li>
@@ -64,7 +64,7 @@ export class TermsOfServiceView extends Component {
                         <li>宗教活動または宗教団体への勧誘行為</li>
                         <li>その他，当社が不適切と判断する行為</li>
                     </ol>
-                </p>
+                </div>
 
                 <h2 className="mt-5">第8条（本サービスの提供の停止等）</h2>
                 <ol>
