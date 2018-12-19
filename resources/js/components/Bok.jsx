@@ -72,7 +72,6 @@ export class Bok extends Component {
     render(){
         const bok = this.props.bok;
         const userBook = this.props.bok.user_book;
-        const bookLink = "/books/" + this.props.bok.user_book.book.id;
         const page = this.makePageViewStr(bok);
         const line = this.makeLineViewStr(bok);
 
@@ -80,7 +79,7 @@ export class Bok extends Component {
             <div className="card p-2">
                 <div className="d-flex">
                     <div className="d-flex flex-column book-info mr-3">
-                        <a href={bookLink}>
+                        <a href={`/books/${bok.user_book.book.id}`}>
                             <img className="book-cover mx-auto d-block" src={userBook.book.cover}/>
                         </a>
                         <pre className="font-weight-bold book-title">{userBook.book.name}</pre>
