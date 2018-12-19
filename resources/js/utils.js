@@ -1,3 +1,4 @@
+// オブジェクト、配列が空かどうか判定する
 export function isEmpty(obj) {
     if(Array.isArray(obj)) {
       return obj.length <= 0;
