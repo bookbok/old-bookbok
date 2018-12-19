@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 
 export class PrivacyPolicyView extends Component {
+    componentDidMount() {
+        document.getElementById('top').scrollIntoView();
+    }
+
     render() {
         return (
-            <div class="container pt-4">
+            <div id="top" class="container pt-4">
                 <h1>プライバシーポリシー</h1>
 
                 <h2 class="mt-5">1.個人情報の利用目的</h2>
