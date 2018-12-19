@@ -17,3 +17,9 @@ export function convertQuery(obj) {
         return key + "=" + body[key];
     }).join('&')
 }
+
+// DateTime形式の文字列を年月日だけの日本表記に変換する
+export function makeDateJP(dateTime) {
+    const date = dateTime.split(/-|\s/, 4);
+    return date[0] + '年' + date[1] + '月' + date[2] + '日';
+}
