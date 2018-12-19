@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { store } from "../store";
 import { Loading } from "./shared/Loading";
+import { BrowserRouter, Route, Link, Swirch } from 'react-router-dom';
 
 export class Bok extends Component {
     constructor(props){
@@ -79,9 +80,9 @@ export class Bok extends Component {
             <div className="card p-2">
                 <div className="d-flex">
                     <div className="d-flex flex-column book-info mr-3">
-                        <a href={`/books/${bok.user_book.book.id}`}>
+                        <Link to={`/books/${bok.user_book.book.id}`}>
                             <img className="book-cover mx-auto d-block" src={userBook.book.cover}/>
-                        </a>
+                        </Link>
                         <pre className="font-weight-bold book-title">{userBook.book.name}</pre>
                         <div className="text-muted book-footer mt-2">
                             <pre>{page}<br/>{line}</pre>
