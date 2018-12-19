@@ -20,8 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserBooksTableSeeder::class);
         $this->call(ReviewsTableSeeder::class);
         $this->call(BoksTableSeeder::class);
-        $this->call(LikesTableSeeder::class);
-        $this->call(LovesTableSeeder::class);
         $this->call(ReactionsTableSeeder::class);
 
         // プロトタイプ用に作ったSeeder
