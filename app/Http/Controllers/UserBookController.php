@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\UserBook;
 use App\User;
 use App\Book;
+use App\Genre;
 use App\Components\BookInfoScraper\ScrapeManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -82,8 +83,7 @@ class UserBookController extends Controller
 
         $book = $book ?? $new_book;
 
-        if (in_array($book->genre_id, [1, 18])) {
-            // もしジャンルが文庫もしくは漫画ならネタバレフラグをtrueにする
+        if (in_array($book->genre_id, Genre::SPOILER_ID_LIST)) {
             $user_book->is_spoiler = true;
         }
 
