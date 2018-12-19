@@ -21,6 +21,7 @@ class ISBNModal_ extends Component {
         $('#ISBNModal').on('shown.bs.modal', () => {
             $('#inputISBN').trigger('focus')
         });
+        $('[data-toggle="popover"]').popover()
     }
 
     handleRegisterISBN(e) {
@@ -57,7 +58,16 @@ class ISBNModal_ extends Component {
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="ISBNModalTitle">ISBNを入力して本棚に追加しましょう</h5>
+                                <h5 className="modal-title" id="ISBNModalTitle">
+                                    <button className="btn btn-link font-weight-bold"
+                                        data-toggle="popover"
+                                        data-trigger="hover"
+                                        data-content="書籍に割り振られる「978」または「979」から始まる13桁の数字">
+                                        ISBN
+                                    </button>
+                                    を入力して本棚に追加しましょう
+                                </h5>
+
                                 <button type="button" className="close" data-dismiss="modal" aria-label="閉じる">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
