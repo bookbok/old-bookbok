@@ -13,7 +13,7 @@ class AddSpoilerFlagColumnUserBooksTable extends Migration
      */
     public function up()
     {
-        Schema::table('books', function (Blueprint $table) {
+        Schema::table('user_book', function (Blueprint $table) {
             $table->boolean('is_spoiler')->default(0);
         });
     }
@@ -25,7 +25,7 @@ class AddSpoilerFlagColumnUserBooksTable extends Migration
      */
     public function down()
     {
-        Schema::table('books', function (Blueprint $table) {
+        Schema::table('user_book', function (Blueprint $table) {
             $table->dropColumn('is_spoiler');
         });
     }
