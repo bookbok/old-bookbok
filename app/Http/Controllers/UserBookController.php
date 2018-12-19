@@ -58,9 +58,22 @@ class UserBookController extends Controller
         // booksテーブルに該当レコードが存在しているか確認する
         $book = Book::where('isbn', $isbn)->first();
         if($book == null){
-            // 存在していなければ、ScrapeManagerに処理委譲。
-            // 外部APIを使用しISBNに該当する本情報をBOOK型で受け取る
-            $new_book = $scrapers->searchByIsbn((string)$isbn);
+            try {
+                // 存在していなければ、ScrapeManagerに処理委譲。
+                // 外部APIを使用しISBNに該当する本情報をBOOK型で受け取る
+                $new_book = $scrapers->searchByIsbn((string)$isbn);
+            } catch (\InvalidArgumentException $e) {
+                return response()->json(
+                    [
+                        'status' => 400,
+                        'userMessage' => 'ISBN文字列が不正です。'
+                    ],
+                    400,
+                    [],
+                    JSON_UNESCAPED_UNICODE
+                );
+            }
+
             // すべてのScraperが情報取得に失敗した場合
             if($new_book == null){
                 return response()->json(
