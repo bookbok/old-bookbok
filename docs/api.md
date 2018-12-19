@@ -450,6 +450,7 @@ BOOKBOK　API仕様書
                         "book_id": "1",
                         "id": 1,
                         "reading_status": "0",
+                        "is_spoiler": "1",
                         "created_at": "2018-09-11 10:11:00",
                         "updated_at": "2018-09-11 10:11:00"
                     }
@@ -466,6 +467,7 @@ BOOKBOK　API仕様書
                         "book_id": "2",
                         "id": 2,
                         "reading_status": "0",
+                        "is_spoiler": "0",
                         "created_at": "2018-09-11 10:11:00",
                         "updated_at": "2018-09-11 10:11:00"
                     }
@@ -557,6 +559,7 @@ BOOKBOK　API仕様書
             "user_id": "1",
             "book_id": "1",
             "reading_status": "0",
+            "is_spoiler": false,
             "user":{
                 "id": 1,
                 "name": "admin",
