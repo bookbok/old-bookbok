@@ -23,3 +23,4 @@ class LikeController extends Controller
             JSON_UNESCAPED_UNICODE
         );
     }
+}
