@@ -2,15 +2,25 @@ import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 
 export class ReviewModal extends Component {
-/*    constructor(props) {
+    constructor(props) {
         super(props);
 
         this.state = { title: "", body: "" };
 
         this.handleChange = this.handleChange.bind(this);
+        this.submitRegister = this.submitRegister.bind(this);
     }
-  */  
- 
+
+    //変更されたinput要素のnameを取得し、自動的にstateの値を変更するハンドラ
+    handleChange(e) {
+        this.setState({ value: event.target.value });
+    }
+
+    submitRegister(e) {
+        e.preventDefault();
+
+    }
+
     render() {
         return (
             <div>
@@ -30,14 +40,26 @@ export class ReviewModal extends Component {
                                 <form>
                                     <div className="row">
                                         <div className="col">レビューのタイトルを記入してください
-                                            <input type="text" className="form-control" placeholder="この本をズバリ一言で！" />
+                                            <input id="title"
+                                                name="title"
+                                                type="text"
+                                                className="form-control"
+                                                value={this.state.name}
+                                                onChange={this.handleChange}
+                                                placeholder="この本をズバリ一言で！" />
                                         </div>
                                     </div>
                                     <div className="form-group" className="mt-5">
                                         <label htmlFor="impressions-text" className="control-label">ここにレビューを記入してください&nbsp;
                                                 <span className="badge badge-danger">必須</span>
                                         </label>
-                                        <textarea className="form-control" id="impressions-text" required placeholder="1冊を読み終えてどうだったか。これから読む人に伝えたいこと。"></textarea>
+                                        <textarea id="impressions-text"
+                                            name="body"
+                                            className="form-control"
+                                            value={this.state.name}
+                                            onChange={this.handleChange}
+                                            placeholder="1冊を読み終えてどうだったか。これから読む人に伝えたいこと。"
+                                            required />
                                     </div>
                                 </form>
                             </div>
