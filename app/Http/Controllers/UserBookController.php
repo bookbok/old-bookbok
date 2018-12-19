@@ -78,7 +78,7 @@ class UserBookController extends Controller
         }
         // user_bookテーブルに挿入する
         $user_book = new UserBook;
-        $user_book->user_id = (int)$userId;
+        $user_book->user_id = auth()->id();
         $user_book->book_id = $book ? $book->id : $new_book->id;
 
         $book = $book ?? $new_book;
