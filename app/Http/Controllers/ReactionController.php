@@ -18,4 +18,13 @@ class ReactionController extends Controller
             JSON_UNESCAPED_UNICODE
         );
     }
+
+    public function storeLike($bokId) {
+        $authId = auth()->guard('api')->id();
+        Reaction::create([
+            'bok_id' => $bokId,
+            'user_id' => $authId,
+            'liked' => true,
+        ]);
+    }
 }
