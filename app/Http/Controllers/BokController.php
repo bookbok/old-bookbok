@@ -32,8 +32,8 @@ class BokController extends Controller
                 JSON_UNESCAPED_UNICODE
             );
         }
-        //userIdの取得
-        $userId = UserBook::find($userBookId)->user_id;
+
+        $authId = auth()->guard('api')->id();
 
         // 指定されたuserBookIdに紐づくBokを取得する
         $boks = Bok::with([
@@ -48,11 +48,11 @@ class BokController extends Controller
                 'reactions as loved_count' => function($q) {
                     $q->isLoved();
                 },
-                'reactions as liked' => function($q) use($userId) {
-                    $q->isLiked()->where('user_id', $userId);
+                'reactions as liked' => function($q) use($authId) {
+                    $q->isLiked()->where('user_id', $authId);
                 },
-                'reactions as loved' => function($q) use($userId) {
-                    $q->isLoved()->where('user_id', $userId);
+                'reactions as loved' => function($q) use($authId) {
+                    $q->isLoved()->where('user_id', $authId);
                 }
             ])
             ->where('user_book_id', $userBookId)

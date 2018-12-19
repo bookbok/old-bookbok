@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\UserBook;
 use App\User;
 use App\Book;
+use App\Genre;
 use App\Components\BookInfoScraper\ScrapeManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -69,9 +70,22 @@ class UserBookController extends Controller
         // booksテーブルに該当レコードが存在しているか確認する
         $book = Book::where('isbn', $isbn)->first();
         if($book == null){
-            // 存在していなければ、ScrapeManagerに処理委譲。
-            // 外部APIを使用しISBNに該当する本情報をBOOK型で受け取る
-            $new_book = $scrapers->searchByIsbn((string)$isbn);
+            try {
+                // 存在していなければ、ScrapeManagerに処理委譲。
+                // 外部APIを使用しISBNに該当する本情報をBOOK型で受け取る
+                $new_book = $scrapers->searchByIsbn((string)$isbn);
+            } catch (\InvalidArgumentException $e) {
+                return response()->json(
+                    [
+                        'status' => 400,
+                        'userMessage' => 'ISBN文字列が不正です。'
+                    ],
+                    400,
+                    [],
+                    JSON_UNESCAPED_UNICODE
+                );
+            }
+
             // すべてのScraperが情報取得に失敗した場合
             if($new_book == null){
                 return response()->json([
@@ -101,7 +115,15 @@ class UserBookController extends Controller
         $user_book = new UserBook;
         $user_book->user_id = auth()->id();
         $user_book->book_id = $book ? $book->id : $new_book->id;
+
+        $book = $book ?? $new_book;
+
+        if (in_array($book->genre_id, Genre::SPOILER_ID_LIST)) {
+            $user_book->is_spoiler = true;
+        }
+
         $user_book->save();
+
         // レスポンスデータの生成
         $userBook = UserBook::with([
             'user:id,name,avatar,description',
@@ -130,7 +152,7 @@ class UserBookController extends Controller
      */
     public function show($userId, $userBookId)
     {
-        $authId = Auth::id();
+        $authId = auth()->guard('api')->id();
         if($authId === null) {
             $authId = 0;
         }
@@ -160,7 +182,7 @@ class UserBookController extends Controller
                 'boks.userBook.book:id,name,cover',
                 'boks.userBook.user:id,name,avatar',
             ])
-            ->select(['id', 'user_id', 'book_id', 'reading_status'])
+            ->select(['id', 'user_id', 'book_id', 'reading_status', 'is_spoiler'])
             ->where('id', $userBookId)
             ->where('user_id', $userId)
             ->take(1)->first();
