@@ -89,28 +89,28 @@ export class Bok extends Component {
                         </div>
                     </div>
 
+                    {/* bok ---------------------------------------------------------------- */}
                     <div className="w-100">
                         <div className="d-flex flex-column h-100">
                             <pre className="bok-user border-bottom">{userBook.user.name}</pre>
                             <pre className="bok-body mt-2 mr-2">{bok.body}</pre>
 
-                            <div className="d-flex bok-footer mt-2">
-                                <pre className="text-muted updated">{bok.updated_at}</pre>
-                                <div className="w-50">
-                                    <div className="float-right">
-                                        <div className="d-flex">
-                                            <div className="align-top" onClick={this.clickLike}>
-                                                <p className="liked mr-2">
-                                                    <i className={this.state.likeClass}></i>
-                                                    {this.state.likeCount}
-                                                </p>
-                                            </div>
-                                            <div onClick={this.clickLove}>
-                                                <p className="loved">
-                                                    <i className={this.state.loveClass}></i>
-                                                    {this.state.loveCount}
-                                                </p>
-                                            </div>
+                            {/* bok-footer */}
+                            <div className="bok-footer mt-2">
+                                <div className="text-muted updated">{bok.updated_at}</div>
+                                <div className="float-right">
+                                    <div className="d-flex">
+                                        <div className="align-top" onClick={this.clickLike}>
+                                            <p className="liked mr-2">
+                                                <i className={this.state.likeClass}></i>
+                                                {this.state.likeCount}
+                                            </p>
+                                        </div>
+                                        <div onClick={this.clickLove}>
+                                            <p className="loved">
+                                                <i className={this.state.loveClass}></i>
+                                                {this.state.loveCount}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
