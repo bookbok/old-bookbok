@@ -27,6 +27,8 @@ class CreateReactionsTable extends Migration
             $table->foreign('bok_id')
                 ->references('id')->on('boks')
                 ->onDelete('cascade');
+
+            $table->unique(['user_id', 'bok_id']);
         });
     }
 
