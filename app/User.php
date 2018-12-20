@@ -76,7 +76,7 @@ class User extends Authenticatable implements MustVerifyEmail
                     $q2->isLoved()->where('user_id', $authId);
                 },
             ])->whereHas('reactions', function($q) {
-                $q->isLiked(); // like一覧なので、likeされているものをフィルタリング
+                $q->isLiked(); // likeされているものをフィルタリング
             })->get();
     }
 
@@ -105,7 +105,7 @@ class User extends Authenticatable implements MustVerifyEmail
                     $q2->isLoved()->where('user_id', $authId);
                 },
             ])->whereHas('reactions', function($q) {
-                $q->isLoved(); // love一覧なので、likeされているものをフィルタリング
+                $q->isLoved(); // loveされているものをフィルタリング
             })->get();
     }
 
