@@ -6,7 +6,7 @@ export class ReviewModal extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { title: "", body: "",isInvalid: false };
+        this.state = { title: "", body: "", isInvalid: false };
 
         this.handleChangeReview = this.handleChangeReview.bind(this);
         this.handleRegisterReview = this.handleRegisterReview.bind(this);
@@ -19,10 +19,11 @@ export class ReviewModal extends Component {
     handleRegisterReview(e) {
         e.preventDefault();
 
-        reviewRegister(1,this.state.body).then(res => {
+        reviewRegister(1, this.state.body).then(res => {
             return res.json();
-        }).then(res =>{
-            this.props.history.push(`/users/${res.user.id}/user_books/${res.id}`);
+        }).then(res => {
+            $('#ISBNModal').modal('hide');
+            this.props.history.push(`/users/${res.user_id}/user_books/${res.user_book_id}`);
         }).catch(err => {
             this.setState({ isInvalid: true });
             console.log("error!");
