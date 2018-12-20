@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ReactionController extends Controller
 {
-    public function likes($userId)
+    public function userLikes($userId)
     {
         $likes = User::find($userId)->likes();
         return response()->json(
@@ -19,17 +19,7 @@ class ReactionController extends Controller
         );
     }
 
-    public function storeLike($bokId)
-    {
-        $authId = auth()->guard('api')->id();
-        Reaction::create([
-            'bok_id' => $bokId,
-            'user_id' => $authId,
-            'liked' => true,
-        ]);
-    }
-
-    public function loves($userId)
+    public function userLoves($userId)
     {
         $loves = User::find($userId)->loves();
         return response()->json(
@@ -40,4 +30,31 @@ class ReactionController extends Controller
         );
     }
 
+    public function storeLike($bokId)
+    {
+        $authId = auth()->guard('api')->id();
+        Reaction::updateOrCreate([
+            'bok_id' => $bokId,
+            'user_id' => $authId,
+        ],
+        [
+            'liked' => true,
+        ]);
+
+        return response()->json([], 200);
+    }
+
+    public function storeLoves($bokId)
+    {
+        $authId = auth()->guard('api')->id();
+        Reaction::updateOrCreate([
+            'bok_id' => $bokId,
+            'user_id' => $authId,
+        ],
+        [
+            'loved' => true,
+        ]);
+
+        return response()->json([], 200);
+    }
 }

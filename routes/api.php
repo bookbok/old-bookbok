@@ -99,7 +99,9 @@ Route::get('genres/{genre}', 'GenreController@show');
  * Resource: Reaction
  *
  */
-Route::get('users/{userId}/likes','ReactionController@likes');
+Route::get('users/{userId}/likes','ReactionController@userLikes');
+Route::get('users/{userId}/loves','ReactionController@userLoves');
+
 Route::post('boks/{userId}/likes', 'ReactionController@storeLike');
-Route::get('users/{userId}/loves','ReactionController@loves');
+Route::post('boks/{userId}/loves', 'ReactionController@storeLoves');
 
