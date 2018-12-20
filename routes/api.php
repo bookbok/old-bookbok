@@ -96,9 +96,10 @@ Route::get('genres','GenreController@index');
 Route::get('genres/{genre}', 'GenreController@show');
 
 /**
- * Resource: Like
+ * Resource: Reaction
  *
  */
 Route::get('users/{userId}/likes','ReactionController@likes');
 Route::post('boks/{userId}/likes', 'ReactionController@storeLike');
+Route::get('users/{userId}/loves','ReactionController@loves');
 

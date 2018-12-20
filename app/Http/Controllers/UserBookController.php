@@ -49,12 +49,26 @@ class UserBookController extends Controller
      */
     public function store(Request $request, $userId)
     {
-        // ScrapeManagerの生成
-        $scrapers = resolve('app.bookInfo.scrapeManager');
+        // 認可チェック
+        $authId = auth()->guard('api')->id();
+        if($authId != $userId){
+            return response()->json(
+                [
+                    'status' => 403,
+                    'userMessage' => '自分以外の本棚に追加することはできません。'
+                ],
+                403,
+                [],
+                JSON_UNESCAPED_UNICODE
+            );
+        }
 
         // 入力取得
         $isbn = $request->input('isbn');
-
+        
+        // ScrapeManagerの生成
+        $scrapers = resolve('app.bookInfo.scrapeManager');
+        
         // booksテーブルに該当レコードが存在しているか確認する
         $book = Book::where('isbn', $isbn)->first();
         if($book == null){
@@ -89,12 +103,26 @@ class UserBookController extends Controller
             // booksテーブルに挿入する
             $new_book->save();
         }
-        // user_bookテーブルに挿入する
-        $user_book = new UserBook;
-        $user_book->user_id = auth()->id();
-        $user_book->book_id = $book ? $book->id : $new_book->id;
 
         $book = $book ?? $new_book;
+
+        // 当該ユーザのuser_bookテーブルに同じ本がすでに登録されているかのチェック
+        $is_userBook_exists = UserBook::where('book_id', $book->id)->where('user_id', $authId)->exists();
+        if($is_userBook_exists){
+            return response()->json(
+                [
+                    'status' => 400,
+                    'userMessage' => '追加しようとした本はすでに本棚に登録されています。'
+                ],
+                400,
+                [],
+                JSON_UNESCAPED_UNICODE);
+        }
+        
+        // user_bookテーブルに挿入する
+        $user_book = new UserBook;
+        $user_book->user_id = $authId;
+        $user_book->book_id = $book->id;
 
         if (in_array($book->genre_id, Genre::SPOILER_ID_LIST)) {
             $user_book->is_spoiler = true;
@@ -130,7 +158,7 @@ class UserBookController extends Controller
      */
     public function show($userId, $userBookId)
     {
-        $authId = Auth::id();
+        $authId = auth()->guard('api')->id();
         if($authId === null) {
             $authId = 0;
         }

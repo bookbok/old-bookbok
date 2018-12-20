@@ -19,7 +19,8 @@ class ReactionController extends Controller
         );
     }
 
-    public function storeLike($bokId) {
+    public function storeLike($bokId)
+    {
         $authId = auth()->guard('api')->id();
         Reaction::create([
             'bok_id' => $bokId,
@@ -27,4 +28,16 @@ class ReactionController extends Controller
             'liked' => true,
         ]);
     }
+
+    public function loves($userId)
+    {
+        $loves = User::find($userId)->loves();
+        return response()->json(
+            $loves,
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
+    }
+
 }
