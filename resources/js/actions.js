@@ -163,9 +163,14 @@ export const fetchLikeBoks = (userId) => dispatch => {
        });
 }
 
-export const reviewRegister = (userBookId,reviewInfo) => {
-    return wrapFetch(DOMAIN + `/api/user_books/${userBookId}/review`, {
+export const reviewRegister = (userBookId, body) => {
+    return fetch(DOMAIN + `/api/user_books/${userBookId}/review`, {
         method: "POST",
-        body: reviewInfo
+        body: JSON.stringify({ "body": body }),
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${state.token}`,
+        },
     });
 }
