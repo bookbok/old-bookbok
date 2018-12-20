@@ -49,6 +49,6 @@ class ReviewController extends Controller
             ]
         );
 
-        return response()->json($review, 200);
+        return response()->json($review, 200, [], JSON_UNESCAPED_UNICODE);
     }
 }
