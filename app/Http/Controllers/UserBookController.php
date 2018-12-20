@@ -104,8 +104,10 @@ class UserBookController extends Controller
             $new_book->save();
         }
 
+        $book = $book ?? $new_book;
+
         // 当該ユーザのuser_bookテーブルに同じ本がすでに登録されているかのチェック
-        $is_userBook_exists = UserBook::where('book_id', $book->id)->where('user_id', $userId)->first();
+        $is_userBook_exists = UserBook::where('book_id', $book->id)->where('user_id', $authId)->exists();
         if($is_userBook_exists){
             return response()->json(
                 [
@@ -116,13 +118,11 @@ class UserBookController extends Controller
                 [],
                 JSON_UNESCAPED_UNICODE);
         }
-
+        
         // user_bookテーブルに挿入する
         $user_book = new UserBook;
-        $user_book->user_id = auth()->id();
-        $user_book->book_id = $book ? $book->id : $new_book->id;
-
-        $book = $book ?? $new_book;
+        $user_book->user_id = $authId;
+        $user_book->book_id = $book->id;
 
         if (in_array($book->genre_id, Genre::SPOILER_ID_LIST)) {
             $user_book->is_spoiler = true;
