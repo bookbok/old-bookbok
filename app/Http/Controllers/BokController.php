@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\UserBook;
 use App\Bok;
 use App\Reaction;
+use Carbon\Carbon;
 
 class BokController extends Controller
 {
@@ -80,6 +81,9 @@ class BokController extends Controller
         $validator = \Validator::make($request->all(), [
             'body' => 'required|string|max:2048',
             'publish' => 'boolean',
+            'page_num_begin' => 'integer',
+            'page_num_end' => 'integer',
+            'line_num' => 'integer',
         ]);
 
         if($validator->fails()) {
@@ -95,17 +99,18 @@ class BokController extends Controller
             $publishedAt = Carbon::now()->toDateTimeString();
         }
 
-        $bok = Bok::updateOrCreate(
+        $bok = Bok::create(
             [
                 'user_id' => auth()->id(),
                 'user_book_id' => $userBookId,
-            ],
-            [
                 'body' => $request->body,
                 'published_at' => $publishedAt,
+                'page_num_begin' => $request->page_num_begin,
+                'page_num_end' => $request->page_num_end,
+                'line_num' => $request->line_num,
             ]
         );
 
-        return response()->json($bok, 200);
+        return response()->json($bok, 200, [], JSON_UNESCAPED_UNICODE);
     }
 }
