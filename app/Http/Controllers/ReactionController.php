@@ -18,4 +18,15 @@ class ReactionController extends Controller
             JSON_UNESCAPED_UNICODE
         );
     }
+
+    public function loves($userId)
+    {
+        $loves = User::find($userId)->loves();
+        return response()->json(
+            $loves,
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
+    }
 }
