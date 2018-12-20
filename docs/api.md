@@ -759,6 +759,7 @@ BOOKBOK　API仕様書
                 "page_num_begin": 1,
                 "page_num_end": 1,
                 "line_num": 1,
+                "publish": true
             }
 
 + Response 200 (application/json)
