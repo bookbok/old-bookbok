@@ -103,5 +103,7 @@ Route::get('users/{userId}/likes','ReactionController@userLikes');
 Route::get('users/{userId}/loves','ReactionController@userLoves');
 
 Route::post('boks/{userId}/likes', 'ReactionController@storeLike');
-Route::post('boks/{userId}/loves', 'ReactionController@storeLoves');
+Route::delete('boks/{userId}/likes', 'ReactionController@deleteLike');
+Route::post('boks/{userId}/loves', 'ReactionController@storeLove');
+Route::delete('boks/{userId}/loves', 'ReactionController@deleteLove');
 

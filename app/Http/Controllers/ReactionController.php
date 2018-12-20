@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class ReactionController extends Controller
 {
+    /**
+     * User likes & loves resources
+     */
+
     public function userLikes($userId)
     {
         $likes = User::find($userId)->likes();
@@ -30,6 +34,10 @@ class ReactionController extends Controller
         );
     }
 
+    /**
+     * Bok likes resources
+     */
+
     public function storeLike($bokId)
     {
         $authId = auth()->guard('api')->id();
@@ -44,7 +52,23 @@ class ReactionController extends Controller
         return response()->json([], 200);
     }
 
-    public function storeLoves($bokId)
+    public function deleteLike($bokId)
+    {
+        $authId = auth()->guard('api')->id();
+        $reaction = Reaction::where('bok_id', $bokId)->where('user_id', $authId)->get()->first();
+        if($reaction != null) {
+            $reaction->liked = false;
+            $reaction->save();
+        }
+
+        return response()->json([], 200);
+    }
+
+    /**
+     * Bok loves resources
+     */
+
+    public function storeLove($bokId)
     {
         $authId = auth()->guard('api')->id();
         Reaction::updateOrCreate([
@@ -54,6 +78,18 @@ class ReactionController extends Controller
         [
             'loved' => true,
         ]);
+
+        return response()->json([], 200);
+    }
+
+    public function deleteLove($bokId)
+    {
+        $authId = auth()->guard('api')->id();
+        $reaction = Reaction::where('bok_id', $bokId)->where('user_id', $authId)->get()->first();
+        if($reaction != null) {
+            $reaction->loved = false;
+            $reaction->save();
+        }
 
         return response()->json([], 200);
     }
