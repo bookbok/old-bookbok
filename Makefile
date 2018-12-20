@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help run migrate migrate/fresh c routes test install build
+.PHONY: help run migrate migrate/fresh c routes test install build json phplint
 
 help: Makefile
 	@-bat Makefile || \
@@ -34,3 +34,6 @@ build:
 
 json:
 	python -m json.tool
+
+phplint:
+	find ./ -type d \( -name 'resources' -o -name 'bootstrap' -o -name 'public' -o -name 'vendor' -o -name 'node_modules' -o -name '.git' -o -name 'storage'  \) -prune -o -type f -name '*.php' -print | xargs -n1 php -l > /dev/null
