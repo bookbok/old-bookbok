@@ -50,7 +50,7 @@ class UserBookController extends Controller
     public function store(Request $request, $userId)
     {
         // 認可チェック
-        $authId = Auth::id();
+        $authId = auth()->guard('api')->id();
         if($authId != $userId){
             return response()->json(
                 [
