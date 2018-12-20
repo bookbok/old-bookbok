@@ -91,14 +91,14 @@ class UserBookController extends Controller
             // すべてのScraperが情報取得に失敗した場合
             if($new_book == null){
                 return response()->json(
-                        [
-                            'status' => 500,
-                            'userMessage' => 'お探しの本の情報を取得することができませんでした。'
-                        ],
-                        500,
-                        [],
-                        JSON_UNESCAPED_UNICODE
-                    );
+                    [
+                        'status' => 500,
+                        'userMessage' => 'お探しの本の情報を取得することができませんでした。'
+                    ],
+                    500,
+                    [],
+                    JSON_UNESCAPED_UNICODE
+                );
             }
             // booksテーブルに挿入する
             $new_book->save();
