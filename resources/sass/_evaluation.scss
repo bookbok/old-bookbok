@@ -1,34 +1,30 @@
-// 本の情報
-.book-info{
-  width: 150px;
-  text-align: center;
+.icon {
+  font-size: 1rem;
+  vertical-align: bottom;
+  @include normal-pc {
+    font-size: 1.2rem;
+  };
 }
 
-.book-footer{
-  height: 40px;
-  font-size: 0.8rem;
+.liked {
+  margin-bottom: 0;
+  vertical-align: top;
+
+  @include normal-pc {
+    margin-right: 5px;
+  }
 }
 
-// bok部分
-.bok-info{
-}
-
-.bok-user{
-  height: 20px;
-  font-size: 0.8rem;
-}
-
-.bok-body{
-  min-height: 60%;
+.loved {
+  margin-bottom: 0;
+  margin-right: 2px;
   vertical-align: top;
 }
 
-.bok-footer{
-  height: 20px;
-  font-size: 0.7rem;
-  margin: 10px;
+.like-animation{
+  color: #4286f4;
 }
 
-.icon{
-  font-size: 1.5rem;
+.love-animation{
+  color: #46a80d;
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bok extends Model
 {
     protected $fillable = [
-        'user_id', 'user_book_id', 'body', 'published_at',
+        'user_id', 'user_book_id', 'body', 'published_at', 'page_num_begin', 'page_num_end', 'line_num',
     ];
 
     // リレーション定義

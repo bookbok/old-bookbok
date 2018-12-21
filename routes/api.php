@@ -32,17 +32,12 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
 
         Route::get('logout','LoginController@logout')->name('logout');
         Route::get('user', function (Request $request) {
-            return $request->user();
+            return $request->user()->makeVisible([
+                'email',
+                'email_verified_at',
+            ]);
         })->name('user');
     });
-});
-
-Route::post('/login','Auth\\LoginController@login');
-Route::middleware('auth:api')->group(function () {
-    Route::get('/logout','Auth\\LoginController@logout');
-});
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
 });
 
 // test method
@@ -96,8 +91,9 @@ Route::get('genres','GenreController@index');
 Route::get('genres/{genre}', 'GenreController@show');
 
 /**
- * Resource: Like
+ * Resource: Reaction
  *
  */
 Route::get('users/{userId}/likes','ReactionController@likes');
+Route::get('users/{userId}/loves','ReactionController@loves');
 

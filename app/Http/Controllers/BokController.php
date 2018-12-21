@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\UserBook;
 use App\Bok;
 use App\Reaction;
+use Carbon\Carbon;
 
 class BokController extends Controller
 {
@@ -32,8 +33,8 @@ class BokController extends Controller
                 JSON_UNESCAPED_UNICODE
             );
         }
-        //userIdの取得
-        $userId = UserBook::find($userBookId)->user_id;
+
+        $authId = auth()->guard('api')->id();
 
         // 指定されたuserBookIdに紐づくBokを取得する
         $boks = Bok::with([
@@ -48,11 +49,11 @@ class BokController extends Controller
                 'reactions as loved_count' => function($q) {
                     $q->isLoved();
                 },
-                'reactions as liked' => function($q) use($userId) {
-                    $q->isLiked()->where('user_id', $userId);
+                'reactions as liked' => function($q) use($authId) {
+                    $q->isLiked()->where('user_id', $authId);
                 },
-                'reactions as loved' => function($q) use($userId) {
-                    $q->isLoved()->where('user_id', $userId);
+                'reactions as loved' => function($q) use($authId) {
+                    $q->isLoved()->where('user_id', $authId);
                 }
             ])
             ->where('user_book_id', $userBookId)
@@ -80,6 +81,9 @@ class BokController extends Controller
         $validator = \Validator::make($request->all(), [
             'body' => 'required|string|max:2048',
             'publish' => 'boolean',
+            'page_num_begin' => 'integer',
+            'page_num_end' => 'integer',
+            'line_num' => 'integer',
         ]);
 
         if($validator->fails()) {
@@ -95,17 +99,18 @@ class BokController extends Controller
             $publishedAt = Carbon::now()->toDateTimeString();
         }
 
-        $bok = Bok::updateOrCreate(
+        $bok = Bok::create(
             [
                 'user_id' => auth()->id(),
                 'user_book_id' => $userBookId,
-            ],
-            [
                 'body' => $request->body,
                 'published_at' => $publishedAt,
+                'page_num_begin' => $request->page_num_begin,
+                'page_num_end' => $request->page_num_end,
+                'line_num' => $request->line_num,
             ]
         );
 
-        return response()->json($bok, 200);
+        return response()->json($bok, 201, [], JSON_UNESCAPED_UNICODE);
     }
 }
