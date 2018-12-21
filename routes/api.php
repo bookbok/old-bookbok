@@ -97,3 +97,9 @@ Route::get('genres/{genre}', 'GenreController@show');
 Route::get('users/{userId}/likes','ReactionController@likes');
 Route::get('users/{userId}/loves','ReactionController@loves');
 
+/**
+ * Resource: Follower
+ *
+ */
+Route::get('users/{userId}/followers','FollowerController@followers');
+Route::get('users/{userId}/followings','FollowerController@followings');
