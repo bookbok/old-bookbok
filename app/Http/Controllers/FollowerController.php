@@ -13,9 +13,9 @@ class FollowerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function followers($userId)
+    public function followers(User $user)
     {
-        $followers = User::find($userId)->followers;
+        $followers = $user->followers;
 
         return response()->json($followers, 200, [], JSON_UNESCAPED_UNICODE);
     }
@@ -25,9 +25,9 @@ class FollowerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function followings($userId)
+    public function followings(User $user)
     {
-        $followings = User::find($userId)->followings;
+        $followings = $user->followings;
 
         return response()->json($followings, 200, [], JSON_UNESCAPED_UNICODE);
     }

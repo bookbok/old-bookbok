@@ -101,5 +101,5 @@ Route::get('users/{userId}/loves','ReactionController@loves');
  * Resource: Follower
  *
  */
-Route::get('users/{userId}/followers','FollowerController@followers');
-Route::get('users/{userId}/followings','FollowerController@followings');
+Route::get('users/{user}/followers','FollowerController@followers');
+Route::get('users/{user}/followings','FollowerController@followings');
