@@ -103,3 +103,4 @@ Route::get('users/{userId}/loves','ReactionController@loves');
  */
 Route::get('users/{user}/followers','FollowerController@followers');
 Route::get('users/{user}/followings','FollowerController@followings');
+Route::post('users/{user}/followings','FollowerController@follow');
