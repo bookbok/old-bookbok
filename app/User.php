@@ -51,6 +51,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Reaction::class);
     }
 
+    public function followers(){
+        return $this->belongsToMany(User::class, 'followers', 'target_id', 'user_id')
+                    ->withPivot('id')
+                    ->withTimestamps();
+    }
+
+    public function followings(){
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'target_id')
+                    ->withPivot('id')
+                    ->withTimestamps();
+    }
+
     public function likes(){
         $authId = auth()->guard('api')->id();
         if($authId === null) {
