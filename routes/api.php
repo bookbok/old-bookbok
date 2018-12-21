@@ -40,17 +40,6 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
     });
 });
 
-Route::post('/login','Auth\\LoginController@login');
-Route::middleware('auth:api')->group(function () {
-    Route::get('/logout','Auth\\LoginController@logout');
-});
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user()->makeVisible([
-        'email',
-        'email_verified_at',
-    ]);
-});
-
 // test method
 Route::get('/users', function () {
     $users = App\User::all();
