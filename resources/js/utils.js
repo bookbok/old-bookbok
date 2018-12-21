@@ -36,6 +36,11 @@ store.subscribe(() => {
     state = store.getState();
 });
 
+// ログイン中のユーザーを取得するヘルパー関数
+export function getAuthUser() {
+    return state.loggedinUser;
+}
+
 
 /**
  * fetch関数を綺麗に扱えるようにするラッパー関数

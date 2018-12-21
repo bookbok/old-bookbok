@@ -65,10 +65,10 @@ class UserBookController extends Controller
 
         // 入力取得
         $isbn = $request->input('isbn');
-        
+
         // ScrapeManagerの生成
         $scrapers = resolve('app.bookInfo.scrapeManager');
-        
+
         // booksテーブルに該当レコードが存在しているか確認する
         $book = Book::where('isbn', $isbn)->first();
         if($book == null){
@@ -118,7 +118,7 @@ class UserBookController extends Controller
                 [],
                 JSON_UNESCAPED_UNICODE);
         }
-        
+
         // user_bookテーブルに挿入する
         $user_book = new UserBook;
         $user_book->user_id = $authId;
