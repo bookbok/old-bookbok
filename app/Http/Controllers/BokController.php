@@ -111,6 +111,6 @@ class BokController extends Controller
             ]
         );
 
-        return response()->json($bok, 200, [], JSON_UNESCAPED_UNICODE);
+        return response()->json($bok, 201, [], JSON_UNESCAPED_UNICODE);
     }
 }
