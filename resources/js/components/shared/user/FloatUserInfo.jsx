@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
+import { withRouter } from "react-router-dom";
+import { getAuthUser, isEmpty } from '../../../utils';
+import { requestFollow } from '../../../actions';
+import FollowButton from './FollowButton';
 
 /**
  * @param {Object} user
@@ -8,7 +12,30 @@ import PropTypes from 'prop-types';
  * このコンポーネントを使用する場合、親要素に`position: relative`を適用する必要がある
  * 基本的に親要素には`.page-content-wrap`クラスを適応すると良い
  */
-export class FloatUserInfo extends Component {
+export class FloatUserInfo_ extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { followed: false };
+        this.handleClickFollow = this.handleClickFollow.bind(this);
+    }
+
+    handleClickFollow() {
+        const user = getAuthUser();
+        if(isEmpty(user)) {
+            console.log('ログインが必要です');
+            return this.props.history.push('/login');
+        }
+
+        if(this.state.followed) {
+            console.log('unfollow');
+        } else {
+            requestFollow(user.id, this.props.user.id).then(() => {
+                this.setState({ followed: !this.state.followed });
+            });
+        }
+    }
+
     render() {
         const user = this.props.user;
 
@@ -27,11 +54,7 @@ export class FloatUserInfo extends Component {
                         <a href={`/users/${user.id}/followings`} className="m-2">127 フォロワー</a>
                     </div>
                 </div>
-                <button
-                    onClick={this.handleClickFollow}
-                    className="btn btn-primary user-follow-btn">
-                    フォローする
-                </button>
+                <FollowButton followed={this.state.followed} handleClickFollow={this.handleClickFollow} />
 
                 <div className="user-info-accordion mt-2">
                     <label htmlFor="user-info-accordion-check" className="accordion-label text-center mt-2">
@@ -47,7 +70,7 @@ export class FloatUserInfo extends Component {
     }
 }
 
-FloatUserInfo.propTypes = {
+FloatUserInfo_.propTypes = {
     user: PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
@@ -55,3 +78,5 @@ FloatUserInfo.propTypes = {
         description: PropTypes.string.isRequired,
     })
 };
+
+export const FloatUserInfo = withRouter(FloatUserInfo_);
