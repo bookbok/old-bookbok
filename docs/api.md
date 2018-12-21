@@ -893,17 +893,38 @@ BOOKBOK　API仕様書
 
         [
             {
-                "user_id": 1,
-                "name": "user name",
-                "avator": "http://~"
+                "id": 2,
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "hey",
+                "created_at": "2018-11-19 04:58:55",
+                "updated_at": "2018-11-19 04:58:55",
+                "role_id": "5",
+                "name": "test-staff",
+                "pivot":{
+                    "target_id": "1",
+                    "user_id": "2",
+                    "id": 4,
+                    "created_at": "2018-12-21 22:01:33",
+                    "updated_at": "2018-12-21 22:01:33"
+                }
             },
             {
-                "user_id": 2,
-                "name": "user name",
-                "avator": "http://~"
+                "id": 3,
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "そのすぐに立って二人ふたりし",
+                "created_at": "2018-11-23 10:34:01",
+                "updated_at": "2009-08-12 07:17:49",
+                "role_id": "10",
+                "name": "三宅 春香",
+                "pivot":{
+                    "target_id": "1",
+                    "user_id": "3",
+                    "id": 5,
+                    "created_at": "2018-12-21 22:01:37",
+                    "updated_at": "2018-12-21 22:01:37"
+                }
             }
         ]
-
 
 # Group FOLLOWINGS
 
@@ -915,21 +936,40 @@ BOOKBOK　API仕様書
 
 ### 自分がフォローしている人の一覧を取得する [GET]
 
-> TODO:
- - followingの詳細が見たい場合は、userの詳細を叩く
-
 + Response 200 (application/json)
 
         [
             {
-                "user_id": 1,
-                "name": "user name",
-                "avator": "http://~"
+                "id": 2,
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "hey",
+                "created_at": "2018-11-19 04:58:55",
+                "updated_at": "2018-11-19 04:58:55",
+                "role_id": "5",
+                "name": "test-staff",
+                "pivot":{
+                    "user_id": "2",
+                    "target_id": "1",
+                    "id": 4,
+                    "created_at": "2018-12-21 22:01:33",
+                    "updated_at": "2018-12-21 22:01:33"
+                }
             },
             {
-                "user_id": 2,
-                "name": "user name",
-                "avator": "http://~"
+                "id": 3,
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "そのすぐに立って二人ふたりし",
+                "created_at": "2018-11-23 10:34:01",
+                "updated_at": "2009-08-12 07:17:49",
+                "role_id": "10",
+                "name": "三宅 春香",
+                "pivot":{
+                    "user_id": "3",
+                    "target_id": "1",
+                    "id": 5,
+                    "created_at": "2018-12-21 22:01:37",
+                    "updated_at": "2018-12-21 22:01:37"
+                }
             }
         ]
 
