@@ -55,7 +55,7 @@ class ReactionController extends Controller
     public function deleteLike($bokId)
     {
         $authId = auth()->guard('api')->id();
-        $reaction = Reaction::where('bok_id', $bokId)->where('user_id', $authId)->get()->first();
+        $reaction = Reaction::where('bok_id', $bokId)->where('user_id', $authId)->first();
         if($reaction != null) {
             $reaction->liked = false;
             $reaction->save();
@@ -85,7 +85,7 @@ class ReactionController extends Controller
     public function deleteLove($bokId)
     {
         $authId = auth()->guard('api')->id();
-        $reaction = Reaction::where('bok_id', $bokId)->where('user_id', $authId)->get()->first();
+        $reaction = Reaction::where('bok_id', $bokId)->where('user_id', $authId)->first();
         if($reaction != null) {
             $reaction->loved = false;
             $reaction->save();
