@@ -14,8 +14,8 @@ export function successfulStatus(code) {
 
 // オブジェクトを受け取って、GETリクエストのクエリパラメーターに変換する
 export function convertQuery(obj) {
-    return Object.keys(body).map((key) => {
-        return key + "=" + body[key];
+    return Object.keys(obj).map((key) => {
+        return key + "=" + obj[key];
     }).join('&')
 }
 
