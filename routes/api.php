@@ -102,3 +102,10 @@ Route::delete('boks/{userId}/likes', 'ReactionController@deleteLike');
 Route::post('boks/{userId}/loves', 'ReactionController@storeLove');
 Route::delete('boks/{userId}/loves', 'ReactionController@deleteLove');
 
+/**
+ * Resource: Follower
+ *
+ */
+Route::get('users/{user}/followers','FollowerController@followers');
+Route::get('users/{user}/followings','FollowerController@followings');
+Route::post('users/{user}/followings','FollowerController@follow');
