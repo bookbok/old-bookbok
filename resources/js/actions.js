@@ -125,3 +125,10 @@ export const storeISBNToUserBookDirect = (userId, isbn) => {
         body: { "isbn": isbn },
     });
 }
+
+export const requestFollow = (userId, targetId) => {
+    return utils.wrapFetch(DOMAIN + `/api/users/${userId}/followings`, {
+        method: "POST",
+        body: { "user_id": targetId },
+    });
+}
