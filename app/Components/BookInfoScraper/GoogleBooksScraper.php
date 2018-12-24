@@ -86,7 +86,7 @@ class GoogleBooksScraper implements ScraperInterface
         $book->name = $this->concatTitles($bookInfo);
         $book->description = array_key_exists("description", $bookInfo) ? $bookInfo->description : "";
         $book->cover = array_key_exists("imageLinks", $bookInfo) ? $bookInfo->imageLinks->smallThumbnail : "";
-        $book->author = $this->concatAuthors($bookInfo->authors);
+        $book->author = property_exists($bookInfo, "authors") ? $this->concatAuthors($bookInfo->authors) : "";
 
         // App\Bookをスクレイプマネージャに返す
         return $book;

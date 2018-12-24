@@ -32,17 +32,12 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
 
         Route::get('logout','LoginController@logout')->name('logout');
         Route::get('user', function (Request $request) {
-            return $request->user();
+            return $request->user()->makeVisible([
+                'email',
+                'email_verified_at',
+            ]);
         })->name('user');
     });
-});
-
-Route::post('/login','Auth\\LoginController@login');
-Route::middleware('auth:api')->group(function () {
-    Route::get('/logout','Auth\\LoginController@logout');
-});
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
 });
 
 // test method
@@ -86,7 +81,7 @@ Route::get('bok_flow', 'BokFlowController@index')->middleware('auth:api');
  */
 Route::get('users/{userId}/user_books','UserBookController@index');
 Route::get('users/{userId}/user_books/{userBookId}', 'UserBookController@show');
-Route::post('users/{userId}/user_books', 'UserBookController@store');
+Route::post('users/{userId}/user_books', 'UserBookController@store')->middleware('auth:api');
 
 /**
  * Resource: Genre
@@ -96,8 +91,21 @@ Route::get('genres','GenreController@index');
 Route::get('genres/{genre}', 'GenreController@show');
 
 /**
- * Resource: Like
+ * Resource: Reaction
  *
  */
-Route::get('users/{userId}/likes','ReactionController@likes');
+Route::get('users/{userId}/likes','ReactionController@userLikes');
+Route::get('users/{userId}/loves','ReactionController@userLoves');
 
+Route::post('boks/{userId}/likes', 'ReactionController@storeLike');
+Route::delete('boks/{userId}/likes', 'ReactionController@deleteLike');
+Route::post('boks/{userId}/loves', 'ReactionController@storeLove');
+Route::delete('boks/{userId}/loves', 'ReactionController@deleteLove');
+
+/**
+ * Resource: Follower
+ *
+ */
+Route::get('users/{user}/followers','FollowerController@followers');
+Route::get('users/{user}/followings','FollowerController@followings');
+Route::post('users/{user}/followings','FollowerController@follow');

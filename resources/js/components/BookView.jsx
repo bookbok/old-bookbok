@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 
 export class BookView extends Component {
     render() {
@@ -18,11 +19,11 @@ export class BookView extends Component {
 
         return (
             <div className="d-inline-block col-md-4 col-4">
-                <a href={this.props.link ? this.props.link : "#"}>
+                <Link to={this.props.link ? this.props.link : "#"}>
                     <img className="book-view-img" src={book.cover}/>
                     {bookName}
                     <br/>
-                </a>
+                </Link>
             </div>
          );
 

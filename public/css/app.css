@@ -1,4 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);/*!
+@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+
+/*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -10466,6 +10468,12 @@ a.text-dark:focus {
   }
 }
 
+/* === 簡易的なレスポンシブ対応 === */
+
+/* smart-horizontal ~ small-pc */
+
+/* ===== */
+
 footer {
   border-top: 1px solid #eaeaea;
   color: lightgray;
@@ -10616,6 +10624,202 @@ footer ul li:first-child {
   35% {
     -webkit-transform: scale3D(0, 0, 1);
     transform: scale3D(0, 0, 1);
+  }
+}
+
+.book-info {
+  width: 150px;
+  text-align: center;
+}
+
+.book-footer {
+  height: 40px;
+  font-size: 0.8rem;
+}
+
+.bok-user {
+  height: 20px;
+  font-size: 0.8rem;
+}
+
+.bok-body {
+  min-height: 60%;
+  vertical-align: top;
+}
+
+.bok-footer {
+  height: 20px;
+  font-size: 0.7rem;
+  margin: 10px;
+}
+
+.icon {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 750px) {
+  pre.book-view-pre {
+    text-overflow: ellipsis;
+    width: 92px;
+    font-size: 12px;
+    overflow: hidden;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  pre.book-view-pre {
+    margin-left: 30px;
+    text-overflow: ellipsis;
+    width: 130px;
+    font-size: 15px;
+    overflow: hidden;
+  }
+}
+
+img.book-view-img {
+  max-width: 92px;
+  max-height: 115px;
+}
+
+@media screen and (min-width: 1024px) {
+  img.book-view-img {
+    margin-left: 30px;
+    max-width: 128px;
+    max-height: 168px;
+  }
+}
+
+img.title-book-cover {
+  max-width: 64px;
+  max-height: 80px;
+}
+
+@media screen and (min-width: 1280px) {
+  img.title-book-cover {
+    max-width: 128px;
+    max-height: 160px;
+  }
+}
+
+.title-book-name {
+  word-break: break-all;
+  font-size: 0.8em;
+}
+
+@media screen and (min-width: 1280px) {
+  .title-book-name {
+    font-size: 1em;
+  }
+}
+
+.page-content-wrap {
+  position: relative;
+}
+
+.main-content {
+  background-color: white;
+}
+
+.sub-content {
+  position: static;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  margin-right: auto;
+  margin-left: auto;
+  width: 80%;
+}
+
+@media screen and (min-width: 1280px) {
+  .sub-content {
+    position: absolute;
+    margin-left: 3rem;
+    max-width: 20%;
+  }
+}
+
+img.user-info-avatar {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+@media screen and (min-width: 1280px) {
+  img.user-info-avatar {
+    max-width: 100px;
+    max-height: 100px;
+  }
+}
+
+/* === user info accordion box == */
+
+.user-info-accordion {
+  /* default display none */
+  /* display description when clicked */
+}
+
+.user-info-accordion label {
+  display: block;
+  cursor: pointer;
+  background-color: #CCFFCC;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 480px) and (max-width: 1279px) {
+  .user-info-accordion label {
+    max-width: 30%;
+  }
+}
+
+.user-info-accordion label:hover {
+  background-color: #99FFCC;
+}
+
+.user-info-accordion input {
+  display: none;
+}
+
+.user-info-accordion .user-info-description {
+  white-space: pre-wrap;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.user-info-accordion .user-info-accordion-check:checked + .user-info-description {
+  height: auto;
+  opacity: 1;
+}
+
+/* == !accordion == */
+
+.user-follow-btn {
+  max-width: 100%;
+}
+
+@media screen and (min-width: 480px) and (max-width: 1279px) {
+  .user-follow-btn {
+    max-width: 30%;
+  }
+}
+
+div.text-size {
+  font-size: 15px;
+}
+
+.search-button-text {
+  display: none;
+}
+
+@media screen and (min-width: 1280px) {
+  .search-button-text {
+    display: inline;
   }
 }
 
