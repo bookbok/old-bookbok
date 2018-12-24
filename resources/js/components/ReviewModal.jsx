@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import { reviewRegister } from "../actions";
+import { getAuthUser, isEmpty } from '../utils';
+import { withRouter } from "react-router-dom";
 
-export class ReviewModal extends Component {
+class ReviewModal_ extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { title: "", body: "", isInvalid: false };
+        this.state = { title: "", body: "", isInvalid: false, invalidMessage: "" };
 
         this.handleChangeReview = this.handleChangeReview.bind(this);
         this.handleRegisterReview = this.handleRegisterReview.bind(this);
@@ -19,15 +21,28 @@ export class ReviewModal extends Component {
     handleRegisterReview(e) {
         e.preventDefault();
 
-        reviewRegister(1, this.state.body).then(res => {
+        const user = getAuthUser();
+        if(isEmpty(user)){
+            return this.props.history.push('/login');
+        }
+
+        reviewRegister(user.id, this.state.body).then(res => {
+            if(res.status === 401) {
+                this.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
+            }else if(!res.ok){
+                res.json().then(json => {
+                    this.setState({ isInvalid: true, invalidMessage: json.userMessage });
+                });
+                throw new Error();
+            }
             return res.json();
         }).then(res => {
-            $('#ISBNModal').modal('hide');
             this.props.history.push(`/users/${res.user_id}/user_books/${res.user_book_id}`);
-        }).catch(err => {
-            this.setState({ isInvalid: true });
-            console.log("error!");
-        });
+        }).catch(()=>{});
+    }
+
+    componentWillUnmount() {
+        $('#ReviewModalCenter').modal('hide');   
     }
 
     render() {
@@ -84,3 +99,5 @@ export class ReviewModal extends Component {
         );
     }
 }
+
+export const ReviewModal = withRouter(ReviewModal_);
