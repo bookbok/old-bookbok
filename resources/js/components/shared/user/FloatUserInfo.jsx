@@ -16,15 +16,15 @@ export class FloatUserInfo extends Component {
             <div className="sub-content card col-md-7">
                 <div className="d-flex">
                     <div>
-                        <a href={`/users/${user.id}`} className="text-body">
+                        <Link to={`/users/${user.id}`} className="text-body">
                             <img src={user.avatar} className="user-info-avatar" />
                             <p className="h4 font-weight-bold">{user.name}</p>
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="user-follow-info mt-2">
-                        <a href={`/users/${user.id}/followers`} className="m-2">14 フォロー</a>
-                        <a href={`/users/${user.id}/followings`} className="m-2">127 フォロワー</a>
+                        <Link to={`/users/${user.id}/followers`} className="m-2">0 フォロー</Link>
+                        <Link to={`/users/${user.id}/followings`} className="m-2">test フォロワー</Link>
                     </div>
                 </div>
                 <button
