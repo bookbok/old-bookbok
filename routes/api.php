@@ -108,4 +108,5 @@ Route::delete('boks/{userId}/loves', 'ReactionController@deleteLove');
  */
 Route::get('users/{user}/followers','FollowerController@followers');
 Route::get('users/{user}/followings','FollowerController@followings');
-Route::post('users/{user}/followings','FollowerController@follow');
+Route::post('users/{userId}/followings','FollowerController@follow');
+Route::delete('users/{userId}/followings/{targetId}','FollowerController@unfollow');

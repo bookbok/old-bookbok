@@ -60,4 +60,23 @@ class FollowerController extends Controller
         return response()->json([], 200);
     }
 
+    public function unFollow($userId, $targetId)
+    {
+        // URLとリクエストされたuserの正当性チェック
+        $authId = auth()->guard('api')->id();
+        if($authId != $userId){
+            return response()->json(
+                [
+                    'status' => 403,
+                    'userMessage' => 'リクエスト権限がありません'
+                ],
+                403,
+                [],
+                JSON_UNESCAPED_UNICODE
+            );
+        }
+
+        Follower::where('user_id', $userId)->where('target_id', $targetId)->delete();
+        return response()->json([], 200);
+    }
 }
