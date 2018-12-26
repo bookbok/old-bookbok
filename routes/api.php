@@ -40,14 +40,11 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
     });
 });
 
-// test method
-Route::get('/users', function () {
-    $users = App\User::all();
-    return $users;
-});
-Route::get('/users/{user}', function (\App\User $user) {
-    return $user;
-});
+/**
+ *  Resource: User
+ */
+Route::get('/users', 'UserController@index');
+Route::get('/users/{user}', 'UserController@show');
 
 /**
  *  Resource: BOOK
