@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class UserBook extends Model
 {
     protected $table = 'user_book';
+    protected $fillable = [
+        'user_id', 'user_book_id', 'is_spoiler', 'reading_status',
+    ];
 
     public const READING_STATUS = [
         'none' => 0,     // 未設定
