@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
-import { reviewRegister } from "../actions";
+import { setReview, reviewRegister } from "../actions";
 import { getAuthUser, isEmpty } from '../utils';
 import { withRouter } from "react-router-dom";
+import { store } from "../store";
 
 class ReviewModal_ extends Component {
     constructor(props) {
@@ -37,7 +38,7 @@ class ReviewModal_ extends Component {
             }
             return res.json();
         }).then(res => {
-            this.props.history.push(`/users/${res.user_id}/user_books/${res.user_book_id}`);
+            store.dispatch(setReview(res));
         }).catch(()=>{});
     }
 
