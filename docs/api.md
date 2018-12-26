@@ -507,7 +507,6 @@ BOOKBOK　API仕様書
                 "description": "user info"
             },
             "book": {
-
                 "id": 1,
                 "isbn": "9784111121221",
                 "name": "book name",
@@ -615,6 +614,23 @@ BOOKBOK　API仕様書
         }
 
 ### あるユーザの特定のユーザーブックを更新する(読了ステータスやネタバレflg) [PUT]
+
+> MEMO:
+ - Requestの`reading_status`は読了ステータス(`none`, `wanted`, `unread`, `reading`, `readed`のどれか)
+
++ Request (application/json)
+
+    + Attributes
+
+        + is_spoiler (required)
+        + reading_status (required)
+
+    + Body
+
+            {
+                "is_spoiler": false,
+                "reading_status": "wanted",
+            }
 
 + Response 200 (application/json)
 
