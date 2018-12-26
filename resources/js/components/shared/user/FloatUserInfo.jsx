@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { withRouter } from "react-router-dom";
 import { getAuthUser, isEmpty } from '../../../utils';
-import { requestFollow } from '../../../actions';
+import { requestFollow, requestUnFollow } from '../../../actions';
 import FollowButton from './FollowButton';
 
 /**
@@ -28,7 +28,9 @@ export class FloatUserInfo_ extends Component {
         }
 
         if(this.state.followed) {
-            console.log('unfollow');
+            requestUnFollow(user.id, this.props.user.id).then(() => {
+                this.setState({ followed: !this.state.followed });
+            })
         } else {
             requestFollow(user.id, this.props.user.id).then(() => {
                 this.setState({ followed: !this.state.followed });

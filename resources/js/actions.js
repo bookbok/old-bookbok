@@ -132,3 +132,9 @@ export const requestFollow = (userId, targetId) => {
         body: { "user_id": targetId },
     });
 }
+
+export const requestUnFollow = (userId, targetId) => {
+    return utils.wrapFetch(DOMAIN + `/api/users/${userId}/followings/{targetId}`, {
+        method: "DELETE",
+    });
+}
