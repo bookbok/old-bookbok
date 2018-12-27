@@ -16,7 +16,7 @@ class ReviewModal_ extends Component {
     }
 
     handleChangeReview(e) {
-        this.setState({ value: e.target.value });
+        this.setState({ body: e.target.value });
     }
 
     handleRegisterReview(e) {
