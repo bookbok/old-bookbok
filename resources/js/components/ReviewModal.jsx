@@ -27,18 +27,25 @@ class ReviewModal_ extends Component {
             return this.props.history.push('/login');
         }
 
-        reviewRegister(user.id, this.state.body).then(res => {
+        //user_book_idの取得
+        var path = location.pathname;
+        var arg = path.split("/");
+        var user_book_id = arg[4];
+
+        reviewRegister(user_book_id, this.state.body).then(res => {
             if(res.status === 401) {
                 this.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
+                throw new Error();
             }else if(!res.ok){
                 res.json().then(json => {
                     this.setState({ isInvalid: true, invalidMessage: json.userMessage });
+                    console.log("else if");
                 });
                 throw new Error();
             }
             return res.json();
         }).then(res => {
-            store.dispatch(setReview(res));
+//            store.dispatch(setReview(json));
         }).catch(()=>{});
     }
 
