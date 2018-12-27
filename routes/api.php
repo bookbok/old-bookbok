@@ -44,7 +44,7 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
  *  Resource: User
  */
 Route::get('/users', 'UserController@index');
-Route::get('/users/{user}', 'UserController@show');
+Route::get('/users/{userId}', 'UserController@show');
 
 /**
  *  Resource: BOOK
