@@ -43,11 +43,8 @@ class ReviewModal_ extends Component {
             return res.json();
         }).then(res => {
 //            store.dispatch(setReview(json));
+            $('#ReviewModalCenter').modal('hide'); // レビュー投稿時、モーダルを閉じる
         }).catch(()=>{});
-    }
-
-    componentWillUnmount() {
-        $('#ReviewModalCenter').modal('hide');
     }
 
     render() {
