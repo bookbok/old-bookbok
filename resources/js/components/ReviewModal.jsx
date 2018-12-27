@@ -27,12 +27,9 @@ class ReviewModal_ extends Component {
             return this.props.history.push('/login');
         }
 
-        //user_book_idの取得
-        var path = location.pathname;
-        var arg = path.split("/");
-        var user_book_id = arg[4];
-
-        reviewRegister(user_book_id, this.state.body).then(res => {
+        const userBookId = this.props.match.params.userBookId;
+        const review = { 'body': this.state.body };
+        reviewRegister(userBookId, review).then(res => {
             if(res.status === 401) {
                 this.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
                 throw new Error();
@@ -50,7 +47,7 @@ class ReviewModal_ extends Component {
     }
 
     componentWillUnmount() {
-        $('#ReviewModalCenter').modal('hide');   
+        $('#ReviewModalCenter').modal('hide');
     }
 
     render() {

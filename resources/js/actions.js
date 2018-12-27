@@ -120,10 +120,10 @@ export const fetchLikeBoks = (userId) => dispatch => {
 }
 
 export const setReview = review => ({ type: types.SET_REVIEW, review });
-export const reviewRegister = (userBookId, body) => {
+export const reviewRegister = (userBookId, review) => {
     return utils.smartFetch(DOMAIN + `/api/user_books/${userBookId}/review`, {
         method: "POST",
-        body: { "body": body },
+        body: review,
     });
 }
 
