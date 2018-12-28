@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -135,5 +136,23 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new Notifications\ResetPassword($token));
+    }
+
+
+    /**
+     * フォロー系の情報を含めたユーザーテーブルのクエリを返す
+     * @params $authId
+     *   ログインユーザーのID
+     */
+    public static function withFollowInfo($authId) {
+        return DB::table('users')
+            ->leftJoin('followers', 'users.id', '=', 'followers.user_id')
+            ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.created_at', 'users.updated_at', 'users.role_id')
+            ->selectRaw('(select count(*) from followers where target_id = users.id) as follower_count')
+            ->selectRaw('(select count(*) from followers where user_id = users.id) as following_count')
+            // ログインユーザーがフォローしているか？
+            ->selectRaw('(select count(*) from followers where user_id = ? and target_id = users.id) as followingd', [$authId])
+            // ログインユーザーがフォローされているか？
+            ->selectRaw('(select count(*) from followers where user_id = users.id and target_id = ?) as followerd', [$authId]);
     }
 }
