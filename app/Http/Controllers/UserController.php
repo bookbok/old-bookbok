@@ -15,7 +15,22 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $authId = auth()->guard('api')->id();
+        if($authId === null) {
+            $authId = 0;
+        }
+
+        $users = DB::table('users')
+            ->leftJoin('followers', 'users.id', '=', 'followers.user_id')
+            ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.created_at', 'users.updated_at', 'users.role_id')
+            ->selectRaw('(select count(*) from followers where target_id = users.id) as follower_count')
+            ->selectRaw('(select count(*) from followers where user_id = users.id) as following_count')
+            // ログインユーザーがフォローしているか？
+            ->selectRaw('(select count(*) from followers where user_id = ? and target_id = users.id) as followingd', [$authId])
+            // ログインユーザーがフォローされているか？
+            ->selectRaw('(select count(*) from followers where user_id = users.id and target_id = ?) as followerd', [$authId])
+            ->get();
+
         return response()->json($users, 200, [], JSON_UNESCAPED_UNICODE);
     }
 
@@ -35,12 +50,12 @@ class UserController extends Controller
         $user = DB::table('users')
             ->leftJoin('followers', 'users.id', '=', 'followers.user_id')
             ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.created_at', 'users.updated_at', 'users.role_id')
-            ->selectRaw('(select count(*) from followers where target_id = ?) as follower_count', [$userId])
-            ->selectRaw('(select count(*) from followers where user_id = ?) as following_count', [$userId])
+            ->selectRaw('(select count(*) from followers where target_id = users.id) as follower_count')
+            ->selectRaw('(select count(*) from followers where user_id = users.id) as following_count')
             // ログインユーザーがフォローしているか？
-            ->selectRaw('(select count(*) from followers where user_id = ? and target_id = ?) as followingd', [$authId, $userId])
+            ->selectRaw('(select count(*) from followers where user_id = ? and target_id = users.id) as followingd', [$authId])
             // ログインユーザーがフォローされているか？
-            ->selectRaw('(select count(*) from followers where user_id = ? and target_id = ?) as followerd', [$userId, $authId])
+            ->selectRaw('(select count(*) from followers where user_id = users.id and target_id = ?) as followerd', [$authId])
             ->where('users.id', '=', $userId)
             ->first();
 
