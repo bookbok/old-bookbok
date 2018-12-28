@@ -16,7 +16,10 @@ class ReviewModal_ extends Component {
     }
 
     handleChangeReview(e) {
-        this.setState({ body: e.target.value });
+        const name = e.target.name;
+        this.setState({
+            [name]: e.target.value, 
+        });
     }
 
     handleRegisterReview(e) {
@@ -71,7 +74,7 @@ class ReviewModal_ extends Component {
                                                 name="title"
                                                 type="text"
                                                 className="form-control"
-                                                value={this.state.name}
+                                                value={this.state.title}
                                                 onChange={this.handleChangeReview}
                                                 placeholder="この本をズバリ一言で！" />
                                         </div>
@@ -83,7 +86,7 @@ class ReviewModal_ extends Component {
                                         <textarea id="impressions-text"
                                             name="body"
                                             className="form-control"
-                                            value={this.state.name}
+                                            value={this.state.body}
                                             onChange={this.handleChangeReview}
                                             placeholder="1冊を読み終えてどうだったか。これから読む人に伝えたいこと。"
                                             required />
