@@ -174,7 +174,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\BookInfoScraperServiceProvider::class,
-
+        App\Providers\HelperServiceProvider::class,
     ],
 
     /*
