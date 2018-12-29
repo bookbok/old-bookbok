@@ -22,6 +22,7 @@ class UnescapeJsonResponse
             return $response;
         }
 
+        // JsonResponseのみ、既存のencodingオプションにJSON_UNESCAPED_UNICODEを追加する
         $newEncodeOptions = $response->getEncodingOptions() | JSON_UNESCAPED_UNICODE;
         $response->setEncodingOptions($newEncodeOptions);
 
