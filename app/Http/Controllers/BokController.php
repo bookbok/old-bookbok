@@ -28,9 +28,7 @@ class BokController extends Controller
                     'status' => 404,
                     'userMessage' => 'お探しのユーザブックは見つかりませんでした。'
                 ],
-                404,
-                [],
-                JSON_UNESCAPED_UNICODE
+                404
             );
         }
 
@@ -60,12 +58,7 @@ class BokController extends Controller
             ->orderBy('page_num_begin')
             ->get();
 
-        return response()->json(
-            $boks,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($boks);
     }
 
     /**
@@ -111,6 +104,6 @@ class BokController extends Controller
             ]
         );
 
-        return response()->json($bok, 201, [], JSON_UNESCAPED_UNICODE);
+        return response()->json($bok, 201);
     }
 }

@@ -12,7 +12,7 @@ class BookController extends Controller
      *
      * @param   Request $request
      *  リクエスト
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -54,12 +54,7 @@ class BookController extends Controller
 
         $collection = $builder->limit($maxResult)->get();
 
-        return response()->json(
-            $collection,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($collection);
     }
 
     /**
@@ -80,20 +75,15 @@ class BookController extends Controller
             'genre_id',
         ]);
 
-        return response()->json(
-            $book,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($book);
     }
 
     /**
      * 検索用パラメータの正規化を行う
-     * 
+     *
      * @param   Request $request
      *  リクエスト
-     * 
+     *
      * @return  mixed[]
      */
     private function normalizeSearchParameters(Request $request)

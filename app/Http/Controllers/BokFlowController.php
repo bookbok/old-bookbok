@@ -26,9 +26,7 @@ class BokFlowController extends Controller
                     'status' => 401,
                     'userMessage' => 'Bokフローの閲覧にはログインが必要です。'
                 ],
-                401,
-                [],
-                JSON_UNESCAPED_UNICODE
+                401
             );
         }
 
@@ -37,12 +35,7 @@ class BokFlowController extends Controller
 
         //フォローが0人の場合は空配列を返す
         if($followers->isEmpty()){
-            return response()->json(
-                [],
-                200,
-                [],
-                JSON_UNESCAPED_UNICODE
-            );
+            return response()->json([]);
         }
 
         //フォローしているユーザのidを配列にパースする
@@ -74,12 +67,6 @@ class BokFlowController extends Controller
         ->orderBy('updated_at', 'desc')
         ->get();
 
-        return response()->json(
-            $bokFlow,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
-
+        return response()->json($bokFlow);
     }
 }
