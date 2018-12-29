@@ -78,8 +78,8 @@ Route::put('users/{userId}/user_books/{userBookId}', 'UserBookController@update'
  * Resource: Review
  *
  */
-Route::post('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
-Route::put('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
+Route::post('user_books/{userBook}/review', 'ReviewController@store')->middleware('auth:api');
+Route::put('user_books/{userBook}/review', 'ReviewController@store')->middleware('auth:api');
 
 /**
  * Resource: Bok
