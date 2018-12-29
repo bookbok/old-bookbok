@@ -145,8 +145,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *   ログインユーザーのID
      */
     public static function withFollowInfo($authId) {
-        return DB::table('users')
-            ->leftJoin('followers', 'users.id', '=', 'followers.user_id')
+        return self::leftJoin('followers', 'users.id', '=', 'followers.user_id')
             ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.created_at', 'users.updated_at', 'users.role_id')
             ->selectRaw('(select count(*) from followers where target_id = users.id) as follower_count')
             ->selectRaw('(select count(*) from followers where user_id = users.id) as following_count')
