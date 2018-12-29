@@ -8,6 +8,10 @@ import { Logout } from './Logout.jsx';
 import { PrivacyPolicyView } from './PrivacyPolicyView';
 import { TermsOfServiceView } from './TermsOfServiceView';
 import { UserRegister } from './UserRegister.jsx';
+
+import { ConnectedFollowersView } from './FollowersView';
+import { ConnectedFollowingsView } from './FollowingsView';
+
 import { ConnectedUserDetail } from './UserDetail.jsx';
 import { ConnectedBokFlow } from '../containers.js';
 import { ConnectedBookDetail} from '../containers.js';
@@ -116,7 +120,11 @@ export const MenuRouter = () => (
                 <Route exact path="/books/:id" component={ ConnectedBookDetail } />
                 <Route exact path="/users/:id/user_books" component={ ConnectedUserBookshelf } />
                 <Route exact path="/users/:userId/user_books/:userBookId" component={ ConnectedUserBookDetail } />
+
                 <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
+                <Route exact path="/users/:id/followers" component={ ConnectedFollowersView } />
+                <Route exact path="/users/:id/followings" component={ ConnectedFollowingsView } />
+
                 <Route exact path="/users" component={ ConnectedUsersView } />
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
             </Switch>
