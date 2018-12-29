@@ -40,14 +40,11 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
     });
 });
 
-// test method
-Route::get('/users', function () {
-    $users = App\User::all();
-    return $users;
-});
-Route::get('/users/{user}', function (\App\User $user) {
-    return $user;
-});
+/**
+ *  Resource: User
+ */
+Route::get('/users', 'UserController@index');
+Route::get('/users/{userId}', 'UserController@show');
 
 /**
  *  Resource: BOOK
@@ -57,18 +54,11 @@ Route::get('books', 'BookController@index');
 Route::get('books/{book}', 'BookController@show');
 
 /**
- * Resource: Review
+ * Resource: Genre
  *
  */
-Route::post('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
-Route::put('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
-
-/**
- * Resource: Bok
- *
- */
-Route::get('user_books/{userBookId}/boks', 'BokController@index');
-Route::post('user_books/{userBookId}/boks', 'BokController@store')->middleware('auth:api');
+Route::get('genres','GenreController@index');
+Route::get('genres/{genre}', 'GenreController@show');
 
 /**
  * Resource: BokFlow
@@ -84,11 +74,18 @@ Route::get('users/{userId}/user_books/{userBookId}', 'UserBookController@show');
 Route::post('users/{userId}/user_books', 'UserBookController@store')->middleware('auth:api');
 
 /**
- * Resource: Genre
+ * Resource: Review
  *
  */
-Route::get('genres','GenreController@index');
-Route::get('genres/{genre}', 'GenreController@show');
+Route::post('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
+Route::put('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
+
+/**
+ * Resource: Bok
+ *
+ */
+Route::get('user_books/{userBookId}/boks', 'BokController@index');
+Route::post('user_books/{userBookId}/boks', 'BokController@store')->middleware('auth:api');
 
 /**
  * Resource: Reaction
