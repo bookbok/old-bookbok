@@ -328,16 +328,17 @@ BOOKBOK　API仕様書
 
         [
             {
-                "id": 1,
-                "name": "bookuser",
-                "avatar": "https://...",
-                "description": "Hi, I'm teaching network at Kobedenshi."
-            },
-            {
-                "id": 2,
-                "name": "bookuser",
-                "avatar": "https://...",
-                "description": "Hi, I'm teaching network at Kobedenshi."
+                "id": "2",
+                "name": "test-staff",
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "",
+                "created_at": "2018-11-19 04:58:55",
+                "updated_at": "2018-11-19 04:58:55",
+                "role_id": "5",
+                "follower_count": "3",
+                "following_count": "1",
+                "followingd": "1",
+                "followerd": "1"
             }
         ]
 
@@ -352,12 +353,18 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "id": 1,
-            "name": "user name",
-            "avator": "http://~",
-            "description": "user info"
+            "id": "2",
+            "name": "test-staff",
+            "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+            "description": "",
+            "created_at": "2018-11-19 04:58:55",
+            "updated_at": "2018-11-19 04:58:55",
+            "role_id": "5",
+            "follower_count": "3",
+            "following_count": "1",
+            "followingd": "1",
+            "followerd": "1"
         }
-
 
 # Group BOOKS
 
