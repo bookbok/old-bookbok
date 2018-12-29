@@ -150,8 +150,8 @@ class User extends Authenticatable implements MustVerifyEmail
             ->selectRaw('(select count(*) from followers where target_id = users.id) as follower_count')
             ->selectRaw('(select count(*) from followers where user_id = users.id) as following_count')
             // ログインユーザーがフォローされているか？
-            ->selectRaw('(select count(*) from followers where user_id = users.id and target_id = ?) as is_follower', [$authId]);
+            ->selectRaw('(select count(*) from followers where user_id = users.id and target_id = ?) as is_follower', [$authId])
             // ログインユーザーがフォローしているか？
-            ->selectRaw('(select count(*) from followers where user_id = ? and target_id = users.id) as is_following', [$authId])
+            ->selectRaw('(select count(*) from followers where user_id = ? and target_id = users.id) as is_following', [$authId]);
     }
 }
