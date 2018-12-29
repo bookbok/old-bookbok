@@ -17,12 +17,7 @@ class GenreController extends Controller
         $genres = Genre::orderBy('id')
                   ->get(['id', 'name']);
 
-        return response()->json(
-            $genres,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($genres);
     }
 
 
@@ -38,11 +33,6 @@ class GenreController extends Controller
             'name',
         ]);
 
-        return response()->json(
-            $genre,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($genre);
     }
 }

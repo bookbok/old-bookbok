@@ -27,12 +27,7 @@ class UserBookController extends Controller
             ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
             ->find($userId);
 
-        return response()->json(
-            $userBooks,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($userBooks);
     }
 
     /**
@@ -57,9 +52,7 @@ class UserBookController extends Controller
                     'status' => 403,
                     'userMessage' => '自分以外の本棚に追加することはできません。'
                 ],
-                403,
-                [],
-                JSON_UNESCAPED_UNICODE
+                403
             );
         }
 
@@ -82,9 +75,7 @@ class UserBookController extends Controller
                         'status' => 400,
                         'userMessage' => 'ISBN文字列が不正です。'
                     ],
-                    400,
-                    [],
-                    JSON_UNESCAPED_UNICODE
+                    400
                 );
             }
 
@@ -95,9 +86,7 @@ class UserBookController extends Controller
                         'status' => 500,
                         'userMessage' => 'お探しの本の情報を取得することができませんでした。'
                     ],
-                    500,
-                    [],
-                    JSON_UNESCAPED_UNICODE
+                    500
                 );
             }
             // booksテーブルに挿入する
@@ -114,9 +103,8 @@ class UserBookController extends Controller
                     'status' => 400,
                     'userMessage' => '追加しようとした本はすでに本棚に登録されています。'
                 ],
-                400,
-                [],
-                JSON_UNESCAPED_UNICODE);
+                400
+            );
         }
 
         // user_bookテーブルに挿入する
@@ -140,12 +128,7 @@ class UserBookController extends Controller
             ->select(['id', 'user_id', 'book_id'])
             ->find($user_book->id);
 
-        return response()->json(
-            $userBook,
-            201,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($userBook, 201);
 
     }
 
@@ -193,12 +176,7 @@ class UserBookController extends Controller
             ->where('user_id', $userId)
             ->take(1)->first();
 
-        return response()->json(
-            $userBook,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($userBook);
     }
 
     /**
@@ -222,9 +200,7 @@ class UserBookController extends Controller
                     'status' => 403,
                     'userMessage' => '自分以外の本棚を編集することはできません。'
                 ],
-                403,
-                [],
-                JSON_UNESCAPED_UNICODE
+                403
             );
         }
 
@@ -235,9 +211,7 @@ class UserBookController extends Controller
                     'status' => 404,
                     'userMessage' => 'お探しの本は存在しません'
                 ],
-                404,
-                [],
-                JSON_UNESCAPED_UNICODE
+                404
             );
         }
 
@@ -273,12 +247,7 @@ class UserBookController extends Controller
             ->select(['id', 'user_id', 'book_id', 'reading_status', 'is_spoiler'])
             ->find($userBook->id);
 
-        return response()->json(
-            $userBook,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($userBook);
     }
 
 }

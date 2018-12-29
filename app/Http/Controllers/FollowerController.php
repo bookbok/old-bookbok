@@ -17,7 +17,7 @@ class FollowerController extends Controller
     {
         $followers = $user->followers;
 
-        return response()->json($followers, 200, [], JSON_UNESCAPED_UNICODE);
+        return response()->json($followers);
     }
 
     /**
@@ -29,7 +29,7 @@ class FollowerController extends Controller
     {
         $followings = $user->followings;
 
-        return response()->json($followings, 200, [], JSON_UNESCAPED_UNICODE);
+        return response()->json($followings);
     }
 
     /**
@@ -50,14 +50,12 @@ class FollowerController extends Controller
                     'status' => 400,
                     'userMessage' => 'リクエストが不正です。'
                 ],
-                400,
-                [],
-                JSON_UNESCAPED_UNICODE
+                400
             );
         }
 
         Follower::firstOrCreate(['user_id' => $authId, 'target_id' => $request->user_id]);
-        return response()->json([], 200);
+        return response()->json([]);
     }
 
     public function unFollow($userId, $targetId)
@@ -70,9 +68,7 @@ class FollowerController extends Controller
                     'status' => 403,
                     'userMessage' => 'リクエスト権限がありません'
                 ],
-                403,
-                [],
-                JSON_UNESCAPED_UNICODE
+                403
             );
         }
 

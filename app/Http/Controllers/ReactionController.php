@@ -15,23 +15,13 @@ class ReactionController extends Controller
     public function userLikes($userId)
     {
         $likes = User::find($userId)->likes();
-        return response()->json(
-            $likes,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($likes);
     }
 
     public function userLoves($userId)
     {
         $loves = User::find($userId)->loves();
-        return response()->json(
-            $loves,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($loves);
     }
 
     /**
@@ -49,7 +39,7 @@ class ReactionController extends Controller
             'liked' => true,
         ]);
 
-        return response()->json([], 200);
+        return response()->json([]);
     }
 
     public function deleteLike($bokId)

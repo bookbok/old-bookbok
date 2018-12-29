@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         $authId = getAuthIdOrZero();
         $users = User::withFollowInfo($authId)->get();
-        return response()->json($users, 200, [], JSON_UNESCAPED_UNICODE);
+        return response()->json($users);
     }
 
     /**
@@ -31,6 +31,6 @@ class UserController extends Controller
             ->where('users.id', '=', $userId)
             ->first();
 
-        return response()->json($user, 200, [], JSON_UNESCAPED_UNICODE);
+        return response()->json($user);
     }
 }
