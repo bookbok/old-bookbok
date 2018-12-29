@@ -31,6 +31,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token', 'email', 'email_verified_at',
     ];
 
+    protected $casts = [
+        'follower_count' => 'integer',
+        'following_count' => 'integer',
+        'is_follower' => 'boolean',
+        'is_following' => 'boolean',
+    ];
+
     /**
      * リレーション定義
      */
