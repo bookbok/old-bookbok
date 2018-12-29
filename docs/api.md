@@ -514,7 +514,6 @@ BOOKBOK　API仕様書
                 "description": "user info"
             },
             "book": {
-
                 "id": 1,
                 "isbn": "9784111121221",
                 "name": "book name",
@@ -558,6 +557,87 @@ BOOKBOK　API仕様書
     + userBookId(number) - UserとBookの中間テーブルカラムのID
 
 ### あるユーザの特定のユーザーブック(本棚の本)を取得する [GET]
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "user_id": "1",
+            "book_id": "1",
+            "reading_status": "0",
+            "is_spoiler": false,
+            "user":{
+                "id": 1,
+                "name": "admin",
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": ""
+            },
+            "book":{
+                "id": 1,
+                "isbn": "9788442163316",
+                "name": "Autem expedita dolor culpa.",
+                "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
+            },
+            "review":{
+                "id": 1,
+                "user_id": "1",
+                "user_book_id": "1",
+                "body": "カムパネルラがまた稜かどかどんどうせきへ戻もどこまでも行って上のゆるした",
+                "published_at": "2018-11-25 04:31:30"
+            },
+            "boks":[
+                {
+                    "id": 1,
+                    "user_id": "1",
+                    "user_book_id": "1",
+                    "page_num_begin": "184",
+                    "page_num_end": "426",
+                    "line_num": "82",
+                    "body": "その子が言いいました。だんだん。それが惜おしてたよ。",
+                    "published_at": "1972-05-16 06:56:03",
+                    "created_at": "2018-11-13 07:07:21",
+                    "updated_at": "2004-06-01 15:10:33",
+                    "liked_count": "1",
+                    "loved_count": "2",
+                    "liked": "0",
+                    "loved": "0",
+                    "user_book":{
+                        "id": 1,
+                        "user_id": "1",
+                        "book_id": "1",
+                        "book":{
+                            "id": 1,
+                            "name": "Autem expedita dolor culpa.",
+                            "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
+                        },
+                        "user":{
+                            "id": 1,
+                            "name": "admin",
+                            "avatar": "https://avatars0.githubusercontent.com/u/22770924"
+                        }
+                    }
+                }
+            ]
+        }
+
+### あるユーザの特定のユーザーブックを更新する(読了ステータスやネタバレflg) [PUT]
+
+> MEMO:
+ - Requestの`reading_status`は読了ステータス(`none`, `wanted`, `unread`, `reading`, `readed`のどれか)
+
++ Request (application/json)
+
+    + Attributes
+
+        + is_spoiler (required)
+        + reading_status (required)
+
+    + Body
+
+            {
+                "is_spoiler": false,
+                "reading_status": "wanted",
+            }
 
 + Response 200 (application/json)
 

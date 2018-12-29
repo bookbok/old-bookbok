@@ -200,4 +200,85 @@ class UserBookController extends Controller
             JSON_UNESCAPED_UNICODE
         );
     }
+
+    /**
+     * ユーザの本棚の読了ステータスやネタバレフラグを変更する
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * 　PUTメソッドで送られてくる。
+     * @param $userId
+     * @param $userBookId
+     *
+     * @return \Illuminate\Http\Response
+     * 　JSON形式で本情報をまとめて返す
+     */
+    public function update(Request $request, $userId, $userBookId)
+    {
+        // 認可チェック
+        $authId = auth()->guard('api')->id();
+        if($authId != $userId){
+            return response()->json(
+                [
+                    'status' => 403,
+                    'userMessage' => '自分以外の本棚を編集することはできません。'
+                ],
+                403,
+                [],
+                JSON_UNESCAPED_UNICODE
+            );
+        }
+
+        $userBook = UserBook::find($userBookId);
+        if($userBook == null){
+            return response()->json(
+                [
+                    'status' => 404,
+                    'userMessage' => 'お探しの本は存在しません'
+                ],
+                404,
+                [],
+                JSON_UNESCAPED_UNICODE
+            );
+        }
+
+        $userBook->reading_status = UserBook::READING_STATUS[$request->input('reading_status')];
+        $userBook->is_spoiler = $request->input('is_spoiler');
+        $userBook->save();
+
+        $userBook = UserBook::with([
+                'user:id,name,avatar,description',
+                'book:id,isbn,name,cover,description',
+                'review:id,user_id,user_book_id,body,published_at',
+                'boks',
+                'boks' => function($q1) use($authId) {
+                    $q1->withCount([
+                        'reactions as liked_count' => function($q2) {
+                            $q2->isLiked();
+                        },
+                        'reactions as loved_count' => function($q2) {
+                            $q2->isLoved();
+                        },
+                        'reactions as liked' => function($q2) use($authId) {
+                            $q2->isLiked()->where('user_id', $authId);
+                        },
+                        'reactions as loved' => function($q2) use($authId) {
+                            $q2->isLoved()->where('user_id', $authId);
+                        },
+                    ]);
+                },
+                'boks.userBook:id,user_id,book_id',
+                'boks.userBook.book:id,name,cover',
+                'boks.userBook.user:id,name,avatar',
+            ])
+            ->select(['id', 'user_id', 'book_id', 'reading_status', 'is_spoiler'])
+            ->find($userBook->id);
+
+        return response()->json(
+            $userBook,
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE
+        );
+    }
+
 }
