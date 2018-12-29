@@ -337,8 +337,8 @@ BOOKBOK　API仕様書
                 "role_id": "5",
                 "follower_count": "3",
                 "following_count": "1",
-                "followingd": "1",
-                "followerd": "1"
+                "is_follower": "1",
+                "is_following": "1"
             }
         ]
 
@@ -362,8 +362,8 @@ BOOKBOK　API仕様書
             "role_id": "5",
             "follower_count": "3",
             "following_count": "1",
-            "followingd": "1",
-            "followerd": "1"
+            "is_follower": "1",
+            "is_following": "1"
         }
 
 # Group BOOKS
