@@ -120,36 +120,9 @@ class UserBookController extends Controller
 
         // レスポンスデータの生成
         $userBook = UserBook::with([
-            'user:id,name,avatar,description',
-            'book:id,isbn,name,description,cover,author,genre_id',
-            'review:id,user_id,user_book_id,body,published_at',
-            'boks:id,user_id,user_book_id,body,page_num_begin,page_num_end,published_at'
-            ])
-            ->select(['id', 'user_id', 'book_id'])
-            ->find($user_book->id);
-
-        return response()->json($userBook, 201);
-
-    }
-
-    /**
-     * 本棚に収められた本の詳細情報表示用API.
-     *
-     * @param  userId: ユーザの主キー
-     * @param  userBookId: ユーザブックの主キー
-     * @return JSON形式のまるっと情報
-     */
-    public function show($userId, $userBookId)
-    {
-        $authId = auth()->guard('api')->id();
-        if($authId === null) {
-            $authId = 0;
-        }
-
-        $userBook = UserBook::with([
-                'user:id,name,avatar,description',
-                'book:id,isbn,name,cover,description',
-                'review:id,user_id,user_book_id,body,published_at',
+                'user',
+                'book',
+                'review',
                 'boks',
                 'boks' => function($q1) use($authId) {
                     $q1->withCount([
@@ -171,10 +144,52 @@ class UserBookController extends Controller
                 'boks.userBook.book:id,name,cover',
                 'boks.userBook.user:id,name,avatar',
             ])
-            ->select(['id', 'user_id', 'book_id', 'reading_status', 'is_spoiler'])
-            ->where('id', $userBookId)
-            ->where('user_id', $userId)
-            ->take(1)->first();
+            ->find($user_book->id);
+
+        return response()->json($userBook, 201);
+
+    }
+
+    /**
+     * 本棚に収められた本の詳細情報表示用API.
+     *
+     * @param  userId: ユーザの主キー
+     * @param  userBookId: ユーザブックの主キー
+     * @return JSON形式のまるっと情報
+     */
+    public function show($userId, $userBookId)
+    {
+        $authId = auth()->guard('api')->id();
+        if($authId === null) {
+            $authId = 0;
+        }
+
+        $userBook = UserBook::with([
+                'user',
+                'book',
+                'review',
+                'boks',
+                'boks' => function($q1) use($authId) {
+                    $q1->withCount([
+                        'reactions as liked_count' => function($q2) {
+                            $q2->isLiked();
+                        },
+                        'reactions as loved_count' => function($q2) {
+                            $q2->isLoved();
+                        },
+                        'reactions as liked' => function($q2) use($authId) {
+                            $q2->isLiked()->where('user_id', $authId);
+                        },
+                        'reactions as loved' => function($q2) use($authId) {
+                            $q2->isLoved()->where('user_id', $authId);
+                        },
+                    ]);
+                },
+                'boks.userBook:id,user_id,book_id',
+                'boks.userBook.book:id,name,cover',
+                'boks.userBook.user:id,name,avatar',
+            ])
+            ->find($userBookId);
 
         return response()->json($userBook);
     }
@@ -220,9 +235,9 @@ class UserBookController extends Controller
         $userBook->save();
 
         $userBook = UserBook::with([
-                'user:id,name,avatar,description',
-                'book:id,isbn,name,cover,description',
-                'review:id,user_id,user_book_id,body,published_at',
+                'user',
+                'book',
+                'review',
                 'boks',
                 'boks' => function($q1) use($authId) {
                     $q1->withCount([
@@ -244,7 +259,6 @@ class UserBookController extends Controller
                 'boks.userBook.book:id,name,cover',
                 'boks.userBook.user:id,name,avatar',
             ])
-            ->select(['id', 'user_id', 'book_id', 'reading_status', 'is_spoiler'])
             ->find($userBook->id);
 
         return response()->json($userBook);
