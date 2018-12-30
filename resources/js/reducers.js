@@ -42,7 +42,7 @@ export function rootReducer(
             return { ...state, token: null, loggedinUser: null };
 
         case types.SET_REVIEW:
-            return { ...state, review: action.review };
+            return { ...state, userBookDetail: { ...state.userBookDetail, review: action.review } };
 
 
     }
