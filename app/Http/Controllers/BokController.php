@@ -65,14 +65,14 @@ class BokController extends Controller
      * Bokの作成、または更新をするAPI
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $userBookId
+     * @param  \App\UserBook  $userBookId
      * @return \Illuminate\Http\Response
      *   BokのインスタンスJSON
      */
-    public function store(Request $request, $userBookId)
+    public function store(Request $request, UserBook $userBook)
     {
         $authId = auth()->guard('api')->id();
-        if($authId != $userBookId){
+        if($authId != $userBook->user_id){
             return response()->json(
                 [
                     'status' => 403,
@@ -105,8 +105,8 @@ class BokController extends Controller
 
         $bok = Bok::create(
             [
-                'user_id' => auth()->id(),
-                'user_book_id' => $userBookId,
+                'user_id' => $authId,
+                'user_book_id' => $userBook->id,
                 'body' => $request->body,
                 'published_at' => $publishedAt,
                 'page_num_begin' => $request->page_num_begin,
