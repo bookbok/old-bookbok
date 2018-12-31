@@ -39,21 +39,23 @@ export class Bok extends Component {
         return line;
     }
 
-    clickLike(bokid, e){
+    clickLike(bokId, e){
         if(this.state.isLiked){
             this.setState({
                 likeClass: "far fa-thumbs-up fa-fw icon",
                 isLiked: false,
                 likeCount: this.state.likeCount-1
             });
-            console.log("いいねを取り消す");
+            requestUnLike(bokId);
+            console.log("no like : " + bokId);
         } else {
             this.setState({
                 likeClass: " fas fa-thumbs-up fa-fw icon like-animation",
                 isLiked: true,
                 likeCount: this.state.likeCount+1
             });
-            console.log("いいねする");
+            requestLike(bokId);
+            console.log("like : " + bokId);
         }
     }
 
@@ -103,7 +105,7 @@ export class Bok extends Component {
                                 <div className="text-muted updated">{bok.updated_at}</div>
                                 <div className="float-right">
                                     <div className="d-flex">
-                                        <div className="align-top" onClick={(e) => this.clickLike(1)}>
+                                        <div className="align-top" onClick={(e) => this.clickLike(bok.id)}>
                                             <p className="liked mr-2">
                                                 <i className={this.state.likeClass}></i>
                                                 {this.state.likeCount}

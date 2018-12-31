@@ -139,14 +139,14 @@ export const requestUnFollow = (userId, targetId) => {
     });
 }
 
-export const requestLike = (bokid) => {
-    return utils.wrapFetch(DOMAIN + `/api/users/${bokid}/likes`, {
+export const requestLike = (bokId) => {
+    return utils.wrapFetch(DOMAIN + `/api/boks/${bokId}/likes`, {
         method: "POST",
     });
 }
 
-export const requestUnLike = (bokid) => {
-    return utils.wrapFetch(DOMAIN + `/api/users/${bokid}/likes`, {
+export const requestUnLike = (bokId) => {
+    return utils.wrapFetch(DOMAIN + `/api/boks/${bokId}/likes`, {
         method: "DELETE",
     });
 }
