@@ -150,3 +150,15 @@ export const requestUnLike = (bokId) => {
         method: "DELETE",
     });
 }
+
+export const requestLove = (bokId) => {
+    return utils.wrapFetch(DOMAIN + `/api/boks/${bokId}/loves`, {
+        method: "POST",
+    });
+}
+
+export const requestUnLove = (bokId) => {
+    return utils.wrapFetch(DOMAIN + `/api/boks/${bokId}/loves`, {
+        method: "DELETE",
+    });
+}
