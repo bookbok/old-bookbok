@@ -126,6 +126,25 @@ export const storeISBNToUserBookDirect = (userId, isbn) => {
     });
 }
 
+
+/**
+ * Follower resource
+ */
+
+export const setFollowers = followers => ({ type: types.SET_FOLLOWERS, followers });
+export const fetchFollowers = userId => dispatch => {
+    utils.wrapFetch(DOMAIN + `/api/users/${userId}/followers`).then(res => {
+        dispatch(setFollowers(res));
+    });
+}
+
+export const setFollowings = followings => ({ type: types.SET_FOLLOWINGS, followings });
+export const fetchFollowings = userId => dispatch => {
+    utils.wrapFetch(DOMAIN + `/api/users/${userId}/followings`).then(res => {
+        dispatch(setFollowings(res));
+    });
+}
+
 export const requestFollow = (userId, targetId) => {
     return utils.wrapFetch(DOMAIN + `/api/users/${userId}/followings`, {
         method: "POST",
@@ -138,6 +157,11 @@ export const requestUnFollow = (userId, targetId) => {
         method: "DELETE",
     });
 }
+
+
+/**
+ * Reaction resource
+ */
 
 export const requestLike = (bokId) => {
     return utils.wrapFetch(DOMAIN + `/api/boks/${bokId}/likes`, {
