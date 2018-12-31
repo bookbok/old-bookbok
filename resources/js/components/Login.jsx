@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { requestLogin } from "../actions.js";
 import { store } from "../store";
+import { Link } from 'react-router-dom';
 
 export class Login extends Component {
     constructor(props) {
@@ -86,9 +87,9 @@ export class Login extends Component {
                                             ログイン
                                         </button>
 
-                                        <a className="btn btn-link" href="#">
+                                        <Link to="#" className="btn btn-link">
                                             パスワードを忘れましたか?
-                                        </a>
+                                        </Link>
                                     </div>
                                 </form>
                             </div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { store } from "../store";
 import { Loading } from "./shared/Loading";
-import { BrowserRouter, Route, Link, Swirch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export class Bok extends Component {
     constructor(props){
