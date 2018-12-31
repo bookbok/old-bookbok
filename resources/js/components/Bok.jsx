@@ -64,12 +64,14 @@ export class Bok extends Component {
                 isLoved: false,
                 loveCount: this.state.loveCount-1
             });
+            requestUnLove(bokId);
         } else {
             this.setState({
                 loveClass: " fas fa-bookmark fa-fw icon love-animation",
                 isLoved: true,
                 loveCount: this.state.loveCount+1
             });
+            requestLove(bokId);
         }
     }
 
@@ -109,7 +111,7 @@ export class Bok extends Component {
                                                 {this.state.likeCount}
                                             </p>
                                         </div>
-                                        <div onClick={this.clickLove}>
+                                        <div onClick={(e) => this.clickLove(bok.id)}>
                                             <p className="loved">
                                                 <i className={this.state.loveClass}></i>
                                                 {this.state.loveCount}
