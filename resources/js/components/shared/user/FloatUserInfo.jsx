@@ -8,7 +8,7 @@ import FollowButton from './FollowButton';
 
 /**
  * @param {Object} user
- *   {id,name,avatar,description}を含むオブジェクトを渡す必要がある
+ *   FloatUserInfo_.propTypes.userを満たすオブジェクトを渡す必要がある
  *
  * このコンポーネントを使用する場合、親要素に`position: relative`を適用する必要がある
  * 基本的に親要素には`.page-content-wrap`クラスを適応すると良い
@@ -17,8 +17,13 @@ export class FloatUserInfo_ extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { followed: false };
+        this.state = { followed: this.props.user.is_following };
         this.handleClickFollow = this.handleClickFollow.bind(this);
+    }
+
+    // propsの値が変更された時に、stateのfollowedを変更する
+    componentWillReceiveProps(nextProps) {
+        this.setState({ followed: nextProps.user.is_following });
     }
 
     handleClickFollow() {
@@ -53,8 +58,8 @@ export class FloatUserInfo_ extends Component {
                     </div>
 
                     <div className="user-follow-info mt-2">
-                        <Link to={`/users/${user.id}/followers`} className="m-2">0 フォロー</Link>
-                        <Link to={`/users/${user.id}/followings`} className="m-2">test フォロワー</Link>
+                        <Link to={`/users/${user.id}/followers`} className="m-2">{user.following_count} フォロー</Link>
+                        <Link to={`/users/${user.id}/followings`} className="m-2">{user.follower_count} フォロワー</Link>
                     </div>
                 </div>
                 <FollowButton followed={this.state.followed} handleClickFollow={this.handleClickFollow} />
@@ -79,6 +84,10 @@ FloatUserInfo_.propTypes = {
         name: PropTypes.string.isRequired,
         avatar: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
+        follower_count: PropTypes.number.isRequired,
+        following_count: PropTypes.number.isRequired,
+        is_follower: PropTypes.bool.isRequired,
+        is_following: PropTypes.bool.isRequired,
     })
 };
 
