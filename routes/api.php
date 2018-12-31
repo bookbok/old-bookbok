@@ -95,10 +95,10 @@ Route::post('user_books/{userBookId}/boks', 'BokController@store')->middleware('
 Route::get('users/{userId}/likes','ReactionController@userLikes');
 Route::get('users/{userId}/loves','ReactionController@userLoves');
 
-Route::post('boks/{userId}/likes', 'ReactionController@storeLike');
-Route::delete('boks/{userId}/likes', 'ReactionController@deleteLike');
-Route::post('boks/{userId}/loves', 'ReactionController@storeLove');
-Route::delete('boks/{userId}/loves', 'ReactionController@deleteLove');
+Route::post('boks/{bokId}/likes', 'ReactionController@storeLike')->middleware('auth:api');
+Route::delete('boks/{bokId}/likes', 'ReactionController@deleteLike')->middleware('auth:api');
+Route::post('boks/{bokId}/loves', 'ReactionController@storeLove')->middleware('auth:api');
+Route::delete('boks/{bokId}/loves', 'ReactionController@deleteLove')->middleware('auth:api');
 
 /**
  * Resource: Follower
@@ -106,5 +106,5 @@ Route::delete('boks/{userId}/loves', 'ReactionController@deleteLove');
  */
 Route::get('users/{user}/followers','FollowerController@followers');
 Route::get('users/{user}/followings','FollowerController@followings');
-Route::post('users/{userId}/followings','FollowerController@follow');
-Route::delete('users/{userId}/followings/{targetId}','FollowerController@unfollow');
+Route::post('users/{userId}/followings','FollowerController@follow')->middleware('auth:api');
+Route::delete('users/{userId}/followings/{targetId}','FollowerController@unfollow')->middleware('auth:api');
