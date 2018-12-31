@@ -6,7 +6,7 @@ export class MyPageTabs extends Component {
         const userId = this.props.userId;
 
         return (
-            <div>
+            <div className="nav-scroll">
                 {/*タブのボタン部分*/}
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
@@ -19,15 +19,27 @@ export class MyPageTabs extends Component {
                            className={this.props.isUserBooks ? 'nav-link active' : 'nav-link'}
                            data-toggle={this.props.isUserBooks ? 'tab' : ''}>本棚</Link>
                     </li>
+
                     <li className="nav-item">
                         <Link to={`/users/${userId}/likes`}
                            className={this.props.isLikes ? 'nav-link active' : 'nav-link'}
-                           data-toggle={this.props.isLikes ? 'tab' : ''}>LIKE</Link>
+                           data-toggle={this.props.isLikes ? 'tab' : ''}>Likes</Link>
                     </li>
                     <li className="nav-item">
                         <Link to={`/users/${userId}/loves`}
                            className={this.props.isLoves ? 'nav-link active' : 'nav-link'}
-                           data-toggle={this.props.isLoves ? 'tab' : ''}>LOVE</Link>
+                           data-toggle={this.props.isLoves ? 'tab' : ''}>Loves</Link>
+                    </li>
+
+                    <li className="nav-item">
+                        <Link to={`/users/${userId}/followings`}
+                           className={this.props.isFollowers ? 'nav-link active' : 'nav-link'}
+                           data-toggle={this.props.isFollowers ? 'tab' : ''}>Followings</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={`/users/${userId}/followers`}
+                           className={this.props.isFollowings ? 'nav-link active' : 'nav-link'}
+                           data-toggle={this.props.isFollowings ? 'tab' : ''}>Followers</Link>
                     </li>
                 </ul>
             </div>
