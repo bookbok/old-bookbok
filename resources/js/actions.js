@@ -138,3 +138,27 @@ export const requestUnFollow = (userId, targetId) => {
         method: "DELETE",
     });
 }
+
+export const requestLike = (bokId) => {
+    return utils.wrapFetch(DOMAIN + `/api/boks/${bokId}/likes`, {
+        method: "POST",
+    });
+}
+
+export const requestUnLike = (bokId) => {
+    return utils.wrapFetch(DOMAIN + `/api/boks/${bokId}/likes`, {
+        method: "DELETE",
+    });
+}
+
+export const requestLove = (bokId) => {
+    return utils.wrapFetch(DOMAIN + `/api/boks/${bokId}/loves`, {
+        method: "POST",
+    });
+}
+
+export const requestUnLove = (bokId) => {
+    return utils.wrapFetch(DOMAIN + `/api/boks/${bokId}/loves`, {
+        method: "DELETE",
+    });
+}
