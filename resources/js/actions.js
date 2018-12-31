@@ -138,3 +138,15 @@ export const requestUnFollow = (userId, targetId) => {
         method: "DELETE",
     });
 }
+
+export const requestLike = (bokid) => {
+    return utils.wrapFetch(DOMAIN + `/api/users/${bokid}/likes`, {
+        method: "POST",
+    });
+}
+
+export const requestUnLike = (bokid) => {
+    return utils.wrapFetch(DOMAIN + `/api/users/${bokid}/likes`, {
+        method: "DELETE",
+    });
+}
