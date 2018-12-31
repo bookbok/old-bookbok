@@ -47,7 +47,6 @@ export class Bok extends Component {
                 likeCount: this.state.likeCount-1
             });
             requestUnLike(bokId);
-            console.log("no like : " + bokId);
         } else {
             this.setState({
                 likeClass: " fas fa-thumbs-up fa-fw icon like-animation",
@@ -55,7 +54,6 @@ export class Bok extends Component {
                 likeCount: this.state.likeCount+1
             });
             requestLike(bokId);
-            console.log("like : " + bokId);
         }
     }
 
