@@ -47,6 +47,33 @@ export class UserBookDetail extends Component {
                 <div className="container mt-4">
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
+                            <div>
+                                <div className="form-group">
+                                    <label>
+                                        読書状況
+                                    </label>
+                                    <select name="reading_status" className="form-control form-control-sm">
+                                        <option value="0">未設定</option>
+                                        <option value="1">欲しい</option>
+                                        <option value="2">積読</option>
+                                        <option value="3">読書中</option>
+                                        <option value="4">読書了</option>
+                                    </select>
+                                </div>
+
+                                <div className="form-group form-check">
+                                    <label className="form-check-label">
+                                        <input id="spoiler_check"
+                                            type="checkbox"
+                                            name="is_spoiler"
+                                            className="form-check-input"
+                                            value="true"/>
+                                        <small>ネタバレを含む</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <hr />
+
                             <BookInfo book={book} />
                             <hr />
                             <h3 className="mt-5">レビュー<div className="float-right"><ReviewModal /></div></h3>
