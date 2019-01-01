@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchUserBookDetail } from "../actions.js";
+import { fetchUserBookDetail, fetchUser } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils.js";
 
@@ -12,25 +12,15 @@ import { ReviewModal } from "./ReviewModal";
 
 
 export class UserBookDetail extends Component {
-    constructor(props){
-        super(props);
-
-        this.state = {};
-        this.handleClickFollow = this.handleClickFollow.bind(this);
-    };
-
     componentDidMount(){
         const userId = parseInt(this.props.match.params.userId);
         const userBookId = parseInt(this.props.match.params.userBookId);
         store.dispatch(fetchUserBookDetail(userId, userBookId));
+        store.dispatch(fetchUser(userId));
     };
 
-    handleClickFollow(){
-        // TODO: POST /users/${userId}/follow
-    }
-
     render(){
-        if(isEmpty(this.props.userBookDetail)){
+        if(isEmpty(this.props.userBookDetail) || isEmpty(this.props.user)){
             return <Loading />;
         }
 
@@ -39,7 +29,8 @@ export class UserBookDetail extends Component {
             return <div className="mt-2" key={bok.id}><Bok bok={bok}/></div>
         })
 
-        const { user, book, review } = this.props.userBookDetail;
+        const { book, review } = this.props.userBookDetail;
+        const user = this.props.user;
         return (
             <div className="page-content-wrap row">
                 <FloatUserInfo user={user} />

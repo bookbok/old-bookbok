@@ -65,12 +65,23 @@ class BokController extends Controller
      * Bokの作成、または更新をするAPI
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $userBookId
+     * @param  \App\UserBook  $userBookId
      * @return \Illuminate\Http\Response
      *   BokのインスタンスJSON
      */
-    public function store(Request $request, $userBookId)
+    public function store(Request $request, UserBook $userBook)
     {
+        $authId = auth()->guard('api')->id();
+        if($authId != $userBook->user_id){
+            return response()->json(
+                [
+                    'status' => 403,
+                    'userMessage' => '自分以外の本棚に追加することはできません。'
+                ],
+                403
+            );
+        }
+
         $validator = \Validator::make($request->all(), [
             'body' => 'required|string|max:2048',
             'publish' => 'boolean',
@@ -94,8 +105,8 @@ class BokController extends Controller
 
         $bok = Bok::create(
             [
-                'user_id' => auth()->id(),
-                'user_book_id' => $userBookId,
+                'user_id' => $authId,
+                'user_book_id' => $userBook->id,
                 'body' => $request->body,
                 'published_at' => $publishedAt,
                 'page_num_begin' => $request->page_num_begin,
@@ -104,6 +115,25 @@ class BokController extends Controller
             ]
         );
 
+        $bok = $bok->with([
+                'userBook.user:id,name',
+                'userBook.book:id,isbn,cover',
+            ])
+            ->withCount([
+                'reactions as liked_count' => function($q) {
+                    $q->isLiked();
+                },
+                'reactions as loved_count' => function($q) {
+                    $q->isLoved();
+                },
+                'reactions as liked' => function($q) use($authId) {
+                    $q->isLiked()->where('user_id', $authId);
+                },
+                'reactions as loved' => function($q) use($authId) {
+                    $q->isLoved()->where('user_id', $authId);
+                }
+            ])
+            ->find($bok->id);
         return response()->json($bok, 201);
     }
 }

@@ -99,6 +99,14 @@ export const fetchUserBookDetail = (userId, userBookId) => dispatch => {
         });
 }
 
+export const setBokToUserBook = bok => ({ type: types.SET_BOK_TO_USER_BOOK, bok });
+export const registerBok = (userBookId, bok) => {
+    return utils.smartFetch(DOMAIN + `/api/user_books/${userBookId}/boks`, {
+        method: 'POST',
+        body: bok,
+    });
+}
+
 export const setBookList = books => ({type: types.SET_BOOKLIST, books});
 // TODO: Rename to fetchBooksWithQuery
 export const fetchBookList = (query = {}) => dispatch => {

@@ -86,7 +86,7 @@ Route::put('user_books/{userBook}/review', 'ReviewController@store')->middleware
  *
  */
 Route::get('user_books/{userBookId}/boks', 'BokController@index');
-Route::post('user_books/{userBookId}/boks', 'BokController@store')->middleware('auth:api');
+Route::post('user_books/{userBook}/boks', 'BokController@store')->middleware('auth:api');
 
 /**
  * Resource: Reaction
