@@ -127,6 +127,14 @@ export const fetchLikeBoks = (userId) => dispatch => {
        });
 }
 
+export const setReview = review => ({ type: types.SET_REVIEW, review });
+export const reviewRegister = (userBookId, review) => {
+    return utils.smartFetch(DOMAIN + `/api/user_books/${userBookId}/review`, {
+        method: "POST",
+        body: review,
+    });
+}
+
 export const storeISBNToUserBookDirect = (userId, isbn) => {
     return utils.smartFetch(DOMAIN + `/api/users/${userId}/user_books`, {
         method: "POST",

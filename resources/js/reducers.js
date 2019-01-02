@@ -50,6 +50,11 @@ export function rootReducer(
 
         case types.REMOVE_LOGGEDIN_INFO: // ログアウトに伴い、ログイントークン、ログイン中ユーザー情報を削除
             return { ...state, token: null, loggedinUser: null };
+
+        case types.SET_REVIEW:
+            return { ...state, userBookDetail: { ...state.userBookDetail, review: action.review } };
+
+
     }
 
     return state;
