@@ -26,6 +26,6 @@ export default class FollowButton extends Component {
 }
 
 FollowButton.propTypes = {
-    followed: PropTypes.bool,
+    followed: PropTypes.bool.isRequired,
     handleClickFollow: PropTypes.func.isRequired,
 };
