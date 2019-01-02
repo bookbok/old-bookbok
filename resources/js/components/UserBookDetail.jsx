@@ -15,9 +15,6 @@ export class UserBookDetail extends Component {
     constructor(props){
         super(props);
 
-        this.state = {};
-        this.handleClickFollow = this.handleClickFollow.bind(this);
-
         this.readingStatus = [
             { id: 0, name: 'none', intl: '未設定' },
             { id: 5, name: 'wanted', intl: '欲しい' },
