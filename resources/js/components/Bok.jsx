@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { store } from "../store";
 import { Loading } from "./shared/Loading";
 import { BrowserRouter, Route, Link, Swirch } from 'react-router-dom';
-import { requestLike, requestUnLike } from "../actions";
+import { requestLike, requestUnLike, requestLove, requestUnLove } from "../actions";
 
 export class Bok extends Component {
     constructor(props){
@@ -57,7 +57,7 @@ export class Bok extends Component {
         }
     }
 
-    clickLove(bokid, e){
+    clickLove(bokId, e){
         if(this.state.isLoved){
             this.setState({
                 loveClass: "far fa-bookmark fa-fw icon",
