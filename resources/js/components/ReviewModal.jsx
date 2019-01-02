@@ -39,7 +39,6 @@ class ReviewModal_ extends Component {
             }else if(!res.ok){
                 res.json().then(json => {
                     this.setState({ isInvalid: true, invalidMessage: json.userMessage });
-                    console.log("else if");
                 });
                 throw new Error();
             }
@@ -51,7 +50,7 @@ class ReviewModal_ extends Component {
     }
 
     componentWillUnmount() {
-            $('#ReviewModalCenter').modal('hide');   
+        $('#ReviewModalCenter').modal('hide');   
     }
 
 
@@ -86,7 +85,7 @@ class ReviewModal_ extends Component {
                                     </div>
                                     <div className="form-group" className="mt-5">
                                         <label htmlFor="impressions-text" className="control-label">ここにレビューを記入してください&nbsp;
-                                                <span className="badge badge-danger">必須</span>
+                                            <span className="badge badge-danger">必須</span>
                                         </label>
                                         <textarea id="impressions-text"
                                             name="body"
