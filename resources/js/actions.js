@@ -143,6 +143,27 @@ export const storeISBNToUserBookDirect = (userId, isbn) => {
     });
 }
 
+export const setBokToUserBook = bok => ({ type: types.SET_BOK_TO_USER_BOOK, bok });
+export const registerBok = (userBookId, bok) => {
+    return utils.smartFetch(DOMAIN + `/api/user_books/${userBookId}/boks`, {
+        method: 'POST',
+        body: bok,
+    });
+}
+
+
+/**
+ * Review resource
+ */
+
+export const setReview = review => ({ type: types.SET_REVIEW, review });
+export const reviewRegister = (userBookId, review) => {
+    return utils.smartFetch(DOMAIN + `/api/user_books/${userBookId}/review`, {
+        method: "POST",
+        body: review,
+    });
+}
+
 
 /**
  * Follower resource
