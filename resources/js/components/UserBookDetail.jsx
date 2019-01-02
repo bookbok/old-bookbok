@@ -17,6 +17,14 @@ export class UserBookDetail extends Component {
 
         this.state = {};
         this.handleClickFollow = this.handleClickFollow.bind(this);
+
+        this.readingStatus = [
+            { id: 0, name: 'none', intl: '未設定' },
+            { id: 5, name: 'wanted', intl: '欲しい' },
+            { id: 10, name: 'unread', intl: '積読' },
+            { id: 15, name: 'reading', intl: '読書中' },
+            { id: 20, name: 'readed', intl: '読書了' },
+        ];
     };
 
     componentDidMount(){
@@ -33,6 +41,10 @@ export class UserBookDetail extends Component {
         if(isEmpty(this.props.userBookDetail)){
             return <Loading />;
         }
+
+        const bindedStatuses = this.readingStatus.map((stat) => (
+            <option key={stat.id} value={stat.name}>{stat.intl}</option>
+        ));
 
         const originBoks = this.props.userBookDetail.boks;
         const boks = originBoks.map((bok) => {
@@ -53,11 +65,7 @@ export class UserBookDetail extends Component {
                                         読書状況
                                     </label>
                                     <select name="reading_status" className="form-control form-control-sm">
-                                        <option value="0">未設定</option>
-                                        <option value="1">欲しい</option>
-                                        <option value="2">積読</option>
-                                        <option value="3">読書中</option>
-                                        <option value="4">読書了</option>
+                                        {bindedStatuses}
                                     </select>
                                 </div>
 
