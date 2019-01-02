@@ -33,21 +33,17 @@ export class UserBookDetail extends Component {
         store.dispatch(fetchUserBookDetail(userId, userBookId));
     };
 
-    handleClickFollow(){
-        // TODO: POST /users/${userId}/follow
-    }
-
     render(){
         if(isEmpty(this.props.userBookDetail)){
             return <Loading />;
         }
 
+        // 読書状況の選択リスト
         const bindedStatuses = this.readingStatus.map((stat) => (
             <option key={stat.id} value={stat.name}>{stat.intl}</option>
         ));
 
-        const originBoks = this.props.userBookDetail.boks;
-        const boks = originBoks.map((bok) => {
+        const boks = this.props.userBookDetail.boks.map((bok) => {
             return <div className="mt-2" key={bok.id}><Bok bok={bok}/></div>
         })
 
