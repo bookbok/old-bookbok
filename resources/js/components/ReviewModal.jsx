@@ -61,7 +61,7 @@ class ReviewModal_ extends Component {
                     レビューを投稿する
                 </button>
 
-                <div className="modal fade" id="ReviewModalCenter" tabIndex="-1" role="dialog" aria-labelledby="ReviewModalCenterTitle" aria-hidden="true">
+                <div className="modal fade" id="ReviewModalCenter" tabIndex="-1" role="dialog" aria-labelledby="ReviewModalCenterTitle" aria-hidden="true" >
                     <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -90,6 +90,7 @@ class ReviewModal_ extends Component {
                                         <textarea id="impressions-text"
                                             name="body"
                                             className="form-control"
+                                            rows="20"
                                             value={this.state.body}
                                             onChange={this.handleChangeReview}
                                             placeholder="1冊を読み終えてどうだったか。これから読む人に伝えたいこと。"
