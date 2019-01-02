@@ -35,11 +35,26 @@ export function rootReducer(
         case types.SET_USER_BOOK_DETAIL:
             return { ...state, userBookDetail: action.userBookDetail };
 
+        case types.SET_BOK_TO_USER_BOOK:
+            // userBookDetailのboksに、新しいbokを一つ追加する
+            return {
+                ...state,
+                userBookDetail: {
+                    ...state.userBookDetail,
+                    boks: [ ...state.userBookDetail.boks, action.bok ],
+                }
+            };
+
         case types.SET_LIKEBOKLIST:
             return { ...state, likeBoks: action.likeBoks };
 
         case types.REMOVE_LOGGEDIN_INFO: // ログアウトに伴い、ログイントークン、ログイン中ユーザー情報を削除
             return { ...state, token: null, loggedinUser: null };
+
+        case types.SET_REVIEW:
+            return { ...state, userBookDetail: { ...state.userBookDetail, review: action.review } };
+
+
     }
 
     return state;

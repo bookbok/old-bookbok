@@ -9,4 +9,6 @@ export const SET_USER = "SET_USER";
 export const SET_USER_BOOKSHELF = "SET_USER_BOOKSHELF";
 export const SET_BOOKLIST = "SET_BOOKLIST";
 export const SET_USER_BOOK_DETAIL = "SET_USER_BOOK_DETAIL";
+export const SET_BOK_TO_USER_BOOK = "SET_BOK_TO_USER_BOOK";
 export const SET_LIKEBOKLIST = "SET_LIKEBOKLIST";
+export const SET_REVIEW = "SET_REVIEW";

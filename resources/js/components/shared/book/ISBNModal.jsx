@@ -90,7 +90,6 @@ class ISBNModal_ extends Component {
                                         placeholder="9784041026168"
                                         value={this.state.isbn}
                                         onChange={(e) => this.setState({ isbn: e.target.value })}
-                                        ref="isbn"
                                         required />
                                     <div className="invalid-feedback">
                                         {this.state.invalidMessage}
