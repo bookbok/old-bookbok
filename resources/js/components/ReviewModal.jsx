@@ -90,7 +90,7 @@ class ReviewModal_ extends Component {
                                         <textarea id="impressions-text"
                                             name="body"
                                             className="form-control"
-                                            rows="20"
+                                            rows="16"
                                             value={this.state.body}
                                             onChange={this.handleChangeReview}
                                             placeholder="1冊を読み終えてどうだったか。これから読む人に伝えたいこと。"
