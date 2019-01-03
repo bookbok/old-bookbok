@@ -92,3 +92,13 @@ export class UserBookDetail extends Component {
     }
 }
 
+import { DOMAIN } from "./domain";
+import * as utils from "./utils";
+import * as types from "./types";
+
+export const requestUpdateUserBookStatus = (userId, userBookId) => {
+    return utils.wrapFetch(DOMAIN + `/api/users/${userId}/user_books/${userBookId}`, {
+        method: 'PUT',
+        body: { 'is_spoiler': false, 'reading_status': 'none' },
+    });
+}
