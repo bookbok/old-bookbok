@@ -230,6 +230,18 @@ class UserBookController extends Controller
             );
         }
 
+        $validator = \Validator::make($request->all(), [
+            'reading_status' => 'required|string|max:16',
+            'is_spoiler' => 'required|boolean',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'userMessage' => $validator->errors()
+            ], 400);
+        }
+
         $userBook->reading_status = UserBook::READING_STATUS[$request->input('reading_status')];
         $userBook->is_spoiler = $request->input('is_spoiler');
         $userBook->save();
