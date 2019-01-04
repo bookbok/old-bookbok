@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { fetchUserBookDetail, fetchUser } from "../actions.js";
+import { fetchUserBookDetail, fetchUser, setUserBookDetail } from "../actions.js";
 import { store } from "../store";
 import { isEmpty, getAuthUser } from "../utils.js";
 
@@ -49,7 +49,7 @@ export class UserBookDetail_ extends Component {
         };
         const name = e.target.name;
         if(name === 'reading_status') {
-            body = { ...body, reading_status: e.target.value };
+            body = { ...body, reading_status: this.getStatusNameFromId(e.target.value) };
         }else if(name === 'is_spoiler') {
             body = { ...body, is_spoiler: e.target.checked };
         }
@@ -58,7 +58,9 @@ export class UserBookDetail_ extends Component {
             this.props.match.params.userId,
             this.props.match.params.userBookId,
             body
-        );
+        ).then(() => {
+            // TODO: Bootstrap alertで更新したことを通知する
+        });
     }
 
     render(){
@@ -70,7 +72,7 @@ export class UserBookDetail_ extends Component {
         // 読書状況の選択リスト
         const bindedStatuses = this.readingStatus.map((stat) => (
             <option key={stat.id}
-                value={stat.name}>
+                value={stat.id}>
                 {stat.intl}
             </option>
         ));
@@ -141,5 +143,7 @@ export const requestUpdateUserBookStatus = (userId, userBookId, body) => {
     return utils.wrapFetch(DOMAIN + `/api/users/${userId}/user_books/${userBookId}`, {
         method: 'PUT',
         body: body,
+    }).then(json => {
+        store.dispatch(setUserBookDetail(json));
     });
 }
