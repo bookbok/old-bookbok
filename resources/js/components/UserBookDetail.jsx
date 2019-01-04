@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { fetchUserBookDetail, fetchUser } from "../actions.js";
 import { store } from "../store";
-import { isEmpty } from "../utils.js";
+import { isEmpty, getAuthUser } from "../utils.js";
 
 import { Loading } from "./shared/Loading";
 import { Bok } from "./Bok";
@@ -11,7 +12,7 @@ import { BokModal } from "./BokModal";
 import { ReviewModal } from "./ReviewModal";
 
 
-export class UserBookDetail extends Component {
+export class UserBookDetail_ extends Component {
     constructor(props){
         super(props);
 
@@ -22,6 +23,7 @@ export class UserBookDetail extends Component {
             { id: 15, name: 'reading', intl: '読書中' },
             { id: 20, name: 'readed', intl: '読書了' },
         ];
+        this.handleUpdate = this.handleUpdate.bind(this);
     };
 
     componentDidMount(){
@@ -31,21 +33,53 @@ export class UserBookDetail extends Component {
         store.dispatch(fetchUser(userId));
     };
 
+    // idを元にサーバーに送信する値を返す
+    getStatusNameFromId(id) {
+        return (this.readingStatus.filter((val) => (val.id == id))[0]).name;
+    }
+
+    handleUpdate(e) {
+        if(isEmpty(getAuthUser())){
+            return this.props.history.push('/login');
+        }
+
+        let body = {
+            reading_status: this.getStatusNameFromId(this.props.userBookDetail.reading_status),
+            is_spoiler: this.props.userBookDetail.is_spoiler,
+        };
+        const name = e.target.name;
+        if(name === 'reading_status') {
+            body = { ...body, reading_status: e.target.value };
+        }else if(name === 'is_spoiler') {
+            body = { ...body, is_spoiler: e.target.checked };
+        }
+
+        requestUpdateUserBookStatus(
+            this.props.match.params.userId,
+            this.props.match.params.userBookId,
+            body
+        );
+    }
+
     render(){
         if(isEmpty(this.props.userBookDetail) || isEmpty(this.props.user)){
             return <Loading />;
         }
+        const userBook = this.props.userBookDetail;
 
         // 読書状況の選択リスト
         const bindedStatuses = this.readingStatus.map((stat) => (
-            <option key={stat.id} value={stat.name}>{stat.intl}</option>
+            <option key={stat.id}
+                value={stat.name}>
+                {stat.intl}
+            </option>
         ));
 
-        const boks = this.props.userBookDetail.boks.map((bok) => {
+        const boks = userBook.boks.map((bok) => {
             return <div className="mt-2" key={bok.id}><Bok bok={bok}/></div>
         })
 
-        const { book, review } = this.props.userBookDetail;
+        const { book, review } = userBook;
         const user = this.props.user;
         return (
             <div className="page-content-wrap row">
@@ -59,7 +93,10 @@ export class UserBookDetail extends Component {
                                     <label>
                                         読書状況
                                     </label>
-                                    <select name="reading_status" className="form-control form-control-sm">
+                                    <select name="reading_status"
+                                        className="form-control form-control-sm"
+                                        value={userBook.reading_status}
+                                        onChange={this.handleUpdate} >
                                         {bindedStatuses}
                                     </select>
                                 </div>
@@ -70,7 +107,9 @@ export class UserBookDetail extends Component {
                                             type="checkbox"
                                             name="is_spoiler"
                                             className="form-check-input"
-                                            value="true"/>
+                                            value="true"
+                                            onChange={this.handleUpdate}
+                                            checked={userBook.is_spoiler} />
                                         <small>ネタバレを含む</small>
                                     </label>
                                 </div>
@@ -92,13 +131,15 @@ export class UserBookDetail extends Component {
     }
 }
 
-import { DOMAIN } from "./domain";
-import * as utils from "./utils";
-import * as types from "./types";
+export const UserBookDetail = withRouter(UserBookDetail_);
 
-export const requestUpdateUserBookStatus = (userId, userBookId) => {
+import { DOMAIN } from '../domain';
+import * as utils from '../utils';
+import * as types from '../types';
+
+export const requestUpdateUserBookStatus = (userId, userBookId, body) => {
     return utils.wrapFetch(DOMAIN + `/api/users/${userId}/user_books/${userBookId}`, {
         method: 'PUT',
-        body: { 'is_spoiler': false, 'reading_status': 'none' },
+        body: body,
     });
 }
