@@ -16,7 +16,7 @@ export class UserBookDetail_ extends Component {
     constructor(props){
         super(props);
 
-        this.readingStatus = [
+        this.readingStatuses = [
             { id: 0, name: 'none', intl: '未設定' },
             { id: 5, name: 'wanted', intl: '欲しい' },
             { id: 10, name: 'unread', intl: '積読' },
@@ -35,7 +35,7 @@ export class UserBookDetail_ extends Component {
 
     // idを元にサーバーに送信する値を返す
     getStatusNameFromId(id) {
-        return (this.readingStatus.filter((val) => (val.id == id))[0]).name;
+        return (this.readingStatuses.filter((val) => (val.id == id))[0]).name;
     }
 
     handleUpdate(e) {
@@ -69,14 +69,6 @@ export class UserBookDetail_ extends Component {
         }
         const userBook = this.props.userBookDetail;
 
-        // 読書状況の選択リスト
-        const bindedStatuses = this.readingStatus.map((stat) => (
-            <option key={stat.id}
-                value={stat.id}>
-                {stat.intl}
-            </option>
-        ));
-
         const boks = userBook.boks.map((bok) => {
             return <div className="mt-2" key={bok.id}><Bok bok={bok}/></div>
         })
@@ -90,33 +82,11 @@ export class UserBookDetail_ extends Component {
                 <div className="container mt-4">
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
-                            <div>
-                                <div className="form-group">
-                                    <label>
-                                        読書状況
-                                    </label>
-                                    <select name="reading_status"
-                                        className="form-control form-control-sm"
-                                        value={userBook.reading_status}
-                                        onChange={this.handleUpdate} >
-                                        {bindedStatuses}
-                                    </select>
-                                </div>
-
-                                <div className="form-group form-check">
-                                    <label className="form-check-label">
-                                        <input id="spoiler_check"
-                                            type="checkbox"
-                                            name="is_spoiler"
-                                            className="form-check-input"
-                                            value="true"
-                                            onChange={this.handleUpdate}
-                                            checked={userBook.is_spoiler} />
-                                        <small>ネタバレを含む</small>
-                                    </label>
-                                </div>
-                            </div>
-                            <hr />
+                            <UserBookInfo
+                                readingStatuses={this.readingStatuses}
+                                handleUpdate={this.handleUpdate}
+                                readingStatus={userBook.reading_status}
+                                isSpoiler={userBook.is_spoiler} />
 
                             <BookInfo book={book} />
                             <hr />
@@ -128,6 +98,52 @@ export class UserBookDetail_ extends Component {
                         </div>
                     </div>
                 </div>
+            </div>
+        );
+    }
+}
+
+export class UserBookInfo extends Component {
+    render() {
+        if(!getAuthUser()) {
+            return <div/>;
+        }
+
+        // 読書状況の選択リスト
+        const bindedStatuses = this.props.readingStatuses.map((stat) => (
+            <option key={stat.id}
+                value={stat.id}>
+                {stat.intl}
+            </option>
+        ));
+
+        return (
+            <div>
+                <div className="form-group">
+                    <label>
+                        読書状況
+                    </label>
+                    <select name="reading_status"
+                        className="form-control form-control-sm"
+                        value={this.props.readingStatus}
+                        onChange={this.props.handleUpdate} >
+                        {bindedStatuses}
+                    </select>
+                </div>
+
+                <div className="form-group form-check">
+                    <label className="form-check-label">
+                        <input id="spoiler_check"
+                            type="checkbox"
+                            name="is_spoiler"
+                            className="form-check-input"
+                            value="true"
+                            onChange={this.props.handleUpdate}
+                            checked={this.props.isSpoiler} />
+                        <small>ネタバレを含む</small>
+                    </label>
+                </div>
+                <hr />
             </div>
         );
     }
