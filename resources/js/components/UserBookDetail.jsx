@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { fetchUserBookDetail, fetchUser, requestUpdateUserBookStatus } from "../actions.js";
+import { fetchUserBookDetail, fetchUser, requestUpdateUserBookStatus } from "../actions";
 import { store } from "../store";
-import { isEmpty, getAuthUser } from "../utils.js";
+import { isEmpty, getAuthUser } from "../utils";
 
 import { Loading } from "./shared/Loading";
 import { Bok } from "./Bok";
