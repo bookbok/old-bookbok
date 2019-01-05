@@ -77,7 +77,8 @@ export class UserBookDetail_ extends Component {
         const { book, review } = userBook;
         const user = this.props.user;
         return (
-            <div className="page-content-wrap row">
+
+            <div className="page-content-wrap row row-book-detail">
                 <FloatUserInfo user={user} />
 
                 <div className="container mt-4">
