@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { connect } from "react-redux";
+
 import { Footer } from './Footer';
-import { Home } from './Home.jsx';
-import { Login } from './Login.jsx';
-import { Logout } from './Logout.jsx';
+import { Home } from './Home';
+import { Login } from './Login';
+import { Logout } from './Logout';
 import { PrivacyPolicyView } from './PrivacyPolicyView';
 import { TermsOfServiceView } from './TermsOfServiceView';
-import { UserRegister } from './UserRegister.jsx';
+import { UserRegister } from './UserRegister';
 
 import { ConnectedFollowersView } from './FollowersView';
 import { ConnectedFollowingsView } from './FollowingsView';
-
-import { ConnectedUserDetail } from './UserDetail.jsx';
-import { ConnectedBokFlow } from '../containers.js';
-import { ConnectedBookDetail} from '../containers.js';
-import { ConnectedBookList} from '../containers.js';
-import { ConnectedUserBookshelf } from '../containers.js';
-import { ConnectedLikeBokList } from '../containers.js';
-import { ConnectedUsersView } from '../containers.js';
-import { ConnectedUserBookDetail } from '../containers.js';
+import { ConnectedUserDetail } from './UserDetail';
+import {
+    ConnectedBokFlow,
+    ConnectedBookDetail,
+    ConnectedBookList,
+    ConnectedUserBookshelf,
+    ConnectedLikeBokList,
+    ConnectedUsersView,
+    ConnectedUserBookDetail
+} from '../containers';
 
 // bootstrap global navigation bar
 class Header extends Component {
