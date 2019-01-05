@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 
@@ -75,6 +76,13 @@ class Header extends Component {
         );
     }
 }
+
+Header.propTypes = {
+    loggedinUser: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+    })
+};
 
 const ConnectedHeader = connect(
     state => ({ loggedinUser: state.loggedinUser })
