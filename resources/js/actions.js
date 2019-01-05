@@ -2,7 +2,9 @@ import { DOMAIN } from "./domain";
 import * as utils from "./utils";
 import * as types from "./types";
 
-
+/**
+ * ==== Top page (time line) ====
+ */
 export const setBokFlow = bokFlow => ({ type: types.SET_BOK_FLOW, bokFlow });
 export const fetchBokFlow = () => dispatch => {
     utils.wrapFetch(DOMAIN + "/api/bok_flow").then(json => {
@@ -14,7 +16,11 @@ export const fetchBokFlow = () => dispatch => {
     });
 }
 
-/* ==== Auth actions ==== */
+
+/**
+ * ==== Auth actions ====
+ */
+
 // Get authentication token
 export const setAuthToken = (token) => ({ type: types.SET_AUTH_TOKEN, token });
 export const requestLogin = (loginUser) => dispatch => {
@@ -51,6 +57,10 @@ export const directUserRegister = (userInfo) => {
 };
 
 
+/**
+ * ==== Genre resource ====
+ */
+
 export const setGenres = genres => ({ type: types.SET_GENRES, genres });
 export const fetchGenres = () => dispatch => {
     utils.wrapFetch(DOMAIN + "/api/genres")
@@ -59,6 +69,11 @@ export const fetchGenres = () => dispatch => {
         });
 }
 
+
+/**
+ * ==== Book resource ====
+ */
+
 export const setBookDetail = bookDetail => ({type: types.SET_BOOK_DETAIL, bookDetail});
 export const fetchBookDetail = (id) => dispatch => {
     utils.wrapFetch(DOMAIN + `/api/books/${id}`)
@@ -66,6 +81,23 @@ export const fetchBookDetail = (id) => dispatch => {
             dispatch(setBookDetail(json));
         });
 }
+
+export const setBookList = books => ({type: types.SET_BOOKLIST, books});
+// TODO: Rename to fetchBooksWithQuery
+export const fetchBookList = (query = {}) => dispatch => {
+    utils.wrapFetch(DOMAIN + "/api/books/", {
+        body: query,
+    }).then(json => {
+        dispatch(setBookList(json));
+    }).catch(err => {
+        console.error("fetchBookList: ", err);
+    });
+}
+
+
+/**
+ * ==== User resource ====
+ */
 
 export const setUsers = users => ({type: types.SET_USERS, users });
 export const fetchUsers = () => dispatch => {
@@ -83,6 +115,11 @@ export const fetchUser = (userId) => dispatch => {
         });
 }
 
+
+/**
+ * ==== UserBook resource ====
+ */
+
 export const setUserBookshelf = userBookshelf => ({type: types.SET_USER_BOOKSHELF, userBookshelf});
 export const fetchUserBookshelf = (userId) => dispatch => {
     utils.wrapFetch(DOMAIN + `/api/users/${userId}/user_books`)
@@ -99,6 +136,13 @@ export const fetchUserBookDetail = (userId, userBookId) => dispatch => {
         });
 }
 
+export const storeISBNToUserBookDirect = (userId, isbn) => {
+    return utils.smartFetch(DOMAIN + `/api/users/${userId}/user_books`, {
+        method: "POST",
+        body: { "isbn": isbn },
+    });
+}
+
 export const setBokToUserBook = bok => ({ type: types.SET_BOK_TO_USER_BOOK, bok });
 export const registerBok = (userBookId, bok) => {
     return utils.smartFetch(DOMAIN + `/api/user_books/${userBookId}/boks`, {
@@ -107,25 +151,10 @@ export const registerBok = (userBookId, bok) => {
     });
 }
 
-export const setBookList = books => ({type: types.SET_BOOKLIST, books});
-// TODO: Rename to fetchBooksWithQuery
-export const fetchBookList = (query = {}) => dispatch => {
-    utils.wrapFetch(DOMAIN + "/api/books/", {
-        body: query,
-    }).then(json => {
-        dispatch(setBookList(json));
-    }).catch(err => {
-        console.error("fetchBookList: ", err);
-    });
-}
 
-export const setLikeBoks = likeBoks => ({type: types.SET_LIKEBOKLIST, likeBoks});
-export const fetchLikeBoks = (userId) => dispatch => {
-    utils.wrapFetch(DOMAIN + `/api/users/${userId}/likes`)
-       .then(json => {
-          dispatch(setLikeBoks(json));
-       });
-}
+/**
+ * Review resource
+ */
 
 export const setReview = review => ({ type: types.SET_REVIEW, review });
 export const reviewRegister = (userBookId, review) => {
@@ -135,10 +164,22 @@ export const reviewRegister = (userBookId, review) => {
     });
 }
 
-export const storeISBNToUserBookDirect = (userId, isbn) => {
-    return utils.smartFetch(DOMAIN + `/api/users/${userId}/user_books`, {
-        method: "POST",
-        body: { "isbn": isbn },
+
+/**
+ * Follower resource
+ */
+
+export const setFollowers = followers => ({ type: types.SET_FOLLOWERS, followers });
+export const fetchFollowers = userId => dispatch => {
+    utils.wrapFetch(DOMAIN + `/api/users/${userId}/followers`).then(res => {
+        dispatch(setFollowers(res));
+    });
+}
+
+export const setFollowings = followings => ({ type: types.SET_FOLLOWINGS, followings });
+export const fetchFollowings = userId => dispatch => {
+    utils.wrapFetch(DOMAIN + `/api/users/${userId}/followings`).then(res => {
+        dispatch(setFollowings(res));
     });
 }
 
@@ -153,6 +194,19 @@ export const requestUnFollow = (userId, targetId) => {
     return utils.wrapFetch(DOMAIN + `/api/users/${userId}/followings/{targetId}`, {
         method: "DELETE",
     });
+}
+
+
+/**
+ * ==== Reaction resource ====
+ */
+
+export const setLikeBoks = likeBoks => ({type: types.SET_LIKEBOKLIST, likeBoks});
+export const fetchLikeBoks = (userId) => dispatch => {
+    utils.wrapFetch(DOMAIN + `/api/users/${userId}/likes`)
+       .then(json => {
+          dispatch(setLikeBoks(json));
+       });
 }
 
 export const requestLike = (bokId) => {
@@ -178,3 +232,4 @@ export const requestUnLove = (bokId) => {
         method: "DELETE",
     });
 }
+

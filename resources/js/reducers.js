@@ -48,6 +48,12 @@ export function rootReducer(
         case types.SET_LIKEBOKLIST:
             return { ...state, likeBoks: action.likeBoks };
 
+        case types.SET_FOLLOWERS:
+            return { ...state, followers: action.followers };
+
+        case types.SET_FOLLOWINGS:
+            return { ...state, followings: action.followings };
+
         case types.REMOVE_LOGGEDIN_INFO: // ログアウトに伴い、ログイントークン、ログイン中ユーザー情報を削除
             return { ...state, token: null, loggedinUser: null };
 

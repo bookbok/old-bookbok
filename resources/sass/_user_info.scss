@@ -61,3 +61,10 @@ img.user-info-avatar {
   //line-height: 50px;
 }
 
+/* nav tab of user detail */
+.nav-scroll .nav-tabs{
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
