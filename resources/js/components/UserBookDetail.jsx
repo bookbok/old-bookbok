@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { fetchUserBookDetail, fetchUser, setUserBookDetail } from "../actions.js";
+import { fetchUserBookDetail, fetchUser, requestUpdateUserBookStatus } from "../actions.js";
 import { store } from "../store";
 import { isEmpty, getAuthUser } from "../utils.js";
 
@@ -107,15 +107,3 @@ export class UserBookDetail_ extends Component {
 
 export const UserBookDetail = withRouter(UserBookDetail_);
 
-import { DOMAIN } from '../domain';
-import * as utils from '../utils';
-import * as types from '../types';
-
-export const requestUpdateUserBookStatus = (userId, userBookId, body) => {
-    return utils.wrapFetch(DOMAIN + `/api/users/${userId}/user_books/${userBookId}`, {
-        method: 'PUT',
-        body: body,
-    }).then(json => {
-        store.dispatch(setUserBookDetail(json));
-    });
-}
