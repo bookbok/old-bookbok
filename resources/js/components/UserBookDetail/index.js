@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { fetchUserBookDetail, fetchUser, requestUpdateUserBookStatus } from "../actions";
-import { store } from "../store";
-import { isEmpty, getAuthUser } from "../utils";
+import { fetchUserBookDetail, fetchUser, requestUpdateUserBookStatus } from "../../actions";
+import { store } from "../../store";
+import { isEmpty, getAuthUser } from "../../utils";
 
-import { Loading } from "./shared/Loading";
-import { Bok } from "./Bok";
-import { FloatUserInfo } from "./shared/user/FloatUserInfo";
-import { BookInfo } from "./shared/book/BookInfo";
-import { BokModal } from "./BokModal";
-import { ReviewModal } from "./ReviewModal";
-import UserBookInfo from './user_book/UserBookInfo';
+import { Loading } from "../shared/Loading";
+import { Bok } from "../Bok";
+import { FloatUserInfo } from "../shared/user/FloatUserInfo";
+import { BookInfo } from "../shared/book/BookInfo";
+import { BokModal } from "../BokModal";
+import { ReviewModal } from "../ReviewModal";
+import UserBookInfo from './UserBookInfo';
 
 
-export class UserBookDetail_ extends Component {
+class UserBookDetail_ extends Component {
     constructor(props){
         super(props);
 
@@ -106,4 +106,5 @@ export class UserBookDetail_ extends Component {
 }
 
 export const UserBookDetail = withRouter(UserBookDetail_);
+export default UserBookDetail;
 
