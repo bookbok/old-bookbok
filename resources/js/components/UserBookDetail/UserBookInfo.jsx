@@ -4,7 +4,20 @@ import { getAuthUser } from "../../utils.js";
 export class UserBookInfo extends Component {
     render() {
         if(!getAuthUser()) {
-            return <div/>;
+            const state = this.props.readingStatuses.filter(stat => (
+                stat.id == this.props.readingStatus
+            ))[0];
+            return (
+                <div className="text-muted">
+                    <label>読書状況は <u>
+                        {state.intl}
+                    </u> です</label>
+                    <label>Boksにネタバレを <b className="text-danger">
+                        {this.props.isSpoiler ? '含みます' : '含みません'}
+                    </b></label>
+                    <hr />
+                </div>
+            );
         }
 
         // 読書状況の選択リスト
