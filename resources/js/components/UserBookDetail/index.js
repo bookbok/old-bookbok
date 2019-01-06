@@ -20,9 +20,9 @@ class UserBookDetail_ extends Component {
         this.readingStatuses = [
             { id: 0, name: 'none', intl: '未設定' },
             { id: 5, name: 'wanted', intl: '欲しい' },
-            { id: 10, name: 'unread', intl: '積読' },
+            { id: 10, name: 'unread', intl: '未読' },
             { id: 15, name: 'reading', intl: '読書中' },
-            { id: 20, name: 'readed', intl: '読書了' },
+            { id: 20, name: 'readed', intl: '読了' },
         ];
         this.handleUpdate = this.handleUpdate.bind(this);
     };
