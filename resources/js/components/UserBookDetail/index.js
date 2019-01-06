@@ -87,6 +87,7 @@ class UserBookDetail_ extends Component {
                             <UserBookInfo
                                 readingStatuses={this.readingStatuses}
                                 handleUpdate={this.handleUpdate}
+                                userId={userBook.user_id}
                                 readingStatus={userBook.reading_status}
                                 isSpoiler={userBook.is_spoiler} />
 

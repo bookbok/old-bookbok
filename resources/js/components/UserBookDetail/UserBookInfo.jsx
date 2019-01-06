@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import { getAuthUser } from "../../utils.js";
 
 export class UserBookInfo extends Component {
     render() {
-        if(!getAuthUser()) {
+        const currentUser = getAuthUser();
+        if(!currentUser || currentUser.id != this.props.userId) {
             const state = this.props.readingStatuses.filter(stat => (
                 stat.id == this.props.readingStatus
             ))[0];
@@ -59,5 +61,13 @@ export class UserBookInfo extends Component {
         );
     }
 }
+
+UserBookInfo.propTypes = {
+    readingStatuses: PropTypes.array,
+    handleUpdate: PropTypes.func.isRequired,
+    userId: PropTypes.string,
+    readingStatus: PropTypes.string,
+    isSpoiler: PropTypes.bool.isRequired,
+};
 
 export default UserBookInfo;
