@@ -11,12 +11,12 @@ export class UserBookInfo extends Component {
             ))[0];
             return (
                 <div className="text-muted">
-                    <label>読書状況は <u>
+                    <div>読書状況は 「<span className="text-success">
                         {state.intl}
-                    </u> です</label>
-                    <label>Boksにネタバレを <b className="text-danger">
+                    </span>」 です</div>
+                    <div>Boksにネタバレを <b className="text-success">
                         {this.props.isSpoiler ? '含みます' : '含みません'}
-                    </b></label>
+                    </b></div>
                     <hr />
                 </div>
             );
