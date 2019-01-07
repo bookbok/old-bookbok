@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
+import { withRouter } from "react-router-dom";
 import { setBokToUserBook, registerBok } from "../actions";
 import { getAuthUser, isEmpty } from '../utils';
-import { withRouter } from "react-router-dom";
 import { store } from "../store";
 import { ErrorsView } from './shared/ErrorsView';
 
