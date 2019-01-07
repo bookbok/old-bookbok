@@ -11,7 +11,7 @@ export class UserBookInfo extends Component {
             ))[0];
             return (
                 <div className="text-muted">
-                    <div>読書状況は 「<span className="text-success">
+                    <div>本のステータスは 「<span className="text-success">
                         {state.intl}
                     </span>」 です</div>
                     <div>Boksにネタバレを <b className="text-success">
@@ -34,7 +34,7 @@ export class UserBookInfo extends Component {
             <div>
                 <div className="form-group">
                     <label>
-                        読書状況
+                        本のステータス
                     </label>
                     <select name="reading_status"
                         className="form-control form-control-sm"
