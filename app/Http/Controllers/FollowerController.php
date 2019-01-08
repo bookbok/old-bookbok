@@ -15,9 +15,20 @@ class FollowerController extends Controller
      */
     public function followers(User $user)
     {
-        $followers = $user->followers;
+        $authId    = auth()->guard('api')->id();
+        $followers = $user->followers(); // MEMO: プロパティへアクセスするとCollectionが返る
 
-        return response()->json($followers);
+        if ($authId) {
+            // もしログインしているのであればユーザが認証ユーザとどのようなフォロー関係なのか分かる情報を付与する
+            User::addFollowInfo( // MEMO: ここでis_follower, is_followingを追加している
+                User::addStdInfo( // MEMO: ここでuserの基本情報のselectを追加している。なぜならこれをしないとselectがフォロー情報のみとなるから
+                    $followers->getBaseQuery()
+                ),
+                $authId
+            );
+        }
+
+        return response()->json($followers->getResults());
     }
 
     /**
@@ -27,9 +38,20 @@ class FollowerController extends Controller
      */
     public function followings(User $user)
     {
-        $followings = $user->followings;
+        $authId     = auth()->guard('api')->id();
+        $followings = $user->followings(); // MEMO: プロパティへアクセスするとCollectionが返る
 
-        return response()->json($followings);
+        if ($authId) {
+            // もしログインしているのであればユーザが認証ユーザとどのようなフォロー関係なのか分かる情報を付与する
+            User::addFollowInfo( // MEMO: ここでis_follower, is_followingを追加している
+                User::addStdInfo( // MEMO: ここでuserの基本情報のselectを追加している。なぜならこれをしないとselectがフォロー情報のみとなるから
+                    $followings->getBaseQuery()
+                ),
+                $authId
+            );
+        }
+
+        return response()->json($followings->getResults());
     }
 
     /**
