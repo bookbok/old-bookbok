@@ -5,7 +5,7 @@ import { BookDetailView } from "./components/BookDetailView";
 import { UsersView } from "./components/UsersView";
 import { BookListView } from "./components/BookListView";
 import { UserBookshelf } from "./components/UserBookshelf";
-import { UserBookDetail } from "./components/UserBookDetail";
+import UserBookDetail from "./components/UserBookDetail";
 import { LikeBokList } from "./components/LikeBokList";
 
 export const ConnectedBokFlow = connect(
