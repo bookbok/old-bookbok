@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\Builder;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -160,5 +161,71 @@ class User extends Authenticatable implements MustVerifyEmail
             ->selectRaw('(select count(*) from followers where user_id = users.id and target_id = ?) as is_follower', [$authId])
             // ログインユーザーがフォローしているか？
             ->selectRaw('(select count(*) from followers where user_id = ? and target_id = users.id) as is_following', [$authId]);
+    }
+
+    /**
+     * クエリビルダーにユーザの基本情報のselectを追加する
+     * 
+     * @param   Builder $builder
+     *  クエリビルダー
+     * 
+     * @return  Builder
+     */
+    public static function addStdInfo(Builder $builder)
+    {
+        return $builder->select(
+            'users.id',
+            'users.avatar',
+            'users.description',
+            'users.created_at',
+            'users.updated_at',
+            'users.role_id',
+            'users.name'
+        );
+    }
+
+    /**
+     * ユーザ(もしくはそのリスト)を取得しようとするクエリビルダーに対して認証ユーザとのフォロー関係情報を追加する
+     * 
+     * @param   Builder $builder
+     *  クエリビルダー
+     * @param   int     $authId
+     *  認証ユーザID
+     * @param   string  $usersTableAlias
+     *  ユーザテーブルのエイリアス
+     * @param   string  $isFollower
+     *  フォローされているかの情報の列名
+     * @param   string  $isFollowing
+     *  フォローしているかの情報の列名
+     * 
+     * @return  Builder
+     */
+    public static function addFollowInfo(
+        Builder $builder,
+        int $authId,
+        string $usersTableAlias = 'users',
+        string $isFollower = 'is_follower',
+        string $isFollowing = 'is_following'
+    ) {
+        return $builder
+            // ログインユーザーがフォローされているか？
+            ->selectRaw(
+                '(select count(*) from followers where user_id = '
+                    . $usersTableAlias
+                    . '.id and target_id = ?) as '
+                    . $isFollower
+                ,
+                [$authId]
+            )
+            // ログインユーザーがフォローしているか？
+            ->selectRaw(
+                '(select count(*) from followers where user_id = ? and target_id = '
+                    . $usersTableAlias
+                    . '.id) as '
+                    . $isFollowing
+                ,
+                [$authId]
+            )
+        ;
     }
 }
