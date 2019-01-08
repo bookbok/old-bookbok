@@ -974,7 +974,9 @@ BOOKBOK　API仕様書
 
     + userId(number) - ユーザーのID
 
-### 自分をフォローしている人の一覧を取得する [GET]
+### 指定したユーザをフォローしている人の一覧を取得する [GET]
+
+認証トークンを送信しなかった場合`is_follower`と`is_following`を含まない。
 
 + Response 200 (application/json)
 
@@ -987,6 +989,8 @@ BOOKBOK　API仕様書
                 "updated_at": "2018-11-19 04:58:55",
                 "role_id": "5",
                 "name": "test-staff",
+                "is_follower": false,
+                "is_following": false,
                 "pivot":{
                     "target_id": "1",
                     "user_id": "2",
@@ -1003,6 +1007,8 @@ BOOKBOK　API仕様書
                 "updated_at": "2009-08-12 07:17:49",
                 "role_id": "10",
                 "name": "三宅 春香",
+                "is_follower": false,
+                "is_following": true,
                 "pivot":{
                     "target_id": "1",
                     "user_id": "3",
@@ -1021,7 +1027,9 @@ BOOKBOK　API仕様書
 
     + userId(number) - ユーザーのID
 
-### 自分がフォローしている人の一覧を取得する [GET]
+### 指定したユーザがフォローしている人の一覧を取得する [GET]
+
+認証トークンを送信しなかった場合`is_follower`と`is_following`を含まない。
 
 + Response 200 (application/json)
 
@@ -1034,6 +1042,8 @@ BOOKBOK　API仕様書
                 "updated_at": "2018-11-19 04:58:55",
                 "role_id": "5",
                 "name": "test-staff",
+                "is_follower": false,
+                "is_following": false,
                 "pivot":{
                     "user_id": "2",
                     "target_id": "1",
@@ -1050,6 +1060,8 @@ BOOKBOK　API仕様書
                 "updated_at": "2009-08-12 07:17:49",
                 "role_id": "10",
                 "name": "三宅 春香",
+                "is_follower": true,
+                "is_following": false,
                 "pivot":{
                     "user_id": "3",
                     "target_id": "1",
