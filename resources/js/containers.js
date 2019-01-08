@@ -7,6 +7,7 @@ import { BookListView } from "./components/BookListView";
 import { UserBookshelf } from "./components/UserBookshelf";
 import { UserBookDetail } from "./components/UserBookDetail";
 import { LikeBokList } from "./components/LikeBokList";
+import { LoveBokList } from "./components/LoveBokList";
 
 export const ConnectedBokFlow = connect(
     state => state
@@ -40,3 +41,6 @@ export const ConnectedLikeBokList = connect(
     state => state,
 )(LikeBokList);
 
+export const ConnectedLoveBokList = connect(
+    state => state,
+)(LoveBokList);
