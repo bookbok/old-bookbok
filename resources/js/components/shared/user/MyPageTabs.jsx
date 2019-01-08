@@ -31,12 +31,12 @@ export class MyPageTabs extends Component {
                            data-toggle={this.props.isLoves ? 'tab' : ''}>Loves</Link>
                     </li>
 
-                    <li className="nav-item">
+                    <li className="nav-item tab-follow-wrapper">
                         <Link to={`/users/${userId}/followings`}
                            className={this.props.isFollowings ? 'nav-link active' : 'nav-link'}
                            data-toggle={this.props.isFollowings ? 'tab' : ''}>Followings</Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item tab-follow-wrapper">
                         <Link to={`/users/${userId}/followers`}
                            className={this.props.isFollowers ? 'nav-link active' : 'nav-link'}
                            data-toggle={this.props.isFollowers ? 'tab' : ''}>Followers</Link>

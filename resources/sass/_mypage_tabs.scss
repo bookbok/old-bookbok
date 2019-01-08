@@ -1,0 +1,5 @@
+.tab-follow-wrapper {
+  @include smart-vertical {
+    display: none;
+  };
+}
