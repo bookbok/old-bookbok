@@ -48,6 +48,9 @@ export function rootReducer(
         case types.SET_LIKEBOKLIST:
             return { ...state, likeBoks: action.likeBoks };
 
+        case types.SET_LOVEBOKLIST:
+            return { ...state, loveBoks: action.loveBoks };
+
         case types.SET_FOLLOWERS:
             return { ...state, followers: action.followers };
 

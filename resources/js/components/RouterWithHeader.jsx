@@ -20,6 +20,7 @@ import {
     ConnectedBookList,
     ConnectedUserBookshelf,
     ConnectedLikeBokList,
+    ConnectedLoveBokList,
     ConnectedUsersView,
     ConnectedUserBookDetail
 } from '../containers';
@@ -47,6 +48,7 @@ const RouterWithHeader = () => (
                 <Route exact path="/users/:userId/user_books/:userBookId" component={ ConnectedUserBookDetail } />
 
                 <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
+                <Route exact path="/users/:id/loves" component={ ConnectedLoveBokList } />
                 <Route exact path="/users/:id/followers" component={ ConnectedFollowersView } />
                 <Route exact path="/users/:id/followings" component={ ConnectedFollowingsView } />
 

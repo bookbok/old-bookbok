@@ -43,6 +43,7 @@ export const SET_REVIEW = "SET_REVIEW";
  * ==== Reaction resource ====
  */
 export const SET_LIKEBOKLIST = "SET_LIKEBOKLIST";
+export const SET_LOVEBOKLIST = "SET_LOVEBOKLIST";
 
 /**
  * ==== Follower resource ====
