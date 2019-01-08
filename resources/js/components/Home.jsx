@@ -28,7 +28,7 @@ export const Home = () => (
                             <i className="fas fa-4x fa-book" />
                             <p>本棚</p>
                         </div>
-                        <p className="service-text">持っている本を本棚で一括管理</p>
+                        <p className="service-text">持っている本を本棚で一括管理できます。</p>
                     </div>
 
                     <div className="service-box">
@@ -36,7 +36,7 @@ export const Home = () => (
                             <i className="fas fa-4x fa-pencil-alt" />
                             <p>レビュー</p>
                         </div>
-                        <p className="service-text">読んだ本をレビュー</p>
+                        <p className="service-text">読書家さんたちの感想を見ることができます。</p>
                     </div>
 
                     <div className="service-box">
@@ -44,7 +44,7 @@ export const Home = () => (
                             <i className="fas fa-4x fa-list-ul" />
                             <p>Boks</p>
                         </div>
-                        <p className="service-text">本の感想をまとめる</p>
+                        <p className="service-text">本の感想を体系立ててまとめて後で見返すことができます。</p>
                     </div>
 
                     <div className="service-box">
@@ -52,7 +52,7 @@ export const Home = () => (
                             <i className="fas fa-4x fa-anchor" />
                             <p>読書管理</p>
                         </div>
-                        <p className="service-text">本の読書状況を管理</p>
+                        <p className="service-text">本の読書状況やステータスを管理することができます。</p>
                     </div>
 
                     <div className="service-box">
@@ -60,7 +60,7 @@ export const Home = () => (
                             <i className="fas fa-4x fa-user-friends" />
                             <p>フォロー</p>
                         </div>
-                        <p className="service-text">気になる読書家をフォロー</p>
+                        <p className="service-text">気になる読書家さん達の繋がりを作ることができます。</p>
                     </div>
 
                     <div className="service-box">
@@ -68,7 +68,7 @@ export const Home = () => (
                             <i className="far fa-4x fa-clock" />
                             <p>Bokフロー</p>
                         </div>
-                        <p className="service-text">自分や他人の最近のBokを確認</p>
+                        <p className="service-text">自分や他人の最近のアクティビティを確認できます。</p>
                     </div>
 
                     <div className="clear-float-left" />
