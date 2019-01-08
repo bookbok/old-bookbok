@@ -19,7 +19,7 @@ class ScrapeManager
     /**
      * @var String
      */
-    private $uri_rakuten_book;
+    public $uri_rakuten_book;
 
     /**
      * Constructor
@@ -29,7 +29,7 @@ class ScrapeManager
      */
     public function __construct(array $scrapers){
         $this->scrapers = $scrapers;
-        $uri_rakuten_book = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&applicationId=" . env('RAKUTEN_KEY') . "&isbn=";
+        $this->uri_rakuten_book = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&applicationId=" . env('RAKUTEN_KEY') . "&isbn=";
     }
 
     /**
@@ -44,12 +44,12 @@ class ScrapeManager
      */
     public function getGenre(string $isbn){
         $client = new Client();
-        $response = $client->request('GET', ($uri_rakuten_book . $isbn))
+        $response = $client->request('GET', ($this->uri_rakuten_book . $isbn))
                            ->getBody();
 
-        $genre_id_raw = $response->Items[0]->Item->booksGenreId;
-        
-        return substr($genre_id_raw, 5, 1);
+        $response = json_decode($response);
+
+        return  substr($response->Items[0]->Item->booksGenreId, 5, 1);
     }
 
     /**
