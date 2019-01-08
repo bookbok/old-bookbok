@@ -52,8 +52,15 @@
   }
 
   .service-text {
-    width: 80%;
+    width: 60%;
     margin: auto;
+
+    @include middle-screen {
+      width: 60%;
+    }
+    @include normal-pc {
+      width: 80%;
+    }
   }
 }
 
