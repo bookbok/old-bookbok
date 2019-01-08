@@ -1,4 +1,5 @@
 import { DOMAIN } from "./domain";
+import { store } from "./store";
 import * as utils from "./utils";
 import * as types from "./types";
 
@@ -151,9 +152,18 @@ export const registerBok = (userBookId, bok) => {
     });
 }
 
+/** ネタバレflgや読書状況を更新する */
+export const requestUpdateUserBookStatus = (userId, userBookId, body) => {
+    return utils.wrapFetch(DOMAIN + `/api/users/${userId}/user_books/${userBookId}`, {
+        method: 'PUT',
+        body: body,
+    }).then(json => {
+        store.dispatch(setUserBookDetail(json));
+    });
+}
 
 /**
- * Review resource
+ * ==== Review resource ====
  */
 
 export const setReview = review => ({ type: types.SET_REVIEW, review });
@@ -166,7 +176,7 @@ export const reviewRegister = (userBookId, review) => {
 
 
 /**
- * Follower resource
+ * ==== Follower resource ====
  */
 
 export const setFollowers = followers => ({ type: types.SET_FOLLOWERS, followers });
@@ -219,6 +229,14 @@ export const requestUnLike = (bokId) => {
     return utils.wrapFetch(DOMAIN + `/api/boks/${bokId}/likes`, {
         method: "DELETE",
     });
+}
+
+export const setLoveBoks = loveBoks => ({type: types.SET_LOVEBOKLIST, loveBoks});
+export const fetchLoveBoks = (userId) => dispatch => {
+    utils.wrapFetch(DOMAIN + `/api/users/${userId}/loves`)
+        .then(json => {
+            dispatch(setLoveBoks(json));
+        });
 }
 
 export const requestLove = (bokId) => {
