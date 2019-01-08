@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchLikeBoks, fetchUser } from "../actions";
+import { fetchLoveBoks, fetchUser } from "../actions";
 import { store } from "../store";
 import { isEmpty } from "../utils";
 
@@ -8,22 +8,22 @@ import { Bok } from "./Bok";
 import { MyPageTabs } from "./shared/user/MyPageTabs";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 
-export class LikeBokList extends Component {
+export class LoveBokList extends Component {
     componentDidMount(){
         const userId = parseInt(this.props.match.params.id);
-        store.dispatch(fetchLikeBoks(userId));
+        store.dispatch(fetchLoveBoks(userId));
         store.dispatch(fetchUser(userId));
     };
 
     render(){
-        const likeBoks = this.props.likeBoks;
+        const loveBoks = this.props.loveBoks;
         const user = this.props.user;
-        if(isEmpty(likeBoks) || isEmpty(user)){
+        if(isEmpty(loveBoks) || isEmpty(user)){
             return <Loading />;
         }
 
-        const boks = likeBoks.map((likeBok, index) => {
-            return <Bok bok={likeBok} key={index} />
+        const boks = loveBoks.map((loveBok, index) => {
+            return <Bok bok={loveBok} key={index} />
         })
 
         return (
@@ -35,7 +35,7 @@ export class LikeBokList extends Component {
                         <div className="col-md-8 main-content p-5">
                             <MyPageTabs isLikes userId={this.props.match.params.id} />
                             <div className="mt-4">
-                                <p>LikeBok一覧</p>
+                                <p>LoveBok一覧</p>
                                 {boks}
                                 <br/>
                             </div>

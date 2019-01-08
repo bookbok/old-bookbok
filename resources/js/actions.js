@@ -222,7 +222,7 @@ export const requestUnLike = (bokId) => {
 }
 
 export const setLoveBoks = loveBoks => ({type: types.SET_LOVEBOKLIST, loveBoks});
-export const fetchLikeBoks = (userId) => dispatch => {
+export const fetchLoveBoks = (userId) => dispatch => {
     utils.wrapFetch(DOMAIN + `/api/users/${userId}/loves`)
         .then(json => {
             dispatch(setLoveBoks(json));
