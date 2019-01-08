@@ -10,7 +10,7 @@ export class UserBookInfo extends Component {
                 stat.id == this.props.readingStatus
             ))[0];
             return (
-                <div className="text-muted">
+                <div className="text-muted mt-3">
                     <div>本のステータスは 「<span className="text-success">
                         {state.intl}
                     </span>」 です</div>
