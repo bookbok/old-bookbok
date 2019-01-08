@@ -41,7 +41,7 @@ export const Home = () => (
 
                     <div className="service-box">
                         <div className="service-icon">
-                            <i className="fas fa-4x fa-square" />
+                            <i className="fas fa-4x fa-list-ul" />
                             <p>Boks</p>
                         </div>
                         <p className="service-text">本の感想をまとめる</p>
@@ -65,7 +65,7 @@ export const Home = () => (
 
                     <div className="service-box">
                         <div className="service-icon">
-                            <i className="fas fa-4x fa-pencil-alt" />
+                            <i className="far fa-4x fa-clock" />
                             <p>Bokフロー</p>
                         </div>
                         <p className="service-text">自分や他人の最近のBokを確認</p>
