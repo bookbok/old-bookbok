@@ -12,18 +12,58 @@
   p {
     opacity: 0.9;
   }
+
+  .register-wrapper {
+    text-align: left;
+    a {
+      background: rgba(56, 148, 114, 0.7);
+    }
+  }
+
 }
 
 .services-wrapper {
   text-align: center;
+
+  .service-heading h2 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: #5f5d60;
+  }
 }
 
-.service-box {
+.services-wrapper .service-box {
   float: left;
-  width: 16%;
+  width: 100%; // 1/1 size
+  margin-bottom: 50px;
+
+  @include middle-screen {
+    width: 50%; // 1/2 size
+  }
+  @include normal-pc {
+    width: 16.66%; // 1/6 size
+  }
 
   .service-icon {
+    color: $bookbok-green;
+    p {
+      margin-top: 5px;
+    }
+  }
 
+  .service-text {
+    width: 80%;
+    margin: auto;
+  }
+}
+
+.register-wrapper {
+  text-align: center;
+  a {
+    font-size: 1.4em;
+    @include smart-vertical {
+      width: 100%;
+    }
   }
 }
 
