@@ -17,6 +17,11 @@ class ScrapeManager
     private $scrapers;
 
     /**
+     * @var String
+     */
+    private $uri_rakuten_book;
+
+    /**
      * Constructor
      *
      * @param   ScraperInterface[]  $scrapers
@@ -24,6 +29,7 @@ class ScrapeManager
      */
     public function __construct(array $scrapers){
         $this->scrapers = $scrapers;
+        $uri_rakuten_book = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&applicationId=" . env('RAKUTEN_KEY') . "&isbn=";
     }
 
     /**
@@ -37,7 +43,13 @@ class ScrapeManager
      * 　ジャンル
      */
     public function getGenre(string $isbn){
-        //@Todo
+        $client = new Client();
+        $response = $client->request('GET', ($uri_rakuten_book . $isbn))
+                           ->getBody();
+
+        $genre_id_raw = $response->Items[0]->Item->booksGenreId;
+        
+        return substr($genre_id_raw, 5, 1);
     }
 
     /**
