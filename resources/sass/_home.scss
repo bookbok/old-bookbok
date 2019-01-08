@@ -1,3 +1,33 @@
 .top-wrapper {
-  background-image: url("../images/top.jpg");
+  padding: 100px 0 100px 0;
+  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url("../images/top.jpg");
+  background-size: cover;
+  color: white;
+  font-size: 1.2em;
+
+  h1 {
+    opacity: 0.9;
+    letter-spacing: 5px;
+  }
+  p {
+    opacity: 0.9;
+  }
+}
+
+.services-wrapper {
+  text-align: center;
+}
+
+.service-box {
+  float: left;
+  width: 16%;
+
+  .service-icon {
+
+  }
+}
+
+
+.clear-float-left {
+  clear: left;
 }
