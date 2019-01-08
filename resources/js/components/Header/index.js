@@ -1,25 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import { Footer } from './Footer';
-import { Home } from './Home.jsx';
-import { Login } from './Login.jsx';
-import { Logout } from './Logout.jsx';
-import { PrivacyPolicyView } from './PrivacyPolicyView';
-import { TermsOfServiceView } from './TermsOfServiceView';
-import { UserRegister } from './UserRegister.jsx';
-
-import { ConnectedFollowersView } from './FollowersView';
-import { ConnectedFollowingsView } from './FollowingsView';
-
-import { ConnectedUserDetail } from './UserDetail.jsx';
-import { ConnectedBokFlow } from '../containers.js';
-import { ConnectedBookDetail} from '../containers.js';
-import { ConnectedBookList} from '../containers.js';
-import { ConnectedUserBookshelf } from '../containers.js';
-import { ConnectedLikeBokList } from '../containers.js';
-import { ConnectedUsersView } from '../containers.js';
-import { ConnectedUserBookDetail } from '../containers.js';
 
 // bootstrap global navigation bar
 class Header extends Component {
@@ -95,41 +77,15 @@ class Header extends Component {
     }
 }
 
+Header.propTypes = {
+    loggedinUser: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+    })
+};
+
 const ConnectedHeader = connect(
     state => ({ loggedinUser: state.loggedinUser })
 )(Header);
 
-
-//react-router-dom
-export const MenuRouter = () => (
-    <BrowserRouter>
-        <div>
-            <ConnectedHeader />
-            <Switch>
-                <Route exact path="/" component={ Home } />
-                <Route exact path="/home" component={ Home } />
-                <Route exact path="/privacy" component={ PrivacyPolicyView } />
-                <Route exact path="/terms_of_service" component={ TermsOfServiceView } />
-                <Route exact path="/bok_flow" component={ ConnectedBokFlow } />
-                <Route exact path="/register" component={ UserRegister } />
-                <Route exact path="/login" component={ Login } />
-                <Route exact path="/logout" component={ Logout } />
-                <Route exact path="/user_register" component={ UserRegister } />
-                <Route exact path="/users/:id" component={ ConnectedUserDetail } />
-                <Route exact path="/books" component={ ConnectedBookList } />
-                <Route exact path="/books/:id" component={ ConnectedBookDetail } />
-                <Route exact path="/users/:id/user_books" component={ ConnectedUserBookshelf } />
-                <Route exact path="/users/:userId/user_books/:userBookId" component={ ConnectedUserBookDetail } />
-
-                <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
-                <Route exact path="/users/:id/followers" component={ ConnectedFollowersView } />
-                <Route exact path="/users/:id/followings" component={ ConnectedFollowingsView } />
-
-                <Route exact path="/users" component={ ConnectedUsersView } />
-                <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
-            </Switch>
-            <Footer />
-        </div>
-    </BrowserRouter>
-)
-
+export default ConnectedHeader;
