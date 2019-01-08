@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { MenuRouter } from './Header.jsx';
+import RouterWithHeader from './RouterWithHeader';
 
 export class App extends Component {
     render() {
         return (
-            <div>
-                <MenuRouter />
-            </div>
+            <RouterWithHeader />
         );
     }
 }

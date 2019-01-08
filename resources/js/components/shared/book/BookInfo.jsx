@@ -17,7 +17,7 @@ export class BookInfo extends Component {
                     <img src={book.cover} className="title-book-cover"/>
                     <h1>
                         <Link to={`/books/${book.id}`}
-                           className="ml-2 d-block text-success title-book-name">
+                           className="ml-2 d-block text-dark title-book-name">
                             {book.name}
                         </Link>
                     </h1>
