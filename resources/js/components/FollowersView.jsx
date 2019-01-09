@@ -20,34 +20,7 @@ class FollowersView extends Component {
     render() {
         const followers = this.props.followers;
         const user = this.props.user;
-
-        if(isEmpty(user)){
-            return <Loading />;
-        } else if(user && isEmpty(followers)){
-            return (
-                <div className="page-content-wrap row">
-                    <FloatUserInfo user={user} />
-
-                    <div className="container mt-4">
-                        <div className="row justify-content-center">
-                            <div className="col-md-8 main-content p-5">
-                                <MyPageTabs isFollowers userId={this.props.match.params.id} />
-                                <div className="mt-4">
-                                    <p>Followers</p>
-                                    <Loading />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        const bindedUsers = followers.map((user, i) => (
-            <SimpleUser user={user} key={i} />
-        ));
-
-        return (
+        const followerList = (view) => (
             <div className="page-content-wrap row">
                 <FloatUserInfo user={user} />
 
@@ -57,12 +30,28 @@ class FollowersView extends Component {
                             <MyPageTabs isFollowers userId={this.props.match.params.id} />
                             <div className="mt-4">
                                 <p>Followers</p>
-                                {bindedUsers}
+                                {view}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        );
+
+        if(isEmpty(user)){
+            return <Loading />;
+        } else if(user && isEmpty(followers)){
+            return (
+                followerList(<Loading />)
+            );
+        }
+
+        const bindedUsers = followers.map((user, i) => (
+            <SimpleUser user={user} key={i} />
+        ));
+
+        return (
+            followerList(bindedUsers)
         );
     }
 }
