@@ -10627,34 +10627,177 @@ footer ul li:first-child {
   }
 }
 
-.book-info {
-  width: 150px;
-  text-align: center;
+@media screen and (max-width: 750px) {
+  pre.book-view-pre {
+    text-overflow: ellipsis;
+    width: 92px;
+    font-size: 12px;
+    overflow: hidden;
+  }
 }
 
-.book-footer {
-  height: 40px;
-  font-size: 0.8rem;
+@media screen and (min-width: 1024px) {
+  pre.book-view-pre {
+    margin-left: 30px;
+    text-overflow: ellipsis;
+    width: 130px;
+    font-size: 15px;
+    overflow: hidden;
+  }
 }
 
-.bok-user {
-  height: 20px;
-  font-size: 0.8rem;
+img.book-view-img {
+  max-width: 92px;
+  max-height: 115px;
 }
 
-.bok-body {
-  min-height: 60%;
-  vertical-align: top;
-}
-
-.bok-footer {
-  height: 20px;
-  font-size: 0.7rem;
-  margin: 10px;
+@media screen and (min-width: 1024px) {
+  img.book-view-img {
+    margin-left: 30px;
+    max-width: 128px;
+    max-height: 168px;
+  }
 }
 
 .icon {
-  font-size: 1.5rem;
+  font-size: 1rem;
+  vertical-align: bottom;
+}
+
+@media screen and (min-width: 1280px) {
+  .icon {
+    font-size: 1.2rem;
+  }
+}
+
+.liked {
+  margin-bottom: 0;
+  vertical-align: top;
+}
+
+@media screen and (min-width: 1280px) {
+  .liked {
+    margin-right: 5px;
+  }
+}
+
+.loved {
+  margin-bottom: 0;
+  margin-right: 2px;
+  vertical-align: top;
+}
+
+.like-animation {
+  color: #4286f4;
+}
+
+.love-animation {
+  color: green;
+}
+
+.bok-book-info {
+  text-align: center;
+  width: 80px;
+}
+
+@media screen and (min-width: 1280px) {
+  .bok-book-info {
+    width: 160px;
+  }
+}
+
+img.bok-book-cover {
+  -webkit-box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.2);
+  width: 64px;
+  max-height: 80px;
+}
+
+@media screen and (min-width: 1280px) {
+  img.bok-book-cover {
+    width: 128px;
+    max-height: 160px;
+  }
+}
+
+img.bok-book-cover:hover {
+  -webkit-box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.4);
+          box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.4);
+}
+
+pre.bok-book-title {
+  display: none;
+}
+
+@media screen and (min-width: 1280px) {
+  pre.bok-book-title {
+    white-space: pre-wrap;
+    margin-top: 5px;
+  }
+}
+
+.book-footer {
+  font-size: 0.8rem;
+  height: 10px;
+}
+
+@media screen and (min-width: 1280px) {
+  .book-footer {
+    height: 20px;
+  }
+}
+
+.bok-user {
+  overflow: visible;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+@media screen and (min-width: 1280px) {
+  .bok-user {
+    font-size: 1rem;
+  }
+}
+
+.bok-body {
+  vertical-align: top;
+  margin: 0;
+  min-height: 60%;
+  white-space: pre-wrap;
+  font-size: 0.7rem;
+  line-height: 1.5em;
+  margin-right: 2px;
+}
+
+@media screen and (min-width: 1280px) {
+  .bok-body {
+    font-size: 0.8rem;
+  }
+}
+
+.bok-footer {
+  font-size: 0.6rem;
+  vertical-align: bottom;
+}
+
+@media screen and (min-width: 1280px) {
+  .bok-footer {
+    font-size: 0.8rem;
+  }
+}
+
+pre.updated {
+  overflow: visible;
+  margin-bottom: 0;
+  width: 50%;
+  font-size: 0.6rem;
+  vertical-align: top;
+}
+
+@media screen and (min-width: 1280px) {
+  pre.updated {
+    margin-top: 0;
+  }
 }
 
 @media screen and (max-width: 750px) {
@@ -10714,6 +10857,10 @@ img.title-book-cover {
 
 .page-content-wrap {
   position: relative;
+}
+
+.row-book-detail {
+  margin: 0;
 }
 
 .main-content {
@@ -10809,6 +10956,15 @@ img.user-info-avatar {
   }
 }
 
+/* nav tab of user detail */
+
+.nav-scroll .nav-tabs {
+  overflow-x: auto;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
 div.text-size {
   font-size: 15px;
 }
@@ -10820,6 +10976,16 @@ div.text-size {
 @media screen and (min-width: 1280px) {
   .search-button-text {
     display: inline;
+  }
+}
+
+.errors-font {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 479px) {
+  .tab-follow-wrapper {
+    display: none;
   }
 }
 
