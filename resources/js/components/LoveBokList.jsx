@@ -33,7 +33,6 @@ export class LoveBokList extends Component {
                                 <div className="mt-4">
                                     <p>LoveBok一覧</p>
                                     <Loading />
-                                    <br/>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +56,6 @@ export class LoveBokList extends Component {
                             <div className="mt-4">
                                 <p>LoveBok一覧</p>
                                 {boks}
-                                <br/>
                             </div>
                         </div>
                     </div>
