@@ -60,7 +60,7 @@ export const Home = () => (
                             <i className="fas fa-4x fa-user-friends" />
                             <p>フォロー</p>
                         </div>
-                        <p className="service-text">気になる読書家さん達の繋がりを作ることができます。</p>
+                        <p className="service-text">気になる読書家さん達と繋がりを作ることができます。</p>
                     </div>
 
                     <div className="service-box">
