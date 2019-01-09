@@ -29,7 +29,7 @@ class FollowersView extends Component {
                         <div className="col-md-8 main-content p-5">
                             <MyPageTabs isFollowers userId={this.props.match.params.id} />
                             <div className="mt-4">
-                                <p>Followers</p>
+                                <p>フォロワー</p>
                                 {view}
                             </div>
                         </div>

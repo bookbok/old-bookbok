@@ -27,7 +27,7 @@ export class LikeBokList extends Component {
                         <div className="col-md-8 main-content p-5">
                             <MyPageTabs isLikes userId={this.props.match.params.id} />
                             <div className="mt-4">
-                                <p>LikeBok一覧</p>
+                                <p>LikeしたBok</p>
                                 {view}
                             </div>
                         </div>

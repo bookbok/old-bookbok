@@ -29,7 +29,7 @@ class FollowingsView extends Component {
                         <div className="col-md-8 main-content p-5">
                             <MyPageTabs isFollowings userId={this.props.match.params.id} />
                             <div className="mt-4">
-                                <p>Followings</p>
+                                <p>フォロー中</p>
                                 {view}
                             </div>
                         </div>
