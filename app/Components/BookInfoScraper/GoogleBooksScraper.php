@@ -74,6 +74,10 @@ class GoogleBooksScraper implements ScraperInterface
         // JSON形式にデコード
         $bookInfo = json_decode($response);
 
+        if(JSON_ERROR_NONE !== json_last_error()){
+            return null;
+        }
+
         //レスポンスなければnullを返す
         if( $bookInfo->totalItems === 0) return null;
         $bookInfo = $bookInfo->items[0]->volumeInfo;

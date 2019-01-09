@@ -49,7 +49,8 @@ class ScrapeManager
                            ->getBody();
 
         $response = json_decode($response);
-        if($response->count === 0){
+
+        if(JSON_ERROR_NONE !== json_last_error() || $response->count === 0){
             return Genre::ELSE_ID;
         }
 

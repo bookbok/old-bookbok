@@ -97,7 +97,17 @@ class NationalDietLibraryScraper implements ScraperInterface
         // item配下にある名前空間'dc'の要素を取得する
         $dcBookInfoXML = $xml->channel->item->children($nameSpaces['dc']);
         // JSONオブジェクトに変換
-        $dcBookInfoJSON = json_decode(json_encode($dcBookInfoXML, true));
+        $jsonText       = json_encode($dcBookInfoXML);
+
+        if(false === $jsonText){
+            return null;
+        }
+
+        $dcBookInfoJSON = json_decode($jsonText);
+
+        if(JSON_ERROR_NONE !== json_last_error()){
+            return null;
+        }
 
         // ScrapeManagerにreturnするBookインスタンスの生成と情報の格納
         $book = new Book;
