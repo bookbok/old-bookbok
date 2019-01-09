@@ -18,10 +18,10 @@ export class BookDetailView extends Component {
         store.dispatch(fetchBookDetail(bookId));
     }
 
-    componentWillReceiveProps(nextProps){
+/*    componentWillReceiveProps(nextProps){
         this.setState({isbn: nextProps.bookDetail.isbn});
     }
-
+*/
     handleRegister(e){
         e.preventDefault();
 
@@ -30,7 +30,7 @@ export class BookDetailView extends Component {
             return this.props.history.push('/login');
         }
 
-        storeISBNToUserBookDirect(user.id, this.state.isbn).then(res => {
+        storeISBNToUserBookDirect(user.id, this.props.bookDetail.isbn).then(res => {
             if(res.status === 401){
                 this.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
                 throw new Error();
