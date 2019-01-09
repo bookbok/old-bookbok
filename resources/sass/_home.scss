@@ -12,6 +12,12 @@
   p {
     opacity: 0.9;
   }
+  @include smart-vertical {
+    font-size: 1em;
+    h1 {
+      font-size: 24px;
+    }
+  }
 
   .register-wrapper {
     text-align: left;
