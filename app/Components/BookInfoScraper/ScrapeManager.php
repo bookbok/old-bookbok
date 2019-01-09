@@ -5,6 +5,7 @@ namespace App\Components\BookInfoScraper;
 use App\Components\ISBN;
 use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
+use App\Genre;
 
 /**
  * 外部のAPIを通じて書籍情報を取得するコンポーネント
@@ -39,8 +40,8 @@ class ScrapeManager
      * 　検索対象ISBN。
      * 　正規化されたものを受け取ることを前提とする。
      * 
-     * @return 
-     * 　ジャンル
+     * @return int
+     * 　ジャンルID
      */
     public function getGenre(string $isbn){
         $client = new Client();
@@ -48,8 +49,11 @@ class ScrapeManager
                            ->getBody();
 
         $response = json_decode($response);
+        if($response->count === 0){
+            return Genre::ELSE_ID;
+        }
 
-        return  substr($response->Items[0]->Item->booksGenreId, 5, 1);
+        return  (int)substr($response->Items[0]->Item->booksGenreId, 4, 2);
     }
 
     /**
