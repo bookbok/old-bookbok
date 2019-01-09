@@ -10,6 +10,10 @@ use Illuminate\Support\ServiceProvider;
 
 class BookInfoScraperServiceProvider extends ServiceProvider
 {
+
+    const RAKUTEN_URI = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&applicationId=";
+    const QUERY = "&isbn=";
+
     /**
      * Bootstrap services.
      *
@@ -60,7 +64,9 @@ class BookInfoScraperServiceProvider extends ServiceProvider
         $this->app->bind(
             'app.bookInfo.scrapeManager',
             function ($app) {
-                return new ScrapeManager($app->tagged('app.bookInfo.scraper'));
+                return new ScrapeManager((self::RAKUTEN_URI . env('RAKUTEN_KEY') . self::QUERY),
+                                         $app->tagged('app.bookInfo.scraper'
+                                        ));
             }
         );
     }
