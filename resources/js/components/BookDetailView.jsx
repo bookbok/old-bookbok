@@ -18,10 +18,6 @@ export class BookDetailView extends Component {
         store.dispatch(fetchBookDetail(bookId));
     }
 
-/*    componentWillReceiveProps(nextProps){
-        this.setState({isbn: nextProps.bookDetail.isbn});
-    }
-*/
     handleRegister(e){
         e.preventDefault();
 
