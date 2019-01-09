@@ -28,9 +28,9 @@ class ScrapeManager
      * @param   ScraperInterface[]  $scrapers
      *  スクレイパーの配列
      */
-    public function __construct(array $scrapers){
+    public function __construct(string $base_uri, array $scrapers){
+        $this->uri_rakuten_book = $base_uri;
         $this->scrapers = $scrapers;
-        $this->uri_rakuten_book = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&applicationId=" . env('RAKUTEN_KEY') . "&isbn=";
     }
 
     /**
