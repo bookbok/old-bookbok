@@ -9,10 +9,10 @@ export class Bok extends Component {
         super(props);
 
         this.state = {
-            likeClass: "far fa-thumbs-up fa-fw icon",
-            loveClass: "far fa-bookmark fa-fw icon",
-            isLiked: false,
-            isLoved: false,
+            likeClass: this.props.bok.liked == "0" ?  "far fa-thumbs-up fa-fw icon" : "fas fa-thumbs-up fa-fw icon like-animation",
+            loveClass: this.props.bok.loved == "0" ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation",
+            isLiked: this.props.bok.liked == "0" ? false : true,
+            isLoved: this.props.bok.loved == "0" ? false : true,
             likeCount: parseInt(this.props.bok.liked_count),
             loveCount: parseInt(this.props.bok.loved_count)
         };
