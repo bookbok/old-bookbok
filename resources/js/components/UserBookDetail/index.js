@@ -5,7 +5,7 @@ import { store } from "../../store";
 import { isEmpty, getAuthUser } from "../../utils";
 
 import { Loading } from "../shared/Loading";
-import { Bok } from "../Bok";
+import { UserDetailBok } from "../UserDetailBok";
 import { FloatUserInfo } from "../shared/user/FloatUserInfo";
 import { BookInfo } from "../shared/book/BookInfo";
 import { BokModal } from "../BokModal";
@@ -72,7 +72,7 @@ class UserBookDetail_ extends Component {
         const userBook = this.props.userBookDetail;
 
         const boks = userBook.boks.map((bok) => {
-            return <div className="mt-2" key={bok.id}><Bok bok={bok}/></div>
+            return <div className="mt-2" key={bok.id}><UserDetailBok bok={bok}/></div>
         })
 
         const { book, review } = userBook;

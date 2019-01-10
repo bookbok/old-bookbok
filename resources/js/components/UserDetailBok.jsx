@@ -4,7 +4,7 @@ import { Loading } from "./shared/Loading";
 import { requestLike, requestUnLike, requestLove, requestUnLove } from "../actions";
 import { Link } from 'react-router-dom';
 
-export class Bok extends Component {
+export class UserDetailBok extends Component {
     constructor(props){
         super(props);
 
