@@ -1,0 +1,86 @@
+.top-wrapper {
+  padding: 100px 0 100px 0;
+  background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url("../images/top.jpg");
+  background-size: cover;
+  color: white;
+  font-size: 1.2em;
+
+  h1 {
+    opacity: 0.9;
+    letter-spacing: 5px;
+  }
+  p {
+    opacity: 0.9;
+  }
+  @include smart-vertical {
+    font-size: 1em;
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  .register-wrapper {
+    text-align: left;
+    a {
+      background: rgba(56, 148, 114, 0.7);
+    }
+  }
+
+}
+
+.services-wrapper {
+  text-align: center;
+
+  .service-heading h2 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: #5f5d60;
+  }
+}
+
+.services-wrapper .service-box {
+  float: left;
+  width: 100%; // 1/1 size
+  margin-bottom: 50px;
+
+  @include middle-screen {
+    width: 50%; // 1/2 size
+  }
+  @include normal-pc {
+    width: 16.66%; // 1/6 size
+  }
+
+  .service-icon {
+    color: $bookbok-green;
+    p {
+      margin-top: 5px;
+    }
+  }
+
+  .service-text {
+    width: 60%;
+    margin: auto;
+
+    @include middle-screen {
+      width: 60%;
+    }
+    @include normal-pc {
+      width: 80%;
+    }
+  }
+}
+
+.register-wrapper {
+  text-align: center;
+  a {
+    font-size: 1.4em;
+    @include smart-vertical {
+      width: 100%;
+    }
+  }
+}
+
+
+.clear-float-left {
+  clear: left;
+}

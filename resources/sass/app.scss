@@ -11,24 +11,16 @@
 // responsive media separator
 @import 'responsive';
 
-// User define class
+/* User define class */
+@import 'home';
 @import 'footer';
 @import 'loading_animation';
-
-@import 'booklist_view';
-
-// like, love
-@import 'evaluation';
-
-// bok
+@import 'evaluation'; // like, love
 @import 'bok';
-
 @import 'booklist_view';
-
 @import 'book_detail';
 @import 'user_info';
 @import 'user_register';
-
 @import 'search_component';
 
 .errors-font {

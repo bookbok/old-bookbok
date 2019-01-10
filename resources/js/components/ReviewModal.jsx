@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
+import { withRouter } from "react-router-dom";
 import { setReview, reviewRegister } from "../actions";
 import { getAuthUser, isEmpty } from '../utils';
-import { withRouter } from "react-router-dom";
 import { store } from "../store";
 
 class ReviewModal_ extends Component {
@@ -18,7 +18,7 @@ class ReviewModal_ extends Component {
     handleChangeReview(e) {
         const name = e.target.name;
         this.setState({
-            [name]: e.target.value, 
+            [name]: e.target.value,
         });
     }
 
@@ -50,7 +50,7 @@ class ReviewModal_ extends Component {
     }
 
     componentWillUnmount() {
-        $('#ReviewModalCenter').modal('hide');   
+        $('#ReviewModalCenter').modal('hide');
     }
 
 
