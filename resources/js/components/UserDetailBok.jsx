@@ -84,7 +84,7 @@ export class UserDetailBok extends Component {
         return (
             <div className="card p-2">
                 <div className="d-flex">
-                    <div className="d-flex flex-column userd-bok-book-pages mt-3 mr-3">
+                    <div className="d-flex flex-column userd-bok-book-page-line mt-3 mr-3">
                         <p>{page}<br/>{line}</p>
                     </div>
 
