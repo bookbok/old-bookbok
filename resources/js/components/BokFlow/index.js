@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { store } from "../store";
-import { fetchBokFlow } from "../actions";
-import { isEmpty, getAuthUser } from "../utils";
-import { Loading } from "./shared/Loading";
-import { Bok } from "./Bok.jsx";
+import { store } from "../../store";
+import { fetchBokFlow } from "../../actions";
+import { isEmpty, getAuthUser } from "../../utils";
+import { Loading } from "../shared/Loading";
+import { Bok } from "../Bok.jsx";
 
 export class BokFlow extends React.Component {
     componentDidMount() {
