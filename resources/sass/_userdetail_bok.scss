@@ -1,5 +1,5 @@
 // 本の情報
-.bok-book-info{
+.userd-bok-book-info{
   text-align: center;
   width: 80px;
 
@@ -8,7 +8,7 @@
   };
 }
 
-img.bok-book-cover {
+img.userd-bok-book-cover {
   box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.2);
 
   width: 64px;
@@ -20,11 +20,11 @@ img.bok-book-cover {
   };
 }
 
-img.bok-book-cover:hover {
+img.userd-bok-book-cover:hover {
   box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.4);
 }
 
-.book-footer{
+.userd-book-footer{
   font-size: 0.8rem;
   height: 10px;
 
@@ -34,7 +34,7 @@ img.bok-book-cover:hover {
 }
 
 // bok部分
-.bok-user {
+.userd-bok-user {
   overflow: visible;
   margin: 0;
   font-size: 0.8rem;
@@ -44,7 +44,7 @@ img.bok-book-cover:hover {
   };
 }
 
-.bok-body {
+.userd-bok-body {
   vertical-align: top;
   margin: 0;
   min-height: 60%;
@@ -58,7 +58,7 @@ img.bok-book-cover:hover {
   }
 }
 
-.bok-footer{
+.userd-bok-footer{
   font-size: 0.6rem;
   vertical-align: bottom;
 
@@ -67,7 +67,7 @@ img.bok-book-cover:hover {
   };
 }
 
-pre.updated {
+pre.userd-updated {
   overflow: visible;
   margin-bottom: 0;
   width: 50%;
