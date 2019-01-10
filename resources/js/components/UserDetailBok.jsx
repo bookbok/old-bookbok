@@ -84,19 +84,17 @@ export class UserDetailBok extends Component {
         return (
             <div className="card p-2">
                 <div className="d-flex">
-                    <div className="d-flex flex-column userd-bok-book-page-line mt-3 mr-3">
-                        <p>{page}<br/>{line}</p>
-                    </div>
 
                     {/* bok ---------------------------------------------------------------- */}
                     <div className="w-100">
                         <div className="d-flex flex-column h-100">
-                            <pre className="userd-bok-user border-bottom">{userBook.user.name}</pre>
+                            <pre className="userd-bok-user">{userBook.user.name}</pre>
+
                             <pre className="userd-bok-body mt-2 mr-2">{bok.body}</pre>
 
                             {/* bok-footer */}
                             <div className="userd-bok-footer mt-2">
-                                <div className="text-muted userd-updated">{bok.updated_at}</div>
+                                <div className="text-muted userd-updated">{page}&nbsp;{line}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{bok.updated_at}</div>
                                 <div className="float-right">
                                     <div className="d-flex">
                                         <div className="align-top" onClick={(e) => this.clickLike(bok.id)}>

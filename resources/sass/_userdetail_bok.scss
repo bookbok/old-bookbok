@@ -1,15 +1,3 @@
-// 本の情報
-.userd-bok-book-page-line{
-  text-align: center;
-  display: inline-block;
-  width: 80px;
-  font-size: 0.8em;
-
-  @include normal-pc {
-    width: 100px;
-  };
-}
-
 // bok部分
 .userd-bok-user {
   overflow: visible;
