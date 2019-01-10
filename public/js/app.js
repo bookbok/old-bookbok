@@ -1311,7 +1311,7 @@ var MyPageTabs = function (_Component) {
                             { to: "/users/" + userId + "/followings",
                                 className: this.props.isFollowings ? 'nav-link active' : 'nav-link',
                                 "data-toggle": this.props.isFollowings ? 'tab' : '' },
-                            "Followings"
+                            "\u30D5\u30A9\u30ED\u30FC\u4E2D"
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -1322,7 +1322,7 @@ var MyPageTabs = function (_Component) {
                             { to: "/users/" + userId + "/followers",
                                 className: this.props.isFollowers ? 'nav-link active' : 'nav-link',
                                 "data-toggle": this.props.isFollowers ? 'tab' : '' },
-                            "Followers"
+                            "\u30D5\u30A9\u30ED\u30EF\u30FC"
                         )
                     )
                 )
@@ -69336,12 +69336,11 @@ var FollowersView = function (_Component) {
     }, {
         key: "render",
         value: function render() {
+            var _this2 = this;
+
             var followers = this.props.followers;
             var user = this.props.user;
-
-            if (Object(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* isEmpty */])(user)) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__shared_Loading__["a" /* Loading */], null);
-            } else if (user && Object(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* isEmpty */])(followers)) {
+            var followerList = function followerList(view) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { className: "page-content-wrap row" },
@@ -69355,55 +69354,34 @@ var FollowersView = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 "div",
                                 { className: "col-md-8 main-content p-5" },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isFollowers: true, userId: this.props.match.params.id }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isFollowers: true, userId: _this2.props.match.params.id }),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     "div",
                                     { className: "mt-4" },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         "p",
                                         null,
-                                        "Followers"
+                                        "\u30D5\u30A9\u30ED\u30EF\u30FC"
                                     ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__shared_Loading__["a" /* Loading */], null)
+                                    view
                                 )
                             )
                         )
                     )
                 );
+            };
+
+            if (Object(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* isEmpty */])(user)) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__shared_Loading__["a" /* Loading */], null);
+            } else if (user && Object(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* isEmpty */])(followers)) {
+                return followerList(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__shared_Loading__["a" /* Loading */], null));
             }
 
             var bindedUsers = followers.map(function (user, i) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__shared_user_SimpleUser__["a" /* default */], { user: user, key: i });
             });
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                { className: "page-content-wrap row" },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__shared_user_FloatUserInfo__["a" /* FloatUserInfo */], { user: user }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "container mt-4" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "div",
-                        { className: "row justify-content-center" },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "div",
-                            { className: "col-md-8 main-content p-5" },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isFollowers: true, userId: this.props.match.params.id }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "div",
-                                { className: "mt-4" },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "p",
-                                    null,
-                                    "Followers"
-                                ),
-                                bindedUsers
-                            )
-                        )
-                    )
-                )
-            );
+            return followerList(bindedUsers);
         }
     }]);
 
@@ -69470,12 +69448,11 @@ var FollowingsView = function (_Component) {
     }, {
         key: "render",
         value: function render() {
+            var _this2 = this;
+
             var followings = this.props.followings;
             var user = this.props.user;
-
-            if (Object(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* isEmpty */])(user)) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__shared_Loading__["a" /* Loading */], null);
-            } else if (user && Object(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* isEmpty */])(followings)) {
+            var followList = function followList(view) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { className: "page-content-wrap row" },
@@ -69489,55 +69466,34 @@ var FollowingsView = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 "div",
                                 { className: "col-md-8 main-content p-5" },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isFollowings: true, userId: this.props.match.params.id }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isFollowings: true, userId: _this2.props.match.params.id }),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     "div",
                                     { className: "mt-4" },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         "p",
                                         null,
-                                        "Followings"
+                                        "\u30D5\u30A9\u30ED\u30FC\u4E2D"
                                     ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__shared_Loading__["a" /* Loading */], null)
+                                    view
                                 )
                             )
                         )
                     )
                 );
+            };
+
+            if (Object(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* isEmpty */])(user)) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__shared_Loading__["a" /* Loading */], null);
+            } else if (user && Object(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* isEmpty */])(followings)) {
+                return followList(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__shared_Loading__["a" /* Loading */], null));
             }
 
             var bindedUsers = followings.map(function (user, i) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__shared_user_SimpleUser__["a" /* default */], { user: user, key: i });
             });
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                { className: "page-content-wrap row" },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__shared_user_FloatUserInfo__["a" /* FloatUserInfo */], { user: user }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "container mt-4" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "div",
-                        { className: "row justify-content-center" },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "div",
-                            { className: "col-md-8 main-content p-5" },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isFollowings: true, userId: this.props.match.params.id }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "div",
-                                { className: "mt-4" },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "p",
-                                    null,
-                                    "Followings"
-                                ),
-                                bindedUsers
-                            )
-                        )
-                    )
-                )
-            );
+            return followList(bindUsers);
         }
     }]);
 
@@ -70472,9 +70428,7 @@ var UserBookshelf = function (_Component) {
 
             var userShelf = this.props.userBookshelf;
             var user = this.props.user;
-            if (Object(__WEBPACK_IMPORTED_MODULE_3__utils_js__["b" /* isEmpty */])(user)) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null);
-            } else if (user && Object(__WEBPACK_IMPORTED_MODULE_3__utils_js__["b" /* isEmpty */])(userShelf)) {
+            var shelfView = function shelfView(view) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { className: "page-content-wrap row" },
@@ -70488,17 +70442,22 @@ var UserBookshelf = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 "div",
                                 { className: "col-md-8 main-content p-5" },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isUserBooks: true, userId: this.props.match.params.id }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isUserBooks: true, userId: _this2.props.match.params.id }),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     "div",
                                     { className: "mt-4" },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null),
-                                    ";"
+                                    view
                                 )
                             )
                         )
                     )
                 );
+            };
+
+            if (Object(__WEBPACK_IMPORTED_MODULE_3__utils_js__["b" /* isEmpty */])(user)) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null);
+            } else if (user && Object(__WEBPACK_IMPORTED_MODULE_3__utils_js__["b" /* isEmpty */])(userShelf)) {
+                return shelfView(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null));
             }
 
             {/* ユーザーが所持する本の情報を本ビューに加工 */}
@@ -70516,29 +70475,7 @@ var UserBookshelf = function (_Component) {
                 }
             }
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                { className: "page-content-wrap row" },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__shared_user_FloatUserInfo__["a" /* FloatUserInfo */], { user: user }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "container mt-4" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "div",
-                        { className: "row justify-content-center" },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "div",
-                            { className: "col-md-8 main-content p-5" },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isUserBooks: true, userId: this.props.match.params.id }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "div",
-                                { className: "mt-4" },
-                                bookshelf
-                            )
-                        )
-                    )
-                )
-            );
+            return shelfView(bookshelf);
         }
     }]);
 
@@ -71433,12 +71370,11 @@ var LikeBokList = function (_Component) {
     }, {
         key: "render",
         value: function render() {
+            var _this2 = this;
+
             var likeBoks = this.props.likeBoks;
             var user = this.props.user;
-
-            if (Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(user)) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null);
-            } else if (user && Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(likeBoks)) {
+            var likeList = function likeList(view) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { className: "page-content-wrap row" },
@@ -71452,55 +71388,34 @@ var LikeBokList = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 "div",
                                 { className: "col-md-8 main-content p-5" },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isLikes: true, userId: this.props.match.params.id }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isLikes: true, userId: _this2.props.match.params.id }),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     "div",
                                     { className: "mt-4" },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         "p",
                                         null,
-                                        "LikeBok\u4E00\u89A7"
+                                        "Like\u3057\u305FBok"
                                     ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null)
+                                    view
                                 )
                             )
                         )
                     )
                 );
+            };
+
+            if (Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(user)) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null);
+            } else if (user && Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(likeBoks)) {
+                return likeList(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null));
             }
 
             var boks = likeBoks.map(function (likeBok, index) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Bok__["a" /* Bok */], { bok: likeBok, key: index });
             });
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                { className: "page-content-wrap row" },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__shared_user_FloatUserInfo__["a" /* FloatUserInfo */], { user: user }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "container mt-4" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "div",
-                        { className: "row justify-content-center" },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "div",
-                            { className: "col-md-8 main-content p-5" },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isLikes: true, userId: this.props.match.params.id }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "div",
-                                { className: "mt-4" },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "p",
-                                    null,
-                                    "LikeBok\u4E00\u89A7"
-                                ),
-                                boks
-                            )
-                        )
-                    )
-                )
-            );
+            return likeList(boks);
         }
     }]);
 
@@ -71559,12 +71474,11 @@ var LoveBokList = function (_Component) {
     }, {
         key: "render",
         value: function render() {
+            var _this2 = this;
+
             var loveBoks = this.props.loveBoks;
             var user = this.props.user;
-
-            if (Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(user)) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null);
-            } else if (user && Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(loveBoks)) {
+            var loveList = function loveList(view) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { className: "page-content-wrap row" },
@@ -71578,55 +71492,34 @@ var LoveBokList = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 "div",
                                 { className: "col-md-8 main-content p-5" },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isLoves: true, userId: this.props.match.params.id }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isLoves: true, userId: _this2.props.match.params.id }),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     "div",
                                     { className: "mt-4" },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         "p",
                                         null,
-                                        "LoveBok\u4E00\u89A7"
+                                        "Love\u3057\u305FBok"
                                     ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null)
+                                    view
                                 )
                             )
                         )
                     )
                 );
+            };
+
+            if (Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(user)) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null);
+            } else if (user && Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(loveBoks)) {
+                return loveList(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null));
             }
 
             var boks = loveBoks.map(function (loveBok, index) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Bok__["a" /* Bok */], { bok: loveBok, key: index });
             });
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                { className: "page-content-wrap row" },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__shared_user_FloatUserInfo__["a" /* FloatUserInfo */], { user: user }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "container mt-4" },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "div",
-                        { className: "row justify-content-center" },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            "div",
-                            { className: "col-md-8 main-content p-5" },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_user_MyPageTabs__["a" /* MyPageTabs */], { isLoves: true, userId: this.props.match.params.id }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                "div",
-                                { className: "mt-4" },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    "p",
-                                    null,
-                                    "LoveBok\u4E00\u89A7"
-                                ),
-                                boks
-                            )
-                        )
-                    )
-                )
-            );
+            return loveList(boks);
         }
     }]);
 
