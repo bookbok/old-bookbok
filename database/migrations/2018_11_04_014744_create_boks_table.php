@@ -20,7 +20,7 @@ class CreateBoksTable extends Migration
             $table->unsignedInteger('page_num_begin')->nullable();
             $table->unsignedInteger('page_num_end')->nullable();
             $table->unsignedInteger('line_num')->nullable();
-            $table->string('body');
+            $table->text('body');
             $table->dateTime('published_at')->nullable();
             $table->timestamps();
 
