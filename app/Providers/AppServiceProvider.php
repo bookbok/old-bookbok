@@ -22,6 +22,19 @@ class AppServiceProvider extends ServiceProvider
         // Force SSL in production
         if($this->app->environment() == 'production') {
             URL::forceScheme('https');
+
+            \Log::listen(function () {
+                $monolog = \Log::getLogger();
+                $slackHandler = new \Monolog\Handler\SlackHandler(
+                    env('SLACK_APP_KEY'),
+                    '#sentry',
+                    'Monolog',
+                    true,
+                    null,
+                    \Monolog\Logger::ERROR
+                );
+                $monolog->pushHandler($slackHandler);
+            });
         }
 
         DB::listen(function ($query) {
