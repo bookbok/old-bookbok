@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import { BokFlow } from "./components/BokFlow";
 import { Genres } from "./components/Genres";
 import { BookDetailView } from "./components/BookDetailView";
 import { UsersView } from "./components/UsersView";
@@ -9,9 +8,6 @@ import UserBookDetail from "./components/UserBookDetail";
 import { LikeBokList } from "./components/LikeBokList";
 import { LoveBokList } from "./components/LoveBokList";
 
-export const ConnectedBokFlow = connect(
-    state => state
-)(BokFlow);
 
 export const ConnectedGenres = connect(
     state => state

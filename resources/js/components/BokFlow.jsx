@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { store } from "../store";
 import { fetchBokFlow } from "../actions";
@@ -6,13 +7,10 @@ import { isEmpty, getAuthUser } from "../utils";
 import { Loading } from "./shared/Loading";
 import { Bok } from "./Bok.jsx";
 
-export class BokFlow extends Component {
-    constructor(props) {
-        super(props);
-        if(!getAuthUser()) this.props.history.push('/login');
-    }
-
+export class BokFlow extends React.Component {
     componentDidMount() {
+        if(!getAuthUser()) return this.props.history.push('/login');
+
         store.dispatch(fetchBokFlow());
     }
 
@@ -46,3 +44,5 @@ export class BokFlow extends Component {
         );
     }
 }
+
+export default withRouter(connect(state => state)(BokFlow));
