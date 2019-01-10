@@ -66967,6 +66967,8 @@ var Footer = function Footer() {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Home; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(1);
+
 
 
 //ホーム画面を表すコンポーネントを定義
@@ -66975,9 +66977,185 @@ var Home = function Home() {
         'div',
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h1',
-            null,
-            '\u30DB\u30FC\u30E0'
+            'div',
+            { className: 'top-wrapper' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'container' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'h1',
+                    null,
+                    '\u8AAD\u66F8\u3092\u4ECA\u3088\u308A\u3082\u7D20\u6575\u306B\u3002'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    null,
+                    '\u672C\u3068\u611F\u60F3\u3092\u307E\u3068\u3081\u3066\u7BA1\u7406\u3067\u304D\u308B\u30B5\u30FC\u30D3\u30B9\u3067\u3059\u3002'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    null,
+                    '\u4ED6\u4EBA\u306E\u66F8\u3044\u305F\u611F\u60F3\u3092\u8AAD\u3093\u3060\u308A\u3001\u8AAD\u66F8\u7BA1\u7406\u3092\u3057\u307E\u3057\u3087\u3046\u3002'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'register-wrapper mt-5' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
+                        { to: '/register', className: 'btn btn-success' },
+                        'BookBok\u3092\u59CB\u3081\u308B'
+                    )
+                )
+            )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'services-wrapper' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'container' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'service-heading' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'h2',
+                        null,
+                        'BookBok\u306B\u306F\u69D8\u3005\u306A\u4ED5\u7D44\u307F\u304C\u3042\u308A\u307E\u3059'
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'services' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'service-box' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'service-icon' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-4x fa-book' }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                '\u672C\u68DA'
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'p',
+                            { className: 'service-text' },
+                            '\u6301\u3063\u3066\u3044\u308B\u672C\u3092\u672C\u68DA\u3067\u4E00\u62EC\u7BA1\u7406\u3067\u304D\u307E\u3059\u3002'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'service-box' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'service-icon' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-4x fa-pencil-alt' }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                '\u30EC\u30D3\u30E5\u30FC'
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'p',
+                            { className: 'service-text' },
+                            '\u8AAD\u66F8\u5BB6\u3055\u3093\u305F\u3061\u306E\u611F\u60F3\u3092\u898B\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u3002'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'service-box' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'service-icon' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-4x fa-list-ul' }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                'Boks'
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'p',
+                            { className: 'service-text' },
+                            '\u672C\u306E\u611F\u60F3\u3092\u4F53\u7CFB\u7ACB\u3066\u3066\u307E\u3068\u3081\u3066\u5F8C\u3067\u898B\u8FD4\u3059\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u3002'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'service-box' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'service-icon' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-4x fa-anchor' }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                '\u8AAD\u66F8\u7BA1\u7406'
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'p',
+                            { className: 'service-text' },
+                            '\u672C\u306E\u8AAD\u66F8\u72B6\u6CC1\u3084\u30B9\u30C6\u30FC\u30BF\u30B9\u3092\u7BA1\u7406\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u3002'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'service-box' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'service-icon' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fas fa-4x fa-user-friends' }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                '\u30D5\u30A9\u30ED\u30FC'
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'p',
+                            { className: 'service-text' },
+                            '\u6C17\u306B\u306A\u308B\u8AAD\u66F8\u5BB6\u3055\u3093\u9054\u3068\u7E4B\u304C\u308A\u3092\u4F5C\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u3002'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'service-box' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'service-icon' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'far fa-4x fa-clock' }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                'Bok\u30D5\u30ED\u30FC'
+                            )
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'p',
+                            { className: 'service-text' },
+                            '\u81EA\u5206\u3084\u4ED6\u4EBA\u306E\u6700\u8FD1\u306E\u30A2\u30AF\u30C6\u30A3\u30D3\u30C6\u30A3\u3092\u78BA\u8A8D\u3067\u304D\u307E\u3059\u3002'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'clear-float-left' })
+                )
+            )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'register-wrapper' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'container' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
+                    { to: '/register', className: 'btn btn-success' },
+                    'BookBok\u3092\u59CB\u3081\u308B'
+                )
+            )
         )
     );
 };
@@ -69066,7 +69244,7 @@ var Header = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
                                     { className: 'nav-link', to: '/bok_flow' },
-                                    'BokFlow'
+                                    'Bok\u30D5\u30ED\u30FC'
                                 )
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -69659,7 +69837,7 @@ var Genres = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__actions_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_Loading__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_book_BookInfo__ = __webpack_require__(55);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -69677,14 +69855,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-
 var BookDetailView = function (_Component) {
     _inherits(BookDetailView, _Component);
 
     function BookDetailView(props) {
         _classCallCheck(this, BookDetailView);
 
-        return _possibleConstructorReturn(this, (BookDetailView.__proto__ || Object.getPrototypeOf(BookDetailView)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (BookDetailView.__proto__ || Object.getPrototypeOf(BookDetailView)).call(this, props));
+
+        _this.state = { isInvalid: false, invalidMessage: "" };
+        _this.handleRegister = _this.handleRegister.bind(_this);
+        return _this;
     }
 
     _createClass(BookDetailView, [{
@@ -69694,10 +69875,37 @@ var BookDetailView = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_2__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_1__actions_js__["c" /* fetchBookDetail */])(bookId));
         }
     }, {
+        key: "handleRegister",
+        value: function handleRegister(e) {
+            var _this2 = this;
+
+            e.preventDefault();
+
+            var user = Object(__WEBPACK_IMPORTED_MODULE_3__utils__["a" /* getAuthUser */])();
+            if (Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(user)) {
+                return this.props.history.push('/login');
+            }
+
+            Object(__WEBPACK_IMPORTED_MODULE_1__actions_js__["A" /* storeISBNToUserBookDirect */])(user.id, this.props.bookDetail.isbn).then(function (res) {
+                if (res.status === 401) {
+                    _this2.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
+                    throw new Error();
+                } else if (!res.ok) {
+                    res.json().then(function (json) {
+                        _this2.setState({ isInvalid: true, invalidMessage: json.userMessage });
+                    });
+                    throw new Error();
+                }
+                return res.json();
+            }).then(function (res) {
+                _this2.props.history.push("/users/" + res.user.id + "/user_books/" + res.id);
+            }).catch(function () {});
+        }
+    }, {
         key: "render",
         value: function render() {
             var book = this.props.bookDetail;
-            if (Object(__WEBPACK_IMPORTED_MODULE_3__utils_js__["b" /* isEmpty */])(book)) {
+            if (Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(book)) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__shared_Loading__["a" /* Loading */], null);
             }
 
@@ -69709,7 +69917,20 @@ var BookDetailView = function (_Component) {
                     { className: "row justify-content-center" },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "div",
-                        { className: "col-md-8 main-content p-5" },
+                        { className: "col-md-8 main-content p-5 clearfix" },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "div",
+                            { className: "float-right" },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                "form",
+                                { onSubmit: this.handleRegister },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    "button",
+                                    { type: "submit", className: "btn btn-success" },
+                                    "\u672C\u68DA\u306B\u8FFD\u52A0"
+                                )
+                            )
+                        ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__shared_book_BookInfo__["a" /* BookInfo */], { book: book })
                     )
                 )
@@ -70518,9 +70739,9 @@ var UserBookDetail = Object(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["e" /
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_router_dom__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_ErrorsView__ = __webpack_require__(160);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -70577,14 +70798,14 @@ var BokModal_ = function (_Component) {
 
             e.preventDefault();
 
-            var user = Object(__WEBPACK_IMPORTED_MODULE_3__utils__["a" /* getAuthUser */])();
-            if (Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(user)) {
+            var user = Object(__WEBPACK_IMPORTED_MODULE_4__utils__["a" /* getAuthUser */])();
+            if (Object(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* isEmpty */])(user)) {
                 return this.props.history.push('/login');
             }
 
             var userBookId = this.props.match.params.userBookId;
             var bok = this.makeBok();
-            Object(__WEBPACK_IMPORTED_MODULE_2__actions__["n" /* registerBok */])(userBookId, bok).then(function (res) {
+            Object(__WEBPACK_IMPORTED_MODULE_3__actions__["n" /* registerBok */])(userBookId, bok).then(function (res) {
                 if (res.status === 401) {
                     _this2.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
                     throw new Error();
@@ -70597,7 +70818,7 @@ var BokModal_ = function (_Component) {
                 return res.json();
             }).then(function (json) {
                 $('#BokModalCenter').modal('hide'); // レビュー投稿時、モーダルを閉じる
-                __WEBPACK_IMPORTED_MODULE_5__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actions__["y" /* setBokToUserBook */])(json));
+                __WEBPACK_IMPORTED_MODULE_5__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions__["y" /* setBokToUserBook */])(json));
                 _this2.initState();
             }).catch(function () {});
         }
@@ -70766,7 +70987,7 @@ var BokModal_ = function (_Component) {
     return BokModal_;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-var BokModal = Object(__WEBPACK_IMPORTED_MODULE_4_react_router_dom__["e" /* withRouter */])(BokModal_);
+var BokModal = Object(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["e" /* withRouter */])(BokModal_);
 
 /***/ }),
 /* 160 */
@@ -70840,9 +71061,9 @@ var ErrorsView = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_router_dom__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__store__ = __webpack_require__(4);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -70889,14 +71110,14 @@ var ReviewModal_ = function (_Component) {
 
             e.preventDefault();
 
-            var user = Object(__WEBPACK_IMPORTED_MODULE_3__utils__["a" /* getAuthUser */])();
-            if (Object(__WEBPACK_IMPORTED_MODULE_3__utils__["b" /* isEmpty */])(user)) {
+            var user = Object(__WEBPACK_IMPORTED_MODULE_4__utils__["a" /* getAuthUser */])();
+            if (Object(__WEBPACK_IMPORTED_MODULE_4__utils__["b" /* isEmpty */])(user)) {
                 return this.props.history.push('/login');
             }
 
             var userBookId = this.props.match.params.userBookId;
             var review = { 'body': this.state.body };
-            Object(__WEBPACK_IMPORTED_MODULE_2__actions__["x" /* reviewRegister */])(userBookId, review).then(function (res) {
+            Object(__WEBPACK_IMPORTED_MODULE_3__actions__["x" /* reviewRegister */])(userBookId, review).then(function (res) {
                 if (res.status === 401) {
                     _this2.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
                     throw new Error();
@@ -70908,7 +71129,7 @@ var ReviewModal_ = function (_Component) {
                 }
                 return res.json();
             }).then(function (res) {
-                __WEBPACK_IMPORTED_MODULE_5__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_2__actions__["z" /* setReview */])(res));
+                __WEBPACK_IMPORTED_MODULE_5__store__["a" /* store */].dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions__["z" /* setReview */])(res));
                 $('#ReviewModalCenter').modal('hide'); // レビュー投稿時、モーダルを閉じる
             }).catch(function () {});
         }
@@ -71020,7 +71241,7 @@ var ReviewModal_ = function (_Component) {
     return ReviewModal_;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-var ReviewModal = Object(__WEBPACK_IMPORTED_MODULE_4_react_router_dom__["e" /* withRouter */])(ReviewModal_);
+var ReviewModal = Object(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["e" /* withRouter */])(ReviewModal_);
 
 /***/ }),
 /* 162 */
