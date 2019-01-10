@@ -51,7 +51,7 @@ class FollowingsView extends Component {
         ));
 
         return (
-            followList(bindUsers)
+            followList(bindedUsers)
         );
     }
 }
