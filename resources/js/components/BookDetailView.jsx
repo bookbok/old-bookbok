@@ -9,7 +9,7 @@ export class BookDetailView extends Component {
     constructor(props){
         super(props);
 
-        this.state={ isbn: null, isInvalid: false, invalidMessage: ""};
+        this.state={ isInvalid: false, invalidMessage: ""};
         this.handleRegister = this.handleRegister.bind(this);
     }
 
