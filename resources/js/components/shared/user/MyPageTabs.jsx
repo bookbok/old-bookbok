@@ -34,12 +34,12 @@ export class MyPageTabs extends Component {
                     <li className="nav-item tab-follow-wrapper">
                         <Link to={`/users/${userId}/followings`}
                            className={this.props.isFollowings ? 'nav-link active' : 'nav-link'}
-                           data-toggle={this.props.isFollowings ? 'tab' : ''}>Followings</Link>
+                           data-toggle={this.props.isFollowings ? 'tab' : ''}>フォロー中</Link>
                     </li>
                     <li className="nav-item tab-follow-wrapper">
                         <Link to={`/users/${userId}/followers`}
                            className={this.props.isFollowers ? 'nav-link active' : 'nav-link'}
-                           data-toggle={this.props.isFollowers ? 'tab' : ''}>Followers</Link>
+                           data-toggle={this.props.isFollowers ? 'tab' : ''}>フォロワー</Link>
                     </li>
                 </ul>
             </div>
