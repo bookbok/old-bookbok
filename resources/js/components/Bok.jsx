@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { store } from "../store";
 import { Loading } from "./shared/Loading";
-import { BrowserRouter, Route, Link, Swirch } from 'react-router-dom';
+import { requestLike, requestUnLike, requestLove, requestUnLove } from "../actions";
+import { Link } from 'react-router-dom';
 
 export class Bok extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            likeClass: "far fa-thumbs-up fa-fw icon",
-            loveClass: "far fa-bookmark fa-fw icon",
-            isLiked: false,
-            isLoved: false,
+            likeClass: this.props.bok.liked == "0" ?  "far fa-thumbs-up fa-fw icon" : "fas fa-thumbs-up fa-fw icon like-animation",
+            loveClass: this.props.bok.loved == "0" ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation",
+            isLiked: this.props.bok.liked == "0" ? false : true,
+            isLoved: this.props.bok.loved == "0" ? false : true,
             likeCount: parseInt(this.props.bok.liked_count),
             loveCount: parseInt(this.props.bok.loved_count)
         };
@@ -38,35 +39,39 @@ export class Bok extends Component {
         return line;
     }
 
-    clickLike(e){
-        if(this.state.isLiked){     // いいねを取り消す
+    clickLike(bokId, e){
+        if(this.state.isLiked){
             this.setState({
                 likeClass: "far fa-thumbs-up fa-fw icon",
                 isLiked: false,
                 likeCount: this.state.likeCount-1
             });
-        } else {                     // いいねする
+            requestUnLike(bokId);
+        } else {
             this.setState({
                 likeClass: " fas fa-thumbs-up fa-fw icon like-animation",
                 isLiked: true,
                 likeCount: this.state.likeCount+1
             });
+            requestLike(bokId);
         }
     }
 
-    clickLove(e){
+    clickLove(bokId, e){
         if(this.state.isLoved){
             this.setState({
                 loveClass: "far fa-bookmark fa-fw icon",
                 isLoved: false,
                 loveCount: this.state.loveCount-1
             });
+            requestUnLove(bokId);
         } else {
             this.setState({
                 loveClass: " fas fa-bookmark fa-fw icon love-animation",
                 isLoved: true,
                 loveCount: this.state.loveCount+1
             });
+            requestLove(bokId);
         }
     }
 
@@ -100,13 +105,13 @@ export class Bok extends Component {
                                 <div className="text-muted updated">{bok.updated_at}</div>
                                 <div className="float-right">
                                     <div className="d-flex">
-                                        <div className="align-top" onClick={this.clickLike}>
+                                        <div className="align-top" onClick={(e) => this.clickLike(bok.id)}>
                                             <p className="liked mr-2">
                                                 <i className={this.state.likeClass}></i>
                                                 {this.state.likeCount}
                                             </p>
                                         </div>
-                                        <div onClick={this.clickLove}>
+                                        <div onClick={(e) => this.clickLove(bok.id)}>
                                             <p className="loved">
                                                 <i className={this.state.loveClass}></i>
                                                 {this.state.loveCount}

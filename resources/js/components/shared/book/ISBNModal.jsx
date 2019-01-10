@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import { withRouter } from "react-router-dom";
 import { storeISBNToUserBookDirect } from "../../../actions";
+import { getAuthUser, isEmpty } from '../../../utils';
 
 // ファイル下部でwithRouterに食わせているため、名前を特殊にしている
 class ISBNModal_ extends Component {
     // HACK: サーバー側から帰ってきたちゃんとしたメッセージに置き換える。
     static get INVALID_ISBN_LENGTH(){ return '入力されたISBNの形式が間違っています'; }
-    static get NOT_FOUND_ISBN() { return 'お探しのISBNが存在しません'; }
 
     constructor(props) {
         super(props);
@@ -27,24 +27,31 @@ class ISBNModal_ extends Component {
     handleRegisterISBN(e) {
         e.preventDefault();
         if(this.state.isbn.length !== 13 && this.state.isbn.length !== 10) {
-            this.setState({ isInvalid: true, invalidMessage: ISBNModal.INVALID_ISBN_LENGTH });
-            return;
+            return this.setState({ isInvalid: true, invalidMessage: ISBNModal.INVALID_ISBN_LENGTH });
         }
 
-        storeISBNToUserBookDirect(1, this.state.isbn).then(res => {
+        const user = getAuthUser();
+        if(isEmpty(user)) {
+            return this.props.history.push('/login');
+        }
+        storeISBNToUserBookDirect(user.id, this.state.isbn).then(res => {
             if(res.status === 401) {
                 this.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
                 throw new Error();
             } else if(!res.ok) {
-                // TODO: ISBN登録でサーバー側から正しいレスポンスが返るようになった時は、レスポンスのメッセージを表示する
-                this.setState({ isInvalid: true, invalidMessage: ISBNModal.NOT_FOUND_ISBN });
+                res.json().then(json => {
+                    this.setState({ isInvalid: true, invalidMessage: json.userMessage });
+                });
                 throw new Error();
             }
             return res.json();
         }).then(res => {
-            $('#ISBNModal').modal('hide'); // hideしないと画面がバグる
             this.props.history.push(`/users/${res.user.id}/user_books/${res.id}`);
-        }).catch(err => {});
+        }).catch(()=>{});
+    }
+
+    componentWillUnmount() {
+        $('#ISBNModal').modal('hide'); // hideしないと画面がバグる
     }
 
     render() {
@@ -83,7 +90,6 @@ class ISBNModal_ extends Component {
                                         placeholder="9784041026168"
                                         value={this.state.isbn}
                                         onChange={(e) => this.setState({ isbn: e.target.value })}
-                                        ref="isbn"
                                         required />
                                     <div className="invalid-feedback">
                                         {this.state.invalidMessage}

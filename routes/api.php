@@ -32,27 +32,19 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
 
         Route::get('logout','LoginController@logout')->name('logout');
         Route::get('user', function (Request $request) {
-            return $request->user();
+            return $request->user()->makeVisible([
+                'email',
+                'email_verified_at',
+            ]);
         })->name('user');
     });
 });
 
-Route::post('/login','Auth\\LoginController@login');
-Route::middleware('auth:api')->group(function () {
-    Route::get('/logout','Auth\\LoginController@logout');
-});
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-// test method
-Route::get('/users', function () {
-    $users = App\User::all();
-    return $users;
-});
-Route::get('/users/{user}', function (\App\User $user) {
-    return $user;
-});
+/**
+ *  Resource: User
+ */
+Route::get('/users', 'UserController@index');
+Route::get('/users/{userId}', 'UserController@show');
 
 /**
  *  Resource: BOOK
@@ -62,18 +54,11 @@ Route::get('books', 'BookController@index');
 Route::get('books/{book}', 'BookController@show');
 
 /**
- * Resource: Review
+ * Resource: Genre
  *
  */
-Route::post('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
-Route::put('user_books/{userBookId}/review', 'ReviewController@store')->middleware('auth:api');
-
-/**
- * Resource: Bok
- *
- */
-Route::get('user_books/{userBookId}/boks', 'BokController@index');
-Route::post('user_books/{userBookId}/boks', 'BokController@store')->middleware('auth:api');
+Route::get('genres','GenreController@index');
+Route::get('genres/{genre}', 'GenreController@show');
 
 /**
  * Resource: BokFlow
@@ -87,17 +72,39 @@ Route::get('bok_flow', 'BokFlowController@index')->middleware('auth:api');
 Route::get('users/{userId}/user_books','UserBookController@index');
 Route::get('users/{userId}/user_books/{userBookId}', 'UserBookController@show');
 Route::post('users/{userId}/user_books', 'UserBookController@store')->middleware('auth:api');
+Route::put('users/{userId}/user_books/{userBookId}', 'UserBookController@update')->middleware('auth:api');
 
 /**
- * Resource: Genre
+ * Resource: Review
  *
  */
-Route::get('genres','GenreController@index');
-Route::get('genres/{genre}', 'GenreController@show');
+Route::post('user_books/{userBook}/review', 'ReviewController@store')->middleware('auth:api');
+Route::put('user_books/{userBook}/review', 'ReviewController@store')->middleware('auth:api');
 
 /**
- * Resource: Like
+ * Resource: Bok
  *
  */
-Route::get('users/{userId}/likes','ReactionController@likes');
+Route::get('user_books/{userBookId}/boks', 'BokController@index');
+Route::post('user_books/{userBook}/boks', 'BokController@store')->middleware('auth:api');
 
+/**
+ * Resource: Reaction
+ *
+ */
+Route::get('users/{userId}/likes','ReactionController@userLikes');
+Route::get('users/{userId}/loves','ReactionController@userLoves');
+
+Route::post('boks/{bokId}/likes', 'ReactionController@storeLike')->middleware('auth:api');
+Route::delete('boks/{bokId}/likes', 'ReactionController@deleteLike')->middleware('auth:api');
+Route::post('boks/{bokId}/loves', 'ReactionController@storeLove')->middleware('auth:api');
+Route::delete('boks/{bokId}/loves', 'ReactionController@deleteLove')->middleware('auth:api');
+
+/**
+ * Resource: Follower
+ *
+ */
+Route::get('users/{user}/followers','FollowerController@followers');
+Route::get('users/{user}/followings','FollowerController@followings');
+Route::post('users/{userId}/followings','FollowerController@follow')->middleware('auth:api');
+Route::delete('users/{userId}/followings/{targetId}','FollowerController@unfollow')->middleware('auth:api');

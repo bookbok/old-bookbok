@@ -1,14 +1,49 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { withRouter } from "react-router-dom";
+import { getAuthUser, isEmpty } from '../../../utils';
+import { requestFollow, requestUnFollow } from '../../../actions';
+import FollowButton from './FollowButton';
 
 /**
  * @param {Object} user
- *   {id,name,avatar,description}を含むオブジェクトを渡す必要がある
+ *   FloatUserInfo_.propTypes.userを満たすオブジェクトを渡す必要がある
  *
  * このコンポーネントを使用する場合、親要素に`position: relative`を適用する必要がある
  * 基本的に親要素には`.page-content-wrap`クラスを適応すると良い
  */
-export class FloatUserInfo extends Component {
+export class FloatUserInfo_ extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { followed: this.props.user.is_following };
+        this.handleClickFollow = this.handleClickFollow.bind(this);
+    }
+
+    // propsの値が変更された時に、stateのfollowedを変更する
+    componentWillReceiveProps(nextProps) {
+        this.setState({ followed: nextProps.user.is_following });
+    }
+
+    handleClickFollow() {
+        const user = getAuthUser();
+        if(isEmpty(user)) {
+            console.log('ログインが必要です');
+            return this.props.history.push('/login');
+        }
+
+        if(this.state.followed) {
+            requestUnFollow(user.id, this.props.user.id).then(() => {
+                this.setState({ followed: !this.state.followed });
+            })
+        } else {
+            requestFollow(user.id, this.props.user.id).then(() => {
+                this.setState({ followed: !this.state.followed });
+            });
+        }
+    }
+
     render() {
         const user = this.props.user;
 
@@ -16,22 +51,18 @@ export class FloatUserInfo extends Component {
             <div className="sub-content card col-md-7">
                 <div className="d-flex">
                     <div>
-                        <a href={`/users/${user.id}`} className="text-body">
+                        <Link to={`/users/${user.id}`} className="text-body">
                             <img src={user.avatar} className="user-info-avatar" />
                             <p className="h4 font-weight-bold">{user.name}</p>
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="user-follow-info mt-2">
-                        <a href={`/users/${user.id}/followers`} className="m-2">14 フォロー</a>
-                        <a href={`/users/${user.id}/followings`} className="m-2">127 フォロワー</a>
+                        <Link to={`/users/${user.id}/followers`} className="m-2">{user.following_count} フォロー</Link>
+                        <Link to={`/users/${user.id}/followings`} className="m-2">{user.follower_count} フォロワー</Link>
                     </div>
                 </div>
-                <button
-                    onClick={this.handleClickFollow}
-                    className="btn btn-primary user-follow-btn">
-                    フォローする
-                </button>
+                <FollowButton followed={this.state.followed} handleClickFollow={this.handleClickFollow} />
 
                 <div className="user-info-accordion mt-2">
                     <label htmlFor="user-info-accordion-check" className="accordion-label text-center mt-2">
@@ -47,11 +78,17 @@ export class FloatUserInfo extends Component {
     }
 }
 
-FloatUserInfo.propTypes = {
+FloatUserInfo_.propTypes = {
     user: PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
         avatar: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
+        follower_count: PropTypes.number.isRequired,
+        following_count: PropTypes.number.isRequired,
+        is_follower: PropTypes.bool.isRequired,
+        is_following: PropTypes.bool.isRequired,
     })
 };
+
+export const FloatUserInfo = withRouter(FloatUserInfo_);

@@ -19,30 +19,23 @@ class BokFlowController extends Controller
     public function index(){
 
         //ログインしているユーザのID取得
-        $userId = Auth::id();
-        if(!$userId){
+        $authId = auth()->guard('api')->id();
+        if(!$authId){
             return response()->json(
                 [
                     'status' => 401,
                     'userMessage' => 'Bokフローの閲覧にはログインが必要です。'
                 ],
-                401,
-                [],
-                JSON_UNESCAPED_UNICODE
+                401
             );
         }
 
         //フォローしているユーザを取得
-        $followers = Follower::where('user_id', $userId)->get();
+        $followers = Follower::where('user_id', $authId)->get();
 
         //フォローが0人の場合は空配列を返す
         if($followers->isEmpty()){
-            return response()->json(
-                [],
-                200,
-                [],
-                JSON_UNESCAPED_UNICODE
-            );
+            return response()->json([]);
         }
 
         //フォローしているユーザのidを配列にパースする
@@ -63,23 +56,17 @@ class BokFlowController extends Controller
             'reactions as loved_count' => function($q) {
                 $q->isLoved();
             },
-            'reactions as liked' => function($q) use($userId) {
-                $q->isLiked()->where('user_id', $userId);
+            'reactions as liked' => function($q) use($authId) {
+                $q->isLiked()->where('user_id', $authId);
             },
-            'reactions as loved' => function($q) use($userId) {
-                $q->isLoved()->where('user_id', $userId);
+            'reactions as loved' => function($q) use($authId) {
+                $q->isLoved()->where('user_id', $authId);
             }
         ])
         ->whereIn('user_id', $ids)
         ->orderBy('updated_at', 'desc')
         ->get();
 
-        return response()->json(
-            $bokFlow,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
-
+        return response()->json($bokFlow);
     }
 }

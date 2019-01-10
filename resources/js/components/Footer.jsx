@@ -7,8 +7,8 @@ export const Footer = () => (
             <footer className="d-none d-md-block">
                 <nav>
                     <ul className="d-flex">
-                        <li><Link to="#">利用規約</Link></li>
-                        <li><Link to="#">プライバシー</Link></li>
+                        <li><Link to="/terms_of_service">利用規約</Link></li>
+                        <li><Link to="/privacy">プライバシー</Link></li>
                         <li><Link to="#">ヘルプ</Link></li>
                         <li className="mr-auto"><Link to="#">お問い合わせ</Link></li>
                         <li><Link to="#">BookBokとは</Link></li>

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'BookBok'),
 
     /*
     |--------------------------------------------------------------------------
@@ -174,7 +174,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\BookInfoScraperServiceProvider::class,
-
+        App\Providers\HelperServiceProvider::class,
     ],
 
     /*

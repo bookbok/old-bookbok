@@ -1,19 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import { Footer } from './Footer';
-import { Home } from './Home.jsx';
-import { Login } from './Login.jsx';
-import { Logout } from './Logout.jsx';
-import { UserRegister } from './UserRegister.jsx';
-import { ConnectedUserDetail } from './UserDetail.jsx';
-import { ConnectedBokFlow } from '../containers.js';
-import { ConnectedBookDetail} from '../containers.js';
-import { ConnectedBookList} from '../containers.js';
-import { ConnectedUserBookshelf } from '../containers.js';
-import { ConnectedLikeBokList } from '../containers.js';
-import { ConnectedUsersView } from '../containers.js';
-import { ConnectedUserBookDetail } from '../containers.js';
 
 // bootstrap global navigation bar
 class Header extends Component {
@@ -52,7 +40,7 @@ class Header extends Component {
                             <Link className="nav-link" to="/login">ログイン</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/signup">新規登録</Link>
+                            <Link className="nav-link" to="/register">新規登録</Link>
                         </li>
                     </ul>
                 );
@@ -73,7 +61,7 @@ class Header extends Component {
                                 <Link className="nav-link" to="/">ホーム <span className="sr-only">(current)</span></Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/bok_flow">BokFlow</Link>
+                                <Link className="nav-link" to="/bok_flow">Bokフロー</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/books">本一覧</Link>
@@ -89,35 +77,15 @@ class Header extends Component {
     }
 }
 
+Header.propTypes = {
+    loggedinUser: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+    })
+};
+
 const ConnectedHeader = connect(
     state => ({ loggedinUser: state.loggedinUser })
 )(Header);
 
-
-//react-router-dom
-export const MenuRouter = () => (
-    <BrowserRouter>
-        <div>
-            <ConnectedHeader />
-            <Switch>
-                <Route exact path="/" component={ Home } />
-                <Route exact path="/home" component={ Home } />
-                <Route exact path="/bok_flow" component={ ConnectedBokFlow } />
-                <Route exact path="/register" component={ UserRegister } />
-                <Route exact path="/login" component={ Login } />
-                <Route exact path="/logout" component={ Logout } />
-                <Route exact path="/user_register" component={ UserRegister } />
-                <Route exact path="/users/:id" component={ ConnectedUserDetail } />
-                <Route exact path="/books" component={ ConnectedBookList } />
-                <Route exact path="/books/:id" component={ ConnectedBookDetail } />
-                <Route exact path="/users/:id/user_books" component={ ConnectedUserBookshelf } />
-                <Route exact path="/users/:userId/user_books/:userBookId" component={ ConnectedUserBookDetail } />
-                <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
-                <Route exact path="/users" component={ ConnectedUsersView } />
-                <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
-            </Switch>
-            <Footer />
-        </div>
-    </BrowserRouter>
-)
-
+export default ConnectedHeader;

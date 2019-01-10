@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 /**
  * @param {Object} book
@@ -15,10 +16,10 @@ export class BookInfo extends Component {
                 <div className="d-flex">
                     <img src={book.cover} className="title-book-cover"/>
                     <h1>
-                        <a href={`/books/${book.id}`}
-                           className="ml-2 d-block text-success title-book-name">
+                        <Link to={`/books/${book.id}`}
+                           className="ml-2 d-block text-dark title-book-name">
                             {book.name}
-                        </a>
+                        </Link>
                     </h1>
                 </div>
                 <p className="mt-2">{book.author ? `著者: ${book.author}` : ''}</p>

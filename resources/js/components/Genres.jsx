@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import { fetchGenres } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils";
+import { Link } from 'react-router-dom';
 
 export class Genres extends Component {
-    constructor(props){
-        super(props);
-    };
-
     componentDidMount(){
         store.dispatch(fetchGenres());
     };
@@ -18,7 +15,7 @@ export class Genres extends Component {
         }
 
         const genres = this.props.genres.map((genre) => (
-            <li key={genre.id}><a href="#" className="text-body">{genre.name}</a></li>
+            <li key={genre.id}><Link to="#" className="text-body">{genre.name}</Link></li>
         ));
 
         return (

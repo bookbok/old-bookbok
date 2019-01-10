@@ -27,12 +27,7 @@ class UserBookController extends Controller
             ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
             ->find($userId);
 
-        return response()->json(
-            $userBooks,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($userBooks);
     }
 
     /**
@@ -49,11 +44,23 @@ class UserBookController extends Controller
      */
     public function store(Request $request, $userId)
     {
-        // ScrapeManagerの生成
-        $scrapers = resolve('app.bookInfo.scrapeManager');
+        // 認可チェック
+        $authId = auth()->guard('api')->id();
+        if($authId != $userId){
+            return response()->json(
+                [
+                    'status' => 403,
+                    'userMessage' => '自分以外の本棚に追加することはできません。'
+                ],
+                403
+            );
+        }
 
         // 入力取得
         $isbn = $request->input('isbn');
+
+        // ScrapeManagerの生成
+        $scrapers = resolve('app.bookInfo.scrapeManager');
 
         // booksテーブルに該当レコードが存在しているか確認する
         $book = Book::where('isbn', $isbn)->first();
@@ -68,9 +75,7 @@ class UserBookController extends Controller
                         'status' => 400,
                         'userMessage' => 'ISBN文字列が不正です。'
                     ],
-                    400,
-                    [],
-                    JSON_UNESCAPED_UNICODE
+                    400
                 );
             }
 
@@ -81,20 +86,31 @@ class UserBookController extends Controller
                         'status' => 500,
                         'userMessage' => 'お探しの本の情報を取得することができませんでした。'
                     ],
-                    500,
-                    [],
-                    JSON_UNESCAPED_UNICODE
+                    500
                 );
             }
             // booksテーブルに挿入する
             $new_book->save();
         }
-        // user_bookテーブルに挿入する
-        $user_book = new UserBook;
-        $user_book->user_id = auth()->id();
-        $user_book->book_id = $book ? $book->id : $new_book->id;
 
         $book = $book ?? $new_book;
+
+        // 当該ユーザのuser_bookテーブルに同じ本がすでに登録されているかのチェック
+        $is_userBook_exists = UserBook::where('book_id', $book->id)->where('user_id', $authId)->exists();
+        if($is_userBook_exists){
+            return response()->json(
+                [
+                    'status' => 400,
+                    'userMessage' => '追加しようとした本はすでに本棚に登録されています。'
+                ],
+                400
+            );
+        }
+
+        // user_bookテーブルに挿入する
+        $user_book = new UserBook;
+        $user_book->user_id = $authId;
+        $user_book->book_id = $book->id;
 
         if (in_array($book->genre_id, Genre::SPOILER_ID_LIST)) {
             $user_book->is_spoiler = true;
@@ -104,41 +120,9 @@ class UserBookController extends Controller
 
         // レスポンスデータの生成
         $userBook = UserBook::with([
-            'user:id,name,avatar,description',
-            'book:id,isbn,name,description,cover,author,genre_id',
-            'review:id,user_id,user_book_id,body,published_at',
-            'boks:id,user_id,user_book_id,body,page_num_begin,page_num_end,published_at'
-            ])
-            ->select(['id', 'user_id', 'book_id'])
-            ->find($user_book->id);
-
-        return response()->json(
-            $userBook,
-            201,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
-
-    }
-
-    /**
-     * 本棚に収められた本の詳細情報表示用API.
-     *
-     * @param  userId: ユーザの主キー
-     * @param  userBookId: ユーザブックの主キー
-     * @return JSON形式のまるっと情報
-     */
-    public function show($userId, $userBookId)
-    {
-        $authId = Auth::id();
-        if($authId === null) {
-            $authId = 0;
-        }
-
-        $userBook = UserBook::with([
-                'user:id,name,avatar,description',
-                'book:id,isbn,name,cover,description',
-                'review:id,user_id,user_book_id,body,published_at',
+                'user',
+                'book',
+                'review',
                 'boks',
                 'boks' => function($q1) use($authId) {
                     $q1->withCount([
@@ -160,16 +144,136 @@ class UserBookController extends Controller
                 'boks.userBook.book:id,name,cover',
                 'boks.userBook.user:id,name,avatar',
             ])
-            ->select(['id', 'user_id', 'book_id', 'reading_status', 'is_spoiler'])
-            ->where('id', $userBookId)
-            ->where('user_id', $userId)
-            ->take(1)->first();
+            ->find($user_book->id);
 
-        return response()->json(
-            $userBook,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE
-        );
+        return response()->json($userBook, 201);
+
     }
+
+    /**
+     * 本棚に収められた本の詳細情報表示用API.
+     *
+     * @param  userId: ユーザの主キー
+     * @param  userBookId: ユーザブックの主キー
+     * @return JSON形式のまるっと情報
+     */
+    public function show($userId, $userBookId)
+    {
+        $authId = auth()->guard('api')->id();
+        if($authId === null) {
+            $authId = 0;
+        }
+
+        $userBook = UserBook::with([
+                'user',
+                'book',
+                'review',
+                'boks',
+                'boks' => function($q1) use($authId) {
+                    $q1->withCount([
+                        'reactions as liked_count' => function($q2) {
+                            $q2->isLiked();
+                        },
+                        'reactions as loved_count' => function($q2) {
+                            $q2->isLoved();
+                        },
+                        'reactions as liked' => function($q2) use($authId) {
+                            $q2->isLiked()->where('user_id', $authId);
+                        },
+                        'reactions as loved' => function($q2) use($authId) {
+                            $q2->isLoved()->where('user_id', $authId);
+                        },
+                    ]);
+                },
+                'boks.userBook:id,user_id,book_id',
+                'boks.userBook.book:id,name,cover',
+                'boks.userBook.user:id,name,avatar',
+            ])
+            ->find($userBookId);
+
+        return response()->json($userBook);
+    }
+
+    /**
+     * ユーザの本棚の読了ステータスやネタバレフラグを変更する
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * 　PUTメソッドで送られてくる。
+     * @param $userId
+     * @param $userBookId
+     *
+     * @return \Illuminate\Http\Response
+     * 　JSON形式で本情報をまとめて返す
+     */
+    public function update(Request $request, $userId, $userBookId)
+    {
+        // 認可チェック
+        $authId = auth()->guard('api')->id();
+        if($authId != $userId){
+            return response()->json(
+                [
+                    'status' => 403,
+                    'userMessage' => '自分以外の本棚を編集することはできません。'
+                ],
+                403
+            );
+        }
+
+        $userBook = UserBook::find($userBookId);
+        if($userBook == null){
+            return response()->json(
+                [
+                    'status' => 404,
+                    'userMessage' => 'お探しの本は存在しません'
+                ],
+                404
+            );
+        }
+
+        $validator = \Validator::make($request->all(), [
+            'reading_status' => 'required|string|max:16',
+            'is_spoiler' => 'required|boolean',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'userMessage' => $validator->errors()
+            ], 400);
+        }
+
+        $userBook->reading_status = UserBook::READING_STATUS[$request->input('reading_status')];
+        $userBook->is_spoiler = $request->input('is_spoiler');
+        $userBook->save();
+
+        $userBook = UserBook::with([
+                'user',
+                'book',
+                'review',
+                'boks',
+                'boks' => function($q1) use($authId) {
+                    $q1->withCount([
+                        'reactions as liked_count' => function($q2) {
+                            $q2->isLiked();
+                        },
+                        'reactions as loved_count' => function($q2) {
+                            $q2->isLoved();
+                        },
+                        'reactions as liked' => function($q2) use($authId) {
+                            $q2->isLiked()->where('user_id', $authId);
+                        },
+                        'reactions as loved' => function($q2) use($authId) {
+                            $q2->isLoved()->where('user_id', $authId);
+                        },
+                    ]);
+                },
+                'boks.userBook:id,user_id,book_id',
+                'boks.userBook.book:id,name,cover',
+                'boks.userBook.user:id,name,avatar',
+            ])
+            ->find($userBook->id);
+
+        return response()->json($userBook);
+    }
+
 }

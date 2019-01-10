@@ -328,16 +328,17 @@ BOOKBOK　API仕様書
 
         [
             {
-                "id": 1,
-                "name": "bookuser",
-                "avatar": "https://...",
-                "description": "Hi, I'm teaching network at Kobedenshi."
-            },
-            {
-                "id": 2,
-                "name": "bookuser",
-                "avatar": "https://...",
-                "description": "Hi, I'm teaching network at Kobedenshi."
+                "id": "2",
+                "name": "test-staff",
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "",
+                "created_at": "2018-11-19 04:58:55",
+                "updated_at": "2018-11-19 04:58:55",
+                "role_id": "5",
+                "follower_count": "3",
+                "following_count": "1",
+                "is_follower": "1",
+                "is_following": "1"
             }
         ]
 
@@ -352,12 +353,18 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "id": 1,
-            "name": "user name",
-            "avator": "http://~",
-            "description": "user info"
+            "id": "2",
+            "name": "test-staff",
+            "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+            "description": "",
+            "created_at": "2018-11-19 04:58:55",
+            "updated_at": "2018-11-19 04:58:55",
+            "role_id": "5",
+            "follower_count": "3",
+            "following_count": "1",
+            "is_follower": "1",
+            "is_following": "1"
         }
-
 
 # Group BOOKS
 
@@ -507,7 +514,6 @@ BOOKBOK　API仕様書
                 "description": "user info"
             },
             "book": {
-
                 "id": 1,
                 "isbn": "9784111121221",
                 "name": "book name",
@@ -551,6 +557,87 @@ BOOKBOK　API仕様書
     + userBookId(number) - UserとBookの中間テーブルカラムのID
 
 ### あるユーザの特定のユーザーブック(本棚の本)を取得する [GET]
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "user_id": "1",
+            "book_id": "1",
+            "reading_status": "0",
+            "is_spoiler": false,
+            "user":{
+                "id": 1,
+                "name": "admin",
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": ""
+            },
+            "book":{
+                "id": 1,
+                "isbn": "9788442163316",
+                "name": "Autem expedita dolor culpa.",
+                "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
+            },
+            "review":{
+                "id": 1,
+                "user_id": "1",
+                "user_book_id": "1",
+                "body": "カムパネルラがまた稜かどかどんどうせきへ戻もどこまでも行って上のゆるした",
+                "published_at": "2018-11-25 04:31:30"
+            },
+            "boks":[
+                {
+                    "id": 1,
+                    "user_id": "1",
+                    "user_book_id": "1",
+                    "page_num_begin": "184",
+                    "page_num_end": "426",
+                    "line_num": "82",
+                    "body": "その子が言いいました。だんだん。それが惜おしてたよ。",
+                    "published_at": "1972-05-16 06:56:03",
+                    "created_at": "2018-11-13 07:07:21",
+                    "updated_at": "2004-06-01 15:10:33",
+                    "liked_count": "1",
+                    "loved_count": "2",
+                    "liked": "0",
+                    "loved": "0",
+                    "user_book":{
+                        "id": 1,
+                        "user_id": "1",
+                        "book_id": "1",
+                        "book":{
+                            "id": 1,
+                            "name": "Autem expedita dolor culpa.",
+                            "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
+                        },
+                        "user":{
+                            "id": 1,
+                            "name": "admin",
+                            "avatar": "https://avatars0.githubusercontent.com/u/22770924"
+                        }
+                    }
+                }
+            ]
+        }
+
+### あるユーザの特定のユーザーブックを更新する(読了ステータスやネタバレflg) [PUT]
+
+> MEMO:
+ - Requestの`reading_status`は読了ステータス(`none`, `wanted`, `unread`, `reading`, `readed`のどれか)
+
++ Request (application/json)
+
+    + Attributes
+
+        + is_spoiler (required)
+        + reading_status (required)
+
+    + Body
+
+            {
+                "is_spoiler": false,
+                "reading_status": "wanted",
+            }
 
 + Response 200 (application/json)
 
@@ -759,6 +846,7 @@ BOOKBOK　API仕様書
                 "page_num_begin": 1,
                 "page_num_end": 1,
                 "line_num": 1,
+                "publish": true
             }
 
 + Response 200 (application/json)
@@ -886,23 +974,50 @@ BOOKBOK　API仕様書
 
     + userId(number) - ユーザーのID
 
-### 自分をフォローしている人の一覧を取得する [GET]
+### 指定したユーザをフォローしている人の一覧を取得する [GET]
+
+認証トークンを送信しなかった場合`is_follower`と`is_following`を含まない。
 
 + Response 200 (application/json)
 
         [
             {
-                "user_id": 1,
-                "name": "user name",
-                "avator": "http://~"
+                "id": 2,
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "hey",
+                "created_at": "2018-11-19 04:58:55",
+                "updated_at": "2018-11-19 04:58:55",
+                "role_id": "5",
+                "name": "test-staff",
+                "is_follower": false,
+                "is_following": false,
+                "pivot":{
+                    "target_id": "1",
+                    "user_id": "2",
+                    "id": 4,
+                    "created_at": "2018-12-21 22:01:33",
+                    "updated_at": "2018-12-21 22:01:33"
+                }
             },
             {
-                "user_id": 2,
-                "name": "user name",
-                "avator": "http://~"
+                "id": 3,
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "そのすぐに立って二人ふたりし",
+                "created_at": "2018-11-23 10:34:01",
+                "updated_at": "2009-08-12 07:17:49",
+                "role_id": "10",
+                "name": "三宅 春香",
+                "is_follower": false,
+                "is_following": true,
+                "pivot":{
+                    "target_id": "1",
+                    "user_id": "3",
+                    "id": 5,
+                    "created_at": "2018-12-21 22:01:37",
+                    "updated_at": "2018-12-21 22:01:37"
+                }
             }
         ]
-
 
 # Group FOLLOWINGS
 
@@ -912,23 +1027,48 @@ BOOKBOK　API仕様書
 
     + userId(number) - ユーザーのID
 
-### 自分がフォローしている人の一覧を取得する [GET]
+### 指定したユーザがフォローしている人の一覧を取得する [GET]
 
-> TODO:
- - followingの詳細が見たい場合は、userの詳細を叩く
+認証トークンを送信しなかった場合`is_follower`と`is_following`を含まない。
 
 + Response 200 (application/json)
 
         [
             {
-                "user_id": 1,
-                "name": "user name",
-                "avator": "http://~"
+                "id": 2,
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "hey",
+                "created_at": "2018-11-19 04:58:55",
+                "updated_at": "2018-11-19 04:58:55",
+                "role_id": "5",
+                "name": "test-staff",
+                "is_follower": false,
+                "is_following": false,
+                "pivot":{
+                    "user_id": "2",
+                    "target_id": "1",
+                    "id": 4,
+                    "created_at": "2018-12-21 22:01:33",
+                    "updated_at": "2018-12-21 22:01:33"
+                }
             },
             {
-                "user_id": 2,
-                "name": "user name",
-                "avator": "http://~"
+                "id": 3,
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "そのすぐに立って二人ふたりし",
+                "created_at": "2018-11-23 10:34:01",
+                "updated_at": "2009-08-12 07:17:49",
+                "role_id": "10",
+                "name": "三宅 春香",
+                "is_follower": true,
+                "is_following": false,
+                "pivot":{
+                    "user_id": "3",
+                    "target_id": "1",
+                    "id": 5,
+                    "created_at": "2018-12-21 22:01:37",
+                    "updated_at": "2018-12-21 22:01:37"
+                }
             }
         ]
 
