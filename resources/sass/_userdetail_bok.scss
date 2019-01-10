@@ -1,7 +1,9 @@
 // 本の情報
-.userd-bok-book-info{
+.userd-bok-book-pages{
   text-align: center;
+  display: inline-block;
   width: 80px;
+  font-size: 0.8em;
 
   @include normal-pc {
     width: 100px;
@@ -21,8 +23,8 @@
 
 .userd-bok-body {
   vertical-align: top;
+  display: inline-block;
   margin: 0;
-  min-height: 60%;
   white-space: pre-wrap;
   font-size: 0.7rem;
   line-height: 1.5em;

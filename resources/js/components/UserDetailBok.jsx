@@ -84,10 +84,8 @@ export class UserDetailBok extends Component {
         return (
             <div className="card p-2">
                 <div className="d-flex">
-                    <div className="d-flex flex-column userd-bok-book-info mr-3">
-                        <div className="text-muted userd-bok-book-footer mt-2">
-                            <pre>{page}<br/>{line}</pre>
-                        </div>
+                    <div className="d-flex flex-column userd-bok-book-pages mt-3 mr-3">
+                        <p>{page}<br/>{line}</p>
                     </div>
 
                     {/* bok ---------------------------------------------------------------- */}
