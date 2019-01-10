@@ -94,7 +94,11 @@ export class UserDetailBok extends Component {
 
                             {/* bok-footer */}
                             <div className="d-flex userd-bok-footer mt-2">
-                                <div className="text-muted userd-page-line-updated">{page}&nbsp;&nbsp;&nbsp;{line}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{bok.updated_at}</div>
+                                <div className="text-muted userd-page-line-updated">
+                                    <div className="userd-page">{page}</div>
+                                    <div className="userd-line ml-1 mr-3">{line}</div>
+                                    <div className="userd-updated">{bok.updated_at}</div>
+                                </div>
                                 <div className="d-flex ml-auto">
                                     <div className="align-top" onClick={(e) => this.clickLike(bok.id)}>
                                         <p className="liked mr-2">

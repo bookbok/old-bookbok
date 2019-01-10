@@ -32,7 +32,8 @@
   };
 }
 
-pre.userd-page-line-updated {
+.userd-page-line-updated {
+  display: block;
   overflow: visible;
   margin-bottom: 0;
   width: 80%;
@@ -41,5 +42,22 @@ pre.userd-page-line-updated {
 
   @include normal-pc {
     margin-top: 0;
+    display: inline;
+  }
+}
+
+.userd-page {
+  display: inline;
+ }
+
+.userd-line {
+  display: inline;
+}
+
+.userd-updated {
+  display: block;
+
+  @include normal-pc {
+    display: inline;
   }
 }
