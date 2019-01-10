@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('user_book_id');
-            $table->string('body');
+            $table->text('body');
             $table->dateTime('published_at')->nullable();
             $table->timestamps();
 
