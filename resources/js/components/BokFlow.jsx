@@ -1,14 +1,20 @@
 import React, { Component } from "react";
-import { fetchBokFlow } from "../actions";
+import { withRouter } from "react-router-dom";
 import { store } from "../store";
-import { isEmpty } from "../utils.js";
+import { fetchBokFlow } from "../actions";
+import { isEmpty, getAuthUser } from "../utils";
 import { Loading } from "./shared/Loading";
 import { Bok } from "./Bok.jsx";
 
 export class BokFlow extends Component {
+    constructor(props) {
+        super(props);
+        if(!getAuthUser()) this.props.history.push('/login');
+    }
+
     componentDidMount() {
         store.dispatch(fetchBokFlow());
-    };
+    }
 
     render() {
         if(isEmpty(this.props.bokFlow)){
