@@ -35,7 +35,7 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name' => 'SUGINO',
             'email' => 'sugino@example.com',
-            'password' => bcrypt('password'),
+            'password' => '$2y$10$nYDttVj18d/LVbcug0P70Ot8bvNTdBloQHRhGLdngo7z3jD8hL72u',
             'role_id' => 10,
             'avatar' => 'https://avatars0.githubusercontent.com/u/29668738',
         ]);
@@ -187,7 +187,7 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name'      => 'kento-oka',
             'email'     => 'kento-oka@example.com',
-            'password'  => bcrypt('password'),
+            'password' => '$2y$10$nYDttVj18d/LVbcug0P70Ot8bvNTdBloQHRhGLdngo7z3jD8hL72u',
             'role_id'   => 10,
             'avatar'    => 'https://avatars0.githubusercontent.com/u/30544668',
         ]);
@@ -278,7 +278,7 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name' => 'kazuki',
             'email' => 'yrtmeci@example.com',
-            'password' => bcrypt('password'),
+            'password' => '$2y$10$nYDttVj18d/LVbcug0P70Ot8bvNTdBloQHRhGLdngo7z3jD8hL72u',
             'role_id' => 10,
             'avatar' => 'https://avatars0.githubusercontent.com/u/41029768',
         ]);
@@ -356,7 +356,7 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name' => 'OYASAI',
             'email' => 'oyasai@example.com',
-            'password' => bcrypt('password'),
+            'password' => '$2y$10$nYDttVj18d/LVbcug0P70Ot8bvNTdBloQHRhGLdngo7z3jD8hL72u',
             'role_id' => 10,
             'avatar' => 'https://avatars3.githubusercontent.com/u/25961633',
         ]);
@@ -432,7 +432,7 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name' => 'AKARI-I',
             'email' => 'akari@example.com',
-            'password' => bcrypt('password'),
+            'password' => '$2y$10$nYDttVj18d/LVbcug0P70Ot8bvNTdBloQHRhGLdngo7z3jD8hL72u',
             'role_id' => 10,
             'avatar' => 'https://avatars0.githubusercontent.com/u/30049713?s=400&u=00ee60703f10456080bc172aad4a966c3c954d5e&v=4',
         ]);
@@ -495,7 +495,7 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name' => 'NAKKA-K',
             'email' => 'nakka@example.com',
-            'password' => bcrypt('password'),
+            'password' => '$2y$10$nYDttVj18d/LVbcug0P70Ot8bvNTdBloQHRhGLdngo7z3jD8hL72u',
             'role_id' => 10,
             'avatar' => 'https://avatars0.githubusercontent.com/u/22770924',
         ]);

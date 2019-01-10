@@ -11,11 +11,11 @@ import { TermsOfServiceView } from './TermsOfServiceView';
 import { UserRegister } from './UserRegister';
 
 import Header from './Header';
+import BokFlow from './BokFlow';
 import { ConnectedFollowersView } from './FollowersView';
 import { ConnectedFollowingsView } from './FollowingsView';
 import { ConnectedUserDetail } from './UserDetail';
 import {
-    ConnectedBokFlow,
     ConnectedBookDetail,
     ConnectedBookList,
     ConnectedUserBookshelf,
@@ -36,7 +36,7 @@ const RouterWithHeader = () => (
                 <Route exact path="/home" component={ Home } />
                 <Route exact path="/privacy" component={ PrivacyPolicyView } />
                 <Route exact path="/terms_of_service" component={ TermsOfServiceView } />
-                <Route exact path="/bok_flow" component={ ConnectedBokFlow } />
+                <Route exact path="/bok_flow" component={ BokFlow } />
                 <Route exact path="/register" component={ UserRegister } />
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/logout" component={ Logout } />
