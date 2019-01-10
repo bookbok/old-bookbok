@@ -15,8 +15,8 @@ img.bok-book-cover {
   max-height: 80px;
 
   @include normal-pc {
-    width: 128px;
-    max-height: 160px;
+    min-width: 64px;
+    min-height: 80px;
   };
 }
 
