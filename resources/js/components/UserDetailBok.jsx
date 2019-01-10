@@ -88,8 +88,7 @@ export class UserDetailBok extends Component {
                     {/* bok ---------------------------------------------------------------- */}
                     <div className="w-100">
                         <div className="d-flex flex-column h-100">
-                            <pre className="userd-bok-user">{userBook.user.name}</pre>
-
+                            <pre className="userd-bok-user border-bottom">{userBook.user.name}</pre>
                             <pre className="userd-bok-body mt-2 mr-2">{bok.body}</pre>
 
                             {/* bok-footer */}
@@ -100,7 +99,7 @@ export class UserDetailBok extends Component {
                                     <div className="userd-updated">{bok.updated_at}</div>
                                 </div>
                                 <div className="d-flex ml-auto">
-                                    <div className="align-top" onClick={(e) => this.clickLike(bok.id)}>
+                                    <div onClick={(e) => this.clickLike(bok.id)}>
                                         <p className="liked mr-2">
                                             <i className={this.state.likeClass}></i>
                                             {this.state.likeCount}
