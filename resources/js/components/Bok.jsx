@@ -88,12 +88,14 @@ export class Bok extends Component {
                         <Link to={`/books/${bok.user_book.book.id}`}>
                             <img className="bok-book-cover mx-auto d-block" src={userBook.book.cover}/>
                         </Link>
-                        <pre className="font-weight-bold bok-book-title">{userBook.book.name}</pre>
                     </div>
 
                     {/* bok ---------------------------------------------------------------- */}
                     <div className="d-flex flex-column h-100">
-                        <pre className="bok-user border-bottom">{userBook.user.name}</pre>
+                        <div className="d-flex border-bottom">
+                            <div className="bok-book-title">{userBook.book.name}</div>
+                            <div className="bok-user ml-auto mr-4">{userBook.user.name}</div>
+                        </div>
                         <pre className="bok-body mt-2 mr-2">{bok.body}</pre>
 
                         {/* bok-footer */}

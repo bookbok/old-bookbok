@@ -1,5 +1,5 @@
 .bok-book-info {
-  padding: 2px;
+  padding: 5px;
 }
 
 .bok-book-cover {
@@ -13,18 +13,21 @@ img:hover {
 
 .bok-book-title {
   display: none;
-  font-size: 0.8rem;
 
   @include normal-pc {
-    display: block;
+    display: inline;
+    font-size: 1rem;
+    word-wrap: break-word;
+    vertical-align: center;
   }
 }
 
-// bok部分
 .bok-user {
   overflow: visible;
   margin: 0;
   font-size: 0.8rem;
+  display: inline;
+  vertical-align: center;
 
   @include normal-pc {
     font-size: 1rem;
