@@ -122,3 +122,5 @@ export class UserDetailBok extends Component {
         );
     }
 }
+
+export default UserDetailBok;
