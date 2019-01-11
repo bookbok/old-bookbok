@@ -130,6 +130,10 @@ class User extends Authenticatable implements MustVerifyEmail
             })->get();
     }
 
+    public function socialAccounts(){
+        return $this->hasMany('App\SocialAccount');
+    }
+
     /**
      * {@inheritdoc}
      */
