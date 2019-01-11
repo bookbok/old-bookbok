@@ -23,12 +23,12 @@ export class MyPageTabs extends Component {
                     <li className="nav-item">
                         <Link to={`/users/${userId}/likes`}
                            className={this.props.isLikes ? 'nav-link active' : 'nav-link'}
-                           data-toggle={this.props.isLikes ? 'tab' : ''}>Likes</Link>
+                           data-toggle={this.props.isLikes ? 'tab' : ''}>いいね</Link>
                     </li>
                     <li className="nav-item">
                         <Link to={`/users/${userId}/loves`}
                            className={this.props.isLoves ? 'nav-link active' : 'nav-link'}
-                           data-toggle={this.props.isLoves ? 'tab' : ''}>Loves</Link>
+                           data-toggle={this.props.isLoves ? 'tab' : ''}>ブックマーク</Link>
                     </li>
 
                     <li className="nav-item tab-follow-wrapper">
