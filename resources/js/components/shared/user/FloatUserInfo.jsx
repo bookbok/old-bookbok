@@ -83,7 +83,7 @@ FloatUserInfo_.propTypes = {
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
         avatar: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
+        description: PropTypes.string,
         follower_count: PropTypes.number.isRequired,
         following_count: PropTypes.number.isRequired,
         is_follower: PropTypes.bool.isRequired,
