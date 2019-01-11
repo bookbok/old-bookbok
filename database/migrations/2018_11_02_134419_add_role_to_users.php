@@ -28,7 +28,9 @@ class AddRoleToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['role_id']);
+            if (DB::getDriverName() !== 'sqlite') {
+                $table->dropForeign(['role_id']);
+            }
             $table->dropColumn('role_id');
         });
     }
