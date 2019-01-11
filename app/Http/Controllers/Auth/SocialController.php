@@ -5,11 +5,19 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use Lcobucci\JWT\Parser;
 
-class LoginController extends Controller
+class SocialController extends Controller
 {
-    public const TOKEN_NAME = 'Laravel Password Grant Client';
+    /**
+     * @var string[] プロバイダ名をキーとした、このクラスのメソッド名の連想配列
+     * 
+     * 登録されるコールバックは引数に文字列(アクセストークン)を取り、App\Userを返す。
+     */
+    private const PROVIDER_CALLBACK_LIST = [
+        'google' => 'connectGoogle',
+    ];
 
     /**
      * ログイン処理
@@ -21,8 +29,8 @@ class LoginController extends Controller
      */
     public function login(Request $request) {
         $validator = \Validator::make($request->all(), [
-            'email'    => 'required|string',
-            'password' => 'required|string',
+            'provider' => 'required|string',
+            'token'    => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -31,7 +39,7 @@ class LoginController extends Controller
                 'userMessage' => $validator->errors()
             ], 400);
         }
-
+/*
         $user = User::where('email', $request->email)->first();
 
         if (
@@ -43,29 +51,16 @@ class LoginController extends Controller
                 'userMessage' => '認証に失敗しました。',
             ], 422);
         }
-
+*/
         return response()->json([
             'token' => $user->createToken(self::TOKEN_NAME)->accessToken,
         ], 200);
     }
 
     /**
-     * ログアウト処理
-     *
-     * @param   Request $request
-     *  リクエスト
-     *
-     * @return  \Illuminate\Http\Response
+     * Googleユーザ認証処理
      */
-    public function logout(Request $request) {
-        $value = $request->bearerToken();
-        $id    = (new Parser())->parse($value)->getHeader('jti');
-        $token = $request->user()->tokens->find($id);
+    public function connectGoogle(string $token){
 
-        $token->revoke();
-
-        return response()->json([
-            'userMessage' => 'ログアウトしました。',
-        ], 200);
     }
 }
