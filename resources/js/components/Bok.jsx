@@ -99,22 +99,24 @@ export class Bok extends Component {
                             <pre className="bok-body mt-2">{bok.body}</pre>
 
                             {/* bok-footer */}
-                            <div className="bok-footer mt-2">
-                                <div className="text-muted updated">{bok.updated_at}</div>
-                                <div className="float-right">
-                                    <div className="d-flex">
-                                        <div className="align-top" onClick={(e) => this.clickLike(bok.id)}>
-                                            <p className="liked mr-2">
-                                                <i className={this.state.likeClass}></i>
-                                                {this.state.likeCount}
-                                            </p>
-                                        </div>
-                                        <div onClick={(e) => this.clickLove(bok.id)}>
-                                            <p className="loved">
-                                                <i className={this.state.loveClass}></i>
-                                                {this.state.loveCount}
-                                            </p>
-                                        </div>
+                            <div className="d-flex bok-footer mt-2">
+                                <div className="text-muted page-line-updated">
+                                    <div className="bok-page">{page}</div>
+                                    <div className="bok-line ml-1 mr-3">{line}</div>
+                                    <div className="bok-updated">{bok.updated_at}</div>
+                                </div>
+                                <div className="d-flex ml-auto mt-auto">
+                                    <div className="align-top" onClick={(e) => this.clickLike(bok.id)}>
+                                        <p className="liked mr-2">
+                                            <i className={this.state.likeClass}></i>
+                                            {this.state.likeCount}
+                                        </p>
+                                    </div>
+                                    <div onClick={(e) => this.clickLove(bok.id)}>
+                                        <p className="loved">
+                                            <i className={this.state.loveClass}></i>
+                                            {this.state.loveCount}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
