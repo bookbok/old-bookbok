@@ -13,14 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard(); //Eloquent の Mass Assignment制約を解除
 
-        $this->call(UsersTableSeeder::class);
         $this->call(RolesTableSeeder::class);
-        $this->call(BooksTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
         $this->call(GenresTableSeeder::class);
-        $this->call(UserBooksTableSeeder::class);
-        $this->call(ReviewsTableSeeder::class);
-        $this->call(BoksTableSeeder::class);
-        $this->call(ReactionsTableSeeder::class);
 
         // プロトタイプ用に作ったSeeder
         $this->call(PrototypesTableSeeder::class);
