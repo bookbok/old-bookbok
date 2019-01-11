@@ -15,6 +15,7 @@ migrate:
 migrate/fresh:
 	composer dump-autoload
 	php artisan migrate:fresh --seed
+	php artisan passport:install --force
 
 c:
 	php artisan tinker
