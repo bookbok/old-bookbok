@@ -318,6 +318,52 @@ BOOKBOK　API仕様書
             "userMessage": "試行回数が多すぎます。"
         }
 
+## Social Login [/api/auth/social/login]
+
+### ソーシャルログインする [POST]
+
++ Request (application/json)
+
+    + Attributes
+
+        + provider: google (required) - 認証プロバイダ名
+        + token: (required) - クライアント側で取得したアクセストークン
+
+    + Body
+
+            {
+                "provider": "google",
+                "token": "Kf23F...0Fi9s"
+            }
+
++ Response 200 (application/json)
+
+        {
+            "token": "eyJ0e...ZN2z0",
+            "isFirstTime": true
+        }
+
++ Response 400 (application/json)
+
+        {
+            "status": 400,
+            "userMessage": {
+                "provider": [
+                    "validation.required"
+                ],
+                "token": [
+                    "validation.required"
+                ]
+            }
+        }
+
++ Response 422 (application/json)
+
+        {
+            "status":422,
+            "userMessage": "認証に失敗しました。"
+        }
+
 # Group USERS
 
 ## Users [/api/users]
