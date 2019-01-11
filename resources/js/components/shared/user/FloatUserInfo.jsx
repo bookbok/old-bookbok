@@ -62,7 +62,10 @@ export class FloatUserInfo_ extends Component {
                         <Link to={`/users/${user.id}/followers`} className="m-2">{user.follower_count} フォロワー</Link>
                     </div>
                 </div>
-                <FollowButton followed={this.state.followed} handleClickFollow={this.handleClickFollow} />
+                <FollowButton
+                    userId={user.id}
+                    followed={this.state.followed}
+                    handleClickFollow={this.handleClickFollow} />
 
                 <div className="user-info-accordion mt-2">
                     <label htmlFor="user-info-accordion-check" className="accordion-label text-center mt-2">
