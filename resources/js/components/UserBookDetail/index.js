@@ -5,7 +5,7 @@ import { store } from "../../store";
 import { isEmpty, getAuthUser } from "../../utils";
 
 import { Loading } from "../shared/Loading";
-import { UserDetailBok } from "../UserDetailBok";
+import { UserDetailBok } from "./UserDetailBok";
 import { FloatUserInfo } from "../shared/user/FloatUserInfo";
 import { BookInfo } from "../shared/book/BookInfo";
 import { BokModal } from "../BokModal";

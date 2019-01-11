@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { store } from "../store";
-import { Loading } from "./shared/Loading";
-import { requestLike, requestUnLike, requestLove, requestUnLove } from "../actions";
+import { store } from "../../store";
+import { Loading } from "../shared/Loading";
+import { requestLike, requestUnLike, requestLove, requestUnLove } from "../../actions";
 import { Link } from 'react-router-dom';
 
 export class UserDetailBok extends Component {
