@@ -58,8 +58,8 @@ export class FloatUserInfo_ extends Component {
                     </div>
 
                     <div className="user-follow-info mt-2">
-                        <Link to={`/users/${user.id}/followers`} className="m-2">{user.following_count} フォロー</Link>
-                        <Link to={`/users/${user.id}/followings`} className="m-2">{user.follower_count} フォロワー</Link>
+                        <Link to={`/users/${user.id}/followings`} className="m-2">{user.following_count} フォロー</Link>
+                        <Link to={`/users/${user.id}/followers`} className="m-2">{user.follower_count} フォロワー</Link>
                     </div>
                 </div>
                 <FollowButton followed={this.state.followed} handleClickFollow={this.handleClickFollow} />
