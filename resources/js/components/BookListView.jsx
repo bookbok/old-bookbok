@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import { fetchBookList } from "../actions";
 import { store } from "../store";
 import { isEmpty } from "../utils";
@@ -9,7 +10,7 @@ import { Loading } from "./shared/Loading";
 import { BookView } from "./BookView";
 import { ISBNModal } from "./shared/book/ISBNModal";
 
-export class BookListView extends Component {
+class BookListView extends Component {
     constructor(props) {
         super(props);
 
@@ -66,3 +67,5 @@ export class BookListView extends Component {
         );
     }
 }
+
+export default withRouter(connect(state => state)(BookListView));
