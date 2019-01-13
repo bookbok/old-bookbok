@@ -14,10 +14,15 @@ export function successfulStatus(code) {
 
 // オブジェクトを受け取って、GETリクエストのクエリパラメーターに変換する
 export function convertQuery(obj) {
-    return Object.keys(obj).map((key) => {
-        return key + "=" + obj[key];
-    }).join('&')
+    if(Array.isArray(obj.genres)){
+        return  "genres[]=" + obj.genres[0];
+    }else{
+        return Object.keys(obj).map((key) => {
+            return key + "=" + obj[key];
+        }).join('&')
+    }
 }
+
 
 // DateTime形式の文字列を年月日だけの日本表記に変換する
 export function makeDateJP(dateTime) {
