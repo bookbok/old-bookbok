@@ -49,14 +49,6 @@ img.user-info-avatar {
 /* == !accordion == */
 
 
-.user-follow-btn {
-  max-width: 100%;
-
-  @include middle-screen {
-    max-width: 30%;
-  }
-}
-
 .user-follow-info {
   //line-height: 50px;
 }

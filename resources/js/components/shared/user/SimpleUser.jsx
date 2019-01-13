@@ -10,14 +10,14 @@ class SimpleUser_ extends Component {
     constructor(props) {
         super(props);
 
-        const is_following = this.props.user.is_following ? this.props.users.is_following : false;
+        const is_following = this.props.user.is_following ? this.props.user.is_following : false;
         this.state = { followed: is_following };
         this.handleClickFollow = this.handleClickFollow.bind(this);
     }
 
     // propsの値が変更された時に、stateのfollowedを変更する
     componentWillReceiveProps(nextProps) {
-        const is_following = nextProps.user.is_following ? nextProps.users.is_following : false;
+        const is_following = nextProps.user.is_following ? nextProps.user.is_following : false;
         this.setState({ followed: is_following });
     }
 
