@@ -13,7 +13,7 @@ export class BookListView extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { q: ""};
+        this.state = { q: "" };
         this.handleSubmitSearchText = this.handleSubmitSearchText.bind(this);
         this.handleClickSearchGenre = this.handleClickSearchGenre.bind(this);
     }

@@ -14,14 +14,16 @@ export function successfulStatus(code) {
 
 // オブジェクトを受け取って、GETリクエストのクエリパラメーターに変換する
 export function convertQuery(obj) {
-    if(Array.isArray(obj.genres)){
-        return  "genres[]=" + obj.genres[0];
-    }else{
-        return Object.keys(obj).map((key) => {
+    return Object.keys(obj).map((key) => {
+        if(Array.isArray(obj[key])){
+        //    return key 
+            return key + "[]=" + obj[key];
+        }else{
             return key + "=" + obj[key];
-        }).join('&')
-    }
+        }
+    }).join('&')
 }
+
 
 
 // DateTime形式の文字列を年月日だけの日本表記に変換する

@@ -6,15 +6,9 @@ import { Link } from 'react-router-dom';
 
 export class Genres extends Component {
 
-    constructor(props) {
-        super(props);
-
-    }
-
     componentDidMount(){
         store.dispatch(fetchGenres());
     };
-
 
     render() {
         if(isEmpty(this.props.genres)){
@@ -22,7 +16,11 @@ export class Genres extends Component {
         }
 
         const genres = this.props.genres.map((genre) => (
-            <li key={genre.id}><Link to="#" onClick={() => this.props.handleClickSearchGenre(genre.id)} className="text-body" >{genre.name}</Link></li>
+            <li key={genre.id}>
+                <Link to="#" onClick={() =>this.props.handleClickSearchGenre(genre.id)} className="text-body" >
+                    {genre.name}
+                </Link>
+            </li>
         ));
 
         return (
