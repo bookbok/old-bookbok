@@ -16,8 +16,9 @@ export function successfulStatus(code) {
 export function convertQuery(obj) {
     return Object.keys(obj).map((key) => {
         if(Array.isArray(obj[key])){
-        //    return key 
-            return key + "[]=" + obj[key];
+            return obj[key].map((value) => {
+                return key + "[]=" + value;
+            }).join('&')
         }else{
             return key + "=" + obj[key];
         }
