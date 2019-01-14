@@ -18,11 +18,12 @@ export class BookView extends Component {
         }
 
         return (
-            <div className="d-inline-block col-md-4 col-4">
+            <div className={this.props.className || "book-view-box"}>
                 <Link to={this.props.link ? this.props.link : "#"}>
-                    <img className="book-view-img" src={book.cover}/>
+                    <img src={book.cover}
+                        className="book-view-img"
+                        alt={book.name} />
                     {bookName}
-                    <br/>
                 </Link>
             </div>
          );
