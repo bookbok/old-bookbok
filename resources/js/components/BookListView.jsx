@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { fetchBookList } from "../actions";
 import { store } from "../store";
 import { isEmpty } from "../utils";
@@ -28,22 +29,13 @@ class BookListView extends Component {
     }
 
     render() {
-        const books = this.props.books;
-        if(isEmpty(books)) {
+        if(isEmpty(this.props.books)) {
             return <Loading />;
         }
 
-        const booksInfo = books.map((book, i) => {
-            return <BookView book={book} link={`/books/${book.id}`} key={i} />
+        const books = this.props.books.map((book) => {
+            return <BookView book={book} link={`/books/${book.id}`} key={book.id} />
         });
-
-        const bookList = [];
-        for(let index = 0, key = booksInfo.length ; index < booksInfo.length; index++) {
-            bookList.push(booksInfo[index]);
-            if(index % 3 == 2 || booksInfo.length == (index+1)) {
-                bookList.push(<div key={key++}></div>);
-            }
-        }
 
         return(
             <div className="container mt-4">
@@ -59,8 +51,8 @@ class BookListView extends Component {
                     <div className="m-3">
                         <ISBNModal />
                     </div>
-                    <div className="mt-4">
-                        {bookList}
+                    <div className="mt-4 book-list-wrapper">
+                        {books}
                     </div>
                 </div>
             </div>
