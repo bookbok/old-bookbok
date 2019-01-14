@@ -18,7 +18,7 @@ export class BookView extends Component {
         }
 
         return (
-            <div className="book-view-box">
+            <div className={this.props.className || "book-view-box"}>
                 <Link to={this.props.link ? this.props.link : "#"}>
                     <img src={book.cover}
                         className="book-view-img"
