@@ -53,6 +53,7 @@ class BookListView extends Component {
                     </div>
                     <div className="mt-4 book-list-wrapper">
                         {books}
+                        <div className="clear-float-left" />
                     </div>
                 </div>
             </div>
