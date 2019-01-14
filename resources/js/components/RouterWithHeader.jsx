@@ -15,9 +15,9 @@ import BokFlow from './BokFlow';
 import { ConnectedFollowersView } from './FollowersView';
 import { ConnectedFollowingsView } from './FollowingsView';
 import { ConnectedUserDetail } from './UserDetail';
+import ConnectedBookList from './BookListView';
 import {
     ConnectedBookDetail,
-    ConnectedBookList,
     ConnectedUserBookshelf,
     ConnectedLikeBokList,
     ConnectedLoveBokList,
