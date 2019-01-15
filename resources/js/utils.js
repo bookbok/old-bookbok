@@ -19,8 +19,8 @@ export function convertQuery(obj) {
             return obj[key].map((value) => {
                 return key + "[]=" + value;
             }).join('&')
-            return key + "=" + obj[key];
         }
+        return key + "=" + obj[key];
     }).join('&')
 }
 
