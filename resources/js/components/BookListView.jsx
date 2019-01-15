@@ -17,6 +17,7 @@ class BookListView extends Component {
 
         this.state = { q: "" };
         this.handleSubmitSearchText = this.handleSubmitSearchText.bind(this);
+        this.handleClickSearchGenre = this.handleClickSearchGenre.bind(this);
     }
 
     componentDidMount() {
@@ -26,6 +27,10 @@ class BookListView extends Component {
     handleSubmitSearchText(q) {
         this.setState({ q: q }); // 現状stateに入れる必要はないが、ジャンルでの絞り込みも始めた時に必要になりそうなので
         store.dispatch(fetchBookList({ q: q }));
+    }
+
+    handleClickSearchGenre(genre) {
+        store.dispatch(fetchBookList({ genres: [genre] }));
     }
 
     render() {
@@ -42,7 +47,7 @@ class BookListView extends Component {
                 <div className="row justify-content-center">
                     <div className="d-flex">
                         <div className="m-3">
-                            <ConnectedGenres />
+                            <ConnectedGenres handleClickSearchGenre={this.handleClickSearchGenre} />
                         </div>
                         <div className="m-3">
                             <Search handleSubmit={this.handleSubmitSearchText} />
