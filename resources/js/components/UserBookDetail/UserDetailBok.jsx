@@ -88,7 +88,11 @@ export class UserDetailBok extends Component {
                     {/* bok ---------------------------------------------------------------- */}
                     <div className="w-100">
                         <div className="d-flex flex-column h-100">
-                            <pre className="userd-bok-user border-bottom">{userBook.user.name}</pre>
+                            <pre className="userd-bok-user border-bottom">
+                                <Link to={`/users/${userBook.user_id}`}>
+                                    {userBook.user.name}
+                                </Link>
+                            </pre>
                             <pre className="userd-bok-body mt-2 mr-2">{bok.body}</pre>
 
                             {/* bok-footer */}
