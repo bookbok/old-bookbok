@@ -91,10 +91,12 @@ export class Bok extends Component {
                     </div>
 
                     {/* bok ---------------------------------------------------------------- */}
-                    <div className="bok-area p-2">
+                    <div className="bok-area">
                         <div className="d-flex flex-column h-100">
                             <div className="d-flex border-bottom">
-                                <div className="bok-user mr-auto">{userBook.user.name}</div>
+                                <div className="bok-user mr-auto">
+                                    <Link to={`/users/${userBook.user_id}`}>{userBook.user.name}</Link>
+                                </div>
                             </div>
                             <pre className="bok-body mt-2">{bok.body}</pre>
 
