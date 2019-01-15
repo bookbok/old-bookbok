@@ -91,7 +91,7 @@ export class Bok extends Component {
                     </div>
 
                     {/* bok ---------------------------------------------------------------- */}
-                    <div className="bok-area p-2">
+                    <div className="bok-area">
                         <div className="d-flex flex-column h-100">
                             <div className="d-flex border-bottom">
                                 <div className="bok-user mr-auto">
