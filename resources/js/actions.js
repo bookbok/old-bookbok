@@ -89,7 +89,7 @@ export const fetchBookList = (query = {}) => {
     return utils.wrapFetch(DOMAIN + "/api/books/", {
         body: query,
     }).then(json => {
-        dispatch(setBookList(json));
+        store.dispatch(setBookList(json));
     });
 }
 
