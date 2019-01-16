@@ -85,13 +85,11 @@ export const fetchBookDetail = (id) => dispatch => {
 
 export const setBookList = books => ({type: types.SET_BOOKLIST, books});
 // TODO: Rename to fetchBooksWithQuery
-export const fetchBookList = (query = {}) => dispatch => {
-    utils.wrapFetch(DOMAIN + "/api/books/", {
+export const fetchBookList = (query = {}) => {
+    return utils.wrapFetch(DOMAIN + "/api/books/", {
         body: query,
     }).then(json => {
         dispatch(setBookList(json));
-    }).catch(err => {
-        console.error("fetchBookList: ", err);
     });
 }
 
