@@ -1,5 +1,4 @@
 .bok-book-cover-area {
-  padding: 10px 0px 5px;
   width: 25%;
 
   @include normal-pc {
@@ -11,6 +10,7 @@
   width: 64px;
   height: 80px;
   box-shadow: 0 0 3px 2px #bababa;
+  margin-top: 0.3em;
 
   @include normal-pc {
     width: 76px;
@@ -25,10 +25,11 @@
 .bok-area {
   position: relative;
   width: 75%;
+  padding-left: 0.5em;
 
   @include normal-pc {
-    padding: 10px 10px 10px 20px;
     width: 85%;
+    padding-left: 1em;
   }
 }
 
