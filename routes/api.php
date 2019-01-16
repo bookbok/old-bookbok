@@ -23,6 +23,11 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
     Route::post('password/reset/send', 'ResetPasswordController@send')->name('password.reset.send');
     Route::post('password/reset', 'ResetPasswordController@reset')->name('password.reset');
 
+    Route::prefix('social')->name('social.')->group(function(){
+        Route::get('{provider}/redirect', 'SocialController@redirect')->name('redirect');
+        Route::get('{provider}/callback', 'SocialController@callback')->name('callback');
+    });
+
     Route::middleware('auth:api')->group(function () {
         Route::get('email/verify/{id}', 'VerificationController@verify')
             ->name('email.verify')

@@ -5,62 +5,79 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use Lcobucci\JWT\Parser;
+use Illuminate\Validation\Rule;
 
 class SocialController extends Controller
 {
-    /**
-     * @var string[] プロバイダ名をキーとした、このクラスのメソッド名の連想配列
-     * 
-     * 登録されるコールバックは引数に文字列(アクセストークン)を取り、App\Userを返す。
-     */
-    private const PROVIDER_CALLBACK_LIST = [
-        'google' => 'connectGoogle',
+    private const PROVIDER_LIST = [
+        'google',
     ];
 
     /**
-     * ログイン処理
+     * リダイレクト処理
+     * 
+     * @param   string  $provider
+     *  プロバイダ名
+     * 
+     * @return  \Illuminate\Http\Response
+     */
+    public function redirect(string $provider){
+        if(!in_array($provider, self::PROVIDER_LIST)){
+            return $this->generateUnsuportProviderResponse($provider);
+        }
+    
+        return response()->json([
+            'provider' => $provider,
+            'uri'      => \Socialite::driver($provider)->stateless()->redirect()->getTargetUrl(),
+        ]);
+    }
+
+    /**
+     * Oauthコールバック処理
+     * 
+     * 認可プロバイダから受け取ったパラメータを解釈して、認証トークンを発行する。
      *
-     * @param   Request $request
-     *  リクエスト
+     * @param   string  $provider
+     *  プロバイダ名
      *
      * @return  \Illuminate\Http\Response
      */
-    public function login(Request $request) {
-        $validator = \Validator::make($request->all(), [
-            'provider' => 'required|string',
-            'token'    => 'required|string',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'userMessage' => $validator->errors()
-            ], 400);
+    public function callback(string $provider){
+        if(!in_array($provider, self::PROVIDER_LIST)){
+            return $this->generateUnsuportProviderResponse($provider);
         }
-/*
-        $user = User::where('email', $request->email)->first();
 
-        if (
-            null === $user ||
-            false === password_verify($request->password, $user->password)
-        ) {
-            return response()->json([
-                'status' => 422,
-                'userMessage' => '認証に失敗しました。',
-            ], 422);
+        // MEMO: メールアドレスの別人による再利用の可能性
+        $isFirstTime  = false;
+        $providerUser = \Socialite::driver($provider)->stateless()->user();
+        $user         = User::query()->firstOrNew(['email' => $providerUser->getEmail()]);
+
+        if (!$user->exists) {
+            $user->name  = $providerUser->getName();
+            $isFirstTime = true;
+
+            $user->save(); 
         }
-*/
+
         return response()->json([
-            'token' => $user->createToken(self::TOKEN_NAME)->accessToken,
+            'provider'    => $provider,
+            'token'       => $user->createToken(LoginController::TOKEN_NAME)->accessToken,
+            'isFirstTime' => $isFirstTime,
         ], 200);
     }
 
     /**
-     * Googleユーザ認証処理
+     * サポートしていないプロバイダを受け取った場合のレスポンスを生成する
+     * 
+     * @param   string  $provider
+     *  プロバイダ名
+     * 
+     * @return  \Illuminate\Http\Response
      */
-    public function connectGoogle(string $token){
-
+    protected function generateUnsuportProviderResponse(string $provider){
+        return response()->json([
+            'status'      => 400,
+            'userMessage' => sprintf('認可プロバイダとして%sは使用できません。', $provider),
+        ], 400);
     }
 }
