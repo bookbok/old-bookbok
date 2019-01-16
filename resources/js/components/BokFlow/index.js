@@ -30,7 +30,7 @@ export class BokFlow extends React.Component {
         }
 
         const bokFlow = this.props.bokFlow.map(bok => {
-            return <div className="mt-2" key={i}><Bok bok={bok}/></div>
+            return <div className="mt-2" key={bok.id}><Bok bok={bok}/></div>
         });
 
         return (

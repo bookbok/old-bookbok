@@ -1,6 +1,9 @@
 footer {
-  border-top: 1px solid #eaeaea;
   color: lightgray;
+
+  nav {
+    border-top: 1px solid darkgray;
+  }
 
   a {
     color: gray;
@@ -13,10 +16,16 @@ footer {
     list-style: none;
 
     li {
-      margin-left: 1em;
-    }
-    li:first-child {
       margin-left: 0;
+      margin-top: 1em;
+
+      @include tablet {
+        margin-right: 0.6em;
+      }
+
+      @include normal-pc {
+        margin-left: 1em;
+      }
     }
   }
 }

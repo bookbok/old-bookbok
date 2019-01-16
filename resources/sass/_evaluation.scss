@@ -1,14 +1,10 @@
 .icon {
   font-size: 1rem;
   vertical-align: bottom;
-  @include normal-pc {
-    font-size: 1.2rem;
-  };
 }
 
 .liked {
   margin-bottom: 0;
-  vertical-align: top;
 
   @include normal-pc {
     margin-right: 5px;
@@ -18,7 +14,6 @@
 .loved {
   margin-bottom: 0;
   margin-right: 2px;
-  vertical-align: top;
 }
 
 .like-animation{
