@@ -9,7 +9,7 @@ use Lcobucci\JWT\Parser;
 
 class LoginController extends Controller
 {
-    private const TOKEN_NAME = 'Laravel Password Grant Client';
+    public const TOKEN_NAME = 'Laravel Password Grant Client';
 
     /**
      * ログイン処理

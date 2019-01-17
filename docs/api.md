@@ -318,6 +318,53 @@ BOOKBOK　API仕様書
             "userMessage": "試行回数が多すぎます。"
         }
 
+## Social Login Redirect URI [/api/auth/social/{provider}/redirect]
+
++ Parameters
+
+    + provider: google (string) - プロバイダ名
+
+### ソーシャルログインの認可プロバイダのページのURIを取得する [GET]
+
++ Response 200 (application/json)
+
+        {
+            "provider": "google",
+            "uri": "https://example.com/oauth/v2/...?status=..."
+        }
+
++ Response 400 (application/json)
+
+        {
+            "status":400,
+            "userMessage": "認可プロバイダとしてgoogleは使用できません。"
+        }
+
+## Social Login Callback [/api/auth/social/{provider}/callback]
+
+認可プロバイダから戻ってきた際にクエリに認可コードなどの情報が含まれているので、それをこのAPIに付与して呼ぶこと!
+
++ Parameters
+
+    + provider: google (string) - プロバイダ名
+
+### ソーシャルログインを行う [GET]
+
++ Response 200 (application/json)
+
+        {
+            "provider": "google",
+            "token": "eyJ0e...ZN2z0",
+            "isFirstTime": true
+        }
+
++ Response 400 (application/json)
+
+        {
+            "status":400,
+            "userMessage": "認可プロバイダとしてgoogleは使用できません。"
+        }
+
 # Group USERS
 
 ## Users [/api/users]
