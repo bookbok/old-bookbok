@@ -33,7 +33,7 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
         Route::get('logout','LoginController@logout')->name('logout');
 
         Route::get('user', 'UserController@show')->name('user');
-        Route::PUT('user', 'UserController@update')->name('user.update');
+        Route::put('user', 'UserController@update')->name('user.update');
     });
 });
 
