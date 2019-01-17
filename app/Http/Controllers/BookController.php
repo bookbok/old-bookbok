@@ -81,7 +81,8 @@ class BookController extends Controller
                                 ->limit(5)
                                 ->get(['reviews.user_id', 'users.name', 'reviews.user_book_id', 'reviews.body', 'reviews.updated_at']);
                      
-        return response()->json(array('book' => $book, 'reviews' => $latestReviewPosts));
+                                
+        return response()->json(['book' => $book, 'reviews' => $latestReviewPosts]);
     }
 
     /**
