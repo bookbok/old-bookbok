@@ -74,8 +74,8 @@ export class Bok extends Component {
         const userBook = this.props.bok.user_book;
         const page = this.makePageViewStr(bok);
         const line = this.makeLineViewStr(bok);
-        const likeClass = (this.state.isLiked == "0" ?  "far fa-thumbs-up fa-fw icon" : "fas fa-thumbs-up fa-fw icon like-animation");
-        const loveClass = (this.state.isLoved == "0" ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation");
+        const likeClass = (!this.state.isLiked ?  "far fa-thumbs-up fa-fw icon" : "fas fa-thumbs-up fa-fw icon like-animation");
+        const loveClass = (!this.state.isLoved ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation");
 
         return (
             <div className="card p-2">
