@@ -50,7 +50,9 @@ class BooksSuspense extends React.Component {
                 loadMore={this.loadMore}
                 hasMore={this.state.hasMore}
                 loader={<Loading key="0"/>}>
+
                 {books}
+                <div className="clear-float-left" />
             </InfiniteScroll>
         );
     }
