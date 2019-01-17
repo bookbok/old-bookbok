@@ -53,7 +53,11 @@ class SocialController extends Controller
         $user         = User::query()->firstOrNew(['email' => $providerUser->getEmail()]);
 
         if (!$user->exists) {
-            $user->name  = $providerUser->getName();
+            do{
+                $name = str_random(15);
+            }while(null !== User::where('name', $name)->first());
+
+            $user->name  = $name;
             $isFirstTime = true;
 
             $user->save(); 
