@@ -66,11 +66,10 @@ class UserBookDetail_ extends Component {
     }
 
     buttonDisplayCheck(loginUser, userId) {
-        if((loginUser !== undefined && loginUser !== null) && loginUser.id == userId) {
+        if(loginUser && loginUser.id == userId) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     render(){
