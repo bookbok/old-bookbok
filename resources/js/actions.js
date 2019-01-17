@@ -51,7 +51,7 @@ export const requestLogout = () => dispatch => {
 }
 
 export const directUserRegister = (userInfo) => {
-    return utils.wrapFetch(DOMAIN + "/api/auth/register", {
+    return utils.smartFetch(DOMAIN + "/api/auth/register", {
         method: "POST",
         body: userInfo
     });
