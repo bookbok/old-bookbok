@@ -49,7 +49,6 @@ class BookListView extends Component {
                         {/* async component */}
                         <Suspense maxDuration={1000} fallback={<Loading />}>
                             <BooksSuspense books={this.props.books}/>
-                            <div className="clear-float-left" />
                         </Suspense>
                     </div>
                 </div>

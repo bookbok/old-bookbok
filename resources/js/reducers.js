@@ -17,6 +17,14 @@ export function rootReducer(
         case types.SET_BOOKLIST:
             return { ...state, books: action.books };
 
+        case types.ADD_BOOKS: // ページ情報は新しいものに変更し、データは古いものと結合する
+            return { ...state,
+                books: {
+                    ...action.books,
+                    data: [ ...state.books.data, ...action.books.data ]
+                }
+            };
+
         case types.SET_USER_BOOKSHELF:
             return { ...state, userBookshelf: action.userBookshelf };
 

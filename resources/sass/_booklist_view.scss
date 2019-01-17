@@ -19,12 +19,14 @@
         float: left;
         width: 33.33%; // 1/3 size
         padding: 10px;
+        min-height: 190px;
 
         @include middle-screen {
             width: 20%; // 1/5 size
         }
         @include normal-pc {
             width: 12.5%; // 1/8 size
+            min-height: 240px;
         }
     }
 
@@ -33,12 +35,14 @@
         float: left;
         width: 33.33%; // 1/3 size
         padding: 10px;
+        min-height: 190px;
 
         @include middle-screen {
             width: 25%; // 1/4 size
         }
         @include normal-pc {
             width: 20%; // 1/5 size
+            min-height: 240px;
         }
     }
 
