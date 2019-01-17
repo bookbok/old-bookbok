@@ -69,7 +69,14 @@ class UserBookDetail_ extends Component {
         if(isEmpty(this.props.userBookDetail) || isEmpty(this.props.user)){
             return <Loading />;
         }
+
         const userBook = this.props.userBookDetail;
+        const loginUser = getAuthUser();
+        console.log("ログインユーザー:" + loginUser);
+        let reviewModalView = "off";
+        if(loginUser !== undefined) {
+            reviewModalView = "on";
+        }
 
         const boks = userBook.boks.map((bok) => {
             return <div className="mt-2" key={bok.id}><UserDetailBok bok={bok}/></div>
@@ -96,7 +103,7 @@ class UserBookDetail_ extends Component {
 
                             <BookInfo book={book} />
                             <hr />
-                            <h3 className="mt-5">レビュー<div className="float-right"><ReviewModal /></div></h3>
+                            <h3 className="mt-5">レビュー<div className="float-right"><ReviewModal display={reviewModalView} /></div></h3>
                             <p className="mt-4">{review.body}</p>
                             <hr />
                             <h3 className="mt-5">Boks <div className="float-right"><BokModal /></div></h3>
