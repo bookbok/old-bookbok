@@ -65,17 +65,25 @@ class UserBookDetail_ extends Component {
         });
     }
 
+    buttonDisplayCheck(loginUser, userId) {
+        if((loginUser !== undefined && loginUser !== null) && loginUser.id == userId) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     render(){
         if(isEmpty(this.props.userBookDetail) || isEmpty(this.props.user)){
             return <Loading />;
         }
 
         const userBook = this.props.userBookDetail;
-        const loginUser = getAuthUser();
+
         let reviewModalView = "off";
         let bokModalView = "off";
 
-        if((loginUser !== undefined && loginUser !== null) && loginUser.id == this.props.match.params.userId) {
+        if(this.buttonDisplayCheck(getAuthUser(), this.props.match.params.userId)) {
             reviewModalView = "on";
             bokModalView = "on";
         }
