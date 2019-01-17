@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +12,7 @@ class UserController extends Controller
      * @param   Request  $request
      *  リクエスト
      * 
-     * @return  User
+     * @return  \App\User
      */
     public function show(Request $request)
     {
@@ -29,7 +28,7 @@ class UserController extends Controller
      * @param   Request $request
      *  リクエスト
      * 
-     * @return  User
+     * @return  \App\User
      */
     public function update(Request $request)
     {
