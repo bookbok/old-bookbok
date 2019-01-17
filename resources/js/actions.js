@@ -89,6 +89,16 @@ export const fetchBookList = (query = {}) => {
         body: query,
     }).then(json => {
         store.dispatch(setBookList(json));
+        return json;
+    });
+}
+export const addBooks = books => ({type: types.ADD_BOOKS, books});
+export const fetchMoreBooks = (query = {}) => {
+    return utils.wrapFetch('/api/books/', {
+        body: query,
+    }).then(json => {
+        store.dispatch(addBooks(json));
+        return json;
     });
 }
 
