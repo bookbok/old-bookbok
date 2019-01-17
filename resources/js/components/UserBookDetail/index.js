@@ -79,9 +79,6 @@ class UserBookDetail_ extends Component {
 
         const userBook = this.props.userBookDetail;
 
-        let reviewModalView = "off";
-        let bokModalView = "off";
-
         const isModalView = this.buttonDisplayCheck(getAuthUser(), this.props.match.params.userId)
 
         const boks = userBook.boks.map((bok) => {
