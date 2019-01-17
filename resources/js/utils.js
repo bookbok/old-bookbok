@@ -15,9 +15,16 @@ export function successfulStatus(code) {
 // オブジェクトを受け取って、GETリクエストのクエリパラメーターに変換する
 export function convertQuery(obj) {
     return Object.keys(obj).map((key) => {
+        if(Array.isArray(obj[key])){
+            return obj[key].map((value) => {
+                return key + "[]=" + value;
+            }).join('&')
+        }
         return key + "=" + obj[key];
     }).join('&')
 }
+
+
 
 // DateTime形式の文字列を年月日だけの日本表記に変換する
 export function makeDateJP(dateTime) {

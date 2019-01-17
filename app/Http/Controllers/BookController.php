@@ -17,7 +17,7 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-        [$queries, $genres, $offset, $maxResult] = $this->normalizeSearchParameters($request);
+        [$queries, $genres] = $this->normalizeSearchParameters($request);
 
         $likeConds = array_map(
             function($like){
@@ -48,13 +48,10 @@ class BookController extends Controller
             $builder->whereIn('genre_id', $genres);
         }
 
-        if (null !== $offset) {
-            $builder->offset($offset);
-        }
+        $books = $builder->paginate(24)
+                         ->appends($request->only(['q', 'genres']));
 
-        $collection = $builder->limit($maxResult)->get();
-
-        return response()->json($collection);
+        return response()->json($books);
     }
 
     /**
@@ -91,16 +88,12 @@ class BookController extends Controller
         $validator = \Validator::make($request->all(), [
             'q'         => 'required|string',
             'genres'    => 'required|array',
-            'offset'    => 'required|integer|min:1',
-            'maxResult' => 'required|integer|min:1|max:100',
         ]);
 
         $errors    = $validator->errors();
         $query     = $errors->has('q')         ? ''   : $request->query('q', '');
         $genres    = $errors->has('genres')    ? []   : $request->query('genres', []);
-        $offset    = $errors->has('offset')    ? null : $request->query('offset', null);
-        $maxResult = $errors->has('maxResult') ? 100  : $request->query('maxResult', 100);
-
+       
         $queries = array_filter(
             explode(
                 ' ',
@@ -118,6 +111,6 @@ class BookController extends Controller
             })
         );
 
-        return [$queries, $genres, $offset, $maxResult];
+        return [$queries, $genres];
     }
 }

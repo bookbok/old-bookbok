@@ -55,6 +55,9 @@ class ReviewModal_ extends Component {
 
 
     render() {
+        if(this.props.display === false){
+            return null;
+        }
         return (
             <div>
                 <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#ReviewModalCenter">
