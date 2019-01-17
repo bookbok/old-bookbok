@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -72,7 +73,15 @@ class BookController extends Controller
             'genre_id',
         ]);
 
-        return response()->json($book);
+        $latestReviewPosts = DB::table('user_book')
+                                ->where('user_book.book_id', '=', $book->id)
+                                ->join('reviews', 'user_book.id', '=', 'reviews.user_book_id')
+                                ->join('users', 'users.id', '=', 'reviews.user_id')
+                                ->orderby('reviews.updated_at', 'DESC')
+                                ->limit(5)
+                                ->get(['reviews.user_id', 'users.name', 'reviews.user_book_id', 'reviews.body', 'reviews.updated_at']);
+                     
+        return response()->json(array('book' => $book, 'reviews' => $latestReviewPosts));
     }
 
     /**
