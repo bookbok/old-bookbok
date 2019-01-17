@@ -23,13 +23,13 @@ export const fetchBokFlow = () => dispatch => {
 
 // Get authentication token
 export const setAuthToken = (token) => ({ type: types.SET_AUTH_TOKEN, token });
-export const requestLogin = (loginUser) => dispatch => {
-    utils.wrapFetch('/api/auth/login', {
+export const requestLogin = (loginUser) => {
+    return utils.wrapFetch('/api/auth/login', {
         method: "POST",
         body: loginUser
     }).then(json => {
-        dispatch(setAuthToken(json.token));
-        dispatch(getLoggedinUser());
+        store.dispatch(setAuthToken(json.token));
+        store.dispatch(getLoggedinUser());
     });
 }
 
