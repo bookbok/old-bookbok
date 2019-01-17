@@ -9,31 +9,25 @@ import { BookView } from "../BookView";
 class BooksSuspense extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { hasMore: true }
         this.loadMore = this.loadMore.bind(this);
+        this.hasMoreBooks = this.hasMoreBooks.bind(this);
     }
 
     loadMore(page) {
-        // HACK: InfiniteScrollのhasMoreプロパティがfalseでも、一度だけ呼び出されてしまうため(ライブラリバグ？)
-        if(this.state.hasMore === false) return;
-        fetchMoreBooks({ page: page }).then(json => {
-            this.setHasMoreBooks(json.next_page_url);
-        });
+        fetchMoreBooks({ page: page });
     }
 
-    setHasMoreBooks(nextPageURL) {
-        if(!nextPageURL) {
-            this.setState({ hasMore: false });
-        } else {
-            this.setState({ hasMore: true });
+    // BooksAPIからのレスポンスをそのまま受け取り、次のページがあるかboolで返す
+    hasMoreBooks(books) {
+        if(books && books.next_page_url) {
+            return true;
         }
+        return false;
     }
 
     render() {
         if (!this.props.books) {
-            throw fetchBookList().then((json) => {
-                this.setHasMoreBooks(json.next_page_url);
-            });
+            throw fetchBookList();
         }
 
         if(isEmpty(this.props.books.data)) {
@@ -48,7 +42,7 @@ class BooksSuspense extends React.Component {
                 initialLoad={false}
                 pageStart={1}
                 loadMore={this.loadMore}
-                hasMore={this.state.hasMore}
+                hasMore={this.hasMoreBooks(this.props.books)}
                 loader={<Loading key="0"/>}>
 
                 {books}
