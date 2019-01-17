@@ -5,6 +5,7 @@ import { isEmpty } from "../utils";
 import { Link } from 'react-router-dom';
 
 export class Genres extends Component {
+
     componentDidMount(){
         store.dispatch(fetchGenres());
     };
@@ -15,7 +16,11 @@ export class Genres extends Component {
         }
 
         const genres = this.props.genres.map((genre) => (
-            <li key={genre.id}><Link to="#" className="text-body">{genre.name}</Link></li>
+            <li key={genre.id}>
+                <Link to="#" onClick={() =>this.props.handleClickSearchGenre(genre.id)} className="text-body" >
+                    {genre.name}
+                </Link>
+            </li>
         ));
 
         return (

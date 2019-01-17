@@ -99,6 +99,44 @@ BOOKBOK　API仕様書
             "userMessage": "権限がありません。"
         }
 
+### 認証したユーザーの情報を更新する [PUT]
+
++ Request (application/json)
+
+    + Attributes
+
+        + name (required)
+        + avatar (required)
+        + description(required)
+
+    + Body
+
+            {
+                "name": "this_is_new_name",
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "これは自己紹介だ。"
+            }
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "email": "example@example.com",
+            "email_verified_at": null,
+            "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+            "description": "これは自己紹介だ。",
+            "created_at": "2018-10-24 15:53:09",
+            "updated_at": "2018-10-24 15:53:09",
+            "role_id": "1",
+            "name": "this_is_new_name"
+        }
+
++ Response 401 (application/json)
+
+        {
+            "status":401,
+            "userMessage": "権限がありません。"
+        }
+
 ## Register [/api/auth/register]
 
 ### ユーザを新規登録する [POST]
