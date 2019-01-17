@@ -72,9 +72,8 @@ class UserBookDetail_ extends Component {
 
         const userBook = this.props.userBookDetail;
         const loginUser = getAuthUser();
-        console.log("ログインユーザー:" + loginUser);
         let reviewModalView = "off";
-        if(loginUser !== undefined && loginUser.id == this.props.match.params.userId) {
+        if((loginUser !== undefined && loginUser !== null) && loginUser.id == this.props.match.params.userId) {
             reviewModalView = "on";
         }
 
