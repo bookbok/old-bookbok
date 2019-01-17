@@ -15,13 +15,13 @@ return [
     'accepted'             => ':attributeを承認してください。',
     'active_url'           => ':attributeは正しいURLではありません。',
     'after'                => ':attributeは:date以降の日付にしてください。',
-    'after_or_equal'       => ':attributeは:date以降の日付にしてください。',          // 追加
+    'after_or_equal'       => ':attributeは:date以降の日付にしてください。',
     'alpha'                => ':attributeは英字のみにしてください。',
     'alpha_dash'           => ':attributeは英数字とハイフンのみにしてください。',
     'alpha_num'            => ':attributeは英数字のみにしてください。',
     'array'                => ':attributeは配列にしてください。',
     'before'               => ':attributeは:date以前の日付にしてください。',
-    'before_or_equal'      => ':attributeは:date以前の日付にしてください。',          // 追加
+    'before_or_equal'      => ':attributeは:date以前の日付にしてください。',
     'between'              => [
         'numeric' => ':attributeは:min?:maxまでにしてください。',
         'file'    => ':attributeは:min?:max KBまでのファイルにしてください。',
@@ -35,43 +35,43 @@ return [
     'different'            => ':attributeは:otherと違うものにしてください。',
     'digits'               => ':attributeは:digits桁にしてください',
     'digits_between'       => ':attributeは:min?:max桁にしてください。',
-    'dimensions'           => ':attributeは画像サイズが不正です。',                   // 追加
-    'distinct'             => ':attributeは重複しています。',                         // 追加
+    'dimensions'           => ':attributeは画像サイズが不正です。',
+    'distinct'             => ':attributeは重複しています。',
     'email'                => ':attributeを正しいメールアドレスにしてください。',
     'exists'               => '選択された:attributeは正しくありません。',
-    'file'                 => ':attributeはファイルにしてください。',                 // 追加
+    'file'                 => ':attributeはファイルにしてください。',
     'filled'               => ':attributeは必須です。',
     'gt'                   => [
-        'numeric' => ':attributeは:value以上にしてください。',                        // 追加
-        'file'    => ':attributeは:value KB以上のファイルにしてください。.',          // 追加
-        'string'  => ':attributeは:value文字以上にしてください。',                    // 追加
-        'array'   => ':attributeは:value個以上にしてください。',                      // 追加
+        'numeric' => ':attributeは:value以上にしてください。',
+        'file'    => ':attributeは:value KB以上のファイルにしてください。.',
+        'string'  => ':attributeは:value文字以上にしてください。',
+        'array'   => ':attributeは:value個以上にしてください。',
     ],
     'gte'                  => [
-        'numeric' => ':attributeは:value以上にしてください。',                        // 追加
-        'file'    => ':attributeは:value KB以上のファイルにしてください。.',          // 追加
-        'string'  => ':attributeは:value文字以上にしてください。',                    // 追加
-        'array'   => ':attributeは:value個以上にしてください。',                      // 追加
+        'numeric' => ':attributeは:value以上にしてください。',
+        'file'    => ':attributeは:value KB以上のファイルにしてください。.',
+        'string'  => ':attributeは:value文字以上にしてください。',
+        'array'   => ':attributeは:value個以上にしてください。',
     ],
     'image'                => ':attributeは画像にしてください。',
     'in'                   => '選択された:attributeは正しくありません。',
-    'in_array'             => 'The :attribute field does not exist in :other.',       // 追加
+    'in_array'             => 'The :attribute field does not exist in :other.',
     'integer'              => ':attributeは整数にしてください。',
     'ip'                   => ':attributeを正しいIPアドレスにしてください。',
-    'ipv4'                 => ':attributeを正しいIPv4アドレスにしてください。',       // 追加
-    'ipv6'                 => ':attributeを正しいIPv6アドレスにしてください。',       // 追加
-    'json'                 => ':attributeを正しいJSON形式にしてください。',           // 追加
+    'ipv4'                 => ':attributeを正しいIPv4アドレスにしてください。',
+    'ipv6'                 => ':attributeを正しいIPv6アドレスにしてください。',
+    'json'                 => ':attributeを正しいJSON形式にしてください。',
     'lt'                   => [
-        'numeric' => ':attributeは:value より小さくなければなりません。',             // 追加
-        'file'    => ':attributeは:value KBより小さくなければなりません。',           // 追加
-        'string'  => ':attributeは:value 文字以下でなければなりません。',             // 追加
-        'array'   => ':attributeは:value 項目以下でなければなりません。',             // 追加
+        'numeric' => ':attributeは:value より小さくなければなりません。',
+        'file'    => ':attributeは:value KBより小さくなければなりません。',
+        'string'  => ':attributeは:value 文字以下でなければなりません。',
+        'array'   => ':attributeは:value 項目以下でなければなりません。',
     ],
     'lte'                  => [
-        'numeric' => ':attributeは:value以下にしてください。',                        // 追加
-        'file'    => ':attributeは:value KB以下のファイルにしてください。.',          // 追加
-        'string'  => ':attributeは:value文字以下にしてください。',                    // 追加
-        'array'   => ':attributeは:value個以下にしてください。',                      // 追加
+        'numeric' => ':attributeは:value以下にしてください。',
+        'file'    => ':attributeは:value KB以下のファイルにしてください。.',
+        'string'  => ':attributeは:value文字以下にしてください。',
+        'array'   => ':attributeは:value個以下にしてください。',
     ],
     'max'                  => [
         'numeric' => ':attributeは:max以下にしてください。',
@@ -80,7 +80,7 @@ return [
         'array'   => ':attributeは:max個以下にしてください。',
     ],
     'mimes'                => ':attributeは:valuesタイプのファイルにしてください。',
-    'mimetypes'            => ':attributeは:valuesタイプのファイルにしてください。',  // 追加
+    'mimetypes'            => ':attributeは:valuesタイプのファイルにしてください。',
     'min'                  => [
         'numeric' => ':attributeは:min以上にしてください。',
         'file'    => ':attributeは:min KB以上のファイルにしてください。.',
@@ -88,13 +88,13 @@ return [
         'array'   => ':attributeは:min個以上にしてください。',
     ],
     'not_in'               => '選択された:attributeは正しくありません。',
-    'not_regex'            => ':attributeの書式が正しくありません。',                 // 追加
+    'not_regex'            => ':attributeの書式が正しくありません。',
     'numeric'              => ':attributeは数字にしてください。',
-    'present'              => ':attributeは存在する必要があります。',                 // 追加
+    'present'              => ':attributeは存在する必要があります。',
     'regex'                => ':attributeの書式が正しくありません。',
     'required'             => ':attributeは必須です。',
     'required_if'          => ':otherが:valueの時、:attributeは必須です。',
-    'required_unless'      => ':otherが:valueにないの時、:attributeは必須です。',     // 追加
+    'required_unless'      => ':otherが:valueにないの時、:attributeは必須です。',
     'required_with'        => ':valuesが存在する時、:attributeは必須です。',
     'required_with_all'    => ':valuesが存在する時、:attributeは必須です。',
     'required_without'     => ':valuesが存在しない時、:attributeは必須です。',
@@ -109,7 +109,7 @@ return [
     'string'               => ':attributeは文字列にしてください。',
     'timezone'             => ':attributeは正しいタイムゾーンを指定してください。',
     'unique'               => ':attributeは既に存在します。',
-    'uploaded'             => ':attributeのアップロードに失敗しました。',             // 追加
+    'uploaded'             => ':attributeのアップロードに失敗しました。',
     'url'                  => ':attributeを正しい書式にしてください。',
 
     /*
