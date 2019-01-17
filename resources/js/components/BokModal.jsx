@@ -89,7 +89,7 @@ class BokModal_ extends Component {
     }
 
     render() {
-        if(this.props.display === "off"){
+        if(this.props.display === false){
             return null;
         }
         return (

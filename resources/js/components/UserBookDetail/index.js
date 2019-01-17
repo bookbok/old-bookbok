@@ -83,10 +83,7 @@ class UserBookDetail_ extends Component {
         let reviewModalView = "off";
         let bokModalView = "off";
 
-        if(this.buttonDisplayCheck(getAuthUser(), this.props.match.params.userId)) {
-            reviewModalView = "on";
-            bokModalView = "on";
-        }
+        const isModalView = this.buttonDisplayCheck(getAuthUser(), this.props.match.params.userId)
 
         const boks = userBook.boks.map((bok) => {
             return <div className="mt-2" key={bok.id}><UserDetailBok bok={bok}/></div>
@@ -113,10 +110,10 @@ class UserBookDetail_ extends Component {
 
                             <BookInfo book={book} />
                             <hr />
-                            <h3 className="mt-5">レビュー<div className="float-right"><ReviewModal display={reviewModalView} /></div></h3>
+                            <h3 className="mt-5">レビュー<div className="float-right"><ReviewModal display={isModalView} /></div></h3>
                             <p className="mt-4">{review.body}</p>
                             <hr />
-                            <h3 className="mt-5">Boks <div className="float-right"><BokModal display={bokModalView} /></div></h3>
+                            <h3 className="mt-5">Boks <div className="float-right"><BokModal display={isModalView} /></div></h3>
                             <div className="mt-4">{boks}</div>
                         </div>
                     </div>
