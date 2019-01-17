@@ -40,9 +40,7 @@ export class UserRegister extends Component {
                         this.setState({invalidPassword: json.userMessage.password});
                         this.setState({isInvalidPassword: true});
                     }
-
                     this.setState({ isInvalid: true });
-                    
                 });
                 throw new Error();
             }
@@ -53,7 +51,6 @@ export class UserRegister extends Component {
     }
 
     render() {
-
         return (
             <div className="container mt-4">
                 <div className="row justify-content-center">
@@ -78,7 +75,6 @@ export class UserRegister extends Component {
                                                 onChange={this.handleChange}
                                                 required
                                                 autoFocus />
-                                        
                                             <div className="invalid-feedback">
                                                 {this.state.invalidName}
                                             </div>
@@ -87,7 +83,6 @@ export class UserRegister extends Component {
 
                                     <div className="form-group row">
                                         <label htmlFor="email" className="col-md-4 col-form-label text-md-right">Eメール</label>
-
                                         <div className="col-md-6">
                                             <input id="email"
                                                 name="email"
@@ -104,7 +99,6 @@ export class UserRegister extends Component {
 
                                     <div className="form-group row">
                                         <label htmlFor="password" className="col-md-4 col-form-label text-md-right">パスワード</label>
-
                                         <div className="col-md-6">
                                             <input id="password"
                                                 name="password"
