@@ -5,7 +5,10 @@ import { directUserRegister } from "../actions.js";
 export class UserRegister extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: "", email: "", password: "", passwordConfirm: "", isInvalid: false };
+        this.state = { name: "", email: "", password: "", passwordConfirm: "", isInvalid: false,
+                        invalidName: "", invalidEmail: "", invalidPassword: "", 
+                        isInvalidName: false, isInvalidEmail: false, isInvalidPassword: false 
+                     };
 
         this.submitRegister = this.submitRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -23,13 +26,34 @@ export class UserRegister extends Component {
         e.preventDefault();
         const that = this;
         directUserRegister(this.state).then(res => {
-            that.props.history.push('/login');
-        }).catch(err => {
-            that.setState({ isInvalid: true });
-        });
+            if(res.status === 400){
+                res.json().then(json => {
+                    if(json.userMessage.name != null){
+                        this.setState({invalidName: json.userMessage.name});
+                        this.setState({isInvalidName: true});
+                    }
+                    if(json.userMessage.email != null){
+                        this.setState({invalidEmail: json.userMessage.email});
+                        this.setState({isInvalidEmail: true});
+                    }
+                    if(json.userMessage.password != null){
+                        this.setState({invalidPassword: json.userMessage.password});
+                        this.setState({isInvalidPassword: true});
+                    }
+
+                    this.setState({ isInvalid: true });
+                    
+                });
+                throw new Error();
+            }
+            return res.json();
+        }).then(json => {
+            this.props.history.push('/login');
+        }).catch(()=>{});
     }
 
     render() {
+
         return (
             <div className="container mt-4">
                 <div className="row justify-content-center">
@@ -39,7 +63,7 @@ export class UserRegister extends Component {
 
                             <div className="card-body">
                                 <div className={`mb-4 text-size invalid-feedback text-center ${this.state.isInvalid && "d-block"}`}>
-                                    入力内容をもう一度ご確認ください。 
+                                    入力内容をもう一度ご確認ください。
                                 </div>
                                 <form onSubmit={this.submitRegister}>
                                     <div className="form-group row">
@@ -49,11 +73,15 @@ export class UserRegister extends Component {
                                             <input id="name"
                                                 name="name"
                                                 type="text"
-                                                className="form-control"
+                                                className={`form-control ${this.state.isInvalidName && "is-invalid"}`}
                                                 value={this.state.name}
                                                 onChange={this.handleChange}
                                                 required
                                                 autoFocus />
+                                        
+                                            <div className="invalid-feedback">
+                                                {this.state.invalidName}
+                                            </div>
                                         </div>
                                     </div>
 
@@ -64,10 +92,13 @@ export class UserRegister extends Component {
                                             <input id="email"
                                                 name="email"
                                                 type="email"
-                                                className="form-control"
+                                                className={`form-control ${this.state.isInvalidEmail && "is-invalid"}`}
                                                 value={this.state.email}
                                                 onChange={this.handleChange}
                                                 required />
+                                            <div className="invalid-feedback">
+                                                 {this.state.invalidEmail}
+                                            </div>
                                         </div>
                                     </div>
 
@@ -78,11 +109,13 @@ export class UserRegister extends Component {
                                             <input id="password"
                                                 name="password"
                                                 type="password"
-                                                className="form-control"
+                                                className={`form-control ${this.state.isInvalidPassword && "is-invalid"}`} 
                                                 value={this.state.password}
                                                 onChange={this.handleChange}
                                                 required />
-
+                                            <div className="invalid-feedback">
+                                                {this.state.invalidPassword}
+                                            </div>
                                         </div>
                                     </div>
 
