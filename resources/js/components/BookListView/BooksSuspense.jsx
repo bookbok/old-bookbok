@@ -1,24 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fetchBookList } from "../../actions";
+import InfiniteScroll from 'react-infinite-scroller';
+import { fetchBookList, fetchMoreBooks } from "../../actions";
 import { isEmpty } from "../../utils";
+import { Loading } from "../shared/Loading";
 import { BookView } from "../BookView";
 
-const BooksSuspense = (props) => {
-    if (!props.books) {
-        throw fetchBookList();
+class BooksSuspense extends React.Component {
+    constructor(props) {
+        super(props);
+        this.loadMore = this.loadMore.bind(this);
+        this.hasMoreBooks = this.hasMoreBooks.bind(this);
     }
 
-    if(isEmpty(props.books)) {
-        return <p className="h5">本が見つかりませんでした</p>;
+    loadMore(page) {
+        fetchMoreBooks({ page: page });
     }
-    return props.books.map((book) => {
-        return <BookView book={book} link={`/books/${book.id}`} key={book.id} />
-    });
+
+    // BooksAPIからのレスポンスをそのまま受け取り、次のページがあるかboolで返す
+    hasMoreBooks(books) {
+        if(books && books.next_page_url) {
+            return true;
+        }
+        return false;
+    }
+
+    render() {
+        if (!this.props.books) {
+            throw fetchBookList();
+        }
+
+        if(isEmpty(this.props.books.data)) {
+            return <p className="h5">本が見つかりませんでした</p>;
+        }
+
+        const books = this.props.books.data.map((book) => {
+            return <BookView book={book} link={`/books/${book.id}`} key={book.id} />
+        });
+        return (
+            <InfiniteScroll
+                initialLoad={false}
+                pageStart={1}
+                loadMore={this.loadMore}
+                hasMore={this.hasMoreBooks(this.props.books)}
+                loader={<Loading key="0"/>}>
+
+                {books}
+                <div className="clear-float-left" />
+            </InfiniteScroll>
+        );
+    }
 }
 
 BooksSuspense.propTypes = {
-    books: PropTypes.array
+    books: PropTypes.shape({
+        data: PropTypes.array,
+    })
 }
 
 export default BooksSuspense;
