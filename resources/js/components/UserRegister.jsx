@@ -5,10 +5,13 @@ import { directUserRegister } from "../actions.js";
 export class UserRegister extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: "", email: "", password: "", passwordConfirm: "", isInvalid: false,
-                        invalidName: "", invalidEmail: "", invalidPassword: "", 
-                        isInvalidName: false, isInvalidEmail: false, isInvalidPassword: false 
-                     };
+        this.state = { 
+                          name: { value: "", invalidName: "", isInvalidName: false},
+                          email: { value: "", invalidEmail: "", isInvalidEmail: false},
+                          password: { value: "", invalidPassword: "", isInvalidPassword: false},
+                          passwordConfirm: "",
+                          isInvalid: false
+                        };
 
         this.submitRegister = this.submitRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -17,8 +20,17 @@ export class UserRegister extends Component {
     // 変更されたinput要素のnameを取得し、自動的にstateの値を変更するハンドラ
     handleChange(e) {
         const name = e.target.name;
-        this.setState({
-            [name]: e.target.value,
+        const value = e.target.value;
+        if(name === 'passwordConfirm') {
+            return this.setState({ [name]: value });
+        }
+        this.setState((state) => {
+            return {
+                [name]: {
+                    ...state[name],
+                    value: value,
+                }
+            }
         });
     }
 
@@ -29,16 +41,13 @@ export class UserRegister extends Component {
             if(res.status === 400){
                 res.json().then(json => {
                     if(json.userMessage.name != null){
-                        this.setState({invalidName: json.userMessage.name});
-                        this.setState({isInvalidName: true});
+                        this.setState({name: {invalidName: json.userMessage.name,isInvalidName: true}});
                     }
                     if(json.userMessage.email != null){
-                        this.setState({invalidEmail: json.userMessage.email});
-                        this.setState({isInvalidEmail: true});
+                        this.setState({email: {invalidEmail: json.userMessage.email, isInvalidEmail: true}});
                     }
                     if(json.userMessage.password != null){
-                        this.setState({invalidPassword: json.userMessage.password});
-                        this.setState({isInvalidPassword: true});
+                        this.setState({password: {invalidPassword: json.userMessage.password, isInvalidPassword: true}});
                     }
                     this.setState({ isInvalid: true });
                 });
@@ -70,13 +79,13 @@ export class UserRegister extends Component {
                                             <input id="name"
                                                 name="name"
                                                 type="text"
-                                                className={`form-control ${this.state.isInvalidName && "is-invalid"}`}
-                                                value={this.state.name}
+                                                className={`form-control ${this.state.name.isInvalidName && "is-invalid"}`}
+                                                value={this.state.name.value || ''}
                                                 onChange={this.handleChange}
                                                 required
                                                 autoFocus />
                                             <div className="invalid-feedback">
-                                                {this.state.invalidName}
+                                                {this.state.name.invalidName}
                                             </div>
                                         </div>
                                     </div>
@@ -87,12 +96,12 @@ export class UserRegister extends Component {
                                             <input id="email"
                                                 name="email"
                                                 type="email"
-                                                className={`form-control ${this.state.isInvalidEmail && "is-invalid"}`}
-                                                value={this.state.email}
+                                                className={`form-control ${this.state.email.isInvalidEmail && "is-invalid"}`}
+                                                value={this.state.email.value || ''}
                                                 onChange={this.handleChange}
                                                 required />
                                             <div className="invalid-feedback">
-                                                 {this.state.invalidEmail}
+                                                 {this.state.email.invalidEmail}
                                             </div>
                                         </div>
                                     </div>
@@ -103,12 +112,12 @@ export class UserRegister extends Component {
                                             <input id="password"
                                                 name="password"
                                                 type="password"
-                                                className={`form-control ${this.state.isInvalidPassword && "is-invalid"}`} 
-                                                value={this.state.password}
+                                                className={`form-control ${this.state.password.isInvalidPassword && "is-invalid"}`} 
+                                                value={this.state.password.value || ''}
                                                 onChange={this.handleChange}
                                                 required />
                                             <div className="invalid-feedback">
-                                                {this.state.invalidPassword}
+                                                {this.state.password.invalidPassword}
                                             </div>
                                         </div>
                                     </div>
@@ -121,7 +130,7 @@ export class UserRegister extends Component {
                                                 name="passwordConfirm"
                                                 type="password"
                                                 className="form-control"
-                                                value={this.state.passwordConfirm}
+                                                value={this.state.passwordConfirm || ''}
                                                 onChange={this.handleChange}
                                                 required />
                                         </div>
