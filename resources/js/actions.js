@@ -30,6 +30,10 @@ export const requestLogin = (loginUser) => {
     }).then(json => {
         store.dispatch(setAuthToken(json.token));
         store.dispatch(getLoggedinUser());
+
+        if (loginUser.remember && utils.storageAvailable('localStorage')) {
+            localStorage.setItem('token', json.token);
+        }
     });
 }
 
@@ -46,6 +50,10 @@ export const requestLogout = () => dispatch => {
         isParse: false,
     }).then(res => {
         dispatch(removeLoggedinInfo());
+
+        if (utils.storageAvailable('localStorage') && localStorage.getItem('token')) {
+            localStorage.removeItem('token');
+        }
     });
 }
 
