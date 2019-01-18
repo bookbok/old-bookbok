@@ -11,7 +11,7 @@ export class UserRegister extends Component {
                           password: { value: "", invalidPassword: "", isInvalidPassword: false},
                           passwordConfirm: "",
                           isInvalid: false
-                        };
+                     };
 
         this.submitRegister = this.submitRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
