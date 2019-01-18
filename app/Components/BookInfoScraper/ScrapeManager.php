@@ -78,9 +78,17 @@ class ScrapeManager
         foreach ($this->scrapers as $scraper) {
             $book = $scraper->searchByIsbn($isbn);
             if (null !== $book) {
-                //@Todo: 別のissueで修正
-                //$book->genre_id = getGenre($isbn);
-                $book->genre_id = 1;
+                if (
+                    '' === $book->name || null === $book->name
+                    || '' === $book->cover || null === $book->cover
+                    || '' === $book->author || null === $book->author
+                ) {
+                    // 本のタイトル・カバー画像・著者名のうちのどれかが正常に取得できなかった場合、
+                    // 次のscraperへ処理をゆだねる。
+                    continue;
+                }
+
+                $book->genre_id = getGenre($isbn);
                 return $book;
             }
         }
