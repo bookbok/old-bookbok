@@ -88,7 +88,7 @@ class ScrapeManager
                     continue;
                 }
 
-                $book->genre_id = getGenre($isbn);
+                $book->genre_id = $this->getGenre($isbn);
                 return $book;
             }
         }
