@@ -60,3 +60,18 @@ img.user-info-avatar {
   white-space: nowrap;
 }
 
+.user-detail-wrapper {
+  .name-input {
+    width: 100%;
+  }
+
+  .avatar-input {
+    width: 100%;
+  }
+
+  .description-input {
+    resize: none;
+    width: 100%;
+    height: 10em;
+  }
+}
