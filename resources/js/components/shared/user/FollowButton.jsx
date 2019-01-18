@@ -8,7 +8,7 @@ export default class FollowButton extends Component {
     render() {
         // 自分
         if(getAuthUser() && getAuthUser().id == this.props.userId) {
-            return (<button className="btn btn-primary" disabled>フォローする</button>);
+            return null;
         }
 
         if(this.props.followed) {
