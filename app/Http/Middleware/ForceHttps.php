@@ -19,7 +19,7 @@ class ForceHttps
         if( config('https.force') === true and
             (
                 !$request->secure() or
-                (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PROTO' === http])
+                (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) and $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'http')
             )
         ){
             return redirect()->secure($request->path());
