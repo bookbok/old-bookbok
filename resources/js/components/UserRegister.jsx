@@ -5,7 +5,13 @@ import { directUserRegister } from "../actions.js";
 export class UserRegister extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: "", email: "", password: "", passwordConfirm: "", isInvalid: false };
+        this.state = { 
+                          name: { value: "", invalidName: "", isInvalidName: false},
+                          email: { value: "", invalidEmail: "", isInvalidEmail: false},
+                          password: { value: "", invalidPassword: "", isInvalidPassword: false},
+                          passwordConfirm: "",
+                          isInvalid: false
+                     };
 
         this.submitRegister = this.submitRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -14,8 +20,17 @@ export class UserRegister extends Component {
     // 変更されたinput要素のnameを取得し、自動的にstateの値を変更するハンドラ
     handleChange(e) {
         const name = e.target.name;
-        this.setState({
-            [name]: e.target.value,
+        const value = e.target.value;
+        if(name === 'passwordConfirm') {
+            return this.setState({ [name]: value });
+        }
+        this.setState((state) => {
+            return {
+                [name]: {
+                    ...state[name],
+                    value: value,
+                }
+            }
         });
     }
 
@@ -23,10 +38,25 @@ export class UserRegister extends Component {
         e.preventDefault();
         const that = this;
         directUserRegister(this.state).then(res => {
-            that.props.history.push('/login');
-        }).catch(err => {
-            that.setState({ isInvalid: true });
-        });
+            if(res.status === 400){
+                res.json().then(json => {
+                    if(json.userMessage.name != null){
+                        this.setState({name: {invalidName: json.userMessage.name,isInvalidName: true}});
+                    }
+                    if(json.userMessage.email != null){
+                        this.setState({email: {invalidEmail: json.userMessage.email, isInvalidEmail: true}});
+                    }
+                    if(json.userMessage.password != null){
+                        this.setState({password: {invalidPassword: json.userMessage.password, isInvalidPassword: true}});
+                    }
+                    this.setState({ isInvalid: true });
+                });
+                throw new Error();
+            }
+            return res.json();
+        }).then(json => {
+            this.props.history.push('/login');
+        }).catch(()=>{});
     }
 
     render() {
@@ -39,7 +69,7 @@ export class UserRegister extends Component {
 
                             <div className="card-body">
                                 <div className={`mb-4 text-size invalid-feedback text-center ${this.state.isInvalid && "d-block"}`}>
-                                    入力内容をもう一度ご確認ください。 
+                                    入力内容をもう一度ご確認ください。
                                 </div>
                                 <form onSubmit={this.submitRegister}>
                                     <div className="form-group row">
@@ -49,40 +79,46 @@ export class UserRegister extends Component {
                                             <input id="name"
                                                 name="name"
                                                 type="text"
-                                                className="form-control"
-                                                value={this.state.name}
+                                                className={`form-control ${this.state.name.isInvalidName && "is-invalid"}`}
+                                                value={this.state.name.value || ''}
                                                 onChange={this.handleChange}
                                                 required
                                                 autoFocus />
+                                            <div className="invalid-feedback">
+                                                {this.state.name.invalidName}
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div className="form-group row">
                                         <label htmlFor="email" className="col-md-4 col-form-label text-md-right">Eメール</label>
-
                                         <div className="col-md-6">
                                             <input id="email"
                                                 name="email"
                                                 type="email"
-                                                className="form-control"
-                                                value={this.state.email}
+                                                className={`form-control ${this.state.email.isInvalidEmail && "is-invalid"}`}
+                                                value={this.state.email.value || ''}
                                                 onChange={this.handleChange}
                                                 required />
+                                            <div className="invalid-feedback">
+                                                 {this.state.email.invalidEmail}
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div className="form-group row">
                                         <label htmlFor="password" className="col-md-4 col-form-label text-md-right">パスワード</label>
-
                                         <div className="col-md-6">
                                             <input id="password"
                                                 name="password"
                                                 type="password"
-                                                className="form-control"
-                                                value={this.state.password}
+                                                className={`form-control ${this.state.password.isInvalidPassword && "is-invalid"}`} 
+                                                value={this.state.password.value || ''}
                                                 onChange={this.handleChange}
                                                 required />
-
+                                            <div className="invalid-feedback">
+                                                {this.state.password.invalidPassword}
+                                            </div>
                                         </div>
                                     </div>
 
@@ -94,7 +130,7 @@ export class UserRegister extends Component {
                                                 name="passwordConfirm"
                                                 type="password"
                                                 className="form-control"
-                                                value={this.state.passwordConfirm}
+                                                value={this.state.passwordConfirm || ''}
                                                 onChange={this.handleChange}
                                                 required />
                                         </div>

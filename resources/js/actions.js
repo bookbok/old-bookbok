@@ -69,7 +69,7 @@ export const requestLogout = () => dispatch => {
 }
 
 export const directUserRegister = (userInfo) => {
-    return utils.wrapFetch('/api/auth/register', {
+    return utils.smartFetch('/api/auth/register', {
         method: "POST",
         body: userInfo
     });
