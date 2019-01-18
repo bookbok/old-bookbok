@@ -61,15 +61,15 @@ img.user-info-avatar {
 }
 
 .user-detail-wrapper {
-  input.name-input {
+  .name-input {
     width: 100%;
   }
 
-  input.avatar-input {
+  .avatar-input {
     width: 100%;
   }
 
-  textarea.description-input {
+  .description-input {
     resize: none;
     width: 100%;
     height: 10em;
