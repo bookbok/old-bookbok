@@ -42,12 +42,46 @@ class UserDetail extends Component {
         store.dispatch(requestUpdateUser(this.state));
     }
 
+    renderNameRow(me, name, changeHandler) {
+        if(me) {
+            return <input name="name"
+                type="text"
+                className="name-input"
+                value={name}
+                onChange={changeHandler} />;
+        }
+        return name;
+    }
+
+    renderAvatarRow(me, avatar, changeHandler) {
+        if(me) {
+            return <input name="avatar"
+                type="text"
+                className="avatar-input"
+                value={avatar}
+                onChange={changeHandler} />;
+        }
+        return null;
+    }
+
+    renderDescriptionRow(me, description, changeHandler) {
+        if(me) {
+            return <textarea name="description"
+                type="text"
+                className="description-input"
+                value={description}
+                onChange={changeHandler} />;
+        }
+        return <p className="description-input">{description || '未設定'}</p>;
+    }
+
     render() {
         const user = this.props.user;
         if(utils.isEmpty(user)){
             return <Loading />;
         }
 
+        const me = utils.getAuthUser().id === user.id;
         return (
             <div className="page-content-wrap row">
                 <FloatUserInfo user={user} />
@@ -58,33 +92,25 @@ class UserDetail extends Component {
                             <MyPageTabs isTop userId={this.props.match.params.id} />
                             <div className="mt-4 user-detail-wrapper">
                                 <div className="h1">
-                                    <input name="name"
-                                        type="text"
-                                        className="name-input"
-                                        value={this.state.name}
-                                        onChange={this.handleChange} />
+                                    {this.renderNameRow(me, this.state.name, this.handleChange)}
                                 </div>
                                 <p className="text-muted">{utils.makeDateJP(user.created_at)}に登録された読書家です</p>
                                 <div className="mt-4">
                                     <strong>プロフィール画像</strong>
                                     <img src={this.state.avatar} className="user-info-avatar d-block mb-1" />
-                                    <input name="avatar"
-                                        type="text"
-                                        className="avatar-input"
-                                        value={this.state.avatar}
-                                        onChange={this.handleChange} />
+                                    {this.renderAvatarRow(me, this.state.avatar, this.handleChange)}
                                 </div>
 
                                 <div className="mt-4">
                                     <strong>自己紹介</strong>
-                                    <textarea name="description"
-                                        type="text"
-                                        className="description-input"
-                                        value={this.state.description}
-                                        onChange={this.handleChange} />
+                                    {this.renderDescriptionRow(me, this.state.description, this.handleChange)}
                                 </div>
 
-                                <button className="btn btn-success float-right" onClick={this.handleSubmit}>保存</button>
+                                {me ? <button className="btn btn-success float-right"
+                                        onClick={this.handleSubmit}>
+                                        保存
+                                    </button> : null
+                                }
                             </div>
                         </div>
                     </div>
