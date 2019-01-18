@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { store } from "../store";
-import { fetchUser } from "../actions";
+import { fetchUser, requestUpdateUser } from "../actions";
 import * as utils from "../utils";
 
 import { Loading } from "./shared/Loading";
@@ -40,7 +40,7 @@ class UserDetail extends Component {
     }
 
     handleSubmit(e) {
-        // dispatch(requestUpdateUser(this.state));
+        store.dispatch(requestUpdateUser(this.state));
     }
 
     render() {
@@ -66,24 +66,24 @@ class UserDetail extends Component {
                                         onChange={this.handleChange} />
                                 </div>
                                 <p className="text-muted">{utils.makeDateJP(user.created_at)}に登録された読書家です</p>
-                                <p>
-                                    <p><strong>プロフィール画像</strong></p>
+                                <div className="mt-4">
+                                    <strong>プロフィール画像</strong>
                                     <img src={this.state.avatar} className="user-info-avatar d-block mb-1" />
                                     <input name="avatar"
                                         type="text"
                                         className="avatar-input"
                                         value={this.state.avatar}
                                         onChange={this.handleChange} />
-                                </p>
+                                </div>
 
-                                <p>
+                                <div className="mt-4">
                                     <strong>自己紹介</strong>
                                     <textarea name="description"
                                         type="text"
                                         className="description-input"
                                         value={this.state.description}
                                         onChange={this.handleChange} />
-                                </p>
+                                </div>
 
                                 <button className="btn btn-success float-right" onClick={this.handleSubmit}>保存</button>
                             </div>
