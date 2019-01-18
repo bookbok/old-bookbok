@@ -14,7 +14,7 @@ class BooksSuspense extends React.Component {
     }
 
     loadMore(page) {
-        fetchMoreBooks({ page: page });
+        fetchMoreBooks({ ...this.props.query, page: page });
     }
 
     // BooksAPIからのレスポンスをそのまま受け取り、次のページがあるかboolで返す
