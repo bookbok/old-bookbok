@@ -28,13 +28,15 @@ class UserDetail extends Component {
 
     // 更新後のユーザー情報を全てstateにも反映
     componentWillReceiveProps(nextProps) {
+        if(!nextProps.user) return;
         const { name, avatar, description } = nextProps.user;
         this.setState({ name, avatar, description, });
     }
 
     handleChange(e) {
         console.log(e.target)
-        this.setState({ [e.target.name]: e.target.value });
+        const name = e.target.name;
+        this.setState({ [name]: e.target.value });
     }
 
     handleSubmit(e) {
@@ -65,7 +67,17 @@ class UserDetail extends Component {
                                 </div>
                                 <p className="text-muted">{utils.makeDateJP(user.created_at)}に登録された読書家です</p>
                                 <p>
-                                    <label>自己紹介</label>
+                                    <p><strong>プロフィール画像</strong></p>
+                                    <img src={this.state.avatar} className="user-info-avatar d-block mb-1" />
+                                    <input name="avatar"
+                                        type="text"
+                                        className="avatar-input"
+                                        value={this.state.avatar}
+                                        onChange={this.handleChange} />
+                                </p>
+
+                                <p>
+                                    <strong>自己紹介</strong>
                                     <textarea name="description"
                                         type="text"
                                         className="description-input"
