@@ -117,7 +117,7 @@ export function wrapAction(actionCreator, callback) {
  * 
  * @see https://developer.mozilla.org/ja/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
  */
-function storageAvailable(type) {
+export function storageAvailable(type) {
 	try {
 		var storage = window[type],
             x       = '__storage_test__'
