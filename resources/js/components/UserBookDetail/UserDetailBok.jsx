@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { store } from "../store";
-import { Loading } from "./shared/Loading";
-import { requestLike, requestUnLike, requestLove, requestUnLove } from "../actions";
+import { store } from "../../store";
+import { Loading } from "../shared/Loading";
+import { requestLike, requestUnLike, requestLove, requestUnLove } from "../../actions";
 import { Link } from 'react-router-dom';
 
-export class Bok extends Component {
+export class UserDetailBok extends Component {
     constructor(props){
         super(props);
 
@@ -74,54 +74,53 @@ export class Bok extends Component {
         const userBook = this.props.bok.user_book;
         const page = this.makePageViewStr(bok);
         const line = this.makeLineViewStr(bok);
-        const likeClass = (!this.state.isLiked ?  "far fa-thumbs-up fa-fw icon" : "fas fa-thumbs-up fa-fw icon like-animation");
+        const likeClass = (!this.state.isLiked ? "far fa-thumbs-up fa-fw icon" : "fas fa-thumbs-up fa-fw icon like-animation");
         const loveClass = (!this.state.isLoved ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation");
 
         return (
             <div className="card p-2">
                 <div className="d-flex">
-                    <div className="d-flex flex-column bok-book-cover-area">
-                        <Link to={`/books/${bok.user_book.book.id}`}>
-                            <img className="bok-book-cover mx-auto d-block" src={userBook.book.cover}/>
-                        </Link>
-                    </div>
 
                     {/* bok ---------------------------------------------------------------- */}
-                    <div className="bok-area">
+                    <div className="w-100">
                         <div className="d-flex flex-column h-100">
-                            <div className="d-flex border-bottom">
-                                <div className="bok-user mr-auto">
-                                    <Link to={`/users/${userBook.user_id}`}>{userBook.user.name}</Link>
-                                </div>
-                            </div>
-                            <pre className="bok-body mt-2">{bok.body}</pre>
+                            <pre className="userd-bok-user border-bottom">
+                                <Link to={`/users/${userBook.user_id}`}>
+                                    {userBook.user.name}
+                                </Link>
+                            </pre>
+                            <pre className="userd-bok-body mt-2 mr-2">{bok.body}</pre>
 
                             {/* bok-footer */}
-                            <div className="d-flex bok-footer mt-2">
-                                <div className="text-muted page-line-updated">
-                                    <div className="bok-page">{page}</div>
-                                    <div className="bok-line ml-1 mr-3">{line}</div>
-                                    <div className="bok-updated">{bok.updated_at}</div>
+                            <div className="d-flex userd-bok-footer mt-2">
+                                <div className="text-muted userd-page-line-updated mt-auto">
+                                    <div className="userd-page">{page}</div>
+                                    <div className="userd-line ml-1 mr-3">{line}</div>
+                                    <div className="userd-updated">{bok.updated_at}</div>
                                 </div>
                                 <div className="d-flex ml-auto mt-auto">
-                                    <div className="align-top" onClick={(e) => this.clickLike(bok.id)}>
-                                        <p className="liked mr-2">
+                                    <div onClick={(e) => this.clickLike(bok.id)}>
+                                        <p className="liked mr-2 mt-auto mb-auto">
                                             <i className={likeClass}></i>
                                             {this.state.likeCount}
                                         </p>
                                     </div>
                                     <div onClick={(e) => this.clickLove(bok.id)}>
-                                        <p className="loved">
+                                        <p className="loved mt-auto mb-auto">
                                             <i className={loveClass}></i>
                                             {this.state.loveCount}
                                         </p>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
+
                 </div>
             </div>
         );
     }
 }
+
+export default UserDetailBok;

@@ -19,6 +19,7 @@ export const SET_GENRES = "SET_GENRES";
  * ==== Book resource ====
  */
 export const SET_BOOKLIST = "SET_BOOKLIST";
+export const ADD_BOOKS = "ADD_BOOKS";
 export const SET_BOOK_DETAIL = "SET_BOOK_DETAIL";
 
 /**

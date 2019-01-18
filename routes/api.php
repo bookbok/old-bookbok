@@ -31,12 +31,9 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
         Route::get('email/resend', 'VerificationController@resend')->name('email.verify.resend');
 
         Route::get('logout','LoginController@logout')->name('logout');
-        Route::get('user', function (Request $request) {
-            return $request->user()->makeVisible([
-                'email',
-                'email_verified_at',
-            ]);
-        })->name('user');
+
+        Route::get('user', 'UserController@show')->name('user');
+        Route::put('user', 'UserController@update')->name('user.update');
     });
 });
 

@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import { Genres } from "./components/Genres";
 import { BookDetailView } from "./components/BookDetailView";
 import { UsersView } from "./components/UsersView";
-import { BookListView } from "./components/BookListView";
 import { UserBookshelf } from "./components/UserBookshelf";
 import UserBookDetail from "./components/UserBookDetail";
 import { LikeBokList } from "./components/LikeBokList";
@@ -24,10 +23,6 @@ export const ConnectedUsersView = connect(
 export const ConnectedUserBookshelf = connect(
     state => state
 )(UserBookshelf);
-
-export const ConnectedBookList = connect(
-    state => state,
-)(BookListView);
 
 export const ConnectedUserBookDetail = connect(
     state => state

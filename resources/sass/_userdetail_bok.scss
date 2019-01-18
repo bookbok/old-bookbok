@@ -1,63 +1,29 @@
-.bok-book-cover-area {
-  width: 25%;
-
-  @include normal-pc {
-    width: 15%;
-  }
-}
-
-.bok-book-cover {
-  width: 64px;
-  height: 80px;
-  box-shadow: 0 0 3px 2px #bababa;
-  margin-top: 0.3em;
-
-  @include normal-pc {
-    width: 76px;
-    height: 95px;
-  }
-}
-
-.bok-book-cover:hover {
-  box-shadow: 0 0 3px 2px #919191;
-}
-
-.bok-area {
-  position: relative;
-  width: 75%;
-  padding-left: 0.5em;
-
-  @include normal-pc {
-    width: 85%;
-    padding-left: 1em;
-  }
-}
-
-.bok-user {
+// bok部分
+.userd-bok-user {
   overflow: visible;
   margin: 0;
   font-size: 0.8rem;
-  display: inline;
-  vertical-align: center;
 
   @include normal-pc {
     font-size: 1rem;
   };
 }
 
-.bok-body {
+.userd-bok-body {
   vertical-align: top;
   display: inline-block;
+  margin: 0;
   white-space: pre-wrap;
   font-size: 0.7rem;
   line-height: 1.5em;
+  margin-right: 2px;
 
   @include normal-pc {
     font-size: 0.8rem;
   }
 }
 
-.bok-footer{
+.userd-bok-footer{
   font-size: 0.6rem;
   vertical-align: bottom;
 
@@ -66,7 +32,7 @@
   };
 }
 
-.page-line-updated {
+.userd-page-line-updated {
   display: block;
   overflow: visible;
   margin-bottom: 0;
@@ -80,15 +46,15 @@
   }
 }
 
-.bok-page {
+.userd-page {
   display: inline;
  }
 
-.bok-line {
+.userd-line {
   display: inline;
 }
 
-.bok-updated {
+.userd-updated {
   display: block;
 
   @include normal-pc {

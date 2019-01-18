@@ -24,8 +24,9 @@ export class Login extends Component {
 
     submitLogin(e) {
         e.preventDefault();
-        store.dispatch(requestLogin(this.state));
-        this.props.history.push('/'); // ログイン後のデフォルト遷移先
+        requestLogin(this.state).then(() => {
+            this.props.history.push('/'); // ログイン後のデフォルト遷移先
+        });
     }
 
     render() {

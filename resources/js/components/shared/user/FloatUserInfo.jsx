@@ -58,11 +58,14 @@ export class FloatUserInfo_ extends Component {
                     </div>
 
                     <div className="user-follow-info mt-2">
-                        <Link to={`/users/${user.id}/followers`} className="m-2">{user.following_count} フォロー</Link>
-                        <Link to={`/users/${user.id}/followings`} className="m-2">{user.follower_count} フォロワー</Link>
+                        <Link to={`/users/${user.id}/followings`} className="m-2">{user.following_count} フォロー</Link>
+                        <Link to={`/users/${user.id}/followers`} className="m-2">{user.follower_count} フォロワー</Link>
                     </div>
                 </div>
-                <FollowButton followed={this.state.followed} handleClickFollow={this.handleClickFollow} />
+                <FollowButton
+                    userId={user.id}
+                    followed={this.state.followed}
+                    handleClickFollow={this.handleClickFollow} />
 
                 <div className="user-info-accordion mt-2">
                     <label htmlFor="user-info-accordion-check" className="accordion-label text-center mt-2">
@@ -83,7 +86,7 @@ FloatUserInfo_.propTypes = {
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
         avatar: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
+        description: PropTypes.string,
         follower_count: PropTypes.number.isRequired,
         following_count: PropTypes.number.isRequired,
         is_follower: PropTypes.bool.isRequired,

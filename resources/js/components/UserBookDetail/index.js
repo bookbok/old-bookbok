@@ -5,7 +5,7 @@ import { store } from "../../store";
 import { isEmpty, getAuthUser } from "../../utils";
 
 import { Loading } from "../shared/Loading";
-import { Bok } from "../Bok";
+import UserDetailBok from "./UserDetailBok";
 import { FloatUserInfo } from "../shared/user/FloatUserInfo";
 import { BookInfo } from "../shared/book/BookInfo";
 import { BokModal } from "../BokModal";
@@ -65,14 +65,24 @@ class UserBookDetail_ extends Component {
         });
     }
 
+    buttonDisplayCheck(loginUser, userId) {
+        if(loginUser && loginUser.id == userId) {
+            return true;
+        }
+        return false;
+    }
+
     render(){
         if(isEmpty(this.props.userBookDetail) || isEmpty(this.props.user)){
             return <Loading />;
         }
+
         const userBook = this.props.userBookDetail;
 
+        const isModalView = this.buttonDisplayCheck(getAuthUser(), this.props.match.params.userId)
+
         const boks = userBook.boks.map((bok) => {
-            return <div className="mt-2" key={bok.id}><Bok bok={bok}/></div>
+            return <div className="mt-2" key={bok.id}><UserDetailBok bok={bok}/></div>
         })
 
         const { book, review } = userBook;
@@ -96,10 +106,10 @@ class UserBookDetail_ extends Component {
 
                             <BookInfo book={book} />
                             <hr />
-                            <h3 className="mt-5">レビュー<div className="float-right"><ReviewModal /></div></h3>
+                            <h3 className="mt-5">レビュー<div className="float-right"><ReviewModal display={isModalView} /></div></h3>
                             <p className="mt-4">{review.body}</p>
                             <hr />
-                            <h3 className="mt-5">Boks <div className="float-right"><BokModal /></div></h3>
+                            <h3 className="mt-5">Boks <div className="float-right"><BokModal display={isModalView} /></div></h3>
                             <div className="mt-4">{boks}</div>
                         </div>
                     </div>
