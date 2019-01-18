@@ -34,7 +34,6 @@ class UserDetail extends Component {
     }
 
     handleChange(e) {
-        console.log(e.target)
         const name = e.target.name;
         this.setState({ [name]: e.target.value });
     }
