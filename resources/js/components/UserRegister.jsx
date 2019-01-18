@@ -5,13 +5,13 @@ import { directUserRegister } from "../actions.js";
 export class UserRegister extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-                          name: { value: "", invalidName: "", isInvalidName: false},
-                          email: { value: "", invalidEmail: "", isInvalidEmail: false},
-                          password: { value: "", invalidPassword: "", isInvalidPassword: false},
-                          passwordConfirm: "",
-                          isInvalid: false
-                     };
+        this.state = {
+            name: { value: "", invalidName: "", isInvalidName: false},
+            email: { value: "", invalidEmail: "", isInvalidEmail: false},
+            password: { value: "", invalidPassword: "", isInvalidPassword: false},
+            passwordConfirm: "",
+            isInvalid: false
+        };
 
         this.submitRegister = this.submitRegister.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -36,8 +36,12 @@ export class UserRegister extends Component {
 
     submitRegister(e) {
         e.preventDefault();
-        const that = this;
-        directUserRegister(this.state).then(res => {
+        const newUser = {
+            name: this.state.name.value,
+            email: this.state.email.value,
+            password: this.state.password.value,
+        };
+        directUserRegister(newUser).then(res => {
             if(res.status === 400){
                 res.json().then(json => {
                     if(json.userMessage.name != null){
@@ -112,7 +116,7 @@ export class UserRegister extends Component {
                                             <input id="password"
                                                 name="password"
                                                 type="password"
-                                                className={`form-control ${this.state.password.isInvalidPassword && "is-invalid"}`} 
+                                                className={`form-control ${this.state.password.isInvalidPassword && "is-invalid"}`}
                                                 value={this.state.password.value || ''}
                                                 onChange={this.handleChange}
                                                 required />
