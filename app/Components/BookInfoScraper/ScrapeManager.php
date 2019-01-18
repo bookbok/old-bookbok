@@ -78,9 +78,7 @@ class ScrapeManager
         foreach ($this->scrapers as $scraper) {
             $book = $scraper->searchByIsbn($isbn);
             if (null !== $book) {
-                //@Todo: 別のissueで修正
-                //$book->genre_id = getGenre($isbn);
-                $book->genre_id = 1;
+                $book->genre_id = getGenre($isbn);
                 return $book;
             }
         }
