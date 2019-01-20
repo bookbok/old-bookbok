@@ -79,7 +79,7 @@ class BookController extends Controller
                                 ->join('users', 'users.id', '=', 'reviews.user_id')
                                 ->orderby('reviews.updated_at', 'DESC')
                                 ->limit(5)
-                                ->get(['reviews.user_id', 'users.name', 'reviews.user_book_id', 'reviews.body', 'reviews.updated_at'])
+                                ->get(['reviews.id', 'reviews.user_id', 'users.name', 'reviews.user_book_id', 'reviews.body', 'reviews.updated_at'])
                                 ->toArray();
 
         return response()->json(array_merge(
@@ -106,7 +106,7 @@ class BookController extends Controller
         $errors    = $validator->errors();
         $query     = $errors->has('q')         ? ''   : $request->query('q', '');
         $genres    = $errors->has('genres')    ? []   : $request->query('genres', []);
-       
+
         $queries = array_filter(
             explode(
                 ' ',
