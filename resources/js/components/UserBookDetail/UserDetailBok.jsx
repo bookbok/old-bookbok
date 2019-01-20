@@ -83,7 +83,6 @@ export class UserDetailBok extends Component {
 
         return (
             <div className="card p-2">
-                <div className="d-flex">
 
                     {/* bok ---------------------------------------------------------------- */}
                     <div className="w-100">
@@ -121,7 +120,6 @@ export class UserDetailBok extends Component {
                         </div>
                     </div>
 
-                </div>
             </div>
         );
     }
