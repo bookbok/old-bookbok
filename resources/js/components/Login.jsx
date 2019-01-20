@@ -25,7 +25,7 @@ export class Login extends Component {
     submitLogin(e) {
         e.preventDefault();
         requestLogin(this.state).then(() => {
-            this.props.history.push('/'); // ログイン後のデフォルト遷移先
+            this.props.history.push('/bok_flow'); // ログイン後のデフォルト遷移先
         });
     }
 
