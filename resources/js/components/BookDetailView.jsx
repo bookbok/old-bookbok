@@ -59,7 +59,7 @@ export class BookDetailView extends Component {
                         </Link>
                         &nbsp;さんのレビュー
                     </pre>
-                    <pre className="userd-bok-body mt-2 mr-2">{toLines(review.body)}</pre>
+                    <pre className="userd-bok-body mt-2 mr-2">{review.body}</pre>
                 </div>
             </div>
         ));
