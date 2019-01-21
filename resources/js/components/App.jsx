@@ -22,15 +22,25 @@ export class App extends Component {
             case "dark"         : alertClass += " alert-dark";      break;  // dark-gray
         }
 
-        return <div className={alertClass}>{message}</div>
+        alertClass += " alert-dismissible fade show";
+
+        return (
+                <div className={alertClass}>
+                    {message}
+                    <button type="button" className="close" data-dismiss="alert" aria-label="閉じる">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+               );
     }
 
     render() {
-        const alertMessage = "Alert test";
+        const alertType = "success";
+        const alertMessage = "alert : success";
 
         return (
             <div>
-                {this.alertView("success" , "alert test : success")}
+                {this.alertView(alertType, alertMessage)}
                 <RouterWithHeader />
             </div>
         );
