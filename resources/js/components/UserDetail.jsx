@@ -92,7 +92,8 @@ class UserDetail extends Component {
             return <Loading />;
         }
 
-        const me = utils.getAuthUser().id === user.id;
+        const currentUser = utils.getAuthUser();
+        const me = (currentUser && currentUser.id === user.id);
         return (
             <div className="page-content-wrap row">
                 <FloatUserInfo user={user} />
