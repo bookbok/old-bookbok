@@ -58,9 +58,9 @@ class CsvImportController extends Controller
                 if(!(UserBook::where('user_id', '=', $authId)->where('book_id', '=', $book->id)->exists())){
                     
                     // ユーザの本棚に登録
-                    $user_book = UserBook::create([
+                    UserBook::create([
                         'user_id' => $authId,
-                        'book_id' => $book_id
+                        'book_id' => $book->id
                     ]);
 
                     $response[] = $book->name;
@@ -73,25 +73,24 @@ class CsvImportController extends Controller
             $scrapers = resolve('app.bookInfo.scrapeManager');
 
             // すでにISBN文字列の正規化は行っているので例外（\InvalidArgumentException）を考慮しない
-            $book = $scrapers->searchByIsbn($isbn);
-            if($book == null){
+            $new_book = $scrapers->searchByIsbn($isbn);
+            if($new_book == null){
                continue;
             }
 
             // App\Bookの保存
-            $book->save();
+            $new_book->save();
 
             // App\UserBookの保存
-            $book_id = Book::where('isbn', '=', $isbn)->first()->id;
-            $user_book = UserBook::create([
+            UserBook::create([
                 'user_id' => $authId,
-                'book_id' => $book_id
+                'book_id' => $new_book->id
             ]);
 
-            $response[] = $book->name;
+            $response[] = $new_book->name;
         }
 
-        if(empty($user_book)){
+        if(empty($response)){
             return response()->json(
                 [
                     'status' => 200,
