@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Components\ISBN;
 use App\UserBook;
 use App\Book;
 use App\Components\BookInfoScraper\ScrapeManager;
@@ -49,7 +48,6 @@ class CsvImportController extends Controller
 
         //　ユーザの本棚に登録されている本と重複しないかをチェックして
         //　問題なければユーザの本棚に新規登録する
-        $scraper_fail_flag = false;
         foreach($filterd_isbn_array as $isbn){
 
             // App\Bookに存在しているか確認
