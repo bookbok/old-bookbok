@@ -99,6 +99,44 @@ BOOKBOK　API仕様書
             "userMessage": "権限がありません。"
         }
 
+### 認証したユーザーの情報を更新する [PUT]
+
++ Request (application/json)
+
+    + Attributes
+
+        + name (required)
+        + avatar (required)
+        + description(required)
+
+    + Body
+
+            {
+                "name": "this_is_new_name",
+                "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+                "description": "これは自己紹介だ。"
+            }
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "email": "example@example.com",
+            "email_verified_at": null,
+            "avatar": "https://avatars0.githubusercontent.com/u/22770924",
+            "description": "これは自己紹介だ。",
+            "created_at": "2018-10-24 15:53:09",
+            "updated_at": "2018-10-24 15:53:09",
+            "role_id": "1",
+            "name": "this_is_new_name"
+        }
+
++ Response 401 (application/json)
+
+        {
+            "status":401,
+            "userMessage": "権限がありません。"
+        }
+
 ## Register [/api/auth/register]
 
 ### ユーザを新規登録する [POST]
@@ -415,14 +453,13 @@ BOOKBOK　API仕様書
 
 # Group BOOKS
 
-## Books [/api/books{?q,genres,offset,maxResult}]
+## Books [/api/books{?q,genres,page}]
 
 + Parameters
 
     + q: keyword1 keyword2 genre:1 (string,optional) - フリーキーワード(タイトルと著者名の部分一致のAND)
     + genres (array,optional) - ジャンル(OR)
-    + offset: 0 (number,optional) - 取得開始位置
-    + maxResult: 20 (number, optional) - 最大取得数
+    + page - ページ数（指定がない場合はデフォルト1として処理される）
 
 ### すべての本の情報を取得する [GET]
 
@@ -461,14 +498,32 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "id": "978412323334",
-            "name": "book name",
-            "description": "book info",
-            "cover": "http://~",
-            "author": "武田 信玄",
-            "genre_id": 1
+            "book": {
+                "id": 9,
+                "isbn": "9782509953827",
+                "name": "Rerum sint et velit.",
+                "description": "しせいをごらんです。するときはきはきれいだから黒い川の向むこう。僕ぼくたちに祈いの高原じゃありました。天の川の水に落おちて来たってしました。「そうにゅうを見てある。ぼくたちがいて、「では二つにお話しかに男の子が、そのひとみんなに永久えいきおいようとして島しました。「ほんとうとこに行くのようにゅうの幸福こうにそこでおいよく見える」「あなた方へ飛とびらを押おさえきませんかくざとうのそとをくるのでした。「ジョバンニがこたわ」女の子にやに白くぼんや遠くかたをお持もって言いいの前を通ってこんなさい。岩いわいられて。",
+                "cover": "http://books.google.com/books/content?id=_42rGAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+                "author": "中津川 加奈",
+                "genre_id": "1"
+            },
+            "reviews": [
+                {
+                    "user_id": "2",
+                    "name": "test-staff",
+                    "user_book_id": "1",
+                    "body": "fugahoge",
+                    "updated_at": "2019-01-17 12:02:56"
+                },
+                {
+                    "user_id": "1",
+                    "name": "admin",
+                    "user_book_id": "1",
+                    "body": "ぼくはどこか方角ほうさつが一つがぽかったんだからも、つるした。「この次つぎからです」カムパネルラの頬ほおを吹ふいて外を見ている影かげぼうでした。ジョバンニさんがステーションを通って、あるよりももうこの次つぎの木などは自分があっちへ来るから顔をそらにぼんやりそっちをとってたくなるように見つめたいしゃるんで帰った小さいといったくさんは」と答えましたかったように雑作ぞうさえたきれぎれのまん中に、ぺか消きえる。もってそれは四辺形しへ行くところしないか」青年にたくインデアンです」泣ない、その前をはじは、いました。。",
+                    "updated_at": "2019-01-09 10:06:22"
+                }
+            ]
         }
-
 
 # Group USERBOOKS
 

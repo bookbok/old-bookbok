@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { fetchBookDetail, storeISBNToUserBookDirect } from "../actions.js";
 import { store } from "../store";
-import { getAuthUser, isEmpty } from "../utils";
+import { getAuthUser, isEmpty, toLines } from "../utils";
+
+import { Link } from 'react-router-dom';
 import { Loading } from "./shared/Loading";
 import { BookInfo } from "./shared/book/BookInfo";
 
@@ -48,6 +50,20 @@ export class BookDetailView extends Component {
             return <Loading />;
         }
 
+        const reviews = book.reviews.map(review => (
+            <div key={review.id}>
+                <div className="card p-2">
+                    <pre className="userd-bok-user border-bottom">
+                        <Link to={`/users/${review.user_id}`}>
+                            {review.name}
+                        </Link>
+                        &nbsp;さんのレビュー
+                    </pre>
+                    <pre className="userd-bok-body mt-2 mr-2">{review.body}</pre>
+                </div>
+            </div>
+        ));
+
         return (
             <div className="container mt-4">
                 <div className="row justify-content-center">
@@ -58,6 +74,9 @@ export class BookDetailView extends Component {
                             </form>
                         </div>
                         <BookInfo book={book} />
+
+                        <h3 className="mt-5">最近のレビュー</h3>
+                        <div className="mt-4">{reviews}</div>
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@ class BookListView extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { q: "" };
+        this.state = { q: "", genres: null };
         this.handleSubmitSearchText = this.handleSubmitSearchText.bind(this);
         this.handleClickSearchGenre = this.handleClickSearchGenre.bind(this);
     }
@@ -27,6 +27,7 @@ class BookListView extends Component {
     }
 
     handleClickSearchGenre(genre) {
+        this.setState({ genres: [genre] });
         fetchBookList({ genres: [genre] });
     }
 
@@ -48,8 +49,7 @@ class BookListView extends Component {
                     <div className="mt-4 book-list-wrapper">
                         {/* async component */}
                         <Suspense maxDuration={1000} fallback={<Loading />}>
-                            <BooksSuspense books={this.props.books}/>
-                            <div className="clear-float-left" />
+                            <BooksSuspense books={this.props.books} query={this.state}/>
                         </Suspense>
                     </div>
                 </div>

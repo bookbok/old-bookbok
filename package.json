@@ -27,6 +27,7 @@
         "redux-thunk": "^2.3.0"
     },
     "dependencies": {
+        "react-infinite-scroller": "^1.2.4",
         "react-router-dom": "^4.3.1"
     }
 }

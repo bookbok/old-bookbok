@@ -9,8 +9,6 @@ export class UserDetailBok extends Component {
         super(props);
 
         this.state = {
-            likeClass: this.props.bok.liked == "0" ?  "far fa-thumbs-up fa-fw icon" : "fas fa-thumbs-up fa-fw icon like-animation",
-            loveClass: this.props.bok.loved == "0" ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation",
             isLiked: this.props.bok.liked == "0" ? false : true,
             isLoved: this.props.bok.loved == "0" ? false : true,
             likeCount: parseInt(this.props.bok.liked_count),
@@ -42,14 +40,12 @@ export class UserDetailBok extends Component {
     clickLike(bokId, e){
         if(this.state.isLiked){
             this.setState({
-                likeClass: "far fa-thumbs-up fa-fw icon",
                 isLiked: false,
                 likeCount: this.state.likeCount-1
             });
             requestUnLike(bokId);
         } else {
             this.setState({
-                likeClass: " fas fa-thumbs-up fa-fw icon like-animation",
                 isLiked: true,
                 likeCount: this.state.likeCount+1
             });
@@ -60,14 +56,12 @@ export class UserDetailBok extends Component {
     clickLove(bokId, e){
         if(this.state.isLoved){
             this.setState({
-                loveClass: "far fa-bookmark fa-fw icon",
                 isLoved: false,
                 loveCount: this.state.loveCount-1
             });
             requestUnLove(bokId);
         } else {
             this.setState({
-                loveClass: " fas fa-bookmark fa-fw icon love-animation",
                 isLoved: true,
                 loveCount: this.state.loveCount+1
             });
@@ -80,10 +74,11 @@ export class UserDetailBok extends Component {
         const userBook = this.props.bok.user_book;
         const page = this.makePageViewStr(bok);
         const line = this.makeLineViewStr(bok);
+        const likeClass = (!this.state.isLiked ? "far fa-thumbs-up fa-fw icon" : "fas fa-thumbs-up fa-fw icon like-animation");
+        const loveClass = (!this.state.isLoved ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation");
 
         return (
             <div className="card p-2">
-                <div className="d-flex">
 
                     {/* bok ---------------------------------------------------------------- */}
                     <div className="w-100">
@@ -105,13 +100,13 @@ export class UserDetailBok extends Component {
                                 <div className="d-flex ml-auto mt-auto">
                                     <div onClick={(e) => this.clickLike(bok.id)}>
                                         <p className="liked mr-2 mt-auto mb-auto">
-                                            <i className={this.state.likeClass}></i>
+                                            <i className={likeClass}></i>
                                             {this.state.likeCount}
                                         </p>
                                     </div>
                                     <div onClick={(e) => this.clickLove(bok.id)}>
                                         <p className="loved mt-auto mb-auto">
-                                            <i className={this.state.loveClass}></i>
+                                            <i className={loveClass}></i>
                                             {this.state.loveCount}
                                         </p>
                                     </div>
@@ -121,7 +116,6 @@ export class UserDetailBok extends Component {
                         </div>
                     </div>
 
-                </div>
             </div>
         );
     }

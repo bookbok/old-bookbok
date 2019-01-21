@@ -23,13 +23,17 @@ export const fetchBokFlow = () => dispatch => {
 
 // Get authentication token
 export const setAuthToken = (token) => ({ type: types.SET_AUTH_TOKEN, token });
-export const requestLogin = (loginUser) => dispatch => {
-    utils.wrapFetch('/api/auth/login', {
+export const requestLogin = (loginUser) => {
+    return utils.wrapFetch('/api/auth/login', {
         method: "POST",
         body: loginUser
     }).then(json => {
-        dispatch(setAuthToken(json.token));
-        dispatch(getLoggedinUser());
+        store.dispatch(setAuthToken(json.token));
+        store.dispatch(getLoggedinUser());
+
+        if (loginUser.remember && utils.storageAvailable('localStorage')) {
+            localStorage.setItem('token', json.token);
+        }
     });
 }
 
@@ -40,17 +44,32 @@ export const getLoggedinUser = () => dispatch => {
     });
 }
 
+export const requestUpdateUser = (user) => dispatch => {
+    utils.wrapFetch('/api/auth/user', {
+        method: 'PUT',
+        body: user,
+    }).then(json => {
+        // 更新が完了したデータをstoreのユーザー情報として更新
+        store.dispatch(setLoggedinUser(json));
+        store.dispatch(fetchUser(json.id));
+    });
+}
+
 export const removeLoggedinInfo = () => ({ type: types.REMOVE_LOGGEDIN_INFO });
 export const requestLogout = () => dispatch => {
     utils.wrapFetch('/api/auth/logout', {
         isParse: false,
     }).then(res => {
         dispatch(removeLoggedinInfo());
+
+        if (utils.storageAvailable('localStorage') && localStorage.getItem('token')) {
+            localStorage.removeItem('token');
+        }
     });
 }
 
 export const directUserRegister = (userInfo) => {
-    return utils.wrapFetch('/api/auth/register', {
+    return utils.smartFetch('/api/auth/register', {
         method: "POST",
         body: userInfo
     });
@@ -89,6 +108,16 @@ export const fetchBookList = (query = {}) => {
         body: query,
     }).then(json => {
         store.dispatch(setBookList(json));
+        return json;
+    });
+}
+export const addBooks = books => ({type: types.ADD_BOOKS, books});
+export const fetchMoreBooks = (query = {}) => {
+    return utils.wrapFetch('/api/books/', {
+        body: query,
+    }).then(json => {
+        store.dispatch(addBooks(json));
+        return json;
     });
 }
 
