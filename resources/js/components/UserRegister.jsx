@@ -77,7 +77,7 @@ export class UserRegister extends Component {
                                 </div>
                                 <form onSubmit={this.submitRegister}>
                                     <div className="form-group row">
-                                        <label htmlFor="name" className="col-md-4 col-form-label text-md-right">名前</label>
+                                        <label htmlFor="name" className="col-md-4 col-form-label text-md-right">ニックネーム</label>
 
                                         <div className="col-md-6">
                                             <input id="name"
