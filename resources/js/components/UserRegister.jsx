@@ -77,7 +77,7 @@ export class UserRegister extends Component {
                                 </div>
                                 <form onSubmit={this.submitRegister}>
                                     <div className="form-group row">
-                                        <label htmlFor="name" className="col-md-4 col-form-label text-md-right">名前</label>
+                                        <label htmlFor="name" className="col-md-4 col-form-label text-md-right">表示名</label>
 
                                         <div className="col-md-6">
                                             <input id="name"
@@ -91,6 +91,7 @@ export class UserRegister extends Component {
                                             <div className="invalid-feedback">
                                                 {this.state.name.invalidName}
                                             </div>
+                                            <small className="text-muted">・表示名は一意です</small>
                                         </div>
                                     </div>
 
@@ -123,6 +124,7 @@ export class UserRegister extends Component {
                                             <div className="invalid-feedback">
                                                 {this.state.password.invalidPassword}
                                             </div>
+                                            <small className="text-muted">・6文字以上の英数字で入力してください</small>
                                         </div>
                                     </div>
 

@@ -44,6 +44,17 @@ export const getLoggedinUser = () => dispatch => {
     });
 }
 
+export const requestUpdateUser = (user) => dispatch => {
+    utils.wrapFetch('/api/auth/user', {
+        method: 'PUT',
+        body: user,
+    }).then(json => {
+        // 更新が完了したデータをstoreのユーザー情報として更新
+        store.dispatch(setLoggedinUser(json));
+        store.dispatch(fetchUser(json.id));
+    });
+}
+
 export const removeLoggedinInfo = () => ({ type: types.REMOVE_LOGGEDIN_INFO });
 export const requestLogout = () => dispatch => {
     utils.wrapFetch('/api/auth/logout', {

@@ -20,7 +20,7 @@ class Header extends Component {
                                data-toggle="dropdown"
                                aria-haspopup="true"
                                aria-expanded="false">
-                                <span>{loggedinUser.name}</span> <span class="caret"></span>
+                                <span>{loggedinUser.name}</span> <span className="caret"></span>
                             </a>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <Link className="dropdown-item" to={`/users/${loggedinUser.id}`}>
@@ -50,7 +50,7 @@ class Header extends Component {
         return (
             <div>
                 <nav className="navbar navbar-expand-md navbar-light bg-light">
-                    <a className="navbar-brand" href="#">BookBok</a>
+                    <Link className="navbar-brand" to="/">BookBok</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

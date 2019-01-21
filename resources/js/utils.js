@@ -1,3 +1,5 @@
+import React from 'react';
+
 // オブジェクト、配列が空かどうか判定する
 export function isEmpty(obj) {
     if(Array.isArray(obj)) {
@@ -24,7 +26,11 @@ export function convertQuery(obj) {
     }).join('&')
 }
 
-
+export function toLines(str) {
+    return str.split("\n").map(s => (
+        <div>{s}<br /></div>
+    ));
+}
 
 // DateTime形式の文字列を年月日だけの日本表記に変換する
 export function makeDateJP(dateTime) {
