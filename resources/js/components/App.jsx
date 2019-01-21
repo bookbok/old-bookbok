@@ -9,7 +9,7 @@ export class App extends Component {
     }
 
     alertView(type, message){
-        let alertClass = "alert";
+        let alertClass = "alert-dismissible fade show alert";
 
         switch(type){
             case "primary"      : alertClass += " alert-primary";   break;  // skyblue
@@ -21,8 +21,6 @@ export class App extends Component {
             case "light"        : alertClass += " alert-light";     break;  // white
             case "dark"         : alertClass += " alert-dark";      break;  // dark-gray
         }
-
-        alertClass += " alert-dismissible fade show";
 
         return (
                 <div className={alertClass}>
