@@ -105,3 +105,8 @@ Route::get('users/{user}/followers','FollowerController@followers');
 Route::get('users/{user}/followings','FollowerController@followings');
 Route::post('users/{userId}/followings','FollowerController@follow')->middleware('auth:api');
 Route::delete('users/{userId}/followings/{targetId}','FollowerController@unfollow')->middleware('auth:api');
+
+/**
+ * Resource: ?
+ */
+Route::post('csv_import', 'CsvImportController@store')->middleware('auth:api');
