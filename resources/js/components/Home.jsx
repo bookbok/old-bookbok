@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { getAuthUser } from '../utils';
 
 //ホーム画面を表すコンポーネントを定義
-export class Home extends Component {
+class Home extends Component {
+    componentWillMount() {
+        const currentUser = getAuthUser();
+        // ログイン済みなら自分の本棚をホームとする
+        if(currentUser) {
+            this.props.history.push(`/users/${currentUser.id}/user_books`);
+        }
+    }
+
     render() {
         return (
             <div>
@@ -89,3 +98,4 @@ export class Home extends Component {
     }
 }
 
+export default withRouter(Home);
