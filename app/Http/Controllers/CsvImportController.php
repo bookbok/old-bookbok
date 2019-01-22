@@ -53,18 +53,19 @@ class CsvImportController extends Controller
             // App\Bookに存在しているか確認
             if(Book::where('isbn', '=', $isbn)->exists()){
 
-                // App\UserBookに存在しているか確認
                 $book = Book::where('isbn', '=', $isbn)->first();
-                if(!(UserBook::where('user_id', '=', $authId)->where('book_id', '=', $book->id)->exists())){
-                    
-                    // ユーザの本棚に登録
-                    UserBook::create([
-                        'user_id' => $authId,
-                        'book_id' => $book->id
-                    ]);
+                
+                // App\UserBookに存在しているか確認
+                if(UserBook::where('user_id', '=', $authId)->where('book_id', '=', $book->id)->exists())continue;
+                
+                // ユーザの本棚に登録
+                UserBook::create([
+                    'user_id' => $authId,
+                    'book_id' => $book->id
+                ]);
 
-                    $response[] = $book->name;
-                }
+                $response[] = $book->name;
+
                 continue;
             }
 
