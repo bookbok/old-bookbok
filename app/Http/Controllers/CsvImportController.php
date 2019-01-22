@@ -20,15 +20,6 @@ class CsvImportController extends Controller
     public function store(Request $request){
         
         $authId = auth()->guard('api')->id();
-        if(!$authId){
-            return response()->json(
-                [
-                    'status' => 401,
-                    'userMessage' => '書籍の一括登録にはログインが必要です。'
-                ],
-                401
-            );
-        }
 
         // 文字列⇒配列
         $raw_isbn_array = explode(',', $request->input('isbn'));
