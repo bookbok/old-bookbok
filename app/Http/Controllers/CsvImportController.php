@@ -21,8 +21,8 @@ class CsvImportController extends Controller
         
         $authId = auth()->guard('api')->id();
 
-        // 文字列⇒配列
-        $raw_isbn_array = explode(',', $request->input('isbn'));
+        // リクエストデータのの取得
+        $raw_isbn_array = $request->input('isbnList');
 
         // 正しいISBNの形式を守るデータのみを残すようにフィルタリング
         $filterd_isbn_array = array_filter($raw_isbn_array, ['App\Components\ISBN', 'normalizeReturnBoolean']);
