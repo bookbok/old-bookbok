@@ -1290,7 +1290,7 @@ BOOKBOK　API仕様書
 
 # Group ImportBooks
 
-## User Loves [/api/import_books]
+## Import Books [/api/import_books]
 
 ### 自分の本棚に本を一括登録する [POST]
 
