@@ -92,6 +92,6 @@ class ImportBooksController extends Controller
             );
         }
 
-        return response()->json($response,201);
+        return response()->json(["books" => $response],201);
     }
 }
