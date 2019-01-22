@@ -109,4 +109,4 @@ Route::delete('users/{userId}/followings/{targetId}','FollowerController@unfollo
 /**
  * Resource: ?
  */
-Route::post('csv_import', 'CsvImportController@store')->middleware('auth:api');
+Route::post('import_books', 'ImportBooksController@store')->middleware('auth:api');
