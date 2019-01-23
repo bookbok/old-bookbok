@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
 import { store } from "../store";
 import { fetchUser, requestUpdateUser } from "../actions";
 import * as utils from "../utils";
@@ -117,8 +116,11 @@ class UserDetail extends Component {
     }
 }
 
+
 // URL内のid変更を検知して、再度ユーザー情報をfetchするためのデコレーター
+import { connect } from "react-redux";
 import { fetchOnIdUpdateDecorator } from '../decorators/FetchOnIdUpdateDecorator';
+
 export default connect(state => state)(
     fetchOnIdUpdateDecorator((nextUserId) => {
         store.dispatch(fetchUser(nextUserId));
