@@ -91,6 +91,7 @@ export class UserRegister extends Component {
                                             <div className="invalid-feedback">
                                                 {this.state.name.invalidName}
                                             </div>
+                                            <small className="text-muted">・表示名は一意です</small>
                                         </div>
                                     </div>
 
@@ -123,6 +124,7 @@ export class UserRegister extends Component {
                                             <div className="invalid-feedback">
                                                 {this.state.password.invalidPassword}
                                             </div>
+                                            <small className="text-muted">・6文字以上の英数字で入力してください</small>
                                         </div>
                                     </div>
 
