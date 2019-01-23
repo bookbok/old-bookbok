@@ -82,9 +82,9 @@ class UserBookDetail_ extends Component {
         const isModalView = this.buttonDisplayCheck(getAuthUser(), this.props.match.params.userId)
 
         const boks = userBook.boks.map((bok) => {
-            return <div className="mt-2 boks_bok" key={bok.id}>
+            return <div className="mt-2 boks-bok" key={bok.id}>
                 <UserDetailBok bok={bok}/>
-                <div className="boks_relation-line"></div>
+                <div className="boks-relation-line"></div>
             </div>
         })
 
