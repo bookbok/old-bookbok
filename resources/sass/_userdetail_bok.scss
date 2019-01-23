@@ -61,3 +61,18 @@
     display: inline;
   }
 }
+
+.boks_bok {
+  .boks_relation-line {
+    margin: .5rem auto 0;
+    width: 3px;
+    height: 42px;
+    border-radius: 0 0 25% 25%;
+    background-color: rgba(0, 0, 0, .125);
+  }
+}
+.boks_bok:last-child{
+  .boks_relation-line {
+    display: none;
+  }
+}
