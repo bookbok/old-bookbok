@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { Footer } from './Footer';
 import Home from './Home';
-import { Login } from './Login';
+import Login from './Login';
 import { Logout } from './Logout';
 import { PrivacyPolicyView } from './PrivacyPolicyView';
 import { TermsOfServiceView } from './TermsOfServiceView';
