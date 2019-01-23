@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import ReactDOM from 'react-dom';
-import { withRouter } from "react-router-dom";
-import { store } from "../store";
+import { connect } from "react-redux";
 
 export class AlertView extends Component {
     render(){
+        console.log("alertView : " + this.props.alertView);
+        if(!this.props.alertView){
+            return null;
+        }
+
         let alertClass = "alert-dismissible fade show alert";
-        switch(this.props.alertType){
+        switch(this.props.alertView.type){
             case "primary"      : alertClass += " alert-primary";   break;  // skyblue
             case "secondary"    : alertClass += " alert-secondary"; break;  // gray
             case "success"      : alertClass += " alert-success";   break;  // green
@@ -19,7 +22,7 @@ export class AlertView extends Component {
 
         return (
             <div className={alertClass}>
-                {this.props.alertMessage}
+                {this.props.alertView.message}
                 <button type="button" className="close" data-dismiss="alert" aria-label="閉じる">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -27,3 +30,5 @@ export class AlertView extends Component {
          );
     }
 }
+
+export default connect(state => state)(AlertView);

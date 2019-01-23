@@ -5,7 +5,7 @@ import * as types from "./types";
 /**
  * ==== Alert message ====
  */
-export const setAlertMessage = alertMessage => ({ type: type.SET_ALERT_MESSAGE, alertMessage })
+export const setAlertMessage = (type, message) => ({ type: type.SET_ALERT_MESSAGE, alertView:{type, message} });
 
 /**
  * ==== Top page (time line) ====
