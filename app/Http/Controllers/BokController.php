@@ -140,11 +140,7 @@ class BokController extends Controller
     /**
      * Bokを削除するAPI
      * 
-     * @Request $request
-     *  Laravel組込のリクエストクラス
-     * 
-     * @String $bokId
-     *  BokのID
+     * @Bok $bok
      */
     public function delete(Bok $bok){
         // 存在しないBokを指定した場合はサーバが自動で404を返す
