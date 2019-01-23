@@ -1,4 +1,9 @@
 /**
+ * ==== Alert message ====
+ */
+export const SET_ALERT_MESSAGE = "SET_ALERT_MESSAGE";
+
+/**
  * ==== Top page (time line) ====
  */
 export const SET_BOK_FLOW = "SET_BOK_FLOW";

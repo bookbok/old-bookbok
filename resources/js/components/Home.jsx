@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { store } from '../store';
 
-clickStartBookBok(alertMessage) {
-    store.dispatch(fetchAlertMessage(alertMessage));
-}
-
 //ホーム画面を表すコンポーネントを定義
 export const Home = () => (
     <div>
@@ -15,7 +11,7 @@ export const Home = () => (
                 <p>本と感想をまとめて管理できるサービスです。</p>
                 <p>他人の書いた感想を読んだり、読書管理をしましょう。</p>
 
-                <div className="register-wrapper mt-5" onClick{(e) => this.clickStartBookBok("BookBokを始める！")}>
+                <div className="register-wrapper mt-5">
                     <Link to="/register" className="btn btn-success">BookBokを始める</Link>
                 </div>
             </div>

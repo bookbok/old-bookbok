@@ -3,6 +3,11 @@ import * as utils from "./utils";
 import * as types from "./types";
 
 /**
+ * ==== Alert message ====
+ */
+export const setAlertMessage = alertMessage => ({ type: type.SET_ALERT_MESSAGE, alertMessage })
+
+/**
  * ==== Top page (time line) ====
  */
 export const setBokFlow = bokFlow => ({ type: types.SET_BOK_FLOW, bokFlow });

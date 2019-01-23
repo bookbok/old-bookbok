@@ -8,10 +8,10 @@ export class App extends Component {
         this.alertView = this.alertView.bind(this);
     }
 
-    alertView(type, message){
+    alertView(alertType, message){
         let alertClass = "alert-dismissible fade show alert";
 
-        switch(type){
+        switch(alertType){
             case "primary"      : alertClass += " alert-primary";   break;  // skyblue
             case "secondary"    : alertClass += " alert-secondary"; break;  // gray
             case "success"      : alertClass += " alert-success";   break;  // green
