@@ -24,6 +24,7 @@ class UserDetail extends Component {
 
     componentDidMount() {
         store.dispatch(fetchUser(this.props.match.params.id));
+        store.dispatch(setAlertMessage("success", "表示できた！"));
     }
 
     // 更新後のユーザー情報を全てstateにも反映
@@ -94,6 +95,7 @@ class UserDetail extends Component {
 
         const currentUser = utils.getAuthUser();
         const me = (currentUser && currentUser.id === user.id);
+
         return (
             <div className="page-content-wrap row">
                 <FloatUserInfo user={user} />
