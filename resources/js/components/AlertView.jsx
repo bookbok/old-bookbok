@@ -9,7 +9,7 @@ export class AlertView extends Component {
         }
 
         let alertClass = "alert-dismissible fade show alert";
-        switch(this.props.alertView.type){
+        switch(this.props.alertView.alertType){
             case "primary"      : alertClass += " alert-primary";   break;  // skyblue
             case "secondary"    : alertClass += " alert-secondary"; break;  // gray
             case "success"      : alertClass += " alert-success";   break;  // green
