@@ -6,6 +6,8 @@ import * as types from "./types";
  * ==== Root actions ====
  */
 export const clearState = () => ({ type: types.CLEAR_STATE });
+export const loading = () => ({ type: types.LOADING });
+export const loaded = () => ({ type: types.LOADED });
 
 /**
  * ==== Top page (time line) ====
