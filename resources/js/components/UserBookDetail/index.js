@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { fetchUserBookDetail, fetchUser, requestUpdateUserBookStatus } from "../../actions";
 import { store } from "../../store";
 import { isEmpty, getAuthUser } from "../../utils";
@@ -100,6 +100,10 @@ class UserBookDetail_ extends Component {
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
                             <MyPageTabs userId={this.props.match.params.userId} />
+                            <Link to={`/users/${this.props.match.params.userId}/user_books`}
+                                className="btn btn-outline-primary mt-5">
+                                戻る
+                            </Link>
                             <UserBookInfo
                                 readingStatuses={this.readingStatuses}
                                 handleUpdate={this.handleUpdate}
