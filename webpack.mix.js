@@ -14,7 +14,13 @@ let mix = require('laravel-mix');
 mix.react('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
 
-// production環境でのみバージョニングする
+//mix.babelConfig({
+//    "plugins": [
+//    ]
+//});
+
 if(mix.inProduction()) {
-    mix.version();
+    mix.version(); // production環境でのみバージョニングする
+} else {
+    mix.sourceMaps(); // 開発環境でのみデバッグ用ソースマップを展開する
 }
