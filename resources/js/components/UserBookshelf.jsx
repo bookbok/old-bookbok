@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchUserBookshelf, fetchUser } from "../actions.js";
+import { fetchUserBookshelf, fetchUser, loading, loaded } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils.js";
 
@@ -8,11 +8,22 @@ import { BookView } from "./BookView.jsx";
 import { MyPageTabs } from "./shared/user/MyPageTabs";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 
+const fetchUserBookshelfActions = ({ userId }) => {
+    store.dispatch(loading());
+    Promise.all([
+        store.dispatch(fetchUserBookshelf(userId)),
+        store.dispatch(fetchUser(userId)),
+    ]).then(() => {
+        store.dispatch(loaded());
+    });
+}
+
 export class UserBookshelf extends Component {
     componentDidMount(){
         this.userId = parseInt(this.props.match.params.id);
-        store.dispatch(fetchUserBookshelf(this.userId));
-        store.dispatch(fetchUser(this.userId));
+         // ローカル変数に入れないとコンパイル後におかしな構文となるらしく、下の行でエラーが出る
+        const userId = this.userId;
+        fetchUserBookshelfActions({ userId });
     };
 
     render(){
@@ -37,7 +48,7 @@ export class UserBookshelf extends Component {
 
         if(isEmpty(user)){
             return <Loading />;
-        } else if(user && isEmpty(userShelf)) {
+        } else if(this.props.loading) {
             return shelfView(<Loading />)
         }
 
@@ -63,8 +74,7 @@ import { fetchOnIdUpdateDecorator } from '../decorators/FetchOnIdUpdateDecorator
 
 export default connect(state => state)(
     fetchOnIdUpdateDecorator((nextUserId) => {
-        store.dispatch(fetchUserBookshelf(nextUserId));
-        store.dispatch(fetchUser(nextUserId));
+        fetchUserBookshelfActions({ nextUserId });
     })(
         UserBookshelf
     )
