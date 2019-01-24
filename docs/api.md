@@ -1021,6 +1021,24 @@ BOOKBOK　API仕様書
             'userMessage' => 'Bokフローの閲覧にはログインが必要です。'
         ]
 
+## Boks [api/boks/{bok}] 
+
+### Delete Bok[DELETE]
+
++ Response 200 (application/json)
+
+        {
+            'status' => 200,
+            'userMessage' => '削除しました。'
+        }
+
++ Response 403 (application/json)
+
+        {
+            'status' =>403,
+            'userMessage' => '自分以外のBokを削除することはできません。'
+        }
+
 # Group FOLLOWERS
 
 ## Followers [/api/users/{userId}/followers]
