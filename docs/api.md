@@ -951,14 +951,14 @@ BOOKBOK　API仕様書
 
         {
             "status": 200,
-            "userMessage": '削除しました。'
+            "userMessage": "削除しました。"
         }
 
 + Response 403 (application/json)
 
         {
             "status": 403,
-            "userMessage": '自分以外のBokを削除することはできません。'
+            "userMessage": "自分以外のBokを削除することはできません。"
         }
 
 # Group BOKFLOW
