@@ -49,7 +49,7 @@ class Header extends Component {
 
         return (
             <div>
-                <nav className="navbar navbar-expand-md navbar-light bg-light">
+                <nav className="navbar navbar-expand-md navbar-dark bg-bookbok">
                     <Link className="navbar-brand" to="/">BookBok</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
