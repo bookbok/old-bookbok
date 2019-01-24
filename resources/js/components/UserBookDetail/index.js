@@ -126,6 +126,5 @@ class UserBookDetail_ extends Component {
     }
 }
 
-export const UserBookDetail = withRouter(UserBookDetail_);
-export default UserBookDetail;
+export default withRouter(UserBookDetail_);
 
