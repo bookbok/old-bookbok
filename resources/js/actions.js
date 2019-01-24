@@ -3,6 +3,11 @@ import * as utils from "./utils";
 import * as types from "./types";
 
 /**
+ * ==== Root actions ====
+ */
+export const clearState = () => ({ type: types.CLEAR_STATE });
+
+/**
  * ==== Top page (time line) ====
  */
 export const setBokFlow = bokFlow => ({ type: types.SET_BOK_FLOW, bokFlow });
