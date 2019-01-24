@@ -3,6 +3,11 @@ import * as utils from "./utils";
 import * as types from "./types";
 
 /**
+ * ==== Root actions ====
+ */
+export const clearState = () => ({ type: types.CLEAR_STATE });
+
+/**
  * ==== Top page (time line) ====
  */
 export const setBokFlow = bokFlow => ({ type: types.SET_BOK_FLOW, bokFlow });
@@ -23,13 +28,20 @@ export const fetchBokFlow = () => dispatch => {
 
 // Get authentication token
 export const setAuthToken = (token) => ({ type: types.SET_AUTH_TOKEN, token });
-export const requestLogin = (loginUser) => {
+export const requestLogin = (loginUser, history) => {
     return utils.wrapFetch('/api/auth/login', {
         method: "POST",
         body: loginUser
     }).then(json => {
         store.dispatch(setAuthToken(json.token));
         store.dispatch(getLoggedinUser());
+
+        // HACK: 本棚に遷移するためのユーザーIDを取得する方法がこれしかなかった
+        const unsubscribe = store.subscribe(() => {
+            if(!store.getState().loggedinUser) return;
+            history.push(`/users/${utils.getAuthUser().id}/user_books`); // ログイン後のデフォルト遷移先
+            unsubscribe();
+        });
 
         if (loginUser.remember && utils.storageAvailable('localStorage')) {
             localStorage.setItem('token', json.token);

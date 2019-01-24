@@ -943,6 +943,24 @@ BOOKBOK　API仕様書
             "user_id": 1
         }
 
+## Boks [api/boks/{bok}] 
+
+### Delete Bok[DELETE]
+
++ Response 200 (application/json)
+
+        {
+            "status": 200,
+            "userMessage": "削除しました。"
+        }
+
++ Response 403 (application/json)
+
+        {
+            "status": 403,
+            "userMessage": "自分以外のBokを削除することはできません。"
+        }
+
 # Group BOKFLOW
 
 ## BOKFLOW [api/bok_flow]
@@ -1287,3 +1305,45 @@ BOOKBOK　API仕様書
 ### loveを解除する [DELETE]
 
 + Response 200 (application/json)
+
+# Group ImportBooks
+
+## Import Books [/api/import_books]
+
+### 自分の本棚に本を一括登録する [POST]
+
++ Request (application/json)
+
+    + Body
+
+            {
+                "isbnList": [
+                    "9784844381495",
+                    "..."
+                ]
+            }
+
++ Response 200 (application/json)
+
+            {
+                "status": 200,
+                "userMessage": "リクエストされた本はすべて登録済みです。"
+            }
+
+
++ Response 201 (application/json)
+
+            {
+                "books":[
+                    "知ってはいけない2　日本の主権はこうして失われた",
+                    "日本が売られる",
+                    "驚くべきCIAの世論操作"
+                ]
+            }
+
++ Response 400 (application/json)
+
+            {
+                "status": 400,
+                "userMessage": "入力されたISBNは13桁の数字になっていますか？ご確認お願い致します。"
+            }

@@ -84,6 +84,7 @@ Route::put('user_books/{userBook}/review', 'ReviewController@store')->middleware
  */
 Route::get('user_books/{userBookId}/boks', 'BokController@index');
 Route::post('user_books/{userBook}/boks', 'BokController@store')->middleware('auth:api');
+Route::delete('boks/{bok}', 'BokController@delete')->middleware('auth:api');
 
 /**
  * Resource: Reaction
@@ -105,3 +106,8 @@ Route::get('users/{user}/followers','FollowerController@followers');
 Route::get('users/{user}/followings','FollowerController@followings');
 Route::post('users/{userId}/followings','FollowerController@follow')->middleware('auth:api');
 Route::delete('users/{userId}/followings/{targetId}','FollowerController@unfollow')->middleware('auth:api');
+
+/**
+ * Resource: ?
+ */
+Route::post('import_books', 'ImportBooksController@store')->middleware('auth:api');

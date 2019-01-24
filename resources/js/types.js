@@ -1,4 +1,9 @@
 /**
+ * ==== Root ====
+ */
+export const CLEAR_STATE = "CLEAR_STATE";
+
+/**
  * ==== Top page (time line) ====
  */
 export const SET_BOK_FLOW = "SET_BOK_FLOW";
