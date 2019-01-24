@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { fetchUserBookDetail, fetchUser, requestUpdateUserBookStatus } from "../../actions";
 import { store } from "../../store";
 import { isEmpty, getAuthUser } from "../../utils";
@@ -82,7 +82,7 @@ class UserBookDetail_ extends Component {
         const isModalView = this.buttonDisplayCheck(getAuthUser(), this.props.match.params.userId)
 
         const boks = userBook.boks.map((bok) => {
-            return <div className="mt-2 boks-bok" key={bok.id}>
+            return <div className="boks-bok" key={bok.id}>
                 <UserDetailBok bok={bok}/>
                 <div className="boks-relation-line"></div>
             </div>
@@ -100,6 +100,10 @@ class UserBookDetail_ extends Component {
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
                             <MyPageTabs userId={this.props.match.params.userId} />
+                            <Link to={`/users/${this.props.match.params.userId}/user_books`}
+                                className="btn btn-outline-primary mt-5">
+                                戻る
+                            </Link>
                             <UserBookInfo
                                 readingStatuses={this.readingStatuses}
                                 handleUpdate={this.handleUpdate}
@@ -122,6 +126,5 @@ class UserBookDetail_ extends Component {
     }
 }
 
-export const UserBookDetail = withRouter(UserBookDetail_);
-export default UserBookDetail;
+export default withRouter(UserBookDetail_);
 
