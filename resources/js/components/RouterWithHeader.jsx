@@ -16,9 +16,9 @@ import { ConnectedFollowersView } from './FollowersView';
 import { ConnectedFollowingsView } from './FollowingsView';
 import ConnectedUserDetail from './UserDetail';
 import ConnectedBookList from './BookListView';
+import UserBookshelf from './UserBookshelf';
 import {
     ConnectedBookDetail,
-    ConnectedUserBookshelf,
     ConnectedLikeBokList,
     ConnectedLoveBokList,
     ConnectedUsersView,
@@ -46,7 +46,7 @@ class RouterWithHeader extends Component {
                         <Route exact path="/users/:id" component={ ConnectedUserDetail } />
                         <Route exact path="/books" component={ ConnectedBookList } />
                         <Route exact path="/books/:id" component={ ConnectedBookDetail } />
-                        <Route exact path="/users/:id/user_books" component={ ConnectedUserBookshelf } />
+                        <Route exact path="/users/:id/user_books" component={ UserBookshelf } />
                         <Route exact path="/users/:userId/user_books/:userBookId" component={ ConnectedUserBookDetail } />
 
                         <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
