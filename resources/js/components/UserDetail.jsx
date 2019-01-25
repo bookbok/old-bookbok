@@ -30,7 +30,7 @@ class UserDetail extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         fetchUserDetailActions(this.props.match.params.id);
     }
 
