@@ -32,7 +32,7 @@ class UserBookDetail_ extends Component {
         this.userId = parseInt(this.props.match.params.userId);
         this.userBookId = parseInt(this.props.match.params.userBookId);
         store.dispatch(fetchUserBookDetail(this.userId, this.userBookId));
-        store.dispatch(fetchUser(this.userId));
+        fetchUser(this.userId);
     };
 
     // idを元にサーバーに送信する値を返す

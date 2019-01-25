@@ -14,7 +14,7 @@ class FollowingsView extends Component {
     componentDidMount(){
         const userId = parseInt(this.props.match.params.id);
         store.dispatch(fetchFollowings(userId));
-        store.dispatch(fetchUser(userId));
+        fetchUser(userId);
     }
 
     render() {

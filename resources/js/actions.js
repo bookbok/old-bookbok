@@ -65,7 +65,7 @@ export const requestUpdateUser = (user) => dispatch => {
     }).then(json => {
         // 更新が完了したデータをstoreのユーザー情報として更新
         store.dispatch(setLoggedinUser(json));
-        store.dispatch(fetchUser(json.id));
+        fetchUser(json.id);
     });
 }
 
@@ -149,10 +149,10 @@ export const fetchUsers = () => dispatch => {
 }
 
 export const setUser = user => ({type: types.SET_USER, user});
-export const fetchUser = (userId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}`)
+export const fetchUser = (userId) => {
+    return utils.wrapFetch(`/api/users/${userId}`)
         .then(json => {
-            dispatch(setUser(json));
+            store.dispatch(setUser(json));
         });
 }
 

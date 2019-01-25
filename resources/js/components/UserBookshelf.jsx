@@ -12,7 +12,7 @@ const fetchUserBookshelfActions = (userId) => {
     store.dispatch(loading());
     Promise.all([
         store.dispatch(fetchUserBookshelf(userId)),
-        store.dispatch(fetchUser(userId)),
+        fetchUser(userId),
     ]).then(() => {
         store.dispatch(loaded());
     });
@@ -20,6 +20,7 @@ const fetchUserBookshelfActions = (userId) => {
 
 export class UserBookshelf extends Component {
     componentDidMount(){
+        console.log('compoenentDidMoutn')
         this.userId = parseInt(this.props.match.params.id);
         fetchUserBookshelfActions(this.userId);
     }
@@ -70,8 +71,9 @@ import { connect } from "react-redux";
 import { fetchOnIdUpdateDecorator } from '../decorators/FetchOnIdUpdateDecorator';
 
 export default connect(state => state)(
-    fetchOnIdUpdateDecorator((nextUserId) => {
-        fetchUserBookshelfActions(nextUserId);
+    fetchOnIdUpdateDecorator(({id}) => {
+        console.log('decorator')
+        fetchUserBookshelfActions(id);
     })(
         UserBookshelf
     )
