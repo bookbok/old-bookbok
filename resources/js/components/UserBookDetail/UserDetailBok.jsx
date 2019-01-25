@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { store } from "../../store";
 import { Loading } from "../shared/Loading";
-import { requestLike, requestUnLike, requestLove, requestUnLove } from "../../actions";
+import { requestLike, requestUnLike,
+         requestLove, requestUnLove,
+         setAlertMessage, deleteAlertMessage} from "../../actions";
+import { getAuthUser } from "../../utils";
 import { Link } from 'react-router-dom';
 
 export class UserDetailBok extends Component {
@@ -38,6 +41,15 @@ export class UserDetailBok extends Component {
     }
 
     clickLike(bokId, e){
+        if(!getAuthUser()){
+            store.dispatch(setAlertMessage("warning", {__html: "<div><a href='/login'>ログイン</a>してください</div>"}));
+            setTimeout(
+                () => { store.dispatch(deleteAlertMessage()); },
+                10000
+            );
+            return;
+        }
+
         if(this.state.isLiked){
             this.setState({
                 isLiked: false,
@@ -54,6 +66,15 @@ export class UserDetailBok extends Component {
     }
 
     clickLove(bokId, e){
+        if(!getAuthUser()){
+            store.dispatch(setAlertMessage("warning", {__html: "<div><a href='/login'>ログイン</a>してください</div>"}));
+            setTimeout(
+                () => { store.dispatch(deleteAlertMessage()); },
+                10000
+            );
+            return;
+        }
+
         if(this.state.isLoved){
             this.setState({
                 isLoved: false,

@@ -24,7 +24,6 @@ class UserDetail extends Component {
 
     componentDidMount() {
         store.dispatch(fetchUser(this.props.match.params.id));
-        store.dispatch(setAlertMessage("success", "表示できた！"));
     }
 
     // 更新後のユーザー情報を全てstateにも反映
