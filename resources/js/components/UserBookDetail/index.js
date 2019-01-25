@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { fetchUserBookDetail, fetchUser, requestUpdateUserBookStatus } from "../../actions";
+import {
+  fetchUserBookDetail,
+  fetchUser,
+  requestUpdateUserBookStatus,
+  loading,
+  loaded
+} from "../../actions";
 import { store } from "../../store";
 import { isEmpty, getAuthUser } from "../../utils";
 
@@ -14,7 +20,17 @@ import { MyPageTabs } from "../shared/user/MyPageTabs";
 import UserBookInfo from './UserBookInfo';
 
 
-class UserBookDetail_ extends Component {
+const fetchUserBookDetailActions = (userId, userBookId) => {
+    store.dispatch(loading());
+    Promise.all([
+        fetchUserBookDetail(userId, userBookId),
+        fetchUser(userId),
+    ]).then(() => {
+        store.dispatch(loaded());
+    });
+}
+
+class UserBookDetail extends Component {
     constructor(props){
         super(props);
 
@@ -31,9 +47,8 @@ class UserBookDetail_ extends Component {
     componentDidMount(){
         this.userId = parseInt(this.props.match.params.userId);
         this.userBookId = parseInt(this.props.match.params.userBookId);
-        store.dispatch(fetchUserBookDetail(this.userId, this.userBookId));
-        fetchUser(this.userId);
-    };
+        fetchUserBookDetailActions(this.userId, this.userBookId);
+    }
 
     // idを元にサーバーに送信する値を返す
     getStatusNameFromId(id) {
@@ -73,7 +88,7 @@ class UserBookDetail_ extends Component {
     }
 
     render(){
-        if(isEmpty(this.props.userBookDetail) || isEmpty(this.props.user)){
+        if(this.props.loading || !this.props.userBookDetail || !this.props.user){
             return <Loading />;
         }
 
@@ -124,5 +139,17 @@ class UserBookDetail_ extends Component {
     }
 }
 
-export default withRouter(UserBookDetail_);
+
+import { connect } from "react-redux";
+import { fetchOnIdUpdateDecorator } from '../../decorators/FetchOnIdUpdateDecorator';
+
+export default withRouter(
+  connect(state => state)(
+    fetchOnIdUpdateDecorator(({userId, userBookId}) => {
+        fetchUserBookDetailActions(userId, userBookId);
+    })(
+      UserBookDetail
+    )
+  )
+);
 
