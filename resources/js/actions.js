@@ -170,10 +170,10 @@ export const fetchUserBookshelf = (userId) => {
 }
 
 export const setUserBookDetail = userBookDetail => ({ type: types.SET_USER_BOOK_DETAIL, userBookDetail });
-export const fetchUserBookDetail = (userId, userBookId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/user_books/${userBookId}`)
+export const fetchUserBookDetail = (userId, userBookId) => {
+    return utils.wrapFetch(`/api/users/${userId}/user_books/${userBookId}`)
         .then(json => {
-            dispatch(setUserBookDetail(json));
+            store.dispatch(setUserBookDetail(json));
         });
 }
 
