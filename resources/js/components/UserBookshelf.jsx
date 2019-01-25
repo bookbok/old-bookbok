@@ -71,7 +71,6 @@ import { fetchOnIdUpdateDecorator } from '../decorators/FetchOnIdUpdateDecorator
 
 export default connect(state => state)(
     fetchOnIdUpdateDecorator(({id}) => {
-        console.log('decorator')
         fetchUserBookshelfActions(id);
     })(
         UserBookshelf
