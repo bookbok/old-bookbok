@@ -22,10 +22,10 @@ export class UserBookshelf extends Component {
     componentDidMount(){
         this.userId = parseInt(this.props.match.params.id);
         fetchUserBookshelfActions(this.userId);
-    };
+    }
 
     render(){
-        const { userShelf, user } = this.props;
+        const { userBookshelf, user } = this.props;
         const shelfView = (view) => (
             <div className="page-content-wrap row">
                 <FloatUserInfo user={user} />
@@ -33,7 +33,7 @@ export class UserBookshelf extends Component {
                 <div className="container mt-4">
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
-                            <MyPageTabs isUserBooks userId={this.props.match.params.id} />
+                            <MyPageTabs isUserBooks userId={this.userId} />
                             <div className="mt-4 book-list-wrapper">
                                 {view}
                             </div>
@@ -50,7 +50,7 @@ export class UserBookshelf extends Component {
         }
 
         {/* ユーザーが所持する本の情報を本ビューに加工 */}
-        const bookshelf = userShelf.books.map(book => {
+        const bookshelf = userBookshelf.books.map(book => {
             return <BookView
                         book={book}
                         link={`/users/${this.userId}/user_books/${book.pivot.id}`}
