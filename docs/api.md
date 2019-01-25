@@ -943,6 +943,24 @@ BOOKBOK　API仕様書
             "user_id": 1
         }
 
+## Boks [api/boks/{bok}] 
+
+### Delete Bok[DELETE]
+
++ Response 200 (application/json)
+
+        {
+            "status": 200,
+            "userMessage": "削除しました。"
+        }
+
++ Response 403 (application/json)
+
+        {
+            "status": 403,
+            "userMessage": "自分以外のBokを削除することはできません。"
+        }
+
 # Group BOKFLOW
 
 ## BOKFLOW [api/bok_flow]
