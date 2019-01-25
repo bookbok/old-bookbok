@@ -10,10 +10,11 @@ import BokFlowContent from "./BokFlowContent";
 
 class BokFlow extends React.Component {
     componentDidMount() {
-        if(!getAuthUser()) return this.props.history.push('/login');
-
+        if(!getAuthUser()){
+            console.log("BokFlow : componentDidMount()");
+            return store.dispatch(setAlertMessage("warning", {__html: "<Link to='/login'>ログイン</Link>してください"}));
+        }
         store.dispatch(fetchBokFlow());
-        store.dispatch(setAlertMessage("success", "Here is BokFlow"));
     }
 
     render() {

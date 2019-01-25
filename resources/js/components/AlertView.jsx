@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 export class AlertView extends Component {
     render(){
-        console.log("alertView : " + this.props.alertView);
         if(!this.props.alertView){
             return null;
         }
@@ -22,7 +21,7 @@ export class AlertView extends Component {
 
         return (
             <div className={alertClass}>
-                {this.props.alertView.message}
+                <div dangerouslySetInnerHTML={this.props.alertView.message} />
                 <button type="button" className="close" data-dismiss="alert" aria-label="閉じる">
                     <span aria-hidden="true">&times;</span>
                 </button>
