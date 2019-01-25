@@ -11,7 +11,7 @@ export class MyPageTabs extends Component {
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
                         <Link to={`/users/${userId}/`}
-                           className={this.props.isTop ? 'nav-link active' : 'nav-link'}
+                           className={this.props.isTop ? 'nav-link active tab-border' : 'nav-link'}
                            data-toggle={this.props.isTop ? 'tab' : ''}>トップ</Link>
                     </li>
                     <li className="nav-item">
@@ -31,7 +31,7 @@ export class MyPageTabs extends Component {
                            data-toggle={this.props.isLoves ? 'tab' : ''}>ブックマーク</Link>
                     </li>
 
-                    <li className="nav-item tab-follow-wrapper">
+                    <li className="nav-itemi tab-follow-wrapper">
                         <Link to={`/users/${userId}/followings`}
                            className={this.props.isFollowings ? 'nav-link active' : 'nav-link'}
                            data-toggle={this.props.isFollowings ? 'tab' : ''}>フォロー中</Link>
