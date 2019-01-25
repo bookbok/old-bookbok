@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { store } from "../store";
-import { fetchUser, requestUpdateUser } from "../actions";
+import { fetchUser, requestUpdateUser, loading, loaded } from "../actions";
 import * as utils from "../utils";
 
 import { Loading } from "./shared/Loading";
 import { MyPageTabs } from "./shared/user/MyPageTabs";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
+
+const fetchUserDetailActions = (userId) => {
+    store.dispatch(loading());
+    Promise.all([
+        fetchUser(userId),
+    ]).then(() => {
+        store.dispatch(loaded());
+    });
+}
 
 //マイページ画面を表すコンポーネントを定義
 class UserDetail extends Component {
@@ -21,8 +30,8 @@ class UserDetail extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
-        store.dispatch(fetchUser(this.props.match.params.id));
+    componentWillMount() {
+        fetchUserDetailActions(this.props.match.params.id);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -87,7 +96,7 @@ class UserDetail extends Component {
 
     render() {
         const user = this.props.user;
-        if(utils.isEmpty(user)){
+        if(this.props.loading || !user){
             return <Loading />;
         }
 
@@ -122,8 +131,8 @@ import { connect } from "react-redux";
 import { fetchOnIdUpdateDecorator } from '../decorators/FetchOnIdUpdateDecorator';
 
 export default connect(state => state)(
-    fetchOnIdUpdateDecorator((nextUserId) => {
-        store.dispatch(fetchUser(nextUserId));
+    fetchOnIdUpdateDecorator(({id}) => {
+        fetchUserDetailActions(id);
     })(
         UserDetail
     )
