@@ -6,6 +6,7 @@ import * as types from "./types";
  * ==== Alert message ====
  */
 export const setAlertMessage = (alertType, message) => ({ type: types.SET_ALERT_MESSAGE, alertView:{alertType, message} });
+export const deleteAlertMessage = () => ({ type: types.SET_ALERT_MESSAGE, alertView: null })
 
 /**
  * ==== Top page (time line) ====
