@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { store } from '../../../store';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withRouter } from "react-router-dom";
 import { getAuthUser, isEmpty } from '../../../utils';
-import { requestFollow, requestUnFollow } from '../../../actions';
+import { requestFollow, requestUnFollow,
+         setAlertMessage, deleteAlertMessage} from '../../../actions';
 import FollowButton from './FollowButton';
 
 /**
@@ -27,11 +29,15 @@ export class FloatUserInfo_ extends Component {
     }
 
     handleClickFollow() {
-        const user = getAuthUser();
-        if(isEmpty(user)) {
-            console.log('ログインが必要です');
-            return this.props.history.push('/login');
+        if(!getAuthUser()){
+            store.dispatch(setAlertMessage("warning", {__html: "<div><a href='/login'>ログイン</a>してください</div>"}));
+            setTimeout(
+                () => { store.dispatch(deleteAlertMessage()); },
+                10000
+            );
+            return;
         }
+
 
         if(this.state.followed) {
             requestUnFollow(user.id, this.props.user.id).then(() => {
