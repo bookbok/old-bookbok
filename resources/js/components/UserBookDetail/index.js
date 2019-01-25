@@ -29,10 +29,10 @@ class UserBookDetail_ extends Component {
     };
 
     componentDidMount(){
-        const userId = parseInt(this.props.match.params.userId);
-        const userBookId = parseInt(this.props.match.params.userBookId);
-        store.dispatch(fetchUserBookDetail(userId, userBookId));
-        store.dispatch(fetchUser(userId));
+        this.userId = parseInt(this.props.match.params.userId);
+        this.userBookId = parseInt(this.props.match.params.userBookId);
+        store.dispatch(fetchUserBookDetail(this.userId, this.userBookId));
+        store.dispatch(fetchUser(this.userId));
     };
 
     // idを元にサーバーに送信する値を返す
@@ -57,8 +57,8 @@ class UserBookDetail_ extends Component {
         }
 
         requestUpdateUserBookStatus(
-            this.props.match.params.userId,
-            this.props.match.params.userBookId,
+            this.userId,
+            this.userBookId,
             body
         ).then(() => {
             // TODO: Bootstrap alertで更新したことを通知する
@@ -78,9 +78,6 @@ class UserBookDetail_ extends Component {
         }
 
         const userBook = this.props.userBookDetail;
-
-        const isModalView = this.buttonDisplayCheck(getAuthUser(), this.props.match.params.userId)
-
         const boks = userBook.boks.map((bok) => {
             return <div className="boks-bok" key={bok.id}>
                 <UserDetailBok bok={bok}/>
@@ -88,6 +85,7 @@ class UserBookDetail_ extends Component {
             </div>
         })
 
+        const isModalView = this.buttonDisplayCheck(getAuthUser(), this.userId)
         const { book, review } = userBook;
         const user = this.props.user;
         return (
@@ -99,8 +97,8 @@ class UserBookDetail_ extends Component {
                 <div className="container mt-4">
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
-                            <MyPageTabs userId={this.props.match.params.userId} />
-                            <Link to={`/users/${this.props.match.params.userId}/user_books`}
+                            <MyPageTabs userId={this.userId} />
+                            <Link to={`/users/${this.userId}/user_books`}
                                 className="btn btn-outline-primary mt-5">
                                 戻る
                             </Link>
