@@ -11,7 +11,13 @@ import BokFlowContent from "./BokFlowContent";
 class BokFlow extends React.Component {
     componentDidMount() {
         if(!getAuthUser()){
-            return store.dispatch(setAlertMessage("warning", {__html: "<Link to='/login'>ログイン</Link>してください"}));
+            store.dispatch(setAlertMessage("warning", {__html: "<Link to='/login'>ログイン</Link>してください"}));
+            setTimeout(
+                () => { store.dispatch(deleteAlertMessage()); },
+                2000
+            );
+
+            return;
         }
         store.dispatch(fetchBokFlow());
     }
