@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { fetchUserBookshelf, fetchUser, loading, loaded } from "../actions.js";
+import { fetchUserBookshelf, fetchUser, loading, loaded } from "../actions";
 import { store } from "../store";
-import { isEmpty } from "../utils.js";
+import { isEmpty } from "../utils";
 
 import { Loading } from "./shared/Loading";
-import { BookView } from "./BookView.jsx";
+import { BookView } from "./BookView";
 import { MyPageTabs } from "./shared/user/MyPageTabs";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 
-const fetchUserBookshelfActions = ({ userId }) => {
+const fetchUserBookshelfActions = (userId) => {
     store.dispatch(loading());
     Promise.all([
         store.dispatch(fetchUserBookshelf(userId)),
@@ -21,14 +21,11 @@ const fetchUserBookshelfActions = ({ userId }) => {
 export class UserBookshelf extends Component {
     componentDidMount(){
         this.userId = parseInt(this.props.match.params.id);
-         // ローカル変数に入れないとコンパイル後におかしな構文となるらしく、下の行でエラーが出る
-        const userId = this.userId;
-        fetchUserBookshelfActions({ userId });
+        fetchUserBookshelfActions(this.userId);
     };
 
     render(){
-        const userShelf = this.props.userBookshelf;
-        const user = this.props.user;
+        const { userShelf, user } = this.props;
         const shelfView = (view) => (
             <div className="page-content-wrap row">
                 <FloatUserInfo user={user} />
@@ -74,7 +71,7 @@ import { fetchOnIdUpdateDecorator } from '../decorators/FetchOnIdUpdateDecorator
 
 export default connect(state => state)(
     fetchOnIdUpdateDecorator((nextUserId) => {
-        fetchUserBookshelfActions({ nextUserId });
+        fetchUserBookshelfActions(nextUserId);
     })(
         UserBookshelf
     )
