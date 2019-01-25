@@ -162,10 +162,10 @@ export const fetchUser = (userId) => {
  */
 
 export const setUserBookshelf = userBookshelf => ({type: types.SET_USER_BOOKSHELF, userBookshelf});
-export const fetchUserBookshelf = (userId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/user_books`)
+export const fetchUserBookshelf = (userId) => {
+    return utils.wrapFetch(`/api/users/${userId}/user_books`)
         .then(json => {
-            dispatch(setUserBookshelf(json));
+            store.dispatch(setUserBookshelf(json));
         });
 }
 

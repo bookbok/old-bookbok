@@ -11,7 +11,7 @@ import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 const fetchUserBookshelfActions = (userId) => {
     store.dispatch(loading());
     Promise.all([
-        store.dispatch(fetchUserBookshelf(userId)),
+        fetchUserBookshelf(userId),
         fetchUser(userId),
     ]).then(() => {
         store.dispatch(loaded());
@@ -20,7 +20,6 @@ const fetchUserBookshelfActions = (userId) => {
 
 export class UserBookshelf extends Component {
     componentDidMount(){
-        console.log('compoenentDidMoutn')
         this.userId = parseInt(this.props.match.params.id);
         fetchUserBookshelfActions(this.userId);
     }
@@ -44,9 +43,9 @@ export class UserBookshelf extends Component {
             </div>
         );
 
-        if(isEmpty(user)){
+        if(!user){
             return <Loading />;
-        } else if(this.props.loading) {
+        } else if(this.props.loading || !userBookshelf) {
             return shelfView(<Loading />)
         }
 
