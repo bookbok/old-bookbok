@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { store } from "../store";
-import { fetchUser, fetchFollowers } from "../actions";
+import { fetchUser, fetchFollowers, loading, loaded } from "../actions";
 import { isEmpty } from "../utils";
 
 import { Loading } from "./shared/Loading";
@@ -12,9 +12,14 @@ import SimpleUser from './shared/user/SimpleUser';
 
 class FollowersView extends Component {
     componentDidMount(){
-        const userId = parseInt(this.props.match.params.id);
-        store.dispatch(fetchFollowers(userId));
-        fetchUser(userId);
+        const userId = this.props.match.params.id;
+        store.dispatch(loading());
+        Promise.all([
+            store.dispatch(fetchFollowers(userId)),
+            fetchUser(userId),
+        ]).then(() => {
+            store.dispatch(loaded());
+        });
     }
 
     render() {
@@ -40,7 +45,7 @@ class FollowersView extends Component {
 
         if(isEmpty(user)){
             return <Loading />;
-        } else if(user && isEmpty(followers)){
+        } else if(this.props.loading || user && !followers){
             return (
                 followerList(<Loading />)
             );
