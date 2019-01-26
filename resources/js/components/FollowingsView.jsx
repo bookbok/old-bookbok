@@ -46,9 +46,7 @@ class FollowingsView extends Component {
         if(isEmpty(user)){
             return <Loading />;
         } else if(this.props.loading || user && !followings){
-            return (
-                followList(<Loading />)
-            );
+            return followList(<Loading />);
         }
 
         const bindedUsers = followings.map((user, i) => (
