@@ -220,9 +220,9 @@ export const reviewRegister = (userBookId, review) => {
  */
 
 export const setFollowers = followers => ({ type: types.SET_FOLLOWERS, followers });
-export const fetchFollowers = userId => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/followers`).then(res => {
-        dispatch(setFollowers(res));
+export const fetchFollowers = userId => {
+    return utils.wrapFetch(`/api/users/${userId}/followers`).then(res => {
+        store.dispatch(setFollowers(res));
     });
 }
 

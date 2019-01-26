@@ -15,7 +15,7 @@ class FollowersView extends Component {
         const userId = this.props.match.params.id;
         store.dispatch(loading());
         Promise.all([
-            store.dispatch(fetchFollowers(userId)),
+            fetchFollowers(userId),
             fetchUser(userId),
         ]).then(() => {
             store.dispatch(loaded());
