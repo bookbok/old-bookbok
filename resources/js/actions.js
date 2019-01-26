@@ -227,9 +227,9 @@ export const fetchFollowers = userId => {
 }
 
 export const setFollowings = followings => ({ type: types.SET_FOLLOWINGS, followings });
-export const fetchFollowings = userId => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/followings`).then(res => {
-        dispatch(setFollowings(res));
+export const fetchFollowings = userId => {
+    return utils.wrapFetch(`/api/users/${userId}/followings`).then(res => {
+        store.dispatch(setFollowings(res));
     });
 }
 
