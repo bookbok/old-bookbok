@@ -61,6 +61,6 @@ class FollowersView extends Component {
     }
 }
 
-export const ConnectedFollowersView = connect(
+export default connect(
     state => state,
 )(FollowersView);

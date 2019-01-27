@@ -12,7 +12,7 @@ import { UserRegister } from './UserRegister';
 
 import Header from './Header';
 import BokFlow from './BokFlow';
-import { ConnectedFollowersView } from './FollowersView';
+import FollowersView from './FollowersView';
 import { ConnectedFollowingsView } from './FollowingsView';
 import ConnectedUserDetail from './UserDetail';
 import ConnectedBookList from './BookListView';
@@ -51,7 +51,7 @@ class RouterWithHeader extends Component {
 
                         <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
                         <Route exact path="/users/:id/loves" component={ ConnectedLoveBokList } />
-                        <Route exact path="/users/:id/followers" component={ ConnectedFollowersView } />
+                        <Route exact path="/users/:id/followers" component={ FollowersView } />
                         <Route exact path="/users/:id/followings" component={ ConnectedFollowingsView } />
 
                         <Route exact path="/users" component={ ConnectedUsersView } />
