@@ -2,6 +2,8 @@
  * ==== Root ====
  */
 export const CLEAR_STATE = "CLEAR_STATE";
+export const LOADING = "LOADING";
+export const LOADED = "LOADED";
 
 /**
  * ==== Top page (time line) ====

@@ -93,13 +93,19 @@ export async function smartFetch(url, { body, method = "GET", isParse = true } =
         body = JSON.stringify(body);
     }
 
+    let defaultHeader = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    };
+    if(state.token){
+        defaultHeader = {
+          ...defaultHeader,
+          "Authorization": `Bearer ${state.token}`,
+        };
+    }
     const res = await fetch(url, {
         method,
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${state.token}`,
-        },
+        headers: defaultHeader,
         body: method === "GET" ? null : body // GET時はクエリで代用するため
     });
 
@@ -116,11 +122,11 @@ export function wrapAction(actionCreator, callback) {
 
 /**
  * ストレージが使用できるか確認する
- * 
+ *
  * @param string type ストレージタイプ
  *  ex) localStorage or sessionstorage
  * @return bool
- * 
+ *
  * @see https://developer.mozilla.org/ja/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
  */
 export function storageAvailable(type) {
