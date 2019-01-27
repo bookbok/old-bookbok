@@ -59,7 +59,7 @@ class FollowingsView extends Component {
     }
 }
 
-export const ConnectedFollowingsView = connect(
+export default connect(
     state => state,
 )(FollowingsView);
 
