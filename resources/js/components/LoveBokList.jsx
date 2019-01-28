@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchLoveBoks, fetchUser } from "../actions";
+import { fetchLoveBoks, fetchUser, loading, loaded } from "../actions";
 import { store } from "../store";
 import { isEmpty } from "../utils";
 
@@ -8,11 +8,21 @@ import { Bok } from "./Bok";
 import { MyPageTabs } from "./shared/user/MyPageTabs";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 
-export class LoveBokList extends Component {
+
+const fetchLoveBokListActions = (userId) => {
+    store.dispatch(loading());
+    Promise.all([
+        fetchLoveBoks(userId),
+        fetchUser(userId),
+    ]).then(() => {
+        store.dispatch(loaded());
+    });
+}
+
+class LoveBokList extends Component {
     componentDidMount(){
-        const userId = parseInt(this.props.match.params.id);
-        store.dispatch(fetchLoveBoks(userId));
-        fetchUser(userId);
+        const userId = this.props.match.params.id;
+        fetchLoveBokListActions(userId);
     };
 
     render(){
@@ -38,7 +48,7 @@ export class LoveBokList extends Component {
 
         if(isEmpty(user)){
             return <Loading />;
-        } else if(user && isEmpty(loveBoks)){
+        } else if(this.props.loading || user && !loveBoks){
             return (
                 loveList(<Loading />)
             );
@@ -53,3 +63,6 @@ export class LoveBokList extends Component {
         );
     }
 }
+
+import { connect } from 'react-redux';
+export default connect(state => state)(LoveBokList);

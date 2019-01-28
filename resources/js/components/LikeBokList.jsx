@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchLikeBoks, fetchUser } from "../actions";
+import { fetchLikeBoks, fetchUser, loading, loaded } from "../actions";
 import { store } from "../store";
 import { isEmpty } from "../utils";
 
@@ -8,12 +8,22 @@ import { Bok } from "./Bok";
 import { MyPageTabs } from "./shared/user/MyPageTabs";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 
-export class LikeBokList extends Component {
+
+const fetchLikeBokListActions = (userId) => {
+    store.dispatch(loading());
+    Promise.all([
+        fetchLikeBoks(userId),
+        fetchUser(userId),
+    ]).then(() => {
+        store.dispatch(loaded());
+    });
+}
+
+class LikeBokList extends Component {
     componentDidMount(){
-        const userId = parseInt(this.props.match.params.id);
-        store.dispatch(fetchLikeBoks(userId));
-        fetchUser(userId);
-    };
+        const userId = this.props.match.params.id;
+        fetchLikeBokListActions(userId);
+    }
 
     render(){
         const likeBoks = this.props.likeBoks;
@@ -38,7 +48,7 @@ export class LikeBokList extends Component {
 
         if(isEmpty(user)){
             return <Loading />;
-        } else if(user && isEmpty(likeBoks)){
+        } else if(this.props.loading || user && !likeBoks){
             return (
                 likeList(<Loading />)
             );
@@ -53,3 +63,6 @@ export class LikeBokList extends Component {
         );
     }
 }
+
+import { connect } from 'react-redux';
+export default connect(state => state)(LikeBokList);

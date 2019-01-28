@@ -18,12 +18,9 @@ import ConnectedUserDetail from './UserDetail';
 import ConnectedBookList from './BookListView';
 import UserBookshelf from './UserBookshelf';
 import UserBookDetail from './UserBookDetail';
-import {
-    ConnectedBookDetail,
-    ConnectedLikeBokList,
-    ConnectedLoveBokList,
-    ConnectedUsersView,
-} from '../containers';
+import LikeBokList from './LikeBokList';
+import LoveBokList from './LoveBokList';
+import { ConnectedBookDetail, ConnectedUsersView, } from '../containers';
 
 
 //react-router-dom
@@ -49,8 +46,8 @@ class RouterWithHeader extends Component {
                         <Route exact path="/users/:id/user_books" component={ UserBookshelf } />
                         <Route exact path="/users/:userId/user_books/:userBookId" component={ UserBookDetail } />
 
-                        <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
-                        <Route exact path="/users/:id/loves" component={ ConnectedLoveBokList } />
+                        <Route exact path="/users/:id/likes" component={ LikeBokList } />
+                        <Route exact path="/users/:id/loves" component={ LoveBokList } />
                         <Route exact path="/users/:id/followers" component={ FollowersView } />
                         <Route exact path="/users/:id/followings" component={ FollowingsView } />
 

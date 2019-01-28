@@ -257,10 +257,10 @@ export const requestUnFollow = (userId, targetId) => {
  */
 
 export const setLikeBoks = likeBoks => ({type: types.SET_LIKEBOKLIST, likeBoks});
-export const fetchLikeBoks = (userId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/likes`)
+export const fetchLikeBoks = (userId) => {
+    return utils.wrapFetch(`/api/users/${userId}/likes`)
        .then(json => {
-          dispatch(setLikeBoks(json));
+          store.dispatch(setLikeBoks(json));
        });
 }
 
@@ -277,10 +277,10 @@ export const requestUnLike = (bokId) => {
 }
 
 export const setLoveBoks = loveBoks => ({type: types.SET_LOVEBOKLIST, loveBoks});
-export const fetchLoveBoks = (userId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/loves`)
+export const fetchLoveBoks = (userId) => {
+    return utils.wrapFetch(`/api/users/${userId}/loves`)
         .then(json => {
-            dispatch(setLoveBoks(json));
+            store.dispatch(setLoveBoks(json));
         });
 }
 
