@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-export class AlertView extends Component {
+// storeにAlertMessageがあるか確認し、alertType,alertMessageをセットする
+class AlertView extends Component {
     render(){
         if(!this.props.alertView){
             return null;
