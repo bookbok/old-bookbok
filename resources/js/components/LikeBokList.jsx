@@ -10,8 +10,8 @@ import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 
 class LikeBokList extends Component {
     componentDidMount(){
-        const userId = parseInt(this.props.match.params.id);
-        store.dispatch(fetchLikeBoks(userId));
+        const userId = this.props.match.params.id;
+        fetchLikeBoks(userId);
         fetchUser(userId);
     }
 
@@ -54,4 +54,5 @@ class LikeBokList extends Component {
     }
 }
 
+import { connect } from 'react-redux';
 export default connect(state => state)(LikeBokList);

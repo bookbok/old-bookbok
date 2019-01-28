@@ -252,10 +252,10 @@ export const requestUnFollow = (userId, targetId) => {
  */
 
 export const setLikeBoks = likeBoks => ({type: types.SET_LIKEBOKLIST, likeBoks});
-export const fetchLikeBoks = (userId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/likes`)
+export const fetchLikeBoks = (userId) => {
+    return utils.wrapFetch(`/api/users/${userId}/likes`)
        .then(json => {
-          dispatch(setLikeBoks(json));
+          store.dispatch(setLikeBoks(json));
        });
 }
 
