@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { store } from "../store";
+import { deleteAlertMessage } from "../actions";
 
 // storeにAlertMessageがあるか確認し、alertType,alertMessageをセットする
 class AlertView extends Component {
@@ -23,7 +25,7 @@ class AlertView extends Component {
         return (
             <div className={alertClass}>
                 <div dangerouslySetInnerHTML={this.props.alertView.message} />
-                <button type="button" className="close" data-dismiss="alert" aria-label="閉じる">
+                <button type="button" className="close" data-dismiss="alert" aria-label="閉じる" onClick={(e) => store.dispatch(deleteAlertMessage())}>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
