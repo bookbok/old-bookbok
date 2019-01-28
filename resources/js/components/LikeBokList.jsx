@@ -8,7 +8,7 @@ import { Bok } from "./Bok";
 import { MyPageTabs } from "./shared/user/MyPageTabs";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 
-export class LikeBokList extends Component {
+class LikeBokList extends Component {
     componentDidMount(){
         const userId = parseInt(this.props.match.params.id);
         store.dispatch(fetchLikeBoks(userId));
@@ -53,3 +53,5 @@ export class LikeBokList extends Component {
         );
     }
 }
+
+export default connect(state => state)(LikeBokList);
