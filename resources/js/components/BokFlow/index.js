@@ -15,7 +15,7 @@ class BokFlow extends React.Component {
     }
 
     componentWillUnmount() {
-        return store.dispatch(deleteAlertMessage());
+        store.dispatch(deleteAlertMessage());
     }
 
     render() {

@@ -1,6 +1,9 @@
 import { store } from "./store";
 import * as utils from "./utils";
 import * as types from "./types";
+/**
+ * ==== Root actions ====
+ */
 
 /**
  * ==== Alert message ====

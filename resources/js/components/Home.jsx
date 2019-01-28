@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { store } from '../store';
 
 //ホーム画面を表すコンポーネントを定義
 export const Home = () => (

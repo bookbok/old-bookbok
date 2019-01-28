@@ -1,4 +1,8 @@
 /**
+ * ==== Root ====
+ */
+
+/**
  * ==== Alert message ====
  */
 export const SET_ALERT_MESSAGE = "SET_ALERT_MESSAGE";
