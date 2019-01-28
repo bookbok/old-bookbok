@@ -13,7 +13,7 @@ export class LikeBokList extends Component {
         const userId = parseInt(this.props.match.params.id);
         store.dispatch(fetchLikeBoks(userId));
         fetchUser(userId);
-    };
+    }
 
     render(){
         const likeBoks = this.props.likeBoks;
