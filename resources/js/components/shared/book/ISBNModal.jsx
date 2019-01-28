@@ -60,8 +60,8 @@ class ISBNModal_ extends Component {
     setAlert(e) {
         store.dispatch(setAlertMessage("warning", {__html: "<div><a href='/login'>ログイン</a>してください</div>"}));
         setTimeout(
-            () => { store.dispatch(deleteAlertMessage()); },
-            10000
+            () => { if(this.props.alertView !== null) store.dispatch(deleteAlertMessage()); },
+            5000
         );
         return;
     }
