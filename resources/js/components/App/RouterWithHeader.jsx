@@ -3,26 +3,27 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Footer } from './Footer';
-import Home from './Home';
-import Login from './Login';
-import { Logout } from './Logout';
-import { PrivacyPolicyView } from './PrivacyPolicyView';
-import { TermsOfServiceView } from './TermsOfServiceView';
-import { UserRegister } from './UserRegister';
-
 import Header from './Header';
-import BokFlow from './BokFlow';
-import FollowersView from './FollowersView';
-import FollowingsView from './FollowingsView';
-import ConnectedUserDetail from './UserDetail';
-import ConnectedBookList from './BookListView';
-import UserBookshelf from './UserBookshelf';
-import UserBookDetail from './UserBookDetail';
-import LikeBokList from './LikeBokList';
-import LoveBokList from './LoveBokList';
-import { ConnectedBookDetail, ConnectedUsersView, } from '../containers';
+import AlertView from '../AlertView';
 
-import AlertView from "./AlertView";
+import Home from '../Home';
+import Login from '../Login';
+import { Logout } from '../Logout';
+import { PrivacyPolicyView } from '../PrivacyPolicyView';
+import { TermsOfServiceView } from '../TermsOfServiceView';
+import { UserRegister } from '../UserRegister';
+
+import BokFlow from '../BokFlow';
+import FollowersView from '../FollowersView';
+import FollowingsView from '../FollowingsView';
+import ConnectedUserDetail from '../UserDetail';
+import ConnectedBookList from '../BookListView';
+import UserBookshelf from '../UserBookshelf';
+import UserBookDetail from '../UserBookDetail';
+import LikeBokList from '../LikeBokList';
+import LoveBokList from '../LoveBokList';
+import { ConnectedBookDetail, ConnectedUsersView, } from '../../containers';
+
 
 //react-router-dom
 class RouterWithHeader extends Component {
