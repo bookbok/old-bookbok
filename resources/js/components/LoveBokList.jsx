@@ -48,7 +48,7 @@ class LoveBokList extends Component {
 
         if(isEmpty(user)){
             return <Loading />;
-        } else if(user && isEmpty(loveBoks)){
+        } else if(this.props.loading || user && !loveBoks){
             return (
                 loveList(<Loading />)
             );
