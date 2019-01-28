@@ -22,6 +22,7 @@ import LikeBokList from './LikeBokList';
 import LoveBokList from './LoveBokList';
 import { ConnectedBookDetail, ConnectedUsersView, } from '../containers';
 
+import AlertView from "./AlertView";
 
 //react-router-dom
 class RouterWithHeader extends Component {
@@ -30,6 +31,7 @@ class RouterWithHeader extends Component {
             <BrowserRouter>
                 <div>
                     <Header />
+                    <AlertView />
                     <Switch>
                         <Route exact path="/" component={ Home } />
                         <Route exact path="/home" component={ Home } />
