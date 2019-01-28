@@ -60,6 +60,10 @@ img.user-info-avatar {
   white-space: nowrap;
 }
 
+.nav-scroll .nav-tabs::-webkit-scrollbar {
+  display:none;
+}
+
 .user-detail-wrapper {
   .name-input {
     width: 100%;
