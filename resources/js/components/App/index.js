@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import RouterWithHeader from './RouterWithHeader';
+import Routes from './Routes';
 import { Footer } from './Footer';
 import Header from './Header';
 import AlertView from '../AlertView';
@@ -14,7 +14,7 @@ class App extends Component {
                 <div>
                     <Header />
                     <AlertView />
-                    <RouterWithHeader />
+                    <Routes />
                     <Footer />
                 </div>
             </BrowserRouter>

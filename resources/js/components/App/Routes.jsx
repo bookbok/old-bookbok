@@ -21,7 +21,7 @@ import { ConnectedBookDetail, ConnectedUsersView, } from '../../containers';
 
 
 //react-router-dom
-class RouterWithHeader extends Component {
+class Routes extends Component {
     render() {
         return (
             <Switch>
@@ -52,4 +52,4 @@ class RouterWithHeader extends Component {
     }
 }
 
-export default RouterWithHeader;
+export default Routes;
