@@ -1,3 +1,5 @@
+@import "variables";
+
 /* cube grid style =============================== */
 .sk-cube-grid {
   width: 50px;
@@ -8,7 +10,7 @@
 .sk-cube-grid .sk-cube {
   width: 33%;
   height: 33%;
-  background-color: #00a78d;
+  background-color: $bookbok-green;
   float: left;
   -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
           animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
