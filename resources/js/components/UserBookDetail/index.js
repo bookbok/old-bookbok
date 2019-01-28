@@ -1,6 +1,12 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { fetchUserBookDetail, fetchUser, requestUpdateUserBookStatus } from "../../actions";
+import { Link, withRouter } from "react-router-dom";
+import {
+  fetchUserBookDetail,
+  fetchUser,
+  requestUpdateUserBookStatus,
+  loading,
+  loaded
+} from "../../actions";
 import { store } from "../../store";
 import { isEmpty, getAuthUser } from "../../utils";
 
@@ -14,7 +20,17 @@ import { MyPageTabs } from "../shared/user/MyPageTabs";
 import UserBookInfo from './UserBookInfo';
 
 
-class UserBookDetail_ extends Component {
+const fetchUserBookDetailActions = (userId, userBookId) => {
+    store.dispatch(loading());
+    Promise.all([
+        fetchUserBookDetail(userId, userBookId),
+        fetchUser(userId),
+    ]).then(() => {
+        store.dispatch(loaded());
+    });
+}
+
+class UserBookDetail extends Component {
     constructor(props){
         super(props);
 
@@ -29,11 +45,10 @@ class UserBookDetail_ extends Component {
     };
 
     componentDidMount(){
-        const userId = parseInt(this.props.match.params.userId);
-        const userBookId = parseInt(this.props.match.params.userBookId);
-        store.dispatch(fetchUserBookDetail(userId, userBookId));
-        store.dispatch(fetchUser(userId));
-    };
+        this.userId = parseInt(this.props.match.params.userId);
+        this.userBookId = parseInt(this.props.match.params.userBookId);
+        fetchUserBookDetailActions(this.userId, this.userBookId);
+    }
 
     // idを元にサーバーに送信する値を返す
     getStatusNameFromId(id) {
@@ -57,8 +72,8 @@ class UserBookDetail_ extends Component {
         }
 
         requestUpdateUserBookStatus(
-            this.props.match.params.userId,
-            this.props.match.params.userBookId,
+            this.userId,
+            this.userBookId,
             body
         ).then(() => {
             // TODO: Bootstrap alertで更新したことを通知する
@@ -73,21 +88,19 @@ class UserBookDetail_ extends Component {
     }
 
     render(){
-        if(isEmpty(this.props.userBookDetail) || isEmpty(this.props.user)){
+        if(this.props.loading || !this.props.userBookDetail || !this.props.user){
             return <Loading />;
         }
 
         const userBook = this.props.userBookDetail;
-
-        const isModalView = this.buttonDisplayCheck(getAuthUser(), this.props.match.params.userId)
-
         const boks = userBook.boks.map((bok) => {
-            return <div className="mt-2 boks-bok" key={bok.id}>
+            return <div className="boks-bok" key={bok.id}>
                 <UserDetailBok bok={bok}/>
                 <div className="boks-relation-line"></div>
             </div>
         })
 
+        const isModalView = this.buttonDisplayCheck(getAuthUser(), this.userId)
         const { book, review } = userBook;
         const user = this.props.user;
         return (
@@ -99,7 +112,11 @@ class UserBookDetail_ extends Component {
                 <div className="container mt-4">
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
-                            <MyPageTabs userId={this.props.match.params.userId} />
+                            <MyPageTabs userId={this.userId} />
+                            <Link to={`/users/${this.userId}/user_books`}
+                                className="btn btn-outline-primary mt-5">
+                                戻る
+                            </Link>
                             <UserBookInfo
                                 readingStatuses={this.readingStatuses}
                                 handleUpdate={this.handleUpdate}
@@ -122,6 +139,17 @@ class UserBookDetail_ extends Component {
     }
 }
 
-export const UserBookDetail = withRouter(UserBookDetail_);
-export default UserBookDetail;
+
+import { connect } from "react-redux";
+import { fetchOnIdUpdateDecorator } from '../../decorators/FetchOnIdUpdateDecorator';
+
+export default withRouter(
+  connect(state => state)(
+    fetchOnIdUpdateDecorator(({userId, userBookId}) => {
+        fetchUserBookDetailActions(userId, userBookId);
+    })(
+      UserBookDetail
+    )
+  )
+);
 

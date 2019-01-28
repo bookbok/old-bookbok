@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import { withRouter } from "react-router-dom";
-import { storeISBNToUserBookDirect } from "../../../actions";
+import { storeISBNToUserBookDirect,
+         setAlertMessage, deleteAlertMessage} from "../../../actions";
 import { getAuthUser, isEmpty } from '../../../utils';
+import { store } from '../../../store';
 
 // ファイル下部でwithRouterに食わせているため、名前を特殊にしている
 class ISBNModal_ extends Component {
@@ -14,6 +16,7 @@ class ISBNModal_ extends Component {
 
         this.state = { isbn: "", isInvalid: false, invalidMessage: "" };
         this.handleRegisterISBN = this.handleRegisterISBN.bind(this);
+        this.setAlert = this.setAlert.bind(this);
     }
 
     componentDidMount() {
@@ -54,7 +57,20 @@ class ISBNModal_ extends Component {
         $('#ISBNModal').modal('hide'); // hideしないと画面がバグる
     }
 
+    setAlert(e) {
+        store.dispatch(setAlertMessage("warning", {__html: "<div><a href='/login'>ログイン</a>してください</div>"}));
+        setTimeout(
+            () => { if(this.props.alertView !== null) store.dispatch(deleteAlertMessage()); },
+            5000
+        );
+        return;
+    }
+
     render() {
+        if(!getAuthUser()){
+            return <button type="button" className="btn btn-success" onClick={this.setAlert}>ISBNから本棚に登録</button>;
+        }
+
         return (
             <div>
                 <button type="button" className="btn btn-success" data-toggle="modal" data-target="#ISBNModal">

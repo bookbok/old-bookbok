@@ -1,5 +1,11 @@
+@import "variables";
+
 .tab-follow-wrapper {
   @include smart-vertical {
     display: none;
   };
+}
+
+.nav-tabs .nav-item .tab-border {
+    border-bottom: $bookbok-green solid 3px;
 }

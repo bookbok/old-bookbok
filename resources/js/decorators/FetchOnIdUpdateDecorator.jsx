@@ -7,10 +7,14 @@ export function fetchOnIdUpdateDecorator(updater) {
     return (DecoratedComponent) => withRouter(
         class FetchOnIdUpdateDecorator extends React.Component {
             componentWillReceiveProps(nextProps) {
-                const nextId = nextProps.match.params.id;
-                if (nextId !== this.props.match.params.id) {
-                    updater(nextId);
-                }
+                const params = this.props.match.params;
+                const nextParams = nextProps.match.params;
+                Object.keys(params).some(key => {
+                    if(params[key] !== nextParams[key]) {
+                        updater(nextParams);
+                        return true;
+                    }
+                });
             }
 
             render() {

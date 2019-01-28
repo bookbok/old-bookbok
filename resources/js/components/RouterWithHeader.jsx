@@ -12,19 +12,17 @@ import { UserRegister } from './UserRegister';
 
 import Header from './Header';
 import BokFlow from './BokFlow';
-import { ConnectedFollowersView } from './FollowersView';
-import { ConnectedFollowingsView } from './FollowingsView';
+import FollowersView from './FollowersView';
+import FollowingsView from './FollowingsView';
 import ConnectedUserDetail from './UserDetail';
 import ConnectedBookList from './BookListView';
 import UserBookshelf from './UserBookshelf';
-import {
-    ConnectedBookDetail,
-    ConnectedLikeBokList,
-    ConnectedLoveBokList,
-    ConnectedUsersView,
-    ConnectedUserBookDetail
-} from '../containers';
+import UserBookDetail from './UserBookDetail';
+import LikeBokList from './LikeBokList';
+import LoveBokList from './LoveBokList';
+import { ConnectedBookDetail, ConnectedUsersView, } from '../containers';
 
+import AlertView from "./AlertView";
 
 //react-router-dom
 class RouterWithHeader extends Component {
@@ -33,6 +31,7 @@ class RouterWithHeader extends Component {
             <BrowserRouter>
                 <div>
                     <Header />
+                    <AlertView />
                     <Switch>
                         <Route exact path="/" component={ Home } />
                         <Route exact path="/home" component={ Home } />
@@ -47,12 +46,12 @@ class RouterWithHeader extends Component {
                         <Route exact path="/books" component={ ConnectedBookList } />
                         <Route exact path="/books/:id" component={ ConnectedBookDetail } />
                         <Route exact path="/users/:id/user_books" component={ UserBookshelf } />
-                        <Route exact path="/users/:userId/user_books/:userBookId" component={ ConnectedUserBookDetail } />
+                        <Route exact path="/users/:userId/user_books/:userBookId" component={ UserBookDetail } />
 
-                        <Route exact path="/users/:id/likes" component={ ConnectedLikeBokList } />
-                        <Route exact path="/users/:id/loves" component={ ConnectedLoveBokList } />
-                        <Route exact path="/users/:id/followers" component={ ConnectedFollowersView } />
-                        <Route exact path="/users/:id/followings" component={ ConnectedFollowingsView } />
+                        <Route exact path="/users/:id/likes" component={ LikeBokList } />
+                        <Route exact path="/users/:id/loves" component={ LoveBokList } />
+                        <Route exact path="/users/:id/followers" component={ FollowersView } />
+                        <Route exact path="/users/:id/followings" component={ FollowingsView } />
 
                         <Route exact path="/users" component={ ConnectedUsersView } />
                         <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}

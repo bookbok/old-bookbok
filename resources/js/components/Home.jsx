@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { store } from '../store';
 import { Link, withRouter } from 'react-router-dom';
 import { getAuthUser } from '../utils';
 

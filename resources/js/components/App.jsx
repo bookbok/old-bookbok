@@ -4,7 +4,9 @@ import RouterWithHeader from './RouterWithHeader';
 export class App extends Component {
     render() {
         return (
-            <RouterWithHeader />
+            <div>
+                <RouterWithHeader />
+            </div>
         );
     }
 }

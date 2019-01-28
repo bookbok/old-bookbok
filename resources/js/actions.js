@@ -1,11 +1,18 @@
 import { store } from "./store";
 import * as utils from "./utils";
 import * as types from "./types";
-
 /**
  * ==== Root actions ====
  */
+
+/**
+ * ==== Alert message ====
+ */
+export const setAlertMessage = (alertType, message) => ({ type: types.SET_ALERT_MESSAGE, alertView:{alertType, message} });
+export const deleteAlertMessage = () => ({ type: types.SET_ALERT_MESSAGE, alertView: null })
 export const clearState = () => ({ type: types.CLEAR_STATE });
+export const loading = () => ({ type: types.LOADING });
+export const loaded = () => ({ type: types.LOADED });
 
 /**
  * ==== Top page (time line) ====
@@ -63,7 +70,7 @@ export const requestUpdateUser = (user) => dispatch => {
     }).then(json => {
         // 更新が完了したデータをstoreのユーザー情報として更新
         store.dispatch(setLoggedinUser(json));
-        store.dispatch(fetchUser(json.id));
+        fetchUser(json.id);
     });
 }
 
@@ -147,10 +154,10 @@ export const fetchUsers = () => dispatch => {
 }
 
 export const setUser = user => ({type: types.SET_USER, user});
-export const fetchUser = (userId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}`)
+export const fetchUser = (userId) => {
+    return utils.wrapFetch(`/api/users/${userId}`)
         .then(json => {
-            dispatch(setUser(json));
+            store.dispatch(setUser(json));
         });
 }
 
@@ -160,18 +167,18 @@ export const fetchUser = (userId) => dispatch => {
  */
 
 export const setUserBookshelf = userBookshelf => ({type: types.SET_USER_BOOKSHELF, userBookshelf});
-export const fetchUserBookshelf = (userId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/user_books`)
+export const fetchUserBookshelf = (userId) => {
+    return utils.wrapFetch(`/api/users/${userId}/user_books`)
         .then(json => {
-            dispatch(setUserBookshelf(json));
+            store.dispatch(setUserBookshelf(json));
         });
 }
 
 export const setUserBookDetail = userBookDetail => ({ type: types.SET_USER_BOOK_DETAIL, userBookDetail });
-export const fetchUserBookDetail = (userId, userBookId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/user_books/${userBookId}`)
+export const fetchUserBookDetail = (userId, userBookId) => {
+    return utils.wrapFetch(`/api/users/${userId}/user_books/${userBookId}`)
         .then(json => {
-            dispatch(setUserBookDetail(json));
+            store.dispatch(setUserBookDetail(json));
         });
 }
 
@@ -218,16 +225,16 @@ export const reviewRegister = (userBookId, review) => {
  */
 
 export const setFollowers = followers => ({ type: types.SET_FOLLOWERS, followers });
-export const fetchFollowers = userId => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/followers`).then(res => {
-        dispatch(setFollowers(res));
+export const fetchFollowers = userId => {
+    return utils.wrapFetch(`/api/users/${userId}/followers`).then(res => {
+        store.dispatch(setFollowers(res));
     });
 }
 
 export const setFollowings = followings => ({ type: types.SET_FOLLOWINGS, followings });
-export const fetchFollowings = userId => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/followings`).then(res => {
-        dispatch(setFollowings(res));
+export const fetchFollowings = userId => {
+    return utils.wrapFetch(`/api/users/${userId}/followings`).then(res => {
+        store.dispatch(setFollowings(res));
     });
 }
 
@@ -250,10 +257,10 @@ export const requestUnFollow = (userId, targetId) => {
  */
 
 export const setLikeBoks = likeBoks => ({type: types.SET_LIKEBOKLIST, likeBoks});
-export const fetchLikeBoks = (userId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/likes`)
+export const fetchLikeBoks = (userId) => {
+    return utils.wrapFetch(`/api/users/${userId}/likes`)
        .then(json => {
-          dispatch(setLikeBoks(json));
+          store.dispatch(setLikeBoks(json));
        });
 }
 
@@ -270,10 +277,10 @@ export const requestUnLike = (bokId) => {
 }
 
 export const setLoveBoks = loveBoks => ({type: types.SET_LOVEBOKLIST, loveBoks});
-export const fetchLoveBoks = (userId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/loves`)
+export const fetchLoveBoks = (userId) => {
+    return utils.wrapFetch(`/api/users/${userId}/loves`)
         .then(json => {
-            dispatch(setLoveBoks(json));
+            store.dispatch(setLoveBoks(json));
         });
 }
 

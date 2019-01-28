@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { store } from "../../store";
-import { fetchBokFlow } from "../../actions";
+import { fetchBokFlow, setAlertMessage, deleteAlertMessage } from "../../actions";
 import { isEmpty, getAuthUser } from "../../utils";
 
 import { Loading } from "../shared/Loading";
@@ -10,9 +10,12 @@ import BokFlowContent from "./BokFlowContent";
 
 class BokFlow extends React.Component {
     componentDidMount() {
-        if(!getAuthUser()) return this.props.history.push('/login');
-
+        if(!getAuthUser()){ return this.props.history.push("/login"); }
         store.dispatch(fetchBokFlow());
+    }
+
+    componentWillUnmount() {
+        store.dispatch(deleteAlertMessage());
     }
 
     render() {
@@ -27,4 +30,6 @@ class BokFlow extends React.Component {
     }
 }
 
-export default withRouter(connect(state => state)(BokFlow));
+export default withRouter(
+    connect(state => state)(BokFlow)
+);
