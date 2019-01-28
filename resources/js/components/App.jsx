@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import RouterWithHeader from './RouterWithHeader';
+import AlertView from "./AlertView";
 
 export class App extends Component {
     render() {
+        // storeにAlertMessageがあるか確認し、alertType,alertMessageをセットする
         return (
-            <RouterWithHeader />
+            <div>
+                <AlertView />
+                <RouterWithHeader />
+            </div>
         );
     }
 }

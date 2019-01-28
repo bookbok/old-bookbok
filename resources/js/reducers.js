@@ -5,6 +5,9 @@ export function rootReducer(
     action
 ) {
     switch(action.type) {
+        case types.SET_ALERT_MESSAGE:
+            return { ...state, alertView: action.alertView };
+        
         case types.CLEAR_STATE: // ログイン情報だけ保持する
             return { loggedinUser: { ...state.loggedinUser }, token: state.token };
 

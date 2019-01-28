@@ -1,10 +1,15 @@
 import { store } from "./store";
 import * as utils from "./utils";
 import * as types from "./types";
-
 /**
  * ==== Root actions ====
  */
+
+/**
+ * ==== Alert message ====
+ */
+export const setAlertMessage = (alertType, message) => ({ type: types.SET_ALERT_MESSAGE, alertView:{alertType, message} });
+export const deleteAlertMessage = () => ({ type: types.SET_ALERT_MESSAGE, alertView: null })
 export const clearState = () => ({ type: types.CLEAR_STATE });
 export const loading = () => ({ type: types.LOADING });
 export const loaded = () => ({ type: types.LOADED });

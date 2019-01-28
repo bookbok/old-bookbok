@@ -1,6 +1,11 @@
 /**
  * ==== Root ====
  */
+
+/**
+ * ==== Alert message ====
+ */
+export const SET_ALERT_MESSAGE = "SET_ALERT_MESSAGE";
 export const CLEAR_STATE = "CLEAR_STATE";
 export const LOADING = "LOADING";
 export const LOADED = "LOADED";
