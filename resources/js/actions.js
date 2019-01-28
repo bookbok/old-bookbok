@@ -272,10 +272,10 @@ export const requestUnLike = (bokId) => {
 }
 
 export const setLoveBoks = loveBoks => ({type: types.SET_LOVEBOKLIST, loveBoks});
-export const fetchLoveBoks = (userId) => dispatch => {
-    utils.wrapFetch(`/api/users/${userId}/loves`)
+export const fetchLoveBoks = (userId) => {
+    return utils.wrapFetch(`/api/users/${userId}/loves`)
         .then(json => {
-            dispatch(setLoveBoks(json));
+            store.dispatch(setLoveBoks(json));
         });
 }
 
