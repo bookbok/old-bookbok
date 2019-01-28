@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import Routes from './Routes';
-import { Footer } from './Footer';
 import Header from './Header';
 import AlertView from '../AlertView';
+import Footer from './Footer';
 
 
 class App extends Component {
