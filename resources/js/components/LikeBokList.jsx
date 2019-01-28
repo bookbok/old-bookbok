@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchLikeBoks, fetchUser } from "../actions";
+import { fetchLikeBoks, fetchUser, loading, loaded } from "../actions";
 import { store } from "../store";
 import { isEmpty } from "../utils";
 
@@ -8,11 +8,21 @@ import { Bok } from "./Bok";
 import { MyPageTabs } from "./shared/user/MyPageTabs";
 import { FloatUserInfo } from "./shared/user/FloatUserInfo";
 
+
+const fetchLikeBokListActions = (userId) => {
+    store.dispatch(loading());
+    Promise.all([
+        fetchLikeBoks(userId),
+        fetchUser(userId),
+    ]).then(() => {
+        store.dispatch(loaded());
+    });
+}
+
 class LikeBokList extends Component {
     componentDidMount(){
         const userId = this.props.match.params.id;
-        fetchLikeBoks(userId);
-        fetchUser(userId);
+        fetchLikeBokListActions(userId);
     }
 
     render(){
