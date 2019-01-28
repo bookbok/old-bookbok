@@ -183,10 +183,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * クエリビルダーにユーザの基本情報のselectを追加する
-     * 
+     *
      * @param   Builder $builder
      *  クエリビルダー
-     * 
+     *
      * @return  Builder
      */
     public static function addStdInfo(Builder $builder)
@@ -204,7 +204,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * ユーザ(もしくはそのリスト)を取得しようとするクエリビルダーに対して認証ユーザとのフォロー関係情報を追加する
-     * 
+     *
      * @param   Builder $builder
      *  クエリビルダー
      * @param   int     $authId
@@ -215,7 +215,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *  フォローされているかの情報の列名
      * @param   string  $isFollowing
      *  フォローしているかの情報の列名
-     * 
+     *
      * @return  Builder
      */
     public static function addFollowInfo(

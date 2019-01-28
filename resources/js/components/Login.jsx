@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { requestLogin } from "../actions.js";
+import { requestLogin } from "../actions";
 import { store } from "../store";
+
 import { Link } from 'react-router-dom';
 
-export class Login extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = { email: "", password: "", remember: false };
@@ -24,9 +25,7 @@ export class Login extends Component {
 
     submitLogin(e) {
         e.preventDefault();
-        requestLogin(this.state).then(() => {
-            this.props.history.push('/bok_flow'); // ログイン後のデフォルト遷移先
-        });
+        requestLogin(this.state, this.props.history);
     }
 
     render() {
@@ -102,3 +101,5 @@ export class Login extends Component {
         );
     }
 }
+
+export default withRouter(Login);

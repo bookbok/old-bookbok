@@ -6,6 +6,7 @@
  * ==== Alert message ====
  */
 export const SET_ALERT_MESSAGE = "SET_ALERT_MESSAGE";
+export const CLEAR_STATE = "CLEAR_STATE";
 
 /**
  * ==== Top page (time line) ====

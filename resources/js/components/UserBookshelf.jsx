@@ -55,3 +55,17 @@ export class UserBookshelf extends Component {
         );
     }
 }
+
+
+// URL内のid変更を検知して、再度ユーザー情報をfetchするためのデコレーター
+import { connect } from "react-redux";
+import { fetchOnIdUpdateDecorator } from '../decorators/FetchOnIdUpdateDecorator';
+
+export default connect(state => state)(
+    fetchOnIdUpdateDecorator((nextUserId) => {
+        store.dispatch(fetchUserBookshelf(nextUserId));
+        store.dispatch(fetchUser(nextUserId));
+    })(
+        UserBookshelf
+    )
+);
