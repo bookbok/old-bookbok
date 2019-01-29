@@ -12,6 +12,7 @@ import ConnectedBookList from '../BookListView';
 
 {/* require login */}
 import BokFlow from '../BokFlow';
+import IsbnBulkRegistrationView from '../IsbnBulkRegistrationView';
 
 {/* auth page */}
 import { UserRegister } from '../UserRegister';
@@ -46,6 +47,7 @@ class Routes extends Component {
 
                 {/* require login */}
                 <Route exact path="/bok_flow" component={ BokFlow } />
+                <Route exact path="/bulk_regist" component={ IsbnBulkRegistrationView } />
 
                 {/* auth page */}
                 <Route exact path="/register" component={ UserRegister } />
