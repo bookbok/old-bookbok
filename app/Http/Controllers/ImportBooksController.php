@@ -20,7 +20,8 @@ class ImportBooksController extends Controller
     public function store(Request $request){
 
         $validator = \Validator::make($request->all(), [
-            'isbnList' => 'required|string',
+            'isbnList' => 'required|array',
+            'isbnList.*' => 'required|string',
         ]);
 
         if($validator->fails()) {
