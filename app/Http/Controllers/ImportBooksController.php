@@ -13,12 +13,23 @@ class ImportBooksController extends Controller
     /**
      * 書籍を一括登録するためのエンドポイント
      * カンマ区切りのISBN文字列が送られてくることを期待している
-     * 
+     *
      * @Request $request
      *  リクエスト情報をまとめているLaravel組込クラス
      */
     public function store(Request $request){
-        
+
+        $validator = \Validator::make($request->all(), [
+            'isbnList' => 'required|string',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'userMessage' => $validator->errors()
+            ], 400);
+        }
+
         $authId = auth()->guard('api')->id();
 
         // リクエストデータのの取得
@@ -45,10 +56,10 @@ class ImportBooksController extends Controller
             if(Book::where('isbn', '=', $isbn)->exists()){
 
                 $book = Book::where('isbn', '=', $isbn)->first();
-                
+
                 // App\UserBookに存在しているか確認
                 if(UserBook::where('user_id', '=', $authId)->where('book_id', '=', $book->id)->exists())continue;
-                
+
                 // ユーザの本棚に登録
                 UserBook::create([
                     'user_id' => $authId,
