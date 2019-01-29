@@ -27,15 +27,18 @@ class IsbnBulkRegistrationView extends Component {
         }
 
         const userId = this.props.loggedinUser.id;
-        storeIsbnBulkRegisterDirect(userId, { isbnList }).then(json => {
-            if(json.status == 400) {
+        storeIsbnBulkRegisterDirect(userId, { isbnList }).then(res => {
+            if(res.status == 400) {
                 this.setState({ invalidMessage: json.userMessage });
-                throw new Error();
+            } else if(res.ok) {
+                return res.json();
             }
-            return res.json();
+            throw new Error(res.statusText);
         }).then(json => {
             this.props.history.push(`/users/${userId}/user_books`);
-        }).catch(()=>{});
+        }).catch(err => {
+            this.setState({ invalidMessage: err.message + ': 登録時にエラーが発生しました。恐れ入りますがフッターの「お問い合わせ」からご連絡ください。' });
+        });
     }
 
     render() {
@@ -48,7 +51,6 @@ class IsbnBulkRegistrationView extends Component {
                             <h1>まとめて登録(ISBN)</h1>
                             <p>本に記載されているISBNを入力することで、簡単に本を自分の本棚に一括登録することができます。<br/>
                             一括登録には若干の時間がかかる場合がありますが、不具合ではありません。</p>
-                            <img src="/images/top.jpg"/>
                         </div>
 
                         <form onSubmit={this.handleSubmitRegister}>
