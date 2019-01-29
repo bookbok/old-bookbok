@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { storeIsbnBulkRegisterDirect } from '../actions';
 import { store } from "../store";
+import { getAuthUser } from "../utils";
 
 
 class IsbnBulkRegistrationView extends Component {
@@ -7,6 +10,32 @@ class IsbnBulkRegistrationView extends Component {
         super(props);
 
         this.state = { text: "", invalidMessage: null };
+        this.handleSubmitRegister = this.handleSubmitRegister.bind(this);
+    }
+
+    componentWillMount() {
+        if(!getAuthUser()) {
+            return this.props.history.push(`/login`);
+        }
+    }
+
+    handleSubmitRegister(e) {
+        e.preventDefault();
+        const isbnList = this.state.text.split("\n");
+        if(isbnList.lenght === 0) {
+            return this.setState({ invalidMessage: "1つ以上のISBNを入力してください" });
+        }
+
+        const userId = this.props.loggedinUser.id;
+        storeIsbnBulkRegisterDirect(userId, { isbnList }).then(json => {
+            if(json.status == 400) {
+                this.setState({ invalidMessage: json.userMessage });
+                throw new Error();
+            }
+            return res.json();
+        }).then(json => {
+            this.props.history.push(`/users/${userId}/user_books`);
+        }).catch(()=>{});
     }
 
     render() {
@@ -19,9 +48,10 @@ class IsbnBulkRegistrationView extends Component {
                             <h1>まとめて登録(ISBN)</h1>
                             <p>本に記載されているISBNを入力することで、簡単に本を自分の本棚に一括登録することができます。<br/>
                             一括登録には若干の時間がかかる場合がありますが、不具合ではありません。</p>
+                            <img src="/images/top.jpg"/>
                         </div>
 
-                        <form>
+                        <form onSubmit={this.handleSubmitRegister}>
                             <div className="form-group">
                                 <label
                                     htmlFor="text">
@@ -57,4 +87,4 @@ class IsbnBulkRegistrationView extends Component {
     }
 }
 
-export default IsbnBulkRegistrationView;
+export default connect(state => state)(IsbnBulkRegistrationView);
