@@ -189,6 +189,13 @@ export const storeISBNToUserBookDirect = (userId, isbn) => {
     });
 }
 
+export const storeIsbnBulkRegisterDirect = (userId, isbnList) => {
+    return utils.smartFetch('/api/import_books', {
+        body: isbnList,
+        method: 'POST',
+    });
+}
+
 export const setBokToUserBook = bok => ({ type: types.SET_BOK_TO_USER_BOOK, bok });
 export const registerBok = (userBookId, bok) => {
     return utils.smartFetch(`/api/user_books/${userBookId}/boks`, {
