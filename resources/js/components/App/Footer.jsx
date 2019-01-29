@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-export const Footer = () => (
+const Footer = () => (
     <div className="container mt-5">
         <div className="justify-content-center">
             <footer className="d-inline">
@@ -24,4 +24,6 @@ export const Footer = () => (
             </footer>
         </div>
     </div>
-)
+);
+
+export default Footer;
