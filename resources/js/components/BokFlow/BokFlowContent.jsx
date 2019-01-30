@@ -10,7 +10,7 @@ class BokFlowContent extends React.Component {
                     <p className="pl-5 pr-5">
                         {currentUser.name}さんがフォローしているユーザーの最新Bokを表示しています。
                     </p>
-                    <div className="col-md-8 main-content p-5">
+                    <div className="col-md-8 main-content bok-flow-wrapper">
                         {typeof bokFlow === 'string' ?
                             bokFlow :
                             bokFlow.map(bok => (

@@ -67,11 +67,13 @@ export class BookDetailView extends Component {
         return (
             <div className="container mt-4">
                 <div className="row justify-content-center">
-                    <div className="col-md-8 main-content p-5 clearfix">
-                        <div>
-                            <Link to="/books" className="btn btn-outline-primary mb-5">戻る</Link>
+                    <div className="col-md-8 main-content clearfix">
+                        <div className="back-button">
+                            <Link to="/books">
+                                <i className="fas fa-angle-left"/>
+                                <p className="d-inline font-weight-bold"> 戻る</p>
+                            </Link>
                         </div>
-
                         <div className="float-right">
                             <form onSubmit={this.handleRegister}>
                                 <button type="submit" className="btn btn-success">本棚に追加</button>

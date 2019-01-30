@@ -10,6 +10,14 @@
     }
 }
 
+.book-search-error {
+  width: 80%;
+
+  @include mq-pc {
+    width: 30%;
+  }
+}
+
 .book-list-wrapper {
     text-align: center;
     width: 100%;
