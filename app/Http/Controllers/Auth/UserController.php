@@ -37,7 +37,7 @@ class UserController extends Controller
         $validator = \Validator::make($request->all(), [
             'name'        => 'required|string|regex:/\A[^[:cntrl:]\s]+\z/u|min:1|max:32',
             'description' => 'required|nullable|string|max:1000',
-            'avatar'      => 'required|string|active_url|max:255',
+            'avatar'      => 'required|string|active_url|max:1000',
         ]);
 
         $validator->after(function ($validator) use ($user, $request) {
