@@ -1,0 +1,27 @@
+.policy-wrapper {
+  max-width: 880px;
+  width: 100%;
+  margin: 50px auto 70px;
+  padding: 15px 3%;
+
+  @include normal-pc {
+    padding: 15px 30px;
+  }
+}
+
+.policy-frame {
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(219, 219, 219);
+  border-image: initial;
+  border-radius: 3px;
+}
+
+.policy-content {
+  padding: 50px 5%;
+  background-color: white;
+
+  @include normal-pc {
+    padding: 55px;
+  }
+}
