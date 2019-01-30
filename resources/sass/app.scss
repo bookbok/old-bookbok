@@ -12,6 +12,7 @@
 @import 'responsive';
 
 /* User define class */
+@import 'root';
 @import 'home';
 @import 'footer';
 @import 'loading_animation';
@@ -23,11 +24,6 @@
 @import 'user_info';
 @import 'user_register';
 @import 'search_component';
-
-// MyPageTabs
 @import 'mypage_tabs';
-
-@import 'root';
-
-// BokFlow
 @import 'bok_flow';
+@import 'policies';

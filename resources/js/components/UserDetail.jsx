@@ -73,6 +73,7 @@ class UserDetail extends Component {
                     <input name="avatar"
                         type="text"
                         className="avatar-input"
+                        placeholder="https://example.com/sample.png"
                         value={state.avatar}
                         onChange={changeHandler} />
                 </div>
@@ -82,6 +83,7 @@ class UserDetail extends Component {
                     <textarea name="description"
                         type="text"
                         className="description-input"
+                        placeholder="こんにちは"
                         value={state.description}
                         onChange={changeHandler} />
                 </div>
