@@ -12,7 +12,7 @@ class UserController extends Controller
      *
      * @param   Request  $request
      *  リクエスト
-     * 
+     *
      * @return  \App\User
      */
     public function show(Request $request)
@@ -25,19 +25,21 @@ class UserController extends Controller
 
     /**
      * ユーザー情報更新
-     * 
+     *
      * @param   Request $request
      *  リクエスト
-     * 
+     *
      * @return  \App\User
      */
     public function update(Request $request)
     {
         $user      = $request->user();
+        // ConvertEmptyStringsToNullミドルウェアによって空文字はnullに変換されてしまうためnullを許可
+        // descriptionとavatarをDBに保存する直前でnullの場合は空文字に変換する
         $validator = \Validator::make($request->all(), [
             'name'        => 'required|string|regex:/\A[^[:cntrl:]\s]+\z/u|min:1|max:32',
-            'description' => 'required|nullable|string|max:1000',
-            'avatar'      => 'required|string|active_url|max:1000',
+            'description' => 'nullable|string|max:1000',
+            'avatar'      => 'nullable|string|active_url|max:1000',
         ]);
 
         $validator->after(function ($validator) use ($user, $request) {
@@ -58,8 +60,8 @@ class UserController extends Controller
         }
 
         $user->name        = $request->name;
-        $user->description = $request->description;
-        $user->avatar      = $request->avatar;
+        $user->description = $request->description ?? '';
+        $user->avatar      = $request->avatar ?? '';
 
         $user->save();
 
