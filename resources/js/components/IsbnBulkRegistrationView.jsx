@@ -5,6 +5,8 @@ import { storeIsbnBulkRegisterDirect } from '../actions';
 import { store } from "../store";
 import { getAuthUser } from "../utils";
 
+import BackButtonArea from './shared/BackButtonArea';
+
 
 class IsbnBulkRegistrationView extends Component {
     constructor(props) {
@@ -48,7 +50,7 @@ class IsbnBulkRegistrationView extends Component {
                 <div className="row justify-content-center">
 
                     <div className="col-md-8 main-content p-5">
-                        <Link to={`/users/${this.props.loggedinUser.id}/user_books`} className="btn btn-outline-primary mb-5">本棚へ</Link>
+                        <BackButtonArea to={`/users/${this.props.loggedinUser.id}/user_books`} text="本棚へ" />
                         <div className="mb-5">
                             <h1>まとめて登録(ISBN)</h1>
                             <p>本に記載されているISBNを入力することで、簡単に本を自分の本棚に一括登録することができます。<br/>
