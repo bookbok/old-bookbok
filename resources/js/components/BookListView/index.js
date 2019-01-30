@@ -37,7 +37,9 @@ class BookListView extends Component {
                 <div className="row justify-content-center">
                     <div className="d-flex">
                         <div className="m-3">
-                            <ConnectedGenres handleClickSearchGenre={this.handleClickSearchGenre} />
+                            <ConnectedGenres
+                                handleClickSearchGenre={this.handleClickSearchGenre}
+                                activeGenreId={this.state.genres ? this.state.genres[0] : null} />
                         </div>
                         <div className="m-3">
                             <Search handleSubmit={this.handleSubmitSearchText} />
