@@ -18,6 +18,7 @@ import { BokModal } from "../BokModal";
 import { ReviewModal } from "../ReviewModal";
 import { MyPageTabs } from "../shared/user/MyPageTabs";
 import UserBookInfo from './UserBookInfo';
+import BackButtonArea from '../shared/BackButtonArea';
 
 
 const fetchUserBookDetailActions = (userId, userBookId) => {
@@ -113,10 +114,7 @@ class UserBookDetail extends Component {
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
                             <MyPageTabs userId={this.userId} />
-                            <Link to={`/users/${this.userId}/user_books`}
-                                className="btn btn-outline-primary mt-5">
-                                戻る
-                            </Link>
+                            <BackButtonArea to={`/users/${this.userId}/user_books`} />
                             <UserBookInfo
                                 readingStatuses={this.readingStatuses}
                                 handleUpdate={this.handleUpdate}
