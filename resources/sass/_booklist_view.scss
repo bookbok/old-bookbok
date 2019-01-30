@@ -11,14 +11,10 @@
 }
 
 .book-search-error {
-  width: 10rem;
+  width: 80%;
 
-  @include tablet {
-    width: 15rem;
-  }
-
-  @include normal-pc {
-    width: 20rem;
+  @include mq-pc {
+    width: 30%;
   }
 }
 
