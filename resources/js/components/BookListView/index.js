@@ -1,11 +1,12 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { fetchBookList } from "../../actions";
+import { fetchBookList, fetchGenres } from "../../actions";
 import { store } from "../../store";
 import { isEmpty } from "../../utils";
 
-import { ConnectedGenres } from "../../containers";
+//import { ConnectedGenres } from "../../containers";
+import Genres from '../Genres';
 import { Search } from "../Search";
 import { Loading } from "../shared/Loading";
 import { ISBNModal } from "../shared/book/ISBNModal";
@@ -19,6 +20,10 @@ class BookListView extends Component {
         this.state = { q: "", genres: null };
         this.handleSubmitSearchText = this.handleSubmitSearchText.bind(this);
         this.handleClickSearchGenre = this.handleClickSearchGenre.bind(this);
+    }
+
+    componentDidMount(){
+        store.dispatch(fetchGenres());
     }
 
     handleSubmitSearchText(q) {
@@ -37,7 +42,10 @@ class BookListView extends Component {
                 <div className="row justify-content-center">
                     <div className="d-flex">
                         <div className="m-3">
-                            <ConnectedGenres handleClickSearchGenre={this.handleClickSearchGenre} />
+                            <Genres
+                                handleClickSearchGenre={this.handleClickSearchGenre}
+                                genres={this.props.genres}
+                                activeGenreId={this.state.genres ? this.state.genres[0] : null} />
                         </div>
                         <div className="m-3">
                             <Search handleSubmit={this.handleSubmitSearchText} />

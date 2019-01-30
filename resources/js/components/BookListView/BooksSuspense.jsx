@@ -35,7 +35,7 @@ class BooksSuspense extends React.Component {
         }
 
         const books = this.props.books.data.map((book) => {
-            return <BookView book={book} link={`/books/${book.id}`} key={book.id} />
+            return <BookView book={book} link={`/books/${book.id}`} key={book.id} />;
         });
         return (
             <InfiniteScroll
