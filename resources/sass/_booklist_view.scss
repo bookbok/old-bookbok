@@ -10,6 +10,18 @@
     }
 }
 
+.book-search-error {
+  width: 10rem;
+
+  @include tablet {
+    width: 15rem;
+  }
+
+  @include normal-pc {
+    width: 20rem;
+  }
+}
+
 .book-list-wrapper {
     text-align: center;
     width: 100%;

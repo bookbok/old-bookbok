@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="book-search-error.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="671.16378"
+     inkscape:cy="682.04494"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1323"
+     inkscape:window-height="991"
+     inkscape:window-x="587"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="レイヤー 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g3760"
+       transform="matrix(0.27253091,0,0,0.27253091,39.611904,29.695211)">
+      <g
+         id="g3703">
+        <g
+           id="g3701">
+          <path
+             id="path3699"
+             d="m 25.15,34.821 c -3.2,1.981 -5.159,5.508 -5.159,9.252 v 337.423 c 0,4.136 2.308,7.902 6.008,9.753 l 211.64,105.82 V 135.308 L 35.751,34.342 C 32.355,32.688 28.371,32.84 25.15,34.821 Z m 446.748,0 c -3.2,-1.981 -7.206,-2.155 -10.58,-0.479 L 259.43,135.308 v 361.761 l 211.64,-105.82 c 3.701,-1.85 6.008,-5.616 6.008,-9.753 V 44.073 c -0.021,-3.744 -1.98,-7.271 -5.18,-9.252 z M 432.387,5.977 C 429.666,0.622 423.113,-1.555 417.758,1.188 L 248.524,86.828 79.29,1.21 C 73.935,-1.511 67.404,0.622 64.661,5.977 c -2.699,5.399 -0.566,11.93 4.789,14.651 l 174.154,88.122 c 1.546,0.784 3.222,1.176 4.92,1.176 1.698,0 3.374,-0.392 4.92,-1.176 L 427.598,20.628 c 5.376,-2.721 7.51,-9.252 4.789,-14.651 z"
+             inkscape:connector-curvature="0"
+             style="fill:#ababab" />
+        </g>
+      </g>
+      <g
+         id="g3705" />
+      <g
+         id="g3707" />
+      <g
+         id="g3709" />
+      <g
+         id="g3711" />
+      <g
+         id="g3713" />
+      <g
+         id="g3715" />
+      <g
+         id="g3717" />
+      <g
+         id="g3719" />
+      <g
+         id="g3721" />
+      <g
+         id="g3723" />
+      <g
+         id="g3725" />
+      <g
+         id="g3727" />
+      <g
+         id="g3729" />
+      <g
+         id="g3731" />
+      <g
+         id="g3733" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="104.99708"
+       y="187.38683"
+       id="text3764"><tspan
+         sodipodi:role="line"
+         id="tspan3762"
+         x="104.99708"
+         y="187.38683"
+         style="text-align:center;text-anchor:middle;fill:#666666;stroke-width:0.26458332">本が見つかりませんでした…</tspan><tspan
+         sodipodi:role="line"
+         x="104.99708"
+         y="200.616"
+         style="text-align:center;text-anchor:middle;fill:#666666;stroke-width:0.26458332"
+         id="tspan3770" /><tspan
+         sodipodi:role="line"
+         x="104.99708"
+         y="214.89935"
+         style="text-align:center;text-anchor:middle;fill:#666666;stroke-width:0.26458332"
+         id="tspan3766">「ISBNから本棚に登録」ボタンから</tspan><tspan
+         sodipodi:role="line"
+         x="104.99708"
+         y="229.18272"
+         style="text-align:center;text-anchor:middle;fill:#666666;stroke-width:0.26458332"
+         id="tspan3768">登録してくれませんか？</tspan></text>
+  </g>
+</svg>
