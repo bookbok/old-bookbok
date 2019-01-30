@@ -7,7 +7,9 @@ class BackButtonArea extends Component {
             <div className="back-button">
                 <Link to={this.props.to}>
                     <i className="fas fa-angle-left"/>
-                    <p className="d-inline font-weight-bold"> 戻る</p>
+                    <p className="d-inline font-weight-bold">
+                        &nbsp;{ this.props.text ? this.props.text : '戻る' }
+                    </p>
                 </Link>
             </div>
         );
