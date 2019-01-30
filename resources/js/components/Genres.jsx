@@ -1,17 +1,11 @@
 import React, { Component } from "react";
-import { fetchGenres } from "../actions.js";
-import { store } from "../store";
 import { isEmpty } from "../utils";
 import { Link } from 'react-router-dom';
 
 export class Genres extends Component {
-    componentDidMount(){
-        store.dispatch(fetchGenres());
-    };
-
     render() {
         if(isEmpty(this.props.genres)){
-            return <div></div>;
+            return <div />;
         }
 
         const genres = this.props.genres.map((genre) => (
@@ -38,3 +32,4 @@ export class Genres extends Component {
     }
 }
 
+export default Genres;
