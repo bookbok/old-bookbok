@@ -12,20 +12,26 @@ footer {
     color: darkgray;
   }
 
-  ul {
+  ul.footer-list {
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em 0;
 
-    li {
-      margin-left: 0;
-      margin-top: 1em;
+    .footer-list-item {
+      padding-right: 2em;
+    }
 
-      @include tablet {
-        margin-right: 0.6em;
-      }
+    @include smart-vertical {
+      flex-direction: column;
 
-      @include normal-pc {
-        margin-left: 1em;
+      .footer-list-item {
+        padding-bottom: 1em;
+        &:last-child {
+          padding-bottom: 0;
+        }
       }
     }
+
   }
 }
