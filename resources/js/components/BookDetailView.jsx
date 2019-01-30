@@ -6,6 +6,7 @@ import { getAuthUser, isEmpty, toLines } from "../utils";
 import { Link } from 'react-router-dom';
 import { Loading } from "./shared/Loading";
 import { BookInfo } from "./shared/book/BookInfo";
+import BackButtonArea from './shared/BackButtonArea';
 
 export class BookDetailView extends Component {
     constructor(props){
@@ -68,12 +69,7 @@ export class BookDetailView extends Component {
             <div className="container mt-4">
                 <div className="row justify-content-center">
                     <div className="col-md-8 main-content clearfix">
-                        <div className="back-button">
-                            <Link to="/books">
-                                <i className="fas fa-angle-left"/>
-                                <p className="d-inline font-weight-bold"> 戻る</p>
-                            </Link>
-                        </div>
+                        <BackButtonArea to="/books"/>
                         <div className="float-right">
                             <form onSubmit={this.handleRegister}>
                                 <button type="submit" className="btn btn-success">本棚に追加</button>
