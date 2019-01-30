@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { isEmpty } from "../utils";
 import { Link } from 'react-router-dom';
 
-export class Genres extends Component {
+class Genres extends Component {
     render() {
         if(isEmpty(this.props.genres)){
             return <div />;
