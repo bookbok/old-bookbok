@@ -6,7 +6,7 @@ import { getAuthUser, isEmpty } from '../../utils';
 import { store } from "../../store";
 import { ErrorsView } from '../shared/ErrorsView';
 
-class BokModal_ extends Component {
+class BokModal extends Component {
     constructor(props) {
         super(props);
 
@@ -168,4 +168,4 @@ class BokModal_ extends Component {
 
 }
 
-export const BokModal = withRouter(BokModal_);
+export default withRouter(BokModal);

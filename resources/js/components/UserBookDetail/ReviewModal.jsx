@@ -5,7 +5,7 @@ import { setReview, reviewRegister } from "../../actions";
 import { getAuthUser, isEmpty } from '../../utils';
 import { store } from "../../store";
 
-class ReviewModal_ extends Component {
+class ReviewModal extends Component {
     constructor(props) {
         super(props);
 
@@ -113,4 +113,4 @@ class ReviewModal_ extends Component {
     }
 }
 
-export const ReviewModal = withRouter(ReviewModal_);
+export default withRouter(ReviewModal);
