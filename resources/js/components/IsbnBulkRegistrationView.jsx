@@ -24,7 +24,7 @@ class IsbnBulkRegistrationView extends Component {
 
     handleSubmitRegister(e) {
         e.preventDefault();
-        const isbnList = this.state.text.split("\n");
+        const isbnList = this.state.text.trim().split("\n");
         if(isbnList.lenght === 0) {
             return this.setState({ invalidMessage: "1つ以上のISBNを入力してください" });
         }
