@@ -126,7 +126,7 @@ this.readingStatuses = [
                             <hr />
                             <h3 className="mt-5">レビュー
                                 <div className="float-right">
-                                    <ReviewModal display={isModalView} />
+                                    <ReviewModal isModalView={isModalView} review={review} />
                                 </div>
                             </h3>
                             <p className="mt-4">{review.body}</p>
@@ -134,7 +134,7 @@ this.readingStatuses = [
                             <hr />
                             <h3 className="mt-5">Boks
                                 <div className="float-right">
-                                    <BokModal display={isModalView} />
+                                    <BokModal isModalView={isModalView} />
                                 </div>
                             </h3>
                             <div className="mt-4">{boks}</div>

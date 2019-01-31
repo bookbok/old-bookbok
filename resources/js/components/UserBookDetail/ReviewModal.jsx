@@ -55,7 +55,7 @@ class ReviewModal extends Component {
 
 
     render() {
-        if(this.props.display === false){
+        if(this.props.isModalView === false){
             return null;
         }
         return (
