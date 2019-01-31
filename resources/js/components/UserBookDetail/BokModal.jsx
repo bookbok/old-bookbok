@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import { withRouter } from "react-router-dom";
-import { setBokToUserBook, registerBok } from "../actions";
-import { getAuthUser, isEmpty } from '../utils';
-import { store } from "../store";
-import { ErrorsView } from './shared/ErrorsView';
+import { setBokToUserBook, registerBok } from "../../actions";
+import { getAuthUser, isEmpty } from '../../utils';
+import { store } from "../../store";
+import { ErrorsView } from '../shared/ErrorsView';
 
 class BokModal_ extends Component {
     constructor(props) {

@@ -14,7 +14,7 @@ import { Loading } from "../shared/Loading";
 import UserDetailBok from "./UserDetailBok";
 import { FloatUserInfo } from "../shared/user/FloatUserInfo";
 import { BookInfo } from "../shared/book/BookInfo";
-import { BokModal } from "../BokModal";
+import { BokModal } from "./BokModal";
 import { ReviewModal } from "./ReviewModal";
 import { MyPageTabs } from "../shared/user/MyPageTabs";
 import UserBookInfo from './UserBookInfo';
