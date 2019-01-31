@@ -34,8 +34,7 @@ const fetchUserBookDetailActions = (userId, userBookId) => {
 class UserBookDetail extends Component {
     constructor(props){
         super(props);
-
-        this.readingStatuses = [
+this.readingStatuses = [
             { id: 0, name: 'none', intl: '未設定' },
             { id: 5, name: 'wanted', intl: '欲しい' },
             { id: 10, name: 'unread', intl: '未読' },
@@ -115,23 +114,34 @@ class UserBookDetail extends Component {
                         <div className="col-md-8 main-content p-5">
                             <MyPageTabs userId={this.userId} />
                             <BackButtonArea to={`/users/${this.userId}/user_books`} />
+
                             <UserBookInfo
                                 readingStatuses={this.readingStatuses}
                                 handleUpdate={this.handleUpdate}
                                 userId={userBook.user_id}
                                 readingStatus={userBook.reading_status}
                                 isSpoiler={userBook.is_spoiler} />
-
                             <BookInfo book={book} />
+
                             <hr />
-                            <h3 className="mt-5">レビュー<div className="float-right"><ReviewModal display={isModalView} /></div></h3>
+                            <h3 className="mt-5">レビュー
+                                <div className="float-right">
+                                    <ReviewModal display={isModalView} />
+                                </div>
+                            </h3>
                             <p className="mt-4">{review.body}</p>
+
                             <hr />
-                            <h3 className="mt-5">Boks <div className="float-right"><BokModal display={isModalView} /></div></h3>
+                            <h3 className="mt-5">Boks
+                                <div className="float-right">
+                                    <BokModal display={isModalView} />
+                                </div>
+                            </h3>
                             <div className="mt-4">{boks}</div>
                         </div>
                     </div>
                 </div>
+
             </div>
         );
     }
