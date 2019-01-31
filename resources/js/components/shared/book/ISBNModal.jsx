@@ -67,14 +67,15 @@ class ISBNModal_ extends Component {
     }
 
     render() {
+        const btnText = this.props.btnText ? this.props.btnText : 'ISBNから本棚に登録';
         if(!getAuthUser()){
-            return <button type="button" className="btn btn-success" onClick={this.setAlert}>ISBNから本棚に登録</button>;
+            return <button type="button" className="btn btn-success" onClick={this.setAlert}>{btnText}</button>;
         }
 
         return (
             <div>
                 <button type="button" className="btn btn-success" data-toggle="modal" data-target="#ISBNModal">
-                    ISBNから本棚に登録
+                    {btnText}
                 </button>
 
                 <div className="modal fade" id="ISBNModal" tabIndex="-1" role="dialog" aria-labelledby="ISBNModalTitle" aria-hidden="true">

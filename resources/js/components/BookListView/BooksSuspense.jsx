@@ -5,6 +5,7 @@ import { fetchBookList, fetchMoreBooks } from "../../actions";
 import { isEmpty } from "../../utils";
 import { Loading } from "../shared/Loading";
 import { BookView } from "../BookView";
+import { ISBNModal } from "../shared/book/ISBNModal";
 
 class BooksSuspense extends React.Component {
     constructor(props) {
@@ -31,11 +32,11 @@ class BooksSuspense extends React.Component {
         }
 
         if(isEmpty(this.props.books.data)) {
-            return <p className="h5">本が見つかりませんでした</p>;
+            return <img src="/images/book-search-error.svg" className="book-search-error"/>
         }
 
         const books = this.props.books.data.map((book) => {
-            return <BookView book={book} link={`/books/${book.id}`} key={book.id} />
+            return <BookView book={book} link={`/books/${book.id}`} key={book.id} />;
         });
         return (
             <InfiniteScroll
