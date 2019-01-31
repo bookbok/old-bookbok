@@ -31,20 +31,26 @@ class IsbnBulkRegistrationView extends Component {
 
         const userId = this.props.loggedinUser.id;
         storeIsbnBulkRegisterDirect(userId, { isbnList }).then(res => {
-            if(res.status == 400) {
-                this.setState({ invalidMessage: json.userMessage });
-            } else if(res.ok) {
+            if(res.ok) {
                 return res.json();
             }
-            throw new Error(res.statusText);
+
+            if(res.status == 400) {
+                this.setState({ invalidMessage: '空行含まれているか、ISBNの書式が間違っている可能性があります。ご確認ください。' });
+            } else {
+                this.setState({ invalidMessage: res.statusText + ': 登録時にエラーが発生しました。恐れ入りますがフッターの「ご意見」からご連絡ください。' });
+            }
+            throw new Error();
         }).then(json => {
             this.props.history.push(`/users/${userId}/user_books`);
-        }).catch(err => {
-            this.setState({ invalidMessage: err.message + ': 登録時にエラーが発生しました。恐れ入りますがフッターの「お問い合わせ」からご連絡ください。' });
-        });
+        }).catch(()=>{});
     }
 
     render() {
+        if(!this.props.loggedinUser) {
+            return null;
+        }
+
         return(
             <div className="container mt-4">
                 <div className="row justify-content-center">
