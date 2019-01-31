@@ -2,7 +2,7 @@
   width: 25%;
 
   @include normal-pc {
-    width: 15%;
+    width: 18%;
   }
 }
 
@@ -13,8 +13,8 @@
   margin-top: 0.3em;
 
   @include normal-pc {
-    width: 76px;
-    height: 95px;
+    width: 88px;
+    height: 107px;
   }
 }
 
@@ -25,18 +25,17 @@
 .bok-area {
   position: relative;
   width: 75%;
-  padding-left: 0.5em;
 
   @include normal-pc {
-    width: 85%;
-    padding-left: 1em;
+    width: 82%;
+    padding-left: 0.5rem;
   }
 }
 
 .bok-user {
   overflow: visible;
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   display: inline;
   vertical-align: center;
 
@@ -57,26 +56,18 @@
   }
 }
 
-.bok-footer{
-  font-size: 0.6rem;
-  vertical-align: bottom;
-
-  @include normal-pc {
-    font-size: 0.8rem;
-  };
-}
-
 .page-line-updated {
   display: block;
   overflow: visible;
   margin-bottom: 0;
   width: 60%;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   vertical-align: top;
 
   @include normal-pc {
     margin-top: 0;
     display: inline;
+    font-size: 0.8rem;
   }
 }
 

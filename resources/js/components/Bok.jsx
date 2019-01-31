@@ -99,7 +99,7 @@ export class Bok extends Component {
         const loveClass = (!this.state.isLoved ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation");
 
         return (
-            <div className="card p-2">
+            <div className="card p-3">
                 <div className="d-flex">
                     <div className="d-flex flex-column bok-book-cover-area">
                         <Link to={`/books/${bok.user_book.book.id}`}>
@@ -108,8 +108,8 @@ export class Bok extends Component {
                     </div>
 
                     {/* bok ---------------------------------------------------------------- */}
-                    <div className="bok-area">
-                        <div className="d-flex flex-column h-100">
+                    <div className="bok-area mr-2">
+                        <div className="d-flex flex-column h-auto">
                             <div className="d-flex border-bottom">
                                 <div className="bok-user mr-auto">
                                     <Link to={`/users/${userBook.user_id}`}>{userBook.user.name}</Link>
@@ -118,24 +118,24 @@ export class Bok extends Component {
                             <pre className="bok-body mt-2">{bok.body}</pre>
 
                             {/* bok-footer */}
-                            <div className="d-flex bok-footer mt-2">
-                                <div className="text-muted page-line-updated">
+                            <div className="d-flex mt-2 align-bottom">
+                                <div className="text-muted page-line-updated w-70">
                                     <div className="bok-page">{page}</div>
                                     <div className="bok-line ml-1 mr-3">{line}</div>
                                     <div className="bok-updated">{bok.updated_at}</div>
                                 </div>
-                                <div className="d-flex ml-auto mt-auto">
-                                    <div className="align-top" onClick={(e) => this.clickLike(bok.id)}>
-                                        <p className="liked mr-2">
+                                <div className="d-flex mt-auto ml-auto mb-1">
+                                    <div className="pl-2 pr-2" onClick={(e) => this.clickLike(bok.id)} >
+                                        <pre className="liked mt-auto">
                                             <i className={likeClass}></i>
                                             {this.state.likeCount}
-                                        </p>
+                                        </pre>
                                     </div>
-                                    <div onClick={(e) => this.clickLove(bok.id)}>
-                                        <p className="loved">
+                                    <div className="pl-2 pr-2" onClick={(e) => this.clickLove(bok.id)}>
+                                        <pre className="loved mt-auto">
                                             <i className={loveClass}></i>
                                             {this.state.loveCount}
-                                        </p>
+                                        </pre>
                                     </div>
                                 </div>
                             </div>
