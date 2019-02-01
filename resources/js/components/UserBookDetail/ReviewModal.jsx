@@ -9,7 +9,12 @@ class ReviewModal extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { title: "", body: "", isInvalid: false, invalidMessage: "" };
+        this.state = {
+            title: "",
+            body: this.props.review.body,
+            isInvalid: false,
+            invalidMessage: ""
+        };
 
         this.handleChangeReview = this.handleChangeReview.bind(this);
         this.handleRegisterReview = this.handleRegisterReview.bind(this);
