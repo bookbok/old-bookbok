@@ -55,17 +55,6 @@ class BokModal extends Component {
         }).catch(()=>{});
     }
 
-    initState() {
-        this.setState({
-            page_num_begin: "",
-            page_num_end: "",
-            line_num: "",
-            body: "",
-            isInvalid: false,
-            invalidMessage: ""
-        });
-    }
-
     // 入力必須ではない項目のデータ制御
     makeBok() {
         let bok = {
