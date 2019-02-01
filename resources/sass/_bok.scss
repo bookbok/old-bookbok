@@ -1,5 +1,5 @@
 .bok-book-cover-area {
-  width: 25%;
+  width: 30%;
 
   @include tablet {
     width: 30%;
@@ -11,8 +11,8 @@
 }
 
 .bok-book-cover {
-  width: 64px;
-  height: 80px;
+  width: 60px;
+  height: 76px;
   box-shadow: 0 0 3px 2px #bababa;
   margin-top: 0.3em;
 
@@ -33,7 +33,7 @@
 
 .bok-area {
   position: relative;
-  width: 75%;
+  width: 70%;
 
   @include tablet {
     width: 70%;
@@ -48,7 +48,7 @@
 .bok-user {
   overflow: visible;
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   display: inline;
   vertical-align: center;
 
@@ -78,7 +78,7 @@
   overflow: visible;
   margin-bottom: 0;
   width: 60%;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   vertical-align: top;
 
   @include normal-pc {

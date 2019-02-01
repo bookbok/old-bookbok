@@ -99,7 +99,7 @@ export class Bok extends Component {
         const loveClass = (!this.state.isLoved ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation");
 
         return (
-            <div className="card p-3 mb-5">
+            <div className="card p-2 p-md-3 mb-3 mb-md-5">
                 <div className="d-flex">
                     <div className="d-flex flex-column bok-book-cover-area">
                         <Link to={`/books/${bok.user_book.book.id}`}>
@@ -108,7 +108,7 @@ export class Bok extends Component {
                     </div>
 
                     {/* bok ---------------------------------------------------------------- */}
-                    <div className="bok-area mr-2">
+                    <div className="bok-area mr-2 pl-2 pl-md-3">
                         <div className="d-flex flex-column h-auto">
                             <div className="d-flex border-bottom">
                                 <div className="bok-user mr-auto">
@@ -125,15 +125,15 @@ export class Bok extends Component {
                                     <div className="bok-updated">{bok.updated_at}</div>
                                 </div>
                                 <div className="d-flex mt-auto ml-auto mb-1">
-                                    <div className="pl-2 pr-2" onClick={(e) => this.clickLike(bok.id)} >
+                                    <div className="pl-1 pl-md-2 pr-1 pr-md-2" onClick={(e) => this.clickLike(bok.id)} >
                                         <pre className="liked mt-auto">
-                                            <i className={likeClass}></i>
+                                            <i className={likeClass}/>
                                             {this.state.likeCount}
                                         </pre>
                                     </div>
-                                    <div className="pl-2 pr-2" onClick={(e) => this.clickLove(bok.id)}>
+                                    <div className="pl-1 pl-md-2 pr-1 pr-md-2" onClick={(e) => this.clickLove(bok.id)}>
                                         <pre className="loved mt-auto">
-                                            <i className={loveClass}></i>
+                                            <i className={loveClass}/>
                                             {this.state.loveCount}
                                         </pre>
                                     </div>
