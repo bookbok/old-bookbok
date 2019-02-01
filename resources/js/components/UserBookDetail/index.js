@@ -8,7 +8,7 @@ import {
   loaded
 } from "../../actions";
 import { store } from "../../store";
-import { isEmpty, getAuthUser } from "../../utils";
+import { isEmpty, getAuthUser, toLines } from "../../utils";
 
 import { Loading } from "../shared/Loading";
 import UserDetailBok from "./UserDetailBok";
@@ -132,7 +132,7 @@ this.readingStatuses = [
                                       review={review} />
                                 </div>
                             </h3>
-                            <p className="mt-4">{review.body}</p>
+                            <p className="mt-4">{toLines(review.body)}</p>
 
                             <hr />
                             <h3 className="mt-5">Boks
