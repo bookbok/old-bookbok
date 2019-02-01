@@ -1,105 +1,116 @@
-.bok-book-cover-area {
-  width: 30%;
+.bok-wrapper {
+  background: white;
+  background-clip: border-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  border-radius: 0.25rem;
 
-  @include tablet {
+  .book-cover-area {
     width: 30%;
+
+    @include tablet {
+      width: 30%;
+    }
+
+    @include normal-pc {
+      width: 20%;
+    }
+    .book-cover {
+      width: 60px;
+      height: 76px;
+      box-shadow: 0 0 3px 2px #bababa;
+      margin-top: 0.3em;
+
+      @include tablet {
+        width: 76px;
+        height: 92px;
+      }
+
+      @include normal-pc {
+        width: 92px;
+        height: 111px;
+      }
+
+      &:hover {
+        box-shadow: 0 0 3px 2px #919191;
+      }
+    }
   }
 
-  @include normal-pc {
-    width: 20%;
-  }
-}
-
-.bok-book-cover {
-  width: 60px;
-  height: 76px;
-  box-shadow: 0 0 3px 2px #bababa;
-  margin-top: 0.3em;
-
-  @include tablet {
-    width: 76px;
-    height: 92px;
-  }
-
-  @include normal-pc {
-    width: 92px;
-    height: 111px;
-  }
-}
-
-.bok-book-cover:hover {
-  box-shadow: 0 0 3px 2px #919191;
-}
-
-.bok-area {
-  position: relative;
-  width: 70%;
-
-  @include tablet {
+  .bok-area {
+    position: relative;
     width: 70%;
-  }
 
-  @include normal-pc {
-    width: 80%;
-    padding-left: 0.5rem;
-  }
-}
+    @include tablet {
+      width: 70%;
+    }
 
-.bok-user {
-  overflow: visible;
-  margin: 0;
-  font-size: 0.8rem;
-  display: inline;
-  vertical-align: center;
+    @include normal-pc {
+      width: 80%;
+      padding-left: 0.5rem;
+    }
 
-  @include tablet {
-    font-size: 1rem;
-  }
+    .user-name {
+      overflow: visible;
+      margin: 0;
+      font-size: 0.8rem;
+      display: inline;
+      vertical-align: center;
 
-  @include normal-pc {
-    font-size: 1rem;
-  };
-}
+      @include tablet {
+        font-size: 1rem;
+      }
 
-.bok-body {
-  font-size: 0.7rem;
-  vertical-align: top;
-  display: inline-block;
-  white-space: pre-wrap;
-  line-height: 1.5em;
+      @include normal-pc {
+        font-size: 1rem;
+      };
+    }
 
-  @include normal-pc {
-    font-size: 0.8rem;
-  }
-}
+    .body {
+      font-size: 0.7rem;
+      vertical-align: top;
+      display: inline-block;
+      white-space: pre-wrap;
+      line-height: 1.5em;
 
-.page-line-updated {
-  display: block;
-  overflow: visible;
-  margin-bottom: 0;
-  width: 60%;
-  font-size: 0.6rem;
-  vertical-align: top;
+      @include normal-pc {
+        font-size: 0.8rem;
+      }
+    }
 
-  @include normal-pc {
-    margin-top: 0;
-    display: inline;
-    font-size: 0.8rem;
-  }
-}
+    .page-line-updated {
+      display: block;
+      overflow: visible;
+      margin-bottom: 0;
+      width: 60%;
+      font-size: 0.6rem;
+      vertical-align: top;
 
-.bok-page {
-  display: inline;
- }
+      @include normal-pc {
+        margin-top: 0;
+        display: inline;
+        font-size: 0.8rem;
+      }
+    }
 
-.bok-line {
-  display: inline;
-}
+    .page {
+      display: inline;
+     }
 
-.bok-updated {
-  display: block;
+    .line {
+      display: inline;
+    }
 
-  @include normal-pc {
-    display: inline;
+    .updated {
+      display: block;
+
+      @include normal-pc {
+        display: inline;
+      }
+    }
   }
 }
