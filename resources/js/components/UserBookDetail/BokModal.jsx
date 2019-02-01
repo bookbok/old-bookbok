@@ -124,10 +124,10 @@ class BokModal extends Component {
                                                 className="form-control"
                                                 placeholder="該当行番号"
                                                 value={this.state.line_num}
-                                                onChange={this.handleChangeBok}
-                                                />
+                                                onChange={this.handleChangeBok} />
                                         </div>
                                     </div>
+
                                     <br />
                                     <div className="form-group">
                                         <label htmlFor="impressions-text" className="control-label">感想&nbsp;
