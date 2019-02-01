@@ -1,8 +1,12 @@
 .bok-book-cover-area {
   width: 25%;
 
+  @include tablet {
+    width: 30%;
+  }
+
   @include normal-pc {
-    width: 18%;
+    width: 20%;
   }
 }
 
@@ -12,9 +16,14 @@
   box-shadow: 0 0 3px 2px #bababa;
   margin-top: 0.3em;
 
+  @include tablet {
+    width: 76px;
+    height: 92px;
+  }
+
   @include normal-pc {
-    width: 88px;
-    height: 107px;
+    width: 92px;
+    height: 111px;
   }
 }
 
@@ -26,8 +35,12 @@
   position: relative;
   width: 75%;
 
+  @include tablet {
+    width: 70%;
+  }
+
   @include normal-pc {
-    width: 82%;
+    width: 80%;
     padding-left: 0.5rem;
   }
 }
@@ -39,16 +52,20 @@
   display: inline;
   vertical-align: center;
 
+  @include tablet {
+    font-size: 1rem;
+  }
+
   @include normal-pc {
     font-size: 1rem;
   };
 }
 
 .bok-body {
+  font-size: 0.7rem;
   vertical-align: top;
   display: inline-block;
   white-space: pre-wrap;
-  font-size: 0.7rem;
   line-height: 1.5em;
 
   @include normal-pc {
@@ -61,7 +78,7 @@
   overflow: visible;
   margin-bottom: 0;
   width: 60%;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   vertical-align: top;
 
   @include normal-pc {
