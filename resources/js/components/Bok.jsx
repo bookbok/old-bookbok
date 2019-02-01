@@ -99,7 +99,7 @@ export class Bok extends Component {
         const loveClass = (!this.state.isLoved ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation");
 
         return (
-            <div className="bok-wrapper p-2 p-md-3 mb-3 mb-md-5">
+            <div className="bok-wrapper mb-3 mb-md-5">
                 <div className="d-flex">
                     <div className="d-flex flex-column book-cover-area">
                         <Link to={`/books/${bok.user_book.book.id}`}>
