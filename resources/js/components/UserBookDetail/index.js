@@ -51,6 +51,28 @@ class UserBookDetail extends Component {
         fetchUserBookDetailActions(this.userId, this.userBookId);
     }
 
+    componentDidUpdate() {
+        if(!this.props.userBookDetail) {
+            return;
+        }
+        // URLハッシュ(#boks-4等)を元にbokの元に移動する
+        window.location.hash = window.decodeURIComponent(window.location.hash);
+        const scrollToAnchor = () => {
+            const hashParts = window.location.hash.split('#');
+            if(hashParts.length === 2) {
+                const hash = hashParts[1];
+                const element = document.getElementById(`${hash}`);
+                if(element) {
+                    element.scrollIntoView();
+                }
+            } else {
+                window.scrollTo(0, 0);
+            }
+        };
+        scrollToAnchor();
+        window.onhashchange = scrollToAnchor;
+    }
+
     // idを元にサーバーに送信する値を返す
     getStatusNameFromId(id) {
         return (this.readingStatuses.filter((val) => (val.id == id))[0]).name;
@@ -94,12 +116,12 @@ class UserBookDetail extends Component {
         }
 
         const userBook = this.props.userBookDetail;
-        const boks = userBook.boks.map((bok) => {
-            return <div className="boks-bok" key={bok.id}>
+        const boks = userBook.boks.map((bok) => (
+            <div className="boks-bok" key={bok.id} id={`boks-${bok.id}`}>
                 <UserDetailBok bok={bok}/>
                 <div className="boks-relation-line"></div>
             </div>
-        })
+        ));
 
         const isModalView = this.buttonDisplayCheck(getAuthUser(), this.userId)
         const { book, review } = userBook;
