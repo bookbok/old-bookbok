@@ -101,7 +101,7 @@ class BokModal extends Component {
                                 <div className="modal-body">
                                     <ErrorsView errors={this.state.invalidMessage}/>
 
-                                    <div className="row">
+                                    <div className="form-row">
                                         <div className="col">
                                             <input name="page_num_begin"
                                                 type="number"
