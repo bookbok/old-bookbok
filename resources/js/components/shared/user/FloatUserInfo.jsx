@@ -7,6 +7,7 @@ import { getAuthUser, isEmpty } from '../../../utils';
 import { requestFollow, requestUnFollow,
          setAlertMessage, deleteAlertMessage} from '../../../actions';
 import FollowButton from './FollowButton';
+import DefaultAvatar from './DefaultAvatar';
 
 /**
  * @param {Object} user
@@ -29,7 +30,8 @@ export class FloatUserInfo_ extends Component {
     }
 
     handleClickFollow() {
-        if(!getAuthUser()){
+        const user = getAuthUser();
+        if(!user){
             store.dispatch(setAlertMessage("warning", {__html: "<div><a href='/login'>ログイン</a>してください</div>"}));
             setTimeout(
                 () => { store.dispatch(deleteAlertMessage()); },
@@ -57,8 +59,11 @@ export class FloatUserInfo_ extends Component {
             <div className="sub-content card col-md-7">
                 <div className="d-flex">
                     <div>
-                        <Link to={`/users/${user.id}`} className="text-body">
-                            <img src={user.avatar} className="user-info-avatar" />
+                        <Link to={`/users/{user.id}`} className="text-body">
+                            { user.avatar ?
+                                <img src={user.avatar} className="user-info-avatar" /> :
+                                <DefaultAvatar className="user-info-avatar bg-bookbok" />
+                            }
                             <p className="h4 font-weight-bold">{user.name}</p>
                         </Link>
                     </div>
