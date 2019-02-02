@@ -4,6 +4,7 @@ import { fetchUsers } from "../actions.js";
 import { store } from "../store";
 import { isEmpty } from "../utils.js";
 import { Loading } from "./shared/Loading";
+import DefaultAvatar from './shared/user/DefaultAvatar';
 
 export class UsersView extends Component {
     componentDidMount(){
@@ -18,7 +19,10 @@ export class UsersView extends Component {
         const bindedUsers = this.props.users.map((user, i) => (
             <div className="card border-secondary mb-2" key={i}>
                 <div className="card-body d-flex">
-                    <img src={user.avatar} height="40" />
+                    { user.avatar ?
+                        <img src={user.avatar} className="user-list-avatar" /> :
+                        <DefaultAvatar className="user-list-avatar bg-bookbok" />
+                    }
                     <div className="ml-2">
                         <Link to={`/users/${user.id}`}>{user.name}</Link>
                         <div className="small text-muted">
