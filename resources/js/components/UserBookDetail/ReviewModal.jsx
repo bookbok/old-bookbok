@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import { withRouter } from "react-router-dom";
-import { setReview, reviewRegister } from "../actions";
-import { getAuthUser, isEmpty } from '../utils';
-import { store } from "../store";
+import { setReview, reviewRegister } from "../../actions";
+import { getAuthUser, isEmpty } from '../../utils';
+import { store } from "../../store";
 
-class ReviewModal_ extends Component {
+class ReviewModal extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { title: "", body: "", isInvalid: false, invalidMessage: "" };
+        this.state = {
+            title: "",
+            body: this.props.review.body,
+            isInvalid: false,
+            invalidMessage: ""
+        };
 
         this.handleChangeReview = this.handleChangeReview.bind(this);
         this.handleRegisterReview = this.handleRegisterReview.bind(this);
@@ -55,7 +60,7 @@ class ReviewModal_ extends Component {
 
 
     render() {
-        if(this.props.display === false){
+        if(this.props.isModalView === false){
             return null;
         }
         return (
@@ -113,4 +118,4 @@ class ReviewModal_ extends Component {
     }
 }
 
-export const ReviewModal = withRouter(ReviewModal_);
+export default withRouter(ReviewModal);
