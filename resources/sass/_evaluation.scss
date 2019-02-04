@@ -1,6 +1,13 @@
 .icon {
-  font-size: 1rem;
-  vertical-align: bottom;
+  font-size: 0.8rem;
+
+  @include tablet {
+    font-size: 0.9rem;
+  }
+
+  @include normal-pc {
+    font-size: 1rem;
+  }
 }
 
 .liked {
