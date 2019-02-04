@@ -154,7 +154,7 @@ this.readingStatuses = [
                                       review={review} />
                                 </div>
                             </h3>
-                            <p className="mt-4">{toLines(review.body)}</p>
+                            <div className="mt-4">{toLines(review.body)}</div>
 
                             <hr />
                             <h3 className="mt-5">Boks
