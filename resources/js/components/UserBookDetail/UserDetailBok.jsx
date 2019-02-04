@@ -103,10 +103,28 @@ export class UserDetailBok extends Component {
                     {/* bok ---------------------------------------------------------------- */}
                     <div className="w-100">
                         <div className="d-flex flex-column h-100">
-                            <pre className="userd-bok-user border-bottom">
+
+                            {/* bok-main-content */}
+                            <pre className="userd-bok-user border-bottom d-flex">
                                 <Link to={`/users/${userBook.user_id}`}>
                                     {userBook.user.name}
                                 </Link>
+                                <div className="ml-auto dropdown">
+                                    <i className="fas fa-ellipsis-h p-2"
+                                        role="button"
+                                        id="dropdownMenuLink"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"></i>
+                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <Link className="dropdown-item" to="#" onClick={() => this.props.handleDeleteBok(this.props.bok)}>
+                                            <i className="fas fa-trash-alt"/>&nbsp;削除
+                                        </Link>
+                                        <a className="dropdown-item" href="#">
+                                            <i className="fas fa-paste"/>&nbsp;リンクコピー
+                                        </a>
+                                    </div>
+                                </div>
                             </pre>
                             <pre className="userd-bok-body mt-2 mr-2">{bok.body}</pre>
 
