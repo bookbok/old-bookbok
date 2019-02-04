@@ -99,43 +99,43 @@ export class Bok extends Component {
         const loveClass = (!this.state.isLoved ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation");
 
         return (
-            <div className="card p-2">
+            <div className="bok-wrapper mb-3 mb-md-5">
                 <div className="d-flex">
-                    <div className="d-flex flex-column bok-book-cover-area">
+                    <div className="d-flex flex-column book-cover-area">
                         <Link to={`/books/${bok.user_book.book.id}`}>
-                            <img className="bok-book-cover mx-auto d-block" src={userBook.book.cover}/>
+                            <img className="book-cover mx-auto d-block" src={userBook.book.cover}/>
                         </Link>
                     </div>
 
                     {/* bok ---------------------------------------------------------------- */}
-                    <div className="bok-area">
-                        <div className="d-flex flex-column h-100">
+                    <div className="bok-area mr-2 pl-2 pl-md-3">
+                        <div className="d-flex flex-column h-auto">
                             <div className="d-flex border-bottom">
-                                <div className="bok-user mr-auto">
+                                <div className="user-name mr-auto">
                                     <Link to={`/users/${userBook.user_id}`}>{userBook.user.name}</Link>
                                 </div>
                             </div>
-                            <pre className="bok-body mt-2">{bok.body}</pre>
+                            <pre className="body mt-2">{bok.body}</pre>
 
                             {/* bok-footer */}
-                            <div className="d-flex bok-footer mt-2">
-                                <div className="text-muted page-line-updated">
-                                    <div className="bok-page">{page}</div>
-                                    <div className="bok-line ml-1 mr-3">{line}</div>
-                                    <div className="bok-updated">{bok.updated_at}</div>
+                            <div className="d-flex mt-2 align-bottom">
+                                <div className="text-muted page-line-updated w-70">
+                                    <div className="page">{page}</div>
+                                    <div className="line ml-1 mr-3">{line}</div>
+                                    <div className="updated">{bok.updated_at}</div>
                                 </div>
-                                <div className="d-flex ml-auto mt-auto">
-                                    <div className="align-top" onClick={(e) => this.clickLike(bok.id)}>
-                                        <p className="liked mr-2">
-                                            <i className={likeClass}></i>
+                                <div className="d-flex mt-auto ml-auto mb-1">
+                                    <div className="pl-1 pl-md-2 pr-1 pr-md-2" onClick={(e) => this.clickLike(bok.id)} >
+                                        <pre className="liked mt-auto">
+                                            <i className={likeClass}/>
                                             {this.state.likeCount}
-                                        </p>
+                                        </pre>
                                     </div>
-                                    <div onClick={(e) => this.clickLove(bok.id)}>
-                                        <p className="loved">
-                                            <i className={loveClass}></i>
+                                    <div className="pl-1 pl-md-2 pr-1 pr-md-2" onClick={(e) => this.clickLove(bok.id)}>
+                                        <pre className="loved mt-auto">
+                                            <i className={loveClass}/>
                                             {this.state.loveCount}
-                                        </p>
+                                        </pre>
                                     </div>
                                 </div>
                             </div>
