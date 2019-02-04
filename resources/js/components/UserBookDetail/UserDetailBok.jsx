@@ -4,7 +4,7 @@ import { Loading } from "../shared/Loading";
 import { requestLike, requestUnLike,
          requestLove, requestUnLove,
          setAlertMessage, deleteAlertMessage} from "../../actions";
-import { getAuthUser } from "../../utils";
+import { getAuthUser, execCopy } from "../../utils";
 import { Link } from 'react-router-dom';
 
 export class UserDetailBok extends Component {
@@ -19,6 +19,7 @@ export class UserDetailBok extends Component {
         };
         this.clickLike = this.clickLike.bind(this);
         this.clickLove = this.clickLove.bind(this);
+        this.handleCopy = this.handleCopy.bind(this);
     }
 
     makePageViewStr(bok) {
@@ -90,6 +91,11 @@ export class UserDetailBok extends Component {
         }
     }
 
+    handleCopy() {
+        const bokPath = `${location.origin}${location.pathname}#boks-${this.props.bok.id}`;
+        execCopy(bokPath);
+    }
+
     render(){
         const bok = this.props.bok;
         const userBook = this.props.bok.user_book;
@@ -120,9 +126,9 @@ export class UserDetailBok extends Component {
                                         <Link className="dropdown-item" to="#" onClick={() => this.props.handleDeleteBok(this.props.bok)}>
                                             <i className="fas fa-trash-alt"/>&nbsp;削除
                                         </Link>
-                                        <a className="dropdown-item" href="#">
+                                        <Link className="dropdown-item" to="#" onClick={this.handleCopy}>
                                             <i className="fas fa-paste"/>&nbsp;リンクコピー
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                             </pre>
