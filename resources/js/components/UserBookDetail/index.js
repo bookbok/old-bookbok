@@ -4,8 +4,9 @@ import {
   fetchUserBookDetail,
   fetchUser,
   requestUpdateUserBookStatus,
+  deleteBok,
   loading,
-  loaded
+  loaded,
 } from "../../actions";
 import { store } from "../../store";
 import { isEmpty, getAuthUser, toLines } from "../../utils";
@@ -34,7 +35,7 @@ const fetchUserBookDetailActions = (userId, userBookId) => {
 class UserBookDetail extends Component {
     constructor(props){
         super(props);
-this.readingStatuses = [
+        this.readingStatuses = [
             { id: 0, name: 'none', intl: '未設定' },
             { id: 5, name: 'wanted', intl: '欲しい' },
             { id: 10, name: 'unread', intl: '未読' },
@@ -42,6 +43,7 @@ this.readingStatuses = [
             { id: 20, name: 'readed', intl: '読了' },
         ];
         this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleDeleteBok = this.handleDeleteBok.bind(this);
     };
 
     componentDidMount(){
@@ -109,6 +111,18 @@ this.readingStatuses = [
         return false;
     }
 
+    handleDeleteBok(currentBok) {
+        if(!currentBok) { return; }
+
+        deleteBok(currentBok.user_book_id, currentBok.id).then(() => {
+            setBoksToUserBook(
+                this.props.userBookDetail.boks.filter(bok => {
+                    return bok !== currentBok;
+                })
+            );
+        });
+    }
+
     render(){
         if(this.props.loading || !this.props.userBookDetail || !this.props.user){
             return <Loading />;
@@ -117,7 +131,7 @@ this.readingStatuses = [
         const userBook = this.props.userBookDetail;
         const boks = userBook.boks.map((bok) => (
             <div className="boks-bok" key={bok.id} id={`boks-${bok.id}`}>
-                <UserDetailBok bok={bok}/>
+                <UserDetailBok bok={bok} handleDeleteBok={this.handleDeleteBok} />
                 <div className="boks-relation-line"></div>
             </div>
         ));
@@ -154,7 +168,7 @@ this.readingStatuses = [
                                       review={review} />
                                 </div>
                             </h3>
-                            <p className="mt-4">{toLines(review.body)}</p>
+                            <div className="mt-4">{toLines(review.body)}</div>
 
                             <hr />
                             <h3 className="mt-5">Boks
