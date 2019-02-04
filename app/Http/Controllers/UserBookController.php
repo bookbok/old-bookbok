@@ -100,10 +100,10 @@ class UserBookController extends Controller
         if($is_userBook_exists){
             return response()->json(
                 [
-                    'status' => 400,
+                    'status' => 409,
                     'userMessage' => '追加しようとした本はすでに本棚に登録されています。'
                 ],
-                400
+                409
             );
         }
 
