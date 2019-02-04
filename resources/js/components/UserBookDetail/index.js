@@ -35,7 +35,7 @@ const fetchUserBookDetailActions = (userId, userBookId) => {
 class UserBookDetail extends Component {
     constructor(props){
         super(props);
-this.readingStatuses = [
+        this.readingStatuses = [
             { id: 0, name: 'none', intl: '未設定' },
             { id: 5, name: 'wanted', intl: '欲しい' },
             { id: 10, name: 'unread', intl: '未読' },
