@@ -64,7 +64,7 @@ class Header extends Component {
                                 <Link className="nav-link" to="/bok_flow">Bokフロー</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/books">本一覧</Link>
+                                <Link className="nav-link" to="/books">本の一覧</Link>
                             </li>
                         </ul>
 
