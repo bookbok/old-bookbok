@@ -27,8 +27,8 @@ export function convertQuery(obj) {
 }
 
 export function toLines(str) {
-    return str.split("\n").map(s => (
-        <div>{s}<br /></div>
+    return str.split("\n").map((s, i) => (
+        <div key={i}>{s}<br /></div>
     ));
 }
 
