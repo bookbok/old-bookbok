@@ -604,6 +604,27 @@ BOOKBOK　API仕様書
             ]
         }
 
++ Response 400 (application/json)
+
+        {
+            "status": 400,
+            "userMessage": "ISBN文字列が不正です。"
+        }
+
++ Response 403 (application/json)
+
+        {
+            "status": 403,
+            "userMessage": "自分以外の本棚に追加することはできません。"
+        }
+
++ Response 409 (application/json)
+
+        {
+            "status": 403,
+            "userMessage": "追加しようとした本はすでに本棚に登録されています。"
+        }
+
 ## UserBooks [/api/users/{userId}/user_books/{userBookId}]
 
 + Parameters
