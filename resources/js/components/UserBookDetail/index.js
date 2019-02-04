@@ -4,8 +4,9 @@ import {
   fetchUserBookDetail,
   fetchUser,
   requestUpdateUserBookStatus,
+  deleteBok,
   loading,
-  loaded
+  loaded,
 } from "../../actions";
 import { store } from "../../store";
 import { isEmpty, getAuthUser, toLines } from "../../utils";
@@ -42,6 +43,7 @@ this.readingStatuses = [
             { id: 20, name: 'readed', intl: '読了' },
         ];
         this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleDeleteBok = this.handleDeleteBok.bind(this);
     };
 
     componentDidMount(){
@@ -109,6 +111,18 @@ this.readingStatuses = [
         return false;
     }
 
+    handleDeleteBok(currentBok) {
+        if(!currentBok) { return; }
+
+        deleteBok(currentBok.user_book_id, currentBok.id).then(() => {
+            setBoksToUserBook(
+                this.props.userBookDetail.boks.filter(bok => {
+                    return bok !== currentBok;
+                })
+            );
+        });
+    }
+
     render(){
         if(this.props.loading || !this.props.userBookDetail || !this.props.user){
             return <Loading />;
@@ -117,7 +131,7 @@ this.readingStatuses = [
         const userBook = this.props.userBookDetail;
         const boks = userBook.boks.map((bok) => (
             <div className="boks-bok" key={bok.id} id={`boks-${bok.id}`}>
-                <UserDetailBok bok={bok}/>
+                <UserDetailBok bok={bok} handleDeleteBok={this.handleDeleteBok} />
                 <div className="boks-relation-line"></div>
             </div>
         ));
