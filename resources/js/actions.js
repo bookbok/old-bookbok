@@ -211,7 +211,7 @@ export const deleteBok = (bokId, boks, currentBok) => {
         const filterdBoks = boks.filter(bok => {
             return bok !== currentBok;
         });
-        setBoksToUserBook(filterdBoks);
+        store.dispatch(setBoksToUserBook(filterdBoks));
     });
 }
 
