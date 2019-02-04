@@ -66,12 +66,9 @@ class UserBookDetail extends Component {
                 if(element) {
                     element.scrollIntoView();
                 }
-            } else {
-                window.scrollTo(0, 0);
             }
         };
         scrollToAnchor();
-        window.onhashchange = scrollToAnchor;
     }
 
     // idを元にサーバーに送信する値を返す
@@ -114,13 +111,7 @@ class UserBookDetail extends Component {
     handleDeleteBok(currentBok) {
         if(!currentBok) { return; }
 
-        deleteBok(currentBok.user_book_id, currentBok.id).then(() => {
-            setBoksToUserBook(
-                this.props.userBookDetail.boks.filter(bok => {
-                    return bok !== currentBok;
-                })
-            );
-        });
+        deleteBok(currentBok.id, this.props.userBookDetail.boks, currentBok);
     }
 
     render(){
