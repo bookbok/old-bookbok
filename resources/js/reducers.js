@@ -7,7 +7,7 @@ export function rootReducer(
     switch(action.type) {
         case types.SET_ALERT_MESSAGE:
             return { ...state, alertView: action.alertView };
-        
+
         case types.CLEAR_STATE: // ログイン情報だけ保持する
             return { loggedinUser: { ...state.loggedinUser }, token: state.token };
 
@@ -62,6 +62,15 @@ export function rootReducer(
                 userBookDetail: {
                     ...state.userBookDetail,
                     boks: [ ...state.userBookDetail.boks, action.bok ],
+                }
+            };
+
+        case types.SET_BOKS_TO_USER_BOOK:
+            return {
+                ...state,
+                userBookDetail: {
+                    ...state.userBookDetail,
+                    boks: action.boks,
                 }
             };
 

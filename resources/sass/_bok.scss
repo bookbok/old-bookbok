@@ -1,97 +1,117 @@
-.bok-book-cover-area {
-  width: 25%;
+.bok-wrapper {
+  background: white;
+  background-clip: border-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  border-radius: 0.25rem;
+  padding: 1rem 0.5rem;
 
-  @include normal-pc {
-    width: 15%;
+  .book-cover-area {
+    width: 30%;
+
+    @include tablet {
+      width: 30%;
+    }
+
+    @include normal-pc {
+      width: 20%;
+    }
+    .book-cover {
+      width: 60px;
+      height: 76px;
+      box-shadow: 0 0 3px 2px #bababa;
+      margin-top: 0.3em;
+
+      @include tablet {
+        width: 76px;
+        height: 92px;
+      }
+
+      @include normal-pc {
+        width: 92px;
+        height: 111px;
+      }
+
+      &:hover {
+        box-shadow: 0 0 3px 2px #919191;
+      }
+    }
   }
-}
 
-.bok-book-cover {
-  width: 64px;
-  height: 80px;
-  box-shadow: 0 0 3px 2px #bababa;
-  margin-top: 0.3em;
+  .bok-area {
+    position: relative;
+    width: 70%;
 
-  @include normal-pc {
-    width: 76px;
-    height: 95px;
-  }
-}
+    @include tablet {
+      width: 70%;
+    }
 
-.bok-book-cover:hover {
-  box-shadow: 0 0 3px 2px #919191;
-}
+    @include normal-pc {
+      width: 80%;
+      padding-left: 0.5rem;
+    }
 
-.bok-area {
-  position: relative;
-  width: 75%;
-  padding-left: 0.5em;
+    .user-name {
+      overflow: visible;
+      margin: 0;
+      font-size: 0.8rem;
+      display: inline;
+      vertical-align: center;
 
-  @include normal-pc {
-    width: 85%;
-    padding-left: 1em;
-  }
-}
+      @include tablet {
+        font-size: 1rem;
+      }
 
-.bok-user {
-  overflow: visible;
-  margin: 0;
-  font-size: 0.8rem;
-  display: inline;
-  vertical-align: center;
+      @include normal-pc {
+        font-size: 1rem;
+      };
+    }
 
-  @include normal-pc {
-    font-size: 1rem;
-  };
-}
+    .body {
+      font-size: 0.7rem;
+      vertical-align: top;
+      display: inline-block;
+      white-space: pre-wrap;
+      line-height: 1.5em;
 
-.bok-body {
-  vertical-align: top;
-  display: inline-block;
-  white-space: pre-wrap;
-  font-size: 0.7rem;
-  line-height: 1.5em;
+      @include normal-pc {
+        font-size: 0.8rem;
+      }
+    }
 
-  @include normal-pc {
-    font-size: 0.8rem;
-  }
-}
+    .page-line-updated {
+      display: block;
+      overflow: visible;
+      margin-bottom: 0;
+      width: 60%;
+      font-size: 0.6rem;
+      vertical-align: top;
 
-.bok-footer{
-  font-size: 0.6rem;
-  vertical-align: bottom;
+      @include normal-pc {
+        margin-top: 0;
+        display: inline;
+        font-size: 0.8rem;
+      }
+    }
 
-  @include normal-pc {
-    font-size: 0.8rem;
-  };
-}
+    .page {
+      display: inline;
+     }
 
-.page-line-updated {
-  display: block;
-  overflow: visible;
-  margin-bottom: 0;
-  width: 60%;
-  font-size: 0.6rem;
-  vertical-align: top;
+    .line {
+      display: inline;
+    }
 
-  @include normal-pc {
-    margin-top: 0;
-    display: inline;
-  }
-}
+    .updated {
+      display: block;
 
-.bok-page {
-  display: inline;
- }
-
-.bok-line {
-  display: inline;
-}
-
-.bok-updated {
-  display: block;
-
-  @include normal-pc {
-    display: inline;
+      @include normal-pc {
+        display: inline;
+      }
+    }
   }
 }

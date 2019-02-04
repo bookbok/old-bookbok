@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { requestFollow, requestUnFollow } from '../../../actions';
 import { getAuthUser, isEmpty } from '../../../utils';
 import FollowButton from './FollowButton';
+import DefaultAvatar from './DefaultAvatar';
 
 class SimpleUser_ extends Component {
     constructor(props) {
@@ -53,7 +54,10 @@ class SimpleUser_ extends Component {
         return (
             <div className="card">
                 <div className="card-body d-flex">
-                    <img src={user.avatar} height="40" />
+                    { user.avatar ?
+                        <img src={user.avatar} className="user-list-avatar" /> :
+                        <DefaultAvatar className="user-list-avatar bg-bookbok" />
+                    }
                     <div className="ml-2">
                         <Link to={`/users/${user.id}`}>{user.name}</Link>
                         <div className="small text-muted">

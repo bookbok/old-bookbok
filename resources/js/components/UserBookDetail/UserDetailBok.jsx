@@ -99,8 +99,7 @@ export class UserDetailBok extends Component {
         const loveClass = (!this.state.isLoved ? "far fa-bookmark fa-fw icon" : "fas fa-bookmark fa-fw icon love-animation");
 
         return (
-            <div className="card p-2">
-
+            <div className="card p-3">
                     {/* bok ---------------------------------------------------------------- */}
                     <div className="w-100">
                         <div className="d-flex flex-column h-100">

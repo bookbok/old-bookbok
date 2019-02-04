@@ -4,18 +4,19 @@ import {
   fetchUserBookDetail,
   fetchUser,
   requestUpdateUserBookStatus,
+  deleteBok,
   loading,
-  loaded
+  loaded,
 } from "../../actions";
 import { store } from "../../store";
-import { isEmpty, getAuthUser } from "../../utils";
+import { isEmpty, getAuthUser, toLines } from "../../utils";
 
 import { Loading } from "../shared/Loading";
 import UserDetailBok from "./UserDetailBok";
 import { FloatUserInfo } from "../shared/user/FloatUserInfo";
 import { BookInfo } from "../shared/book/BookInfo";
-import { BokModal } from "../BokModal";
-import { ReviewModal } from "../ReviewModal";
+import BokModal from "./BokModal";
+import ReviewModal from "./ReviewModal";
 import { MyPageTabs } from "../shared/user/MyPageTabs";
 import UserBookInfo from './UserBookInfo';
 import BackButtonArea from '../shared/BackButtonArea';
@@ -34,7 +35,6 @@ const fetchUserBookDetailActions = (userId, userBookId) => {
 class UserBookDetail extends Component {
     constructor(props){
         super(props);
-
         this.readingStatuses = [
             { id: 0, name: 'none', intl: '未設定' },
             { id: 5, name: 'wanted', intl: '欲しい' },
@@ -43,12 +43,35 @@ class UserBookDetail extends Component {
             { id: 20, name: 'readed', intl: '読了' },
         ];
         this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleDeleteBok = this.handleDeleteBok.bind(this);
     };
 
     componentDidMount(){
         this.userId = parseInt(this.props.match.params.userId);
         this.userBookId = parseInt(this.props.match.params.userBookId);
         fetchUserBookDetailActions(this.userId, this.userBookId);
+    }
+
+    componentDidUpdate() {
+        if(!this.props.userBookDetail) {
+            return;
+        }
+        // URLハッシュ(#boks-4等)を元にbokの元に移動する
+        window.location.hash = window.decodeURIComponent(window.location.hash);
+        const scrollToAnchor = () => {
+            const hashParts = window.location.hash.split('#');
+            if(hashParts.length === 2) {
+                const hash = hashParts[1];
+                const element = document.getElementById(`${hash}`);
+                if(element) {
+                    element.scrollIntoView();
+                }
+            } else {
+                window.scrollTo(0, 0);
+            }
+        };
+        scrollToAnchor();
+        window.onhashchange = scrollToAnchor;
     }
 
     // idを元にサーバーに送信する値を返す
@@ -88,18 +111,30 @@ class UserBookDetail extends Component {
         return false;
     }
 
+    handleDeleteBok(currentBok) {
+        if(!currentBok) { return; }
+
+        deleteBok(currentBok.user_book_id, currentBok.id).then(() => {
+            setBoksToUserBook(
+                this.props.userBookDetail.boks.filter(bok => {
+                    return bok !== currentBok;
+                })
+            );
+        });
+    }
+
     render(){
         if(this.props.loading || !this.props.userBookDetail || !this.props.user){
             return <Loading />;
         }
 
         const userBook = this.props.userBookDetail;
-        const boks = userBook.boks.map((bok) => {
-            return <div className="boks-bok" key={bok.id}>
-                <UserDetailBok bok={bok}/>
+        const boks = userBook.boks.map((bok) => (
+            <div className="boks-bok" key={bok.id} id={`boks-${bok.id}`}>
+                <UserDetailBok bok={bok} handleDeleteBok={this.handleDeleteBok} />
                 <div className="boks-relation-line"></div>
             </div>
-        })
+        ));
 
         const isModalView = this.buttonDisplayCheck(getAuthUser(), this.userId)
         const { book, review } = userBook;
@@ -115,23 +150,37 @@ class UserBookDetail extends Component {
                         <div className="col-md-8 main-content p-5">
                             <MyPageTabs userId={this.userId} />
                             <BackButtonArea to={`/users/${this.userId}/user_books`} />
+
                             <UserBookInfo
                                 readingStatuses={this.readingStatuses}
                                 handleUpdate={this.handleUpdate}
                                 userId={userBook.user_id}
                                 readingStatus={userBook.reading_status}
                                 isSpoiler={userBook.is_spoiler} />
-
                             <BookInfo book={book} />
+
                             <hr />
-                            <h3 className="mt-5">レビュー<div className="float-right"><ReviewModal display={isModalView} /></div></h3>
-                            <p className="mt-4">{review.body}</p>
+                            <h3 className="mt-5">レビュー
+                                <div className="float-right">
+                                    <ReviewModal
+                                      key={review.updated_at}
+                                      isModalView={isModalView}
+                                      review={review} />
+                                </div>
+                            </h3>
+                            <div className="mt-4">{toLines(review.body)}</div>
+
                             <hr />
-                            <h3 className="mt-5">Boks <div className="float-right"><BokModal display={isModalView} /></div></h3>
+                            <h3 className="mt-5">Boks
+                                <div className="float-right">
+                                    <BokModal isModalView={isModalView} />
+                                </div>
+                            </h3>
                             <div className="mt-4">{boks}</div>
                         </div>
                     </div>
                 </div>
+
             </div>
         );
     }

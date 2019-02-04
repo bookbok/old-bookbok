@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import { withRouter } from "react-router-dom";
-import { setBokToUserBook, registerBok } from "../actions";
-import { getAuthUser, isEmpty } from '../utils';
-import { store } from "../store";
-import { ErrorsView } from './shared/ErrorsView';
+import { setBokToUserBook, registerBok } from "../../actions";
+import { getAuthUser, isEmpty } from '../../utils';
+import { store } from "../../store";
+import { ErrorsView } from '../shared/ErrorsView';
 
-class BokModal_ extends Component {
+class BokModal extends Component {
     constructor(props) {
         super(props);
 
@@ -55,17 +55,6 @@ class BokModal_ extends Component {
         }).catch(()=>{});
     }
 
-    initState() {
-        this.setState({
-            page_num_begin: "",
-            page_num_end: "",
-            line_num: "",
-            body: "",
-            isInvalid: false,
-            invalidMessage: ""
-        });
-    }
-
     // 入力必須ではない項目のデータ制御
     makeBok() {
         let bok = {
@@ -89,7 +78,7 @@ class BokModal_ extends Component {
     }
 
     render() {
-        if(this.props.display === false){
+        if(this.props.isModalView === false){
             return null;
         }
         return (
@@ -112,7 +101,7 @@ class BokModal_ extends Component {
                                 <div className="modal-body">
                                     <ErrorsView errors={this.state.invalidMessage}/>
 
-                                    <div className="row">
+                                    <div className="form-row">
                                         <div className="col">
                                             <input name="page_num_begin"
                                                 type="number"
@@ -135,10 +124,10 @@ class BokModal_ extends Component {
                                                 className="form-control"
                                                 placeholder="該当行番号"
                                                 value={this.state.line_num}
-                                                onChange={this.handleChangeBok}
-                                                />
+                                                onChange={this.handleChangeBok} />
                                         </div>
                                     </div>
+
                                     <br />
                                     <div className="form-group">
                                         <label htmlFor="impressions-text" className="control-label">感想&nbsp;
@@ -168,4 +157,4 @@ class BokModal_ extends Component {
 
 }
 
-export const BokModal = withRouter(BokModal_);
+export default withRouter(BokModal);

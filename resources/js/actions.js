@@ -203,6 +203,12 @@ export const registerBok = (userBookId, bok) => {
         body: bok,
     });
 }
+export const setBoksToUserBook = boks => ({ type: types.SET_BOKS_TO_USER_BOOK, boks });
+export const deleteBok = (userBookId, bokId) => {
+    return utils.wrapFetch(`/api/user_books/${userBookId}/boks/${bokId}`, {
+        method: 'DELETE',
+    });
+}
 
 /** ネタバレflgや読書状況を更新する */
 export const requestUpdateUserBookStatus = (userId, userBookId, body) => {
