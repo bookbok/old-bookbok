@@ -70,6 +70,7 @@ Route::get('users/{userId}/user_books','UserBookController@index');
 Route::get('users/{userId}/user_books/{userBookId}', 'UserBookController@show');
 Route::post('users/{userId}/user_books', 'UserBookController@store')->middleware('auth:api');
 Route::put('users/{userId}/user_books/{userBookId}', 'UserBookController@update')->middleware('auth:api');
+Route::delete('user_books/{userBook}', 'UserBookController@delete')->middleware('auth:api');
 
 /**
  * Resource: Review
