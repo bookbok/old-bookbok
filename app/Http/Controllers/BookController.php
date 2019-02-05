@@ -79,7 +79,7 @@ class BookController extends Controller
                                 ->join('users', 'users.id', '=', 'reviews.user_id')
                                 ->orderby('reviews.updated_at', 'DESC')
                                 ->limit(5)
-                                ->get(['reviews.id', 'reviews.user_id', 'users.name', 'reviews.user_book_id', 'reviews.body', 'reviews.updated_at'])
+                                ->get(['reviews.id', 'reviews.user_id', 'users.name', 'reviews.user_book_id', 'reviews.title', 'reviews.body', 'reviews.updated_at'])
                                 ->toArray();
 
         return response()->json(array_merge(
