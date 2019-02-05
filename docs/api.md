@@ -781,6 +781,18 @@ BOOKBOK　API仕様書
 
 + Response 200 (application/json)
 
+        {
+            "status": 200,
+            "userMessage": "削除しました。"
+        }
+
++ Response 403 (application/json)
+
+        {
+            "status": 403,
+            "userMessage": "自分以外の本を削除することはできません。"
+        }
+
 # Group GENRES
 
 ## Genres [/api/genres]

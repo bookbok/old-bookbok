@@ -4,7 +4,7 @@ import { Loading } from "../shared/Loading";
 import { requestLike, requestUnLike,
          requestLove, requestUnLove,
          setAlertMessage } from "../../actions";
-import { getAuthUser } from "../../utils";
+import { getAuthUser, execCopy } from "../../utils";
 import { Link } from 'react-router-dom';
 
 export class UserDetailBok extends Component {
@@ -19,6 +19,7 @@ export class UserDetailBok extends Component {
         };
         this.clickLike = this.clickLike.bind(this);
         this.clickLove = this.clickLove.bind(this);
+        this.handleCopy = this.handleCopy.bind(this);
     }
 
     makePageViewStr(bok) {
@@ -82,6 +83,11 @@ export class UserDetailBok extends Component {
         }
     }
 
+    handleCopy() {
+        const bokPath = `${location.origin}${location.pathname}#boks-${this.props.bok.id}`;
+        execCopy(bokPath);
+    }
+
     render(){
         const bok = this.props.bok;
         const userBook = this.props.bok.user_book;
@@ -95,10 +101,28 @@ export class UserDetailBok extends Component {
                     {/* bok ---------------------------------------------------------------- */}
                     <div className="w-100">
                         <div className="d-flex flex-column h-100">
-                            <pre className="userd-bok-user border-bottom">
+
+                            {/* bok-main-content */}
+                            <pre className="userd-bok-user border-bottom d-flex">
                                 <Link to={`/users/${userBook.user_id}`}>
                                     {userBook.user.name}
                                 </Link>
+                                <div className="ml-auto dropdown">
+                                    <i className="fas fa-ellipsis-h p-2"
+                                        role="button"
+                                        id="dropdownMenuLink"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"></i>
+                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <Link className="dropdown-item" to="#" onClick={() => this.props.handleDeleteBok(this.props.bok)}>
+                                            <i className="fas fa-trash-alt"/>&nbsp;削除
+                                        </Link>
+                                        <Link className="dropdown-item" to="#" onClick={this.handleCopy}>
+                                            <i className="fas fa-paste"/>&nbsp;リンクコピー
+                                        </Link>
+                                    </div>
+                                </div>
                             </pre>
                             <pre className="userd-bok-body mt-2 mr-2">{bok.body}</pre>
 
