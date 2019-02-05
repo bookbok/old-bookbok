@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { store } from "../../store";
 import { Loading } from "../shared/Loading";
-import { requestLike, requestUnLike,
-         requestLove, requestUnLove,
-         setAlertMessage } from "../../actions";
+import {
+    requestLike,
+    requestUnLike,
+    requestLove,
+    requestUnLove,
+    setAlertMessage,
+} from "../../actions";
 import { getAuthUser, execCopy } from "../../utils";
 import { Link } from 'react-router-dom';
 
