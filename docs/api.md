@@ -854,12 +854,14 @@ BOOKBOK　API仕様書
 
     + Attributes
 
+        + title (required)
         + boby (required)
         + publish
 
     + Body
 
             {
+                "title": "review title",
                 "body": "review body",
                 "publish": true
             }
@@ -868,6 +870,7 @@ BOOKBOK　API仕様書
 
         {
             "id": 1,
+            "title": "review title",
             "body": "review body",
             "published_at": "2018-11-11 10:30",
             "user_book_id": 1,
