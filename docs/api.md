@@ -465,6 +465,7 @@ BOOKBOK　API仕様書
                     "user_id": "2",
                     "name": "test-staff",
                     "user_book_id": "1",
+                    "title": "nice book!!",
                     "body": "fugahoge",
                     "updated_at": "2019-01-17 12:02:56"
                 },
@@ -472,6 +473,7 @@ BOOKBOK　API仕様書
                     "user_id": "1",
                     "name": "admin",
                     "user_book_id": "1",
+                    "title": "よいんだよ。ほほえまし、います。",
                     "body": "ぼくはどこか方角ほうさつが一つがぽかったんだからも、つるした。「この次つぎからです」カムパネルラの頬ほおを吹ふいて外を見ている影かげぼうでした。ジョバンニさんがステーションを通って、あるよりももうこの次つぎの木などは自分があっちへ来るから顔をそらにぼんやりそっちをとってたくなるように見つめたいしゃるんで帰った小さいといったくさんは」と答えましたかったように雑作ぞうさえたきれぎれのまん中に、ぺか消きえる。もってそれは四辺形しへ行くところしないか」青年にたくインデアンです」泣ない、その前をはじは、いました。。",
                     "updated_at": "2019-01-09 10:06:22"
                 }
@@ -658,6 +660,7 @@ BOOKBOK　API仕様書
                 "id": 1,
                 "user_id": "1",
                 "user_book_id": "1",
+                "title": "レビュータイトル",
                 "body": "カムパネルラがまた稜かどかどんどうせきへ戻もどこまでも行って上のゆるした",
                 "published_at": "2018-11-25 04:31:30"
             },
@@ -739,6 +742,7 @@ BOOKBOK　API仕様書
                 "id": 1,
                 "user_id": "1",
                 "user_book_id": "1",
+                "title": "レビュータイトル",
                 "body": "カムパネルラがまた稜かどかどんどうせきへ戻もどこまでも行って上のゆるした",
                 "published_at": "2018-11-25 04:31:30"
             },
@@ -854,12 +858,14 @@ BOOKBOK　API仕様書
 
     + Attributes
 
+        + title (required)
         + boby (required)
         + publish
 
     + Body
 
             {
+                "title": "review title",
                 "body": "review body",
                 "publish": true
             }
@@ -868,6 +874,7 @@ BOOKBOK　API仕様書
 
         {
             "id": 1,
+            "title": "review title",
             "body": "review body",
             "published_at": "2018-11-11 10:30",
             "user_book_id": 1,

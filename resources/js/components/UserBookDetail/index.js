@@ -159,7 +159,10 @@ class UserBookDetail extends Component {
                                       review={review} />
                                 </div>
                             </h3>
-                            <div className="mt-4">{toLines(review.body)}</div>
+                            <div className="mt-4">
+                                <h4>{review.title}</h4>
+                                {toLines(review.body)}
+                            </div>
 
                             <hr />
                             <h3 className="mt-5">Boks
