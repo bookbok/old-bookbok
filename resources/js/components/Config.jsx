@@ -47,6 +47,7 @@ class Config extends Component {
 
     handleSubmit(e) {
         store.dispatch(requestUpdateUser(this.state));
+        return this.props.history.push(`/user/getAuthUser().id/`);
     }
 
     render() {
