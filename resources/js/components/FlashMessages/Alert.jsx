@@ -30,7 +30,7 @@ class Alert extends React.Component {
 
     render(){
         const message = this.props.message;
-        const alertClass = `alert ${this.getAlertClass(message.alertType)} alert-dismissible fade show`;
+        const alertClass = `alert ${this.getAlertClass(message.alertType)} alert-dismissible fade show flash-toast`;
 
         return (
             <div className={alertClass} role="alert">

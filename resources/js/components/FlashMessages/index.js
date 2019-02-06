@@ -17,7 +17,9 @@ class FlashMessages extends React.Component {
 
         const { message, alertType } = this.props.alertView;
         return (
-            <Alert message={ {text: message, alertType} } onClose={ () => this.removeMessage() }/>
+            <div className="flash-toast-group">
+                <Alert message={ {text: message, alertType} } onClose={ () => this.removeMessage() }/>
+            </div>
         );
     }
 }
