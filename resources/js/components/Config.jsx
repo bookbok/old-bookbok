@@ -8,6 +8,9 @@ class Config extends Component {
     constructor(props) {
         super(props);
 
+        const userInfo = utils.getAuthUser();
+        console.table(userInfo);
+
         this.state = {
             name: "",
             avatar: "",
@@ -18,7 +21,16 @@ class Config extends Component {
     }
 
     componentDidMount() {
-        if(!utils.getAuthUser()){ return this.props.history.push("/login"); }
+        const loginUser = utils.getAuthUser();
+        if(!loginUser){
+            return this.props.history.push("/login");
+        }
+        console.table(loginUser);
+        this.setState({
+            name: loginUser.name,
+            avatar: loginUser.avatar,
+            description: loginUser.description
+        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -44,17 +56,18 @@ class Config extends Component {
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
                             <div className="mt-4 user-detail-wrapper">
+                                <strong>ニックネーム</strong>
                                 <input name="name"
                                     type="text"
                                     className="name-input"
-                                    value={name}
-                                    onChange={this.handleChange} />;
+                                    value={this.state.name}
+                                    onChange={this.handleChange} />
                                 <strong>プロフィール画像</strong>
                                 <img src={this.state.avatar} className="user-info-avatar d-block mb-1" />
                                 <input name="avatar"
                                     type="text"
                                     className="avatar-input"
-                                    placeholder="https://example.com/sample.png"
+                                    placeholder="例：https://example.com/sample.png"
                                     value={this.state.avatar}
                                     onChange={this.handleChange} />
 
