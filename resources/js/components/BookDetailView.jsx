@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchBookDetail, storeISBNToUserBookDirect, setAlertMessage } from "../actions.js";
+import { fetchBookDetail, storeISBNToUserBookDirect } from "../actions.js";
 import { store } from "../store";
 import { getAuthUser, isEmpty, toLines } from "../utils";
 
@@ -12,6 +12,7 @@ export class BookDetailView extends Component {
     constructor(props){
         super(props);
 
+        this.state={ isInvalid: false, invalidMessage: ""};
         this.handleRegister = this.handleRegister.bind(this);
     }
 
@@ -25,16 +26,16 @@ export class BookDetailView extends Component {
 
         const user = getAuthUser();
         if(isEmpty(user)){
-            store.dispatch(setAlertMessage("warning", {__html: "<div><a href='/login'>ログイン</a>してください</div>"}));
-            return;
+            return this.props.history.push('/login');
         }
 
         storeISBNToUserBookDirect(user.id, this.props.bookDetail.isbn).then(res => {
             if(res.status === 401){
+                this.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
                 throw new Error();
             }else if(!res.ok){
                 res.json().then(json => {
-                    store.dispatch(setAlertMessage("warning", {__html: `<div>${json.userMessage}</div>`}));
+                    this.setState({ isInvalid: true, invalidMessage: json.userMessage });
                 });
                 throw new Error();
             }

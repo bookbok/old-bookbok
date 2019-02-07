@@ -29,8 +29,7 @@ class UserBook extends Model
     public function review(){
         return $this->hasOne(Review::class, 'user_book_id')
                     ->withDefault([
-                        "title" => "無題",
-                        "body"  => "未記入",
+                        "body" => "未記入"
                     ]);
     }
 

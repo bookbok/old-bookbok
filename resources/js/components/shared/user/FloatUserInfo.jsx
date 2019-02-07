@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from "react-router-dom";
 import { getAuthUser, isEmpty } from '../../../utils';
 import { requestFollow, requestUnFollow,
-         setAlertMessage } from '../../../actions';
+         setAlertMessage, deleteAlertMessage} from '../../../actions';
 import FollowButton from './FollowButton';
 import DefaultAvatar from './DefaultAvatar';
 
@@ -33,6 +33,10 @@ export class FloatUserInfo_ extends Component {
         const user = getAuthUser();
         if(!user){
             store.dispatch(setAlertMessage("warning", {__html: "<div><a href='/login'>ログイン</a>してください</div>"}));
+            setTimeout(
+                () => { store.dispatch(deleteAlertMessage()); },
+                10000
+            );
             return;
         }
 
