@@ -100,10 +100,10 @@ class UserBookController extends Controller
         if($is_userBook_exists){
             return response()->json(
                 [
-                    'status' => 409,
+                    'status' => 400,
                     'userMessage' => '追加しようとした本はすでに本棚に登録されています。'
                 ],
-                409
+                400
             );
         }
 
@@ -276,34 +276,4 @@ class UserBookController extends Controller
         return response()->json($userBook);
     }
 
-    /**
-     * 削除API
-     * 
-     * @UserBook $userBook
-     */
-    public function delete(UserBook $userBook){
-        // 存在しないUserBookを指定した場合はサーバが自動的に404を返す
-
-        // 認可チェック
-        $authId = auth()->guard('api')->id();
-        if($authId != $userBook->user_id){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外の本を削除することはできません。'
-                ],
-                403
-            );
-        }
-
-        $userBook->delete();
-
-        return response()->json(
-            [
-                'status' => 200,
-                'userMessage' => '削除しました。'
-            ],
-            200
-        );
-    }
 }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import { withRouter } from "react-router-dom";
 import { storeISBNToUserBookDirect,
-         setAlertMessage } from "../../../actions";
+         setAlertMessage, deleteAlertMessage} from "../../../actions";
 import { getAuthUser, isEmpty } from '../../../utils';
 import { store } from '../../../store';
 
@@ -59,6 +59,10 @@ class ISBNModal_ extends Component {
 
     setAlert(e) {
         store.dispatch(setAlertMessage("warning", {__html: "<div><a href='/login'>ログイン</a>してください</div>"}));
+        setTimeout(
+            () => { if(this.props.alertView !== null) store.dispatch(deleteAlertMessage()); },
+            5000
+        );
         return;
     }
 

@@ -204,14 +204,9 @@ export const registerBok = (userBookId, bok) => {
     });
 }
 export const setBoksToUserBook = boks => ({ type: types.SET_BOKS_TO_USER_BOOK, boks });
-export const deleteBok = (bokId, boks, currentBok) => {
-    return utils.wrapFetch(`/api/boks/${bokId}`, {
+export const deleteBok = (userBookId, bokId) => {
+    return utils.wrapFetch(`/api/user_books/${userBookId}/boks/${bokId}`, {
         method: 'DELETE',
-    }).then(() => {
-        const filterdBoks = boks.filter(bok => {
-            return bok !== currentBok;
-        });
-        store.dispatch(setBoksToUserBook(filterdBoks));
     });
 }
 

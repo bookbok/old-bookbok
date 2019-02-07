@@ -33,8 +33,7 @@ class ReviewController extends Controller
         }
 
         $validator = \Validator::make($request->all(), [
-            'title'   => 'required|string|max:100',
-            'body'    => 'required|string|max:4048',
+            'body' => 'required|string|max:4048',
             'publish' => 'boolean',
         ]);
 
@@ -57,8 +56,7 @@ class ReviewController extends Controller
                 'user_book_id' => $userBook->id,
             ],
             [
-                'title'        => $request->title,
-                'body'         => $request->body,
+                'body' => $request->body,
                 'published_at' => $publishedAt,
             ]
         );

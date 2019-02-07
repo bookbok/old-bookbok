@@ -66,9 +66,12 @@ class UserBookDetail extends Component {
                 if(element) {
                     element.scrollIntoView();
                 }
+            } else {
+                window.scrollTo(0, 0);
             }
         };
         scrollToAnchor();
+        window.onhashchange = scrollToAnchor;
     }
 
     // idを元にサーバーに送信する値を返す
@@ -111,7 +114,13 @@ class UserBookDetail extends Component {
     handleDeleteBok(currentBok) {
         if(!currentBok) { return; }
 
-        deleteBok(currentBok.id, this.props.userBookDetail.boks, currentBok);
+        deleteBok(currentBok.user_book_id, currentBok.id).then(() => {
+            setBoksToUserBook(
+                this.props.userBookDetail.boks.filter(bok => {
+                    return bok !== currentBok;
+                })
+            );
+        });
     }
 
     render(){
@@ -159,10 +168,7 @@ class UserBookDetail extends Component {
                                       review={review} />
                                 </div>
                             </h3>
-                            <div className="mt-4">
-                                <h4>{review.title}</h4>
-                                {toLines(review.body)}
-                            </div>
+                            <div className="mt-4">{toLines(review.body)}</div>
 
                             <hr />
                             <h3 className="mt-5">Boks
