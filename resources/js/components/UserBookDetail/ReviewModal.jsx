@@ -36,7 +36,10 @@ class ReviewModal extends Component {
         }
 
         const userBookId = this.props.match.params.userBookId;
-        const review = { 'body': this.state.body };
+        const review = {
+            'title': this.state.title,
+            'body': this.state.body
+        };
         reviewRegister(userBookId, review).then(res => {
             if(res.status === 401) {
                 this.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });

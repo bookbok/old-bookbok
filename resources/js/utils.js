@@ -38,6 +38,16 @@ export function makeDateJP(dateTime) {
     return date[0] + '年' + date[1] + '月' + date[2] + '日';
 }
 
+// 引数に渡した文字列をクリップボードにコピーする
+export function execCopy(text) {
+    let input = document.createElement('input');
+    input.setAttribute('id', 'copyinput');
+    document.body.appendChild(input);
+    input.value = text;
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+}
 
 
 /* ----------------------- */
