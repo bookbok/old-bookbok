@@ -56,24 +56,40 @@ class Config extends Component {
                 <div className="container mt-4">
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
-                            <div className="mt-4 user-detail-wrapper">
-                                <strong>ニックネーム</strong>
-                                <input name="name"
-                                    type="text"
-                                    className="name-input"
-                                    value={this.state.name}
-                                    onChange={this.handleChange} />
-                                <strong>プロフィール画像</strong>
-                                <img src={this.state.avatar} className="user-info-avatar d-block mb-1" />
-                                <input name="avatar"
-                                    type="text"
-                                    className="avatar-input"
-                                    placeholder="例：https://example.com/sample.png"
-                                    value={this.state.avatar}
-                                    onChange={this.handleChange} />
+                            <div className="user-detail-wrapper d-flex flex-column">
+                                <h1>プロフィール設定</h1>
 
-                                <div className="mt-4">
-                                    <strong>自己紹介</strong>
+                                {/* ニックネーム */}
+                                <div className="items-wrapper">
+                                    <div className="d-flex align-items-end">
+                                        <p className="font-weight-bold m-0">ニックネーム</p>
+                                        <p className="text-muted hint-message">32文字以内の英数字で入力してください</p>
+                                    </div>
+                                    <input name="name"
+                                        type="text"
+                                        className="name-input"
+                                        value={this.state.name}
+                                        onChange={this.handleChange} />
+                                </div>
+
+                                {/* プロフィール画像 */}
+                                <div className="items-wrapper">
+                                    <p className="font-weight-bold m-0">プロフィール画像</p>
+                                    <img src={this.state.avatar} className="user-info-avatar d-block mb-1" />
+                                    <input name="avatar"
+                                        type="text"
+                                        className="avatar-input"
+                                        placeholder="例：https://example.com/sample.png"
+                                        value={this.state.avatar}
+                                        onChange={this.handleChange} />
+                                </div>
+
+                                {/* 自己紹介欄 */}
+                                <div className="items-wrapper">
+                                    <div className="d-flex align-items-end">
+                                        <p className="font-weight-bold m-0">自己紹介</p>
+                                        <p className="text-muted hint-message">1000文字以内で入力してください</p>
+                                    </div>
                                     <textarea name="description"
                                         type="text"
                                         className="description-input"
