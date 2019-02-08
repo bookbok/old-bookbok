@@ -74,7 +74,10 @@ class Config extends Component {
 
                                 {/* プロフィール画像 */}
                                 <div className="items-wrapper">
-                                    <p className="font-weight-bold m-0">プロフィール画像</p>
+                                    <p className="font-weight-bold m-0">
+                                        プロフィール画像
+                                        <i className="far fa-question-circle ml-2" />
+                                    </p>
                                     <img src={this.state.avatar} className="user-info-avatar d-block mb-1" />
                                     <input name="avatar"
                                         type="text"

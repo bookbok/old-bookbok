@@ -51,9 +51,10 @@ class UserDetail extends Component {
                             <div className="mt-4 user-detail-wrapper">
                                 <div className="d-flex">
                                     <img src={currentUser.avatar} className="user-info-avatar d-block" />
-                                    <h3 className="m-0 ml-2 d-flex align-items-center">{currentUser.description}</h3>
+                                    <h3 className="m-0 ml-2 d-flex align-items-center">{currentUser.name}</h3>
                                 </div>
                                 <p className="text-muted">{utils.makeDateJP(user.created_at)}に登録された読書家です</p>
+                                <p className="mt-3">{currentUser.description}</p>
                             </div>
                         </div>
                     </div>
