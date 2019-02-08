@@ -62,7 +62,7 @@ class Config extends Component {
                                 {/* ニックネーム */}
                                 <div className="items-wrapper">
                                     <div className="d-flex align-items-end">
-                                        <p className="font-weight-bold m-0">ニックネーム</p>
+                                        <label className="font-weight-bold">ニックネーム</label>
                                         <p className="text-muted hint-message">32文字以内の英数字で入力してください</p>
                                     </div>
                                     <input name="name"
@@ -74,10 +74,10 @@ class Config extends Component {
 
                                 {/* プロフィール画像 */}
                                 <div className="items-wrapper">
-                                    <p className="font-weight-bold m-0">
+                                    <label className="font-weight-bold">
                                         プロフィール画像
                                         <i className="far fa-question-circle ml-2" />
-                                    </p>
+                                    </label>
                                     <img src={this.state.avatar} className="user-info-avatar d-block mb-1" />
                                     <input name="avatar"
                                         type="text"
@@ -90,7 +90,7 @@ class Config extends Component {
                                 {/* 自己紹介欄 */}
                                 <div className="items-wrapper">
                                     <div className="d-flex align-items-end">
-                                        <p className="font-weight-bold m-0">自己紹介</p>
+                                        <label className="font-weight-bold">自己紹介</label>
                                         <p className="text-muted hint-message">1000文字以内で入力してください</p>
                                     </div>
                                     <textarea name="description"
