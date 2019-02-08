@@ -36,7 +36,8 @@ class LoginController extends Controller
 
         if (
             null === $user ||
-            false === password_verify($request->password, $user->password)
+            false === password_verify($request->password, $user->password) ||
+            !$user->hasVerifiedEmail()
         ) {
             return response()->json([
                 'status' => 422,
