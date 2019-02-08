@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Routes from './Routes';
 import Header from './Header';
-import AlertView from '../AlertView';
+import FlashMessages from '../FlashMessages';
 import Footer from './Footer';
 
 
@@ -13,7 +13,7 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                     <Header />
-                    <AlertView />
+                    <FlashMessages />
                     <Routes />
                     <Footer />
                 </div>

@@ -10,7 +10,13 @@ class BokModal extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
+        this.state = this.initialState();
+        this.handleChangeBok = this.handleChangeBok.bind(this);
+        this.handleRegisterBok = this.handleRegisterBok.bind(this);
+    }
+
+    initialState() {
+        return {
             page_num_begin: "",
             page_num_end: "",
             line_num: "",
@@ -18,8 +24,6 @@ class BokModal extends Component {
             isInvalid: false,
             invalidMessage: ""
         };
-        this.handleChangeBok = this.handleChangeBok.bind(this);
-        this.handleRegisterBok = this.handleRegisterBok.bind(this);
     }
 
     handleChangeBok(e) {
@@ -51,7 +55,7 @@ class BokModal extends Component {
         }).then(json => {
             $('#BokModalCenter').modal('hide'); // レビュー投稿時、モーダルを閉じる
             store.dispatch(setBokToUserBook(json));
-            this.initState();
+            this.setState(this.initialState());
         }).catch(()=>{});
     }
 
