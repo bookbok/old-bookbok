@@ -117,7 +117,6 @@ class Config extends Component {
 
 // URL内のid変更を検知して、再度ユーザー情報をfetchするためのデコレーター
 import { connect } from "react-redux";
-import { fetchOnIdUpdateDecorator } from '../decorators/FetchOnIdUpdateDecorator';
 
 export default connect(state => state)(
     Config
