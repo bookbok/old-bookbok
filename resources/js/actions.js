@@ -94,6 +94,19 @@ export const directUserRegister = (userInfo) => {
     });
 };
 
+export const verifyEmail = (href) => {
+    const url = utils.getQueryParam('url', href);
+    return utils.smartFetch(url).then(res => {
+        return res.json();
+    });
+};
+
+export const resendVerifyMail = () => {
+    return utils.smartFetch('/api/auth/email/resend').then(res => {
+        return res.json();
+    });
+}
+
 
 /**
  * ==== Genre resource ====
