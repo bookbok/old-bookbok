@@ -90,8 +90,7 @@ Header.propTypes = {
     })
 };
 
-const ConnectedHeader = connect(
+export default connect(
     state => ({ loggedinUser: state.loggedinUser })
 )(Header);
 
-export default ConnectedHeader;
