@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -23,6 +24,10 @@ class App extends Component {
         ) :
         <Loading />;
     }
+}
+
+App.propTypes = {
+    isPrepared: PropTypes.bool.isRequired,
 }
 
 export default connect(
