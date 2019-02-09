@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
@@ -23,25 +24,24 @@ class VerificationController extends Controller
      * 
      * @param   Request    $request
      *  リクエスト
+     * @param   User    $user
+     *  ルートパラメータから取得したユーザ
      * 
      * @return  \Illuminate\Http\Response
      */
-    public function verify(Request $request)
+    public function verify(Request $request, User $user)
     {
-        if (
-            $request->user()->getKey() !== (int) $request->route('id')
-            || !$request->user()->markEmailAsVerified()
-        ) {
+        if (!$user->markEmailAsVerified()) {
             return response()->json([
                 'status' => 400,
-                'userMessage' => '有効化に失敗しました。'
+                'userMessage' => '検証に失敗しました。'
             ], 400);
         }
 
         event(new Verified($request->user()));
 
         return response()->json([
-            'userMessage' => '有効化に成功しました。',
+            'userMessage' => '検証に成功しました。',
         ], 200);
     }
 
@@ -57,14 +57,15 @@ class VerificationController extends Controller
     {
         if ($request->user()->hasVerifiedEmail()) {
             return response()->json([
-                'userMessage' => '有効化に成功しました。',
-            ], 200);
+                'status' => 400,
+                'userMessage' => 'すでに検証されています。',
+            ], 400);
         }
 
         $request->user()->sendEmailVerificationNotification();
 
         return response()->json([
-            'userMessage' => '検証メールを再送信しました。確認をお願いします。',
+            'userMessage' => '送信しました。',
         ], 200);
     }
 }

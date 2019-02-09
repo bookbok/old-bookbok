@@ -23,11 +23,9 @@ Route::prefix('auth')->namespace('Auth')->name('auth.')->group(function(){
     Route::post('password/reset/send', 'ResetPasswordController@send')->name('password.reset.send');
     Route::post('password/reset', 'ResetPasswordController@reset')->name('password.reset');
 
+    Route::get('email/verify/{user}', 'VerificationController@verify')->name('email.verify');
+
     Route::middleware('auth:api')->group(function () {
-        Route::get('email/verify/{id}', 'VerificationController@verify')
-            ->name('email.verify')
-            ->where('id', '[1-9][0-9]*')
-        ;
         Route::get('email/resend', 'VerificationController@resend')->name('email.verify.resend');
 
         Route::get('logout','LoginController@logout')->name('logout');

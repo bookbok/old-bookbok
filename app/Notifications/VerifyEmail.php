@@ -69,8 +69,7 @@ class VerifyEmail extends Notification
             ['id' => $notifiable->getKey()]
         );
 
-        parse_str(explode('?', $apiUrl, 2)[1] ?? '', $parameters);
-        return route('dummy.auth.email.verify', $parameters);
+        return route('dummy.auth.email.verify', ['url' => $apiUrl]);
     }
 
     /**
