@@ -18,6 +18,7 @@ import IsbnBulkRegistrationView from '../IsbnBulkRegistrationView';
 import { UserRegister } from '../UserRegister';
 import Login from '../Login';
 import { Logout } from '../Logout';
+import EmailVerify from '../auth/EmailVerify';
 
 {/* user page */}
 import ConnectedUserDetail from '../UserDetail';
@@ -54,6 +55,7 @@ class Routes extends Component {
                 <Route exact path="/user_register" component={ UserRegister } />
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/logout" component={ Logout } />
+                <Route exact path="/auth/email/verify" component={ EmailVerify } /> // TODO: EmailVerifyに置き換える
 
                 {/* user page */}
                 <Route exact path="/users/:id" component={ ConnectedUserDetail } />
