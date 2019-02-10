@@ -112,13 +112,17 @@ export class UserDetailBok extends Component {
                                     {userBook.user.name}
                                 </Link>
                                 <div className="ml-auto dropdown">
-                                    <i className="fas fa-ellipsis-h p-2"
+                                    <a className="text-dark"
+                                        href="#"
                                         role="button"
                                         id="dropdownMenuLink"
                                         data-toggle="dropdown"
                                         aria-haspopup="true"
-                                        aria-expanded="false"></i>
-                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        aria-expanded="false"
+                                        data-display="static">
+                                        <i className="fas fa-ellipsis-h p-2" ></i>
+                                    </a>
+                                    <div className="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuLink">
                                         <Link className="dropdown-item" to="#" onClick={() => this.props.handleDeleteBok(this.props.bok)}>
                                             <i className="fas fa-trash-alt"/>&nbsp;削除
                                         </Link>
