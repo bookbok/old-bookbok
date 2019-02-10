@@ -122,7 +122,7 @@ export class UserDetailBok extends Component {
                                         data-display="static">
                                         <i className="fas fa-ellipsis-h p-2" ></i>
                                     </a>
-                                    <div className="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuLink">
+                                    <div className="dropdown-menu dropdown-menu-right dropdown-menu-md-left" aria-labelledby="dropdownMenuLink">
                                         <Link className="dropdown-item" to="#" onClick={() => this.props.handleDeleteBok(this.props.bok)}>
                                             <i className="fas fa-trash-alt"/>&nbsp;削除
                                         </Link>
