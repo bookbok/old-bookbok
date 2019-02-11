@@ -4,8 +4,7 @@ import { store } from "../store";
 
 export class Logout extends Component {
     componentDidMount() {
-        store.dispatch(requestLogout());
-        this.props.history.push('/');
+        store.dispatch(requestLogout(this.props.history));
     }
 
     // 実際ほぼ表示されないが、レスポンスが遅い場合表示されるかもしれない画面
