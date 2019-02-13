@@ -6,7 +6,7 @@ import { store } from "../../store";
 import { isEmpty } from "../../utils";
 
 //import { ConnectedGenres } from "../../containers";
-import Genres from '../Genres';
+import Genres from './Genres';
 import { Search } from "./Search";
 import { Loading } from "../shared/Loading";
 import { ISBNModal } from "../shared/book/ISBNModal";
