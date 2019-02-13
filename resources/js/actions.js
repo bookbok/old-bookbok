@@ -75,7 +75,7 @@ export const requestUpdateUser = (user) => dispatch => {
 }
 
 export const removeLoggedinInfo = () => ({ type: types.REMOVE_LOGGEDIN_INFO });
-export const requestLogout = () => dispatch => {
+export const requestLogout = (history) => dispatch => {
     utils.wrapFetch('/api/auth/logout', {
         isParse: false,
     }).then(res => {
@@ -84,6 +84,7 @@ export const requestLogout = () => dispatch => {
         if (utils.storageAvailable('localStorage') && localStorage.getItem('token')) {
             localStorage.removeItem('token');
         }
+        history.push('/');
     });
 }
 
