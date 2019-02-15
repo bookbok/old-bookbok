@@ -55,14 +55,22 @@ class VerificationController extends Controller
      */
     public function resend(Request $request)
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        $validator = \Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255',
+        ]);
+
+        if ($validator->fails()) {
             return response()->json([
                 'status' => 400,
-                'userMessage' => 'すでに検証されています。',
+                'userMessage' => $validator->errors(),
             ], 400);
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        $user = User::where('email', $request->query('email'))->first();
+
+        if(null !== $user && !$user->hasVerifiedEmail()){
+            $user->sendEmailVerificationNotification();
+        }
 
         return response()->json([
             'userMessage' => '送信しました。',
