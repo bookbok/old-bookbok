@@ -31,6 +31,10 @@ img.title-book-cover {
 
 .main-content {
   background-color: white;
+
+  @include normal-pc {
+      max-width: 80%;
+  }
 }
 
 .sub-content {
