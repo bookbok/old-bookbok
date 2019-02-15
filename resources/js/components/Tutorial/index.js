@@ -38,6 +38,17 @@ class TutorialFrame extends React.Component {
     }
 }
 
+class Tutorial00 extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1>チュートリアル開始</h1>
+                <p>読書をもっと素敵にする「BookBok」サービスをご利用いただきありがとうございます。</p>
+            </div>
+        );
+    }
+}
+
 class Tutorial extends React.Component {
     render() {
         const tutorialID = this.props.match.params.id;
@@ -46,7 +57,7 @@ class Tutorial extends React.Component {
         // 子要素にチュートリアルの種類ごとコンテンツを渡す形
         const page = <TutorialFrame tutorialID={tutorialID}>
             {(() => {
-                if(tutorialID == 1) return null;
+                if(tutorialID == 0) return <Tutorial00 />;
             })()}
         </TutorialFrame>
 
