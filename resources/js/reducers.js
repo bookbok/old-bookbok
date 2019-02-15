@@ -1,7 +1,7 @@
 import * as types from "./types";
 
 export function rootReducer(
-    state = {},
+    state = { isPrepared: false },
     action
 ) {
     switch(action.type) {
@@ -92,7 +92,8 @@ export function rootReducer(
         case types.SET_REVIEW:
             return { ...state, userBookDetail: { ...state.userBookDetail, review: action.review } };
 
-
+        case types.SET_PREPARED_FLAG:
+            return { ...state, isPrepared: true };
     }
 
     return state;
