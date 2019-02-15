@@ -223,26 +223,16 @@ BOOKBOK　API仕様書
 
 ## Email Verify Resend [/api/auth/email/resend]
 
++ Parameters
+
+    + email: example@example.com (string) - 検証対象メールアドレス
+
 ### メールアドレス検証メールを再送する [GET]
 
 + Response 200 (application/json)
 
         {
-            "userMessage": "検証メールを再送信しました。確認をお願いします。"
-        }
-
-+ Response 400 (application/json)
-
-        {
-            "status": 400,
-            "userMessage": "すでに検証されています。"
-        }
-
-+ Response 401 (application/json)
-
-        {
-            "status": 401,
-            "userMessage": "権限がありません。"
+            "userMessage": "送信しました。"
         }
 
 + Response 429 (application/json)
