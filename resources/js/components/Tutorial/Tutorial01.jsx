@@ -36,10 +36,22 @@ class Tutorial01 extends React.Component {
                             <img src="/images/tutorials/01-03.png" className="img-fluid card" />
                         </p>
                     </li>
+
+                    <li className="mb-5">
+                        <p>
+                            複数のISBNから一括登録する場合、ISBNを改行区切りで入力することで複数の本を一括登録することができます。
+                            <img src="/images/tutorials/01-04.png" className="img-fluid card" />
+                        </p>
+
+                        <p>
+                            「まとめて登録」ページはログイン時のみ表示される画面右上のアカウント名をクリックし、表示される一覧の「本棚の一括登録」から遷移できます。
+                            <img src="/images/tutorials/01-05.png" className="img-fluid card" />
+                        </p>
+                    </li>
                 </ol>
 
                 <div className="text-center">
-                    <Link to="/tutorial/2" className="btn btn-success">Bok投稿</Link>
+                    <Link to="/tutorial/2" className="btn btn-success">次へ進む</Link>
                 </div>
             </div>
         );
