@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Tutorial00 from './Tutorial00';
 import Tutorial01 from './Tutorial01';
+import Tutorial02 from './Tutorial02';
 
 
 class Tutorial extends React.Component {
@@ -11,7 +12,7 @@ class Tutorial extends React.Component {
         this.tutorials = [
             { component: Tutorial00, title: 'チュートリアルを始めましょう' },
             { component: Tutorial01, title: '本を登録しましょう' },
-            { component: null, title: 'Bokを投稿しましょう' },
+            { component: Tutorial02, title: 'Bokを投稿しましょう' },
             { component: null, title: 'レビューを投稿しましょう' },
             { component: null, title: 'ユーザー情報を編集しましょう' },
         ];
