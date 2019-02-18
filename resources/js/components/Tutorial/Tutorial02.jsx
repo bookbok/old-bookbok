@@ -6,16 +6,7 @@ class Tutorial02 extends React.Component {
         return (
             <div>
                 <h1>{this.props.title}</h1>
-                <p></p>
-                <ol className="ml-4">
-                    <li>方法</li>
-                </ol>
-                <hr/>
-
-                <ol>
-                    <li className="mb-5">
-                    </li>
-                </ol>
+                <p>BookBokではBokという本を読んでいる間の呟きを投稿する仕組みがあります。</p>
 
                 <div className="text-center">
                     <Link to="/tutorial/3" className="btn btn-success">次へ進む</Link>
