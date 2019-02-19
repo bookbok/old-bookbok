@@ -8,6 +8,9 @@ class Tutorial02 extends React.Component {
                 <h1>{this.props.title}</h1>
                 <p>
                     BookBokではBokという、本を読んでいる間の呟きを投稿する仕組みがあります。
+                    BookBokは呟き感覚で感じたこと、考えたことを記録することができます。
+                    また、通常のSNSなどとは異なり、特定の本についての呟きを残すことができます。
+                    これをBookBokではBok(ボック)と呼びます。このボックはひとつのページで管理されているので自分自身の感じたことや考えたことの足跡を一目で振り返ることができます。
                 </p>
 
                 <div className="text-center">
