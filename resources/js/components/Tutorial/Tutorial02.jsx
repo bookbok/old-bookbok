@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ImageCard from './ImageCard';
 
-const ImageCard = (props) => (
-    <img src={props.src ? props.src : ''} className="img-fluid card" />
-);
 
 class Tutorial02 extends React.Component {
     render() {
