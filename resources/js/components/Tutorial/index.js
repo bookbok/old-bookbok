@@ -5,6 +5,7 @@ import Tutorial00 from './Tutorial00';
 import Tutorial01 from './Tutorial01';
 import Tutorial02 from './Tutorial02';
 import Tutorial03 from './Tutorial03';
+import Tutorial04 from './Tutorial04';
 
 
 class Tutorial extends React.Component {
@@ -15,7 +16,7 @@ class Tutorial extends React.Component {
             { component: Tutorial01, title: '本を登録しましょう' },
             { component: Tutorial02, title: 'Bokを投稿しましょう' },
             { component: Tutorial03, title: 'レビューを投稿しましょう' },
-            { component: null, title: 'ユーザー情報を編集しましょう' },
+            { component: Tutorial04, title: 'ユーザー情報を編集しましょう' },
         ];
     }
 
