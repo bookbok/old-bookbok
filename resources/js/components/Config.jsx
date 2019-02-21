@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { store } from "../store";
-import { fetchUser, requestUpdateUser, loading, loaded } from "../actions";
+import { fetchUser, requestUpdateUser, setAlertMessage } from "../actions";
 import * as utils from "../utils";
 import { Loading } from "./shared/Loading";
 
@@ -36,7 +36,9 @@ class Config extends Component {
     }
 
     handleSubmit(e) {
-        store.dispatch(requestUpdateUser(this.state));
+        requestUpdateUser(this.state).then(() => {
+            store.dispatch(setAlertMessage('success', {__html: '更新しました'}));
+        });
     }
 
     render() {

@@ -65,8 +65,8 @@ export const getLoggedinUser = () => dispatch => {
     });
 }
 
-export const requestUpdateUser = (user) => dispatch => {
-    utils.wrapFetch('/api/auth/user', {
+export const requestUpdateUser = (user) => {
+    return utils.wrapFetch('/api/auth/user', {
         method: 'PUT',
         body: user,
     }).then(json => {
