@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Routes from './Routes';
 import Header from './Header';
-import AlertView from '../AlertView';
+import FlashMessages from '../FlashMessages';
 import Footer from './Footer';
+import { Loading } from '../shared/Loading';
 
 
 class App extends Component {
     render() {
-        return (
+        return this.props.isPrepared ? (
             <BrowserRouter>
                 <div>
                     <Header />
-                    <AlertView />
+                    <FlashMessages />
                     <Routes />
                     <Footer />
                 </div>
             </BrowserRouter>
-        );
+        ) :
+        <Loading />;
     }
 }
 
-export default App;
+App.propTypes = {
+    isPrepared: PropTypes.bool.isRequired,
+}
+
+export default connect(
+    state => ({ isPrepared: state.isPrepared })
+)(App);

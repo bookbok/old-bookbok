@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { isEmpty } from "../utils";
+import { isEmpty } from "../../utils";
 import { Link } from 'react-router-dom';
 
 class Genres extends Component {

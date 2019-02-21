@@ -56,10 +56,12 @@ export const requestLogin = (loginUser, history) => {
     });
 }
 
+export const preparedLogin = () => ({ type: types.SET_PREPARED_FLAG });
 export const setLoggedinUser = (loggedinUser) => ({ type: types.SET_LOGGEDIN_USER, loggedinUser });
 export const getLoggedinUser = () => dispatch => {
     utils.wrapFetch('/api/auth/user').then(json => {
         dispatch(setLoggedinUser(json));
+        dispatch(preparedLogin());
     });
 }
 
@@ -75,7 +77,7 @@ export const requestUpdateUser = (user) => dispatch => {
 }
 
 export const removeLoggedinInfo = () => ({ type: types.REMOVE_LOGGEDIN_INFO });
-export const requestLogout = () => dispatch => {
+export const requestLogout = (history) => dispatch => {
     utils.wrapFetch('/api/auth/logout', {
         isParse: false,
     }).then(res => {
@@ -84,6 +86,7 @@ export const requestLogout = () => dispatch => {
         if (utils.storageAvailable('localStorage') && localStorage.getItem('token')) {
             localStorage.removeItem('token');
         }
+        history.push('/');
     });
 }
 
@@ -204,9 +207,14 @@ export const registerBok = (userBookId, bok) => {
     });
 }
 export const setBoksToUserBook = boks => ({ type: types.SET_BOKS_TO_USER_BOOK, boks });
-export const deleteBok = (userBookId, bokId) => {
-    return utils.wrapFetch(`/api/user_books/${userBookId}/boks/${bokId}`, {
+export const deleteBok = (bokId, boks, currentBok) => {
+    return utils.wrapFetch(`/api/boks/${bokId}`, {
         method: 'DELETE',
+    }).then(() => {
+        const filterdBoks = boks.filter(bok => {
+            return bok !== currentBok;
+        });
+        store.dispatch(setBoksToUserBook(filterdBoks));
     });
 }
 

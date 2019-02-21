@@ -42,6 +42,11 @@ class UserBookDetail extends Component {
             { id: 15, name: 'reading', intl: '読書中' },
             { id: 20, name: 'readed', intl: '読了' },
         ];
+
+        this.state = {
+            isSpoiler: false,
+            readingStatus: 0,
+        };
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleDeleteBok = this.handleDeleteBok.bind(this);
     };
@@ -50,6 +55,17 @@ class UserBookDetail extends Component {
         this.userId = parseInt(this.props.match.params.userId);
         this.userBookId = parseInt(this.props.match.params.userBookId);
         fetchUserBookDetailActions(this.userId, this.userBookId);
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        const userBook = nextProps.userBookDetail;
+        if(userBook && (userBook.is_spoiler != prevState.isSpoiler || userBook.reading_status != prevState.readingStatus)) {
+            return {
+              isSpoiler: userBook.is_spoiler,
+              readingStatus: userBook.reading_status,
+            };
+        }
+        return null;
     }
 
     componentDidUpdate() {
@@ -66,12 +82,9 @@ class UserBookDetail extends Component {
                 if(element) {
                     element.scrollIntoView();
                 }
-            } else {
-                window.scrollTo(0, 0);
             }
         };
         scrollToAnchor();
-        window.onhashchange = scrollToAnchor;
     }
 
     // idを元にサーバーに送信する値を返す
@@ -84,15 +97,20 @@ class UserBookDetail extends Component {
             return this.props.history.push('/login');
         }
 
-        let body = {
-            reading_status: this.getStatusNameFromId(this.props.userBookDetail.reading_status),
-            is_spoiler: this.props.userBookDetail.is_spoiler,
-        };
         const name = e.target.name;
+        const value = e.target.type === 'checkbox' ?
+            e.target.checked :
+            e.target.value;
+        this.setState({ [name]: value });
+
+        let body = {
+            is_spoiler: this.state.isSpoiler,
+            reading_status: this.getStatusNameFromId(this.state.readingStatus),
+        };
         if(name === 'reading_status') {
-            body = { ...body, reading_status: this.getStatusNameFromId(e.target.value) };
+            body = { ...body, reading_status: this.getStatusNameFromId(value) };
         }else if(name === 'is_spoiler') {
-            body = { ...body, is_spoiler: e.target.checked };
+            body = { ...body, is_spoiler: value };
         }
 
         requestUpdateUserBookStatus(
@@ -114,13 +132,7 @@ class UserBookDetail extends Component {
     handleDeleteBok(currentBok) {
         if(!currentBok) { return; }
 
-        deleteBok(currentBok.user_book_id, currentBok.id).then(() => {
-            setBoksToUserBook(
-                this.props.userBookDetail.boks.filter(bok => {
-                    return bok !== currentBok;
-                })
-            );
-        });
+        deleteBok(currentBok.id, this.props.userBookDetail.boks, currentBok);
     }
 
     render(){
@@ -144,7 +156,6 @@ class UserBookDetail extends Component {
             <div className="page-content-wrap row row-book-detail">
                 <FloatUserInfo user={user} />
 
-
                 <div className="container mt-4">
                     <div className="row justify-content-center">
                         <div className="col-md-8 main-content p-5">
@@ -155,8 +166,8 @@ class UserBookDetail extends Component {
                                 readingStatuses={this.readingStatuses}
                                 handleUpdate={this.handleUpdate}
                                 userId={userBook.user_id}
-                                readingStatus={userBook.reading_status}
-                                isSpoiler={userBook.is_spoiler} />
+                                readingStatus={this.state.readingStatus}
+                                isSpoiler={this.state.isSpoiler} />
                             <BookInfo book={book} />
 
                             <hr />
@@ -168,7 +179,10 @@ class UserBookDetail extends Component {
                                       review={review} />
                                 </div>
                             </h3>
-                            <div className="mt-4">{toLines(review.body)}</div>
+                            <div className="mt-4">
+                                <h4>{review.title}</h4>
+                                {toLines(review.body)}
+                            </div>
 
                             <hr />
                             <h3 className="mt-5">Boks
