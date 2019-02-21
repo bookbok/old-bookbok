@@ -101,8 +101,10 @@ export const verifyEmail = (href) => {
     });
 };
 
-export const resendVerifyMail = () => {
-    return utils.smartFetch('/api/auth/email/resend').then(res => {
+export const resendVerifyMail = (email) => {
+    return utils.smartFetch('/api/auth/email/resend', {
+        body: { email },
+    }).then(res => {
         return res.json();
     });
 }
