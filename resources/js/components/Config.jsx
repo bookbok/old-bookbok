@@ -8,9 +8,6 @@ class Config extends Component {
     constructor(props) {
         super(props);
 
-        const userInfo = utils.getAuthUser();
-        console.table(userInfo);
-
         this.state = {
             name: "",
             avatar: "",
@@ -23,9 +20,9 @@ class Config extends Component {
     componentDidMount() {
         const loginUser = utils.getAuthUser();
         if(!loginUser){
-            return this.props.history.push("/login");
+            return this.props.history.push('/login');
         }
-        console.table(loginUser);
+
         this.setState({
             name: loginUser.name,
             avatar: loginUser.avatar,
@@ -115,7 +112,6 @@ class Config extends Component {
 }
 
 
-// URL内のid変更を検知して、再度ユーザー情報をfetchするためのデコレーター
 import { connect } from "react-redux";
 
 export default connect(state => state)(
