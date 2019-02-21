@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { store } from "../store";
-import { fetchUser, requestUpdateUser, loading, loaded } from "../actions";
+import { fetchUser, loading, loaded } from "../actions";
 import * as utils from "../utils";
 
 import { Loading } from "./shared/Loading";
