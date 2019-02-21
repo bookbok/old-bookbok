@@ -17,8 +17,6 @@ class EmailVerify extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ verified: true });
-        return;
         const url = getQueryParam('url', location.href);
         verifyEmail(url).then(json => {
             if(successfulStatus(json.status) || !json.status) {
