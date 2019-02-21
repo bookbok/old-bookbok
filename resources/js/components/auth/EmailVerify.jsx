@@ -17,6 +17,8 @@ class EmailVerify extends React.Component {
     }
 
     componentDidMount() {
+        this.setState({ verified: true });
+        return;
         const url = getQueryParam('url', location.href);
         verifyEmail(url).then(json => {
             if(successfulStatus(json.status) || !json.status) {
@@ -72,20 +74,18 @@ class EmailVerify extends React.Component {
                             <div className="card-body">
                                 もし検証メールを確認していない場合、メールが届いていないかご確認ください。<br/>
                                 もう一度メールを送信する場合は
+                                <a role="button"
+                                    className="text-primary"
+                                    onClick={() => this.handleClickResend()} >
+                                    こちらをクリックしてください。
+                                </a>
 
                                 <div className="dropdown">
-                                    <a role="button"
-                                        className="text-primary"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        onClick={() => this.handleClickResend()} >
-                                        こちらをクリックしてください。
-                                    </a>
-
                                     <div className={`dropdown-menu p-4 ${this.state.show ? 'show': ''}`}>
                                         <div className="form-group">
                                             <label htmlFor="email">送信先email</label>
-                                            <input name="email"
+                                            <input id="email"
+                                                name="email"
                                                 type="email"
                                                 className="form-control"
                                                 placeholder="email@example.com"
@@ -97,8 +97,8 @@ class EmailVerify extends React.Component {
                                             送信
                                         </button>
                                     </div>
-
                                 </div>
+
                             </div>
                         </div>{/* end card */}
 
