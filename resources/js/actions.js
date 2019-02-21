@@ -72,7 +72,6 @@ export const requestUpdateUser = (user) => dispatch => {
     }).then(json => {
         // 更新が完了したデータをstoreのユーザー情報として更新
         store.dispatch(setLoggedinUser(json));
-        fetchUser(json.id);
     });
 }
 
