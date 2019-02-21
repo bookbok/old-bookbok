@@ -20,11 +20,11 @@ class EmailVerify extends React.Component {
         verifyEmail(location.href).then(json => {
             if(successfulStatus(json.status) || !json.status) {
                 store.dispatch(setAlertMessage("success", {__html: json.userMessage}));
-                //this.props.history.push('/login');
+                this.props.history.push('/login');
             } else {
                 store.dispatch(setAlertMessage("warning", {__html: json.userMessage}));
+                this.setState({ verified: true });
             }
-            this.setState({ verified: true });
         });
     }
 
