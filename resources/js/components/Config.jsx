@@ -30,13 +30,6 @@ class Config extends Component {
         });
     }
 
-    componentWillReceiveProps(nextProps) {
-        // 更新後のユーザー情報を全てstateにも反映
-        if(!nextProps.user) return;
-        const { name, avatar, description } = nextProps.user;
-        this.setState({ name, avatar, description, });
-    }
-
     handleChange(e) {
         const name = e.target.name;
         this.setState({ [name]: e.target.value });
