@@ -28,15 +28,15 @@ class Tutorial03 extends React.Component {
 
                 <p>
                     本棚に移動した後、自分の本棚からどれか本の画像を選択します。
-                    遷移した画面を下にスクロールし「レビュー」というボタンを選択します。
-                    <ImageCard src="/images/tutorials/03-02.png" />
+                    遷移した画面を下にスクロールし「レビューを投稿する」というボタンを選択します。
+                    <ImageCard src="/images/tutorials/03-03.png" />
                 </p>
 
                 <p>
                     レビューの入力フォームが表示されます。
                     タイトル、内容を入力できる様になっています。
                     タイトルは任意入力で、入力しなかった場合「無題」と表示されます。
-                    <ImageCard src="/images/tutorials/03-02.png" />
+                    <ImageCard src="/images/tutorials/03-04.png" />
                 </p>
 
                 <div className="text-center">
