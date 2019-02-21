@@ -94,8 +94,7 @@ export const directUserRegister = (userInfo) => {
     });
 };
 
-export const verifyEmail = (href) => {
-    const url = utils.getQueryParam('url', href);
+export const verifyEmail = (url) => {
     return utils.smartFetch(url).then(res => {
         return res.json();
     });

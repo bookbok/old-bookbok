@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { store } from "../../store";
-import { successfulStatus, getAuthUser } from '../../utils';
+import { successfulStatus, getAuthUser, getQueryParam } from '../../utils';
 
 import { Loading } from '../shared/Loading';
 import { verifyEmail, resendVerifyMail, setAlertMessage } from '../../actions';
@@ -17,7 +17,8 @@ class EmailVerify extends React.Component {
     }
 
     componentDidMount() {
-        verifyEmail(location.href).then(json => {
+        const url = getQueryParam('url', location.href);
+        verifyEmail(url).then(json => {
             if(successfulStatus(json.status) || !json.status) {
                 store.dispatch(setAlertMessage("success", {__html: json.userMessage}));
                 this.props.history.push('/login');
