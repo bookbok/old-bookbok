@@ -46,7 +46,7 @@ class Config extends Component {
             <div className="page-content-wrap row">
                 <div className="container mt-4">
                     <div className="row justify-content-center">
-                        <div className="col-md-8 main-content p-5">
+                        <div className="main-content">
                             <div className="user-detail-wrapper d-flex flex-column">
                                 <h1>プロフィール設定</h1>
 
