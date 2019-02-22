@@ -67,7 +67,7 @@ export class BookDetailView extends Component {
         return (
             <div className="container mt-4">
                 <div className="row justify-content-center">
-                    <div className="col-md-8 main-content clearfix">
+                    <div className="main-content clearfix">
                         <BackButtonArea to="/books"/>
                         <div className="float-right">
                             <form onSubmit={this.handleRegister}>
