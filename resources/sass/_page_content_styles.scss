@@ -17,6 +17,9 @@
   @include normal-pc {
     position: absolute;
     margin-left: 3rem;
-    max-width: 20%;
+    max-width:20%;
   }
+
+  @extend .col-md-7;
+  @extend .col-xl-4;
 }

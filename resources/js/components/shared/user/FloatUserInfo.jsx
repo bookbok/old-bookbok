@@ -52,7 +52,7 @@ export class FloatUserInfo_ extends Component {
         const user = this.props.user;
 
         return (
-            <div className="sub-content card col-md-7">
+            <div className="sub-content card">
                 <div className="d-flex">
                     <div>
                         <Link to={`/users/{user.id}`} className="text-body">
