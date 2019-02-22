@@ -39,7 +39,7 @@ class Tutorial extends React.Component {
 
                 <div className="container mt-4">
                     <div className="row justify-content-center">
-                        <div className="col-md-8 main-content p-5">
+                        <div className="main-content">
                             {(() => {
                                 const TutorialContent = this.tutorials[tutorialID];
                                 if(!TutorialContent || !TutorialContent.component) return null;
