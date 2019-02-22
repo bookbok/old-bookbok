@@ -8,8 +8,21 @@ class Tutorial04 extends React.Component {
         return (
             <div>
                 <h1>{this.props.title}</h1>
-                <p className="mt-4 text-center">
-                    作成途中
+                <p>
+                    BookBokにはユーザーシステムがあります。
+                    ユーザー名、アイコン、自己紹介を設定ページから設定することができます。
+                </p>
+                <hr/>
+
+                <p>
+                    画面右上のアカウント名をクリックし、表示される一覧の「各種設定」からプロフィール設定ページに遷移できます。
+                    <ImageCard src="/images/tutorials/04-01.png" />
+                </p>
+
+                <p>
+                    各種ユーザー情報を編集できるフォームが表示されます。
+
+                    <ImageCard src="/images/tutorials/04-02.png" />
                 </p>
             </div>
         );
