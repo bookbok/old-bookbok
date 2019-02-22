@@ -21,8 +21,13 @@ class Tutorial04 extends React.Component {
 
                 <p>
                     各種ユーザー情報を編集できるフォームが表示されます。
-
+                    自由に編集しましょう。
                     <ImageCard src="/images/tutorials/04-02.png" />
+                </p>
+
+                <p>
+                    以上でチュートリアルは終了です。
+                    引き続き読書をお楽しみください。
                 </p>
             </div>
         );
