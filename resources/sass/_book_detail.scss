@@ -29,26 +29,3 @@ img.title-book-cover {
     margin: 0;
 }
 
-.main-content {
-  background-color: white;
-
-  @include normal-pc {
-      max-width: 80%;
-  }
-}
-
-.sub-content {
-  position: static; // mainコンテンツの上に表示するため
-  flex: 0 1 auto;
-  padding: 1rem;
-  margin-top: 1.5rem;
-  margin-right: auto;
-  margin-left: auto;
-  width: 80%;
-
-  @include normal-pc {
-    position: absolute;
-    margin-left: 3rem;
-    max-width: 20%;
-  }
-}
