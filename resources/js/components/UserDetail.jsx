@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { store } from "../store";
-import { fetchUser, requestUpdateUser, loading, loaded } from "../actions";
+import { fetchUser, loading, loaded } from "../actions";
 import * as utils from "../utils";
 
 import { Loading } from "./shared/Loading";
@@ -26,74 +26,10 @@ class UserDetail extends Component {
             avatar: "",
             description: "",
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
         fetchUserDetailActions(this.props.match.params.id);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        // 更新後のユーザー情報を全てstateにも反映
-        if(!nextProps.user) return;
-        const { name, avatar, description } = nextProps.user;
-        this.setState({ name, avatar, description, });
-    }
-
-    handleChange(e) {
-        const name = e.target.name;
-        this.setState({ [name]: e.target.value });
-    }
-
-    handleSubmit(e) {
-        store.dispatch(requestUpdateUser(this.state));
-    }
-
-    renderNameRow(me, name, changeHandler) {
-        if(me) {
-            return <input name="name"
-                type="text"
-                className="name-input"
-                value={name}
-                onChange={changeHandler} />;
-        }
-        return name;
-    }
-
-    renderUserEditRow(me, state, changeHandler, submitHandler) {
-        if(!me) {
-            return null;
-        }
-        return (
-            <div>
-                <div className="mt-4">
-                    <strong>プロフィール画像</strong>
-                    <img src={state.avatar} className="user-info-avatar d-block mb-1" />
-                    <input name="avatar"
-                        type="text"
-                        className="avatar-input"
-                        placeholder="https://example.com/sample.png"
-                        value={state.avatar}
-                        onChange={changeHandler} />
-                </div>
-
-                <div className="mt-4">
-                    <strong>自己紹介</strong>
-                    <textarea name="description"
-                        type="text"
-                        className="description-input"
-                        placeholder="こんにちは"
-                        value={state.description}
-                        onChange={changeHandler} />
-                </div>
-
-                <button className="btn btn-success float-right"
-                    onClick={submitHandler}>
-                    保存
-                </button>
-            </div>
-        );
     }
 
     render() {
@@ -103,7 +39,6 @@ class UserDetail extends Component {
         }
 
         const currentUser = utils.getAuthUser();
-        const me = (currentUser && currentUser.id === user.id);
 
         return (
             <div className="page-content-wrap row">
@@ -114,11 +49,12 @@ class UserDetail extends Component {
                         <div className="col-md-8 main-content p-5">
                             <MyPageTabs isTop userId={this.props.match.params.id} />
                             <div className="mt-4 user-detail-wrapper">
-                                <div className="h1">
-                                    {this.renderNameRow(me, this.state.name, this.handleChange)}
+                                <div className="d-flex">
+                                    <img src={currentUser.avatar} className="user-info-avatar d-block" />
+                                    <h3 className="m-0 ml-2 d-flex align-items-center">{currentUser.name}</h3>
                                 </div>
                                 <p className="text-muted">{utils.makeDateJP(user.created_at)}に登録された読書家です</p>
-                                {this.renderUserEditRow(me, this.state, this.handleChange, this.handleSubmit)}
+                                <p className="mt-3">{currentUser.description}</p>
                             </div>
                         </div>
                     </div>

@@ -29,6 +29,9 @@ class Header extends Component {
                                 <Link className="dropdown-item" to={'/bulk_regist'}>
                                     本棚の一括登録
                                 </Link>
+                                <Link className="dropdown-item" to="/config">
+                                    各種設定
+                                </Link>
                                 <Link className="dropdown-item" to="/logout">
                                     ログアウト
                                 </Link>
