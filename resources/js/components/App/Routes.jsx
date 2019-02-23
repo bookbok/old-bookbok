@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../Home';
 import { PrivacyPolicyView } from '../PrivacyPolicyView';
 import { TermsOfServiceView } from '../TermsOfServiceView';
+import Tutorial from '../Tutorial';
 
 {/* resource page */}
 import { ConnectedBookDetail, ConnectedUsersView, } from '../../containers';
@@ -41,6 +42,7 @@ class Routes extends Component {
                 <Route exact path="/home" component={ Home } />
                 <Route exact path="/privacy" component={ PrivacyPolicyView } />
                 <Route exact path="/terms_of_service" component={ TermsOfServiceView } />
+                <Route exact path="/tutorial/:id" component={ Tutorial } />
 
                 {/* resource page */}
                 <Route exact path="/books" component={ ConnectedBookList } />
