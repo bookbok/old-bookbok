@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
         App\User::create([
             'name' => 'admin',
             'email' => 'admin@example.com',
+            'email_verified_at' => Carbon::now()->subDays(1),
             'password' => '$2y$10$2e6j5ZXZXklk5Hs.8VpyZOovlXhW4OsXu3Ut/CTOi5Nry39GRQLIu',
             'role_id' => 1,
             'avatar' => 'https://avatars0.githubusercontent.com/u/22770924',
@@ -26,6 +27,7 @@ class UsersTableSeeder extends Seeder
         App\User::create([
             'name' => 'test-staff',
             'email' => 'staff@example.com',
+            'email_verified_at' => Carbon::now()->subDays(1),
             'password' => '$2y$10$2e6j5ZXZXklk5Hs.8VpyZOovlXhW4OsXu3Ut/CTOi5Nry39GRQLIu',
             'role_id' => 5,
             'avatar' => 'https://avatars0.githubusercontent.com/u/22770924',
