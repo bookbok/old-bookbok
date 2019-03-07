@@ -142,7 +142,8 @@ BOOKBOK　API仕様書
 ### ユーザを新規登録する [POST]
 
 新規ユーザ登録を完了すると、
-`/auth/email/verify?expires={expires}&signature={signature}`へのリンクを記載したメールが送信される。
+`/auth/email/verify?url=https://...`へのリンクを記載したメールが送信される。
+パラメータurlのapiを叩くと検証処理が行われる。
 
 + Request (application/json)
 
@@ -196,64 +197,48 @@ BOOKBOK　API仕様書
 + Response 200 (application/json)
 
         {
-            "userMessage": "有効化に成功しました。"
+            "userMessage": "検証に成功しました。"
         }
 
 + Response 400 (application/json)
 
         {
             "status":400,
-            "userMessage": "有効化に失敗しました。"
-        }
-
-+ Response 401 (application/json)
-
-        {
-            "status":401,
-            "userMessage": "権限がありません。"
+            "userMessage": "検証に失敗しました。"
         }
 
 + Response 403 (application/json)
 
         {
-            "status":403,
+            "status": 403,
             "userMessage": "シグネチャが不正です。"
         }
 
 + Response 429 (application/json)
 
         {
-            "status":429,
+            "status": 429,
             "userMessage": "試行回数が多すぎます。"
         }
 
 ## Email Verify Resend [/api/auth/email/resend]
+
++ Parameters
+
+    + email: example@example.com (string) - 検証対象メールアドレス
 
 ### メールアドレス検証メールを再送する [GET]
 
 + Response 200 (application/json)
 
         {
-            "userMessage": "検証メールを再送信しました。確認をお願いします。"
-        }
-
-+ Response 200 (application/json)
-
-        {
-            "userMessage": "有効化に成功しました。"
-        }
-
-+ Response 401 (application/json)
-
-        {
-            "status":401,
-            "userMessage": "権限がありません。"
+            "userMessage": "送信しました。"
         }
 
 + Response 429 (application/json)
 
         {
-            "status":429,
+            "status": 429,
             "userMessage": "試行回数が多すぎます。"
         }
 

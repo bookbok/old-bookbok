@@ -93,6 +93,20 @@ export const directUserRegister = (userInfo) => {
     });
 };
 
+export const verifyEmail = (url) => {
+    return utils.smartFetch(url).then(res => {
+        return res.json();
+    });
+};
+
+export const resendVerifyMail = (email) => {
+    return utils.smartFetch('/api/auth/email/resend', {
+        body: { email },
+    }).then(res => {
+        return res.json();
+    });
+}
+
 
 /**
  * ==== Genre resource ====

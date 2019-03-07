@@ -39,7 +39,6 @@ class RegisterController extends Controller
             'password' => password_hash($data['password'], PASSWORD_DEFAULT),
         ]);
 
-        // TODO: もしメールアドレス認証メール送信イベントリスナーが登録されていなければ登録する。
         event(new Registered($user));
 
         return response()->json([
