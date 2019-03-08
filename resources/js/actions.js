@@ -62,6 +62,9 @@ export const getLoggedinUser = () => dispatch => {
     utils.wrapFetch('/api/auth/user').then(json => {
         dispatch(setLoggedinUser(json));
         dispatch(preparedLogin());
+    }).catch(err => {
+        // 失敗として事前処理を終了する
+        dispatch(preparedLogin());
     });
 }
 
