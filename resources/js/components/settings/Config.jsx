@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { store } from "../store";
-import { fetchUser, requestUpdateUser, setLoggedinUser, setAlertMessage } from "../actions";
-import * as utils from "../utils";
-import { Loading } from "./shared/Loading";
+import { store } from "../../store";
+import { fetchUser, requestUpdateUser, setLoggedinUser, setAlertMessage } from "../../actions";
+import * as utils from "../../utils";
+import { Loading } from "../shared/Loading";
 
 class Config extends Component {
     constructor(props) {

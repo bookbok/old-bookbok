@@ -31,7 +31,7 @@ import FollowersView from '../FollowersView';
 import FollowingsView from '../FollowingsView';
 
 {/* config page */}
-import Config from '../Config';
+import Config from '../settings/Config';
 
 //react-router-dom
 class Routes extends Component {
