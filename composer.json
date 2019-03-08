@@ -54,7 +54,7 @@
             "@php artisan package:discover --ansi"
         ],
         "post-install-cmd": [
-            "php artisan migrate",
+            "php artisan migrate --force",
             "chmod -R 777 storage",
             "php artisan passport:install"
         ]
