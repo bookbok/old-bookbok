@@ -4,7 +4,7 @@ import { fetchUser, requestUpdateUser, setLoggedinUser, setAlertMessage } from "
 import * as utils from "../../utils";
 import { Loading } from "../shared/Loading";
 
-class Config extends Component {
+class Profile extends Component {
     constructor(props) {
         super(props);
 
@@ -165,5 +165,5 @@ class Config extends Component {
 import { connect } from "react-redux";
 
 export default connect(state => state)(
-    Config
+    Profile
 );
