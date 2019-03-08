@@ -55,7 +55,7 @@ class IsbnBulkRegistrationView extends Component {
             <div className="container mt-4">
                 <div className="row justify-content-center">
 
-                    <div className="col-md-8 main-content p-5">
+                    <div className="main-content">
                         <BackButtonArea to={`/users/${this.props.loggedinUser.id}/user_books`} text="本棚へ" />
                         <div className="mb-5">
                             <h1>まとめて登録(ISBN)</h1>

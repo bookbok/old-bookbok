@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../Home';
 import { PrivacyPolicyView } from '../PrivacyPolicyView';
 import { TermsOfServiceView } from '../TermsOfServiceView';
+import Tutorial from '../Tutorial';
 
 {/* resource page */}
 import { ConnectedBookDetail, ConnectedUsersView, } from '../../containers';
@@ -18,6 +19,7 @@ import IsbnBulkRegistrationView from '../IsbnBulkRegistrationView';
 import { UserRegister } from '../UserRegister';
 import Login from '../Login';
 import { Logout } from '../Logout';
+import EmailVerify from '../auth/EmailVerify';
 
 {/* user page */}
 import ConnectedUserDetail from '../UserDetail';
@@ -28,6 +30,8 @@ import LoveBokList from '../LoveBokList';
 import FollowersView from '../FollowersView';
 import FollowingsView from '../FollowingsView';
 
+{/* setting page */}
+import ProfileSetting from '../settings/Profile';
 
 //react-router-dom
 class Routes extends Component {
@@ -39,6 +43,7 @@ class Routes extends Component {
                 <Route exact path="/home" component={ Home } />
                 <Route exact path="/privacy" component={ PrivacyPolicyView } />
                 <Route exact path="/terms_of_service" component={ TermsOfServiceView } />
+                <Route exact path="/tutorial/:id" component={ Tutorial } />
 
                 {/* resource page */}
                 <Route exact path="/books" component={ ConnectedBookList } />
@@ -54,6 +59,7 @@ class Routes extends Component {
                 <Route exact path="/user_register" component={ UserRegister } />
                 <Route exact path="/login" component={ Login } />
                 <Route exact path="/logout" component={ Logout } />
+                <Route exact path="/auth/email/verify" component={ EmailVerify } /> // TODO: EmailVerifyに置き換える
 
                 {/* user page */}
                 <Route exact path="/users/:id" component={ ConnectedUserDetail } />
@@ -63,6 +69,9 @@ class Routes extends Component {
                 <Route exact path="/users/:id/loves" component={ LoveBokList } />
                 <Route exact path="/users/:id/followers" component={ FollowersView } />
                 <Route exact path="/users/:id/followings" component={ FollowingsView } />
+
+                {/* setting page */}
+                <Route exact path="/settings/profile" component={ ProfileSetting } />
 
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
             </Switch>

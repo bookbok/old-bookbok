@@ -66,11 +66,10 @@ class VerifyEmail extends Notification
         $apiUrl = URL::temporarySignedRoute(
             'auth.email.verify',
             Carbon::now()->addMinutes(60),
-            ['id' => $notifiable->getKey()]
+            ['user' => $notifiable->getKey()]
         );
 
-        parse_str(explode('?', $apiUrl, 2)[1] ?? '', $parameters);
-        return route('dummy.auth.email.verify', $parameters);
+        return route('dummy.auth.email.verify', ['url' => $apiUrl]);
     }
 
     /**

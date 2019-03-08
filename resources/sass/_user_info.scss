@@ -65,6 +65,17 @@ img.user-info-avatar {
 }
 
 .user-detail-wrapper {
+  .items-wrapper {
+    padding: 1rem 0 1.5rem 0;
+    border-bottom: 1px solid #dee2e6;
+    height: auto;
+  }
+
+  .hint-message{
+    font-size: 80%;
+    margin: 0 0 0.6rem 0.5rem;
+  }
+
   .name-input {
     width: 100%;
   }

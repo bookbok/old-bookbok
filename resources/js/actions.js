@@ -56,26 +56,24 @@ export const requestLogin = (loginUser, history) => {
     });
 }
 
+export const preparedLogin = () => ({ type: types.SET_PREPARED_FLAG });
 export const setLoggedinUser = (loggedinUser) => ({ type: types.SET_LOGGEDIN_USER, loggedinUser });
 export const getLoggedinUser = () => dispatch => {
     utils.wrapFetch('/api/auth/user').then(json => {
         dispatch(setLoggedinUser(json));
+        dispatch(preparedLogin());
     });
 }
 
-export const requestUpdateUser = (user) => dispatch => {
-    utils.wrapFetch('/api/auth/user', {
+export const requestUpdateUser = (user) => {
+    return utils.smartFetch('/api/auth/user', {
         method: 'PUT',
         body: user,
-    }).then(json => {
-        // 更新が完了したデータをstoreのユーザー情報として更新
-        store.dispatch(setLoggedinUser(json));
-        fetchUser(json.id);
     });
 }
 
 export const removeLoggedinInfo = () => ({ type: types.REMOVE_LOGGEDIN_INFO });
-export const requestLogout = () => dispatch => {
+export const requestLogout = (history) => dispatch => {
     utils.wrapFetch('/api/auth/logout', {
         isParse: false,
     }).then(res => {
@@ -84,6 +82,7 @@ export const requestLogout = () => dispatch => {
         if (utils.storageAvailable('localStorage') && localStorage.getItem('token')) {
             localStorage.removeItem('token');
         }
+        history.push('/');
     });
 }
 
@@ -93,6 +92,20 @@ export const directUserRegister = (userInfo) => {
         body: userInfo
     });
 };
+
+export const verifyEmail = (url) => {
+    return utils.smartFetch(url).then(res => {
+        return res.json();
+    });
+};
+
+export const resendVerifyMail = (email) => {
+    return utils.smartFetch('/api/auth/email/resend', {
+        body: { email },
+    }).then(res => {
+        return res.json();
+    });
+}
 
 
 /**

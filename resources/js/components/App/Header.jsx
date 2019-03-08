@@ -29,6 +29,9 @@ class Header extends Component {
                                 <Link className="dropdown-item" to={'/bulk_regist'}>
                                     本棚の一括登録
                                 </Link>
+                                <Link className="dropdown-item" to="/settings/profile">
+                                    設定
+                                </Link>
                                 <Link className="dropdown-item" to="/logout">
                                     ログアウト
                                 </Link>
@@ -90,8 +93,7 @@ Header.propTypes = {
     })
 };
 
-const ConnectedHeader = connect(
+export default connect(
     state => ({ loggedinUser: state.loggedinUser })
 )(Header);
 
-export default ConnectedHeader;

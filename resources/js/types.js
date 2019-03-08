@@ -18,6 +18,7 @@ export const SET_BOK_FLOW = "SET_BOK_FLOW";
 /**
  * ==== Auth resource ====
  */
+export const SET_PREPARED_FLAG = "SET_PREPARED_FLAG";
 export const SET_AUTH_TOKEN = "SET_AUTH_TOKEN";
 export const SET_LOGGEDIN_USER = "SET_LOGGEDIN_USER";
 export const REMOVE_LOGGEDIN_INFO = "REMOVE_LOGGEDIN_INFO";

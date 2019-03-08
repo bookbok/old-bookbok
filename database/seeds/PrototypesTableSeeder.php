@@ -35,9 +35,12 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name' => 'SUGINO',
             'email' => 'sugino@example.com',
+            'email_verified_at' => Carbon::now()->subDays(1),
             'password' => '$2y$10$2e6j5ZXZXklk5Hs.8VpyZOovlXhW4OsXu3Ut/CTOi5Nry39GRQLIu',
             'role_id' => 10,
             'avatar' => 'https://avatars0.githubusercontent.com/u/29668738',
+            'created_at' => Carbon::now()->subDays(32),
+            'updated_at' => Carbon::now()->subDays(32),
         ]);
          $book = Book::create([
             'isbn' => '9784534031730',
@@ -187,9 +190,12 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name'      => 'kento-oka',
             'email'     => 'kento-oka@example.com',
+            'email_verified_at' => Carbon::now()->subDays(1),
             'password' => '$2y$10$2e6j5ZXZXklk5Hs.8VpyZOovlXhW4OsXu3Ut/CTOi5Nry39GRQLIu',
             'role_id'   => 10,
             'avatar'    => 'https://avatars0.githubusercontent.com/u/30544668',
+            'created_at' => Carbon::now()->subDays(32),
+            'updated_at' => Carbon::now()->subDays(32),
         ]);
 
         $book = Book::create([
@@ -278,9 +284,12 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name' => 'kazuki',
             'email' => 'yrtmeci@example.com',
+            'email_verified_at' => Carbon::now()->subDays(1),
             'password' => '$2y$10$2e6j5ZXZXklk5Hs.8VpyZOovlXhW4OsXu3Ut/CTOi5Nry39GRQLIu',
             'role_id' => 10,
             'avatar' => 'https://avatars0.githubusercontent.com/u/41029768',
+            'created_at' => Carbon::now()->subDays(32),
+            'updated_at' => Carbon::now()->subDays(32),
         ]);
 
         $book = Book::create([
@@ -356,9 +365,12 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name' => 'OYASAI',
             'email' => 'oyasai@example.com',
+            'email_verified_at' => Carbon::now()->subDays(1),
             'password' => '$2y$10$2e6j5ZXZXklk5Hs.8VpyZOovlXhW4OsXu3Ut/CTOi5Nry39GRQLIu',
             'role_id' => 10,
             'avatar' => 'https://avatars3.githubusercontent.com/u/25961633',
+            'created_at' => Carbon::now()->subDays(32),
+            'updated_at' => Carbon::now()->subDays(32),
         ]);
 
         $book = Book::create([
@@ -432,9 +444,12 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name' => 'AKARI-I',
             'email' => 'akari@example.com',
+            'email_verified_at' => Carbon::now()->subDays(1),
             'password' => '$2y$10$2e6j5ZXZXklk5Hs.8VpyZOovlXhW4OsXu3Ut/CTOi5Nry39GRQLIu',
             'role_id' => 10,
             'avatar' => 'https://avatars0.githubusercontent.com/u/30049713?s=400&u=00ee60703f10456080bc172aad4a966c3c954d5e&v=4',
+            'created_at' => Carbon::now()->subDays(32),
+            'updated_at' => Carbon::now()->subDays(32),
         ]);
 
         $book = Book::create([
@@ -495,9 +510,12 @@ class PrototypesTableSeeder extends Seeder
         $user = User::create([
             'name' => 'NAKKA-K',
             'email' => 'nakka@example.com',
+            'email_verified_at' => Carbon::now()->subDays(1),
             'password' => '$2y$10$2e6j5ZXZXklk5Hs.8VpyZOovlXhW4OsXu3Ut/CTOi5Nry39GRQLIu',
             'role_id' => 10,
             'avatar' => 'https://avatars0.githubusercontent.com/u/22770924',
+            'created_at' => Carbon::now()->subDays(32),
+            'updated_at' => Carbon::now()->subDays(32),
         ]);
 
         $book = Book::create([
