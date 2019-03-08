@@ -71,7 +71,7 @@ class Routes extends Component {
                 <Route exact path="/users/:id/followings" component={ FollowingsView } />
 
                 {/* config page */}
-                <Route exact path="/config" component={ Config } />
+                <Route exact path="/settings/profile" component={ Config } />
 
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
             </Switch>
