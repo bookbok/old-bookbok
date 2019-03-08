@@ -26,6 +26,9 @@ class EmailVerify extends React.Component {
                 store.dispatch(setAlertMessage("warning", {__html: json.userMessage}));
                 this.setState({ verified: true });
             }
+        }).catch(err => {
+            store.dispatch(setAlertMessage("warning", {__html: 'エラーが発生しました。お手数ですが運営へご連絡お願いします。'}));
+            this.setState({ verified: true });
         });
     }
 

@@ -30,8 +30,8 @@ import LoveBokList from '../LoveBokList';
 import FollowersView from '../FollowersView';
 import FollowingsView from '../FollowingsView';
 
-{/* config page */}
-import Config from '../Config';
+{/* setting page */}
+import ProfileSetting from '../settings/Profile';
 
 //react-router-dom
 class Routes extends Component {
@@ -70,8 +70,8 @@ class Routes extends Component {
                 <Route exact path="/users/:id/followers" component={ FollowersView } />
                 <Route exact path="/users/:id/followings" component={ FollowingsView } />
 
-                {/* config page */}
-                <Route exact path="/config" component={ Config } />
+                {/* setting page */}
+                <Route exact path="/settings/profile" component={ ProfileSetting } />
 
                 <Route exact component={ Home } /> {/* TODO: Replace to 404 page component*/}
             </Switch>

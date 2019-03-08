@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { store } from "../store";
-import { fetchUser, requestUpdateUser, setLoggedinUser, setAlertMessage } from "../actions";
-import * as utils from "../utils";
-import { Loading } from "./shared/Loading";
+import { store } from "../../store";
+import { fetchUser, requestUpdateUser, setLoggedinUser, setAlertMessage } from "../../actions";
+import * as utils from "../../utils";
+import { Loading } from "../shared/Loading";
+import SettingsSubContent from "./SettingsSubContent";
 
-class Config extends Component {
+class Profile extends Component {
     constructor(props) {
         super(props);
 
@@ -92,6 +93,8 @@ class Config extends Component {
     render() {
         return (
             <div className="page-content-wrap row">
+                <SettingsSubContent />
+
                 <div className="container mt-4">
                     <div className="row justify-content-center">
                         <div className="main-content">
@@ -165,5 +168,5 @@ class Config extends Component {
 import { connect } from "react-redux";
 
 export default connect(state => state)(
-    Config
+    Profile
 );
