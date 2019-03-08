@@ -87,6 +87,9 @@ class Login extends Component {
                                             ログイン
                                         </button>
 
+                                        <Link to="/auth/email/verify" className="btn btn-link">
+                                            メールアドレスを検証していますか？
+                                        </Link>
                                         <Link to="#" className="btn btn-link">
                                             パスワードを忘れましたか?
                                         </Link>
