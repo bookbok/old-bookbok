@@ -3,6 +3,7 @@ import { store } from "../../store";
 import { fetchUser, requestUpdateUser, setLoggedinUser, setAlertMessage } from "../../actions";
 import * as utils from "../../utils";
 import { Loading } from "../shared/Loading";
+import SettingsSubContent from "./SettingsSubContent";
 
 class Profile extends Component {
     constructor(props) {
@@ -92,6 +93,8 @@ class Profile extends Component {
     render() {
         return (
             <div className="page-content-wrap row">
+                <SettingsSubContent />
+
                 <div className="container mt-4">
                     <div className="row justify-content-center">
                         <div className="main-content">
