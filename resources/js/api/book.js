@@ -10,9 +10,3 @@ export const fetchBooks = (query = {}) => {
     });
 }
 
-// HACK: fetchBooksとfetchMoreBooksはBooksPaginator的なページやqueryを管理してくれるクラスがあると良い
-export const fetchMoreBooks = (query = {}) => {
-    return utils.wrapFetch('/api/books/', {
-        body: query,
-    });
-}
