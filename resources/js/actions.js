@@ -1,6 +1,8 @@
 import { store } from "./store";
 import * as utils from "./utils";
 import * as types from "./types";
+import * as api from "./api";
+
 /**
  * ==== Root actions ====
  */
@@ -130,27 +132,23 @@ export const fetchGenres = () => dispatch => {
 
 export const setBookDetail = bookDetail => ({type: types.SET_BOOK_DETAIL, bookDetail});
 export const fetchBookDetail = (id) => dispatch => {
-    utils.wrapFetch(`/api/books/${id}`)
-        .then(json => {
-            dispatch(setBookDetail(json));
-        });
+    api.fetchBook(id).then(json => {
+        dispatch(setBookDetail(json));
+    });
 }
 
 export const setBookList = books => ({type: types.SET_BOOKLIST, books});
 // TODO: Rename to fetchBooksWithQuery
 export const fetchBookList = (query = {}) => {
-    return utils.wrapFetch('/api/books/', {
-        body: query,
-    }).then(json => {
+    return api.fetchBooks(query).then(json => {
         store.dispatch(setBookList(json));
         return json;
     });
 }
+// HACK: fetchBooksとfetchMoreBooksはBooksPaginator的なページやqueryを管理してくれるクラスがあると良い
 export const addBooks = books => ({type: types.ADD_BOOKS, books});
 export const fetchMoreBooks = (query = {}) => {
-    return utils.wrapFetch('/api/books/', {
-        body: query,
-    }).then(json => {
+    return api.fetchBooks(query).then(json => {
         store.dispatch(addBooks(json));
         return json;
     });
