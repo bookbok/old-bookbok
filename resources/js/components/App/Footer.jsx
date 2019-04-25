@@ -10,7 +10,7 @@ const Footer = () => (
                 <li className="footer-list-item"><Link to="/privacy">プライバシー</Link></li>
                 <li className="footer-list-item"><Link to="/tutorial/0">チュートリアル</Link></li>
                 <li className="footer-list-item"><Link to="/users">ユーザー</Link></li>
-                <li className="footer-list-item"><a href="https://goo.gl/forms/Ig6K1ieesR4dY7cg1" target="_blank">ご意見</a></li>
+                <li className="footer-list-item"><a href="https://goo.gl/forms/Ig6K1ieesR4dY7cg1" target="_blank" rel="noopener noreferrer">ご意見</a></li>
             </ul>
         </nav>
     </footer>
