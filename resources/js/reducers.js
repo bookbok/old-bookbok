@@ -1,10 +1,7 @@
-import * as types from "./types";
+import * as types from './types';
 
-export function rootReducer(
-    state = { isPrepared: false },
-    action
-) {
-    switch(action.type) {
+export function rootReducer(state = { isPrepared: false }, action) {
+    switch (action.type) {
         case types.SET_ALERT_MESSAGE:
             return { ...state, alertView: action.alertView };
 
@@ -30,11 +27,12 @@ export function rootReducer(
             return { ...state, books: action.books };
 
         case types.ADD_BOOKS: // ページ情報は新しいものに変更し、データは古いものと結合する
-            return { ...state,
+            return {
+                ...state,
                 books: {
                     ...action.books,
-                    data: [ ...state.books.data, ...action.books.data ]
-                }
+                    data: [...state.books.data, ...action.books.data],
+                },
             };
 
         case types.SET_USER_BOOKSHELF:
@@ -61,8 +59,8 @@ export function rootReducer(
                 ...state,
                 userBookDetail: {
                     ...state.userBookDetail,
-                    boks: [ ...state.userBookDetail.boks, action.bok ],
-                }
+                    boks: [...state.userBookDetail.boks, action.bok],
+                },
             };
 
         case types.SET_BOKS_TO_USER_BOOK:
@@ -71,7 +69,7 @@ export function rootReducer(
                 userBookDetail: {
                     ...state.userBookDetail,
                     boks: action.boks,
-                }
+                },
             };
 
         case types.SET_LIKEBOKLIST:
@@ -98,4 +96,3 @@ export function rootReducer(
 
     return state;
 }
-
