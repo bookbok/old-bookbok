@@ -4,3 +4,5 @@
 /vendor
 /public/css/app.css
 /public/js/app.js
+
+/resources/js/bootstrap.js
