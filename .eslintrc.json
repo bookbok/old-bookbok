@@ -11,6 +11,11 @@
         "plugin:prettier/recommended",
         "prettier/react"
     ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly",
