@@ -289,8 +289,7 @@ export const requestFollow = (userId, targetId) => {
 };
 
 export const requestUnFollow = (userId, targetId) => {
-    // FIX: targetIdの埋め込みがうまくできていない
-    return utils.wrapFetch(`/api/users/${userId}/followings/{targetId}`, {
+    return utils.wrapFetch(`/api/users/${userId}/followings/${targetId}`, {
         method: 'DELETE',
     });
 };
