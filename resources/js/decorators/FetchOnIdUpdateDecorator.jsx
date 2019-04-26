@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import * as ResourceTypes from 'resource-types';
 import { withRouter } from 'react-router-dom';
 
 // 同じコンポーネントだとパス内のidが変わってもcomponentDidMountが呼ばれない
@@ -24,9 +24,7 @@ export function fetchOnIdUpdateDecorator(updater) {
         }
 
         FetchOnIdUpdateDecorator.propTypes = {
-            match: PropTypes.shape({
-                params: PropTypes.object,
-            }),
+            match: ResourceTypes.MATCHER,
         };
 
         return withRouter(FetchOnIdUpdateDecorator);

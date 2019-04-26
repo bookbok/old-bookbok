@@ -64,9 +64,7 @@ export class UserBookshelf extends Component {
 }
 
 UserBookshelf.propTypes = {
-    match: PropTypes.shape({
-        params: PropTypes.object,
-    }).isRequired,
+    match: ResourceTypes.MATCHER,
     loading: PropTypes.bool,
     user: ResourceTypes.USER,
     userBookshelf: ResourceTypes.USER_BOOKS,
