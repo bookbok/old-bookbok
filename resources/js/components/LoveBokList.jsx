@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import * as ResourceTypes from '../resource-types';
 import { fetchLoveBoks, fetchUser, loading, loaded } from '../actions';
 import { store } from '../store';
 import { isEmpty } from '../utils';
@@ -55,6 +57,13 @@ class LoveBokList extends Component {
         return loveList(boks);
     }
 }
+
+LoveBokList.propTypes = {
+    match: ResourceTypes.MATCHER,
+    user: ResourceTypes.USER,
+    loading: PropTypes.bool,
+    loveBoks: PropTypes.arrayOf(ResourceTypes.BOK),
+};
 
 import { connect } from 'react-redux';
 export default connect(state => state)(LoveBokList);

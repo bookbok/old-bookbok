@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as ResourceTypes from '../resource-types';
 import { requestLogout } from '../actions';
 import { store } from '../store';
 
@@ -16,3 +17,7 @@ export class Logout extends Component {
         );
     }
 }
+
+Logout.propTypes = {
+    history: ResourceTypes.ROUTER,
+};
