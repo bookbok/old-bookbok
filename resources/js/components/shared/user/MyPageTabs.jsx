@@ -98,10 +98,10 @@ export class MyPageTabs extends Component {
 
 MyPageTabs.propTypes = {
     userId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    isTop: PropTypes.bool.isRequired,
-    isUserBooks: PropTypes.bool.isRequired,
-    isLikes: PropTypes.bool.isRequired,
-    isLoves: PropTypes.bool.isRequired,
-    isFollowers: PropTypes.bool.isRequired,
-    isFollowings: PropTypes.bool.isRequired,
+    isTop: PropTypes.bool,
+    isUserBooks: PropTypes.bool,
+    isLikes: PropTypes.bool,
+    isLoves: PropTypes.bool,
+    isFollowers: PropTypes.bool,
+    isFollowings: PropTypes.bool,
 };
