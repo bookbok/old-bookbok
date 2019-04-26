@@ -34,5 +34,5 @@ export class BookInfo extends Component {
 }
 
 BookInfo.propTypes = {
-    book: ResourceTypes.BOOK,
+    book: ResourceTypes.BOOK.isRequired,
 };

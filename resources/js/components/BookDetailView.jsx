@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import * as ResourceTypes from '../resource-types';
 import { fetchBookDetail, storeISBNToUserBookDirect, setAlertMessage } from '../actions.js';
 import { store } from '../store';
-import { getAuthUser, isEmpty, toLines } from '../utils';
+import { getAuthUser, isEmpty } from '../utils';
 
 import { Link } from 'react-router-dom';
 import { Loading } from './shared/Loading';
@@ -93,3 +94,9 @@ export class BookDetailView extends Component {
         );
     }
 }
+
+BookDetailView.propTypes = {
+    match: ResourceTypes.MATCHER,
+    history: ResourceTypes.ROUTER,
+    bookDetail: ResourceTypes.BOOK,
+};
