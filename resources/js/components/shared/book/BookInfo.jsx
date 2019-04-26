@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as ResourceTypes from '../../../resource-types';
 import { Link } from 'react-router-dom';
 
 /**
@@ -34,11 +34,5 @@ export class BookInfo extends Component {
 }
 
 BookInfo.propTypes = {
-    book: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        cover: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        author: PropTypes.string,
-    }),
+    book: ResourceTypes.BOOK,
 };

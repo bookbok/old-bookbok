@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as ResourceTypes from 'resource-types';
+import * as ResourceTypes from '../../../resource-types';
 import { withRouter } from 'react-router-dom';
 import { requestFollow, requestUnFollow } from '../../../actions';
 import { getAuthUser, isEmpty } from '../../../utils';
