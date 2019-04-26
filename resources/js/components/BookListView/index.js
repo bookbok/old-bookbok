@@ -1,28 +1,27 @@
 import React, { Component, Suspense } from 'react';
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { fetchBookList, fetchGenres } from "../../actions";
-import { store } from "../../store";
-import { isEmpty } from "../../utils";
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { fetchBookList, fetchGenres } from '../../actions';
+import { store } from '../../store';
+import { isEmpty } from '../../utils';
 
 //import { ConnectedGenres } from "../../containers";
 import Genres from './Genres';
-import { Search } from "./Search";
-import { Loading } from "../shared/Loading";
-import { ISBNModal } from "../shared/book/ISBNModal";
-import BooksSuspense from "./BooksSuspense";
-
+import { Search } from './Search';
+import { Loading } from '../shared/Loading';
+import { ISBNModal } from '../shared/book/ISBNModal';
+import BooksSuspense from './BooksSuspense';
 
 class BookListView extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { q: "", genres: null };
+        this.state = { q: '', genres: null };
         this.handleSubmitSearchText = this.handleSubmitSearchText.bind(this);
         this.handleClickSearchGenre = this.handleClickSearchGenre.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         store.dispatch(fetchGenres());
     }
 
@@ -37,7 +36,7 @@ class BookListView extends Component {
     }
 
     render() {
-        return(
+        return (
             <div className="container mt-4">
                 <div className="row justify-content-center">
                     <div className="d-flex">
@@ -45,7 +44,8 @@ class BookListView extends Component {
                             <Genres
                                 handleClickSearchGenre={this.handleClickSearchGenre}
                                 genres={this.props.genres}
-                                activeGenreId={this.state.genres ? this.state.genres[0] : null} />
+                                activeGenreId={this.state.genres ? this.state.genres[0] : null}
+                            />
                         </div>
                         <div className="m-3">
                             <Search handleSubmit={this.handleSubmitSearchText} />
@@ -57,7 +57,7 @@ class BookListView extends Component {
                     <div className="mt-4 book-list-wrapper">
                         {/* async component */}
                         <Suspense maxDuration={1000} fallback={<Loading />}>
-                            <BooksSuspense books={this.props.books} query={this.state}/>
+                            <BooksSuspense books={this.props.books} query={this.state} />
                         </Suspense>
                     </div>
                 </div>
