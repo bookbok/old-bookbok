@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import * as ResourceTypes from '../resource-types';
 import { Link } from 'react-router-dom';
 
 export class BookView extends Component {
@@ -44,3 +46,9 @@ export class BookView extends Component {
         );
     }
 }
+
+BookView.propTypes = {
+    book: ResourceTypes.BOOK,
+    className: PropTypes.string,
+    link: PropTypes.string,
+};
