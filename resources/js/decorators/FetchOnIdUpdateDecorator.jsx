@@ -1,5 +1,5 @@
 import React from 'react';
-import * as ResourceTypes from 'resource-types';
+import * as ResourceTypes from '../resource-types';
 import { withRouter } from 'react-router-dom';
 
 // 同じコンポーネントだとパス内のidが変わってもcomponentDidMountが呼ばれない
