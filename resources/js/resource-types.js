@@ -69,3 +69,7 @@ export const ROUTER = PropTypes.shape({
     replace: PropTypes.func.isRequired,
     createHref: PropTypes.func.isRequired,
 }).isRequired;
+
+export const MATCHER = PropTypes.shape({
+    params: PropTypes.object.isRequired,
+}).isRequired;
