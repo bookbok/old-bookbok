@@ -18,7 +18,7 @@ export const USER = PropTypes.shape({
     id: idType.isRequired,
     name: PropTypes.string.isRequired,
     avatar: PropTypes.string, // avatarは空文字を許す
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     role_id: idType.isRequired,
     follower_count: PropTypes.any.isRequired,
     following_count: PropTypes.any.isRequired,
@@ -32,7 +32,7 @@ export const CURRENT_USER = PropTypes.shape({
     id: idType.isRequired,
     name: PropTypes.string.isRequired,
     avatar: PropTypes.string, // avatarは空文字を許す
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     role_id: idType.isRequired,
     created_at: PropTypes.string.isRequired,
     updated_at: PropTypes.string.isRequired,

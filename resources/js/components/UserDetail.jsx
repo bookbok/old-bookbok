@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import * as ResourceTypes from '../resource-types';
 import { store } from '../store';
 import { fetchUser, loading, loaded } from '../actions';
 import * as utils from '../utils';
@@ -36,8 +38,6 @@ class UserDetail extends Component {
             return <Loading />;
         }
 
-        const currentUser = utils.getAuthUser();
-
         return (
             <div className="page-content-wrap row">
                 <FloatUserInfo user={user} />
@@ -48,18 +48,15 @@ class UserDetail extends Component {
                             <MyPageTabs isTop userId={this.props.match.params.id} />
                             <div className="mt-4 user-detail-wrapper">
                                 <div className="d-flex">
-                                    <img
-                                        src={currentUser.avatar}
-                                        className="user-info-avatar d-block"
-                                    />
+                                    <img src={user.avatar} className="user-info-avatar d-block" />
                                     <h3 className="m-0 ml-2 d-flex align-items-center">
-                                        {currentUser.name}
+                                        {user.name}
                                     </h3>
                                 </div>
                                 <p className="text-muted">
                                     {utils.makeDateJP(user.created_at)}に登録された読書家です
                                 </p>
-                                <p className="mt-3">{currentUser.description}</p>
+                                <p className="mt-3">{user.description}</p>
                             </div>
                         </div>
                     </div>
@@ -68,6 +65,12 @@ class UserDetail extends Component {
         );
     }
 }
+
+UserDetail.propTypes = {
+    match: ResourceTypes.MATCHER,
+    user: ResourceTypes.USER,
+    loading: PropTypes.bool,
+};
 
 // URL内のid変更を検知して、再度ユーザー情報をfetchするためのデコレーター
 import { connect } from 'react-redux';

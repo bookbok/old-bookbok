@@ -18,11 +18,11 @@ const fetchUserBookshelfActions = userId => {
 
 export class UserBookshelf extends Component {
     componentDidMount() {
-        this.userId = parseInt(this.props.match.params.id);
-        fetchUserBookshelfActions(this.userId);
+        fetchUserBookshelfActions(this.props.match.params.id);
     }
 
     render() {
+        this.userId = parseInt(this.props.match.params.id);
         const { userBookshelf, user } = this.props;
         const shelfView = view => (
             <div className="page-content-wrap row">

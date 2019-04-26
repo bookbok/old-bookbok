@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import * as ResourceTypes from '../resource-types';
 import { Link } from 'react-router-dom';
 import { fetchUsers } from '../actions.js';
 import { store } from '../store';
@@ -44,3 +46,7 @@ export class UsersView extends Component {
         );
     }
 }
+
+UsersView.propTypes = {
+    users: PropTypes.arrayOf(ResourceTypes.USER),
+};

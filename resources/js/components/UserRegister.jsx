@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import * as ResourceTypes from '../resource-types';
 import { directUserRegister } from '../actions.js';
 
 export class UserRegister extends Component {
@@ -72,7 +72,7 @@ export class UserRegister extends Component {
                 }
                 return res.json();
             })
-            .then(json => {
+            .then(() => {
                 this.props.history.push('/login');
             })
             .catch(() => {});
@@ -208,3 +208,7 @@ export class UserRegister extends Component {
         );
     }
 }
+
+UserRegister.propTypes = {
+    history: ResourceTypes.ROUTER,
+};

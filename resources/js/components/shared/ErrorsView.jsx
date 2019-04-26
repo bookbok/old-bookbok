@@ -25,5 +25,5 @@ export class ErrorsView extends Component {
 }
 
 ErrorsView.propTypes = {
-    errors: PropTypes.object.isRequired,
+    errors: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
 };
