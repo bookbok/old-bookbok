@@ -5,7 +5,6 @@ import { fetchBookList, fetchMoreBooks } from '../../actions';
 import { isEmpty } from '../../utils';
 import { Loading } from '../shared/Loading';
 import { BookView } from '../BookView';
-import { ISBNModal } from '../shared/book/ISBNModal';
 
 class BooksSuspense extends React.Component {
     constructor(props) {
@@ -57,6 +56,7 @@ BooksSuspense.propTypes = {
     books: PropTypes.shape({
         data: PropTypes.array,
     }),
+    query: PropTypes.string,
 };
 
 export default BooksSuspense;

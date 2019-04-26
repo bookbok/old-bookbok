@@ -1,9 +1,10 @@
 import React, { Component, Suspense } from 'react';
+import PropTypes from 'prop-types';
+import * as ResourceTypes from 'resource-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchBookList, fetchGenres } from '../../actions';
 import { store } from '../../store';
-import { isEmpty } from '../../utils';
 
 //import { ConnectedGenres } from "../../containers";
 import Genres from './Genres';
@@ -65,5 +66,10 @@ class BookListView extends Component {
         );
     }
 }
+
+BookListView.propTypes = {
+    genres: PropTypes.arrayOf(ResourceTypes.GENRE),
+    books: PropTypes.arrayOf(ResourceTypes.BOOK),
+};
 
 export default withRouter(connect(state => state)(BookListView));

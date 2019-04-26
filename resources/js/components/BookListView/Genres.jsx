@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import * as ResourceTypes from 'resource-types';
 import { isEmpty } from '../../utils';
 import { Link } from 'react-router-dom';
 
@@ -40,5 +42,11 @@ class Genres extends Component {
         );
     }
 }
+
+Genres.propTypes = {
+    genres: PropTypes.arrayOf(ResourceTypes.GENRE),
+    handleClickSearchGenre: PropTypes.func.isRequired,
+    activeGenreId: ResourceTypes.idType,
+};
 
 export default Genres;
