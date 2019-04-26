@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { ResourceTypes } from '../resource-types';
+import * as ResourceTypes from '../resource-types';
 import { fetchUserBookshelf, fetchUser, loading, loaded } from '../actions';
 import { store } from '../store';
 
@@ -66,11 +66,10 @@ export class UserBookshelf extends Component {
 UserBookshelf.propTypes = {
     match: PropTypes.shape({
         params: PropTypes.object,
-    }),
-    loading: PropTypes.boolean,
-    book: ResourceTypes.BOOK_PROP_TYPES,
+    }).isRequired,
+    loading: PropTypes.bool,
     user: ResourceTypes.USER_PROP_TYPES,
-    userBookshelf: ResourceTypes.USERS_BOOK_PROP_TYPES,
+    userBookshelf: ResourceTypes.USER_BOOKS_PROP_TYPES,
 };
 
 // URL内のid変更を検知して、再度ユーザー情報をfetchするためのデコレーター
