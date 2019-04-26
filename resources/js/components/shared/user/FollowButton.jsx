@@ -1,29 +1,24 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { requestFollow } from '../../../actions';
 import { getAuthUser } from '../../../utils';
 
 export default class FollowButton extends Component {
     render() {
         // 自分
-        if(getAuthUser() && getAuthUser().id == this.props.userId) {
+        if (getAuthUser() && getAuthUser().id == this.props.userId) {
             return null;
         }
 
-        if(this.props.followed) {
+        if (this.props.followed) {
             return (
-                <button
-                    onClick={this.props.handleClickFollow}
-                    className="btn btn-primary">
+                <button onClick={this.props.handleClickFollow} className="btn btn-primary">
                     フォロー中
                 </button>
             );
         } else {
             return (
-                <button
-                    onClick={this.props.handleClickFollow}
-                    className="btn btn-outline-primary">
+                <button onClick={this.props.handleClickFollow} className="btn btn-outline-primary">
                     フォローする
                 </button>
             );

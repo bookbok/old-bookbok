@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
-import { fetchBookList, fetchMoreBooks } from "../../actions";
-import { isEmpty } from "../../utils";
-import { Loading } from "../shared/Loading";
-import { BookView } from "../BookView";
-import { ISBNModal } from "../shared/book/ISBNModal";
+import { fetchBookList, fetchMoreBooks } from '../../actions';
+import { isEmpty } from '../../utils';
+import { Loading } from '../shared/Loading';
+import { BookView } from '../BookView';
 
 class BooksSuspense extends React.Component {
     constructor(props) {
@@ -20,7 +19,7 @@ class BooksSuspense extends React.Component {
 
     // BooksAPIからのレスポンスをそのまま受け取り、次のページがあるかboolで返す
     hasMoreBooks(books) {
-        if(books && books.next_page_url) {
+        if (books && books.next_page_url) {
             return true;
         }
         return false;
@@ -31,11 +30,11 @@ class BooksSuspense extends React.Component {
             throw fetchBookList();
         }
 
-        if(isEmpty(this.props.books.data)) {
-            return <img src="/images/book-search-error.svg" className="book-search-error"/>
+        if (isEmpty(this.props.books.data)) {
+            return <img src="/images/book-search-error.svg" className="book-search-error" />;
         }
 
-        const books = this.props.books.data.map((book) => {
+        const books = this.props.books.data.map(book => {
             return <BookView book={book} link={`/books/${book.id}`} key={book.id} />;
         });
         return (
@@ -44,8 +43,8 @@ class BooksSuspense extends React.Component {
                 pageStart={1}
                 loadMore={this.loadMore}
                 hasMore={this.hasMoreBooks(this.props.books)}
-                loader={<Loading key="0"/>}>
-
+                loader={<Loading key="0" />}
+            >
                 {books}
                 <div className="clear-float-left" />
             </InfiniteScroll>
@@ -56,7 +55,8 @@ class BooksSuspense extends React.Component {
 BooksSuspense.propTypes = {
     books: PropTypes.shape({
         data: PropTypes.array,
-    })
-}
+    }),
+    query: PropTypes.string,
+};
 
 export default BooksSuspense;
