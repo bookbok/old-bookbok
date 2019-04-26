@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as ResourceTypes from 'resource-types';
+import * as ResourceTypes from '../../resource-types';
 import { isEmpty } from '../../utils';
 import { Link } from 'react-router-dom';
 

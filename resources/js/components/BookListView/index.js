@@ -1,6 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import PropTypes from 'prop-types';
-import * as ResourceTypes from 'resource-types';
+import * as ResourceTypes from '../../resource-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchBookList, fetchGenres } from '../../actions';
