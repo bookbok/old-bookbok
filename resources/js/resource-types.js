@@ -28,6 +28,16 @@ export const USER = PropTypes.shape({
     updated_at: PropTypes.string.isRequired,
 });
 
+export const CURRENT_USER = PropTypes.shape({
+    id: idType.isRequired,
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string, // avatarは空文字を許す
+    description: PropTypes.string.isRequired,
+    role_id: idType.isRequired,
+    created_at: PropTypes.string.isRequired,
+    updated_at: PropTypes.string.isRequired,
+});
+
 export const USER_BOOKS = PropTypes.shape({
     id: idType.isRequired,
     name: PropTypes.string.isRequired,
