@@ -68,8 +68,8 @@ UserBookshelf.propTypes = {
         params: PropTypes.object,
     }).isRequired,
     loading: PropTypes.bool,
-    user: ResourceTypes.USER_PROP_TYPES,
-    userBookshelf: ResourceTypes.USER_BOOKS_PROP_TYPES,
+    user: ResourceTypes.USER,
+    userBookshelf: ResourceTypes.USER_BOOKS,
 };
 
 // URL内のid変更を検知して、再度ユーザー情報をfetchするためのデコレーター
