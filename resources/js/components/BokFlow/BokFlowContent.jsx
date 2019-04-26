@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import * as ResourceTypes from 'resource-types';
+import * as ResourceTypes from '../../resource-types';
 import { Bok } from '../Bok';
 
 class BokFlowContent extends React.Component {
