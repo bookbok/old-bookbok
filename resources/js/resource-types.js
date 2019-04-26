@@ -64,6 +64,11 @@ export const BOK = PropTypes.shape({
     user_book: PropTypes.object,
 });
 
+export const GENRE = PropTypes.shape({
+    id: idType.isRequired,
+    name: PropTypes.string.isRequired,
+});
+
 export const ROUTER = PropTypes.shape({
     push: PropTypes.func.isRequired,
     replace: PropTypes.func.isRequired,
