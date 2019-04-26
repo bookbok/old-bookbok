@@ -1,34 +1,30 @@
-import React, { Component } from "react";
-import { fetchLoveBoks, fetchUser, loading, loaded } from "../actions";
-import { store } from "../store";
-import { isEmpty } from "../utils";
+import React, { Component } from 'react';
+import { fetchLoveBoks, fetchUser, loading, loaded } from '../actions';
+import { store } from '../store';
+import { isEmpty } from '../utils';
 
-import { Loading } from "./shared/Loading";
-import { Bok } from "./Bok";
-import { MyPageTabs } from "./shared/user/MyPageTabs";
-import { FloatUserInfo } from "./shared/user/FloatUserInfo";
+import { Loading } from './shared/Loading';
+import { Bok } from './Bok';
+import { MyPageTabs } from './shared/user/MyPageTabs';
+import { FloatUserInfo } from './shared/user/FloatUserInfo';
 
-
-const fetchLoveBokListActions = (userId) => {
+const fetchLoveBokListActions = userId => {
     store.dispatch(loading());
-    Promise.all([
-        fetchLoveBoks(userId),
-        fetchUser(userId),
-    ]).then(() => {
+    Promise.all([fetchLoveBoks(userId), fetchUser(userId)]).then(() => {
         store.dispatch(loaded());
     });
-}
+};
 
 class LoveBokList extends Component {
-    componentDidMount(){
+    componentDidMount() {
         const userId = this.props.match.params.id;
         fetchLoveBokListActions(userId);
-    };
+    }
 
-    render(){
+    render() {
         const loveBoks = this.props.loveBoks;
         const user = this.props.user;
-        const loveList = (view) => (
+        const loveList = view => (
             <div className="page-content-wrap row">
                 <FloatUserInfo user={user} />
 
@@ -46,21 +42,17 @@ class LoveBokList extends Component {
             </div>
         );
 
-        if(isEmpty(user)){
+        if (isEmpty(user)) {
             return <Loading />;
-        } else if(this.props.loading || user && !loveBoks){
-            return (
-                loveList(<Loading />)
-            );
+        } else if (this.props.loading || (user && !loveBoks)) {
+            return loveList(<Loading />);
         }
 
         const boks = loveBoks.map((loveBok, index) => {
-            return <Bok bok={loveBok} key={index} />
-        })
+            return <Bok bok={loveBok} key={index} />;
+        });
 
-        return (
-            loveList(boks)
-        );
+        return loveList(boks);
     }
 }
 
