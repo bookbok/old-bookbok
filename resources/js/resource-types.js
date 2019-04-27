@@ -14,18 +14,24 @@ export const BOOK = PropTypes.shape({
     updated_at: PropTypes.string.isRequired,
 });
 
-export const USER = PropTypes.shape({
+const simpleUser = {
     id: idType.isRequired,
     name: PropTypes.string.isRequired,
     avatar: PropTypes.string, // avatarは空文字を許す
     description: PropTypes.string,
     role_id: idType.isRequired,
-    follower_count: PropTypes.any.isRequired,
-    following_count: PropTypes.any.isRequired,
     is_follower: PropTypes.any.isRequired,
     is_following: PropTypes.any.isRequired,
     created_at: PropTypes.string.isRequired,
     updated_at: PropTypes.string.isRequired,
+};
+
+export const SIMPLE_USER = PropTypes.shape(simpleUser);
+
+export const USER = PropTypes.shape({
+    ...simpleUser,
+    follower_count: PropTypes.any.isRequired,
+    following_count: PropTypes.any.isRequired,
 });
 
 export const CURRENT_USER = PropTypes.shape({
