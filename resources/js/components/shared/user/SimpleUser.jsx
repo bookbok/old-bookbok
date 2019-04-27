@@ -76,7 +76,7 @@ class SimpleUser_ extends Component {
 
 SimpleUser_.propTypes = {
     history: ResourceTypes.ROUTER,
-    user: ResourceTypes.USER,
+    user: ResourceTypes.SIMPLE_USER.isRequired,
 };
 
 const SimpleUser = withRouter(SimpleUser_);
