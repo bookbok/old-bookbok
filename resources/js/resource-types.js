@@ -75,6 +75,14 @@ export const GENRE = PropTypes.shape({
     name: PropTypes.string.isRequired,
 });
 
+export const REVIEW = PropTypes.shape({
+    id: idType.isRequired,
+    body: PropTypes.string,
+    published_at: PropTypes.string,
+    user_book_id: idType.isRequired,
+    user_id: idType.isRequired,
+});
+
 export const ROUTER = PropTypes.shape({
     push: PropTypes.func.isRequired,
     replace: PropTypes.func.isRequired,
