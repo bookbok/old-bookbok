@@ -1,4 +1,5 @@
 import React from 'react';
+import * as ResourceTypes from '../../resource-types';
 import { Link } from 'react-router-dom';
 
 import Tutorial00 from './Tutorial00';
@@ -6,7 +7,6 @@ import Tutorial01 from './Tutorial01';
 import Tutorial02 from './Tutorial02';
 import Tutorial03 from './Tutorial03';
 import Tutorial04 from './Tutorial04';
-
 
 class Tutorial extends React.Component {
     constructor(props) {
@@ -29,9 +29,12 @@ class Tutorial extends React.Component {
             <div className="page-content-wrap ">
                 <div className="list-group sub-content">
                     {this.tutorials.map((tutorial, i) => (
-                        <Link to={`/tutorial/${i}`}
-                            className={`list-group-item list-group-item-action ${tutorialID === i && 'active'}`}
-                            key={i}>
+                        <Link
+                            to={`/tutorial/${i}`}
+                            className={`list-group-item list-group-item-action ${tutorialID === i &&
+                                'active'}`}
+                            key={i}
+                        >
                             {tutorial.title}
                         </Link>
                     ))}
@@ -42,18 +45,24 @@ class Tutorial extends React.Component {
                         <div className="main-content">
                             {(() => {
                                 const TutorialContent = this.tutorials[tutorialID];
-                                if(!TutorialContent || !TutorialContent.component) return null;
+                                if (!TutorialContent || !TutorialContent.component) return null;
 
-                                return <TutorialContent.component
-                                    title={this.tutorials[tutorialID].title} />;
+                                return (
+                                    <TutorialContent.component
+                                        title={this.tutorials[tutorialID].title}
+                                    />
+                                );
                             })()}
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }
 }
+
+Tutorial.propTypes = {
+    match: ResourceTypes.MATCHER,
+};
 
 export default Tutorial;

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import * as ResourceTypes from '../resource-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { storeIsbnBulkRegisterDirect } from '../actions';
-import { store } from '../store';
 import { getAuthUser } from '../utils';
 
 import BackButtonArea from './shared/BackButtonArea';
@@ -49,7 +48,7 @@ class IsbnBulkRegistrationView extends Component {
                 }
                 throw new Error();
             })
-            .then(json => {
+            .then(() => {
                 this.props.history.push(`/users/${userId}/user_books`);
             })
             .catch(() => {});
@@ -113,5 +112,10 @@ class IsbnBulkRegistrationView extends Component {
         );
     }
 }
+
+IsbnBulkRegistrationView.propTypes = {
+    history: ResourceTypes.ROUTER,
+    loggedinUser: ResourceTypes.CURRENT_USER,
+};
 
 export default connect(state => state)(IsbnBulkRegistrationView);

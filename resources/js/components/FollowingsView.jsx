@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import * as ResourceTypes from '../resource-types';
 import { connect } from 'react-redux';
 import { store } from '../store';
 import { fetchUser, fetchFollowings, loading, loaded } from '../actions';
@@ -7,7 +9,6 @@ import { isEmpty } from '../utils';
 import { Loading } from './shared/Loading';
 import { MyPageTabs } from './shared/user/MyPageTabs';
 import { FloatUserInfo } from './shared/user/FloatUserInfo';
-import { Link } from 'react-router-dom';
 import SimpleUser from './shared/user/SimpleUser';
 
 class FollowingsView extends Component {
@@ -51,5 +52,12 @@ class FollowingsView extends Component {
         return followList(bindedUsers);
     }
 }
+
+FollowingsView.propTypes = {
+    match: ResourceTypes.MATCHER,
+    user: ResourceTypes.USER,
+    loading: PropTypes.bool,
+    followings: PropTypes.arrayOf(ResourceTypes.SIMPLE_USER),
+};
 
 export default connect(state => state)(FollowingsView);
