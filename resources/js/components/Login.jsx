@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import * as ResourceTypes from '../resource-types';
 import { withRouter } from 'react-router-dom';
 import { requestLogin } from '../actions';
-import { store } from '../store';
 
 import { Link } from 'react-router-dom';
 
@@ -122,5 +122,9 @@ class Login extends Component {
         );
     }
 }
+
+Login.propTypes = {
+    history: ResourceTypes.ROUTER,
+};
 
 export default withRouter(Login);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { store } from '../store';
+import * as ResourceTypes from '../resource-types';
 import { Link, withRouter } from 'react-router-dom';
 import { getAuthUser } from '../utils';
 
@@ -113,5 +113,9 @@ class Home extends Component {
         );
     }
 }
+
+Home.propTypes = {
+    history: ResourceTypes.ROUTER,
+};
 
 export default withRouter(Home);
