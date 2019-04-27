@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import * as ResourceTypes from '../../resource-types';
 import { store } from '../../store';
-import { Loading } from '../shared/Loading';
 import {
     requestLike,
     requestUnLike,
@@ -45,7 +46,7 @@ export class UserDetailBok extends Component {
         return line;
     }
 
-    clickLike(bokId, e) {
+    clickLike(bokId) {
         if (!getAuthUser()) {
             store.dispatch(
                 setAlertMessage('warning', {
@@ -70,7 +71,7 @@ export class UserDetailBok extends Component {
         }
     }
 
-    clickLove(bokId, e) {
+    clickLove(bokId) {
         if (!getAuthUser()) {
             store.dispatch(
                 setAlertMessage('warning', {
@@ -166,13 +167,13 @@ export class UserDetailBok extends Component {
                                 <div className="userd-updated">{bok.updated_at}</div>
                             </div>
                             <div className="d-flex ml-auto mt-auto">
-                                <div onClick={e => this.clickLike(bok.id)}>
+                                <div onClick={() => this.clickLike(bok.id)}>
                                     <p className="liked mr-2 mt-auto mb-auto">
                                         <i className={likeClass} />
                                         {this.state.likeCount}
                                     </p>
                                 </div>
-                                <div onClick={e => this.clickLove(bok.id)}>
+                                <div onClick={() => this.clickLove(bok.id)}>
                                     <p className="loved mt-auto mb-auto">
                                         <i className={loveClass} />
                                         {this.state.loveCount}
@@ -186,5 +187,10 @@ export class UserDetailBok extends Component {
         );
     }
 }
+
+UserDetailBok.propTypes = {
+    bok: ResourceTypes.BOK,
+    handleDeleteBok: PropTypes.func.isRequired,
+};
 
 export default UserDetailBok;

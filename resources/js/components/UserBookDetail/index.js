@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
+import * as ResourceTypes from '../../resource-types';
+import { withRouter } from 'react-router-dom';
 import {
     fetchUserBookDetail,
     fetchUser,
@@ -197,6 +199,14 @@ class UserBookDetail extends Component {
         );
     }
 }
+
+UserBookDetail.propTypes = {
+    history: ResourceTypes.ROUTER,
+    match: ResourceTypes.MATCHER,
+    loading: PropTypes.bool,
+    userBookDetail: ResourceTypes.USER_BOOK,
+    user: ResourceTypes.USER,
+};
 
 import { connect } from 'react-redux';
 import { fetchOnIdUpdateDecorator } from '../../decorators/FetchOnIdUpdateDecorator';

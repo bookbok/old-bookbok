@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import { PropTypes } from 'prop-types';
+import * as ResourceTypes from '../../resource-types';
 import { withRouter } from 'react-router-dom';
 import { setBokToUserBook, registerBok } from '../../actions';
 import { getAuthUser, isEmpty } from '../../utils';
@@ -197,5 +198,11 @@ class BokModal extends Component {
         );
     }
 }
+
+BokModal.propTypes = {
+    history: ResourceTypes.ROUTER,
+    match: ResourceTypes.MATCHER,
+    isModalView: PropTypes.bool.isRequired,
+};
 
 export default withRouter(BokModal);

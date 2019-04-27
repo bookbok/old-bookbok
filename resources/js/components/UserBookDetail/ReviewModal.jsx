@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import { PropTypes } from 'prop-types';
+import * as ResourceTypes from '../../resource-types';
 import { withRouter } from 'react-router-dom';
 import { setReview, reviewRegister } from '../../actions';
 import { getAuthUser, isEmpty } from '../../utils';
@@ -116,7 +117,7 @@ class ReviewModal extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <div className="form-group" className="mt-5">
+                                    <div className="form-group mt-5">
                                         <label htmlFor="impressions-text" className="control-label">
                                             ここにレビューを記入してください&nbsp;
                                             <span className="badge badge-danger">必須</span>
@@ -153,5 +154,12 @@ class ReviewModal extends Component {
         );
     }
 }
+
+ReviewModal.propTypes = {
+    history: ResourceTypes.ROUTER,
+    match: ResourceTypes.MATCHER,
+    isModalView: PropTypes.bool.isRequired,
+    review: ResourceTypes.REVIEW,
+};
 
 export default withRouter(ReviewModal);
