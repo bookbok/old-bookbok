@@ -83,6 +83,14 @@ export const REVIEW = PropTypes.shape({
     user_id: idType.isRequired,
 });
 
+export const USER_BOOK = PropTypes.shape({
+    id: idType.isRequired,
+    user_id: idType.isRequired,
+    book_id: idType.isRequired,
+    reading_status: PropTypes.oneOf(['0', '5', '10', '15', '20', 0, 5, 10, 15, 20]).isRequired,
+    is_spoiler: PropTypes.bool.isRequired,
+});
+
 export const ROUTER = PropTypes.shape({
     push: PropTypes.func.isRequired,
     replace: PropTypes.func.isRequired,
