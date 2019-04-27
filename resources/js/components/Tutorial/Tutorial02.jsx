@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import ImageCard from './ImageCard';
 
@@ -52,5 +53,9 @@ class Tutorial02 extends React.Component {
         );
     }
 }
+
+Tutorial02.propTypes = {
+    title: PropTypes.string.isRequired,
+};
 
 export default Tutorial02;

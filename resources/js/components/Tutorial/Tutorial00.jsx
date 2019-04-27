@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class Tutorial00 extends React.Component {
@@ -23,5 +24,9 @@ class Tutorial00 extends React.Component {
         );
     }
 }
+
+Tutorial00.propTypes = {
+    title: PropTypes.string.isRequired,
+};
 
 export default Tutorial00;

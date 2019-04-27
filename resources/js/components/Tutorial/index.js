@@ -1,4 +1,5 @@
 import React from 'react';
+import * as ResourceTypes from '../../resource-types';
 import { Link } from 'react-router-dom';
 
 import Tutorial00 from './Tutorial00';
@@ -59,5 +60,9 @@ class Tutorial extends React.Component {
         );
     }
 }
+
+Tutorial.propTypes = {
+    match: ResourceTypes.MATCHER,
+};
 
 export default Tutorial;
