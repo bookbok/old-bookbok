@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import * as ResourceTypes from '../../../resource-types';
 import { Link } from 'react-router-dom';
 
 /**
@@ -14,10 +14,12 @@ export class BookInfo extends Component {
         return (
             <div>
                 <div className="d-flex">
-                    <img src={book.cover} className="title-book-cover"/>
+                    <img src={book.cover} className="title-book-cover" />
                     <h1>
-                        <Link to={`/books/${book.id}`}
-                           className="ml-2 d-block text-dark title-book-name">
+                        <Link
+                            to={`/books/${book.id}`}
+                            className="ml-2 d-block text-dark title-book-name"
+                        >
                             {book.name}
                         </Link>
                     </h1>
@@ -32,11 +34,5 @@ export class BookInfo extends Component {
 }
 
 BookInfo.propTypes = {
-    book: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        cover: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        author: PropTypes.string,
-    })
+    book: ResourceTypes.BOOK.isRequired,
 };

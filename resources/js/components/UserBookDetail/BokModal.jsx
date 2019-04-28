@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import ReactDOM from 'react-dom';
-import { withRouter } from "react-router-dom";
-import { setBokToUserBook, registerBok } from "../../actions";
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import * as ResourceTypes from '../../resource-types';
+import { withRouter } from 'react-router-dom';
+import { setBokToUserBook, registerBok } from '../../actions';
 import { getAuthUser, isEmpty } from '../../utils';
-import { store } from "../../store";
+import { store } from '../../store';
 import { ErrorsView } from '../shared/ErrorsView';
 
 class BokModal extends Component {
@@ -17,12 +18,12 @@ class BokModal extends Component {
 
     initialState() {
         return {
-            page_num_begin: "",
-            page_num_end: "",
-            line_num: "",
-            body: "",
+            page_num_begin: '',
+            page_num_end: '',
+            line_num: '',
+            body: '',
             isInvalid: false,
-            invalidMessage: ""
+            invalidMessage: '',
         };
     }
 
@@ -35,44 +36,47 @@ class BokModal extends Component {
         e.preventDefault();
 
         const user = getAuthUser();
-        if(isEmpty(user)){
+        if (isEmpty(user)) {
             return this.props.history.push('/login');
         }
 
         const userBookId = this.props.match.params.userBookId;
         const bok = this.makeBok();
-        registerBok(userBookId, bok).then(res => {
-            if(res.status === 401) {
-                this.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
-                throw new Error();
-            }else if(!res.ok){
-                res.json().then(json => {
-                    this.setState({ isInvalid: true, invalidMessage: json.userMessage });
-                });
-                throw new Error();
-            }
-            return res.json();
-        }).then(json => {
-            $('#BokModalCenter').modal('hide'); // レビュー投稿時、モーダルを閉じる
-            store.dispatch(setBokToUserBook(json));
-            this.setState(this.initialState());
-        }).catch(()=>{});
+        registerBok(userBookId, bok)
+            .then(res => {
+                if (res.status === 401) {
+                    this.setState({ isInvalid: true, invalidMessage: 'ログインが必要です' });
+                    throw new Error();
+                } else if (!res.ok) {
+                    res.json().then(json => {
+                        this.setState({ isInvalid: true, invalidMessage: json.userMessage });
+                    });
+                    throw new Error();
+                }
+                return res.json();
+            })
+            .then(json => {
+                $('#BokModalCenter').modal('hide'); // レビュー投稿時、モーダルを閉じる
+                store.dispatch(setBokToUserBook(json));
+                this.setState(this.initialState());
+            })
+            .catch(() => {});
     }
 
     // 入力必須ではない項目のデータ制御
     makeBok() {
         let bok = {
-            'body': this.state.body
+            body: this.state.body,
         };
 
-        if(this.state.page_num_begin !== "") {
-            bok = { ...bok, 'page_num_begin': this.state.page_num_begin };
+        if (this.state.page_num_begin !== '') {
+            bok = { ...bok, page_num_begin: this.state.page_num_begin };
         }
-        if(this.state.page_num_end !== "") {
-            bok = { ...bok, 'page_num_end': this.state.page_num_end };
+        if (this.state.page_num_end !== '') {
+            bok = { ...bok, page_num_end: this.state.page_num_end };
         }
-        if(this.state.line_num !== "") {
-            bok = { ...bok, 'line_num': this.state.line_num };
+        if (this.state.line_num !== '') {
+            bok = { ...bok, line_num: this.state.line_num };
         }
         return bok;
     }
@@ -82,83 +86,123 @@ class BokModal extends Component {
     }
 
     render() {
-        if(this.props.isModalView === false){
+        if (this.props.isModalView === false) {
             return null;
         }
         return (
             <div>
-                <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#BokModalCenter">
+                <button
+                    type="button"
+                    className="btn btn-primary"
+                    data-toggle="modal"
+                    data-target="#BokModalCenter"
+                >
                     Bok
                 </button>
 
-                <div className="modal fade" id="BokModalCenter" tabIndex="-1" role="dialog" aria-labelledby="BokModalCenterTitle" aria-hidden="true">
+                <div
+                    className="modal fade"
+                    id="BokModalCenter"
+                    tabIndex="-1"
+                    role="dialog"
+                    aria-labelledby="BokModalCenterTitle"
+                    aria-hidden="true"
+                >
                     <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalCenterTitle">Bokを追加します</h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="閉じる">
+                                <h5 className="modal-title" id="exampleModalCenterTitle">
+                                    Bokを追加します
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="close"
+                                    data-dismiss="modal"
+                                    aria-label="閉じる"
+                                >
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
 
                             <form onSubmit={this.handleRegisterBok}>
                                 <div className="modal-body">
-                                    <ErrorsView errors={this.state.invalidMessage}/>
+                                    <ErrorsView errors={this.state.invalidMessage} />
 
                                     <div className="form-row">
                                         <div className="col">
-                                            <input name="page_num_begin"
+                                            <input
+                                                name="page_num_begin"
                                                 type="number"
                                                 className="form-control"
                                                 placeholder="開始ページ"
                                                 value={this.state.page_num_begin}
-                                                onChange={this.handleChangeBok} />
+                                                onChange={this.handleChangeBok}
+                                            />
                                         </div>
                                         <div className="col">
-                                            <input name="page_num_end"
+                                            <input
+                                                name="page_num_end"
                                                 type="number"
                                                 className="form-control"
                                                 placeholder="終了ページ"
                                                 value={this.state.page_num_end}
-                                                onChange={this.handleChangeBok} />
+                                                onChange={this.handleChangeBok}
+                                            />
                                         </div>
                                         <div className="col">
-                                            <input name="line_num"
+                                            <input
+                                                name="line_num"
                                                 type="number"
                                                 className="form-control"
                                                 placeholder="該当行番号"
                                                 value={this.state.line_num}
-                                                onChange={this.handleChangeBok} />
+                                                onChange={this.handleChangeBok}
+                                            />
                                         </div>
                                     </div>
 
                                     <br />
                                     <div className="form-group">
-                                        <label htmlFor="impressions-text" className="control-label">感想&nbsp;
-                                                <span className="badge badge-danger">必須</span>
+                                        <label htmlFor="impressions-text" className="control-label">
+                                            感想&nbsp;
+                                            <span className="badge badge-danger">必須</span>
                                         </label>
-                                        <textarea id="impressions-text"
+                                        <textarea
+                                            id="impressions-text"
                                             name="body"
                                             className="form-control"
                                             value={this.state.body}
                                             onChange={this.handleChangeBok}
-                                            required />
+                                            required
+                                        />
                                     </div>
                                 </div>
 
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                                    <button type="submit" className="btn btn-primary">BOKを投稿</button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-secondary"
+                                        data-dismiss="modal"
+                                    >
+                                        閉じる
+                                    </button>
+                                    <button type="submit" className="btn btn-primary">
+                                        BOKを投稿
+                                    </button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
         );
     }
-
 }
+
+BokModal.propTypes = {
+    history: ResourceTypes.ROUTER,
+    match: ResourceTypes.MATCHER,
+    isModalView: PropTypes.bool.isRequired,
+};
 
 export default withRouter(BokModal);

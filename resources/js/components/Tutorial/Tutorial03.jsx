@@ -1,7 +1,7 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import ImageCard from './ImageCard';
-
 
 class Tutorial03 extends React.Component {
     render() {
@@ -13,7 +13,7 @@ class Tutorial03 extends React.Component {
                     本を読み終わった後、全体のレビューを書いてみましょう。
                     レビューには出来るだけネタバレを書かない様にしましょう。
                 </p>
-                <hr/>
+                <hr />
 
                 <p>
                     レビューを書くにはまず自分の本棚に移動する必要があります。
@@ -40,12 +40,17 @@ class Tutorial03 extends React.Component {
                 </p>
 
                 <div className="text-center">
-                    <Link to="/tutorial/4" className="btn btn-success">次へ進む</Link>
+                    <Link to="/tutorial/4" className="btn btn-success">
+                        次へ進む
+                    </Link>
                 </div>
             </div>
         );
     }
 }
 
-export default Tutorial03;
+Tutorial03.propTypes = {
+    title: PropTypes.string.isRequired,
+};
 
+export default Tutorial03;

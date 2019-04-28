@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import { store } from "../store";
-import { fetchUser, loading, loaded } from "../actions";
-import * as utils from "../utils";
+import PropTypes from 'prop-types';
+import * as ResourceTypes from '../resource-types';
+import { store } from '../store';
+import { fetchUser, loading, loaded } from '../actions';
+import * as utils from '../utils';
 
-import { Loading } from "./shared/Loading";
-import { MyPageTabs } from "./shared/user/MyPageTabs";
-import { FloatUserInfo } from "./shared/user/FloatUserInfo";
+import { Loading } from './shared/Loading';
+import { MyPageTabs } from './shared/user/MyPageTabs';
+import { FloatUserInfo } from './shared/user/FloatUserInfo';
 
-const fetchUserDetailActions = (userId) => {
+const fetchUserDetailActions = userId => {
     store.dispatch(loading());
-    Promise.all([
-        fetchUser(userId),
-    ]).then(() => {
+    Promise.all([fetchUser(userId)]).then(() => {
         store.dispatch(loaded());
     });
-}
+};
 
 //マイページ画面を表すコンポーネントを定義
 class UserDetail extends Component {
@@ -22,9 +22,9 @@ class UserDetail extends Component {
         super(props);
 
         this.state = {
-            name: "",
-            avatar: "",
-            description: "",
+            name: '',
+            avatar: '',
+            description: '',
         };
     }
 
@@ -34,11 +34,9 @@ class UserDetail extends Component {
 
     render() {
         const user = this.props.user;
-        if(this.props.loading || !user){
+        if (this.props.loading || !user) {
             return <Loading />;
         }
-
-        const currentUser = utils.getAuthUser();
 
         return (
             <div className="page-content-wrap row">
@@ -50,11 +48,15 @@ class UserDetail extends Component {
                             <MyPageTabs isTop userId={this.props.match.params.id} />
                             <div className="mt-4 user-detail-wrapper">
                                 <div className="d-flex">
-                                    <img src={currentUser.avatar} className="user-info-avatar d-block" />
-                                    <h3 className="m-0 ml-2 d-flex align-items-center">{currentUser.name}</h3>
+                                    <img src={user.avatar} className="user-info-avatar d-block" />
+                                    <h3 className="m-0 ml-2 d-flex align-items-center">
+                                        {user.name}
+                                    </h3>
                                 </div>
-                                <p className="text-muted">{utils.makeDateJP(user.created_at)}に登録された読書家です</p>
-                                <p className="mt-3">{currentUser.description}</p>
+                                <p className="text-muted">
+                                    {utils.makeDateJP(user.created_at)}に登録された読書家です
+                                </p>
+                                <p className="mt-3">{user.description}</p>
                             </div>
                         </div>
                     </div>
@@ -64,15 +66,18 @@ class UserDetail extends Component {
     }
 }
 
+UserDetail.propTypes = {
+    match: ResourceTypes.MATCHER,
+    user: ResourceTypes.USER,
+    loading: PropTypes.bool,
+};
 
 // URL内のid変更を検知して、再度ユーザー情報をfetchするためのデコレーター
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { fetchOnIdUpdateDecorator } from '../decorators/FetchOnIdUpdateDecorator';
 
 export default connect(state => state)(
-    fetchOnIdUpdateDecorator(({id}) => {
+    fetchOnIdUpdateDecorator(({ id }) => {
         fetchUserDetailActions(id);
-    })(
-        UserDetail
-    )
+    })(UserDetail)
 );

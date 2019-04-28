@@ -1,13 +1,10 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // storeにAlertMessageがあるか確認し、alertType,alertMessageをセットする
 class Alert extends React.Component {
     componentDidMount() {
-        this.timer = setTimeout(
-            this.props.onClose,
-            this.props.timeout
-        );
+        this.timer = setTimeout(this.props.onClose, this.props.timeout);
     }
 
     componentWillUnmount() {
@@ -15,35 +12,48 @@ class Alert extends React.Component {
     }
 
     getAlertClass(type) {
-        switch(type){
-            case "primary"  : return "alert-primary";   // skyblue
-            case "secondary": return "alert-secondary"; // gray
-            case "success"  : return "alert-success";   // green
-            case "info"     : return "alert-info";      // blue-green
-            case "warning"  : return "alert-warning";   // yellow
-            case "danger"   : return "alert-danger";    // red
-            case "light"    : return "alert-light";     // white
-            case "dark"     : return "alert-dark";      // dark-gray
-            default         : return "";
+        switch (type) {
+            case 'primary':
+                return 'alert-primary'; // skyblue
+            case 'secondary':
+                return 'alert-secondary'; // gray
+            case 'success':
+                return 'alert-success'; // green
+            case 'info':
+                return 'alert-info'; // blue-green
+            case 'warning':
+                return 'alert-warning'; // yellow
+            case 'danger':
+                return 'alert-danger'; // red
+            case 'light':
+                return 'alert-light'; // white
+            case 'dark':
+                return 'alert-dark'; // dark-gray
+            default:
+                return '';
         }
     }
 
-    render(){
+    render() {
         const message = this.props.message;
-        const alertClass = `alert ${this.getAlertClass(message.alertType)} alert-dismissible fade show flash-toast`;
+        const alertClass = `alert ${this.getAlertClass(
+            message.alertType
+        )} alert-dismissible fade show flash-toast`;
 
         return (
             <div className={alertClass} role="alert">
                 <div dangerouslySetInnerHTML={message.text} />
-                <button type="button"
+                <button
+                    type="button"
                     className="close"
                     data-dismiss="alert"
                     aria-label="閉じる"
-                    onClick={this.props.onClose}>
+                    onClick={this.props.onClose}
+                >
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-         );
+        );
     }
 }
 

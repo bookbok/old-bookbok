@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
-import App from "./components/App";
-import { store } from "./store";
-import { storageAvailable } from "./utils";
-import { setAuthToken, getLoggedinUser, preparedLogin } from "./actions";
+import App from './components/App';
+import { store } from './store';
+import { storageAvailable } from './utils';
+import { setAuthToken, getLoggedinUser, preparedLogin } from './actions';
 
 const view = (
     <Provider store={store}>

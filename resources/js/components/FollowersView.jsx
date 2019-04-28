@@ -1,23 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { store } from "../store";
-import { fetchUser, fetchFollowers, loading, loaded } from "../actions";
-import { isEmpty } from "../utils";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import * as ResourceTypes from '../resource-types';
+import { connect } from 'react-redux';
+import { store } from '../store';
+import { fetchUser, fetchFollowers, loading, loaded } from '../actions';
+import { isEmpty } from '../utils';
 
-import { Loading } from "./shared/Loading";
-import { MyPageTabs } from "./shared/user/MyPageTabs";
-import { FloatUserInfo } from "./shared/user/FloatUserInfo";
-import { Link } from 'react-router-dom';
+import { Loading } from './shared/Loading';
+import { MyPageTabs } from './shared/user/MyPageTabs';
+import { FloatUserInfo } from './shared/user/FloatUserInfo';
 import SimpleUser from './shared/user/SimpleUser';
 
 class FollowersView extends Component {
-    componentDidMount(){
+    componentDidMount() {
         const userId = this.props.match.params.id;
         store.dispatch(loading());
-        Promise.all([
-            fetchFollowers(userId),
-            fetchUser(userId),
-        ]).then(() => {
+        Promise.all([fetchFollowers(userId), fetchUser(userId)]).then(() => {
             store.dispatch(loaded());
         });
     }
@@ -25,7 +23,7 @@ class FollowersView extends Component {
     render() {
         const followers = this.props.followers;
         const user = this.props.user;
-        const followerList = (view) => (
+        const followerList = view => (
             <div className="page-content-wrap row">
                 <FloatUserInfo user={user} />
 
@@ -43,24 +41,23 @@ class FollowersView extends Component {
             </div>
         );
 
-        if(isEmpty(user)){
+        if (isEmpty(user)) {
             return <Loading />;
-        } else if(this.props.loading || user && !followers){
-            return (
-                followerList(<Loading />)
-            );
+        } else if (this.props.loading || (user && !followers)) {
+            return followerList(<Loading />);
         }
 
-        const bindedUsers = followers.map((user, i) => (
-            <SimpleUser user={user} key={i} />
-        ));
+        const bindedUsers = followers.map((user, i) => <SimpleUser user={user} key={i} />);
 
-        return (
-            followerList(bindedUsers)
-        );
+        return followerList(bindedUsers);
     }
 }
 
-export default connect(
-    state => state,
-)(FollowersView);
+FollowersView.propTypes = {
+    match: ResourceTypes.MATCHER,
+    user: ResourceTypes.USER,
+    loading: PropTypes.bool,
+    followers: PropTypes.arrayOf(ResourceTypes.SIMPLE_USER),
+};
+
+export default connect(state => state)(FollowersView);

@@ -1,7 +1,7 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import ImageCard from './ImageCard';
-
 
 class Tutorial02 extends React.Component {
     render() {
@@ -14,7 +14,7 @@ class Tutorial02 extends React.Component {
                     また、通常のSNSなどとは異なり、特定の本についての呟きを残すことができます。
                     これをBookBokではBok(ボック)と呼びます。このボックはひとつのページで管理されているので自分自身の感じたことや考えたことの足跡を一目で振り返ることができます。
                 </p>
-                <hr/>
+                <hr />
 
                 <p>
                     Bokを書くにはまず自分の本棚に移動する必要があります。
@@ -36,18 +36,26 @@ class Tutorial02 extends React.Component {
                 <p>
                     Bokの入力フォームが表示されます。
                     開始ページ、終了ページ、該当行番号、内容を入力できる様になっています。
-                    内容以外は全て任意入力なので、自分にあった粒度でBokを入力してください。<br/>
-                    <small className="text-muted">※Bokは開始ページの昇順に並べた後、作成日の昇順で並べられます。</small>
+                    内容以外は全て任意入力なので、自分にあった粒度でBokを入力してください。
+                    <br />
+                    <small className="text-muted">
+                        ※Bokは開始ページの昇順に並べた後、作成日の昇順で並べられます。
+                    </small>
                     <ImageCard src="/images/tutorials/02-04.png" />
                 </p>
 
                 <div className="text-center">
-                    <Link to="/tutorial/3" className="btn btn-success">次へ進む</Link>
+                    <Link to="/tutorial/3" className="btn btn-success">
+                        次へ進む
+                    </Link>
                 </div>
             </div>
         );
     }
 }
 
-export default Tutorial02;
+Tutorial02.propTypes = {
+    title: PropTypes.string.isRequired,
+};
 
+export default Tutorial02;

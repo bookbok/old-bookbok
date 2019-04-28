@@ -9,7 +9,6 @@ import FlashMessages from '../FlashMessages';
 import Footer from './Footer';
 import { Loading } from '../shared/Loading';
 
-
 class App extends Component {
     render() {
         return this.props.isPrepared ? (
@@ -21,15 +20,14 @@ class App extends Component {
                     <Footer />
                 </div>
             </BrowserRouter>
-        ) :
-        <Loading />;
+        ) : (
+            <Loading />
+        );
     }
 }
 
 App.propTypes = {
     isPrepared: PropTypes.bool.isRequired,
-}
+};
 
-export default connect(
-    state => ({ isPrepared: state.isPrepared })
-)(App);
+export default connect(state => ({ isPrepared: state.isPrepared }))(App);
