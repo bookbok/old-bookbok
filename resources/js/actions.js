@@ -24,7 +24,7 @@ export const loaded = () => ({ type: types.LOADED });
  */
 export const setBokFlow = bokFlow => ({ type: types.SET_BOK_FLOW, bokFlow });
 export const fetchBokFlow = () => dispatch => {
-    utils.wrapFetch('/api/bok_flow').then(json => {
+    api.fetchBokFlow().then(json => {
         if (utils.isEmpty(json)) {
             dispatch(setBokFlow('最近のBokがありません'));
         } else {
@@ -40,33 +40,27 @@ export const fetchBokFlow = () => dispatch => {
 // Get authentication token
 export const setAuthToken = token => ({ type: types.SET_AUTH_TOKEN, token });
 export const requestLogin = (loginUser, history) => {
-    return utils
-        .wrapFetch('/api/auth/login', {
-            method: 'POST',
-            body: loginUser,
-        })
-        .then(json => {
-            store.dispatch(setAuthToken(json.token));
-            store.dispatch(getLoggedinUser());
+    return api.requestLogin(loginUser).then(json => {
+        store.dispatch(setAuthToken(json.token));
+        store.dispatch(getLoggedinUser());
 
-            // HACK: 本棚に遷移するためのユーザーIDを取得する方法がこれしかなかった
-            const unsubscribe = store.subscribe(() => {
-                if (!store.getState().loggedinUser) return;
-                history.push(`/users/${utils.getAuthUser().id}/user_books`); // ログイン後のデフォルト遷移先
-                unsubscribe();
-            });
-
-            if (loginUser.remember && utils.storageAvailable('localStorage')) {
-                localStorage.setItem('token', json.token);
-            }
+        // HACK: 本棚に遷移するためのユーザーIDを取得する方法がこれしかなかった
+        const unsubscribe = store.subscribe(() => {
+            if (!store.getState().loggedinUser) return;
+            history.push(`/users/${utils.getAuthUser().id}/user_books`); // ログイン後のデフォルト遷移先
+            unsubscribe();
         });
+
+        if (loginUser.remember && utils.storageAvailable('localStorage')) {
+            localStorage.setItem('token', json.token);
+        }
+    });
 };
 
 export const preparedLogin = () => ({ type: types.SET_PREPARED_FLAG });
 export const setLoggedinUser = loggedinUser => ({ type: types.SET_LOGGEDIN_USER, loggedinUser });
 export const getLoggedinUser = () => dispatch => {
-    utils
-        .wrapFetch('/api/auth/user')
+    api.fetchCurrentUser()
         .then(json => {
             dispatch(setLoggedinUser(json));
             dispatch(preparedLogin());
@@ -78,49 +72,31 @@ export const getLoggedinUser = () => dispatch => {
 };
 
 export const requestUpdateUser = user => {
-    return utils.smartFetch('/api/auth/user', {
-        method: 'PUT',
-        body: user,
-    });
+    return api.putUpdateUser(user);
 };
 
 export const removeLoggedinInfo = () => ({ type: types.REMOVE_LOGGEDIN_INFO });
 export const requestLogout = history => dispatch => {
-    utils
-        .wrapFetch('/api/auth/logout', {
-            isParse: false,
-        })
-        .then(() => {
-            dispatch(removeLoggedinInfo());
+    api.requestLogout().then(() => {
+        dispatch(removeLoggedinInfo());
 
-            if (utils.storageAvailable('localStorage') && localStorage.getItem('token')) {
-                localStorage.removeItem('token');
-            }
-            history.push('/');
-        });
+        if (utils.storageAvailable('localStorage') && localStorage.getItem('token')) {
+            localStorage.removeItem('token');
+        }
+        history.push('/');
+    });
 };
 
 export const directUserRegister = userInfo => {
-    return utils.smartFetch('/api/auth/register', {
-        method: 'POST',
-        body: userInfo,
-    });
+    return api.postUser(userInfo);
 };
 
 export const verifyEmail = url => {
-    return utils.smartFetch(url).then(res => {
-        return res.json();
-    });
+    return api.requestVerifyEmail(url);
 };
 
 export const resendVerifyMail = email => {
-    return utils
-        .smartFetch('/api/auth/email/resend', {
-            body: { email },
-        })
-        .then(res => {
-            return res.json();
-        });
+    return api.reRequestVerifyEmail(email);
 };
 
 /**
