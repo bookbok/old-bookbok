@@ -105,7 +105,7 @@ export const resendVerifyMail = email => {
 
 export const setGenres = genres => ({ type: types.SET_GENRES, genres });
 export const fetchGenres = () => dispatch => {
-    utils.wrapFetch('/api/genres').then(json => {
+    api.fetchGenres().then(json => {
         dispatch(setGenres(json));
     });
 };
