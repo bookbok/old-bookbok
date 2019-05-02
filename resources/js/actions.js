@@ -144,14 +144,14 @@ export const fetchMoreBooks = (query = {}) => {
 
 export const setUsers = users => ({ type: types.SET_USERS, users });
 export const fetchUsers = () => dispatch => {
-    utils.wrapFetch('/api/users/').then(json => {
+    api.fetchUsers().then(json => {
         dispatch(setUsers(json));
     });
 };
 
 export const setUser = user => ({ type: types.SET_USER, user });
 export const fetchUser = userId => {
-    return utils.wrapFetch(`/api/users/${userId}`).then(json => {
+    return api.fetchUser(userId).then(json => {
         store.dispatch(setUser(json));
     });
 };
