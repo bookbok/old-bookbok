@@ -165,7 +165,7 @@ export const setUserBookshelf = userBookshelf => ({
     userBookshelf,
 });
 export const fetchUserBookshelf = userId => {
-    return utils.wrapFetch(`/api/users/${userId}/user_books`).then(json => {
+    return api.fetchUserBooks(userId).then(json => {
         store.dispatch(setUserBookshelf(json));
     });
 };
@@ -175,24 +175,29 @@ export const setUserBookDetail = userBookDetail => ({
     userBookDetail,
 });
 export const fetchUserBookDetail = (userId, userBookId) => {
-    return utils.wrapFetch(`/api/users/${userId}/user_books/${userBookId}`).then(json => {
+    return api.fetchUserBook(userId, userBookId).then(json => {
         store.dispatch(setUserBookDetail(json));
     });
 };
 
 export const storeISBNToUserBookDirect = (userId, isbn) => {
-    return utils.smartFetch(`/api/users/${userId}/user_books`, {
-        method: 'POST',
-        body: { isbn: isbn },
-    });
+    return api.postUserBookFrom(userId, isbn);
 };
 
 export const storeIsbnBulkRegisterDirect = (userId, isbnList) => {
-    return utils.smartFetch('/api/import_books', {
-        body: isbnList,
-        method: 'POST',
+    return api.postUserBooksFrom(userId, isbnList);
+};
+
+/** ネタバレflgや読書状況を更新する */
+export const requestUpdateUserBookStatus = (userId, userBookId, body) => {
+    return api.putUpdatedUserBookStat(userId, userBookId, body).then(json => {
+        store.dispatch(setUserBookDetail(json));
     });
 };
+
+/**
+ * ==== Bok resource ====
+ */
 
 export const setBokToUserBook = bok => ({ type: types.SET_BOK_TO_USER_BOOK, bok });
 export const registerBok = (userBookId, bok) => {
@@ -212,18 +217,6 @@ export const deleteBok = (bokId, boks, currentBok) => {
                 return bok !== currentBok;
             });
             store.dispatch(setBoksToUserBook(filterdBoks));
-        });
-};
-
-/** ネタバレflgや読書状況を更新する */
-export const requestUpdateUserBookStatus = (userId, userBookId, body) => {
-    return utils
-        .wrapFetch(`/api/users/${userId}/user_books/${userBookId}`, {
-            method: 'PUT',
-            body: body,
-        })
-        .then(json => {
-            store.dispatch(setUserBookDetail(json));
         });
 };
 
