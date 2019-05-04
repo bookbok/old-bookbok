@@ -201,23 +201,17 @@ export const requestUpdateUserBookStatus = (userId, userBookId, body) => {
 
 export const setBokToUserBook = bok => ({ type: types.SET_BOK_TO_USER_BOOK, bok });
 export const registerBok = (userBookId, bok) => {
-    return utils.smartFetch(`/api/user_books/${userBookId}/boks`, {
-        method: 'POST',
-        body: bok,
-    });
+    return api.postBok(userBookId, bok);
 };
+
 export const setBoksToUserBook = boks => ({ type: types.SET_BOKS_TO_USER_BOOK, boks });
 export const deleteBok = (bokId, boks, currentBok) => {
-    return utils
-        .wrapFetch(`/api/boks/${bokId}`, {
-            method: 'DELETE',
-        })
-        .then(() => {
-            const filterdBoks = boks.filter(bok => {
-                return bok !== currentBok;
-            });
-            store.dispatch(setBoksToUserBook(filterdBoks));
+    return api.deleteBok(bokId).then(() => {
+        const filterdBoks = boks.filter(bok => {
+            return bok !== currentBok;
         });
+        store.dispatch(setBoksToUserBook(filterdBoks));
+    });
 };
 
 /**
