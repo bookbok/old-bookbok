@@ -4,3 +4,4 @@ export * from './auth';
 export * from './genre';
 export * from './user';
 export * from './user-book';
+export * from './bok';
