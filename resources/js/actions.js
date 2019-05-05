@@ -220,10 +220,7 @@ export const deleteBok = (bokId, boks, currentBok) => {
 
 export const setReview = review => ({ type: types.SET_REVIEW, review });
 export const reviewRegister = (userBookId, review) => {
-    return utils.smartFetch(`/api/user_books/${userBookId}/review`, {
-        method: 'POST',
-        body: review,
-    });
+    return api.postReview(userBookId, review);
 };
 
 /**
