@@ -229,29 +229,24 @@ export const reviewRegister = (userBookId, review) => {
 
 export const setFollowers = followers => ({ type: types.SET_FOLLOWERS, followers });
 export const fetchFollowers = userId => {
-    return utils.wrapFetch(`/api/users/${userId}/followers`).then(res => {
+    return api.fetchFollowers(userId).then(res => {
         store.dispatch(setFollowers(res));
     });
 };
 
 export const setFollowings = followings => ({ type: types.SET_FOLLOWINGS, followings });
 export const fetchFollowings = userId => {
-    return utils.wrapFetch(`/api/users/${userId}/followings`).then(res => {
+    return api.fetchFollowings(userId).then(res => {
         store.dispatch(setFollowings(res));
     });
 };
 
 export const requestFollow = (userId, targetId) => {
-    return utils.wrapFetch(`/api/users/${userId}/followings`, {
-        method: 'POST',
-        body: { user_id: targetId },
-    });
+    return api.requestFollowTo(userId, targetId);
 };
 
 export const requestUnFollow = (userId, targetId) => {
-    return utils.wrapFetch(`/api/users/${userId}/followings/${targetId}`, {
-        method: 'DELETE',
-    });
+    return api.requestUnFollow(userId, targetId);
 };
 
 /**
