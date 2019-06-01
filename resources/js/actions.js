@@ -255,38 +255,30 @@ export const requestUnFollow = (userId, targetId) => {
 
 export const setLikeBoks = likeBoks => ({ type: types.SET_LIKEBOKLIST, likeBoks });
 export const fetchLikeBoks = userId => {
-    return utils.wrapFetch(`/api/users/${userId}/likes`).then(json => {
+    return api.fetchLikeBoks(userId).then(json => {
         store.dispatch(setLikeBoks(json));
     });
 };
 
 export const requestLike = bokId => {
-    return utils.wrapFetch(`/api/boks/${bokId}/likes`, {
-        method: 'POST',
-    });
+    return api.requestLike(bokId);
 };
 
 export const requestUnLike = bokId => {
-    return utils.wrapFetch(`/api/boks/${bokId}/likes`, {
-        method: 'DELETE',
-    });
+    return api.requestUnLike(bokId);
 };
 
 export const setLoveBoks = loveBoks => ({ type: types.SET_LOVEBOKLIST, loveBoks });
 export const fetchLoveBoks = userId => {
-    return utils.wrapFetch(`/api/users/${userId}/loves`).then(json => {
+    return api.fetchLoveBoks(userId).then(json => {
         store.dispatch(setLoveBoks(json));
     });
 };
 
 export const requestLove = bokId => {
-    return utils.wrapFetch(`/api/boks/${bokId}/loves`, {
-        method: 'POST',
-    });
+    return api.requestLove(bokId);
 };
 
 export const requestUnLove = bokId => {
-    return utils.wrapFetch(`/api/boks/${bokId}/loves`, {
-        method: 'DELETE',
-    });
+    return api.requestUnLove(bokId);
 };
