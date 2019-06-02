@@ -7,6 +7,7 @@ use App\UserBook;
 use App\Bok;
 use App\Reaction;
 use Carbon\Carbon;
+use App\Http\Requests\BokRequest;
 
 class BokController extends Controller
 {
@@ -69,7 +70,7 @@ class BokController extends Controller
      * @return \Illuminate\Http\Response
      *   BokのインスタンスJSON
      */
-    public function store(Request $request, UserBook $userBook)
+    public function store(BokRequest $request, UserBook $userBook)
     {
         $authId = auth()->guard('api')->id();
         if($authId != $userBook->user_id){
@@ -80,21 +81,6 @@ class BokController extends Controller
                 ],
                 403
             );
-        }
-
-        $validator = \Validator::make($request->all(), [
-            'body' => 'required|string|max:2048',
-            'publish' => 'boolean',
-            'page_num_begin' => 'integer',
-            'page_num_end' => 'integer',
-            'line_num' => 'integer',
-        ]);
-
-        if($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'userMessage' => $validator->errors()
-            ], 400);
         }
 
         // 公開処理
@@ -139,7 +125,7 @@ class BokController extends Controller
 
     /**
      * Bokを削除するAPI
-     * 
+     *
      * @Bok $bok
      */
     public function delete(Bok $bok){
