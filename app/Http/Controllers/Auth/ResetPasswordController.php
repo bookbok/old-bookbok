@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Requests\ResetPasswordEmailRequest;
 
 class ResetPasswordController extends Controller
 {
@@ -24,24 +25,13 @@ class ResetPasswordController extends Controller
     /**
      * パスワードリセットメール送信処理
      *
-     * @param   Request    $request
+     * @param   ResetPasswordEmailRequest    $request
      *  リクエスト
      *
      * @return  \Illuminate\Http\Response
      */
-    public function send(Request $request)
+    public function send(ResetPasswordEmailRequest $request)
     {
-        $validator = \Validator::make($request->all(), [
-            'email' => 'required|string|email|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'userMessage' => $validator->errors()
-            ], 400);
-        }
-
         $response = Password::broker()->sendResetLink(
             $request->only('email')
         );
