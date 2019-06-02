@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Lcobucci\JWT\Parser;
+use App\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -14,24 +15,12 @@ class LoginController extends Controller
     /**
      * ログイン処理
      *
-     * @param   Request $request
+     * @param   LoginRequest $request
      *  リクエスト
      *
      * @return  \Illuminate\Http\Response
      */
-    public function login(Request $request) {
-        $validator = \Validator::make($request->all(), [
-            'email'    => 'required|string',
-            'password' => 'required|string',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'userMessage' => $validator->errors()
-            ], 400);
-        }
-
+    public function login(LoginRequest $request) {
         $user = User::where('email', $request->email)->first();
 
         if (
