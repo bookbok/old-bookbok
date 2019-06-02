@@ -141,6 +141,8 @@ return [
     */
 
     'attributes' => [
+        'email' => 'Eメール',
+        'password' => 'パスワード',
         'body' => '本文',
         'page_num_begin' => '開始ページ',
         'page_num_end' => '終了ページ',
