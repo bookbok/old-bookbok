@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
+use App\Http\Requests\ResetPasswordRequest;
 
 class ResetPasswordController extends Controller
 {
@@ -25,7 +26,7 @@ class ResetPasswordController extends Controller
      *
      * @param   Request    $request
      *  リクエスト
-     * 
+     *
      * @return  \Illuminate\Http\Response
      */
     public function send(Request $request)
@@ -53,26 +54,13 @@ class ResetPasswordController extends Controller
     /**
      * パスワードリセット処理
      *
-     * @param   Request    $request
+     * @param   ResetPasswordRequest    $request
      *  リクエスト
-     * 
+     *
      * @return  \Illuminate\Http\Response
      */
-    public function reset(Request $request)
+    public function reset(ResetPasswordRequest $request)
     {
-        $validator = \Validator::make($request->all(), [
-            'token'    => 'required',
-            'email'    => 'required|email|max:255',
-            'password' => 'required|min:6',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'userMessage' => $validator->errors()
-            ], 400);
-        }
-   
         $response = Password::broker()->reset(
             // ここでpassword_confirmationを追加するのはPasswordBrokerでその値を使うから。
             // リクエストに含めないのはパスワードの入力チェックはクライアント側でやってもらいたいから。
@@ -89,7 +77,7 @@ class ResetPasswordController extends Controller
                 'userMessage' => 'パスワードのリセットに失敗しました。',
             ], 400);
         }
-        
+
         return response()->json([
             'userMessage' => 'パスワードの変更に成功しました。',
         ], 200);
@@ -97,12 +85,12 @@ class ResetPasswordController extends Controller
 
     /**
      * パスワードをリセットする
-     * 
+     *
      * @param   \App\User   $user
      *  ユーザー
      * @param   string  $password
      *  パスワード
-     * 
+     *
      * @return void
      */
     public function resetPassword(\App\User $user, string $password)
@@ -114,7 +102,7 @@ class ResetPasswordController extends Controller
 
         // アクセストークンをすべて無効化
         foreach($user->tokens as $token) {
-            $token->revoke();   
+            $token->revoke();
         }
 
         $user->save();
