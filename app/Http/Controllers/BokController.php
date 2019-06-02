@@ -65,7 +65,7 @@ class BokController extends Controller
     /**
      * Bokの作成、または更新をするAPI
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Requests\BokRequest  $request
      * @param  \App\UserBook  $userBookId
      * @return \Illuminate\Http\Response
      *   BokのインスタンスJSON
