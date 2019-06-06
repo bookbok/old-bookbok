@@ -194,31 +194,24 @@ class UserBookController extends Controller
         return response()->json($userBook);
     }
 
+    public function __construct(){
+      $this->middleware('can:update,userBook')->only('update');
+    }
+
     /**
      * ユーザの本棚の読了ステータスやネタバレフラグを変更する
      *
      * @param  \Illuminate\Http\Request  $request
      * 　PUTメソッドで送られてくる。
-     * @param $userId
-     * @param $userBookId
+     * @param $user
+     * @param $userBook
      *
      * @return \Illuminate\Http\Response
      * 　JSON形式で本情報をまとめて返す
      */
-    public function update(Request $request, $userId, $userBookId)
+    public function update(Request $request, User $user, UserBook $userBook)
     {
-        // 認可チェック
         $authId = auth()->guard('api')->id();
-        if($authId != $userId){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外の本棚を編集することはできません。'
-                ],
-                403
-            );
-        }
-
         $userBook = UserBook::find($userBookId);
         if($userBook == null){
             return response()->json(
