@@ -212,16 +212,6 @@ class UserBookController extends Controller
     public function update(Request $request, User $user, UserBook $userBook)
     {
         $authId = auth()->guard('api')->id();
-        $userBook = UserBook::find($userBookId);
-        if($userBook == null){
-            return response()->json(
-                [
-                    'status' => 404,
-                    'userMessage' => 'お探しの本は存在しません'
-                ],
-                404
-            );
-        }
 
         $validator = \Validator::make($request->all(), [
             'reading_status' => 'required|string|max:16',
@@ -271,7 +261,7 @@ class UserBookController extends Controller
 
     /**
      * 削除API
-     * 
+     *
      * @UserBook $userBook
      */
     public function delete(UserBook $userBook){
