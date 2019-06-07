@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\UserBook;
 use App\Bok;
+use App\User;
 use App\Reaction;
 use Carbon\Carbon;
 use App\Http\Requests\BokRequest;
 
 class BokController extends Controller
 {
+    public function __construct(){
+      $this->middleware('can:create,App\Bok,userBook')->only('store');
+    }
+
     /**
      *  BOKSを返すAPI
      *
@@ -66,22 +71,13 @@ class BokController extends Controller
      * Bokの作成、または更新をするAPI
      *
      * @param  \Illuminate\Http\Requests\BokRequest  $request
-     * @param  \App\UserBook  $userBookId
+     * @param  \App\UserBook  $userBook
      * @return \Illuminate\Http\Response
      *   BokのインスタンスJSON
      */
     public function store(BokRequest $request, UserBook $userBook)
     {
         $authId = auth()->guard('api')->id();
-        if($authId != $userBook->user_id){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外の本棚に追加することはできません。'
-                ],
-                403
-            );
-        }
 
         // 公開処理
         $publishedAt = null;
