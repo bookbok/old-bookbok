@@ -197,6 +197,7 @@ class UserBookController extends Controller
 
     public function __construct(){
       $this->middleware('can:update,userBook')->only('update');
+      $this->middleware('can:delete,userBook')->only('delete');
     }
 
     /**
@@ -258,15 +259,6 @@ class UserBookController extends Controller
 
         // 認可チェック
         $authId = auth()->guard('api')->id();
-        if($authId != $userBook->user_id){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外の本を削除することはできません。'
-                ],
-                403
-            );
-        }
 
         $userBook->delete();
 

@@ -58,7 +58,10 @@ class UserBookPolicy
      */
     public function delete(User $user, UserBook $userBook)
     {
-        //
+        if ($user->id == $userBook->user_id) {
+            return true;
+        }
+        throw new AuthorizationException('自分以外の本を削除することはできません。');
     }
 
     /**
