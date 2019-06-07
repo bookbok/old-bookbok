@@ -13,6 +13,11 @@ use App\Http\Requests\UserBookUpdateRequest;
 
 class UserBookController extends Controller
 {
+    public function __construct(){
+      $this->middleware('can:update,userBook')->only('update');
+      $this->middleware('can:delete,userBook')->only('delete');
+    }
+
     /**
      * 特定ユーザの本棚のなかに登録されている本の一覧情報を返す
      *
@@ -193,11 +198,6 @@ class UserBookController extends Controller
             ->find($userBookId);
 
         return response()->json($userBook);
-    }
-
-    public function __construct(){
-      $this->middleware('can:update,userBook')->only('update');
-      $this->middleware('can:delete,userBook')->only('delete');
     }
 
     /**
