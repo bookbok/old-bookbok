@@ -50,10 +50,12 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof AuthorizationException) {
             return response()->json([
+                'status' => 403,
                 'userMessage' => [$exception->getMessage()]
             ], 403);
         } else if ($exception instanceof ModelNotFoundException) {
             return response()->json([
+                'status' => 404,
                 'userMessage' => [$exception->getMessage()]
             ], 404);
         }
