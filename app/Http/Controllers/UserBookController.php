@@ -9,6 +9,7 @@ use App\Genre;
 use App\Components\BookInfoScraper\ScrapeManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserBookUpdateRequest;
 
 class UserBookController extends Controller
 {
@@ -209,21 +210,9 @@ class UserBookController extends Controller
      * @return \Illuminate\Http\Response
      * 　JSON形式で本情報をまとめて返す
      */
-    public function update(Request $request, User $user, UserBook $userBook)
+    public function update(UserBookUpdateRequest $request, User $user, UserBook $userBook)
     {
         $authId = auth()->guard('api')->id();
-
-        $validator = \Validator::make($request->all(), [
-            'reading_status' => 'required|string|max:16',
-            'is_spoiler' => 'required|boolean',
-        ]);
-
-        if($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'userMessage' => $validator->errors()
-            ], 400);
-        }
 
         $userBook->reading_status = UserBook::READING_STATUS[$request->input('reading_status')];
         $userBook->is_spoiler = $request->input('is_spoiler');
