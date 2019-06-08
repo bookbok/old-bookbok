@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use App\Http\Requests\VerifyEmailResendRequest;
 
 class VerificationController extends Controller
 {
@@ -21,12 +22,12 @@ class VerificationController extends Controller
 
     /**
      * メールアドレス検証処理
-     * 
+     *
      * @param   Request    $request
      *  リクエスト
      * @param   User    $user
      *  ルートパラメータから取得したユーザ
-     * 
+     *
      * @return  \Illuminate\Http\Response
      */
     public function verify(Request $request, User $user)
@@ -47,25 +48,14 @@ class VerificationController extends Controller
 
     /**
      * メールアドレス検証メール再送処理
-     * 
+     *
      * @param   Request    $request
      *  リクエスト
-     * 
+     *
      * @return  \Illuminate\Http\Response
      */
-    public function resend(Request $request)
+    public function resend(VerifyEmailResendRequest $request)
     {
-        $validator = \Validator::make($request->all(), [
-            'email' => 'required|string|email|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'userMessage' => $validator->errors(),
-            ], 400);
-        }
-
         $user = User::where('email', $request->query('email'))->first();
 
         if(null !== $user && !$user->hasVerifiedEmail()){
