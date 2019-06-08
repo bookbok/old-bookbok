@@ -10,6 +10,10 @@ use Carbon\Carbon;
 
 class ReviewController extends Controller
 {
+    public function __construct(){
+      $this->middleware('can:create,App\Review,userBook')->only('store');
+    }
+
 
     /**
      * Reviewの作成、または更新をするAPI
@@ -22,15 +26,6 @@ class ReviewController extends Controller
     public function store(Request $request, UserBook $userBook)
     {
         $authId = auth()->guard('api')->id();
-        if($authId != $userBook->user_id){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外の本棚に追加することはできません。'
-                ],
-                403
-            );
-        }
 
         $validator = \Validator::make($request->all(), [
             'title'   => 'required|string|max:100',
