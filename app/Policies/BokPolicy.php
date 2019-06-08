@@ -28,6 +28,7 @@ class BokPolicy
      * Determine whether the user can create boks.
      *
      * @param  \App\User  $user
+     * @param  \App\UserBook  $userBook
      * @return mixed
      */
     public function create(User $user, UserBook $userBook)
