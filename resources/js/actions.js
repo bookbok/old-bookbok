@@ -23,14 +23,14 @@ export const loaded = () => ({ type: types.LOADED });
  * ==== Top page (time line) ====
  */
 export const setBokFlow = bokFlow => ({ type: types.SET_BOK_FLOW, bokFlow });
-export const fetchBokFlow = () => dispatch => {
-    api.fetchBokFlow().then(json => {
-        if (utils.isEmpty(json)) {
-            dispatch(setBokFlow('最近のBokがありません'));
-        } else {
-            dispatch(setBokFlow(json));
-        }
-    });
+export const fetchBokFlow = () => async dispatch => {
+    const json = await api.fetchBokFlow();
+
+    if (utils.isEmpty(json)) {
+        dispatch(setBokFlow('最近のBokがありません'));
+    } else {
+        dispatch(setBokFlow(json));
+    }
 };
 
 /**
@@ -105,7 +105,7 @@ export const resendVerifyMail = email => {
 
 export const setGenres = genres => ({ type: types.SET_GENRES, genres });
 export const fetchGenres = () => dispatch => {
-    utils.wrapFetch('/api/genres').then(json => {
+    api.fetchGenres().then(json => {
         dispatch(setGenres(json));
     });
 };
@@ -144,14 +144,14 @@ export const fetchMoreBooks = (query = {}) => {
 
 export const setUsers = users => ({ type: types.SET_USERS, users });
 export const fetchUsers = () => dispatch => {
-    utils.wrapFetch('/api/users/').then(json => {
+    api.fetchUsers().then(json => {
         dispatch(setUsers(json));
     });
 };
 
 export const setUser = user => ({ type: types.SET_USER, user });
 export const fetchUser = userId => {
-    return utils.wrapFetch(`/api/users/${userId}`).then(json => {
+    return api.fetchUser(userId).then(json => {
         store.dispatch(setUser(json));
     });
 };
@@ -165,7 +165,7 @@ export const setUserBookshelf = userBookshelf => ({
     userBookshelf,
 });
 export const fetchUserBookshelf = userId => {
-    return utils.wrapFetch(`/api/users/${userId}/user_books`).then(json => {
+    return api.fetchUserBooks(userId).then(json => {
         store.dispatch(setUserBookshelf(json));
     });
 };
@@ -175,56 +175,43 @@ export const setUserBookDetail = userBookDetail => ({
     userBookDetail,
 });
 export const fetchUserBookDetail = (userId, userBookId) => {
-    return utils.wrapFetch(`/api/users/${userId}/user_books/${userBookId}`).then(json => {
+    return api.fetchUserBook(userId, userBookId).then(json => {
         store.dispatch(setUserBookDetail(json));
     });
 };
 
 export const storeISBNToUserBookDirect = (userId, isbn) => {
-    return utils.smartFetch(`/api/users/${userId}/user_books`, {
-        method: 'POST',
-        body: { isbn: isbn },
-    });
+    return api.postUserBookFrom(userId, isbn);
 };
 
 export const storeIsbnBulkRegisterDirect = (userId, isbnList) => {
-    return utils.smartFetch('/api/import_books', {
-        body: isbnList,
-        method: 'POST',
-    });
-};
-
-export const setBokToUserBook = bok => ({ type: types.SET_BOK_TO_USER_BOOK, bok });
-export const registerBok = (userBookId, bok) => {
-    return utils.smartFetch(`/api/user_books/${userBookId}/boks`, {
-        method: 'POST',
-        body: bok,
-    });
-};
-export const setBoksToUserBook = boks => ({ type: types.SET_BOKS_TO_USER_BOOK, boks });
-export const deleteBok = (bokId, boks, currentBok) => {
-    return utils
-        .wrapFetch(`/api/boks/${bokId}`, {
-            method: 'DELETE',
-        })
-        .then(() => {
-            const filterdBoks = boks.filter(bok => {
-                return bok !== currentBok;
-            });
-            store.dispatch(setBoksToUserBook(filterdBoks));
-        });
+    return api.postUserBooksFrom(userId, isbnList);
 };
 
 /** ネタバレflgや読書状況を更新する */
 export const requestUpdateUserBookStatus = (userId, userBookId, body) => {
-    return utils
-        .wrapFetch(`/api/users/${userId}/user_books/${userBookId}`, {
-            method: 'PUT',
-            body: body,
-        })
-        .then(json => {
-            store.dispatch(setUserBookDetail(json));
+    return api.putUpdatedUserBookStat(userId, userBookId, body).then(json => {
+        store.dispatch(setUserBookDetail(json));
+    });
+};
+
+/**
+ * ==== Bok resource ====
+ */
+
+export const setBokToUserBook = bok => ({ type: types.SET_BOK_TO_USER_BOOK, bok });
+export const registerBok = (userBookId, bok) => {
+    return api.postBok(userBookId, bok);
+};
+
+export const setBoksToUserBook = boks => ({ type: types.SET_BOKS_TO_USER_BOOK, boks });
+export const deleteBok = (bokId, boks, currentBok) => {
+    return api.deleteBok(bokId).then(() => {
+        const filterdBoks = boks.filter(bok => {
+            return bok !== currentBok;
         });
+        store.dispatch(setBoksToUserBook(filterdBoks));
+    });
 };
 
 /**
@@ -233,10 +220,7 @@ export const requestUpdateUserBookStatus = (userId, userBookId, body) => {
 
 export const setReview = review => ({ type: types.SET_REVIEW, review });
 export const reviewRegister = (userBookId, review) => {
-    return utils.smartFetch(`/api/user_books/${userBookId}/review`, {
-        method: 'POST',
-        body: review,
-    });
+    return api.postReview(userBookId, review);
 };
 
 /**
@@ -245,29 +229,24 @@ export const reviewRegister = (userBookId, review) => {
 
 export const setFollowers = followers => ({ type: types.SET_FOLLOWERS, followers });
 export const fetchFollowers = userId => {
-    return utils.wrapFetch(`/api/users/${userId}/followers`).then(res => {
+    return api.fetchFollowers(userId).then(res => {
         store.dispatch(setFollowers(res));
     });
 };
 
 export const setFollowings = followings => ({ type: types.SET_FOLLOWINGS, followings });
 export const fetchFollowings = userId => {
-    return utils.wrapFetch(`/api/users/${userId}/followings`).then(res => {
+    return api.fetchFollowings(userId).then(res => {
         store.dispatch(setFollowings(res));
     });
 };
 
 export const requestFollow = (userId, targetId) => {
-    return utils.wrapFetch(`/api/users/${userId}/followings`, {
-        method: 'POST',
-        body: { user_id: targetId },
-    });
+    return api.requestFollowTo(userId, targetId);
 };
 
 export const requestUnFollow = (userId, targetId) => {
-    return utils.wrapFetch(`/api/users/${userId}/followings/${targetId}`, {
-        method: 'DELETE',
-    });
+    return api.requestUnFollow(userId, targetId);
 };
 
 /**
@@ -276,38 +255,30 @@ export const requestUnFollow = (userId, targetId) => {
 
 export const setLikeBoks = likeBoks => ({ type: types.SET_LIKEBOKLIST, likeBoks });
 export const fetchLikeBoks = userId => {
-    return utils.wrapFetch(`/api/users/${userId}/likes`).then(json => {
+    return api.fetchLikeBoks(userId).then(json => {
         store.dispatch(setLikeBoks(json));
     });
 };
 
 export const requestLike = bokId => {
-    return utils.wrapFetch(`/api/boks/${bokId}/likes`, {
-        method: 'POST',
-    });
+    return api.requestLike(bokId);
 };
 
 export const requestUnLike = bokId => {
-    return utils.wrapFetch(`/api/boks/${bokId}/likes`, {
-        method: 'DELETE',
-    });
+    return api.requestUnLike(bokId);
 };
 
 export const setLoveBoks = loveBoks => ({ type: types.SET_LOVEBOKLIST, loveBoks });
 export const fetchLoveBoks = userId => {
-    return utils.wrapFetch(`/api/users/${userId}/loves`).then(json => {
+    return api.fetchLoveBoks(userId).then(json => {
         store.dispatch(setLoveBoks(json));
     });
 };
 
 export const requestLove = bokId => {
-    return utils.wrapFetch(`/api/boks/${bokId}/loves`, {
-        method: 'POST',
-    });
+    return api.requestLove(bokId);
 };
 
 export const requestUnLove = bokId => {
-    return utils.wrapFetch(`/api/boks/${bokId}/loves`, {
-        method: 'DELETE',
-    });
+    return api.requestUnLove(bokId);
 };

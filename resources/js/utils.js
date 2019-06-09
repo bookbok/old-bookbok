@@ -135,6 +135,9 @@ export async function smartFetch(url, { body, method = 'GET' } = {}) {
         method,
         headers: defaultHeader,
         body: method === 'GET' ? null : body, // GET時はクエリで代用するため
+    }).catch(err => {
+        console.error(err);
+        throw err;
     });
 
     return res;
