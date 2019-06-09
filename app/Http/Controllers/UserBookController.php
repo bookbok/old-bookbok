@@ -14,6 +14,7 @@ use App\Http\Requests\UserBookUpdateRequest;
 class UserBookController extends Controller
 {
     public function __construct(){
+      $this->middleware('can:create,App\UserBook,user')->only('store');
       $this->middleware('can:update,userBook')->only('update');
       $this->middleware('can:delete,userBook')->only('delete');
     }
@@ -40,27 +41,16 @@ class UserBookController extends Controller
      * ユーザの本棚に本を追加する。
      *
      * @param  \Illuminate\Http\Request  $request
-     * 　POSTメソッドで送られてくる。
-     * 　ボディにはbook_id（本のISBN）が含まれている。
-     * @param $userId
-     * 　usersリソースを一意に特定するためのユーザID。
+     * 　ボディにはISBNが含まれている。
+     * @param $user
      *
      * @return \Illuminate\Http\Response
      * 　JSON形式で本情報をまとめて返す
      */
-    public function store(Request $request, $userId)
+    public function store(Request $request, User $user)
     {
         // 認可チェック
         $authId = auth()->guard('api')->id();
-        if($authId != $userId){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外の本棚に追加することはできません。'
-                ],
-                403
-            );
-        }
 
         // 入力取得
         $isbn = $request->input('isbn');
