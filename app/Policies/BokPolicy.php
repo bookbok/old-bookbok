@@ -60,7 +60,10 @@ class BokPolicy
      */
     public function delete(User $user, Bok $bok)
     {
-        //
+        if ($user->id == $bok->user_id) {
+            return true;
+        }
+        throw new AuthorizationException('自分以外のBokを削除することはできません。');
     }
 
     /**

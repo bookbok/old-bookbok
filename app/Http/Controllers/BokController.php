@@ -14,6 +14,7 @@ class BokController extends Controller
 {
     public function __construct(){
       $this->middleware('can:create,App\Bok,userBook')->only('store');
+      $this->middleware('can:delete,bok')->only('delete');
     }
 
     /**
@@ -125,19 +126,6 @@ class BokController extends Controller
      * @Bok $bok
      */
     public function delete(Bok $bok){
-        // 存在しないBokを指定した場合はサーバが自動で404を返す
-
-        $authId = auth()->guard('api')->id();
-        if( $authId != $bok->user_id ){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外のBokを削除することはできません。'
-                ],
-                403
-            );
-        }
-
         $bok->delete();
 
         return response()->json(
