@@ -29,9 +29,12 @@ class UserBookPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, User $ofUser)
     {
-        //
+        if ($user->id == $ofUser->id) {
+            return true;
+        }
+        throw new AuthorizationException('自分以外の本棚に追加することはできません。');
     }
 
     /**
