@@ -23,14 +23,14 @@ export const loaded = () => ({ type: types.LOADED });
  * ==== Top page (time line) ====
  */
 export const setBokFlow = bokFlow => ({ type: types.SET_BOK_FLOW, bokFlow });
-export const fetchBokFlow = () => dispatch => {
-    api.fetchBokFlow().then(json => {
-        if (utils.isEmpty(json)) {
-            dispatch(setBokFlow('最近のBokがありません'));
-        } else {
-            dispatch(setBokFlow(json));
-        }
-    });
+export const fetchBokFlow = () => async dispatch => {
+    const json = await api.fetchBokFlow();
+
+    if (utils.isEmpty(json)) {
+        dispatch(setBokFlow('最近のBokがありません'));
+    } else {
+        dispatch(setBokFlow(json));
+    }
 };
 
 /**
