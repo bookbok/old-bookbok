@@ -17,6 +17,9 @@ migrate/fresh:
 	php artisan migrate:fresh --seed
 	php artisan passport:install --force
 
+migrate/test:
+	php artisan migrate:fresh --seed --database=test_sqlite
+
 c:
 	php artisan tinker
 
