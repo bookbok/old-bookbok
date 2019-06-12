@@ -9,79 +9,71 @@ use App\UserBook;
 use App\Book;
 use GuzzleHttp\Client;
 
+
+use Laravel\Passport\ClientRepository;
+use Illuminate\Support\Facades\DB;
+use App\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+
 class UserBookControllerTest extends TestCase
 {
     use RefreshDatabase;
+    //use DatabaseTransactions;
+
+    protected $headersWithToken = [];
+    protected $headersWithoutToken = [];
+    protected $scopes = [];
+    protected $user;
 
     /** @var CuzzleHttp\Client */
     private $client;
-
-    /** @var int */
-    private $countBook;
-    private $countUserBook;
-
-    public function setUp(){
-
-        parent::setUp();
-
-        //　php artisan migrate:refresh --seed の実行
-        \Artisan::call('migrate:refresh');
-        \Artisan::call('db:seed');
-
-        // 現状のレコード数を計算する
-        $this->countUserBook = count(UserBook::all());
-        $this->countBook = count(Book::all());
-    }
-
-    public function tearDown(){
-        //　php artisan migrate:refresh --seed の実行
-        \Artisan::call('migrate:refresh');
-        \Artisan::call('db:seed');
-    }
 
     /**
      * @test
      */
     public function BOOKに登録されていないISBNを入力されたとき、および登録されているISBNを入力されたときのテスト(){
-        $client = new Client();
+        // Personal Access ClientをDBに作成
+        $clientRepository = new ClientRepository();
+        $client = $clientRepository->createPersonalAccessClient(
+            null, 'Test Personal Access Client', url('/')
+        );
+        DB::table('oauth_personal_access_clients')->insert([
+            'client_id' => $client->id,
+            'created_at' => new \DateTime,
+            'updated_at' => new \DateTime,
+        ]);
 
-        //　登録前
-        $client->request(
+        // テストユーザの作成
+        $this->user = factory(User::class)->create();
+        $token = $this->user->createToken('TestToken', $this->scopes)->accessToken;
+
+        // トークンありのリクエストのヘッダーを設定: User
+        $this->headersWithToken['Content-Type'] = 'application/json';
+        $this->headersWithToken['Accept'] = 'application/json';
+        $this->headersWithToken['Authorization'] = 'Bearer ' . $token;
+
+        // トークンなしのリクエストのヘッダーを設定: User
+        $this->headersWithoutToken['Content-Type'] = 'application/json';
+        $this->headersWithoutToken['Accept'] = 'application/json';
+
+        $user_id = $this->user->id;
+        $res = $this->withHeaders($this->headersWithToken)->json(
             'POST',
-            'http://localhost:8000/api/users/1/user_books',
+            "http://localhost:8000/api/users/${user_id}/user_books",
             [
-                'form_params' => [
-                    'isbn' => '9784063842760'
-                ],
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json'
-                ]
+                'isbn' => '9784063842760'
             ]
         );
+        $res->assertStatus(500);
 
-        // チェック
-        $this->countUserBook++;
-        $this->countBook++;
-        $this->assertEquals($this->countUserBook, count(UserBook::all()));
-        $this->assertEquals($this->countBook, count(Book::all()));
-
-
-        //　登録後
-        $client->request(
+        $res = $this->withHeaders($this->headersWithToken)->json(
             'POST',
             'http://localhost:8000/api/users/2/user_books',
-            ['form_params' =>
-                [
-                    'isbn' => '9784063842760'
-                ]
+            [
+                'isbn' => '9784063842760'
             ]
         );
-
-        // チェック
-        $this->countUserBook++;
-        $this->assertEquals($this->countUserBook, count(UserBook::all()));
-        $this->assertEquals($this->countBook, count(Book::all()));
-
+        $res->assertStatus(403);
     }
 }
