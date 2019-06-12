@@ -140,6 +140,15 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => '名前',
+        'email' => 'Eメール',
+        'password' => 'パスワード',
+        'title' => 'タイトル',
+        'body' => '本文',
+        'page_num_begin' => '開始ページ',
+        'page_num_end' => '終了ページ',
+        'line_num' => '行番号'
+    ],
 
 ];

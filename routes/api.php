@@ -65,8 +65,8 @@ Route::get('bok_flow', 'BokFlowController@index')->middleware('auth:api');
  */
 Route::get('users/{userId}/user_books','UserBookController@index');
 Route::get('users/{userId}/user_books/{userBookId}', 'UserBookController@show');
-Route::post('users/{userId}/user_books', 'UserBookController@store')->middleware('auth:api');
-Route::put('users/{userId}/user_books/{userBookId}', 'UserBookController@update')->middleware('auth:api');
+Route::post('users/{user}/user_books', 'UserBookController@store')->middleware('auth:api');
+Route::put('users/{user}/user_books/{userBook}', 'UserBookController@update')->middleware('auth:api');
 Route::delete('user_books/{userBook}', 'UserBookController@delete')->middleware('auth:api');
 
 /**
@@ -102,8 +102,8 @@ Route::delete('boks/{bokId}/loves', 'ReactionController@deleteLove')->middleware
  */
 Route::get('users/{user}/followers','FollowerController@followers');
 Route::get('users/{user}/followings','FollowerController@followings');
-Route::post('users/{userId}/followings','FollowerController@follow')->middleware('auth:api');
-Route::delete('users/{userId}/followings/{targetId}','FollowerController@unfollow')->middleware('auth:api');
+Route::post('users/{user}/followings','FollowerController@follow')->middleware('auth:api');
+Route::delete('users/{user}/followings/{targetUser}','FollowerController@unFollow')->middleware('auth:api');
 
 /**
  * Resource: ?

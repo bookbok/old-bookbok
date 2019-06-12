@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\UserBook;
 use App\Book;
 use App\Components\BookInfoScraper\ScrapeManager;
+use App\Http\Requests\ImportBookRequest;
 
 class ImportBooksController extends Controller
 {
@@ -17,20 +18,7 @@ class ImportBooksController extends Controller
      * @Request $request
      *  リクエスト情報をまとめているLaravel組込クラス
      */
-    public function store(Request $request){
-
-        $validator = \Validator::make($request->all(), [
-            'isbnList' => 'required|array',
-            'isbnList.*' => 'required|string',
-        ]);
-
-        if($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'userMessage' => $validator->errors()
-            ], 400);
-        }
-
+    public function store(ImportBookRequest $request) {
         $authId = auth()->guard('api')->id();
 
         // リクエストデータのの取得
