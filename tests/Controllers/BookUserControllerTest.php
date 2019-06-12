@@ -57,19 +57,20 @@ class UserBookControllerTest extends TestCase
         $this->headersWithoutToken['Content-Type'] = 'application/json';
         $this->headersWithoutToken['Accept'] = 'application/json';
 
-        $user_id = $this->user->id;
+        $userId = $this->user->id;
         $res = $this->withHeaders($this->headersWithToken)->json(
             'POST',
-            "http://localhost:8000/api/users/${user_id}/user_books",
+            "http://localhost:8000/api/users/${userId}/user_books",
             [
                 'isbn' => '9784063842760'
             ]
         );
         $res->assertStatus(500);
 
+        $otherUserId = factory(User::class)->create()->id;
         $res = $this->withHeaders($this->headersWithToken)->json(
             'POST',
-            'http://localhost:8000/api/users/2/user_books',
+            "http://localhost:8000/api/users/${otherUserId}/user_books",
             [
                 'isbn' => '9784063842760'
             ]
