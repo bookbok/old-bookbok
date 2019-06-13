@@ -92,8 +92,8 @@ class UserBookController extends Controller
         $book = $book ?? $new_book;
 
         // 当該ユーザのuser_bookテーブルに同じ本がすでに登録されているかのチェック
-        $is_userBook_exists = UserBook::where('book_id', $book->id)->where('user_id', $authId)->exists();
-        if($is_userBook_exists){
+        $isUserBookExists = UserBook::where('book_id', $book->id)->where('user_id', $authId)->exists();
+        if($isUserBookExists){
             return response()->json(
                 [
                     'status' => 409,
