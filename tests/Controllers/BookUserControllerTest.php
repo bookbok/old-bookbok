@@ -14,7 +14,9 @@ use Laravel\Passport\ClientRepository;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-
+use App\Components\BookInfoScraper\ScrapeManager;
+use App\Http\Controllers\UserBookController;
+use Illuminate\Http\Request;
 
 class UserBookControllerTest extends TestCase
 {
@@ -28,6 +30,12 @@ class UserBookControllerTest extends TestCase
 
     /** @var CuzzleHttp\Client */
     private $client;
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        \Mockery::close();
+    }
 
     /**
      * @test
@@ -57,24 +65,32 @@ class UserBookControllerTest extends TestCase
         $this->headersWithoutToken['Content-Type'] = 'application/json';
         $this->headersWithoutToken['Accept'] = 'application/json';
 
-        $userId = $this->user->id;
-        $res = $this->withHeaders($this->headersWithToken)->json(
-            'POST',
-            "http://localhost:8000/api/users/${userId}/user_books",
-            [
-                'isbn' => '9784063842760'
-            ]
-        );
-        $res->assertStatus(500);
+        $book = factory(Book::class)->make();
+        $mock = \Mockery::mock(ScrapeManager::class)
+            ->shouldReceive('searchByIsbn')
+            ->twice()
+            //->once() // 1度しか呼ばれないことを期待する
+            ->andReturn($book)
+            ->getMock();
+        $this->app->bind('app.bookInfo.scrapeManager', function() use ($mock) {
+            return $mock;
+        });
 
-        $otherUserId = factory(User::class)->create()->id;
-        $res = $this->withHeaders($this->headersWithToken)->json(
-            'POST',
-            "http://localhost:8000/api/users/${otherUserId}/user_books",
-            [
-                'isbn' => '9784063842760'
-            ]
-        );
-        $res->assertStatus(403);
+        $this->actingAs($this->user, 'api');
+        $request = new Request(['isbn' => '9784063842760']);
+        $response = \App::make(UserBookController::class)->store($request, $this->user);
+
+        $this->assertEquals(201, $response->status());
+        $data = collect($response->getData());
+
+        $this->assertTrue($data->contains('user'));
+        $this->assertTrue($data->contains('book'));
+        $this->assertTrue($data->contains('review'));
+        $this->assertTrue($data->contains('boks'));
+
+
+        $this->otherUser = factory(User::class)->create();
+        $response = \App::make(UserBookController::class)->store($request, $this->otherUser);
+        $this->assertEquals(409, $response->status());
     }
 }
