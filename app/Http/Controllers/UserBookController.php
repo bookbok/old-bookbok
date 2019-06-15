@@ -25,13 +25,11 @@ class UserBookController extends Controller
      * @param userId : ユーザID
      * @return JSON形式のユーザの本棚内一覧
      */
-    public function index($userId)
+    public function index(int $userId)
     {
 
         $userBooks = User::with(['books' => function($q) {
-                $q->select('books.id','books.isbn','books.name', 'books.cover', 'books.author', 'books.genre_id');
             }])
-            ->select('users.id', 'users.name', 'users.avatar', 'users.description', 'users.role_id')
             ->find($userId);
 
         return response()->json($userBooks);
