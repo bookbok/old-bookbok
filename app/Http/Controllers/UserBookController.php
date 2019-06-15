@@ -29,6 +29,7 @@ class UserBookController extends Controller
     {
 
         $userBooks = User::with(['books' => function($q) {
+                $q->orderBy('updated_at', 'desc');
             }])
             ->find($userId);
 
