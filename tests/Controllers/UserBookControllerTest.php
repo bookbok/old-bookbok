@@ -68,4 +68,12 @@ class UserBookControllerTest extends TestCase
         $data = collect($response->getData());
         $this->assertEquals(1, count($data->get('books')));
     }
+
+    public function testユーザーの本を取得する() {
+        $userBook = factory(UserBook::class)->create([
+            'user_id' => $this->user->id,
+        ]);
+        $response = \App::make(UserBookController::class)->show($this->user->id, $userBook->id);
+        $this->assertEquals(200, $response->status());
+    }
 }
