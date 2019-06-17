@@ -152,7 +152,7 @@ class UserBookController extends Controller
      * @param  userBookId: ユーザブックの主キー
      * @return JSON形式のまるっと情報
      */
-    public function show($userId, $userBookId)
+    public function show(int $userId, int $userBookId)
     {
         $authId = auth()->guard('api')->id();
         if($authId === null) {
