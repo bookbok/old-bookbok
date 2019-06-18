@@ -136,8 +136,8 @@ class UserBookController extends Controller
                     ]);
                 },
                 'boks.userBook:id,user_id,book_id',
-                'boks.userBook.book:id,name,cover',
-                'boks.userBook.user:id,name,avatar',
+                'boks.userBook.book',
+                'boks.userBook.user',
             ])
             ->find($user_book->id);
 
@@ -181,8 +181,8 @@ class UserBookController extends Controller
                     ]);
                 },
                 'boks.userBook:id,user_id,book_id',
-                'boks.userBook.book:id,name,cover',
-                'boks.userBook.user:id,name,avatar',
+                'boks.userBook.book',
+                'boks.userBook.user',
             ])
             ->find($userBookId);
 
@@ -230,8 +230,8 @@ class UserBookController extends Controller
                     ]);
                 },
                 'boks.userBook:id,user_id,book_id',
-                'boks.userBook.book:id,name,cover',
-                'boks.userBook.user:id,name,avatar',
+                'boks.userBook.book',
+                'boks.userBook.user',
             ])
             ->find($userBook->id);
 
