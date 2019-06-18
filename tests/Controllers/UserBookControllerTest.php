@@ -12,6 +12,7 @@ use App\Http\Controllers\UserBookController;
 use App\User;
 use App\Book;
 use App\UserBook;
+use App\Http\Requests\UserBookUpdateRequest;
 
 class UserBookControllerTest extends TestCase
 {
@@ -74,6 +75,20 @@ class UserBookControllerTest extends TestCase
             'user_id' => $this->user->id,
         ]);
         $response = \App::make(UserBookController::class)->show($this->user->id, $userBook->id);
+        $this->assertEquals(200, $response->status());
+    }
+
+    public function testユーザーの本ステータスを更新する() {
+        $this->actingAs($this->user, 'api');
+        $userBook = factory(UserBook::class)->create([
+            'user_id' => $this->user->id,
+        ]);
+
+        $request = new UserBookUpdateRequest([
+            'reading_status' => 'none',
+            'is_spoiler' => true
+        ]);
+        $response = \App::make(UserBookController::class)->update($request, $this->user, $userBook);
         $this->assertEquals(200, $response->status());
     }
 }
