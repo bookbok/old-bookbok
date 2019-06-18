@@ -91,4 +91,14 @@ class UserBookControllerTest extends TestCase
         $response = \App::make(UserBookController::class)->update($request, $this->user, $userBook);
         $this->assertEquals(200, $response->status());
     }
+
+    public function testユーザーの本を削除する() {
+        $this->actingAs($this->user, 'api');
+        $userBook = factory(UserBook::class)->create([
+            'user_id' => $this->user->id,
+        ]);
+
+        $response = \App::make(UserBookController::class)->delete($userBook);
+        $this->assertEquals(200, $response->status());
+    }
 }
