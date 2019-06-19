@@ -11,6 +11,8 @@ use App\Components\BookInfoScraper\ScrapeManager;
 use App\Http\Controllers\BookController;
 use App\User;
 use App\Book;
+use App\UserBook;
+use App\Review;
 
 class BookControllerTest extends TestCase
 {
@@ -70,5 +72,17 @@ class BookControllerTest extends TestCase
         $response = \App::make(BookController::class)->index($request);
         $this->assertEquals(200, $response->status());
         $this->assertEquals(0, count($response->getData()->data));
+    }
+
+    public function test本の詳細を取得する() {
+        $this->book = factory(Book::class)->create();
+        $this->userBook = factory(\App\UserBook::class)->create(['book_id' => $this->book->id]);
+        $this->review = factory(\App\Review::class)->create([
+            'user_book_id' => $this->userBook->id,
+            'user_id' => 1
+        ]);
+
+        $response = \App::make(BookController::class)->show($this->book);
+        $this->assertEquals(200, $response->status());
     }
 }
