@@ -49,4 +49,26 @@ class BookControllerTest extends TestCase
         $this->assertEquals(200, $response->status());
         $this->assertEquals(2, count($response->getData()->data));
     }
+
+    public function test本の一覧を検索する() {
+        factory(Book::class, 2)->create(['name' => 'matching title', 'genre_id' => 1]);
+
+        // matching title & genre
+        $request = new Request(['q' => 'matching title', 'genres' => [1]]);
+        $response = \App::make(BookController::class)->index($request);
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals(2, count($response->getData()->data));
+
+        // not matching genre
+        $request = new Request(['q' => 'matching title', 'genres' => [2]]);
+        $response = \App::make(BookController::class)->index($request);
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals(0, count($response->getData()->data));
+
+        // not matching title
+        $request = new Request(['q' => 'not matching title', 'genres' => [1]]);
+        $response = \App::make(BookController::class)->index($request);
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals(0, count($response->getData()->data));
+    }
 }
