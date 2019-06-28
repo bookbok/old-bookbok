@@ -15,7 +15,6 @@ class ReviewController extends Controller
       $this->middleware('can:create,App\Review,userBook')->only('store');
     }
 
-
     /**
      * Reviewの作成、または更新をするAPI
      *

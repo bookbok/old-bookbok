@@ -27,13 +27,12 @@ class BokController extends Controller
      *   JSON形式でBOKSを返す
      */
     public function index($userBookId){
-
         // 指定されたuserBookIdが実在するかのチェック
         if(!UserBook::find($userBookId)){
             return response()->json(
                 [
                     'status' => 404,
-                    'userMessage' => 'お探しのユーザブックは見つかりませんでした。'
+                    'userMessage' => 'お探しのユーザブックは見つかりませんでした。',
                 ],
                 404
             );
@@ -131,7 +130,7 @@ class BokController extends Controller
         return response()->json(
             [
                 'status' => 200,
-                'userMessage' => '削除しました。'
+                'userMessage' => '削除しました。',
             ],
             200
         );
