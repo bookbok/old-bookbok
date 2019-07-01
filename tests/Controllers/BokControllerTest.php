@@ -25,7 +25,7 @@ class BokControllerTest extends TestCase
         $this->user = factory(User::class)->create();
     }
 
-    public function testユーザーの本棚を取得する() {
+    public function testユーザーの本に投稿されているBoksを取得する() {
         $this->actingAs($this->user, 'api');
         $userBook = factory(UserBook::class)->create([
             'user_id' => $this->user->id,
