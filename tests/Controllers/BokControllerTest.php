@@ -52,5 +52,20 @@ class BokControllerTest extends TestCase
         $this->assertEquals(201, $response->status());
         $this->assertEquals('Test body of bok.', $response->getData()->body);
     }
+
+    public function testユーザーの本のBokを削除する() {
+        $this->actingAs($this->user, 'api');
+
+        $userBook = factory(UserBook::class)->create([
+            'user_id' => $this->user->id,
+        ]);
+        $bok = factory(Bok::class)->create([
+            'user_id' => $this->user->id,
+            'user_book_id' => $userBook->id,
+        ]);
+
+        $response = \App::make(BokController::class)->delete($bok);
+        $this->assertEquals(200, $response->status());
+    }
 }
 
