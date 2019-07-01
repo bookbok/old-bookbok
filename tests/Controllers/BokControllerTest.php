@@ -11,6 +11,7 @@ use App\Http\Controllers\BokController;
 use App\User;
 use App\Bok;
 use App\UserBook;
+use App\Http\Requests\BokRequest;
 
 class BokControllerTest extends TestCase
 {
@@ -26,7 +27,6 @@ class BokControllerTest extends TestCase
     }
 
     public function testユーザーの本に投稿されているBoksを取得する() {
-        $this->actingAs($this->user, 'api');
         $userBook = factory(UserBook::class)->create([
             'user_id' => $this->user->id,
         ]);
@@ -38,6 +38,19 @@ class BokControllerTest extends TestCase
         $this->assertEquals(200, $response->status());
 
         $this->assertEquals(2, count($response->getData()));
+    }
+
+    public function testユーザーの本にBokを投稿する() {
+        $this->actingAs($this->user, 'api');
+
+        $userBook = factory(UserBook::class)->create([
+            'user_id' => $this->user->id,
+        ]);
+
+        $request = new BokRequest(['body' => 'Test body of bok.']);
+        $response = \App::make(BokController::class)->store($request, $userBook);
+        $this->assertEquals(201, $response->status());
+        $this->assertEquals('Test body of bok.', $response->getData()->body);
     }
 }
 
