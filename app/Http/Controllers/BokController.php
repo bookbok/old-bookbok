@@ -45,7 +45,6 @@ class BokController extends Controller
                 'userBook.user:id,name',
                 'userBook.book:id,isbn,cover',
             ])
-            ->select(['id', 'user_id', 'user_book_id', 'page_num_begin', 'page_num_end', 'line_num', 'body', 'updated_at'])
             ->withCount([
                 'reactions as liked_count' => function($q) {
                     $q->isLiked();
