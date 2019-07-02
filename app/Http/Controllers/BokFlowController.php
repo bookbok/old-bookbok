@@ -16,9 +16,7 @@ class BokFlowController extends Controller
      * @return @return  \Illuminate\Http\Response
      *   JSON形式のBokフローデータ
      */
-    public function index(){
-
-        //ログインしているユーザのID取得
+    public function index() {
         $authId = auth()->guard('api')->id();
         if(!$authId){
             return response()->json(
@@ -32,7 +30,6 @@ class BokFlowController extends Controller
 
         //フォローしているユーザを取得
         $followers = Follower::where('user_id', $authId)->get();
-
         //フォローが0人の場合は空配列を返す
         if($followers->isEmpty()){
             return response()->json([]);
@@ -48,7 +45,6 @@ class BokFlowController extends Controller
             'userBook.user:id,name',
             'userBook.book:id,isbn,cover',
         ])
-        ->select(['id', 'user_id', 'user_book_id', 'page_num_begin', 'page_num_end', 'line_num', 'body', 'updated_at'])
         ->withCount([
             'reactions as liked_count' => function($q) {
                 $q->isLiked();
