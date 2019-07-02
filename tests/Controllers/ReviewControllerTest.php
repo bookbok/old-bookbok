@@ -1,0 +1,43 @@
+<?php
+
+namespace Tests\Unit;
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\ReviewController;
+use App\User;
+use App\Review;
+use App\UserBook;
+use App\Http\Requests\ReviewRequest;
+
+class ReviewControllerTest extends TestCase
+{
+    use RefreshDatabase;
+
+    protected $user;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->user = factory(User::class)->create();
+    }
+
+    public function testユーザーの本にレビューを投稿する() {
+        $this->actingAs($this->user, 'api');
+
+        $userBook = factory(UserBook::class)->create([
+            'user_id' => $this->user->id,
+        ]);
+
+        $request = new ReviewRequest(['title' => 'Test title of review', 'body' => 'Test body of review.']);
+        $response = \App::make(ReviewController::class)->store($request, $userBook);
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals('Test body of review.', $response->getData()->body);
+    }
+}
+
+
