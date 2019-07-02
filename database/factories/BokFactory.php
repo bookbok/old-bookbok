@@ -6,10 +6,10 @@ $factory->define(App\Bok::class, function (Faker $faker) {
     $pageEnd = $faker->numberBetween($min = 1, $max = 1000);
     $user = factory(App\User::class)->create();
     return [
-        'user_id' => function () {
+        'user_id' => function () use ($user) {
             return $user->id;
         },
-        'user_book_id' => function () {
+        'user_book_id' => function () use ($user) {
             return factory(App\UserBook::class)->create([
                 'user_id' => $user->id,
             ])->id;
