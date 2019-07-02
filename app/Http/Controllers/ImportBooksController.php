@@ -41,13 +41,12 @@ class ImportBooksController extends Controller
         //　問題なければユーザの本棚に新規登録する
         foreach($filterd_isbn_array as $isbn){
 
-            // App\Bookに存在しているか確認
             if(Book::where('isbn', '=', $isbn)->exists()){
 
                 $book = Book::where('isbn', '=', $isbn)->first();
 
                 // App\UserBookに存在しているか確認
-                if(UserBook::where('user_id', '=', $authId)->where('book_id', '=', $book->id)->exists())continue;
+                if(UserBook::where('user_id', '=', $authId)->where('book_id', '=', $book->id)->exists()) continue;
 
                 // ユーザの本棚に登録
                 UserBook::create([
@@ -56,7 +55,6 @@ class ImportBooksController extends Controller
                 ]);
 
                 $response[] = $book->name;
-
                 continue;
             }
 
@@ -65,21 +63,18 @@ class ImportBooksController extends Controller
             $scrapers = resolve('app.bookInfo.scrapeManager');
 
             // すでにISBN文字列の正規化は行っているので例外（\InvalidArgumentException）を考慮しない
-            $new_book = $scrapers->searchByIsbn($isbn);
-            if($new_book == null){
+            $newBook = $scrapers->searchByIsbn($isbn);
+            if($newBook == null){
                continue;
             }
+            $newBook->save();
 
-            // App\Bookの保存
-            $new_book->save();
-
-            // App\UserBookの保存
             UserBook::create([
                 'user_id' => $authId,
-                'book_id' => $new_book->id
+                'book_id' => $newBook->id
             ]);
 
-            $response[] = $new_book->name;
+            $response[] = $newBook->name;
         }
 
         if(empty($response)){
@@ -92,6 +87,6 @@ class ImportBooksController extends Controller
             );
         }
 
-        return response()->json(["books" => $response],201);
+        return response()->json(['books' => $response], 201);
     }
 }
