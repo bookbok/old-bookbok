@@ -38,6 +38,23 @@ class ReviewControllerTest extends TestCase
         $this->assertEquals(200, $response->status());
         $this->assertEquals('Test body of review.', $response->getData()->body);
     }
+
+    public function testユーザーの本のレビューを更新する() {
+        $this->actingAs($this->user, 'api');
+
+        $userBook = factory(UserBook::class)->create([
+            'user_id' => $this->user->id,
+        ]);
+        $review = factory(Review::class)->create([
+            'user_id' => $this->user->id,
+            'user_book_id' => $userBook->id,
+        ]);
+
+        $request = new ReviewRequest(['title' => 'Test title of review', 'body' => 'Test updated body of review.']);
+        $response = \App::make(ReviewController::class)->store($request, $userBook);
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals('Test updated body of review.', $response->getData()->body);
+    }
 }
 
 
