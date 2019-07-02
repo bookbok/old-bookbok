@@ -43,4 +43,21 @@ class ReactionControllerTest extends TestCase
         $this->assertEquals(200, $response->status());
     }
 
+    public function test自分のブックマーク一覧を取得する() {
+        $this->actingAs($this->user, 'api');
+        $userBook = factory(UserBook::class)->create(['user_id' => $this->user->id]);
+        $bok = factory(Bok::class)->create([
+            'user_id' => $this->user->id,
+            'user_book_id' => $userBook->id,
+        ]);
+        $followers = factory(Reaction::class)->create([
+            'user_id' => $this->user->id,
+            'bok_id' => $bok->id,
+            'loved' => true
+        ]);
+
+        $response = \App::make(ReactionController::class)->userLoves($this->user->id);
+        $this->assertEquals(200, $response->status());
+    }
+
 }
