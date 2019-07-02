@@ -66,4 +66,13 @@ class ReactionControllerTest extends TestCase
         $response = \App::make(ReactionController::class)->storeLike($bok->id);
         $this->assertEquals(200, $response->status());
     }
+
+    public function testいいねを解除する() {
+        $this->actingAs($this->user, 'api');
+        $bok = factory(Bok::class)->create(['user_id' => $this->user->id]);
+        factory(Reaction::class)->create(['user_id' => $this->user->id, 'bok_id' => $bok->id]);
+
+        $response = \App::make(ReactionController::class)->deleteLike($bok->id);
+        $this->assertEquals(200, $response->status());
+    }
 }
