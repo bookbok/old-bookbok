@@ -60,4 +60,10 @@ class ReactionControllerTest extends TestCase
         $this->assertEquals(200, $response->status());
     }
 
+    public function testいいねする() {
+        $this->actingAs($this->user, 'api');
+        $bok = factory(Bok::class)->create();
+        $response = \App::make(ReactionController::class)->storeLike($bok->id);
+        $this->assertEquals(200, $response->status());
+    }
 }
