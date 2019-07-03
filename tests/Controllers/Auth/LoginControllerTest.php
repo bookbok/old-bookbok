@@ -25,7 +25,16 @@ class LoginControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('passport:install');
+        //$this->artisan('passport:install');
+        $clientRepository = new ClientRepository();
+        $client = $clientRepository->createPersonalAccessClient(
+            null, 'Test Personal Access Client', url('/')
+        );
+        DB::table('oauth_personal_access_clients')->insert([
+            'client_id' => $client->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     public function testログインする() {
@@ -35,6 +44,17 @@ class LoginControllerTest extends TestCase
 
         $request = new LoginRequest(['email' => $this->user->email, 'password' => $pass]);
         $response = \App::make(LoginController::class)->login($request);
+        $this->assertEquals(200, $response->status());
+    }
+
+    public function testログアウトする() {
+        $this->user = factory(User::class)->create();
+
+        $token = $this->user->createToken('TestToken', [])->accessToken;
+        $headers = ['Authorization' => 'Bearer ' . $token];
+
+        // HACK: ログアウトはhttp通信でないとテストが難しかった
+        $response = $this->get('/api/auth/logout', $headers);
         $this->assertEquals(200, $response->status());
     }
 }
