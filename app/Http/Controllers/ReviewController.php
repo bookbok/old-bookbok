@@ -35,7 +35,7 @@ class ReviewController extends Controller
 
         $review = Review::updateOrCreate(
             [
-                'user_id' => $authId,
+                'user_id'      => $authId,
                 'user_book_id' => $userBook->id,
             ],
             [
