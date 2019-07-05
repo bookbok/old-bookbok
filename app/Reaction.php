@@ -34,4 +34,9 @@ class Reaction extends Model
     public function scopeIsReactioned($query) {
         return $query->where('liked', true)->orWhere('loved', true);
     }
+
+    public function scopeWhereMy($query) {
+        $authId = getAuthIdOrZero();
+        return $query->where('user_id', $authId);
+    }
 }
