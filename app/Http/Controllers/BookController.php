@@ -36,12 +36,7 @@ class BookController extends Controller
         // というSQLを組み立てる
         if (!empty($queries)) {
             foreach ($likeConds as $cond) {
-                $builder->where(function ($builder) use ($cond) {
-                    $builder
-                        ->orWhere('name', 'LIKE', $cond)
-                        ->orWhere('author', 'LIKE', $cond)
-                    ;
-                });
+                $builder->namePartialMatch($cond);
             }
         }
 

@@ -20,4 +20,12 @@ class Book extends Model
     public function userBooks(){
         return $this->hasMany(UserBook::class);
     }
+
+    public function scopeNamePartialMatch($query, string $conditional) {
+        return $query->where(function ($builder) use ($conditional) {
+            $builder
+                ->orWhere('name', 'LIKE', $conditional)
+                ->orWhere('author', 'LIKE', $conditional);
+        });
+    }
 }
