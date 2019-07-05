@@ -45,20 +45,6 @@ class BokFlowController extends Controller
             'userBook.user:id,name',
             'userBook.book:id,isbn,cover',
         ])
-        ->withCount([
-            'reactions as liked_count' => function($q) {
-                $q->isLiked();
-            },
-            'reactions as loved_count' => function($q) {
-                $q->isLoved();
-            },
-            'reactions as liked' => function($q) use($authId) {
-                $q->isLiked()->where('user_id', $authId);
-            },
-            'reactions as loved' => function($q) use($authId) {
-                $q->isLoved()->where('user_id', $authId);
-            }
-        ])
         ->whereIn('user_id', $ids)
         ->orderBy('updated_at', 'desc')
         ->get();
