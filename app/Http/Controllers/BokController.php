@@ -45,20 +45,6 @@ class BokController extends Controller
                 'userBook.user:id,name',
                 'userBook.book:id,isbn,cover',
             ])
-            ->withCount([
-                'reactions as liked_count' => function($q) {
-                    $q->isLiked();
-                },
-                'reactions as loved_count' => function($q) {
-                    $q->isLoved();
-                },
-                'reactions as liked' => function($q) use($authId) {
-                    $q->isLiked()->where('user_id', $authId);
-                },
-                'reactions as loved' => function($q) use($authId) {
-                    $q->isLoved()->where('user_id', $authId);
-                }
-            ])
             ->where('user_book_id', $userBookId)
             ->orderBy('page_num_begin')
             ->get();
@@ -99,20 +85,6 @@ class BokController extends Controller
         $bok = $bok->with([
                 'userBook.user:id,name',
                 'userBook.book:id,isbn,cover',
-            ])
-            ->withCount([
-                'reactions as liked_count' => function($q) {
-                    $q->isLiked();
-                },
-                'reactions as loved_count' => function($q) {
-                    $q->isLoved();
-                },
-                'reactions as liked' => function($q) use($authId) {
-                    $q->isLiked()->where('user_id', $authId);
-                },
-                'reactions as loved' => function($q) use($authId) {
-                    $q->isLoved()->where('user_id', $authId);
-                }
             ])
             ->find($bok->id);
         return response()->json($bok, 201);
