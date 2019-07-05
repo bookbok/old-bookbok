@@ -119,22 +119,6 @@ class UserBookController extends Controller
                 'book',
                 'review',
                 'boks',
-                'boks' => function($q1) use($authId) {
-                    $q1->withCount([
-                        'reactions as liked_count' => function($q2) {
-                            $q2->isLiked();
-                        },
-                        'reactions as loved_count' => function($q2) {
-                            $q2->isLoved();
-                        },
-                        'reactions as liked' => function($q2) use($authId) {
-                            $q2->isLiked()->where('user_id', $authId);
-                        },
-                        'reactions as loved' => function($q2) use($authId) {
-                            $q2->isLoved()->where('user_id', $authId);
-                        },
-                    ]);
-                },
                 'boks.userBook:id,user_id,book_id',
                 'boks.userBook.book',
                 'boks.userBook.user',
@@ -154,32 +138,13 @@ class UserBookController extends Controller
      */
     public function show(int $userId, int $userBookId)
     {
-        $authId = auth()->guard('api')->id();
-        if($authId === null) {
-            $authId = 0;
-        }
+        $authId = getAuthIdOrZero();
 
         $userBook = UserBook::with([
                 'user',
                 'book',
                 'review',
                 'boks',
-                'boks' => function($q1) use($authId) {
-                    $q1->withCount([
-                        'reactions as liked_count' => function($q2) {
-                            $q2->isLiked();
-                        },
-                        'reactions as loved_count' => function($q2) {
-                            $q2->isLoved();
-                        },
-                        'reactions as liked' => function($q2) use($authId) {
-                            $q2->isLiked()->where('user_id', $authId);
-                        },
-                        'reactions as loved' => function($q2) use($authId) {
-                            $q2->isLoved()->where('user_id', $authId);
-                        },
-                    ]);
-                },
                 'boks.userBook:id,user_id,book_id',
                 'boks.userBook.book',
                 'boks.userBook.user',
@@ -213,22 +178,6 @@ class UserBookController extends Controller
                 'book',
                 'review',
                 'boks',
-                'boks' => function($q1) use($authId) {
-                    $q1->withCount([
-                        'reactions as liked_count' => function($q2) {
-                            $q2->isLiked();
-                        },
-                        'reactions as loved_count' => function($q2) {
-                            $q2->isLoved();
-                        },
-                        'reactions as liked' => function($q2) use($authId) {
-                            $q2->isLiked()->where('user_id', $authId);
-                        },
-                        'reactions as loved' => function($q2) use($authId) {
-                            $q2->isLoved()->where('user_id', $authId);
-                        },
-                    ]);
-                },
                 'boks.userBook:id,user_id,book_id',
                 'boks.userBook.book',
                 'boks.userBook.user',
