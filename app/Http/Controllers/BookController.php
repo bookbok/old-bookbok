@@ -82,8 +82,8 @@ class BookController extends Controller
         ]);
 
         $errors    = $validator->errors();
-        $query     = $errors->has('q')         ? ''   : $request->query('q', '');
-        $genres    = $errors->has('genres')    ? []   : $request->query('genres', []);
+        $query     = $errors->has('q')      ? '' : $request->query('q', '');
+        $genres    = $errors->has('genres') ? [] : $request->query('genres', []);
 
         $queries = array_filter(
             explode(
