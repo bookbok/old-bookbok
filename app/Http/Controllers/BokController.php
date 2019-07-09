@@ -68,17 +68,15 @@ class BokController extends Controller
             $publishedAt = Carbon::now()->toDateTimeString();
         }
 
-        $bok = Bok::create(
-            [
-                'user_id' => $authId,
-                'user_book_id' => $userBook->id,
-                'body' => $request->body,
-                'published_at' => $publishedAt,
-                'page_num_begin' => $request->page_num_begin,
-                'page_num_end' => $request->page_num_end,
-                'line_num' => $request->line_num,
-            ]
-        );
+        $bok = Bok::create([
+            'user_id' => $authId,
+            'user_book_id' => $userBook->id,
+            'body' => $request->body,
+            'published_at' => $publishedAt,
+            'page_num_begin' => $request->page_num_begin,
+            'page_num_end' => $request->page_num_end,
+            'line_num' => $request->line_num,
+        ]);
 
         $bok = $bok->with([
                 'userBook.user:id,name',
