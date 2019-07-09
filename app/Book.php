@@ -30,6 +30,10 @@ class Book extends Model
         });
     }
 
+    public function scopeWhereSomeGenres($query, array $genres) {
+        return $query->whereIn('genre_id', $genres);
+    }
+
     public static function findRecentReviews(int $bookId) {
         return DB::table('user_book')
             ->where('user_book.book_id', '=', $bookId)

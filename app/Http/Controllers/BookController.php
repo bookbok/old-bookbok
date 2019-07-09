@@ -41,7 +41,7 @@ class BookController extends Controller
         }
 
         if (!empty($genres)) {
-            $builder->whereIn('genre_id', $genres);
+            $builder->whereSomeGenres($genres);
         }
 
         $books = $builder->paginate(24)
