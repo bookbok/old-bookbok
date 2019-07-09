@@ -58,21 +58,11 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        $latestReviewPosts = DB::table('user_book')
-                                ->where('user_book.book_id', '=', $book->id)
-                                ->join('reviews', 'user_book.id', '=', 'reviews.user_book_id')
-                                ->join('users', 'users.id', '=', 'reviews.user_id')
-                                ->orderby('reviews.updated_at', 'DESC')
-                                ->limit(5)
-                                ->get([
-                                    'reviews.*',
-                                    'users.name',
-                                ])
-                                ->toArray();
+        $recentReviews = Book::findRecentReviews($book->id);
 
         return response()->json(array_merge(
             $book->toArray(),
-            ["reviews" => $latestReviewPosts]
+            ["reviews" => $recentReviews]
         ));
     }
 
