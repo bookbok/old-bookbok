@@ -70,4 +70,8 @@ class UserBook extends Model
     public function scopeReadedStatus($query){
         return $query->where('reading_status', self::READING_STATUS['readed']);
     }
+
+    public function scopeWhereFromUserAndBook($query, $userId, $bookId) {
+        return $query->where('user_id', '=', $userId)->where('book_id', '=', $bookId);
+    }
 }

@@ -46,7 +46,7 @@ class ImportBooksController extends Controller
                 $book = Book::where('isbn', '=', $isbn)->first();
 
                 // App\UserBookに存在しているか確認
-                if(UserBook::where('user_id', '=', $authId)->where('book_id', '=', $book->id)->exists()) continue;
+                if(UserBook::whereFromUserAndBook($authId, $book->id)->exists()) continue;
 
                 // ユーザの本棚に登録
                 UserBook::create([
