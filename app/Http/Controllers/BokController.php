@@ -38,8 +38,6 @@ class BokController extends Controller
             );
         }
 
-        $authId = auth()->guard('api')->id();
-
         // 指定されたuserBookIdに紐づくBokを取得する
         $boks = Bok::with([
                 'userBook.user:id,name',
