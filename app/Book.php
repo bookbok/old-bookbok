@@ -21,7 +21,7 @@ class Book extends Model
         return $this->hasMany(UserBook::class);
     }
 
-    public function scopeNamePartialMatch($query, string $conditional) {
+    public function scopeWhereNamePartialMatch($query, string $conditional) {
         return $query->where(function ($builder) use ($conditional) {
             $builder
                 ->orWhere('name', 'LIKE', $conditional)
