@@ -103,15 +103,15 @@ class UserBookController extends Controller
         }
 
         // user_bookテーブルに挿入する
-        $user_book = new UserBook;
-        $user_book->user_id = $authId;
-        $user_book->book_id = $book->id;
+        $newUserBook = UserBook::make([
+            'user_id' => $authId,
+            'book_id' => $book->id,
+        ]);
 
         if (in_array($book->genre_id, Genre::SPOILER_ID_LIST)) {
-            $user_book->is_spoiler = true;
+            $newUserBook->is_spoiler = true;
         }
-
-        $user_book->save();
+        $newUserBook->save();
 
         // レスポンスデータの生成
         $userBook = UserBook::with([
@@ -123,7 +123,7 @@ class UserBookController extends Controller
                 'boks.userBook.book',
                 'boks.userBook.user',
             ])
-            ->find($user_book->id);
+            ->find($newUserBook->id);
 
         return response()->json($userBook, 201);
 
