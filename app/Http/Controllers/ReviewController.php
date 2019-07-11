@@ -25,8 +25,6 @@ class ReviewController extends Controller
      */
     public function store(ReviewRequest $request, UserBook $userBook)
     {
-        $authId = auth()->guard('api')->id();
-
         // 公開処理
         $publishedAt = null;
         if($request->publish) {
@@ -35,7 +33,7 @@ class ReviewController extends Controller
 
         $review = Review::updateOrCreate(
             [
-                'user_id'      => $authId,
+                'user_id'      => auth()->guard('api')->id(),
                 'user_book_id' => $userBook->id,
             ],
             [
