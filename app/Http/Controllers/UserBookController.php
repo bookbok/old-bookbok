@@ -10,6 +10,7 @@ use App\Components\BookInfoScraper\ScrapeManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserBookUpdateRequest;
+use App\Http\Requests\UserBookRequest;
 
 class UserBookController extends Controller
 {
@@ -46,12 +47,9 @@ class UserBookController extends Controller
      * @return \Illuminate\Http\Response
      * 　JSON形式で本情報をまとめて返す
      */
-    public function store(Request $request, User $user)
+    public function store(UserBookRequest $request, User $user)
     {
-        // 認可チェック
         $authId = auth()->guard('api')->id();
-
-        // 入力取得
         $isbn = $request->input('isbn');
 
         // ScrapeManagerの生成
