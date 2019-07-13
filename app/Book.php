@@ -46,4 +46,25 @@ class Book extends Model
                 'users.name',
             ]);
     }
+
+    public function scopeSearchBookBy($query, $likeConditions, $genres) {
+        $builder = $query->orderBy('isbn');
+
+        // もしキーワードが設定されていたら
+        // WHERE
+        //  (name LIKE '%FOO%' OR author LIKE '%FOO%')
+        //  AND (name LIKE '%BAR%' OR author LIKE '%BAR%')
+        // というSQLを組み立てる
+        if (!empty($likeConditions)) {
+            foreach ($likeConditions as $cond) {
+                $builder->whereNamePartialMatch($cond);
+            }
+        }
+
+        if (!empty($genres)) {
+            $builder->whereSomeGenres($genres);
+        }
+
+        return $builder;
+    }
 }

@@ -27,25 +27,9 @@ class BookController extends Controller
             $queries
         );
 
-        $builder = Book::orderBy('isbn');
-
-        // もしキーワードが設定されていたら
-        // WHERE
-        //  (name LIKE '%FOO%' OR author LIKE '%FOO%')
-        //  AND (name LIKE '%BAR%' OR author LIKE '%BAR%')
-        // というSQLを組み立てる
-        if (!empty($queries)) {
-            foreach ($likeConds as $cond) {
-                $builder->whereNamePartialMatch($cond);
-            }
-        }
-
-        if (!empty($genres)) {
-            $builder->whereSomeGenres($genres);
-        }
-
-        $books = $builder->paginate(24)
-                         ->appends($request->only(['q', 'genres']));
+        $books = Book::searchBookBy($likeConds, $genres)
+            ->paginate(24)
+            ->appends($request->only(['q', 'genres']));
 
         return response()->json($books);
     }
