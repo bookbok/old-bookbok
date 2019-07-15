@@ -13,6 +13,7 @@ use App\User;
 use App\Book;
 use App\UserBook;
 use App\Http\Requests\UserBookUpdateRequest;
+use App\Http\Requests\UserBookRequest;
 
 class UserBookControllerTest extends TestCase
 {
@@ -49,7 +50,7 @@ class UserBookControllerTest extends TestCase
     public function BOOKに登録されていないISBNを入力されたとき、および登録されているISBNを入力されたときのテスト(){
         $this->actingAs($this->user, 'api');
 
-        $request = new Request(['isbn' => '9784063842760']);
+        $request = new UserBookRequest(['isbn' => '9784063842760']);
         $response = \App::make(UserBookController::class)->store($request, $this->user);
         $this->assertEquals(201, $response->status());
         $data = collect($response->getData());
