@@ -11,10 +11,6 @@ use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
-    public function __construct(){
-      $this->middleware('can:create,App\Review,userBook')->only('store');
-    }
-
     /**
      * Reviewの作成、または更新をするAPI
      *
