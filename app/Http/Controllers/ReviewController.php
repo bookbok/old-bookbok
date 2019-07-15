@@ -18,7 +18,7 @@ class ReviewController extends Controller
     /**
      * Reviewの作成、または更新をするAPI
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ReviewRequest  $request
      * @param  \App\UserBook  $userBook
      * @return \Illuminate\Http\Response
      *   ReviewのインスタンスJSON
