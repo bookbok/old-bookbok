@@ -40,20 +40,13 @@ class ImportBooksController extends Controller
         //　ユーザの本棚に登録されている本と重複しないかをチェックして
         //　問題なければユーザの本棚に新規登録する
         foreach($filterd_isbn_array as $isbn){
-
             if(Book::where('isbn', '=', $isbn)->exists()){
+                $bookName = $this->registeUserBook($authId, $isbn);
 
-                $book = Book::where('isbn', '=', $isbn)->first();
-
-                $userBook = UserBook::firstOrCreate([
-                    'user_id' => $authId,
-                    'book_id' => $book->id
-                ]);
-                if($userBook->wasRecentlyCreated) {
-                    // 追加された本の名前を一覧にする
-                    $response[] = $book->name;
+                // 追加された本の名前を一覧にする
+                if ($bookName) {
+                    $response[] = $bookName;
                 }
-
                 continue;
             }
 
@@ -87,5 +80,19 @@ class ImportBooksController extends Controller
         }
 
         return response()->json(['books' => $response], 201);
+    }
+
+    private function registeUserBook(int $userId, string $isbn) {
+        $book = Book::where('isbn', '=', $isbn)->first();
+
+        $userBook = UserBook::firstOrCreate([
+            'user_id' => $userId,
+            'book_id' => $book->id
+        ]);
+
+        if($userBook->wasRecentlyCreated) {
+            return $book->name;
+        }
+        return null;
     }
 }
