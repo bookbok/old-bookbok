@@ -12,11 +12,6 @@ use App\Http\Requests\BokRequest;
 
 class BokController extends Controller
 {
-    public function __construct(){
-      $this->middleware('can:create,App\Bok,userBook')->only('store');
-      $this->middleware('can:delete,bok')->only('delete');
-    }
-
     /**
      *  BOKSを返すAPI
      *
