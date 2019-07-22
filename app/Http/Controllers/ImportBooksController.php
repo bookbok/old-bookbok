@@ -37,39 +37,9 @@ class ImportBooksController extends Controller
             );
         }
 
-        //　ユーザの本棚に登録されている本と重複しないかをチェックして
-        //　問題なければユーザの本棚に新規登録する
-        foreach($filterd_isbn_array as $isbn){
-            if(Book::where('isbn', '=', $isbn)->exists()){
-                $bookName = $this->registeUserBook($authId, $isbn);
+        $bookNames = UserBook::registeUserBooks($filterd_isbn_array, $authId);
 
-                // 追加された本の名前を一覧にする
-                if ($bookName) {
-                    $response[] = $bookName;
-                }
-                continue;
-            }
-
-            // App\Bookに存在していない場合
-            // ScrapeManagerを使って本情報を取得してからBookとUserBook双方の登録を行う
-            $scrapers = resolve('app.bookInfo.scrapeManager');
-
-            // すでにISBN文字列の正規化は行っているので例外（\InvalidArgumentException）を考慮しない
-            $newBook = $scrapers->searchByIsbn($isbn);
-            if($newBook == null){
-               continue;
-            }
-            $newBook->save();
-
-            UserBook::create([
-                'user_id' => $authId,
-                'book_id' => $newBook->id
-            ]);
-
-            $response[] = $newBook->name;
-        }
-
-        if(empty($response)){
+        if(empty($bookNames)){
             return response()->json(
                 [
                     'status' => 200,
@@ -79,20 +49,6 @@ class ImportBooksController extends Controller
             );
         }
 
-        return response()->json(['books' => $response], 201);
-    }
-
-    private function registeUserBook(int $userId, string $isbn) {
-        $book = Book::where('isbn', '=', $isbn)->first();
-
-        $userBook = UserBook::firstOrCreate([
-            'user_id' => $userId,
-            'book_id' => $book->id
-        ]);
-
-        if($userBook->wasRecentlyCreated) {
-            return $book->name;
-        }
-        return null;
+        return response()->json(['books' => $bookNames], 201);
     }
 }
