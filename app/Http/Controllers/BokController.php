@@ -57,11 +57,7 @@ class BokController extends Controller
     {
         $authId = auth()->guard('api')->id();
 
-        // 公開処理
-        $publishedAt = null;
-        if($request->publish) {
-            $publishedAt = Carbon::now()->toDateTimeString();
-        }
+        $publishedAt = $request->publish ? Carbon::now()->toDateTimeString() : null;
 
         $bok = Bok::create([
             'user_id' => $authId,
