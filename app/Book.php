@@ -47,8 +47,10 @@ class Book extends Model
             ]);
     }
 
-    public function scopeSearchBookBy($query, $likeConditions, $genres) {
+    public function scopeSearchBookBy($query, array $conditionMaterials, array $genres) {
         $builder = $query->orderBy('isbn');
+
+        $likeConditions = $this->makeLikeConditions($conditionMaterials);
 
         // もしキーワードが設定されていたら
         // WHERE
@@ -66,5 +68,18 @@ class Book extends Model
         }
 
         return $builder;
+    }
+
+
+    /**
+     * 検索用語の配列をLIKE文の条件用に変換する
+     */
+    private function makeLikeConditions(array $conditions) {
+        return array_map(
+            function($condition){
+                return '%' . addcslashes($condition, '_%') . '%';
+            },
+            $conditions
+        );
     }
 }

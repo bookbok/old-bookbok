@@ -19,9 +19,7 @@ class BookController extends Controller
     {
         [$queries, $genres] = $this->normalizeSearchParameters($request);
 
-        $likeConds = makeLikeConditions($queries);
-
-        $books = Book::searchBookBy($likeConds, $genres)
+        $books = Book::searchBookBy($queries, $genres)
             ->paginate(24)
             ->appends($request->only(['q', 'genres']));
 
@@ -81,21 +79,5 @@ class BookController extends Controller
         );
 
         return [$queries, $genres];
-    }
-
-
-
-    /**
-     * 検索用語をLIKE文の条件用に変換する
-     */
-    private function makeLikeCondition(string $condition) {
-        return '%' . addcslashes($condition, '_%') . '%';
-    }
-
-    /**
-     * 検索用語の配列をLIKE文の条件用に変換する
-     */
-    private function makeLikeConditions(array $conditions) {
-        return array_map(makeLikeQuery, $conditions);
     }
 }
