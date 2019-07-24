@@ -21,11 +21,7 @@ class ReviewController extends Controller
      */
     public function store(ReviewRequest $request, UserBook $userBook)
     {
-        // 公開処理
-        $publishedAt = null;
-        if($request->publish) {
-            $publishedAt = Carbon::now()->toDateTimeString();
-        }
+        $publishedAt = $request->publish ? Carbon::now()->toDateTimeString() : null;
 
         $review = Review::updateOrCreate(
             [
