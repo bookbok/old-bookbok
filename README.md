@@ -8,6 +8,7 @@ It is assumed that you have **copied the .env file**.
 ```bash
 $ make install
 $ make migrate/fresh
+$ make migrate/test
 $ make run
 ```
 
