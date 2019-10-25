@@ -27,7 +27,7 @@ class ImportBooksControllerTest extends TestCase
         $this->user = factory(User::class)->create();
     }
 
-    public function testユーザーの本にBokを投稿する() {
+    public function test本をまとめて登録する() {
         $this->actingAs($this->user, 'api');
 
         $newBook = factory(Book::class)->make(['isbn' => '4775941151']);

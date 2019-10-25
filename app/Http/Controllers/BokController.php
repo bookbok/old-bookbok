@@ -38,26 +38,10 @@ class BokController extends Controller
             );
         }
 
-        $authId = auth()->guard('api')->id();
-
         // 指定されたuserBookIdに紐づくBokを取得する
         $boks = Bok::with([
                 'userBook.user:id,name',
                 'userBook.book:id,isbn,cover',
-            ])
-            ->withCount([
-                'reactions as liked_count' => function($q) {
-                    $q->isLiked();
-                },
-                'reactions as loved_count' => function($q) {
-                    $q->isLoved();
-                },
-                'reactions as liked' => function($q) use($authId) {
-                    $q->isLiked()->where('user_id', $authId);
-                },
-                'reactions as loved' => function($q) use($authId) {
-                    $q->isLoved()->where('user_id', $authId);
-                }
             ])
             ->where('user_book_id', $userBookId)
             ->orderBy('page_num_begin')
@@ -84,35 +68,19 @@ class BokController extends Controller
             $publishedAt = Carbon::now()->toDateTimeString();
         }
 
-        $bok = Bok::create(
-            [
-                'user_id' => $authId,
-                'user_book_id' => $userBook->id,
-                'body' => $request->body,
-                'published_at' => $publishedAt,
-                'page_num_begin' => $request->page_num_begin,
-                'page_num_end' => $request->page_num_end,
-                'line_num' => $request->line_num,
-            ]
-        );
+        $bok = Bok::create([
+            'user_id' => $authId,
+            'user_book_id' => $userBook->id,
+            'body' => $request->body,
+            'published_at' => $publishedAt,
+            'page_num_begin' => $request->page_num_begin,
+            'page_num_end' => $request->page_num_end,
+            'line_num' => $request->line_num,
+        ]);
 
         $bok = $bok->with([
                 'userBook.user:id,name',
                 'userBook.book:id,isbn,cover',
-            ])
-            ->withCount([
-                'reactions as liked_count' => function($q) {
-                    $q->isLiked();
-                },
-                'reactions as loved_count' => function($q) {
-                    $q->isLoved();
-                },
-                'reactions as liked' => function($q) use($authId) {
-                    $q->isLiked()->where('user_id', $authId);
-                },
-                'reactions as loved' => function($q) use($authId) {
-                    $q->isLoved()->where('user_id', $authId);
-                }
             ])
             ->find($bok->id);
         return response()->json($bok, 201);

@@ -45,16 +45,15 @@ class ImportBooksController extends Controller
 
                 $book = Book::where('isbn', '=', $isbn)->first();
 
-                // App\UserBookに存在しているか確認
-                if(UserBook::where('user_id', '=', $authId)->where('book_id', '=', $book->id)->exists()) continue;
-
-                // ユーザの本棚に登録
-                UserBook::create([
+                $userBook = UserBook::firstOrCreate([
                     'user_id' => $authId,
                     'book_id' => $book->id
                 ]);
+                if($userBook->wasRecentlyCreated) {
+                    // 追加された本の名前を一覧にする
+                    $response[] = $book->name;
+                }
 
-                $response[] = $book->name;
                 continue;
             }
 

@@ -45,13 +45,13 @@ class ReactionController extends Controller
     public function deleteLike($bokId)
     {
         $authId = auth()->guard('api')->id();
-        $reaction = Reaction::where('bok_id', $bokId)->where('user_id', $authId)->first();
+        $reaction = Reaction::whereFromForeignKeys($authId, $bokId)->first();
         if($reaction != null) {
             $reaction->liked = false;
             $reaction->save();
         }
 
-        return response()->json([], 200);
+        return response()->json([]);
     }
 
     /**
@@ -69,18 +69,18 @@ class ReactionController extends Controller
             'loved' => true,
         ]);
 
-        return response()->json([], 200);
+        return response()->json([]);
     }
 
     public function deleteLove($bokId)
     {
         $authId = auth()->guard('api')->id();
-        $reaction = Reaction::where('bok_id', $bokId)->where('user_id', $authId)->first();
+        $reaction = Reaction::whereFromForeignKeys($authId, $bokId)->first();
         if($reaction != null) {
             $reaction->loved = false;
             $reaction->save();
         }
 
-        return response()->json([], 200);
+        return response()->json([]);
     }
 }

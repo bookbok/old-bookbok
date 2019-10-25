@@ -36,17 +36,12 @@ class BookController extends Controller
         // というSQLを組み立てる
         if (!empty($queries)) {
             foreach ($likeConds as $cond) {
-                $builder->where(function ($builder) use ($cond) {
-                    $builder
-                        ->orWhere('name', 'LIKE', $cond)
-                        ->orWhere('author', 'LIKE', $cond)
-                    ;
-                });
+                $builder->whereNamePartialMatch($cond);
             }
         }
 
         if (!empty($genres)) {
-            $builder->whereIn('genre_id', $genres);
+            $builder->whereSomeGenres($genres);
         }
 
         $books = $builder->paginate(24)
@@ -63,21 +58,11 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        $latestReviewPosts = DB::table('user_book')
-                                ->where('user_book.book_id', '=', $book->id)
-                                ->join('reviews', 'user_book.id', '=', 'reviews.user_book_id')
-                                ->join('users', 'users.id', '=', 'reviews.user_id')
-                                ->orderby('reviews.updated_at', 'DESC')
-                                ->limit(5)
-                                ->get([
-                                    'reviews.*',
-                                    'users.name',
-                                ])
-                                ->toArray();
+        $recentReviews = Book::findRecentReviews($book->id);
 
         return response()->json(array_merge(
             $book->toArray(),
-            ["reviews" => $latestReviewPosts]
+            ["reviews" => $recentReviews]
         ));
     }
 
@@ -97,8 +82,8 @@ class BookController extends Controller
         ]);
 
         $errors    = $validator->errors();
-        $query     = $errors->has('q')         ? ''   : $request->query('q', '');
-        $genres    = $errors->has('genres')    ? []   : $request->query('genres', []);
+        $query     = $errors->has('q')      ? '' : $request->query('q', '');
+        $genres    = $errors->has('genres') ? [] : $request->query('genres', []);
 
         $queries = array_filter(
             explode(
