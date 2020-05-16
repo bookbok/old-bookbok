@@ -41,3 +41,13 @@ json:
 
 phplint:
 	find ./ -type d \( -name 'resources' -o -name 'bootstrap' -o -name 'public' -o -name 'vendor' -o -name 'node_modules' -o -name '.git' -o -name 'storage'  \) -prune -o -type f -name '*.php' -print | xargs -n1 php -l > /dev/null
+
+
+# debug
+.PHONY: docker/*
+
+docker/build: Dockerfile
+	docker build -t bookbok/app:latest ./
+
+docker/run:
+	docker run -it --rm bookbok/app /bin/bash
