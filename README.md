@@ -1,5 +1,8 @@
 # BOOKBOK
 
+# Require
+- 環境(Vagrant): https://github.com/NAKKA-K/vagrant-laravel-react
+
 # Getting started
 It is assumed that you have **copied the .env file**.
 
