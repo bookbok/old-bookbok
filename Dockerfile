@@ -13,7 +13,8 @@ RUN set -eux && \
         zip \
         unzip \
         make \
-        vim
+        vim \
+        sqlite3
 
 # Install php library & composer
 RUN docker-php-ext-install pdo pdo_pgsql zip && \
@@ -23,4 +24,8 @@ RUN docker-php-ext-install pdo pdo_pgsql zip && \
 
 WORKDIR /home/bookbok
 COPY ./ /home/bookbok
+
+# Generate sqlite3 non-interactively
+RUN sqlite3 ./database/database.sqlite ""
+
 RUN /usr/local/bin/composer install -d /home/bookbok
