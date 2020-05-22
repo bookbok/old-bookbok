@@ -3,6 +3,8 @@ FROM php:7.4-fpm
 ENV TZ Asia/Tokyo
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+WORKDIR /home/bookbok
+
 # Strict error settings & Add packages to use
 RUN set -eux && \
     apt-get update -qq && \
@@ -22,10 +24,8 @@ RUN docker-php-ext-install pdo pdo_pgsql zip && \
         mv composer.phar /usr/local/bin/composer && \
         chmod +x /usr/local/bin/composer
 
-WORKDIR /home/bookbok
 COPY ./ /home/bookbok
 
 # Generate sqlite3 non-interactively
 RUN sqlite3 ./database/database.sqlite ""
-
-RUN /usr/local/bin/composer install -d /home/bookbok
+RUN /usr/local/bin/composer install

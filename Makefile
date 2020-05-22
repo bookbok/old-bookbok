@@ -50,4 +50,4 @@ docker/build: Dockerfile
 	docker build -t bookbok/app:latest ./
 
 docker/run:
-	docker run -it --rm bookbok/app /bin/bash
+	docker run -it --rm -p 8080:80 -p 8000:8000 bookbok/app /bin/bash
