@@ -47,7 +47,10 @@ phplint:
 .PHONY: docker/*
 
 docker/build: Dockerfile
-	docker build -t bookbok/app:latest ./
+	docker-compose build
 
 docker/run:
-	docker run -it --rm -p 8080:80 -p 8000:8000 bookbok/app /bin/bash
+	docker-compose up -d
+
+docker/bash:
+	docker-compose exec app bash
