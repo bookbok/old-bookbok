@@ -26,13 +26,13 @@ WORKDIR /home/bookbok
 COPY ./composer.json ./
 COPY ./composer.lock ./
 
+COPY . .
+
 # install package & migration
 RUN /usr/local/bin/composer install
 
-COPY . .
-
 # Generate sqlite3 non-interactively & Prepare to launch laravel
 RUN sqlite3 ./database/database.sqlite "" && \
-    php artisan migrate --froce && \
+    php artisan migrate --force && \
     chmod -R 777 storage && \
     php artisan passport:install

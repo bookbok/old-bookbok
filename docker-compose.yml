@@ -7,12 +7,11 @@ volumes:
 services:
   app:
     build: ./
-    container_name: 'bookbok-php'
     ports:
       - 8080:80
       - 8000:8000
     volumes:
       - .:/home/bookbok
       - php_cache:/home/bookbok/vendor
-      - db_cache:/home/bookbok/database/database.sqlite
+      - db_cache:/home/bookbok/database
     tty: true
