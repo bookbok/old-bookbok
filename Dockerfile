@@ -14,22 +14,29 @@ RUN set -eux && \
         unzip \
         make \
         vim \
-        sqlite3
+        sqlite3 \
+        curl \
+        nodejs
 
-# Install php library & composer
+# Install php library & composer & npm
 RUN docker-php-ext-install pdo pdo_pgsql zip && \
     curl -sS https://getcomposer.org/installer | php && \
         mv composer.phar /usr/local/bin/composer && \
-        chmod +x /usr/local/bin/composer
+        chmod +x /usr/local/bin/composer && \
+RUN curl -SL https://deb.nodesource.com/setup_13.x | bash && \
+    npm install -g npm@latest
 
 WORKDIR /home/bookbok
 COPY ./composer.json ./
 COPY ./composer.lock ./
+COPY ./package.json ./
+COPY ./package.lock ./
 
 COPY . .
 
-# install package & migration
+# Install package
 RUN /usr/local/bin/composer install
+RUN npm install
 
 # Generate sqlite3 non-interactively & Prepare to launch laravel
 RUN sqlite3 ./database/database.sqlite "" && \
