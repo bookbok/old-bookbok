@@ -23,9 +23,16 @@ RUN docker-php-ext-install pdo pdo_pgsql zip && \
         chmod +x /usr/local/bin/composer
 
 WORKDIR /home/bookbok
+COPY ./composer.json ./
+COPY ./composer.lock ./
+
+# install package & migration
+RUN /usr/local/bin/composer install
+
 COPY . .
 
-# Generate sqlite3 non-interactively
-RUN sqlite3 ./database/database.sqlite ""
-
-# RUN /usr/local/bin/composer install
+# Generate sqlite3 non-interactively & Prepare to launch laravel
+RUN sqlite3 ./database/database.sqlite "" && \
+    php artisan migrate --froce && \
+    chmod -R 777 storage && \
+    php artisan passport:install

@@ -14,4 +14,5 @@ services:
     volumes:
       - .:/home/bookbok
       - php_cache:/home/bookbok/vendor
+      - db_cache:/home/bookbok/database/database.sqlite
     tty: true

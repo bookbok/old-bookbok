@@ -54,3 +54,6 @@ docker/run:
 
 docker/bash:
 	docker-compose exec app bash
+
+docker/all_remove:
+	docker-compose down -v --rmi all
