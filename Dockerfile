@@ -28,6 +28,7 @@ RUN curl -SL https://deb.nodesource.com/setup_13.x | bash && \
     apt-get install -y nodejs && \
     npm install -g npm@latest
 
+
 # TODO: 後々yarnに移行する
 # Install yarn
 # RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
@@ -42,12 +43,9 @@ COPY ./package-lock.json ./
 
 COPY . .
 
+# Generate sqlite3 non-interactively
+RUN sqlite3 ./database/database.sqlite ""
+
 # Install package
 RUN /usr/local/bin/composer install
 RUN npm install
-
-# Generate sqlite3 non-interactively & Prepare to launch laravel
-RUN sqlite3 ./database/database.sqlite "" && \
-    php artisan migrate --force && \
-    chmod -R 777 storage && \
-    php artisan passport:install
