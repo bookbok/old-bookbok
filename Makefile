@@ -54,6 +54,9 @@ docker/build: Dockerfile
 docker/run:
 	docker-compose up -d
 
+docker/down:
+	docker-compose down
+
 # 依存パッケージが変更された時に実行するターゲット(vendorなどはvolume化されているのでホスト側に共有される)
 docker/install:
 	docker-compose exec app make install

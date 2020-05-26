@@ -15,22 +15,30 @@ RUN set -eux && \
         make \
         vim \
         sqlite3 \
-        curl \
-        nodejs
+        curl
 
-# Install php library & composer & npm
+# Install php library & composer
 RUN docker-php-ext-install pdo pdo_pgsql zip && \
     curl -sS https://getcomposer.org/installer | php && \
         mv composer.phar /usr/local/bin/composer && \
-        chmod +x /usr/local/bin/composer && \
+        chmod +x /usr/local/bin/composer
+
+# Install npm
 RUN curl -SL https://deb.nodesource.com/setup_13.x | bash && \
+    apt-get install -y nodejs && \
     npm install -g npm@latest
+
+# TODO: 後々yarnに移行する
+# Install yarn
+# RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
+#     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+#     sudo apt-get update && sudo apt-get install yarn
 
 WORKDIR /home/bookbok
 COPY ./composer.json ./
 COPY ./composer.lock ./
 COPY ./package.json ./
-COPY ./package.lock ./
+COPY ./package-lock.json ./
 
 COPY . .
 
