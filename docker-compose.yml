@@ -16,4 +16,5 @@ services:
       - php_cache:/home/bookbok/vendor
       - js_cache:/home/bookbok/node_modules
       - db_cache:/home/bookbok/database
+    command: ["make", "run"]
     tty: true
