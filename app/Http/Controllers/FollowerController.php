@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class FollowerController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:create,App\Follower,user')->only('follow');
+        $this->middleware('can:delete,App\Follower,user')->only('unFollow');
+    }
+
     /**
      * あるユーザーをフォローしている人の一覧を返す
      *
@@ -58,19 +63,19 @@ class FollowerController extends Controller
      * ユーザーをフォローする
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param $userId
+     * @param $user
      *
      * @return \Illuminate\Http\Response
      */
-    public function follow(Request $request, $userId)
+    public function follow(Request $request, User $user)
     {
         // URLとリクエストされたuserの正当性チェック
         $authId = auth()->guard('api')->id();
-        if($authId != $userId || !User::where('id', $request->user_id)->exists()){
+        if(!User::where('id', $request->user_id)->exists()){
             return response()->json(
                 [
                     'status' => 400,
-                    'userMessage' => 'リクエストが不正です。'
+                    'userMessage' => 'フォロー先のユーザーが存在しません。'
                 ],
                 400
             );
@@ -80,21 +85,9 @@ class FollowerController extends Controller
         return response()->json([]);
     }
 
-    public function unFollow($userId, $targetId)
+    public function unFollow(User $user, User $targetUser)
     {
-        // URLとリクエストされたuserの正当性チェック
-        $authId = auth()->guard('api')->id();
-        if($authId != $userId){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => 'リクエスト権限がありません'
-                ],
-                403
-            );
-        }
-
-        Follower::where('user_id', $userId)->where('target_id', $targetId)->delete();
+        Follower::where('user_id', $user->id)->where('target_id', $targetUser->id)->delete();
         return response()->json([], 200);
     }
 }

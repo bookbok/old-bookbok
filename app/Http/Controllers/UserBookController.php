@@ -9,9 +9,16 @@ use App\Genre;
 use App\Components\BookInfoScraper\ScrapeManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserBookUpdateRequest;
 
 class UserBookController extends Controller
 {
+    public function __construct(){
+      $this->middleware('can:create,App\UserBook,user')->only('store');
+      $this->middleware('can:update,userBook')->only('update');
+      $this->middleware('can:delete,userBook')->only('delete');
+    }
+
     /**
      * 特定ユーザの本棚のなかに登録されている本の一覧情報を返す
      *
@@ -34,27 +41,16 @@ class UserBookController extends Controller
      * ユーザの本棚に本を追加する。
      *
      * @param  \Illuminate\Http\Request  $request
-     * 　POSTメソッドで送られてくる。
-     * 　ボディにはbook_id（本のISBN）が含まれている。
-     * @param $userId
-     * 　usersリソースを一意に特定するためのユーザID。
+     * 　ボディにはISBNが含まれている。
+     * @param $user
      *
      * @return \Illuminate\Http\Response
      * 　JSON形式で本情報をまとめて返す
      */
-    public function store(Request $request, $userId)
+    public function store(Request $request, User $user)
     {
         // 認可チェック
         $authId = auth()->guard('api')->id();
-        if($authId != $userId){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外の本棚に追加することはできません。'
-                ],
-                403
-            );
-        }
 
         // 入力取得
         $isbn = $request->input('isbn');
@@ -96,8 +92,8 @@ class UserBookController extends Controller
         $book = $book ?? $new_book;
 
         // 当該ユーザのuser_bookテーブルに同じ本がすでに登録されているかのチェック
-        $is_userBook_exists = UserBook::where('book_id', $book->id)->where('user_id', $authId)->exists();
-        if($is_userBook_exists){
+        $isUserBookExists = UserBook::where('book_id', $book->id)->where('user_id', $authId)->exists();
+        if($isUserBookExists){
             return response()->json(
                 [
                     'status' => 409,
@@ -199,48 +195,15 @@ class UserBookController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * 　PUTメソッドで送られてくる。
-     * @param $userId
-     * @param $userBookId
+     * @param $user
+     * @param $userBook
      *
      * @return \Illuminate\Http\Response
      * 　JSON形式で本情報をまとめて返す
      */
-    public function update(Request $request, $userId, $userBookId)
+    public function update(UserBookUpdateRequest $request, User $user, UserBook $userBook)
     {
-        // 認可チェック
         $authId = auth()->guard('api')->id();
-        if($authId != $userId){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外の本棚を編集することはできません。'
-                ],
-                403
-            );
-        }
-
-        $userBook = UserBook::find($userBookId);
-        if($userBook == null){
-            return response()->json(
-                [
-                    'status' => 404,
-                    'userMessage' => 'お探しの本は存在しません'
-                ],
-                404
-            );
-        }
-
-        $validator = \Validator::make($request->all(), [
-            'reading_status' => 'required|string|max:16',
-            'is_spoiler' => 'required|boolean',
-        ]);
-
-        if($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'userMessage' => $validator->errors()
-            ], 400);
-        }
 
         $userBook->reading_status = UserBook::READING_STATUS[$request->input('reading_status')];
         $userBook->is_spoiler = $request->input('is_spoiler');
@@ -278,7 +241,7 @@ class UserBookController extends Controller
 
     /**
      * 削除API
-     * 
+     *
      * @UserBook $userBook
      */
     public function delete(UserBook $userBook){
@@ -286,15 +249,6 @@ class UserBookController extends Controller
 
         // 認可チェック
         $authId = auth()->guard('api')->id();
-        if($authId != $userBook->user_id){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外の本を削除することはできません。'
-                ],
-                403
-            );
-        }
 
         $userBook->delete();
 

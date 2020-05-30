@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\UserBook;
 use App\Bok;
+use App\User;
 use App\Reaction;
 use Carbon\Carbon;
+use App\Http\Requests\BokRequest;
 
 class BokController extends Controller
 {
+    public function __construct(){
+      $this->middleware('can:create,App\Bok,userBook')->only('store');
+      $this->middleware('can:delete,bok')->only('delete');
+    }
+
     /**
      *  BOKSを返すAPI
      *
@@ -64,38 +71,14 @@ class BokController extends Controller
     /**
      * Bokの作成、または更新をするAPI
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserBook  $userBookId
+     * @param  \Illuminate\Http\Requests\BokRequest  $request
+     * @param  \App\UserBook  $userBook
      * @return \Illuminate\Http\Response
      *   BokのインスタンスJSON
      */
-    public function store(Request $request, UserBook $userBook)
+    public function store(BokRequest $request, UserBook $userBook)
     {
         $authId = auth()->guard('api')->id();
-        if($authId != $userBook->user_id){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外の本棚に追加することはできません。'
-                ],
-                403
-            );
-        }
-
-        $validator = \Validator::make($request->all(), [
-            'body' => 'required|string|max:2048',
-            'publish' => 'boolean',
-            'page_num_begin' => 'integer',
-            'page_num_end' => 'integer',
-            'line_num' => 'integer',
-        ]);
-
-        if($validator->fails()) {
-            return response()->json([
-                'status' => 400,
-                'userMessage' => $validator->errors()
-            ], 400);
-        }
 
         // 公開処理
         $publishedAt = null;
@@ -139,23 +122,10 @@ class BokController extends Controller
 
     /**
      * Bokを削除するAPI
-     * 
+     *
      * @Bok $bok
      */
     public function delete(Bok $bok){
-        // 存在しないBokを指定した場合はサーバが自動で404を返す
-
-        $authId = auth()->guard('api')->id();
-        if( $authId != $bok->user_id ){
-            return response()->json(
-                [
-                    'status' => 403,
-                    'userMessage' => '自分以外のBokを削除することはできません。'
-                ],
-                403
-            );
-        }
-
         $bok->delete();
 
         return response()->json(

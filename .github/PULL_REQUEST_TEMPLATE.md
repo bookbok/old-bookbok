@@ -1,4 +1,3 @@
-connect to #
 close #
 
 # 概要
