@@ -1,0 +1,20 @@
+version: '3'
+
+volumes:
+  php_cache:
+  js_cache:
+  db_cache:
+
+services:
+  app:
+    build: ./
+    ports:
+      - 8080:80
+      - 8000:8000
+    volumes:
+      - .:/home/bookbok
+      - php_cache:/home/bookbok/vendor
+      - js_cache:/home/bookbok/node_modules
+      - db_cache:/home/bookbok/database
+    command: ["make", "run"]
+    tty: true
