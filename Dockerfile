@@ -41,7 +41,11 @@ COPY ./composer.lock ./
 COPY ./package.json ./
 COPY ./package-lock.json ./
 
+# Setting php
+COPY ./php.ini /usr/local/etc/php/conf.d/
+
 COPY . .
+
 
 # Generate sqlite3 non-interactively
 RUN sqlite3 ./database/database.sqlite ""
