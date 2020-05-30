@@ -78,12 +78,12 @@ class UserBook extends Model
     /**
      * User methods
      */
-    public static function registeUserBooks(array $filterd_isbn_array, int $authId) {
+    public static function registerUserBooks(array $filterd_isbn_array, int $authId) {
         //　ユーザの本棚に登録されている本と重複しないかをチェックして
         //　問題なければユーザの本棚に新規登録する
         foreach($filterd_isbn_array as $isbn){
             if(Book::where('isbn', '=', $isbn)->exists()){
-                $bookName = self::registeUserBook($authId, $isbn);
+                $bookName = self::registerUserBook($authId, $isbn);
 
                 if ($bookName) {
                     $bookNames[] = $bookName;
@@ -92,7 +92,7 @@ class UserBook extends Model
             }
 
             // App\Bookに存在していない場合
-            $bookName = self::registeScrapedBookTo($authId, $isbn);
+            $bookName = self::registerScrapedBookTo($authId, $isbn);
             if ($bookName) {
                 $bookNames[] = $bookName;
             }
@@ -100,7 +100,7 @@ class UserBook extends Model
         return $bookNames;
     }
 
-    private static function registeScrapedBookTo(int $authId, string $isbn) {
+    private static function registerScrapedBookTo(int $authId, string $isbn) {
         // ScrapeManagerを使って本情報を取得してからBookとUserBook双方の登録を行う
         $scrapers = resolve('app.bookInfo.scrapeManager');
 
@@ -118,7 +118,7 @@ class UserBook extends Model
         return $newBook->name;
     }
 
-    private static function registeUserBook(int $userId, string $isbn) {
+    private static function registerUserBook(int $userId, string $isbn) {
         $book = Book::where('isbn', '=', $isbn)->first();
 
         $userBook = UserBook::firstOrCreate([

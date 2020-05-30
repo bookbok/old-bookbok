@@ -37,7 +37,7 @@ class ImportBooksController extends Controller
             );
         }
 
-        $bookNames = UserBook::registeUserBooks($filterd_isbn_array, $authId);
+        $bookNames = UserBook::registerUserBooks($filterd_isbn_array, $authId);
 
         if(empty($bookNames)){
             return response()->json(
