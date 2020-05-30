@@ -11,32 +11,21 @@ use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
-    public function __construct(){
-      $this->middleware('can:create,App\Review,userBook')->only('store');
-    }
-
-
     /**
      * Reviewの作成、または更新をするAPI
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ReviewRequest  $request
      * @param  \App\UserBook  $userBook
      * @return \Illuminate\Http\Response
      *   ReviewのインスタンスJSON
      */
     public function store(ReviewRequest $request, UserBook $userBook)
     {
-        $authId = auth()->guard('api')->id();
-
-        // 公開処理
-        $publishedAt = null;
-        if($request->publish) {
-            $publishedAt = Carbon::now()->toDateTimeString();
-        }
+        $publishedAt = $request->publish ? Carbon::now()->toDateTimeString() : null;
 
         $review = Review::updateOrCreate(
             [
-                'user_id' => $authId,
+                'user_id'      => auth()->guard('api')->id(),
                 'user_book_id' => $userBook->id,
             ],
             [

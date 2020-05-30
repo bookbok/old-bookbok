@@ -21,7 +21,7 @@ class LoginController extends Controller
      * @return  \Illuminate\Http\Response
      */
     public function login(LoginRequest $request) {
-        $user = User::where('email', $request->email)->first();
+        $user = User::whereEmail($request->email)->first();
 
         if (
             null === $user ||
