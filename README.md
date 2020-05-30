@@ -1,54 +1,50 @@
 # BOOKBOK
 
-# Require
-- 環境(Vagrant): https://github.com/NAKKA-K/vagrant-laravel-react
+- BookBok TOP: https://www.bookbok.net
+- API: https://www.bookbok.net/api
+
 
 # Getting started
-It is assumed that you have **copied the .env file**.
-
-[if npm permission denied](https://qiita.com/okoysm/items/ced3c3de30af1035242d)
+まず最初に、GoogleDrive(DW2019/共有ファイル/)から`.env`ファイルをダウンロードしてプロジェクトルートに配置してください。
 
 ```bash
-$ make install
-$ make migrate/fresh
-$ make migrate/test
-$ make run
+# Laravelサーバーが動くDockerコンテナを作成します。
+$ make docker/run
+
+# クライアントコードをビルドします。
+# 初期状態ではビルドされていないのでローカルページは真っ白になります。
+$ docker-compose exec app npm run dev
+
+# DBの初期化、初期データ挿入をします。
+$ docker-compose exec app make migrate/fresh
+$ docker-compose exec app make migrate/test
 ```
 
-*Let's access server* with browser!!
-<localhost:8000>
+以下のURLからローカルページにアクセスすることができます。
+<http://localhost:8000>
+
 
 # Install
-composer & npm install
+PHPライブラリとJavaScriptライブラリをインストールします。
+Dockerビルド後にこのコマンドを実行した場合、マウントされているためローカルにも反映されます。
+
+ローカルでIDEなどの補完を効かせたい場合は一度このコマンドを実行する必要があります。
 
 ```bash
-$ make install
+$ docker-compose exec app make install
 ```
 
-# Run
-Run laravel server.
+# Client build
+クライアントコードはファイルが変更されるたびにビルドする必要があります。
+もし自動でビルドをしてほしいなら以下のコマンドを実行してください。
 
 ```bash
-$ make run
+$ docker-compose exec app npm run watch
 ```
 
-# Help
-View the all command list.
+# Start interactive laravel
+Laravelのtinker機能を使うと対話的に動作確認をすることができます。
 
 ```bash
-$ make help
-```
-
-# Build react
-Run webpack.
-
-```bash
-$ make build
-```
-
-# Debug on laravel
-Run debugger on laravel tinker.
-
-```bash
-$ make c
+$ docker-compose exec app make c
 ```
