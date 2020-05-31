@@ -1,5 +1,5 @@
-import React from 'react';
-import { render } from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import App from './components/App';
@@ -7,7 +7,7 @@ import { store } from './store';
 import { storageAvailable } from './utils';
 import { setAuthToken, getLoggedinUser, preparedLogin } from './actions';
 
-const view = (
+const view: React.FunctionComponent = () => (
     <Provider store={store}>
         <App />
     </Provider>
@@ -21,5 +21,5 @@ if (storageAvailable('localStorage') && localStorage.getItem('token')) {
 }
 
 if (document.getElementById('app')) {
-    render(view, document.getElementById('app'));
+    ReactDOM.render(view, document.getElementById('app'));
 }
