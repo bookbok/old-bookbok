@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-const Footer = () => (
+const Footer: React.FC = () => (
     <footer className="container mt-5">
         <nav>
             <ul className="footer-list justify-content-center text-center">
