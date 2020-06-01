@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as ResourceTypes from '../resource-types';
-import { directUserRegister } from '../actions.js';
+import { directUserRegister } from '../actions';
 
 export class UserRegister extends Component {
     constructor(props) {

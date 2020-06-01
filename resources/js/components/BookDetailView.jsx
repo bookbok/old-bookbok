@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as ResourceTypes from '../resource-types';
-import { fetchBookDetail, storeISBNToUserBookDirect, setAlertMessage } from '../actions.js';
+import { fetchBookDetail, storeISBNToUserBookDirect, setAlertMessage } from '../actions';
 import { store } from '../store';
 import { getAuthUser, isEmpty } from '../utils';
 

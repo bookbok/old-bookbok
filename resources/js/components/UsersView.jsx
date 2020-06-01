@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as ResourceTypes from '../resource-types';
 import { Link } from 'react-router-dom';
-import { fetchUsers } from '../actions.js';
+import { fetchUsers } from '../actions';
 import { store } from '../store';
-import { isEmpty } from '../utils.js';
+import { isEmpty } from '../utils';
 import { Loading } from './shared/Loading';
 import DefaultAvatar from './shared/user/DefaultAvatar';
 
