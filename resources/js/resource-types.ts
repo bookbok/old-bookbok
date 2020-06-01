@@ -1,4 +1,13 @@
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
+
+export interface RootState {
+    alertView?: any;
+    loggedinUser?: any;
+    isPrepared: boolean;
+    token?: any;
+    books?: any;
+    userBookDetail?: any;
+}
 
 export const idType = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
 

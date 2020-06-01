@@ -1,10 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+interface loggedinUser {
+    id: number;
+    name: string;
+}
+
+interface Props {
+    loggedinUser: loggedinUser;
+}
+
 // bootstrap global navigation bar
-class Header extends Component {
+class Header extends React.Component<Props> {
+    constructor(props: Props) {
+        super(props);
+    }
+
     render() {
         const loggedinUser = this.props.loggedinUser;
 
@@ -109,11 +121,5 @@ class Header extends Component {
     }
 }
 
-Header.propTypes = {
-    loggedinUser: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-    }),
-};
 
 export default connect(state => ({ loggedinUser: state.loggedinUser }))(Header);

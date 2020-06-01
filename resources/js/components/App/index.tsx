@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { RootState } from 'resource-types';
 import { BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -9,7 +9,11 @@ import FlashMessages from '../FlashMessages';
 import Footer from './Footer';
 import { Loading } from '../shared/Loading';
 
-class App extends Component {
+interface Props {
+    isPrepared: boolean;
+}
+
+class App extends React.Component<Props> {
     render() {
         return this.props.isPrepared ? (
             <BrowserRouter>
@@ -26,8 +30,4 @@ class App extends Component {
     }
 }
 
-App.propTypes = {
-    isPrepared: PropTypes.bool.isRequired,
-};
-
-export default connect(state => ({ isPrepared: state.isPrepared }))(App);
+export default connect((state: RootState) => ({ isPrepared: state.isPrepared }))(App);

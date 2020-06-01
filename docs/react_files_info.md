@@ -60,7 +60,7 @@ actionを使うときは、dispatch関数にactionを渡せば実行される。
 実行されたactionの**type**に応じて`switch case`で、stateの変化を振り分ける
 
 ### 場所
-`resources/js/reducers.js`に書かれている。
+`resources/js/reducers.ts`に書かれている。
 
 ### 追記方法
 `switch case`の**case**を追加して、stateの変化を記述する。
