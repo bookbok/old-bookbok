@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import * as ResourceTypes from '../../resource-types';
 import { store } from '../../store';
 import { requestUpdateUser, setLoggedinUser, setAlertMessage } from '../../actions';
 import * as utils from '../../utils';
 import SettingsSubContent from './SettingsSubContent';
 
-class Profile extends Component {
+class Profile extends React.Component {
     constructor(props) {
         super(props);
 

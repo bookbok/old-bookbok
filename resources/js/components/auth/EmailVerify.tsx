@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import * as ResourceTypes from '../../resource-types';
 import { store } from '../../store';
@@ -7,7 +7,11 @@ import { successfulStatus, getAuthUser, getQueryParam } from '../../utils';
 import { Loading } from '../shared/Loading';
 import { verifyEmail, resendVerifyMail, setAlertMessage } from '../../actions';
 
-class EmailVerify extends React.Component {
+interface Props {
+    history: ResourceTypes.Route
+}
+
+class EmailVerify extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
@@ -40,7 +44,7 @@ class EmailVerify extends React.Component {
             });
     }
 
-    handleClickResend(email) {
+    handleClickResend(email: any) {
         let destinationEmail = null;
         const currentUser = getAuthUser();
         if (currentUser) {
@@ -86,7 +90,7 @@ class EmailVerify extends React.Component {
                                 <a
                                     role="button"
                                     className="text-primary"
-                                    onClick={() => this.handleClickResend()}
+                                    onClick={() => this.handleClickResend(null)}
                                 >
                                     こちらをクリックしてください。
                                 </a>
@@ -125,9 +129,5 @@ class EmailVerify extends React.Component {
         );
     }
 }
-
-EmailVerify.propTypes = {
-    history: ResourceTypes.ROUTER,
-};
 
 export default withRouter(EmailVerify);
