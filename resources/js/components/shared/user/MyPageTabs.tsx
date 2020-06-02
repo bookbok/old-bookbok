@@ -1,8 +1,17 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-export class MyPageTabs extends Component {
+interface Props {
+    userId: number | string;
+    isTop?: boolean;
+    isUserBooks?: boolean;
+    isLikes: boolean;
+    isLoves: boolean;
+    isFollowers: boolean;
+    isFollowings: boolean;
+}
+
+export class MyPageTabs extends React.Component<Props> {
     render() {
         const userId = this.props.userId;
 
@@ -95,13 +104,3 @@ export class MyPageTabs extends Component {
         );
     }
 }
-
-MyPageTabs.propTypes = {
-    userId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    isTop: PropTypes.bool,
-    isUserBooks: PropTypes.bool,
-    isLikes: PropTypes.bool,
-    isLoves: PropTypes.bool,
-    isFollowers: PropTypes.bool,
-    isFollowings: PropTypes.bool,
-};
