@@ -1,11 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { store } from '../../store';
 import { deleteAlertMessage } from '../../actions';
 import Alert from './Alert';
 
-class FlashMessages extends React.Component {
+interface Props {
+    alertView?: {
+        message: string;
+        alertType: string;
+    };
+}
+
+class FlashMessages extends React.Component<Props> {
     removeMessage() {
         store.dispatch(deleteAlertMessage());
     }
@@ -26,9 +32,5 @@ class FlashMessages extends React.Component {
         );
     }
 }
-
-FlashMessages.propTypes = {
-    alertView: PropTypes.object,
-};
 
 export default connect(state => state)(FlashMessages);

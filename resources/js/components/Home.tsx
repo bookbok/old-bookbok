@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import * as ResourceTypes from '../resource-types';
 import { Link, withRouter } from 'react-router-dom';
 import { getAuthUser } from '../utils';
 
+interface Props {
+    history: ResourceTypes.Route;
+}
+
 //ホーム画面を表すコンポーネントを定義
-class Home extends Component {
+class Home extends React.Component<Props> {
     componentWillMount() {
         const currentUser = getAuthUser();
         // ログイン済みなら自分の本棚をホームとする
@@ -113,9 +117,5 @@ class Home extends Component {
         );
     }
 }
-
-Home.propTypes = {
-    history: ResourceTypes.ROUTER,
-};
 
 export default withRouter(Home);

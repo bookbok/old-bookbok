@@ -100,6 +100,12 @@ export const USER_BOOK = PropTypes.shape({
     is_spoiler: PropTypes.bool.isRequired,
 });
 
+export interface Route {
+    push: (path: string) => any;
+    replace: (any) => any;
+    createHref: (any) => any;
+}
+
 export const ROUTER = PropTypes.shape({
     push: PropTypes.func.isRequired,
     replace: PropTypes.func.isRequired,

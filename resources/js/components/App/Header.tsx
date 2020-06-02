@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { RootState } from "../../resource-types";
 
 interface loggedinUser {
     id: number;
@@ -13,10 +14,6 @@ interface Props {
 
 // bootstrap global navigation bar
 class Header extends React.Component<Props> {
-    constructor(props: Props) {
-        super(props);
-    }
-
     render() {
         const loggedinUser = this.props.loggedinUser;
 
@@ -122,4 +119,4 @@ class Header extends React.Component<Props> {
 }
 
 
-export default connect(state => ({ loggedinUser: state.loggedinUser }))(Header);
+export default connect((state: RootState) => ({ loggedinUser: state.loggedinUser }))(Header);
