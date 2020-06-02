@@ -1,12 +1,16 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { store } from '../../../store';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { getAuthUser } from '../../../utils';
 import { requestFollow, requestUnFollow, setAlertMessage } from '../../../actions';
 import FollowButton from './FollowButton';
 import DefaultAvatar from './DefaultAvatar';
+import * as ResourceTypes from "../../../resource-types";
+
+interface Props {
+    user: ResourceTypes.User;
+}
 
 /**
  * @param {Object} user
@@ -15,7 +19,7 @@ import DefaultAvatar from './DefaultAvatar';
  * このコンポーネントを使用する場合、親要素に`position: relative`を適用する必要がある
  * 基本的に親要素には`.page-content-wrap`クラスを適応すると良い
  */
-export class FloatUserInfo_ extends Component {
+export class FloatUserInfo_ extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
@@ -102,18 +106,5 @@ export class FloatUserInfo_ extends Component {
         );
     }
 }
-
-FloatUserInfo_.propTypes = {
-    user: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        avatar: PropTypes.string.isRequired,
-        description: PropTypes.string,
-        follower_count: PropTypes.number.isRequired,
-        following_count: PropTypes.number.isRequired,
-        is_follower: PropTypes.bool.isRequired,
-        is_following: PropTypes.bool.isRequired,
-    }),
-};
 
 export const FloatUserInfo = withRouter(FloatUserInfo_);
