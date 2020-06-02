@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import * as React from 'react';
 import * as ResourceTypes from '../resource-types';
 import { fetchUserBookshelf, fetchUser, loading, loaded } from '../actions';
 import { store } from '../store';
@@ -9,6 +8,13 @@ import { BookView } from './BookView';
 import { MyPageTabs } from './shared/user/MyPageTabs';
 import { FloatUserInfo } from './shared/user/FloatUserInfo';
 
+interface Props {
+    match: ResourceTypes.Matcher;
+    loading: boolean;
+    user?: ResourceTypes.User;
+    userBookshelf?: ResourceTypes.UserBooks;
+}
+
 const fetchUserBookshelfActions = userId => {
     store.dispatch(loading());
     Promise.all([fetchUserBookshelf(userId), fetchUser(userId)]).then(() => {
@@ -16,7 +22,8 @@ const fetchUserBookshelfActions = userId => {
     });
 };
 
-export class UserBookshelf extends Component {
+export class UserBookshelf extends React.Component<Props> {
+    private userId?: number;
     componentDidMount() {
         fetchUserBookshelfActions(this.props.match.params.id);
     }
@@ -48,10 +55,12 @@ export class UserBookshelf extends Component {
         {
             /* ユーザーが所持する本の情報を本ビューに加工 */
         }
+        // @ts-ignore
         const bookshelf = userBookshelf.books.map(book => {
             return (
                 <BookView
                     book={book}
+                    // @ts-ignore
                     link={`/users/${this.userId}/user_books/${book.pivot.id}`}
                     key={book.id}
                     className="bookshelf-box"
@@ -62,13 +71,6 @@ export class UserBookshelf extends Component {
         return shelfView(bookshelf);
     }
 }
-
-UserBookshelf.propTypes = {
-    match: ResourceTypes.MATCHER,
-    loading: PropTypes.bool,
-    user: ResourceTypes.USER,
-    userBookshelf: ResourceTypes.USER_BOOKS,
-};
 
 // URL内のid変更を検知して、再度ユーザー情報をfetchするためのデコレーター
 import { connect } from 'react-redux';

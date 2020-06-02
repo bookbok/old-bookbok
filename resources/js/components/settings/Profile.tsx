@@ -5,7 +5,11 @@ import { requestUpdateUser, setLoggedinUser, setAlertMessage } from '../../actio
 import * as utils from '../../utils';
 import SettingsSubContent from './SettingsSubContent';
 
-class Profile extends React.Component {
+interface Props {
+    history: ResourceTypes.Route;
+}
+
+class Profile extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
@@ -64,7 +68,7 @@ class Profile extends React.Component {
     }
 
     handleSubmit() {
-        requestUpdateUser(this.getUserFromState(this.state))
+        requestUpdateUser(this.getUserFromState())
             .then(res => {
                 if (res.ok) {
                     return res.json();
@@ -176,7 +180,6 @@ class Profile extends React.Component {
                                     </div>
                                     <textarea
                                         name="description"
-                                        type="text"
                                         className={`form-control description-input ${this.state
                                             .description.isInvalid && 'is-invalid'}`}
                                         placeholder="例）小説をよく読みます。好きな作者は○○さんです。"
@@ -202,10 +205,6 @@ class Profile extends React.Component {
         );
     }
 }
-
-Profile.propTypes = {
-    history: ResourceTypes.ROUTER,
-};
 
 import { connect } from 'react-redux';
 

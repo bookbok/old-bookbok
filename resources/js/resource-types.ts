@@ -11,6 +11,17 @@ export interface RootState {
 
 export const idType = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
 
+export interface Book {
+    id: number | string;
+    isbn: string;
+    name: string;
+    description?: string;
+    cover: string;
+    author: string;
+    genre_id: number | string;
+    created_at: string;
+    updated_at: string;
+}
 export const BOOK = PropTypes.shape({
     id: idType.isRequired,
     isbn: PropTypes.string.isRequired,
@@ -69,6 +80,15 @@ export const CURRENT_USER = PropTypes.shape({
     created_at: PropTypes.string.isRequired,
     updated_at: PropTypes.string.isRequired,
 });
+
+export interface UserBooks {
+    id: number | string;
+    name: string;
+    avatar?: string;
+    description: string;
+    role_id: number | string;
+    books?: Array<Book>;
+}
 
 export const USER_BOOKS = PropTypes.shape({
     id: idType.isRequired,
