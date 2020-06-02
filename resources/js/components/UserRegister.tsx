@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
-import * as ResourceTypes from '../resource-types';
+import * as React from 'react';
 import { directUserRegister } from '../actions';
+import { Route } from "../resource-types";
 
-export class UserRegister extends Component {
+interface Props {
+    history: Route
+}
+
+export class UserRegister extends React.Component<Props, any> {
     constructor(props) {
         super(props);
         this.state = {
@@ -208,7 +212,3 @@ export class UserRegister extends Component {
         );
     }
 }
-
-UserRegister.propTypes = {
-    history: ResourceTypes.ROUTER,
-};
