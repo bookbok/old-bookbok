@@ -35,6 +35,23 @@ const simpleUser = {
     updated_at: PropTypes.string.isRequired,
 };
 
+export interface SimpleUser {
+    id: number | string;
+    name: string;
+    avatar?: string;
+    description?: string;
+    role_id?: number | string;
+    is_follower: number | string;
+    is_following: number | string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface User extends SimpleUser {
+    follower_count: string | number;
+    following_count: string | number;
+}
+
 export const SIMPLE_USER = PropTypes.shape(simpleUser);
 
 export const USER = PropTypes.shape({
@@ -111,6 +128,10 @@ export const ROUTER = PropTypes.shape({
     replace: PropTypes.func.isRequired,
     createHref: PropTypes.func.isRequired,
 }).isRequired;
+
+export interface Matcher {
+    params: any;
+}
 
 export const MATCHER = PropTypes.shape({
     params: PropTypes.object.isRequired,

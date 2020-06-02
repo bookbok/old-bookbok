@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import * as ResourceTypes from '../resource-types';
 import { store } from '../store';
 import { fetchUser, loading, loaded } from '../actions';
@@ -9,6 +8,12 @@ import { Loading } from './shared/Loading';
 import { MyPageTabs } from './shared/user/MyPageTabs';
 import { FloatUserInfo } from './shared/user/FloatUserInfo';
 
+interface Props {
+    match: ResourceTypes.Matcher;
+    user?: ResourceTypes.User;
+    loading: boolean;
+}
+
 const fetchUserDetailActions = userId => {
     store.dispatch(loading());
     Promise.all([fetchUser(userId)]).then(() => {
@@ -17,7 +22,7 @@ const fetchUserDetailActions = userId => {
 };
 
 //マイページ画面を表すコンポーネントを定義
-class UserDetail extends Component {
+class UserDetail extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
@@ -66,15 +71,10 @@ class UserDetail extends Component {
     }
 }
 
-UserDetail.propTypes = {
-    match: ResourceTypes.MATCHER,
-    user: ResourceTypes.USER,
-    loading: PropTypes.bool,
-};
-
 // URL内のid変更を検知して、再度ユーザー情報をfetchするためのデコレーター
 import { connect } from 'react-redux';
 import { fetchOnIdUpdateDecorator } from '../decorators/FetchOnIdUpdateDecorator';
+import {Matcher} from "../resource-types";
 
 export default connect(state => state)(
     fetchOnIdUpdateDecorator(({ id }) => {
