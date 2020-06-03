@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import * as ResourceTypes from '../resource-types';
 import { fetchBookDetail, storeISBNToUserBookDirect, setAlertMessage } from '../actions';
 import { store } from '../store';
@@ -9,7 +9,17 @@ import { Loading } from './shared/Loading';
 import { BookInfo } from './shared/book/BookInfo';
 import BackButtonArea from './shared/BackButtonArea';
 
-export class BookDetailView extends Component {
+interface BookWithReviews extends ResourceTypes.Book {
+    reviews?: Array<ResourceTypes.Review>;
+}
+
+interface Props {
+    match: ResourceTypes.Matcher;
+    history: ResourceTypes.Route;
+    bookDetail?: BookWithReviews;
+}
+
+export class BookDetailView extends React.Component<Props> {
     constructor(props) {
         super(props);
 
@@ -23,6 +33,7 @@ export class BookDetailView extends Component {
 
     handleRegister(e) {
         e.preventDefault();
+        if (!this.props.bookDetail) return;
 
         const user = getAuthUser();
         if (isEmpty(user)) {
@@ -60,11 +71,12 @@ export class BookDetailView extends Component {
             return <Loading />;
         }
 
+        // @ts-ignore
         const reviews = book.reviews.map(review => (
             <div key={review.id}>
                 <div className="card p-2">
                     <pre className="userd-bok-user border-bottom">
-                        <Link to={`/users/${review.user_id}`}>{review.name}</Link>
+                        <Link to={`/users/${review.user_id}`}>{review.title}</Link>
                         &nbsp;さんのレビュー
                     </pre>
                     <pre className="userd-bok-body mt-2 mr-2">{review.body}</pre>
@@ -94,9 +106,3 @@ export class BookDetailView extends Component {
         );
     }
 }
-
-BookDetailView.propTypes = {
-    match: ResourceTypes.MATCHER,
-    history: ResourceTypes.ROUTER,
-    bookDetail: ResourceTypes.BOOK,
-};
