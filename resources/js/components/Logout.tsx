@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import * as ResourceTypes from '../resource-types';
 import { requestLogout } from '../actions';
 import { store } from '../store';
 
-export class Logout extends Component {
+interface Props {
+    history: ResourceTypes.Route;
+}
+
+export class Logout extends React.Component<Props> {
     componentDidMount() {
         store.dispatch(requestLogout(this.props.history));
     }
@@ -17,7 +21,3 @@ export class Logout extends Component {
         );
     }
 }
-
-Logout.propTypes = {
-    history: ResourceTypes.ROUTER,
-};

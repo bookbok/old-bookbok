@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import * as ResourceTypes from '../resource-types';
 import { withRouter } from 'react-router-dom';
 import { requestLogin } from '../actions';
 
 import { Link } from 'react-router-dom';
 
-class Login extends Component {
+interface Props {
+    history: ResourceTypes.Route;
+}
+
+class Login extends React.Component<Props, any> {
     constructor(props) {
         super(props);
         this.state = { email: '', password: '', remember: false };
@@ -122,9 +126,5 @@ class Login extends Component {
         );
     }
 }
-
-Login.propTypes = {
-    history: ResourceTypes.ROUTER,
-};
 
 export default withRouter(Login);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import * as ResourceTypes from '../resource-types';
 import { fetchLikeBoks, fetchUser, loading, loaded } from '../actions';
@@ -10,6 +10,13 @@ import { Bok } from './Bok';
 import { MyPageTabs } from './shared/user/MyPageTabs';
 import { FloatUserInfo } from './shared/user/FloatUserInfo';
 
+interface Props {
+    match: ResourceTypes.Matcher;
+    user?: ResourceTypes.User;
+    loading?: boolean;
+    likeBoks?: Array<ResourceTypes.Bok>;
+}
+
 const fetchLikeBokListActions = userId => {
     store.dispatch(loading());
     Promise.all([fetchLikeBoks(userId), fetchUser(userId)]).then(() => {
@@ -17,7 +24,7 @@ const fetchLikeBokListActions = userId => {
     });
 };
 
-class LikeBokList extends Component {
+class LikeBokList extends React.Component<Props> {
     componentDidMount() {
         const userId = this.props.match.params.id;
         fetchLikeBokListActions(userId);
@@ -50,6 +57,7 @@ class LikeBokList extends Component {
             return likeList(<Loading />);
         }
 
+        // @ts-ignore
         const boks = likeBoks.map((likeBok, index) => {
             return <Bok bok={likeBok} key={index} />;
         });
@@ -57,13 +65,6 @@ class LikeBokList extends Component {
         return likeList(boks);
     }
 }
-
-LikeBokList.propTypes = {
-    match: ResourceTypes.MATCHER,
-    user: ResourceTypes.USER,
-    loading: PropTypes.bool,
-    likeBoks: PropTypes.arrayOf(ResourceTypes.BOK),
-};
 
 import { connect } from 'react-redux';
 export default connect(state => state)(LikeBokList);

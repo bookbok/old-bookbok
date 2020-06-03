@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import * as ResourceTypes from '../resource-types';
 import { connect } from 'react-redux';
 import { storeIsbnBulkRegisterDirect } from '../actions';
@@ -6,7 +6,12 @@ import { getAuthUser } from '../utils';
 
 import BackButtonArea from './shared/BackButtonArea';
 
-class IsbnBulkRegistrationView extends Component {
+interface Props {
+    history: ResourceTypes.Route;
+    loggedinUser: ResourceTypes.CurrentUser;
+}
+
+class IsbnBulkRegistrationView extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
@@ -86,7 +91,7 @@ class IsbnBulkRegistrationView extends Component {
                                     className={`form-control ${this.state.invalidMessage &&
                                         'is-invalid'}`}
                                     value={this.state.text || ''}
-                                    rows="5"
+                                    rows={5}
                                     onChange={e => this.setState({ text: e.target.value })}
                                     required
                                     autoFocus
@@ -112,10 +117,5 @@ class IsbnBulkRegistrationView extends Component {
         );
     }
 }
-
-IsbnBulkRegistrationView.propTypes = {
-    history: ResourceTypes.ROUTER,
-    loggedinUser: ResourceTypes.CURRENT_USER,
-};
 
 export default connect(state => state)(IsbnBulkRegistrationView);

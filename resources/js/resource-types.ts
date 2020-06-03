@@ -71,6 +71,16 @@ export const USER = PropTypes.shape({
     following_count: PropTypes.any.isRequired,
 });
 
+export interface CurrentUser {
+    id: number | string;
+    name: string;
+    avatar?: string;
+    description?: string;
+    role_id: number | string;
+    created_at: string;
+    updated_at: string;
+}
+
 export const CURRENT_USER = PropTypes.shape({
     id: idType.isRequired,
     name: PropTypes.string.isRequired,
