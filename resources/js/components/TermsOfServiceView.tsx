@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
-export class TermsOfServiceView extends Component {
+export class TermsOfServiceView extends React.Component {
     componentDidMount() {
+        // @ts-ignore
         document.getElementById('top').scrollIntoView();
     }
 

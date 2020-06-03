@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import * as ResourceTypes from '../resource-types';
 import { fetchLoveBoks, fetchUser, loading, loaded } from '../actions';
 import { store } from '../store';
@@ -10,6 +9,13 @@ import { Bok } from './Bok';
 import { MyPageTabs } from './shared/user/MyPageTabs';
 import { FloatUserInfo } from './shared/user/FloatUserInfo';
 
+interface Props {
+    match: ResourceTypes.Matcher;
+    user?: ResourceTypes.User;
+    loading?: boolean;
+    loveBoks?: Array<ResourceTypes.Bok>;
+}
+
 const fetchLoveBokListActions = userId => {
     store.dispatch(loading());
     Promise.all([fetchLoveBoks(userId), fetchUser(userId)]).then(() => {
@@ -17,7 +23,7 @@ const fetchLoveBokListActions = userId => {
     });
 };
 
-class LoveBokList extends Component {
+class LoveBokList extends React.Component<Props> {
     componentDidMount() {
         const userId = this.props.match.params.id;
         fetchLoveBokListActions(userId);
@@ -50,6 +56,7 @@ class LoveBokList extends Component {
             return loveList(<Loading />);
         }
 
+        // @ts-ignore
         const boks = loveBoks.map((loveBok, index) => {
             return <Bok bok={loveBok} key={index} />;
         });
@@ -57,13 +64,6 @@ class LoveBokList extends Component {
         return loveList(boks);
     }
 }
-
-LoveBokList.propTypes = {
-    match: ResourceTypes.MATCHER,
-    user: ResourceTypes.USER,
-    loading: PropTypes.bool,
-    loveBoks: PropTypes.arrayOf(ResourceTypes.BOK),
-};
 
 import { connect } from 'react-redux';
 export default connect(state => state)(LoveBokList);

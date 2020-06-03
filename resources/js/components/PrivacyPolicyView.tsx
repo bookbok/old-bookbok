@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
-export class PrivacyPolicyView extends Component {
+export class PrivacyPolicyView extends React.Component {
     componentDidMount() {
+        // @ts-ignore
         document.getElementById('top').scrollIntoView();
     }
 
