@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-const SettingsSubContent = () => {
+const SettingsSubContent: React.FC = () => {
     const settings = [
         { link: '/settings/profile', title: 'アカウント' },
         { link: '/auth/email/verify', title: 'Email検証' },

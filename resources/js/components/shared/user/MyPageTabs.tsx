@@ -2,18 +2,21 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 interface Props {
-    userId: number | string;
+    userId?: number | string;
     isTop?: boolean;
     isUserBooks?: boolean;
-    isLikes: boolean;
-    isLoves: boolean;
-    isFollowers: boolean;
-    isFollowings: boolean;
+    isLikes?: boolean;
+    isLoves?: boolean;
+    isFollowers?: boolean;
+    isFollowings?: boolean;
 }
 
 export class MyPageTabs extends React.Component<Props> {
     render() {
         const userId = this.props.userId;
+        if (userId === null) {
+            return null;
+        }
 
         return (
             <div className="nav-scroll">

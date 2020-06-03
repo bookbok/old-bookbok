@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import * as ResourceTypes from '../resource-types';
 import { Link } from 'react-router-dom';
 import { fetchUsers } from '../actions';
@@ -8,7 +7,11 @@ import { isEmpty } from '../utils';
 import { Loading } from './shared/Loading';
 import DefaultAvatar from './shared/user/DefaultAvatar';
 
-export class UsersView extends Component {
+interface Props {
+    users?: Array<ResourceTypes.User>;
+}
+
+export class UsersView extends React.Component<Props> {
     componentDidMount() {
         store.dispatch(fetchUsers());
     }
@@ -18,6 +21,7 @@ export class UsersView extends Component {
             return <Loading />;
         }
 
+        // @ts-ignore
         const bindedUsers = this.props.users.map((user, i) => (
             <div className="card border-secondary mb-2" key={i}>
                 <div className="card-body d-flex">
@@ -46,7 +50,3 @@ export class UsersView extends Component {
         );
     }
 }
-
-UsersView.propTypes = {
-    users: PropTypes.arrayOf(ResourceTypes.USER),
-};

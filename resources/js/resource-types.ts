@@ -99,6 +99,23 @@ export const USER_BOOKS = PropTypes.shape({
     books: PropTypes.arrayOf(BOOK),
 });
 
+export interface Bok {
+    id: number | string;
+    user_id: number | string;
+    user_book_id: number | string;
+    page_num_begin: number | string,
+    page_num_end: number | string,
+    line_num: number | string,
+    body: string;
+    liked_count: number | string;
+    loved_count: number | string;
+    liked: boolean;
+    loved: boolean;
+    created_at: string;
+    updated_at: string;
+    user_book?: UserBook;
+}
+
 export const BOK = PropTypes.shape({
     id: idType.isRequired,
     user_id: idType.isRequired,
@@ -121,6 +138,17 @@ export const GENRE = PropTypes.shape({
     name: PropTypes.string.isRequired,
 });
 
+export interface Review {
+    id: number | string;
+    title: string;
+    body: string;
+    published_at?: string;
+    user_book_id: number | string;
+    user_id: number | string;
+    created_at: string;
+    updated_at: string;
+}
+
 export const REVIEW = PropTypes.shape({
     id: idType.isRequired,
     body: PropTypes.string,
@@ -128,6 +156,14 @@ export const REVIEW = PropTypes.shape({
     user_book_id: idType.isRequired,
     user_id: idType.isRequired,
 });
+
+export interface UserBook {
+    id: number | string;
+    user_id: number | string;
+    book_id: number | string;
+    reading_status: '0' | '5' | '10' | '15' | '20' | 0 | 5 | 10 | 15 | 20;
+    is_spoiler: boolean;
+}
 
 export const USER_BOOK = PropTypes.shape({
     id: idType.isRequired,

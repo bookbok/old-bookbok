@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import * as React from 'react';
 import * as ResourceTypes from '../../resource-types';
 import { withRouter } from 'react-router-dom';
 import {
@@ -23,6 +22,20 @@ import { MyPageTabs } from '../shared/user/MyPageTabs';
 import UserBookInfo from './UserBookInfo';
 import BackButtonArea from '../shared/BackButtonArea';
 
+interface UserBookWithRelation extends ResourceTypes.UserBook {
+    book: ResourceTypes.Book;
+    boks?: Array<ResourceTypes.Bok>;
+    review?: ResourceTypes.Review;
+}
+
+interface Props {
+    history: ResourceTypes.Route;
+    match: ResourceTypes.Matcher;
+    loading?: boolean;
+    userBookDetail?: UserBookWithRelation;
+    user?: ResourceTypes.User;
+}
+
 const fetchUserBookDetailActions = (userId, userBookId) => {
     store.dispatch(loading());
     Promise.all([fetchUserBookDetail(userId, userBookId), fetchUser(userId)]).then(() => {
@@ -30,7 +43,11 @@ const fetchUserBookDetailActions = (userId, userBookId) => {
     });
 };
 
-class UserBookDetail extends Component {
+class UserBookDetail extends React.Component<Props, any> {
+    private readonly readingStatuses: Array<{ name: string; id: number; intl: string }>;
+    private userId?: number;
+    private userBookId?: number;
+
     constructor(props) {
         super(props);
         this.readingStatuses = [
@@ -130,6 +147,7 @@ class UserBookDetail extends Component {
             return;
         }
 
+        // @ts-ignore
         deleteBok(currentBok.id, this.props.userBookDetail.boks, currentBok);
     }
 
@@ -139,6 +157,7 @@ class UserBookDetail extends Component {
         }
 
         const userBook = this.props.userBookDetail;
+        // @ts-ignore
         const boks = userBook.boks.map(bok => (
             <div className="boks-bok" key={bok.id} id={`boks-${bok.id}`}>
                 <UserDetailBok bok={bok} handleDeleteBok={this.handleDeleteBok} />
@@ -173,16 +192,18 @@ class UserBookDetail extends Component {
                                 レビュー
                                 <div className="float-right">
                                     <ReviewModal
-                                        key={review.updated_at}
+                                        key={review?.updated_at || "review"}
                                         isModalView={isModalView}
                                         review={review}
                                     />
                                 </div>
                             </h3>
-                            <div className="mt-4">
-                                <h4>{review.title}</h4>
-                                {toLines(review.body)}
-                            </div>
+                            { review ? (
+                                <div className="mt-4">
+                                    <h4>{review.title}</h4>
+                                    {toLines(review.body)}
+                                </div>
+                            ) : null }
 
                             <hr />
                             <h3 className="mt-5">
@@ -199,14 +220,6 @@ class UserBookDetail extends Component {
         );
     }
 }
-
-UserBookDetail.propTypes = {
-    history: ResourceTypes.ROUTER,
-    match: ResourceTypes.MATCHER,
-    loading: PropTypes.bool,
-    userBookDetail: ResourceTypes.USER_BOOK,
-    user: ResourceTypes.USER,
-};
 
 import { connect } from 'react-redux';
 import { fetchOnIdUpdateDecorator } from '../../decorators/FetchOnIdUpdateDecorator';
