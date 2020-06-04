@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import * as React from 'react';
 import * as ResourceTypes from '../../resource-types';
 import { store } from '../../store';
 import {
@@ -12,15 +11,30 @@ import {
 import { getAuthUser, execCopy } from '../../utils';
 import { Link } from 'react-router-dom';
 
-export class UserDetailBok extends Component {
+interface UserBookWithUser extends ResourceTypes.UserBook {
+    user?: ResourceTypes.User;
+}
+interface BokWithUserBook extends ResourceTypes.Bok {
+    user_book?: UserBookWithUser;
+}
+interface Props {
+    bok: BokWithUserBook;
+    handleDeleteBok: any;
+    // handleDeleteBok: (...args: any[]) => any;
+}
+
+export class UserDetailBok extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
+        const convertToInt = (value: number | string) => {
+            return typeof value === "string" ? parseInt(value) : value;
+        }
         this.state = {
-            isLiked: this.props.bok.liked == '0' ? false : true,
-            isLoved: this.props.bok.loved == '0' ? false : true,
-            likeCount: parseInt(this.props.bok.liked_count),
-            loveCount: parseInt(this.props.bok.loved_count),
+            isLiked: this.props.bok.liked,
+            isLoved: this.props.bok.loved,
+            likeCount: convertToInt(this.props.bok.liked_count),
+            loveCount: convertToInt(this.props.bok.loved_count),
         };
         this.clickLike = this.clickLike.bind(this);
         this.clickLove = this.clickLove.bind(this);
@@ -28,7 +42,7 @@ export class UserDetailBok extends Component {
     }
 
     makePageViewStr(bok) {
-        let page = null;
+        let page: string | null = null;
         if (bok.page_num_begin !== null) {
             page = 'p' + bok.page_num_begin;
             if (bok.page_num_begin !== bok.page_num_end && bok.page_num_end !== null) {
@@ -39,7 +53,7 @@ export class UserDetailBok extends Component {
     }
 
     makeLineViewStr(bok) {
-        let line = null;
+        let line: string | null = null;
         if (bok.line_num !== null) {
             line = bok.line_num + '行目';
         }
@@ -120,7 +134,7 @@ export class UserDetailBok extends Component {
                     <div className="d-flex flex-column h-100">
                         {/* bok-main-content */}
                         <pre className="userd-bok-user border-bottom d-flex">
-                            <Link to={`/users/${userBook.user_id}`}>{userBook.user.name}</Link>
+                            <Link to={`/users/${userBook?.user_id}`}>{userBook?.user?.name}</Link>
                             <div className="ml-auto dropdown">
                                 <a
                                     className="text-dark"
@@ -187,10 +201,5 @@ export class UserDetailBok extends Component {
         );
     }
 }
-
-UserDetailBok.propTypes = {
-    bok: ResourceTypes.BOK,
-    handleDeleteBok: PropTypes.func.isRequired,
-};
 
 export default UserDetailBok;

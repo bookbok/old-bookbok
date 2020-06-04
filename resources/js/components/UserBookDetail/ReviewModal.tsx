@@ -1,18 +1,24 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import * as React from 'react';
 import * as ResourceTypes from '../../resource-types';
 import { withRouter } from 'react-router-dom';
 import { setReview, reviewRegister } from '../../actions';
 import { getAuthUser, isEmpty } from '../../utils';
 import { store } from '../../store';
 
-class ReviewModal extends Component {
+interface Props {
+    history: ResourceTypes.Route;
+    match: ResourceTypes.Matcher;
+    isModalView: boolean;
+    review?: ResourceTypes.Review;
+}
+
+class ReviewModal extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
         this.state = {
             title: '',
-            body: this.props.review.body,
+            body: this.props.review ? this.props.review.body : '',
             isInvalid: false,
             invalidMessage: '',
         };
@@ -56,12 +62,14 @@ class ReviewModal extends Component {
             })
             .then(res => {
                 store.dispatch(setReview(res));
+                // @ts-ignore
                 $('#ReviewModalCenter').modal('hide'); // レビュー投稿時、モーダルを閉じる
             })
             .catch(() => {});
     }
 
     componentWillUnmount() {
+        // @ts-ignore
         $('#ReviewModalCenter').modal('hide');
     }
 
@@ -83,7 +91,7 @@ class ReviewModal extends Component {
                 <div
                     className="modal fade"
                     id="ReviewModalCenter"
-                    tabIndex="-1"
+                    tabIndex={-1}
                     role="dialog"
                     aria-labelledby="ReviewModalCenterTitle"
                     aria-hidden="true"
@@ -126,7 +134,7 @@ class ReviewModal extends Component {
                                             id="impressions-text"
                                             name="body"
                                             className="form-control"
-                                            rows="10"
+                                            rows={10}
                                             value={this.state.body}
                                             onChange={this.handleChangeReview}
                                             placeholder="1冊を読み終えてどうだったか。これから読む人に伝えたいこと。"
@@ -154,12 +162,5 @@ class ReviewModal extends Component {
         );
     }
 }
-
-ReviewModal.propTypes = {
-    history: ResourceTypes.ROUTER,
-    match: ResourceTypes.MATCHER,
-    isModalView: PropTypes.bool.isRequired,
-    review: ResourceTypes.REVIEW,
-};
 
 export default withRouter(ReviewModal);

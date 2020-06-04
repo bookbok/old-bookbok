@@ -1,8 +1,16 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { getAuthUser } from '../../utils.js';
 
-export class UserBookInfo extends Component {
+interface Props {
+    readingStatuses: Array<{ name: string; id: number; intl: string }>;
+    handleUpdate: any;
+    userId?: number | string;
+    readingStatus: number | string;
+    isSpoiler: boolean;
+}
+
+export class UserBookInfo extends React.Component<Props> {
     render() {
         const currentUser = getAuthUser();
         if (!currentUser || currentUser.id != this.props.userId) {
@@ -65,13 +73,5 @@ export class UserBookInfo extends Component {
         );
     }
 }
-
-UserBookInfo.propTypes = {
-    readingStatuses: PropTypes.array,
-    handleUpdate: PropTypes.func.isRequired,
-    userId: PropTypes.string,
-    readingStatus: PropTypes.string,
-    isSpoiler: PropTypes.bool.isRequired,
-};
 
 export default UserBookInfo;

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import * as React from 'react';
 import * as ResourceTypes from '../../resource-types';
 import { withRouter } from 'react-router-dom';
 import { setBokToUserBook, registerBok } from '../../actions';
@@ -7,7 +6,13 @@ import { getAuthUser, isEmpty } from '../../utils';
 import { store } from '../../store';
 import { ErrorsView } from '../shared/ErrorsView';
 
-class BokModal extends Component {
+interface Props {
+    history: ResourceTypes.Route;
+    match: ResourceTypes.Matcher;
+    isModalView: boolean;
+}
+
+class BokModal extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
@@ -56,6 +61,7 @@ class BokModal extends Component {
                 return res.json();
             })
             .then(json => {
+                // @ts-ignore
                 $('#BokModalCenter').modal('hide'); // レビュー投稿時、モーダルを閉じる
                 store.dispatch(setBokToUserBook(json));
                 this.setState(this.initialState());
@@ -65,7 +71,12 @@ class BokModal extends Component {
 
     // 入力必須ではない項目のデータ制御
     makeBok() {
-        let bok = {
+        let bok: {
+            body: string;
+            page_num_begin?: number;
+            page_num_end?: number;
+            line_num?: number;
+        } = {
             body: this.state.body,
         };
 
@@ -82,6 +93,7 @@ class BokModal extends Component {
     }
 
     componentWillUnmount() {
+        // @ts-ignore
         $('#BokModalCenter').modal('hide'); // 画面遷移時、モーダルを閉じる
     }
 
@@ -89,6 +101,7 @@ class BokModal extends Component {
         if (this.props.isModalView === false) {
             return null;
         }
+
         return (
             <div>
                 <button
@@ -103,7 +116,7 @@ class BokModal extends Component {
                 <div
                     className="modal fade"
                     id="BokModalCenter"
-                    tabIndex="-1"
+                    tabIndex={-1}
                     role="dialog"
                     aria-labelledby="BokModalCenterTitle"
                     aria-hidden="true"
@@ -198,11 +211,5 @@ class BokModal extends Component {
         );
     }
 }
-
-BokModal.propTypes = {
-    history: ResourceTypes.ROUTER,
-    match: ResourceTypes.MATCHER,
-    isModalView: PropTypes.bool.isRequired,
-};
 
 export default withRouter(BokModal);
