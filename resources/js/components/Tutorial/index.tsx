@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import * as ResourceTypes from '../../resource-types';
 import { Link } from 'react-router-dom';
 
@@ -7,8 +7,15 @@ import Tutorial01 from './Tutorial01';
 import Tutorial02 from './Tutorial02';
 import Tutorial03 from './Tutorial03';
 import Tutorial04 from './Tutorial04';
+import { TutorialProps } from './TutorialProps';
 
-class Tutorial extends React.Component {
+interface Props {
+    match: ResourceTypes.Matcher;
+}
+
+class Tutorial extends React.Component<Props> {
+    private tutorials: Array<{ component: React.FC<TutorialProps>; title: string }>;
+
     constructor(props) {
         super(props);
         this.tutorials = [
@@ -60,9 +67,5 @@ class Tutorial extends React.Component {
         );
     }
 }
-
-Tutorial.propTypes = {
-    match: ResourceTypes.MATCHER,
-};
 
 export default Tutorial;
