@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { store } from '../store';
 import {
     requestLike,
@@ -10,23 +9,38 @@ import {
 } from '../actions';
 import { getAuthUser } from '../utils';
 import { Link } from 'react-router-dom';
+import * as ResourceTypes from "../resource-types";
 
-export class Bok extends Component {
+interface UserBookWithUserAndBook extends ResourceTypes.UserBook {
+    user?: ResourceTypes.User;
+    book?: ResourceTypes.Book;
+}
+interface BokWithUserBook extends ResourceTypes.Bok {
+    user_book?: UserBookWithUserAndBook;
+}
+interface Props {
+    bok: BokWithUserBook;
+}
+
+export class Bok extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
+        const convertToInt = (value: number | string) => {
+            return typeof value === "string" ? parseInt(value) : value;
+        }
         this.state = {
-            isLiked: this.props.bok.liked == '0' ? false : true,
-            isLoved: this.props.bok.loved == '0' ? false : true,
-            likeCount: parseInt(this.props.bok.liked_count),
-            loveCount: parseInt(this.props.bok.loved_count),
+            isLiked: this.props.bok.liked,
+            isLoved: this.props.bok.loved,
+            likeCount: convertToInt(this.props.bok.liked_count),
+            loveCount: convertToInt(this.props.bok.loved_count),
         };
         this.clickLike = this.clickLike.bind(this);
         this.clickLove = this.clickLove.bind(this);
     }
 
     makePageViewStr(bok) {
-        let page = null;
+        let page: string | null = null;
         if (bok.page_num_begin !== null) {
             page = 'p' + bok.page_num_begin;
             if (bok.page_num_begin !== bok.page_num_end && bok.page_num_end !== null) {
@@ -37,7 +51,7 @@ export class Bok extends Component {
     }
 
     makeLineViewStr(bok) {
-        let line = null;
+        let line: string | null = null;
         if (bok.line_num !== null) {
             line = bok.line_num + '行目';
         }
@@ -110,8 +124,8 @@ export class Bok extends Component {
             <div className="bok-wrapper mb-3 mb-md-5">
                 <div className="d-flex">
                     <div className="d-flex flex-column book-cover-area">
-                        <Link to={`/books/${bok.user_book.book.id}`}>
-                            <img className="book-cover mx-auto d-block" src={userBook.book.cover} />
+                        <Link to={`/books/${bok?.user_book?.book?.id}`}>
+                            <img className="book-cover mx-auto d-block" src={userBook?.book?.cover} />
                         </Link>
                     </div>
 
@@ -120,8 +134,8 @@ export class Bok extends Component {
                         <div className="d-flex flex-column h-auto">
                             <div className="d-flex border-bottom">
                                 <div className="user-name mr-auto">
-                                    <Link to={`/users/${userBook.user_id}`}>
-                                        {userBook.user.name}
+                                    <Link to={`/users/${userBook?.user_id}`}>
+                                        {userBook?.user?.name}
                                     </Link>
                                 </div>
                             </div>
@@ -162,18 +176,3 @@ export class Bok extends Component {
         );
     }
 }
-
-Bok.propTypes = {
-    bok: PropTypes.shape({
-        id: PropTypes.any,
-        liked: PropTypes.any.isRequired,
-        loved: PropTypes.any.isRequired,
-        liked_count: PropTypes.any.isRequired,
-        loved_count: PropTypes.any.isRequired,
-        page_num_begin: PropTypes.any,
-        page_num_end: PropTypes.any,
-        line_num: PropTypes.any,
-        updated_at: PropTypes.any,
-        user_book: PropTypes.object,
-    }),
-};
