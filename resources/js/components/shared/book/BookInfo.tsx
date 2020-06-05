@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import * as ResourceTypes from '../../../resource-types';
 import { Link } from 'react-router-dom';
 
-/**
- * @param {Object} book
- *   {id,name,cover,description[,author]}を含むオブジェクトを渡す必要がある
- *
- */
-export class BookInfo extends Component {
+interface Props {
+    book: ResourceTypes.Book;
+}
+
+export class BookInfo extends React.Component<Props> {
     render() {
         const book = this.props.book;
 
@@ -32,7 +31,3 @@ export class BookInfo extends Component {
         );
     }
 }
-
-BookInfo.propTypes = {
-    book: ResourceTypes.BOOK.isRequired,
-};

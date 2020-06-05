@@ -1,12 +1,21 @@
-export { toLines } from 'utils-for-jsx';
+import {isObject, isString} from "util";
+
+export { toLines } from './utils-for-jsx';
 
 // オブジェクト、配列が空かどうか判定する
-export function isEmpty(obj) {
-    if (Array.isArray(obj)) {
-        return obj.length <= 0;
-    } else {
-        return !obj || !Object.keys(obj).length;
+// TODO: どうも上手くTypeGuardできない
+type None = null | undefined | Record<never, never> | never[];
+export function isEmpty<T>(value: T | None): value is None {
+    if (value === null || value === undefined) {
+        return true;
+    } else if (Array.isArray(value)) {
+        return value.length === 0;
+    } else if (typeof value === 'object' && value instanceof Object) {
+        return Object.keys(value).length === 0;
+    } else if (typeof value === 'string') {
+        return false;
     }
+    return false;
 }
 
 // ステータスコードが200番代か判定する
@@ -78,20 +87,20 @@ export function getAuthUser() {
  * 200系のレスポンスのみthen句に流れるので、この関数を使った場合then句ではエラーレスポンスはありえない
  * ステータスコードで細かくエラーハンドリングしたい場合、smartFetchを使う必要がある
  */
-export async function wrapFetch(url, { body, method = 'GET', isParse = true } = {}) {
+export async function wrapFetch(url, { body, method = 'GET', isParse = true }: { body: string, method?: string, isParse?: boolean}) {
     const res = await smartFetch(url, { body, method });
 
     if (res.status === 401) {
         throw new Error('[401]Authorization error: ' + res.statusText);
     }
 
-    let json = null;
+    let json: { userMessage? } | null = null;
     if (isParse) {
         json = await res.json();
     }
 
     if (!res.ok) {
-        console.error(json.userMessage);
+        console.error(json?.userMessage);
         throw new Error(`[${res.status}]Fetch error: ` + res.statusText);
     }
 
@@ -103,7 +112,7 @@ export async function wrapFetch(url, { body, method = 'GET', isParse = true } = 
  * ネットワークエラーなどの重大エラー以外はcatchされないので注意
  * 400, 500などのサーバーレスポンスが返ってきても全てthenとして扱われる
  */
-export async function smartFetch(url, { body, method = 'GET' } = {}) {
+export async function smartFetch(url, { body, method = 'GET' }: { body: string, method?: string}) {
     // GETリクエスト時にクエリパラメーターを自動作成する
     if (method === 'GET' && !isEmpty(body)) {
         url += '?' + convertQuery(body);
@@ -112,10 +121,10 @@ export async function smartFetch(url, { body, method = 'GET' } = {}) {
         body = JSON.stringify(body);
     }
 
-    let defaultHeader = {
+    let defaultHeader: { [key: string]: any } = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-    };
+    }
     if (state.token) {
         defaultHeader = {
             ...defaultHeader,
@@ -154,7 +163,9 @@ export function storageAvailable(type) {
     try {
         var storage = window[type],
             x = '__storage_test__';
+        // @ts-ignore
         storage.setItem(x, x);
+        // @ts-ignore
         storage.removeItem(x);
         return true;
     } catch (e) {
@@ -170,6 +181,7 @@ export function storageAvailable(type) {
                 // Firefox
                 e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
             // acknowledge QuotaExceededError only if there's something already stored
+            // @ts-ignore
             storage.length !== 0
         );
     }
