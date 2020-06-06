@@ -1,5 +1,3 @@
-import { isObject, isString } from "util";
-
 export { toLines } from './utils-for-jsx';
 
 // オブジェクト、配列が空かどうか判定する
