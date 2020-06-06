@@ -1,9 +1,8 @@
 export { toLines } from './utils-for-jsx';
 
 // オブジェクト、配列が空かどうか判定する
-// TODO: どうも上手くTypeGuardできない
-type None = null | undefined | Record<never, never> | never[];
-export function isEmpty<T>(value: T | None): value is None {
+type None = null | undefined;
+export function isEmpty(value: unknown): value is None {
     if (value === null || value === undefined) {
         return true;
     } else if (Array.isArray(value)) {
@@ -93,7 +92,10 @@ export async function wrapFetch(url, options: { body?: object, method?: string, 
         throw new Error('[401]Authorization error: ' + res.statusText);
     }
 
-    let json: { userMessage?} | null = null;
+    let json: {
+        status: number | string;
+        userMessage?
+    } | null = null;
     if (isParse) {
         json = await res.json();
     }

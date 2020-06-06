@@ -26,7 +26,9 @@ class EmailVerify extends React.Component<Props, any> {
 
         verifyEmail(url)
             .then(json => {
-                if (successfulStatus(json.status) || !json.status) {
+                if (!json) {
+                    throw new Error('レスポンスが存在しません。APIの仕様を確認してください。')
+                } if (successfulStatus(json.status) || !json.status) {
                     store.dispatch(setAlertMessage('success', { __html: json.userMessage }));
                     this.props.history.push('/login');
                 } else {
@@ -58,7 +60,9 @@ class EmailVerify extends React.Component<Props, any> {
 
         resendVerifyMail(destinationEmail).then(json => {
             // HACK: 200系で帰るときだけstatusが設定されていない場合が多々あるためこのような記法になっている
-            if (successfulStatus(json.status) || !json.status) {
+            if (!json) {
+                throw new Error("レスポンスがありません。");
+            } else if (successfulStatus(json.status) || !json.status) {
                 store.dispatch(setAlertMessage('success', { __html: json.userMessage }));
             } else {
                 store.dispatch(setAlertMessage('warning', { __html: json.userMessage }));

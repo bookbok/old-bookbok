@@ -67,8 +67,7 @@ export class BookDetailView extends React.Component<Props> {
 
     render() {
         const book = this.props.bookDetail;
-        // HACK: TypeGuardが上手くいかないので、一時対応
-        if (!book || isEmpty(book)) {
+        if (isEmpty(book)) {
             return <Loading />;
         }
 
