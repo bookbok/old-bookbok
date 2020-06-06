@@ -87,8 +87,9 @@ export function getAuthUser() {
  * 200系のレスポンスのみthen句に流れるので、この関数を使った場合then句ではエラーレスポンスはありえない
  * ステータスコードで細かくエラーハンドリングしたい場合、smartFetchを使う必要がある
  */
-export async function wrapFetch(url, { body, method = 'GET', isParse = true }: { body: string, method?: string, isParse?: boolean }) {
-    const res = await smartFetch(url, { body, method });
+export async function wrapFetch(url, options: { body?: object, method?: string, isParse?: boolean } = {}) {
+    const { body = {}, method = 'GET', isParse = true } = options
+    const res = await smartFetch(url, body, method);
 
     if (res.status === 401) {
         throw new Error('[401]Authorization error: ' + res.statusText);
@@ -112,13 +113,10 @@ export async function wrapFetch(url, { body, method = 'GET', isParse = true }: {
  * ネットワークエラーなどの重大エラー以外はcatchされないので注意
  * 400, 500などのサーバーレスポンスが返ってきても全てthenとして扱われる
  */
-export async function smartFetch(url, { body, method = 'GET' }: { body: string, method?: string }) {
+export async function smartFetch(url: string, params: object = {}, method: string = 'GET') {
     // GETリクエスト時にクエリパラメーターを自動作成する
-    if (method === 'GET' && !isEmpty(body)) {
-        url += '?' + convertQuery(body);
-    } else if (!isEmpty(body)) {
-        // not get request && body not empty
-        body = JSON.stringify(body);
+    if (method === 'GET' && !isEmpty(params)) {
+        url += '?' + convertQuery(params);
     }
 
     let defaultHeader: { [key: string]: any } = {
@@ -131,10 +129,11 @@ export async function smartFetch(url, { body, method = 'GET' }: { body: string, 
             Authorization: `Bearer ${state.token}`,
         };
     }
+
     const res = await fetch(url, {
         method,
         headers: defaultHeader,
-        body: method === 'GET' ? null : body, // GET時はクエリで代用するため
+        body: method === 'GET' || isEmpty(params) ? null : JSON.stringify(params), // GET時はクエリで代用するため
     }).catch(err => {
         console.error(err);
         throw err;

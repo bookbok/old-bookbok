@@ -12,10 +12,7 @@ export const fetchCurrentUser = () => {
 };
 
 export const putUpdateUser = user => {
-    return utils.smartFetch('/api/auth/user', {
-        method: 'PUT',
-        body: user,
-    });
+    return utils.smartFetch('/api/auth/user', user, 'PUT');
 };
 
 export const requestLogout = () => {
@@ -25,10 +22,7 @@ export const requestLogout = () => {
 };
 
 export const postUser = user => {
-    return utils.smartFetch('/api/auth/register', {
-        method: 'POST',
-        body: user,
-    });
+    return utils.smartFetch('/api/auth/register', user, 'POST');
 };
 
 export const requestVerifyEmail = url => {

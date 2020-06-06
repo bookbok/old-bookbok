@@ -9,17 +9,11 @@ export const fetchUserBook = (userId, userBookId) => {
 };
 
 export const postUserBookFrom = (userId, isbn) => {
-    return utils.smartFetch(`/api/users/${userId}/user_books`, {
-        method: 'POST',
-        body: { isbn: isbn },
-    });
+    return utils.smartFetch(`/api/users/${userId}/user_books`, { isbn: isbn }, 'POST');
 };
 
 export const postUserBooksFrom = (userId, isbnList) => {
-    return utils.smartFetch('/api/import_books', {
-        body: isbnList,
-        method: 'POST',
-    });
+    return utils.smartFetch('/api/import_books', isbnList, 'POST');
 };
 
 /** ネタバレflgや読書状況を更新する */
