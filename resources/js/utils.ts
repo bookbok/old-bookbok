@@ -1,4 +1,4 @@
-import {isObject, isString} from "util";
+import { isObject, isString } from "util";
 
 export { toLines } from './utils-for-jsx';
 
@@ -87,14 +87,14 @@ export function getAuthUser() {
  * 200系のレスポンスのみthen句に流れるので、この関数を使った場合then句ではエラーレスポンスはありえない
  * ステータスコードで細かくエラーハンドリングしたい場合、smartFetchを使う必要がある
  */
-export async function wrapFetch(url, { body, method = 'GET', isParse = true }: { body: string, method?: string, isParse?: boolean}) {
+export async function wrapFetch(url, { body, method = 'GET', isParse = true }: { body: string, method?: string, isParse?: boolean }) {
     const res = await smartFetch(url, { body, method });
 
     if (res.status === 401) {
         throw new Error('[401]Authorization error: ' + res.statusText);
     }
 
-    let json: { userMessage? } | null = null;
+    let json: { userMessage?} | null = null;
     if (isParse) {
         json = await res.json();
     }
@@ -112,7 +112,7 @@ export async function wrapFetch(url, { body, method = 'GET', isParse = true }: {
  * ネットワークエラーなどの重大エラー以外はcatchされないので注意
  * 400, 500などのサーバーレスポンスが返ってきても全てthenとして扱われる
  */
-export async function smartFetch(url, { body, method = 'GET' }: { body: string, method?: string}) {
+export async function smartFetch(url, { body, method = 'GET' }: { body: string, method?: string }) {
     // GETリクエスト時にクエリパラメーターを自動作成する
     if (method === 'GET' && !isEmpty(body)) {
         url += '?' + convertQuery(body);
@@ -151,15 +151,9 @@ export function wrapAction(actionCreator, callback) {
 }
 
 /**
- * ストレージが使用できるか確認する
- *
- * @param string type ストレージタイプ
- *  ex) localStorage or sessionstorage
- * @return bool
- *
- * @see https://developer.mozilla.org/ja/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+ * https://developer.mozilla.org/ja/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
  */
-export function storageAvailable(type) {
+export function storageAvailable(type: 'localStorage' | 'sessionStorage'): boolean {
     try {
         var storage = window[type],
             x = '__storage_test__';
