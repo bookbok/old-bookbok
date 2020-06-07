@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import * as React from 'react';
 
-export class ErrorsView extends Component {
+interface Props {
+    errors: string | Array<any>;
+}
+
+export class ErrorsView extends React.Component<Props> {
     render() {
         const errors = this.props.errors;
         if (!errors) {
@@ -23,7 +26,3 @@ export class ErrorsView extends Component {
         );
     }
 }
-
-ErrorsView.propTypes = {
-    errors: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
-};

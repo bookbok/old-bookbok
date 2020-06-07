@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-class BackButtonArea extends Component {
+interface Props {
+    to: string;
+    text?: string;
+}
+
+class BackButtonArea extends React.Component<Props> {
     render() {
         return (
             <div className="back-button">
@@ -16,10 +20,5 @@ class BackButtonArea extends Component {
         );
     }
 }
-
-BackButtonArea.propTypes = {
-    to: PropTypes.string.isRequired,
-    text: PropTypes.string,
-};
 
 export default BackButtonArea;
