@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import * as React from 'react';
+import * as ResourceTypes from '../../../resource-types';
 import { withRouter } from 'react-router-dom';
 import { storeISBNToUserBookDirect, setAlertMessage } from '../../../actions';
 import { getAuthUser, isEmpty } from '../../../utils';
 import { store } from '../../../store';
 
+interface Props {
+    history: ResourceTypes.Route;
+    btnText?: string;
+}
+
 // ファイル下部でwithRouterに食わせているため、名前を特殊にしている
-class ISBNModal_ extends Component {
+class ISBNModal_ extends React.Component<Props, any> {
     // HACK: サーバー側から帰ってきたちゃんとしたメッセージに置き換える。
     static get INVALID_ISBN_LENGTH() {
         return '入力されたISBNの形式が間違っています';
@@ -22,9 +27,12 @@ class ISBNModal_ extends Component {
 
     componentDidMount() {
         // モーダル展開時に入力欄autofocus
+        // @ts-ignore
         $('#ISBNModal').on('shown.bs.modal', () => {
+            // @ts-ignore
             $('#inputISBN').trigger('focus');
         });
+        // @ts-ignore
         $('[data-toggle="popover"]').popover();
     }
 
@@ -61,6 +69,7 @@ class ISBNModal_ extends Component {
     }
 
     componentWillUnmount() {
+        // @ts-ignore
         $('#ISBNModal').modal('hide'); // hideしないと画面がバグる
     }
 
@@ -97,7 +106,7 @@ class ISBNModal_ extends Component {
                 <div
                     className="modal fade"
                     id="ISBNModal"
-                    tabIndex="-1"
+                    tabIndex={-1}
                     role="dialog"
                     aria-labelledby="ISBNModalTitle"
                     aria-hidden="true"
@@ -166,10 +175,5 @@ class ISBNModal_ extends Component {
         );
     }
 }
-
-ISBNModal_.propTypes = {
-    history: PropTypes.object.isRequired,
-    btnText: PropTypes.string,
-};
 
 export const ISBNModal = withRouter(ISBNModal_);
