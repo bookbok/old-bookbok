@@ -1,8 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+
+interface Props {
+    onClose?: any;
+    timeout?: number;
+    message: {
+        alertType: string;
+        text: any;
+    };
+}
 
 // storeにAlertMessageがあるか確認し、alertType,alertMessageをセットする
-class Alert extends React.Component {
+class Alert extends React.Component<Props> {
+    private timer?: number;
+
+    static defaultProps = {
+        timeout: 5000
+    }
+
     componentDidMount() {
         this.timer = setTimeout(this.props.onClose, this.props.timeout);
     }
@@ -13,22 +27,15 @@ class Alert extends React.Component {
 
     getAlertClass(type) {
         switch (type) {
-            case 'primary':
-                return 'alert-primary'; // skyblue
-            case 'secondary':
-                return 'alert-secondary'; // gray
-            case 'success':
-                return 'alert-success'; // green
-            case 'info':
-                return 'alert-info'; // blue-green
-            case 'warning':
-                return 'alert-warning'; // yellow
-            case 'danger':
-                return 'alert-danger'; // red
-            case 'light':
-                return 'alert-light'; // white
-            case 'dark':
-                return 'alert-dark'; // dark-gray
+            case 'primary': // skyblue
+            case 'secondary': // gray
+            case 'success': // green
+            case 'info': // blue-green
+            case 'warning': // yellow
+            case 'danger': // red
+            case 'light': // white
+            case 'dark': // dark-gray
+                return `alert-${type}`;
             default:
                 return '';
         }
@@ -56,15 +63,5 @@ class Alert extends React.Component {
         );
     }
 }
-
-Alert.propTypes = {
-    onClose: PropTypes.func,
-    timeout: PropTypes.number,
-    message: PropTypes.object.isRequired,
-};
-
-Alert.defaultProps = {
-    timeout: 5000,
-};
 
 export default Alert;
