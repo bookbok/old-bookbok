@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import { getAuthUser } from '../../../utils';
 
-export default class FollowButton extends Component {
+interface Props {
+    userId?: number;
+    followed: boolean;
+    handleClickFollow: any;
+}
+
+export default class FollowButton extends React.Component<Props> {
     render() {
         // 自分
         if (getAuthUser() && getAuthUser().id == this.props.userId) {
@@ -25,9 +30,3 @@ export default class FollowButton extends Component {
         }
     }
 }
-
-FollowButton.propTypes = {
-    userId: PropTypes.number,
-    followed: PropTypes.bool.isRequired,
-    handleClickFollow: PropTypes.func.isRequired,
-};
