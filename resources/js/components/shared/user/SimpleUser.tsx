@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as ResourceTypes from '../../../resource-types';
 import { withRouter } from 'react-router-dom';
@@ -7,7 +7,12 @@ import { getAuthUser, isEmpty } from '../../../utils';
 import FollowButton from './FollowButton';
 import DefaultAvatar from './DefaultAvatar';
 
-class SimpleUser_ extends Component {
+interface Props {
+    history: ResourceTypes.Route;
+    user: ResourceTypes.SimpleUser;
+}
+
+class SimpleUser_ extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
@@ -73,11 +78,6 @@ class SimpleUser_ extends Component {
         );
     }
 }
-
-SimpleUser_.propTypes = {
-    history: ResourceTypes.ROUTER,
-    user: ResourceTypes.SIMPLE_USER.isRequired,
-};
 
 const SimpleUser = withRouter(SimpleUser_);
 export default SimpleUser;
