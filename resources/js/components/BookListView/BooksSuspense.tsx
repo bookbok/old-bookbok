@@ -1,12 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroller';
 import { fetchBookList, fetchMoreBooks } from '../../actions';
 import { isEmpty } from '../../utils';
 import { Loading } from '../shared/Loading';
 import { BookView } from '../BookView';
 
-class BooksSuspense extends React.Component {
+interface Props {
+    books?: {
+        data: Array<any>;
+    };
+    query?: {
+        q?: string;
+        genre?: number | string;
+    };
+}
+
+class BooksSuspense extends React.Component<Props> {
     constructor(props) {
         super(props);
         this.loadMore = this.loadMore.bind(this);
@@ -51,12 +60,5 @@ class BooksSuspense extends React.Component {
         );
     }
 }
-
-BooksSuspense.propTypes = {
-    books: PropTypes.shape({
-        data: PropTypes.array,
-    }),
-    query: PropTypes.string,
-};
 
 export default BooksSuspense;
