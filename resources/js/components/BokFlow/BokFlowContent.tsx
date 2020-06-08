@@ -1,9 +1,13 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
+import * as React from 'react';
 import * as ResourceTypes from '../../resource-types';
 import { Bok } from '../Bok';
 
-class BokFlowContent extends React.Component {
+interface Props {
+    bokFlow: Array<ResourceTypes.Bok>;
+    currentUser: ResourceTypes.CurrentUser;
+}
+
+class BokFlowContent extends React.Component<Props> {
     render() {
         const { bokFlow, currentUser } = this.props;
         return (
@@ -26,10 +30,5 @@ class BokFlowContent extends React.Component {
         );
     }
 }
-
-BokFlowContent.propTypes = {
-    bokFlow: PropTypes.arrayOf(ResourceTypes.BOK).isRequired,
-    currentUser: ResourceTypes.CURRENT_USER.isRequired,
-};
 
 export default BokFlowContent;
