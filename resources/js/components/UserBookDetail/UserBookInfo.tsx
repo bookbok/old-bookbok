@@ -1,6 +1,5 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import { getAuthUser } from '../../utils.js';
+import { getAuthUser } from '../../utils';
 
 interface Props {
     readingStatuses: Array<{ name: string; id: number; intl: string }>;
