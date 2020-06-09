@@ -3,7 +3,7 @@ import * as React from 'react';
 import { getAuthUser } from '../../../utils';
 
 interface Props {
-    userId?: number;
+    userId?: number | string;
     followed: boolean;
     handleClickFollow: any;
 }
