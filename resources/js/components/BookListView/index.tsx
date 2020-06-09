@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import * as ResourceTypes from '../../resource-types';
 import { connect } from 'react-redux';
@@ -12,7 +12,14 @@ import { Loading } from '../shared/Loading';
 import { ISBNModal } from '../shared/book/ISBNModal';
 import BooksSuspense from './BooksSuspense';
 
-class BookListView extends Component {
+interface Props {
+    genres?: Array<ResourceTypes.Genre>;
+    books?: {
+        data: Array<any>;
+    };
+}
+
+class BookListView extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
@@ -56,19 +63,14 @@ class BookListView extends Component {
                     </div>
                     <div className="mt-4 book-list-wrapper">
                         {/* async component */}
-                        <Suspense maxDuration={1000} fallback={<Loading />}>
+                        <React.Suspense fallback={<Loading />}>
                             <BooksSuspense books={this.props.books} query={this.state} />
-                        </Suspense>
+                        </React.Suspense>
                     </div>
                 </div>
             </div>
         );
     }
 }
-
-BookListView.propTypes = {
-    genres: PropTypes.arrayOf(ResourceTypes.GENRE),
-    books: PropTypes.arrayOf(ResourceTypes.BOOK),
-};
 
 export default withRouter(connect(state => state)(BookListView));
