@@ -143,6 +143,11 @@ export const BOK = PropTypes.shape({
     user_book: PropTypes.object,
 });
 
+export interface Genre {
+    id: number | string;
+    name: string;
+}
+
 export const GENRE = PropTypes.shape({
     id: idType.isRequired,
     name: PropTypes.string.isRequired,
