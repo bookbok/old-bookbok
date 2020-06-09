@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-export class Search extends Component {
+interface Props {
+    handleSubmit: any;
+}
+
+export class Search extends React.Component<Props, any> {
     constructor(props) {
         super(props);
 
@@ -31,7 +34,3 @@ export class Search extends Component {
         );
     }
 }
-
-Search.propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
-};

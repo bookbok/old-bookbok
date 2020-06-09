@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import { fetchBookList, fetchGenres } from '../../actions';
 import { store } from '../../store';
 
-//import { ConnectedGenres } from "../../containers";
 import Genres from './Genres';
 import { Search } from './Search';
 import { Loading } from '../shared/Loading';
