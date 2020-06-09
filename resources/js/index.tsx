@@ -7,7 +7,7 @@ import { store } from './store';
 import { storageAvailable } from './utils';
 import { setAuthToken, getLoggedinUser, preparedLogin } from './actions';
 
-const view: React.FunctionComponent = () => (
+const view: React.ReactElement = (
     <Provider store={store}>
         <App />
     </Provider>
