@@ -162,6 +162,7 @@ export interface Review {
     user_id: number | string;
     created_at: string;
     updated_at: string;
+    user_name?: string;
 }
 
 export const REVIEW = PropTypes.shape({

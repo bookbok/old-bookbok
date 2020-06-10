@@ -76,7 +76,7 @@ export class BookDetailView extends React.Component<Props> {
             <div key={review.id}>
                 <div className="card p-2">
                     <pre className="userd-bok-user border-bottom">
-                        <Link to={`/users/${review.user_id}`}>{review.title}</Link>
+                        <Link to={`/users/${review.user_id}`}>{review.user_name}</Link>
                         &nbsp;さんのレビュー
                     </pre>
                     <pre className="userd-bok-body mt-2 mr-2">{review.body}</pre>
