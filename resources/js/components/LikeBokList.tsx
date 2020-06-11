@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import * as ResourceTypes from '../resource-types';
 import { fetchLikeBoks, fetchUser, loading, loaded } from '../actions';
 import { store } from '../store';
