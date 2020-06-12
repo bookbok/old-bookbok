@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Reaction;
 use App\User;
-use Illuminate\Http\Request;
 
 class ReactionController extends Controller
 {
