@@ -1,7 +1,11 @@
 import * as types from './types';
 import { RootState } from './resource-types';
 
-export function rootReducer(state: RootState = { isPrepared: false }, action) {
+const initialState: RootState = {
+    isPrepared: false
+}
+
+export function rootReducer(state: RootState = initialState, action) {
     switch (action.type) {
         case types.SET_ALERT_MESSAGE:
             return { ...state, alertView: action.alertView };

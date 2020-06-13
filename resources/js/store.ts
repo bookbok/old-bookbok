@@ -4,4 +4,6 @@ import thunkMiddleware from 'redux-thunk';
 // import { composeWithDevTools } from "redux-devtools-extension";
 import { rootReducer } from './reducers';
 
+// HACK: createStoreの引数にinitialStateを設定し、その他型を適切に設定しないとエラーが出る。
+// @ts-ignore
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
