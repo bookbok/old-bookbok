@@ -2,6 +2,7 @@ import { store } from './store';
 import * as utils from './utils';
 import * as types from './types';
 import * as api from './api';
+import {isEmpty} from "./utils";
 
 /**
  * ==== Root actions ====
@@ -41,6 +42,9 @@ export const fetchBokFlow = () => async dispatch => {
 export const setAuthToken = token => ({ type: types.SET_AUTH_TOKEN, token });
 export const requestLogin = (loginUser, history) => {
     return api.requestLogin(loginUser).then(json => {
+        if (isEmpty(json)) {
+            throw new Error();
+        }
         store.dispatch(setAuthToken(json.token));
         store.dispatch(getLoggedinUser());
 

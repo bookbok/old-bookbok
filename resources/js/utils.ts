@@ -94,7 +94,8 @@ export async function wrapFetch(url, options: { body?: object, method?: string, 
 
     let json: {
         status: number | string;
-        userMessage?
+        userMessage?;
+        [extraProps: string]: any; // その他の値も許可する
     } | null = null;
     if (isParse) {
         json = await res.json();

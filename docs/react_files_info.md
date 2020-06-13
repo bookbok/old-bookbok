@@ -29,7 +29,7 @@
 内外部とのstateやりとりがあるコンポーネントは基本的にContainerで加工する必要がある。
 
 ### 場所
-`resources/js/containers.js`に書かれている。
+`resources/js/containers.ts`に書かれている。
 同一ファイル内でそれぞれの部品ごとに加工されている。
 いずれ適切な大きさを保つように、ファイル分割をするかも。
 
@@ -45,7 +45,7 @@ typeとはreducerがどのようにstateを加工すべきか支持するため�
 外部のAPIから値を取得して、別のactionに渡す役割も持っている場合もある。
 
 ### 場所
-`resources/js/actions.js`に書かれている。
+`resources/js/actions.ts`に書かれている。
 actionはそれぞれ`export const`で書かれていることが多い。
 action内部でactionを使う場合は、dispatchを渡していることもある。
 
