@@ -5,8 +5,10 @@
         "es6": true,
         "jquery": true
     },
-    "parser": "babel-eslint",
+    "parser": "@typescript-eslint/parser",
     "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:prettier/recommended",
@@ -32,7 +34,8 @@
     },
     "plugins": [
         "react",
-        "prettier"
+        "prettier",
+        "@typescript-eslint"
     ],
     "rules": {
          "no-console": 0,
