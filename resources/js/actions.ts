@@ -2,7 +2,7 @@ import { store } from './store';
 import * as utils from './utils';
 import * as types from './types';
 import * as api from './api';
-import {isEmpty} from "./utils";
+import { isEmpty } from './utils';
 
 /**
  * ==== Root actions ====
