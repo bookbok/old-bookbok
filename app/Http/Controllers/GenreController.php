@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Genre;
+use App\Models\Genre;
 
 class GenreController extends Controller
 {

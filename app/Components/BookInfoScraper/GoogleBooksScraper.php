@@ -3,7 +3,7 @@
 namespace App\Components\BookInfoScraper;
 
 use GuzzleHttp\Client;
-use App\Book;
+use App\Models\Book;
 
 class GoogleBooksScraper implements ScraperInterface
 {
@@ -19,9 +19,9 @@ class GoogleBooksScraper implements ScraperInterface
 
     /**
      * 著者情報の整形処理
-     * 
+     *
      * @param $bookInfoAuthor
-     * 
+     *
      * @return $consAuthors | $bookInfoAuthor
      *   引数に渡されたものが配列であれば文字列に連結して返す。
      * 　配列でない場合はそのまま返す。
@@ -39,7 +39,7 @@ class GoogleBooksScraper implements ScraperInterface
 
     /**
      * タイトル情報整形処理
-     * 
+     *
      * @return string
      *   サブタイトルがあれば「:」で連結して返す。
      * 　なければ、タイトルをそのまま返す。
@@ -59,7 +59,7 @@ class GoogleBooksScraper implements ScraperInterface
      * @param string $isbn
      *  正規化されたISBN
      *
-     * @return App\Book | null
+     * @return Book | null
      *  戻り値があればApp\Bookにして返す。
      *  なかった場合はnullを返す。
      */

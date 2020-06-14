@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Review;
-use App\UserBook;
+use App\Models\User;
+use App\Models\Review;
+use App\Models\UserBook;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -15,8 +15,8 @@ class ReviewPolicy
     /**
      * Determine whether the user can view the review.
      *
-     * @param  \App\User  $user
-     * @param  \App\Review  $review
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Review  $review
      * @return mixed
      */
     public function view(User $user, Review $review)
@@ -27,8 +27,8 @@ class ReviewPolicy
     /**
      * Determine whether the user can create reviews.
      *
-     * @param  \App\User  $user
-     * @param  \App\UserBook  $userBook
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\UserBook  $userBook
      * @return mixed
      */
     public function create(User $user, UserBook $userBook)
@@ -42,8 +42,8 @@ class ReviewPolicy
     /**
      * Determine whether the user can update the review.
      *
-     * @param  \App\User  $user
-     * @param  \App\Review  $review
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Review  $review
      * @return mixed
      */
     public function update(User $user, Review $review)
@@ -54,8 +54,8 @@ class ReviewPolicy
     /**
      * Determine whether the user can delete the review.
      *
-     * @param  \App\User  $user
-     * @param  \App\Review  $review
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Review  $review
      * @return mixed
      */
     public function delete(User $user, Review $review)
@@ -66,8 +66,8 @@ class ReviewPolicy
     /**
      * Determine whether the user can restore the review.
      *
-     * @param  \App\User  $user
-     * @param  \App\Review  $review
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Review  $review
      * @return mixed
      */
     public function restore(User $user, Review $review)
@@ -78,8 +78,8 @@ class ReviewPolicy
     /**
      * Determine whether the user can permanently delete the review.
      *
-     * @param  \App\User  $user
-     * @param  \App\Review  $review
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Review  $review
      * @return mixed
      */
     public function forceDelete(User $user, Review $review)

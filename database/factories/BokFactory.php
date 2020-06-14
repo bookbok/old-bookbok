@@ -1,16 +1,21 @@
 <?php
 
 use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factory;
+use App\Models\Bok;
+use App\Models\User;
+use App\Models\UserBook;
 
-$factory->define(App\Bok::class, function (Faker $faker) {
+/** @var Factory $factory */
+$factory->define(Bok::class, function (Faker $faker) {
     $pageEnd = $faker->numberBetween($min = 1, $max = 1000);
-    $user = factory(App\User::class)->create();
+    $user = factory(User::class)->create();
     return [
         'user_id' => function () use ($user) {
             return $user->id;
         },
         'user_book_id' => function () use ($user) {
-            return factory(App\UserBook::class)->create([
+            return factory(UserBook::class)->create([
                 'user_id' => $user->id,
             ])->id;
         },

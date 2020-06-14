@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Models\Role;
 
 class AddRoleToUsers extends Migration
 {
@@ -14,7 +15,7 @@ class AddRoleToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('role_id')->after('password')->default(\App\Role::NORMAL);
+            $table->unsignedInteger('role_id')->after('password')->default(Role::NORMAL);
             $table->foreign('role_id')
                 ->references('id')->on('roles');
         });

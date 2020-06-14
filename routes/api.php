@@ -74,9 +74,9 @@ Route::delete('user_books/{userBook}', 'UserBookController@delete')->middleware(
  *
  */
 Route::post('user_books/{userBook}/review', 'ReviewController@store')
-    ->middleware('auth:api', 'can:create,App\Review,userBook');
+    ->middleware('auth:api', 'can:create,App\Models\Review,userBook');
 Route::put('user_books/{userBook}/review', 'ReviewController@store')
-    ->middleware('auth:api', 'can:create,App\Review,userBook');
+    ->middleware('auth:api', 'can:create,App\Models\Review,userBook');
 
 /**
  * Resource: Bok
@@ -84,7 +84,7 @@ Route::put('user_books/{userBook}/review', 'ReviewController@store')
  */
 Route::get('user_books/{userBookId}/boks', 'BokController@index');
 Route::post('user_books/{userBook}/boks', 'BokController@store')
-    ->middleware('auth:api', 'can:create,App\Bok,userBook');
+    ->middleware('auth:api', 'can:create,App\Models\Bok,userBook');
 Route::delete('boks/{bok}', 'BokController@delete')
     ->middleware('auth:api', 'can:delete,bok');
 

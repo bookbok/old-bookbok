@@ -8,11 +8,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\BokFlowController;
-use App\User;
-use App\Book;
-use App\Bok;
-use App\UserBook;
-use App\Follower;
+use App\Models\User;
+use App\Models\Bok;
+use App\Models\UserBook;
+use App\Models\Follower;
 
 class BokFlowControllerTest extends TestCase
 {

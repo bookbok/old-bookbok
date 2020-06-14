@@ -8,8 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\GenreController;
-use App\User;
-use App\Genre;
+use App\Models\Genre;
 
 class GenreControllerTest extends TestCase
 {

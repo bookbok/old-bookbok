@@ -1,6 +1,9 @@
 <?php
 
 use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factory;
+use App\Models\Follower;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +16,14 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Follower::class, function (Faker $faker) {
+/** @var Factory $factory */
+$factory->define(Follower::class, function (Faker $faker) {
     return [
         'user_id' => function () {
-            return factory(App\User::class)->create()->id;
+            return factory(User::class)->create()->id;
         },
         'target_id' => function () {
-            return factory(App\User::class)->create()->id;
+            return factory(User::class)->create()->id;
         },
         'created_at' => now(),
         'updated_at' => now(),

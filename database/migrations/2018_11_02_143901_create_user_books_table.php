@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Models\UserBook;
 
 class CreateUserBooksTable extends Migration
 {
@@ -17,7 +18,7 @@ class CreateUserBooksTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('book_id');
-            $table->integer('reading_status')->default(App\UserBook::READING_STATUS['none']);
+            $table->integer('reading_status')->default(UserBook::READING_STATUS['none']);
             $table->timestamps();
 
             $table->foreign('user_id')

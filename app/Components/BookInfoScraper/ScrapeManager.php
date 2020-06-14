@@ -3,9 +3,10 @@
 namespace App\Components\BookInfoScraper;
 
 use App\Components\ISBN;
+use App\Models\Book;
 use Illuminate\Support\ServiceProvider;
 use GuzzleHttp\Client;
-use App\Genre;
+use App\Models\Genre;
 
 /**
  * 外部のAPIを通じて書籍情報を取得するコンポーネント
@@ -35,11 +36,11 @@ class ScrapeManager
 
     /**
      * 楽天ブックスAPIを利用してジャンル情報を取得する
-     * 
+     *
      * @param string $isbn
      * 　検索対象ISBN。
      * 　正規化されたものを受け取ることを前提とする。
-     * 
+     *
      * @return int
      * 　ジャンルID
      */
@@ -64,8 +65,8 @@ class ScrapeManager
      *  検索対象ISBN。
      *  ISBN10の場合、プレフィックス978のISBN13に変換して検索する。
      *
-     * @return  \App\Book|false
-     *  見つかった場合はApp\Bookモデルを返す。
+     * @return  Book|false
+     *  見つかった場合はBookモデルを返す。
      *  見つからなかった場合はfalseを返す
      *
      * @throws  \InvalidArgumentException

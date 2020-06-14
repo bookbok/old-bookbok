@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\UserBook;
-use App\Book;
+use App\Models\UserBook;
+use App\Models\Book;
 use App\Components\BookInfoScraper\ScrapeManager;
 use App\Http\Requests\ImportBookRequest;
 

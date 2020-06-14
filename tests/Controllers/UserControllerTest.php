@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\UserController;
-use App\User;
+use App\Models\User;
 
 class UserControllerTest extends TestCase
 {

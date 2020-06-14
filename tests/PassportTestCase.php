@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Passport\ClientRepository;
 use Illuminate\Support\Facades\DB;
 
-use App\User;
+use App\Models\User;
 
 class PassportTestCase extends TestCase
 {

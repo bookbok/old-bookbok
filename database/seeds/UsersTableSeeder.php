@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use App\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         // created_at, updated_at is random
-        App\User::create([
+        User::create([
             'name' => 'admin',
             'email' => 'admin@example.com',
             'email_verified_at' => Carbon::now()->subDays(1),
@@ -24,7 +25,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => Carbon::now()->subDays(32),
         ]);
 
-        App\User::create([
+        User::create([
             'name' => 'test-staff',
             'email' => 'staff@example.com',
             'email_verified_at' => Carbon::now()->subDays(1),

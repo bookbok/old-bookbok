@@ -8,10 +8,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\ReactionController;
-use App\User;
-use App\UserBook;
-use App\Bok;
-use App\Reaction;
+use App\Models\User;
+use App\Models\UserBook;
+use App\Models\Bok;
+use App\Models\Reaction;
 
 class ReactionControllerTest extends TestCase
 {

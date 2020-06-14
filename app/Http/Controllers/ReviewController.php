@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Review;
-use App\UserBook;
+use App\Models\Review;
+use App\Models\UserBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -15,7 +15,7 @@ class ReviewController extends Controller
      * Reviewの作成、または更新をするAPI
      *
      * @param  \App\Http\Requests\ReviewRequest  $request
-     * @param  \App\UserBook  $userBook
+     * @param  \App\Models\UserBook  $userBook
      * @return \Illuminate\Http\Response
      *   ReviewのインスタンスJSON
      */

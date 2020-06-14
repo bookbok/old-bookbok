@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\UserBook;
+use App\Models\User;
+use App\Models\UserBook;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -14,8 +14,8 @@ class UserBookPolicy
     /**
      * Determine whether the user can view the user book.
      *
-     * @param  \App\User  $user
-     * @param  \App\UserBook  $userBook
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\UserBook  $userBook
      * @return mixed
      */
     public function view(User $user, UserBook $userBook)
@@ -26,7 +26,7 @@ class UserBookPolicy
     /**
      * Determine whether the user can create user books.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function create(User $user, User $userBookOwner)
@@ -40,8 +40,8 @@ class UserBookPolicy
     /**
      * Determine whether the user can update the user book.
      *
-     * @param  \App\User  $user
-     * @param  \App\UserBook  $userBook
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\UserBook  $userBook
      * @return mixed
      */
     public function update(User $user, UserBook $userBook)
@@ -55,8 +55,8 @@ class UserBookPolicy
     /**
      * Determine whether the user can delete the user book.
      *
-     * @param  \App\User  $user
-     * @param  \App\UserBook  $userBook
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\UserBook  $userBook
      * @return mixed
      */
     public function delete(User $user, UserBook $userBook)
@@ -70,8 +70,8 @@ class UserBookPolicy
     /**
      * Determine whether the user can restore the user book.
      *
-     * @param  \App\User  $user
-     * @param  \App\UserBook  $userBook
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\UserBook  $userBook
      * @return mixed
      */
     public function restore(User $user, UserBook $userBook)
@@ -82,8 +82,8 @@ class UserBookPolicy
     /**
      * Determine whether the user can permanently delete the user book.
      *
-     * @param  \App\User  $user
-     * @param  \App\UserBook  $userBook
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\UserBook  $userBook
      * @return mixed
      */
     public function forceDelete(User $user, UserBook $userBook)

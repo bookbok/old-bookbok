@@ -14,7 +14,7 @@ class UserController extends Controller
      * @param   Request  $request
      *  リクエスト
      *
-     * @return  \App\User
+     * @return  \App\Models\User
      */
     public function show(Request $request)
     {
@@ -30,7 +30,7 @@ class UserController extends Controller
      * @param   UserUpdateRequest $request
      *  リクエスト
      *
-     * @return  \App\User
+     * @return  \App\Models\User
      */
     public function update(UserUpdateRequest $request)
     {

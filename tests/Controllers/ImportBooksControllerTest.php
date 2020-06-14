@@ -8,9 +8,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\ImportBooksController;
-use App\User;
-use App\Book;
-use App\Http\Requests\BokRequest;
+use App\Models\User;
+use App\Models\Book;
 use App\Components\BookInfoScraper\ScrapeManager;
 use App\Http\Requests\ImportBookRequest;
 

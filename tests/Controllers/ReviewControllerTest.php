@@ -8,9 +8,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\ReviewController;
-use App\User;
-use App\Review;
-use App\UserBook;
+use App\Models\User;
+use App\Models\Review;
+use App\Models\UserBook;
 use App\Http\Requests\ReviewRequest;
 
 class ReviewControllerTest extends TestCase

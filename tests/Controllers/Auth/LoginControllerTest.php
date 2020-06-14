@@ -10,9 +10,7 @@ use Laravel\Passport\ClientRepository;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Auth\LoginController;
-use App\User;
-use App\Bok;
-use App\UserBook;
+use App\Models\User;
 use App\Http\Requests\LoginRequest;
 
 class LoginControllerTest extends TestCase
