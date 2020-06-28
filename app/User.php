@@ -78,14 +78,13 @@ class User extends Authenticatable implements MustVerifyEmail
             $authId = 0;
         }
 
-        return $this->boks()
-            ->with([
-                'userBook:id,user_id,book_id',
-                'userBook.book:id,name,cover',
-                'userBook.user:id,name,avatar',
-            ])->whereHas('reactions', function($q) {
-                $q->isLiked(); // likeされているものをフィルタリング
-            })->get();
+        return Bok::with([
+            'userBook:id,user_id,book_id',
+            'userBook.book:id,name,cover',
+            'userBook.user:id,name,avatar',
+        ])->whereHas('reactions', function($q) {
+            $q->where('user_id', $this->id)->isLiked(); // likeされているものをフィルタリング
+        })->get();
     }
 
     public function loves(){
@@ -94,14 +93,13 @@ class User extends Authenticatable implements MustVerifyEmail
             $authId = 0;
         }
 
-        return $this->boks()
-            ->with([
-                'userBook:id,user_id,book_id',
-                'userBook.book:id,name,cover',
-                'userBook.user:id,name,avatar',
-            ])->whereHas('reactions', function($q) {
-                $q->isLoved(); // loveされているものをフィルタリング
-            })->get();
+        return Bok::with([
+            'userBook:id,user_id,book_id',
+            'userBook.book:id,name,cover',
+            'userBook.user:id,name,avatar',
+        ])->whereHas('reactions', function($q) {
+            $q->where('user_id', $this->id)->isLoved(); // loveされているものをフィルタリング
+        })->get();
     }
 
     /**

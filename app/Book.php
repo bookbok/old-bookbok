@@ -43,7 +43,7 @@ class Book extends Model
             ->limit(5)
             ->get([
                 'reviews.*',
-                'users.name',
+                'users.name as user_name',
             ]);
     }
 
