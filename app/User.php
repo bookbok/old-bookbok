@@ -78,27 +78,13 @@ class User extends Authenticatable implements MustVerifyEmail
             $authId = 0;
         }
 
-        return $this->boks()
-            ->with([
-                'userBook:id,user_id,book_id',
-                'userBook.book:id,name,cover',
-                'userBook.user:id,name,avatar',
-            ])->withCount([
-                'reactions as liked_count' => function($q2) {
-                    $q2->isLiked();
-                },
-                'reactions as loved_count' => function($q2) {
-                    $q2->isLoved();
-                },
-                'reactions as liked' => function($q2) use($authId) {
-                    $q2->isLiked()->where('user_id', $authId);
-                },
-                'reactions as loved' => function($q2) use($authId) {
-                    $q2->isLoved()->where('user_id', $authId);
-                },
-            ])->whereHas('reactions', function($q) {
-                $q->isLiked(); // likeされているものをフィルタリング
-            })->get();
+        return Bok::with([
+            'userBook:id,user_id,book_id',
+            'userBook.book:id,name,cover',
+            'userBook.user:id,name,avatar',
+        ])->whereHas('reactions', function($q) {
+            $q->where('user_id', $this->id)->isLiked(); // likeされているものをフィルタリング
+        })->get();
     }
 
     public function loves(){
@@ -107,27 +93,13 @@ class User extends Authenticatable implements MustVerifyEmail
             $authId = 0;
         }
 
-        return $this->boks()
-            ->with([
-                'userBook:id,user_id,book_id',
-                'userBook.book:id,name,cover',
-                'userBook.user:id,name,avatar',
-            ])->withCount([
-                'reactions as liked_count' => function($q2) {
-                    $q2->isLiked();
-                },
-                'reactions as loved_count' => function($q2) {
-                    $q2->isLoved();
-                },
-                'reactions as liked' => function($q2) use($authId) {
-                    $q2->isLiked()->where('user_id', $authId);
-                },
-                'reactions as loved' => function($q2) use($authId) {
-                    $q2->isLoved()->where('user_id', $authId);
-                },
-            ])->whereHas('reactions', function($q) {
-                $q->isLoved(); // loveされているものをフィルタリング
-            })->get();
+        return Bok::with([
+            'userBook:id,user_id,book_id',
+            'userBook.book:id,name,cover',
+            'userBook.user:id,name,avatar',
+        ])->whereHas('reactions', function($q) {
+            $q->where('user_id', $this->id)->isLoved(); // loveされているものをフィルタリング
+        })->get();
     }
 
     /**

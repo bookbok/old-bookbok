@@ -111,6 +111,7 @@ return [
     'unique'               => ':attributeは既に存在します。',
     'uploaded'             => ':attributeのアップロードに失敗しました。',
     'url'                  => ':attributeを正しい書式にしてください。',
+    'isbn'                 => ':attributeは10桁か13桁のISBN規格で入力してください。',
 
     /*
     |--------------------------------------------------------------------------
@@ -148,7 +149,8 @@ return [
         'body' => '本文',
         'page_num_begin' => '開始ページ',
         'page_num_end' => '終了ページ',
-        'line_num' => '行番号'
+        'line_num' => '行番号',
+        'isbn' => 'ISBN',
     ],
 
 ];

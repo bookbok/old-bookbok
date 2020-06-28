@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -20,37 +19,9 @@ class BookController extends Controller
     {
         [$queries, $genres] = $this->normalizeSearchParameters($request);
 
-        $likeConds = array_map(
-            function($like){
-                return '%' . addcslashes($like, '_%') . '%';
-            },
-            $queries
-        );
-
-        $builder = Book::orderBy('isbn');
-
-        // もしキーワードが設定されていたら
-        // WHERE
-        //  (name LIKE '%FOO%' OR author LIKE '%FOO%')
-        //  AND (name LIKE '%BAR%' OR author LIKE '%BAR%')
-        // というSQLを組み立てる
-        if (!empty($queries)) {
-            foreach ($likeConds as $cond) {
-                $builder->where(function ($builder) use ($cond) {
-                    $builder
-                        ->orWhere('name', 'LIKE', $cond)
-                        ->orWhere('author', 'LIKE', $cond)
-                    ;
-                });
-            }
-        }
-
-        if (!empty($genres)) {
-            $builder->whereIn('genre_id', $genres);
-        }
-
-        $books = $builder->paginate(24)
-                         ->appends($request->only(['q', 'genres']));
+        $books = Book::searchBookBy($queries, $genres)
+            ->paginate(24)
+            ->appends($request->only(['q', 'genres']));
 
         return response()->json($books);
     }
@@ -63,29 +34,12 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        $book->setVisible([
-            'id',
-            'isbn',
-            'name',
-            'description',
-            'cover',
-            'author',
-            'genre_id',
-        ]);
-
-        $latestReviewPosts = DB::table('user_book')
-                                ->where('user_book.book_id', '=', $book->id)
-                                ->join('reviews', 'user_book.id', '=', 'reviews.user_book_id')
-                                ->join('users', 'users.id', '=', 'reviews.user_id')
-                                ->orderby('reviews.updated_at', 'DESC')
-                                ->limit(5)
-                                ->get(['reviews.id', 'reviews.user_id', 'users.name', 'reviews.user_book_id', 'reviews.title', 'reviews.body', 'reviews.updated_at'])
-                                ->toArray();
+        $recentReviews = Book::findRecentReviews($book->id);
 
         return response()->json(array_merge(
             $book->toArray(),
-            ["reviews" => $latestReviewPosts]
-          ));
+            ["reviews" => $recentReviews]
+        ));
     }
 
     /**
@@ -104,8 +58,8 @@ class BookController extends Controller
         ]);
 
         $errors    = $validator->errors();
-        $query     = $errors->has('q')         ? ''   : $request->query('q', '');
-        $genres    = $errors->has('genres')    ? []   : $request->query('genres', []);
+        $query     = $errors->has('q')      ? '' : $request->query('q', '');
+        $genres    = $errors->has('genres') ? [] : $request->query('genres', []);
 
         $queries = array_filter(
             explode(

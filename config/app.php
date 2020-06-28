@@ -175,6 +175,11 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\BookInfoScraperServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+
+        /**
+         * Validators
+         */
+        App\Providers\ISBNValidationServiceProvider::class,
     ],
 
     /*

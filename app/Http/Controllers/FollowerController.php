@@ -87,7 +87,7 @@ class FollowerController extends Controller
 
     public function unFollow(User $user, User $targetUser)
     {
-        Follower::where('user_id', $user->id)->where('target_id', $targetUser->id)->delete();
-        return response()->json([], 200);
+        Follower::whereFromForeignKeys($user->id, $targetUser->id)->delete();
+        return response()->json([]);
     }
 }
