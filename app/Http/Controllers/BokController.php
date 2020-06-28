@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\UserBook;
-use App\Bok;
-use App\User;
-use App\Reaction;
+use App\Models\UserBook;
+use App\Models\Bok;
 use Carbon\Carbon;
 use App\Http\Requests\BokRequest;
 

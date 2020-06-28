@@ -8,8 +8,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\FollowerController;
-use App\User;
-use App\Follower;
+use App\Models\User;
+use App\Models\Follower;
 
 class FollowerControllerTest extends TestCase
 {

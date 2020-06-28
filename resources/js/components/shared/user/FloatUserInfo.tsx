@@ -6,7 +6,7 @@ import { getAuthUser } from '../../../utils';
 import { requestFollow, requestUnFollow, setAlertMessage } from '../../../actions';
 import FollowButton from './FollowButton';
 import DefaultAvatar from './DefaultAvatar';
-import * as ResourceTypes from "../../../resource-types";
+import * as ResourceTypes from '../../../resource-types';
 
 interface Props {
     user: ResourceTypes.User;
@@ -61,7 +61,7 @@ export class FloatUserInfo_ extends React.Component<Props, any> {
             <div className="sub-content card">
                 <div className="d-flex">
                     <div>
-                        <Link to={`/users/{user.id}`} className="text-body">
+                        <Link to={`/users/${user.id}`} className="text-body">
                             {user.avatar ? (
                                 <img src={user.avatar} className="user-info-avatar" />
                             ) : (

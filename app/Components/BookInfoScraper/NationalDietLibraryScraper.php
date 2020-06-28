@@ -3,7 +3,7 @@
 namespace App\Components\BookInfoScraper;
 
 use GuzzleHttp\Client;
-use App\Book;
+use App\Models\Book;
 
 class NationalDietLibraryScraper implements ScraperInterface
 {
@@ -66,8 +66,8 @@ class NationalDietLibraryScraper implements ScraperInterface
      *  @param string $isbn
      *   正規化されたISBN
      *
-     *  @return App\Book | null
-     *   戻り値があればApp/Bookにして返す。
+     *  @return Book | null
+     *   戻り値があればBookにして返す。
      *   なかった場合はnullを返す。
      */
     public function searchByIsbn(string $isbn){

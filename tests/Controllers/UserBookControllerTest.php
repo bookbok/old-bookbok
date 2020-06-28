@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 use App\Components\BookInfoScraper\ScrapeManager;
 use App\Http\Controllers\UserBookController;
-use App\User;
-use App\Book;
-use App\UserBook;
+use App\Models\User;
+use App\Models\Book;
+use App\Models\UserBook;
 use App\Http\Requests\UserBookUpdateRequest;
 use App\Http\Requests\UserBookRequest;
 

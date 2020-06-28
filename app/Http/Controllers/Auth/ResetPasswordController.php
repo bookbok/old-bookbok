@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\ResetPasswordEmailRequest;
+use App\Models\User;
 
 class ResetPasswordController extends Controller
 {
@@ -76,14 +77,14 @@ class ResetPasswordController extends Controller
     /**
      * パスワードをリセットする
      *
-     * @param   \App\User   $user
+     * @param User $user
      *  ユーザー
-     * @param   string  $password
+     * @param string $password
      *  パスワード
      *
      * @return void
      */
-    public function resetPassword(\App\User $user, string $password)
+    public function resetPassword(User $user, string $password)
     {
         $user->password = password_hash($password, PASSWORD_DEFAULT);
 

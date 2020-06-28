@@ -1,8 +1,11 @@
 <?php
 
 use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factory;
+use App\Models\Book;
 
-$factory->define(App\Book::class, function (Faker $faker) {
+/** @var Factory $factory */
+$factory->define(Book::class, function (Faker $faker) {
     return [
         'isbn' => $faker->isbn13,
         'name' => $faker->sentence($nbWords = 4, $variableNbWords = false),

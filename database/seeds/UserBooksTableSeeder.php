@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use App\Models\Book;
+use App\Models\UserBook;
 
 class UserBooksTableSeeder extends Seeder
 {
@@ -13,9 +15,9 @@ class UserBooksTableSeeder extends Seeder
     public function run()
     {
         // HACK: BooksTableSeederで10個のBookが生成されていることを前提としている
-        $books = App\Book::orderBy('created_at')->take(5)->get();
+        $books = Book::orderBy('created_at')->take(5)->get();
         foreach($books as $book) {
-            App\UserBook::create([
+            UserBook::create([
                 'user_id' => 1,
                 'book_id' => $book->id,
                 'created_at' => Carbon::now()->subDays(15),

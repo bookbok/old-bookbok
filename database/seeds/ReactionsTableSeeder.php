@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Reaction;
+use App\Models\Reaction;
+use App\Models\User;
+use App\Models\Bok;
 
 class ReactionsTableSeeder extends Seeder
 {
@@ -12,10 +14,10 @@ class ReactionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $adminUser = App\User::find(1);
+        $adminUser = User::find(1);
         // bokの良いね数、一般ユーザーからの見え方をテストしたい
-        $normalUser = App\User::find(5);
-        $boks = App\Bok::take(10)->get();
+        $normalUser = User::find(5);
+        $boks = Bok::take(10)->get();
 
         foreach($boks as $bok) {
             Reaction::create([

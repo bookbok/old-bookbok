@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 
 use App\Components\BookInfoScraper\ScrapeManager;
 use App\Http\Controllers\BookController;
-use App\User;
-use App\Book;
-use App\UserBook;
-use App\Review;
+use App\Models\User;
+use App\Models\Book;
+use App\Models\UserBook;
+use App\Models\Review;
 
 class BookControllerTest extends TestCase
 {
@@ -76,8 +76,8 @@ class BookControllerTest extends TestCase
 
     public function test本の詳細を取得する() {
         $this->book = factory(Book::class)->create();
-        $this->userBook = factory(\App\UserBook::class)->create(['book_id' => $this->book->id]);
-        $this->review = factory(\App\Review::class)->create([
+        $this->userBook = factory(UserBook::class)->create(['book_id' => $this->book->id]);
+        $this->review = factory(Review::class)->create([
             'user_book_id' => $this->userBook->id,
             'user_id' => 1
         ]);

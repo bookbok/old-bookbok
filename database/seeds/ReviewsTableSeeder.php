@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\UserBook;
+use App\Models\Review;
 
 class ReviewsTableSeeder extends Seeder
 {
@@ -11,9 +13,9 @@ class ReviewsTableSeeder extends Seeder
      */
     public function run()
     {
-        $userBooks = App\UserBook::all();
+        $userBooks = UserBook::all();
         foreach($userBooks as $book) {
-            factory(App\Review::class)->create(['user_book_id' => $book->id, 'user_id' => $book->user_id]);
+            factory(Review::class)->create(['user_book_id' => $book->id, 'user_id' => $book->user_id]);
         }
     }
 }

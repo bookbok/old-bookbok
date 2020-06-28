@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Follower;
-use App\User;
+use App\Models\Follower;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FollowerController extends Controller
 {
     public function __construct(){
-        $this->middleware('can:create,App\Follower,user')->only('follow');
-        $this->middleware('can:delete,App\Follower,user')->only('unFollow');
+        $this->middleware('can:create,App\Models\Follower,user')->only('follow');
+        $this->middleware('can:delete,App\Models\Follower,user')->only('unFollow');
     }
 
     /**

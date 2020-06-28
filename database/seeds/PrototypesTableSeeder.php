@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
-use App\Book;
-use App\UserBook;
-use App\Review;
+use App\Models\User;
+use App\Models\Book;
+use App\Models\UserBook;
+use App\Models\Review;
 use Carbon\Carbon;
 
 class PrototypesTableSeeder extends Seeder

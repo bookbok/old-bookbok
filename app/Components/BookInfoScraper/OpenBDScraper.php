@@ -3,7 +3,7 @@
 namespace App\Components\BookInfoScraper;
 
 use GuzzleHttp\Client;
-use App\Book;
+use App\Models\Book;
 
 class OpenBDScraper implements ScraperInterface
 {
@@ -26,7 +26,7 @@ class OpenBDScraper implements ScraperInterface
     {
         $this->client = $client;
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Reaction;
-use App\User;
+use App\Models\Reaction;
+use App\Models\User;
 
 class ReactionController extends Controller
 {

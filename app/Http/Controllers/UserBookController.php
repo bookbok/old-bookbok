@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\UserBook;
-use App\User;
-use App\Book;
-use App\Genre;
+use App\Models\UserBook;
+use App\Models\User;
+use App\Models\Book;
+use App\Models\Genre;
 use App\Components\BookInfoScraper\ScrapeManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +15,7 @@ use App\Http\Requests\UserBookRequest;
 class UserBookController extends Controller
 {
     public function __construct(){
-      $this->middleware('can:create,App\UserBook,user')->only('store');
+      $this->middleware('can:create,App\Models\UserBook,user')->only('store');
       $this->middleware('can:update,userBook')->only('update');
       $this->middleware('can:delete,userBook')->only('delete');
     }

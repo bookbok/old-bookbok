@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Bok;
-use App\UserBook;
+use App\Models\User;
+use App\Models\Bok;
+use App\Models\UserBook;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -15,8 +15,8 @@ class BokPolicy
     /**
      * Determine whether the user can view the bok.
      *
-     * @param  \App\User  $user
-     * @param  \App\Bok  $bok
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Bok $bok
      * @return mixed
      */
     public function view(User $user, Bok $bok)
@@ -27,8 +27,8 @@ class BokPolicy
     /**
      * Determine whether the user can create boks.
      *
-     * @param  \App\User  $user
-     * @param  \App\UserBook  $userBook
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\UserBook  $userBook
      * @return mixed
      */
     public function create(User $user, UserBook $userBook)
@@ -42,8 +42,8 @@ class BokPolicy
     /**
      * Determine whether the user can update the bok.
      *
-     * @param  \App\User  $user
-     * @param  \App\Bok  $bok
+     * @param \App\Models\User $user
+     * @param \App\Models\Bok $bok
      * @return mixed
      */
     public function update(User $user, Bok $bok)
@@ -54,9 +54,10 @@ class BokPolicy
     /**
      * Determine whether the user can delete the bok.
      *
-     * @param  \App\User  $user
-     * @param  \App\Bok  $bok
+     * @param \App\Models\User $user
+     * @param \App\Models\Bok $bok
      * @return mixed
+     * @throws AuthorizationException
      */
     public function delete(User $user, Bok $bok)
     {
@@ -69,8 +70,8 @@ class BokPolicy
     /**
      * Determine whether the user can restore the bok.
      *
-     * @param  \App\User  $user
-     * @param  \App\Bok  $bok
+     * @param \App\Models\User $user
+     * @param \App\Models\Bok $bok
      * @return mixed
      */
     public function restore(User $user, Bok $bok)
@@ -81,8 +82,8 @@ class BokPolicy
     /**
      * Determine whether the user can permanently delete the bok.
      *
-     * @param  \App\User  $user
-     * @param  \App\Bok  $bok
+     * @param \App\Models\User $user
+     * @param \App\Models\Bok $bok
      * @return mixed
      */
     public function forceDelete(User $user, Bok $bok)

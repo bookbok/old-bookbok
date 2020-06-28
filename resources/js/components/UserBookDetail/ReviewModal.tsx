@@ -114,6 +114,7 @@ class ReviewModal extends React.Component<Props, any> {
                                     <div className="row">
                                         <div className="col">
                                             レビューのタイトルを記入してください
+                                            <span className="badge badge-danger">必須</span>
                                             <input
                                                 id="title"
                                                 name="title"

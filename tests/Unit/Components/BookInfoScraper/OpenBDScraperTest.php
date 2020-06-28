@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Components\BookInfoScraper;
 
-use App\Book;
+use App\Models\Book;
 use App\Components\BookInfoScraper\OpenBDScraper;
 use GuzzleHttp\Client;
 use Tests\TestCase;

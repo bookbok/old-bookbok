@@ -39,7 +39,7 @@ class UserDetail extends React.Component<Props, any> {
 
     render() {
         const user = this.props.user;
-        if (this.props.loading || !user) {
+        if (this.props.loading || isEmpty(user)) {
             return <Loading />;
         }
 
@@ -74,7 +74,7 @@ class UserDetail extends React.Component<Props, any> {
 // URL内のid変更を検知して、再度ユーザー情報をfetchするためのデコレーター
 import { connect } from 'react-redux';
 import { fetchOnIdUpdateDecorator } from '../decorators/FetchOnIdUpdateDecorator';
-import {Matcher} from "../resource-types";
+import { isEmpty } from '../utils';
 
 export default connect(state => state)(
     fetchOnIdUpdateDecorator(({ id }) => {
