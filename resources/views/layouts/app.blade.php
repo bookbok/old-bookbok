@@ -3,6 +3,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="ogp:site_name" content="{{ config('app.name', 'BookBok') }}">
+    @if (isset($ogp_title))
+        <meta property="ogp:title" content="{{ $ogp_title }}">
+    @else
+        <meta property="ogp:title" content="{{ config('app.name', 'BookBok') }}">
+    @endif
+
+    @if (isset($ogp_description))
+        <meta property="ogp:description" content="{{ $ogp_description }}">
+    @else
+        <meta property="ogp:description" content="読書を今よりも素敵に。本と感想をまとめて管理できるサービスです。">
+    @endif
+
+    @if (isset($ogp_image))
+        <meta property="ogp:image" content="{{ $ogp_image }}">
+    @else
+        <meta property="ogp:image" content="">
+    @endif
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
