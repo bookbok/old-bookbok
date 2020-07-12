@@ -21,7 +21,6 @@
     @else
         <meta property="og:image" content="">
     @endif
-
     <meta name="twitter:card" content="summary">
 
     <!-- CSRF Token -->
